@@ -2,7 +2,6 @@
 //  ViewController.swift
 //  Ookami
 //
-//  Created by Maka on 4/11/16.
 //  Copyright © 2016 Mikunj Varsani. All rights reserved.
 //
 
