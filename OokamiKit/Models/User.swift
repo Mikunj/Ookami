@@ -10,7 +10,7 @@ import RealmSwift
 import SwiftyJSON
 
 class User: Object {
-    dynamic var id: Int64 = -1
+    dynamic var id = -1
     dynamic var about = ""
     dynamic var bio = ""
     dynamic var location = ""
@@ -52,6 +52,18 @@ class User: Object {
 
 extension User {
     
+    /// Get a user with a given id
+    ///
+    /// - Parameters:
+    ///   - id: The user id
+    ///   - realm: The realm to check. If left nil then it will use the default realm.
+    /// - Returns: A user if they exist with the given id in the realm
+    class func get(withId id: Int, realm: Realm? = nil) -> User? {
+        var r = realm
+        if r == nil { r = try! Realm() }
+        return r!.object(ofType: User.self, forPrimaryKey: id)
+    }
+    
     /// Construct a `User` object from JSON Data
     ///
     /// - Parameter json: The JSON data
@@ -63,7 +75,7 @@ extension User {
         
         let attributes = json["attributes"]
         let user = User()
-        user.id = json["id"].int64Value
+        user.id = json["id"].intValue
         user.name = attributes["name"].stringValue
         user.about = attributes["about"].stringValue
         user.bio = attributes["bio"].stringValue

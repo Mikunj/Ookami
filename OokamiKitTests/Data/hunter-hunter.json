@@ -1,0 +1,107 @@
+{
+    "id": "6448",
+    "type": "anime",
+    "links": {
+        "self": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448"
+    },
+    "attributes": {
+        "slug": "hunter-x-hunter-2011",
+        "synopsis": "A remake of the 1999 TV series of Hunter x Hunter based on the manga by Togashi Yoshihiro.\r\n\r\nA Hunter is one who travels the world doing all sorts of dangerous tasks. From capturing criminals to searching deep within uncharted lands for any lost treasures. Gon is a young boy whose father disappeared long ago, being a Hunter. He believes if he could also follow his father's path, he could one day reunite with him.\r\n\r\nAfter becoming 12, Gon leaves his home and takes on the task of entering the Hunter exam, notorious for its low success rate and high probability of death to become an official Hunter. He befriends the revenge-driven Kurapika, the doctor-to-be Leorio and the rebellious ex-assassin Killua in the exam, with their friendship prevailing throughout the many trials and threats they come upon taking on the dangerous career of a Hunter.",
+        "coverImageTopOffset": 130,
+        "titles": {
+            "en": "",
+            "en_jp": "Hunter x Hunter (2011)",
+            "ja_jp": "\u30cf\u30f3\u30bf\u30fc\u00d7\u30cf\u30f3\u30bf\u30fc"
+        },
+        "canonicalTitle": "Hunter x Hunter (2011)",
+        "abbreviatedTitles": null,
+        "averageRating": 4.4999011528989,
+        "ratingFrequencies": {
+            "0.5": "65",
+            "1.0": "303",
+            "1.5": "48",
+            "2.0": "69",
+            "2.5": "180",
+            "3.0": "1113",
+            "3.5": "887",
+            "4.0": "2195",
+            "4.5": "2793",
+            "5.0": "11409",
+            "nil": "9312",
+            "0.205": "-1",
+            "4.79452054794521": "1",
+            "0.136986301369863": "1",
+            "0.205479452054795": "1",
+            "0.547945205479452": "1",
+            "0.684931506849315": "1",
+            "0.958904109589041": "1",
+            "0.0684931506849315": "1"
+        },
+        "startDate": "2011-10-02",
+        "endDate": null,
+        "posterImage": {
+            "original": "https://static.hummingbird.me/anime/poster_images/000/006/448/original/QxC5cby.png?1431828590"
+        },
+        "coverImage": {
+            "original": "https://static.hummingbird.me/anime/cover_images/000/006/448/original/kANsAC1.jpg?1435367957"
+        },
+        "episodeCount": 148,
+        "episodeLength": null,
+        "showType": "TV",
+        "youtubeVideoId": "5Vy0Hzkxndc",
+        "ageRating": "R",
+        "ageRatingGuide": "Violence, Profanity"
+    },
+    "relationships": {
+        "genres": {
+            "links": {
+                "self": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/relationships\/genres",
+                "related": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/genres"
+            },
+            "data": [
+                     {
+                     "type": "genres",
+                     "id": "2"
+                     },
+                     {
+                     "type": "genres",
+                     "id": "23"
+                     },
+                     {
+                     "type": "genres",
+                     "id": "1"
+                     }
+                     ]
+        },
+        "castings": {
+            "links": {
+                "self": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/relationships\/castings",
+                "related": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/castings"
+            }
+        },
+        "installments": {
+            "links": {
+                "self": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/relationships\/installments",
+                "related": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/installments"
+            }
+        },
+        "mappings": {
+            "links": {
+                "self": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/relationships\/mappings",
+                "related": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/mappings"
+            }
+        },
+        "episodes": {
+            "links": {
+                "self": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/relationships\/episodes",
+                "related": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/episodes"
+            }
+        },
+        "streamingLinks": {
+            "links": {
+                "self": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/relationships\/streaming-links",
+                "related": "https:\/\/kitsu-api-staging.herokuapp.com\/api\/edge\/anime\/6448\/streaming-links"
+            }
+        }
+    }
+}

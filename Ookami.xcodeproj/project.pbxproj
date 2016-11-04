@@ -20,6 +20,12 @@
 		248734361DCCB1D1002E7366 /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user.json */; };
 		248734371DCCB1D3002E7366 /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user.json */; };
 		248734381DCCB1D3002E7366 /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user.json */; };
+		2487343A1DCCB479002E7366 /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248734391DCCB479002E7366 /* Anime.swift */; };
+		2487343C1DCCC183002E7366 /* AnimeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2487343B1DCCC183002E7366 /* AnimeSpec.swift */; };
+		2487343E1DCCC274002E7366 /* hunter-hunter.json in Resources */ = {isa = PBXBuildFile; fileRef = 2487343D1DCCC274002E7366 /* hunter-hunter.json */; };
+		2487343F1DCCC383002E7366 /* hunter-hunter.json in Resources */ = {isa = PBXBuildFile; fileRef = 2487343D1DCCC274002E7366 /* hunter-hunter.json */; };
+		248734401DCCC384002E7366 /* hunter-hunter.json in Resources */ = {isa = PBXBuildFile; fileRef = 2487343D1DCCC274002E7366 /* hunter-hunter.json */; };
+		248734411DCCC384002E7366 /* hunter-hunter.json in Resources */ = {isa = PBXBuildFile; fileRef = 2487343D1DCCC274002E7366 /* hunter-hunter.json */; };
 		2494D9A81DCC631E0032AC8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A71DCC631E0032AC8E /* User.swift */; };
 		2494D9AA1DCC673F0032AC8E /* RealmString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A91DCC673F0032AC8E /* RealmString.swift */; };
 		2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */; };
@@ -90,6 +96,9 @@
 		2464F1F91DCC5AE60028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2464F1FE1DCC5AE70028F7B0 /* OokamiKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OokamiKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F2071DCC5AE70028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		248734391DCCB479002E7366 /* Anime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
+		2487343B1DCCC183002E7366 /* AnimeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSpec.swift; sourceTree = "<group>"; };
+		2487343D1DCCC274002E7366 /* hunter-hunter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "hunter-hunter.json"; sourceTree = "<group>"; };
 		2494D9A71DCC631E0032AC8E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2494D9A91DCC673F0032AC8E /* RealmString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmString.swift; sourceTree = "<group>"; };
 		2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
@@ -208,6 +217,7 @@
 			children = (
 				2494D9A91DCC673F0032AC8E /* RealmString.swift */,
 				2494D9A71DCC631E0032AC8E /* User.swift */,
+				248734391DCCB479002E7366 /* Anime.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				24EEEF5F1DCCA56700869696 /* user.json */,
+				2487343D1DCCC274002E7366 /* hunter-hunter.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -249,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				246023391DCCA11700B3C99B /* UserSpec.swift */,
+				2487343B1DCCC183002E7366 /* AnimeSpec.swift */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -438,6 +450,7 @@
 				248734381DCCB1D3002E7366 /* user.json in Resources */,
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
 				2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */,
+				2487343F1DCCC383002E7366 /* hunter-hunter.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				248734371DCCB1D3002E7366 /* user.json in Resources */,
+				248734401DCCC384002E7366 /* hunter-hunter.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				248734361DCCB1D1002E7366 /* user.json in Resources */,
+				248734411DCCC384002E7366 /* hunter-hunter.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24EEEF601DCCA56700869696 /* user.json in Resources */,
+				2487343E1DCCC274002E7366 /* hunter-hunter.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,6 +673,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2487343A1DCCB479002E7366 /* Anime.swift in Sources */,
 				2494D9AA1DCC673F0032AC8E /* RealmString.swift in Sources */,
 				2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */,
 				2494D9A81DCC631E0032AC8E /* User.swift in Sources */,
@@ -667,6 +684,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2487343C1DCCC183002E7366 /* AnimeSpec.swift in Sources */,
 				24EEEF5D1DCCA53100869696 /* TestHelper.swift in Sources */,
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,
 			);
