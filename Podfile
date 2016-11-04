@@ -10,7 +10,8 @@ plugin 'cocoapods-keys', {
  ]}
 
 def project_pods
-    pod 'RealmSwift', '~> 0.100.0'
+    pod 'Realm', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master',:submodules => true
+    pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master',:submodules => true
 end
 
 target 'Ookami' do

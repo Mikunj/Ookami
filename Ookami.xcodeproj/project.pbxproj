@@ -18,6 +18,7 @@
 		2464F2081DCC5AE70028F7B0 /* OokamiKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464F1F81DCC5AE60028F7B0 /* OokamiKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2464F20B1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; };
 		2464F20C1DCC5AE70028F7B0 /* OokamiKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2494D9A81DCC631E0032AC8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A71DCC631E0032AC8E /* User.swift */; };
 		364B8C934AA81B11899ED841 /* Pods_OokamiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D86110E14B7F60F7972CF99F /* Pods_OokamiKit.framework */; };
 		37685DE358CF651B80E914B3 /* Pods_Ookami.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7250EF880611316C9DA8A4E4 /* Pods_Ookami.framework */; };
 		6859700A80776506BA8F6BFB /* Pods_OokamiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B729F121EEA7F2BCEB5C8C /* Pods_OokamiTests.framework */; };
@@ -86,6 +87,7 @@
 		2464F1FE1DCC5AE70028F7B0 /* OokamiKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OokamiKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F2051DCC5AE70028F7B0 /* OokamiKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OokamiKitTests.swift; sourceTree = "<group>"; };
 		2464F2071DCC5AE70028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2494D9A71DCC631E0032AC8E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		27729C4AC8AC0DCDF978B234 /* Pods_OokamiKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OokamiKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F388665F937BCB808512F1 /* Pods-OokamiKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OokamiKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OokamiKitTests/Pods-OokamiKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		710495F66072A3D78D2F11E0 /* Pods-OokamiKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OokamiKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-OokamiKit/Pods-OokamiKit.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,13 +141,13 @@
 		2464F1C51DCC58800028F7B0 = {
 			isa = PBXGroup;
 			children = (
+				9951A69243FAA00FDF79934E /* Frameworks */,
 				2464F1D01DCC58800028F7B0 /* Ookami */,
-				2464F1E51DCC58800028F7B0 /* OokamiTests */,
 				2464F1F71DCC5AE60028F7B0 /* OokamiKit */,
 				2464F2041DCC5AE70028F7B0 /* OokamiKitTests */,
-				2464F1CF1DCC58800028F7B0 /* Products */,
+				2464F1E51DCC58800028F7B0 /* OokamiTests */,
 				93F3BA900FD07957D4F96F08 /* Pods */,
-				9951A69243FAA00FDF79934E /* Frameworks */,
+				2464F1CF1DCC58800028F7B0 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,10 +165,10 @@
 		2464F1D01DCC58800028F7B0 /* Ookami */ = {
 			isa = PBXGroup;
 			children = (
-				2464F1D11DCC58800028F7B0 /* AppDelegate.swift */,
 				2464F2161DCC5C400028F7B0 /* Supporting Files */,
-				2464F1D31DCC58800028F7B0 /* ViewController.swift */,
+				2464F1D11DCC58800028F7B0 /* AppDelegate.swift */,
 				2464F1D81DCC58800028F7B0 /* Assets.xcassets */,
+				2464F1D31DCC58800028F7B0 /* ViewController.swift */,
 			);
 			path = Ookami;
 			sourceTree = "<group>";
@@ -174,8 +176,8 @@
 		2464F1E51DCC58800028F7B0 /* OokamiTests */ = {
 			isa = PBXGroup;
 			children = (
-				2464F1E61DCC58800028F7B0 /* OokamiTests.swift */,
 				2464F1E81DCC58800028F7B0 /* Info.plist */,
+				2464F1E61DCC58800028F7B0 /* OokamiTests.swift */,
 			);
 			path = OokamiTests;
 			sourceTree = "<group>";
@@ -183,8 +185,8 @@
 		2464F1F71DCC5AE60028F7B0 /* OokamiKit */ = {
 			isa = PBXGroup;
 			children = (
-				2464F2171DCC5C540028F7B0 /* Supporting Files */,
 				2464F2141DCC5C000028F7B0 /* Models */,
+				2464F2171DCC5C540028F7B0 /* Supporting Files */,
 				2464F1F81DCC5AE60028F7B0 /* OokamiKit.h */,
 			);
 			path = OokamiKit;
@@ -193,8 +195,8 @@
 		2464F2041DCC5AE70028F7B0 /* OokamiKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				2464F2051DCC5AE70028F7B0 /* OokamiKitTests.swift */,
 				2464F2071DCC5AE70028F7B0 /* Info.plist */,
+				2464F2051DCC5AE70028F7B0 /* OokamiKitTests.swift */,
 			);
 			path = OokamiKitTests;
 			sourceTree = "<group>";
@@ -202,17 +204,18 @@
 		2464F2141DCC5C000028F7B0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2494D9A71DCC631E0032AC8E /* User.swift */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		2464F2161DCC5C400028F7B0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */,
 				2464F1DD1DCC58800028F7B0 /* Info.plist */,
+				2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		2464F2171DCC5C540028F7B0 /* Supporting Files */ = {
@@ -220,7 +223,7 @@
 			children = (
 				2464F1F91DCC5AE60028F7B0 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		93F3BA900FD07957D4F96F08 /* Pods */ = {
@@ -372,6 +375,7 @@
 					2464F1F51DCC5AE60028F7B0 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 5V7RKV36V8;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 					2464F1FD1DCC5AE70028F7B0 = {
@@ -626,6 +630,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2494D9A81DCC631E0032AC8E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,6 +674,7 @@
 				2464F1DB1DCC58800028F7B0 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -773,7 +779,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
-				INFOPLIST_FILE = Ookami/Info.plist;
+				INFOPLIST_FILE = "Ookami/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.Ookami;
@@ -788,7 +794,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
-				INFOPLIST_FILE = Ookami/Info.plist;
+				INFOPLIST_FILE = "Ookami/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.Ookami;
@@ -831,6 +837,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 06A3998A92091D3C7CC01CB7 /* Pods-OokamiKit.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -838,13 +845,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = OokamiKit/Info.plist;
+				INFOPLIST_FILE = "OokamiKit/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.OokamiKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -855,6 +863,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 710495F66072A3D78D2F11E0 /* Pods-OokamiKit.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -862,7 +871,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = OokamiKit/Info.plist;
+				INFOPLIST_FILE = "OokamiKit/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
