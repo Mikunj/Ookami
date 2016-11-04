@@ -1,0 +1,415 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D11DCC58800028F7B0 /* AppDelegate.swift */; };
+		2464F1D41DCC58800028F7B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D31DCC58800028F7B0 /* ViewController.swift */; };
+		2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2464F1D81DCC58800028F7B0 /* Assets.xcassets */; };
+		2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */; };
+		2464F1E71DCC58800028F7B0 /* OokamiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1E61DCC58800028F7B0 /* OokamiTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2464F1E31DCC58800028F7B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2464F1C61DCC58800028F7B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2464F1CD1DCC58800028F7B0;
+			remoteInfo = Ookami;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2464F1CE1DCC58800028F7B0 /* Ookami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ookami.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2464F1D11DCC58800028F7B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2464F1D31DCC58800028F7B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2464F1D81DCC58800028F7B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2464F1DB1DCC58800028F7B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2464F1DD1DCC58800028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2464F1E21DCC58800028F7B0 /* OokamiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OokamiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2464F1E61DCC58800028F7B0 /* OokamiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OokamiTests.swift; sourceTree = "<group>"; };
+		2464F1E81DCC58800028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2464F1CB1DCC58800028F7B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2464F1DF1DCC58800028F7B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2464F1C51DCC58800028F7B0 = {
+			isa = PBXGroup;
+			children = (
+				2464F1D01DCC58800028F7B0 /* Ookami */,
+				2464F1E51DCC58800028F7B0 /* OokamiTests */,
+				2464F1CF1DCC58800028F7B0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2464F1CF1DCC58800028F7B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2464F1CE1DCC58800028F7B0 /* Ookami.app */,
+				2464F1E21DCC58800028F7B0 /* OokamiTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2464F1D01DCC58800028F7B0 /* Ookami */ = {
+			isa = PBXGroup;
+			children = (
+				2464F1D11DCC58800028F7B0 /* AppDelegate.swift */,
+				2464F1D31DCC58800028F7B0 /* ViewController.swift */,
+				2464F1D81DCC58800028F7B0 /* Assets.xcassets */,
+				2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */,
+				2464F1DD1DCC58800028F7B0 /* Info.plist */,
+			);
+			path = Ookami;
+			sourceTree = "<group>";
+		};
+		2464F1E51DCC58800028F7B0 /* OokamiTests */ = {
+			isa = PBXGroup;
+			children = (
+				2464F1E61DCC58800028F7B0 /* OokamiTests.swift */,
+				2464F1E81DCC58800028F7B0 /* Info.plist */,
+			);
+			path = OokamiTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2464F1CD1DCC58800028F7B0 /* Ookami */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2464F1EB1DCC58800028F7B0 /* Build configuration list for PBXNativeTarget "Ookami" */;
+			buildPhases = (
+				2464F1CA1DCC58800028F7B0 /* Sources */,
+				2464F1CB1DCC58800028F7B0 /* Frameworks */,
+				2464F1CC1DCC58800028F7B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ookami;
+			productName = Ookami;
+			productReference = 2464F1CE1DCC58800028F7B0 /* Ookami.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2464F1E11DCC58800028F7B0 /* OokamiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2464F1EE1DCC58800028F7B0 /* Build configuration list for PBXNativeTarget "OokamiTests" */;
+			buildPhases = (
+				2464F1DE1DCC58800028F7B0 /* Sources */,
+				2464F1DF1DCC58800028F7B0 /* Frameworks */,
+				2464F1E01DCC58800028F7B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2464F1E41DCC58800028F7B0 /* PBXTargetDependency */,
+			);
+			name = OokamiTests;
+			productName = OokamiTests;
+			productReference = 2464F1E21DCC58800028F7B0 /* OokamiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2464F1C61DCC58800028F7B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Mikunj Varsani";
+				TargetAttributes = {
+					2464F1CD1DCC58800028F7B0 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 5V7RKV36V8;
+						ProvisioningStyle = Automatic;
+					};
+					2464F1E11DCC58800028F7B0 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 5V7RKV36V8;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2464F1CD1DCC58800028F7B0;
+					};
+				};
+			};
+			buildConfigurationList = 2464F1C91DCC58800028F7B0 /* Build configuration list for PBXProject "Ookami" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2464F1C51DCC58800028F7B0;
+			productRefGroup = 2464F1CF1DCC58800028F7B0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2464F1CD1DCC58800028F7B0 /* Ookami */,
+				2464F1E11DCC58800028F7B0 /* OokamiTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2464F1CC1DCC58800028F7B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
+				2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2464F1E01DCC58800028F7B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2464F1CA1DCC58800028F7B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2464F1D41DCC58800028F7B0 /* ViewController.swift in Sources */,
+				2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2464F1DE1DCC58800028F7B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2464F1E71DCC58800028F7B0 /* OokamiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2464F1E41DCC58800028F7B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2464F1CD1DCC58800028F7B0 /* Ookami */;
+			targetProxy = 2464F1E31DCC58800028F7B0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2464F1DB1DCC58800028F7B0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2464F1E91DCC58800028F7B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2464F1EA1DCC58800028F7B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2464F1EC1DCC58800028F7B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5V7RKV36V8;
+				INFOPLIST_FILE = Ookami/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.Ookami;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		2464F1ED1DCC58800028F7B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5V7RKV36V8;
+				INFOPLIST_FILE = Ookami/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.Ookami;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		2464F1EF1DCC58800028F7B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 5V7RKV36V8;
+				INFOPLIST_FILE = OokamiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.OokamiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ookami.app/Ookami";
+			};
+			name = Debug;
+		};
+		2464F1F01DCC58800028F7B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 5V7RKV36V8;
+				INFOPLIST_FILE = OokamiTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.OokamiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ookami.app/Ookami";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2464F1C91DCC58800028F7B0 /* Build configuration list for PBXProject "Ookami" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2464F1E91DCC58800028F7B0 /* Debug */,
+				2464F1EA1DCC58800028F7B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2464F1EB1DCC58800028F7B0 /* Build configuration list for PBXNativeTarget "Ookami" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2464F1EC1DCC58800028F7B0 /* Debug */,
+				2464F1ED1DCC58800028F7B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2464F1EE1DCC58800028F7B0 /* Build configuration list for PBXNativeTarget "OokamiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2464F1EF1DCC58800028F7B0 /* Debug */,
+				2464F1F01DCC58800028F7B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2464F1C61DCC58800028F7B0 /* Project object */;
+}
