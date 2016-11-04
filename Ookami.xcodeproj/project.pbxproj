@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16FEE4F0E708A28D7472EEE6 /* Pods_OokamiKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27729C4AC8AC0DCDF978B234 /* Pods_OokamiKitTests.framework */; };
 		2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D11DCC58800028F7B0 /* AppDelegate.swift */; };
 		2464F1D41DCC58800028F7B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D31DCC58800028F7B0 /* ViewController.swift */; };
 		2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2464F1D81DCC58800028F7B0 /* Assets.xcassets */; };
@@ -17,6 +18,9 @@
 		2464F2081DCC5AE70028F7B0 /* OokamiKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464F1F81DCC5AE60028F7B0 /* OokamiKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2464F20B1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; };
 		2464F20C1DCC5AE70028F7B0 /* OokamiKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		364B8C934AA81B11899ED841 /* Pods_OokamiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D86110E14B7F60F7972CF99F /* Pods_OokamiKit.framework */; };
+		37685DE358CF651B80E914B3 /* Pods_Ookami.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7250EF880611316C9DA8A4E4 /* Pods_Ookami.framework */; };
+		6859700A80776506BA8F6BFB /* Pods_OokamiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B729F121EEA7F2BCEB5C8C /* Pods_OokamiTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		06A3998A92091D3C7CC01CB7 /* Pods-OokamiKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OokamiKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OokamiKit/Pods-OokamiKit.debug.xcconfig"; sourceTree = "<group>"; };
+		18EC37E7569603AFBC8D3B99 /* Pods-Ookami.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ookami.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ookami/Pods-Ookami.debug.xcconfig"; sourceTree = "<group>"; };
 		2464F1CE1DCC58800028F7B0 /* Ookami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ookami.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F1D11DCC58800028F7B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2464F1D31DCC58800028F7B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +86,16 @@
 		2464F1FE1DCC5AE70028F7B0 /* OokamiKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OokamiKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F2051DCC5AE70028F7B0 /* OokamiKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OokamiKitTests.swift; sourceTree = "<group>"; };
 		2464F2071DCC5AE70028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27729C4AC8AC0DCDF978B234 /* Pods_OokamiKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OokamiKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		68F388665F937BCB808512F1 /* Pods-OokamiKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OokamiKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OokamiKitTests/Pods-OokamiKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		710495F66072A3D78D2F11E0 /* Pods-OokamiKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OokamiKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-OokamiKit/Pods-OokamiKit.release.xcconfig"; sourceTree = "<group>"; };
+		7250EF880611316C9DA8A4E4 /* Pods_Ookami.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ookami.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72A8C67A6A8DCBB9BF71028F /* Pods-OokamiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OokamiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OokamiTests/Pods-OokamiTests.debug.xcconfig"; sourceTree = "<group>"; };
+		81AF019151CBF20FF6F085E7 /* Pods-OokamiKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OokamiKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OokamiKitTests/Pods-OokamiKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8C5DC783924AF7569ADB675F /* Pods-OokamiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OokamiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OokamiTests/Pods-OokamiTests.release.xcconfig"; sourceTree = "<group>"; };
+		958EA7BCF8D5FE2EEE92E8DE /* Pods-Ookami.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ookami.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ookami/Pods-Ookami.release.xcconfig"; sourceTree = "<group>"; };
+		A1B729F121EEA7F2BCEB5C8C /* Pods_OokamiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OokamiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D86110E14B7F60F7972CF99F /* Pods_OokamiKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OokamiKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2464F20B1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */,
+				37685DE358CF651B80E914B3 /* Pods_Ookami.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6859700A80776506BA8F6BFB /* Pods_OokamiTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				364B8C934AA81B11899ED841 /* Pods_OokamiKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2464F1FF1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */,
+				16FEE4F0E708A28D7472EEE6 /* Pods_OokamiKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +144,8 @@
 				2464F1F71DCC5AE60028F7B0 /* OokamiKit */,
 				2464F2041DCC5AE70028F7B0 /* OokamiKitTests */,
 				2464F1CF1DCC58800028F7B0 /* Products */,
+				93F3BA900FD07957D4F96F08 /* Pods */,
+				9951A69243FAA00FDF79934E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -201,6 +223,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		93F3BA900FD07957D4F96F08 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				18EC37E7569603AFBC8D3B99 /* Pods-Ookami.debug.xcconfig */,
+				958EA7BCF8D5FE2EEE92E8DE /* Pods-Ookami.release.xcconfig */,
+				06A3998A92091D3C7CC01CB7 /* Pods-OokamiKit.debug.xcconfig */,
+				710495F66072A3D78D2F11E0 /* Pods-OokamiKit.release.xcconfig */,
+				81AF019151CBF20FF6F085E7 /* Pods-OokamiKitTests.debug.xcconfig */,
+				68F388665F937BCB808512F1 /* Pods-OokamiKitTests.release.xcconfig */,
+				72A8C67A6A8DCBB9BF71028F /* Pods-OokamiTests.debug.xcconfig */,
+				8C5DC783924AF7569ADB675F /* Pods-OokamiTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9951A69243FAA00FDF79934E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7250EF880611316C9DA8A4E4 /* Pods_Ookami.framework */,
+				D86110E14B7F60F7972CF99F /* Pods_OokamiKit.framework */,
+				27729C4AC8AC0DCDF978B234 /* Pods_OokamiKitTests.framework */,
+				A1B729F121EEA7F2BCEB5C8C /* Pods_OokamiTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -219,10 +267,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2464F1EB1DCC58800028F7B0 /* Build configuration list for PBXNativeTarget "Ookami" */;
 			buildPhases = (
+				04B6951058BA871945D801ED /* [CP] Check Pods Manifest.lock */,
 				2464F1CA1DCC58800028F7B0 /* Sources */,
 				2464F1CB1DCC58800028F7B0 /* Frameworks */,
 				2464F1CC1DCC58800028F7B0 /* Resources */,
 				2464F2101DCC5AE70028F7B0 /* Embed Frameworks */,
+				54B5A24229AFC793053BB16F /* [CP] Embed Pods Frameworks */,
+				5FE57C09B753C94960BE526B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -238,9 +289,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2464F1EE1DCC58800028F7B0 /* Build configuration list for PBXNativeTarget "OokamiTests" */;
 			buildPhases = (
+				5B0932C3AF1DEC19E1758F1E /* [CP] Check Pods Manifest.lock */,
 				2464F1DE1DCC58800028F7B0 /* Sources */,
 				2464F1DF1DCC58800028F7B0 /* Frameworks */,
 				2464F1E01DCC58800028F7B0 /* Resources */,
+				F309356DF8D061DA89CD9E21 /* [CP] Embed Pods Frameworks */,
+				5F170A22787117076E0E1EBD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -256,10 +310,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2464F20D1DCC5AE70028F7B0 /* Build configuration list for PBXNativeTarget "OokamiKit" */;
 			buildPhases = (
+				819A3BECC0758D20C71AD60F /* [CP] Check Pods Manifest.lock */,
 				2464F1F11DCC5AE60028F7B0 /* Sources */,
 				2464F1F21DCC5AE60028F7B0 /* Frameworks */,
 				2464F1F31DCC5AE60028F7B0 /* Headers */,
 				2464F1F41DCC5AE60028F7B0 /* Resources */,
+				772A12683D4D0C99EE91B239 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -274,9 +330,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2464F2111DCC5AE70028F7B0 /* Build configuration list for PBXNativeTarget "OokamiKitTests" */;
 			buildPhases = (
+				C6B6AD352FC7CCB6AB715DFB /* [CP] Check Pods Manifest.lock */,
 				2464F1FA1DCC5AE70028F7B0 /* Sources */,
 				2464F1FB1DCC5AE70028F7B0 /* Frameworks */,
 				2464F1FC1DCC5AE70028F7B0 /* Resources */,
+				938460EF5F3B502E798D8A0B /* [CP] Embed Pods Frameworks */,
+				8E61B0F4C7FB6D5C8BFDD4F9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -376,6 +435,174 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		04B6951058BA871945D801ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		54B5A24229AFC793053BB16F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ookami/Pods-Ookami-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B0932C3AF1DEC19E1758F1E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5F170A22787117076E0E1EBD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OokamiTests/Pods-OokamiTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5FE57C09B753C94960BE526B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Ookami/Pods-Ookami-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		772A12683D4D0C99EE91B239 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OokamiKit/Pods-OokamiKit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		819A3BECC0758D20C71AD60F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8E61B0F4C7FB6D5C8BFDD4F9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OokamiKitTests/Pods-OokamiKitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		938460EF5F3B502E798D8A0B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OokamiKitTests/Pods-OokamiKitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6B6AD352FC7CCB6AB715DFB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F309356DF8D061DA89CD9E21 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OokamiTests/Pods-OokamiTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2464F1CA1DCC58800028F7B0 /* Sources */ = {
@@ -542,6 +769,7 @@
 		};
 		2464F1EC1DCC58800028F7B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18EC37E7569603AFBC8D3B99 /* Pods-Ookami.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
@@ -556,6 +784,7 @@
 		};
 		2464F1ED1DCC58800028F7B0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 958EA7BCF8D5FE2EEE92E8DE /* Pods-Ookami.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
@@ -570,8 +799,8 @@
 		};
 		2464F1EF1DCC58800028F7B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72A8C67A6A8DCBB9BF71028F /* Pods-OokamiTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiTests/Info.plist;
@@ -585,8 +814,8 @@
 		};
 		2464F1F01DCC58800028F7B0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C5DC783924AF7569ADB675F /* Pods-OokamiTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiTests/Info.plist;
@@ -600,6 +829,7 @@
 		};
 		2464F20E1DCC5AE70028F7B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06A3998A92091D3C7CC01CB7 /* Pods-OokamiKit.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
@@ -623,6 +853,7 @@
 		};
 		2464F20F1DCC5AE70028F7B0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 710495F66072A3D78D2F11E0 /* Pods-OokamiKit.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
@@ -646,8 +877,8 @@
 		};
 		2464F2121DCC5AE70028F7B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81AF019151CBF20FF6F085E7 /* Pods-OokamiKitTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -660,8 +891,8 @@
 		};
 		2464F2131DCC5AE70028F7B0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 68F388665F937BCB808512F1 /* Pods-OokamiKitTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -691,6 +922,7 @@
 				2464F1ED1DCC58800028F7B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2464F1EE1DCC58800028F7B0 /* Build configuration list for PBXNativeTarget "OokamiTests" */ = {
 			isa = XCConfigurationList;
@@ -699,6 +931,7 @@
 				2464F1F01DCC58800028F7B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2464F20D1DCC5AE70028F7B0 /* Build configuration list for PBXNativeTarget "OokamiKit" */ = {
 			isa = XCConfigurationList;
@@ -707,6 +940,7 @@
 				2464F20F1DCC5AE70028F7B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2464F2111DCC5AE70028F7B0 /* Build configuration list for PBXNativeTarget "OokamiKitTests" */ = {
 			isa = XCConfigurationList;
@@ -715,6 +949,7 @@
 				2464F2131DCC5AE70028F7B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
