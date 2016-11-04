@@ -12,6 +12,11 @@
 		2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2464F1D81DCC58800028F7B0 /* Assets.xcassets */; };
 		2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */; };
 		2464F1E71DCC58800028F7B0 /* OokamiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1E61DCC58800028F7B0 /* OokamiTests.swift */; };
+		2464F1FF1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; };
+		2464F2061DCC5AE70028F7B0 /* OokamiKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F2051DCC5AE70028F7B0 /* OokamiKitTests.swift */; };
+		2464F2081DCC5AE70028F7B0 /* OokamiKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464F1F81DCC5AE60028F7B0 /* OokamiKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2464F20B1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; };
+		2464F20C1DCC5AE70028F7B0 /* OokamiKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,7 +27,42 @@
 			remoteGlobalIDString = 2464F1CD1DCC58800028F7B0;
 			remoteInfo = Ookami;
 		};
+		2464F2001DCC5AE70028F7B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2464F1C61DCC58800028F7B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2464F1F51DCC5AE60028F7B0;
+			remoteInfo = OokamiKit;
+		};
+		2464F2021DCC5AE70028F7B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2464F1C61DCC58800028F7B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2464F1CD1DCC58800028F7B0;
+			remoteInfo = Ookami;
+		};
+		2464F2091DCC5AE70028F7B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2464F1C61DCC58800028F7B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2464F1F51DCC5AE60028F7B0;
+			remoteInfo = OokamiKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2464F2101DCC5AE70028F7B0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2464F20C1DCC5AE70028F7B0 /* OokamiKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2464F1CE1DCC58800028F7B0 /* Ookami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ookami.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,6 +74,12 @@
 		2464F1E21DCC58800028F7B0 /* OokamiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OokamiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F1E61DCC58800028F7B0 /* OokamiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OokamiTests.swift; sourceTree = "<group>"; };
 		2464F1E81DCC58800028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OokamiKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2464F1F81DCC5AE60028F7B0 /* OokamiKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OokamiKit.h; sourceTree = "<group>"; };
+		2464F1F91DCC5AE60028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2464F1FE1DCC5AE70028F7B0 /* OokamiKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OokamiKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2464F2051DCC5AE70028F7B0 /* OokamiKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OokamiKitTests.swift; sourceTree = "<group>"; };
+		2464F2071DCC5AE70028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2464F20B1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +95,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2464F1F21DCC5AE60028F7B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2464F1FB1DCC5AE70028F7B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2464F1FF1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +121,8 @@
 			children = (
 				2464F1D01DCC58800028F7B0 /* Ookami */,
 				2464F1E51DCC58800028F7B0 /* OokamiTests */,
+				2464F1F71DCC5AE60028F7B0 /* OokamiKit */,
+				2464F2041DCC5AE70028F7B0 /* OokamiKitTests */,
 				2464F1CF1DCC58800028F7B0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,6 +132,8 @@
 			children = (
 				2464F1CE1DCC58800028F7B0 /* Ookami.app */,
 				2464F1E21DCC58800028F7B0 /* OokamiTests.xctest */,
+				2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */,
+				2464F1FE1DCC5AE70028F7B0 /* OokamiKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,10 +142,9 @@
 			isa = PBXGroup;
 			children = (
 				2464F1D11DCC58800028F7B0 /* AppDelegate.swift */,
+				2464F2161DCC5C400028F7B0 /* Supporting Files */,
 				2464F1D31DCC58800028F7B0 /* ViewController.swift */,
 				2464F1D81DCC58800028F7B0 /* Assets.xcassets */,
-				2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */,
-				2464F1DD1DCC58800028F7B0 /* Info.plist */,
 			);
 			path = Ookami;
 			sourceTree = "<group>";
@@ -93,7 +158,61 @@
 			path = OokamiTests;
 			sourceTree = "<group>";
 		};
+		2464F1F71DCC5AE60028F7B0 /* OokamiKit */ = {
+			isa = PBXGroup;
+			children = (
+				2464F2171DCC5C540028F7B0 /* Supporting Files */,
+				2464F2141DCC5C000028F7B0 /* Models */,
+				2464F1F81DCC5AE60028F7B0 /* OokamiKit.h */,
+			);
+			path = OokamiKit;
+			sourceTree = "<group>";
+		};
+		2464F2041DCC5AE70028F7B0 /* OokamiKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				2464F2051DCC5AE70028F7B0 /* OokamiKitTests.swift */,
+				2464F2071DCC5AE70028F7B0 /* Info.plist */,
+			);
+			path = OokamiKitTests;
+			sourceTree = "<group>";
+		};
+		2464F2141DCC5C000028F7B0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		2464F2161DCC5C400028F7B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */,
+				2464F1DD1DCC58800028F7B0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2464F2171DCC5C540028F7B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2464F1F91DCC5AE60028F7B0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2464F1F31DCC5AE60028F7B0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2464F2081DCC5AE70028F7B0 /* OokamiKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		2464F1CD1DCC58800028F7B0 /* Ookami */ = {
@@ -103,10 +222,12 @@
 				2464F1CA1DCC58800028F7B0 /* Sources */,
 				2464F1CB1DCC58800028F7B0 /* Frameworks */,
 				2464F1CC1DCC58800028F7B0 /* Resources */,
+				2464F2101DCC5AE70028F7B0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2464F20A1DCC5AE70028F7B0 /* PBXTargetDependency */,
 			);
 			name = Ookami;
 			productName = Ookami;
@@ -131,6 +252,43 @@
 			productReference = 2464F1E21DCC58800028F7B0 /* OokamiTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		2464F1F51DCC5AE60028F7B0 /* OokamiKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2464F20D1DCC5AE70028F7B0 /* Build configuration list for PBXNativeTarget "OokamiKit" */;
+			buildPhases = (
+				2464F1F11DCC5AE60028F7B0 /* Sources */,
+				2464F1F21DCC5AE60028F7B0 /* Frameworks */,
+				2464F1F31DCC5AE60028F7B0 /* Headers */,
+				2464F1F41DCC5AE60028F7B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OokamiKit;
+			productName = OokamiKit;
+			productReference = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		2464F1FD1DCC5AE70028F7B0 /* OokamiKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2464F2111DCC5AE70028F7B0 /* Build configuration list for PBXNativeTarget "OokamiKitTests" */;
+			buildPhases = (
+				2464F1FA1DCC5AE70028F7B0 /* Sources */,
+				2464F1FB1DCC5AE70028F7B0 /* Frameworks */,
+				2464F1FC1DCC5AE70028F7B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2464F2011DCC5AE70028F7B0 /* PBXTargetDependency */,
+				2464F2031DCC5AE70028F7B0 /* PBXTargetDependency */,
+			);
+			name = OokamiKitTests;
+			productName = OokamiKitTests;
+			productReference = 2464F1FE1DCC5AE70028F7B0 /* OokamiKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -147,6 +305,17 @@
 						ProvisioningStyle = Automatic;
 					};
 					2464F1E11DCC58800028F7B0 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 5V7RKV36V8;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 2464F1CD1DCC58800028F7B0;
+					};
+					2464F1F51DCC5AE60028F7B0 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 5V7RKV36V8;
+						ProvisioningStyle = Automatic;
+					};
+					2464F1FD1DCC5AE70028F7B0 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 5V7RKV36V8;
 						ProvisioningStyle = Automatic;
@@ -169,6 +338,8 @@
 			targets = (
 				2464F1CD1DCC58800028F7B0 /* Ookami */,
 				2464F1E11DCC58800028F7B0 /* OokamiTests */,
+				2464F1F51DCC5AE60028F7B0 /* OokamiKit */,
+				2464F1FD1DCC5AE70028F7B0 /* OokamiKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -184,6 +355,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2464F1E01DCC58800028F7B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2464F1F41DCC5AE60028F7B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2464F1FC1DCC5AE70028F7B0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -210,6 +395,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2464F1F11DCC5AE60028F7B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2464F1FA1DCC5AE70028F7B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2464F2061DCC5AE70028F7B0 /* OokamiKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -217,6 +417,21 @@
 			isa = PBXTargetDependency;
 			target = 2464F1CD1DCC58800028F7B0 /* Ookami */;
 			targetProxy = 2464F1E31DCC58800028F7B0 /* PBXContainerItemProxy */;
+		};
+		2464F2011DCC5AE70028F7B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2464F1F51DCC5AE60028F7B0 /* OokamiKit */;
+			targetProxy = 2464F2001DCC5AE70028F7B0 /* PBXContainerItemProxy */;
+		};
+		2464F2031DCC5AE70028F7B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2464F1CD1DCC58800028F7B0 /* Ookami */;
+			targetProxy = 2464F2021DCC5AE70028F7B0 /* PBXContainerItemProxy */;
+		};
+		2464F20A1DCC5AE70028F7B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2464F1F51DCC5AE60028F7B0 /* OokamiKit */;
+			targetProxy = 2464F2091DCC5AE70028F7B0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -383,6 +598,80 @@
 			};
 			name = Release;
 		};
+		2464F20E1DCC5AE70028F7B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 5V7RKV36V8;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = OokamiKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.OokamiKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2464F20F1DCC5AE70028F7B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 5V7RKV36V8;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = OokamiKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.OokamiKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2464F2121DCC5AE70028F7B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 5V7RKV36V8;
+				INFOPLIST_FILE = OokamiKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.OokamiKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ookami.app/Ookami";
+			};
+			name = Debug;
+		};
+		2464F2131DCC5AE70028F7B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 5V7RKV36V8;
+				INFOPLIST_FILE = OokamiKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.OokamiKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ookami.app/Ookami";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -408,6 +697,22 @@
 			buildConfigurations = (
 				2464F1EF1DCC58800028F7B0 /* Debug */,
 				2464F1F01DCC58800028F7B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2464F20D1DCC5AE70028F7B0 /* Build configuration list for PBXNativeTarget "OokamiKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2464F20E1DCC5AE70028F7B0 /* Debug */,
+				2464F20F1DCC5AE70028F7B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2464F2111DCC5AE70028F7B0 /* Build configuration list for PBXNativeTarget "OokamiKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2464F2121DCC5AE70028F7B0 /* Debug */,
+				2464F2131DCC5AE70028F7B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

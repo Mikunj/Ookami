@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>OokamiKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>2464F1E11DCC58800028F7B0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2464F1F51DCC5AE60028F7B0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2464F1FD1DCC5AE70028F7B0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
