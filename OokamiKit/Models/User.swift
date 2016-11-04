@@ -56,12 +56,10 @@ extension User {
     ///
     /// - Parameters:
     ///   - id: The user id
-    ///   - realm: The realm to check. If left nil then it will use the default realm.
     /// - Returns: A user if they exist with the given id in the realm
-    class func get(withId id: Int, realm: Realm? = nil) -> User? {
-        var r = realm
-        if r == nil { r = try! Realm() }
-        return r!.object(ofType: User.self, forPrimaryKey: id)
+    class func get(withId id: Int) -> User? {
+        let r = Realm.realm()
+        return r.object(ofType: User.self, forPrimaryKey: id)
     }
     
     /// Construct a `User` object from JSON Data

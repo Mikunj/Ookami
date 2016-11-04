@@ -52,12 +52,10 @@ extension Anime {
     /// Get an anime with the given id.
     ///
     /// - Parameter id: The anime id
-    ///   - realm: The realm to check. If left nil then it will use the default realm.
     /// - Returns: An anime object if it exists with given id
-    class func get(withId id: Int, realm: Realm? = nil) -> Anime? {
-        var r = realm
-        if r == nil { r = try! Realm() }
-        return r!.object(ofType: Anime.self, forPrimaryKey: id)
+    class func get(withId id: Int) -> Anime? {
+        let r = Realm.realm()
+        return r.object(ofType: Anime.self, forPrimaryKey: id)
     }
     
     /// Construct an `Anime` object from JSON Data

@@ -20,7 +20,7 @@ class UserSpec: QuickSpec {
             var testRealm: Realm!
             
             beforeEach {
-                testRealm = try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: "user-spec-realm"))
+                testRealm = Realm.realm()
             }
             
             afterEach {

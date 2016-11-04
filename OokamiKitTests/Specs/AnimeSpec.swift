@@ -21,7 +21,7 @@ class AnimeSpec: QuickSpec {
             var testRealm: Realm!
             
             beforeEach {
-                testRealm = try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: "anime-spec-realm"))
+                testRealm = Realm.realm()
             }
             
             afterEach {
