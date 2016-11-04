@@ -12,7 +12,6 @@
 		2464F1D41DCC58800028F7B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D31DCC58800028F7B0 /* ViewController.swift */; };
 		2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2464F1D81DCC58800028F7B0 /* Assets.xcassets */; };
 		2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */; };
-		2464F1E71DCC58800028F7B0 /* OokamiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1E61DCC58800028F7B0 /* OokamiTests.swift */; };
 		2464F1FF1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; };
 		2464F2081DCC5AE70028F7B0 /* OokamiKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464F1F81DCC5AE60028F7B0 /* OokamiKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2464F20B1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; };
@@ -26,7 +25,7 @@
 		2487343F1DCCC383002E7366 /* hunter-hunter.json in Resources */ = {isa = PBXBuildFile; fileRef = 2487343D1DCCC274002E7366 /* hunter-hunter.json */; };
 		248734401DCCC384002E7366 /* hunter-hunter.json in Resources */ = {isa = PBXBuildFile; fileRef = 2487343D1DCCC274002E7366 /* hunter-hunter.json */; };
 		248734411DCCC384002E7366 /* hunter-hunter.json in Resources */ = {isa = PBXBuildFile; fileRef = 2487343D1DCCC274002E7366 /* hunter-hunter.json */; };
-		248734441DCCC91C002E7366 /* Realm+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248734431DCCC91C002E7366 /* Realm+Utils.swift */; };
+		248734481DCD491E002E7366 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248734471DCD491E002E7366 /* RealmProvider.swift */; };
 		2494D9A81DCC631E0032AC8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A71DCC631E0032AC8E /* User.swift */; };
 		2494D9AA1DCC673F0032AC8E /* RealmString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A91DCC673F0032AC8E /* RealmString.swift */; };
 		2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */; };
@@ -90,7 +89,6 @@
 		2464F1DB1DCC58800028F7B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2464F1DD1DCC58800028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2464F1E21DCC58800028F7B0 /* OokamiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OokamiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2464F1E61DCC58800028F7B0 /* OokamiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OokamiTests.swift; sourceTree = "<group>"; };
 		2464F1E81DCC58800028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OokamiKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F1F81DCC5AE60028F7B0 /* OokamiKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OokamiKit.h; sourceTree = "<group>"; };
@@ -100,7 +98,7 @@
 		248734391DCCB479002E7366 /* Anime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
 		2487343B1DCCC183002E7366 /* AnimeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSpec.swift; sourceTree = "<group>"; };
 		2487343D1DCCC274002E7366 /* hunter-hunter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "hunter-hunter.json"; sourceTree = "<group>"; };
-		248734431DCCC91C002E7366 /* Realm+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Realm+Utils.swift"; sourceTree = "<group>"; };
+		248734471DCD491E002E7366 /* RealmProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
 		2494D9A71DCC631E0032AC8E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2494D9A91DCC673F0032AC8E /* RealmString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmString.swift; sourceTree = "<group>"; };
 		2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
@@ -187,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				2464F1E81DCC58800028F7B0 /* Info.plist */,
-				2464F1E61DCC58800028F7B0 /* OokamiTests.swift */,
 			);
 			path = OokamiTests;
 			sourceTree = "<group>";
@@ -195,6 +192,7 @@
 		2464F1F71DCC5AE60028F7B0 /* OokamiKit */ = {
 			isa = PBXGroup;
 			children = (
+				248734451DCD490B002E7366 /* Classes */,
 				2494D9AB1DCC73F40032AC8E /* Extensions */,
 				2464F2141DCC5C000028F7B0 /* Models */,
 				2464F2171DCC5C540028F7B0 /* Supporting Files */,
@@ -208,8 +206,8 @@
 			children = (
 				24EEEF5E1DCCA53500869696 /* Data */,
 				24EEEF611DCCAB1300869696 /* Specs */,
-				2464F2071DCC5AE70028F7B0 /* Info.plist */,
 				24EEEF5C1DCCA53100869696 /* Helper.swift */,
+				2464F2071DCC5AE70028F7B0 /* Info.plist */,
 			);
 			path = OokamiKitTests;
 			sourceTree = "<group>";
@@ -217,9 +215,9 @@
 		2464F2141DCC5C000028F7B0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				248734391DCCB479002E7366 /* Anime.swift */,
 				2494D9A91DCC673F0032AC8E /* RealmString.swift */,
 				2494D9A71DCC631E0032AC8E /* User.swift */,
-				248734391DCCB479002E7366 /* Anime.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,11 +239,28 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		248734451DCD490B002E7366 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				248734461DCD4910002E7366 /* Helper */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		248734461DCD4910002E7366 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				248734471DCD491E002E7366 /* RealmProvider.swift */,
+			);
+			name = Helper;
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		2494D9AB1DCC73F40032AC8E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */,
-				248734431DCCC91C002E7366 /* Realm+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -253,8 +268,8 @@
 		24EEEF5E1DCCA53500869696 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				24EEEF5F1DCCA56700869696 /* user.json */,
 				2487343D1DCCC274002E7366 /* hunter-hunter.json */,
+				24EEEF5F1DCCA56700869696 /* user.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -262,8 +277,8 @@
 		24EEEF611DCCAB1300869696 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				246023391DCCA11700B3C99B /* UserSpec.swift */,
 				2487343B1DCCC183002E7366 /* AnimeSpec.swift */,
+				246023391DCCA11700B3C99B /* UserSpec.swift */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -668,7 +683,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2464F1E71DCC58800028F7B0 /* OokamiTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,7 +692,7 @@
 			files = (
 				2487343A1DCCB479002E7366 /* Anime.swift in Sources */,
 				2494D9AA1DCC673F0032AC8E /* RealmString.swift in Sources */,
-				248734441DCCC91C002E7366 /* Realm+Utils.swift in Sources */,
+				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
 				2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */,
 				2494D9A81DCC631E0032AC8E /* User.swift in Sources */,
 			);

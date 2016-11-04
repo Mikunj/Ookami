@@ -58,7 +58,7 @@ extension User {
     ///   - id: The user id
     /// - Returns: A user if they exist with the given id in the realm
     class func get(withId id: Int) -> User? {
-        let r = Realm.realm()
+        let r = RealmProvider.realm()
         return r.object(ofType: User.self, forPrimaryKey: id)
     }
     

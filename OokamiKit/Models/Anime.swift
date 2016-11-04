@@ -54,7 +54,7 @@ extension Anime {
     /// - Parameter id: The anime id
     /// - Returns: An anime object if it exists with given id
     class func get(withId id: Int) -> Anime? {
-        let r = Realm.realm()
+        let r = RealmProvider.realm()
         return r.object(ofType: Anime.self, forPrimaryKey: id)
     }
     

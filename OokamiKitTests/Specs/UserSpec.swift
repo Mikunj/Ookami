@@ -20,7 +20,7 @@ class UserSpec: QuickSpec {
             var testRealm: Realm!
             
             beforeEach {
-                testRealm = Realm.realm()
+                testRealm = RealmProvider.realm()
             }
             
             afterEach {
@@ -36,13 +36,13 @@ class UserSpec: QuickSpec {
                         testRealm.add(u, update: true)
                     }
                     
-                    let another = User.get(withId: u.id, realm: testRealm)
+                    let another = User.get(withId: u.id)
                     expect(another).toNot(beNil())
                     expect(another?.name).to(equal(u.name))
                 }
                 
                 it("should return a nil user if no id is found") {
-                    let another = User.get(withId: 1, realm: testRealm)
+                    let another = User.get(withId: 1)
                     expect(another).to(beNil())
                 }
             }

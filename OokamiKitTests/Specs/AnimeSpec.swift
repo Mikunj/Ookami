@@ -21,7 +21,7 @@ class AnimeSpec: QuickSpec {
             var testRealm: Realm!
             
             beforeEach {
-                testRealm = Realm.realm()
+                testRealm = RealmProvider.realm()
             }
             
             afterEach {
@@ -37,13 +37,13 @@ class AnimeSpec: QuickSpec {
                         testRealm.add(a, update: true)
                     }
                     
-                    let another = Anime.get(withId: a.id, realm: testRealm)
+                    let another = Anime.get(withId: a.id)
                     expect(another).toNot(beNil())
                     expect(another?.canonicalTitle).to(equal(a.canonicalTitle))
                 }
                 
                 it("should return a nil user if no id is found") {
-                    let another = Anime.get(withId: 1, realm: testRealm)
+                    let another = Anime.get(withId: 1)
                     expect(another).to(beNil())
                 }
             }

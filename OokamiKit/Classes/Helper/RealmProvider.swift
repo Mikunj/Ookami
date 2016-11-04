@@ -1,5 +1,5 @@
 //
-//  Realm+Utils.swift
+//  RealmProvider.swift
 //  Ookami
 //
 //  Created by Maka on 5/11/16.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-extension Realm {
+class RealmProvider {
     /// Get a realm instance. This works the same way as calling try! Realm()
     /// Therefore, you should follow it's guidelines such as not using an instance across threads. Instead call this again on the new thread to recieve another instance.
     ///
@@ -24,4 +24,5 @@ extension Realm {
             
         }
     }
+
 }
