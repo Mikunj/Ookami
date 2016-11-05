@@ -17,7 +17,7 @@ class AnimeSpec: QuickSpec {
     override func spec() {
         describe("Anime") {
             
-            let animeJSON = TestHelper.loadJSON(fromFile: "hunter-hunter")!
+            let animeJSON = TestHelper.loadJSON(fromFile: "anime-hunter-hunter")!
             var testRealm: Realm!
             
             beforeEach {
@@ -41,6 +41,18 @@ class AnimeSpec: QuickSpec {
                     expect(another).toNot(beNil())
                     expect(another?.canonicalTitle).to(equal(a.canonicalTitle))
                 }
+                
+                it("should be able to fetch multiple anime from the database") {
+                    var ids: [Int] = []
+                    TestHelper.create(object: Anime.self, inRealm: testRealm, amount: 3) { (index, anime) in
+                        anime.id = index
+                        ids.append(index)
+                    }
+                    
+                    let anime = Anime.get(withIds: ids)
+                    expect(anime.count).to(equal(3))
+                }
+
                 
                 it("should return a nil user if no id is found") {
                     let another = Anime.get(withId: 1)

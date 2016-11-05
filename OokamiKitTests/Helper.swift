@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
 
 class TestHelper {
     
@@ -28,6 +29,23 @@ class TestHelper {
         } else {
             print("Invalid filename/path \(file).")
             return nil
+        }
+    }
+    
+    /// Creates objects in the realm database
+    ///
+    /// - Parameters:
+    ///   - object: The object class
+    ///   - realm: The realm
+    ///   - amount: Amount of objects to create
+    ///   - objectModifer: A closure for modifying the properties of the object before it is added to the realm. It passes the index and the object as its arguments.
+    static func create<T: Object>(object: T.Type, inRealm realm: Realm, amount: Int, objectModifer: (Int, T) -> ()) {
+        try! realm.write {
+            for i in 0..<amount {
+                let object = T()
+                objectModifer(i, object)
+                realm.add(object, update: true)
+            }
         }
     }
 }

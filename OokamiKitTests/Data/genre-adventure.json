@@ -1,0 +1,12 @@
+{
+    "id": "2",
+    "type": "genres",
+    "links": {
+        "self": "https://kitsu-api-staging.herokuapp.com/api/edge/genres/2"
+    },
+    "attributes": {
+        "name": "Adventure",
+        "slug": "adventure",
+        "description": null
+    }
+}

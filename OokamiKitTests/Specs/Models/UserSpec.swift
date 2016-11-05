@@ -13,10 +13,9 @@ import RealmSwift
 
 class UserSpec: QuickSpec {
     
-    
     override func spec() {
         describe("User") {
-            let userJSON = TestHelper.loadJSON(fromFile: "user")!
+            let userJSON = TestHelper.loadJSON(fromFile: "user-jigglyslime")!
             var testRealm: Realm!
             
             beforeEach {
@@ -31,7 +30,7 @@ class UserSpec: QuickSpec {
             
             context("Fetching") {
                 it("should be able to fetch a valid user from the database") {
-                    let u = User.parse(json: userJSON["data"][0])!
+                    let u = User.parse(json: userJSON)!
                     try! testRealm.write {
                         testRealm.add(u, update: true)
                     }
@@ -39,6 +38,17 @@ class UserSpec: QuickSpec {
                     let another = User.get(withId: u.id)
                     expect(another).toNot(beNil())
                     expect(another?.name).to(equal(u.name))
+                }
+                
+                it("should be able to fetch multiple users from the database") {
+                    var ids: [Int] = []
+                    TestHelper.create(object: User.self, inRealm: testRealm, amount: 3) { (index, user) in
+                        user.id = index
+                        ids.append(index)
+                    }
+                    
+                    let users = User.get(withIds: ids)
+                    expect(users.count).to(equal(3))
                 }
                 
                 it("should return a nil user if no id is found") {
@@ -49,7 +59,7 @@ class UserSpec: QuickSpec {
             
             context("Parsing") {
                 it("should parse a user JSON correctly") {
-                    let u = User.parse(json: userJSON["data"][0])
+                    let u = User.parse(json: userJSON)
                     expect(u).toNot(beNil())
                     
                     let user = u!;

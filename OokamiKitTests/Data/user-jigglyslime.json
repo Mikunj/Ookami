@@ -1,0 +1,61 @@
+{
+    "id": "2875",
+    "type": "users",
+    "links": {
+        "self": "https://kitsu-api-staging.herokuapp.com/api/edge/users/2875"
+    },
+    "attributes": {
+        "name": "Jigglyslime",
+        "pastNames": [],
+        "about": "",
+        "bio": "( ͡° ͜ʖ ͡°) Eᴠᴇʀʏ 60 sᴇᴄᴏɴᴅs ɪɴ Aғʀɪᴄᴀ, ᴀ ᴍɪɴᴜᴛᴇ ᴘᴀssᴇs. Tᴏɢᴇᴛʜᴇʀ ᴡᴇ ᴄᴀɴ sᴛᴏᴘ ᴛʜɪs. Pʟᴇᴀsᴇ sᴘʀᴇᴀᴅ ᴛʜᴇ ᴡᴏʀᴅ ( ͡° ͜ʖ ͡°)",
+        "aboutFormatted": null,
+        "location": "",
+        "website": null,
+        "waifuOrHusbando": "Waifu",
+        "toFollow": false,
+        "followersCount": 55,
+        "createdAt": "2013-05-17T06:10:09.481Z",
+        "followingCount": 13,
+        "onboarded": false,
+        "lifeSpentOnAnime": 129205,
+        "birthday": null,
+        "gender": null,
+        "facebookId": null,
+        "updatedAt": "2016-10-31T02:11:12.727Z",
+        "avatar": {
+            "original": "https://static.hummingbird.me/users/avatars/000/002/875/original/114367.jpg?1392948358"
+        },
+        "coverImage": {
+            "original": "https://static.hummingbird.me/users/cover_images/000/002/875/original/2875-rainbowish_fb_cover_by_n3x0n-d5fqohg.png?1389986097"
+        },
+        "email": "jigglyslime@kitsu.io",
+        "password": null
+    },
+    "relationships": {
+        "waifu": {
+            "links": {
+                "self": "https://kitsu-api-staging.herokuapp.com/api/edge/users/2875/relationships/waifu",
+                "related": "https://kitsu-api-staging.herokuapp.com/api/edge/users/2875/waifu"
+            }
+        },
+        "followers": {
+            "links": {
+                "self": "https://kitsu-api-staging.herokuapp.com/api/edge/users/2875/relationships/followers",
+                "related": "https://kitsu-api-staging.herokuapp.com/api/edge/users/2875/followers"
+            }
+        },
+        "following": {
+            "links": {
+                "self": "https://kitsu-api-staging.herokuapp.com/api/edge/users/2875/relationships/following",
+                "related": "https://kitsu-api-staging.herokuapp.com/api/edge/users/2875/following"
+            }
+        },
+        "blocks": {
+            "links": {
+                "self": "https://kitsu-api-staging.herokuapp.com/api/edge/users/2875/relationships/blocks",
+                "related": "https://kitsu-api-staging.herokuapp.com/api/edge/users/2875/blocks"
+            }
+        }
+    }
+}
