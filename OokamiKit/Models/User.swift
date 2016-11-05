@@ -9,6 +9,28 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+class UserPastName: Object {
+    //The user this name belongs to
+    dynamic var userId = -1 {
+        didSet { compoundKey = self.compoundKeyValue() }
+    }
+    
+    //the past name
+    dynamic var name = "" {
+        didSet { compoundKey = self.compoundKeyValue() }
+    }
+    
+    dynamic var compoundKey: String = "0-"
+    func compoundKeyValue() -> String {
+        return "\(userId)-\(name)"
+    }
+    
+    override static func primaryKey() -> String {
+        return "compoundKey"
+    }
+
+}
+
 class User: Object {
     dynamic var id = -1
     dynamic var about = ""
@@ -26,32 +48,26 @@ class User: Object {
     dynamic var avatarImage = ""
     dynamic var coverImage = ""
     
-    /**
-     Since we can't store an array of strings easily in realm, we just add a relationship with a RealmString object and use that for getting/setting an array of strings.
-     */
     dynamic var name = ""
-    let _backingPastNames = List<RealmString>()
-    var pastNames: [String] {
-        return _backingPastNames.map { $0.value }
-    }
+    let pastNames = List<UserPastName>()
     
     override static func primaryKey() -> String {
         return "id"
     }
     
     override static func ignoredProperties() -> [String] {
-        return ["pastNames"]
+        return []
     }
 }
 
 extension User: GettableObject { typealias T = User }
-extension User {
+extension User: JSONParsable {
     
     /// Construct a `User` object from JSON Data
     ///
     /// - Parameter json: The JSON data
     /// - Returns: A User if the JSON data was valid
-    class func parse(json: JSON) -> User? {
+    static func parse(json: JSON) -> User? {
         guard json["type"].stringValue == "users" else {
             return nil
         }
@@ -80,9 +96,11 @@ extension User {
         //Parse past names
         let pastNamesJSON = attributes["pastNames"]        
         for (_, name): (String, JSON) in pastNamesJSON {
-            user._backingPastNames.append(RealmString(value: [name.stringValue]))
+            let pastName = UserPastName()
+            pastName.userId = user.id
+            pastName.name = name.stringValue
+            user.pastNames.append(pastName)
         }
-        
         
         return user
     }

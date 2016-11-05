@@ -27,13 +27,13 @@ class Genre: Object {
 }
 
 extension Genre: GettableObject { typealias T = Genre }
-extension Genre {
+extension Genre: JSONParsable {
 
     /// Construct an `Genre` object from JSON Data
     ///
     /// - Parameter json: The JSON Data
     /// - Returns: A genre if JSON data was valid
-    class func parse(json: JSON) -> Genre? {
+    static func parse(json: JSON) -> Genre? {
         guard json["type"].stringValue == "genres" else {
             return nil
         }

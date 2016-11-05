@@ -1,0 +1,45 @@
+{
+    "id": "340253",
+    "type": "libraryEntries",
+    "links": {
+        "self": "https://kitsu-api-staging.herokuapp.com/api/edge/library-entries/340253"
+    },
+    "attributes": {
+        "status": "current",
+        "progress": 131,
+        "reconsuming": true,
+        "reconsumeCount": 0,
+        "notes": null,
+        "private": true,
+        "rating": "5.0",
+        "updatedAt": "2016-08-15T11:01:29.181Z"
+    },
+    "relationships": {
+        "user": {
+            "links": {
+                "self": "https://kitsu-api-staging.herokuapp.com/api/edge/library-entries/340253/relationships/user",
+                "related": "https://kitsu-api-staging.herokuapp.com/api/edge/library-entries/340253/user"
+            },
+            "data": {
+                "type": "users",
+                "id": "2875"
+            }
+        },
+        "media": {
+            "links": {
+                "self": "https://kitsu-api-staging.herokuapp.com/api/edge/library-entries/340253/relationships/media",
+                "related": "https://kitsu-api-staging.herokuapp.com/api/edge/library-entries/340253/media"
+            },
+            "data": {
+                "type": "anime",
+                "id": "6448"
+            }
+        },
+        "unit": {
+            "links": {
+                "self": "https://kitsu-api-staging.herokuapp.com/api/edge/library-entries/340253/relationships/unit",
+                "related": "https://kitsu-api-staging.herokuapp.com/api/edge/library-entries/340253/unit"
+            }
+        }
+    }
+}

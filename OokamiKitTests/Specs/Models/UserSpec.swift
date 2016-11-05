@@ -66,7 +66,7 @@ class UserSpec: QuickSpec {
                     expect(user.id).to(equal(2875))
                     expect(user.id).toNot(equal(0))
                     expect(user.name).to(equal("Jigglyslime"))
-                    expect(user.pastNames).to(haveCount(0))
+                    expect(user.pastNames).to(haveCount(2))
                     expect(user.about).to(equal(""))
                     expect(user.bio).to(equal("( ͡° ͜ʖ ͡°) Eᴠᴇʀʏ 60 sᴇᴄᴏɴᴅs ɪɴ Aғʀɪᴄᴀ, ᴀ ᴍɪɴᴜᴛᴇ ᴘᴀssᴇs. Tᴏɢᴇᴛʜᴇʀ ᴡᴇ ᴄᴀɴ sᴛᴏᴘ ᴛʜɪs. Pʟᴇᴀsᴇ sᴘʀᴇᴀᴅ ᴛʜᴇ ᴡᴏʀᴅ ( ͡° ͜ʖ ͡°)"))
                     expect(user.location).to(equal(""))
@@ -96,6 +96,16 @@ class UserSpec: QuickSpec {
                     let json = JSON("badJSON")
                     let u = User.parse(json: json)
                     expect(u).to(beNil())
+                }
+                
+                it("Should not cause redundant Objects to be present in the database") {
+                    let a = User.parse(json: userJSON)
+                    let b = User.parse(json: userJSON)
+                    try! testRealm.write {
+                        testRealm.add(a!)
+                        testRealm.add(b!, update: true)
+                    }
+                    expect(testRealm.objects(UserPastName.self)).to(haveCount(a!.pastNames.count))
                 }
             }
         }

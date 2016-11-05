@@ -33,10 +33,8 @@ class GenreSpec: QuickSpec {
             context("Fetching") {
                 it("should be able to fetch a valid genre from the database") {
                     let genre = Genre.parse(json: genreJSON)
-                    let f = Genre.parse(json: genreJSON)
                     try! testRealm.write {
                         testRealm.add(genre!, update: true)
-                        testRealm.add(f!, update: true)
                     }
                     let g = Genre.get(withId: 2)
                     expect(g).toNot(beNil())
@@ -51,7 +49,7 @@ class GenreSpec: QuickSpec {
                     }
                     
                     let genres = Genre.get(withIds: ids)
-                    expect(genres.count).to(equal(3))
+                    expect(genres).to(haveCount(3))
                 }
                 
                 it("should return a nil genre if no id is found") {

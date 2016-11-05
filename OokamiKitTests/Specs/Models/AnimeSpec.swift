@@ -6,7 +6,6 @@
 //  Copyright © 2016 Mikunj Varsani. All rights reserved.
 //
 
-import Foundation
 import Quick
 import Nimble
 @testable import OokamiKit
@@ -50,7 +49,7 @@ class AnimeSpec: QuickSpec {
                     }
                     
                     let anime = Anime.get(withIds: ids)
-                    expect(anime.count).to(equal(3))
+                    expect(anime).to(haveCount(3))
                 }
 
                 
@@ -70,7 +69,7 @@ class AnimeSpec: QuickSpec {
                     expect(anime.slug).to(equal("hunter-x-hunter-2011"))
                     expect(anime.synopsis).to(equal("A remake of the 1999 TV series of Hunter x Hunter based on the manga by Togashi Yoshihiro.\r\n\r\nA Hunter is one who travels the world doing all sorts of dangerous tasks. From capturing criminals to searching deep within uncharted lands for any lost treasures. Gon is a young boy whose father disappeared long ago, being a Hunter. He believes if he could also follow his father's path, he could one day reunite with him.\r\n\r\nAfter becoming 12, Gon leaves his home and takes on the task of entering the Hunter exam, notorious for its low success rate and high probability of death to become an official Hunter. He befriends the revenge-driven Kurapika, the doctor-to-be Leorio and the rebellious ex-assassin Killua in the exam, with their friendship prevailing throughout the many trials and threats they come upon taking on the dangerous career of a Hunter."))
                     expect(anime.canonicalTitle).to(equal("Hunter x Hunter (2011)"))
-                    expect(anime.titles.count).to(equal(3))
+                    expect(anime.titles).to(haveCount(3))
                     expect(anime.averageRating).to(equal(4.4999011528989))
                     expect(anime.posterImage).to(equal("https://static.hummingbird.me/anime/poster_images/000/006/448/original/QxC5cby.png?1431828590"))
                     expect(anime.coverImage).to(equal("https://static.hummingbird.me/anime/cover_images/000/006/448/original/kANsAC1.jpg?1435367957"))
@@ -87,8 +86,7 @@ class AnimeSpec: QuickSpec {
                     expect(anime.startDate).to(equal(startDate))
                     expect(anime.endDate).to(beNil())
                     
-                    expect(anime._backingGenres.count).to(equal(3))
-                    expect(anime.genres.count).to(equal(0))
+                    expect(anime.genres).to(haveCount(3))
                 }
                 
                 it("should not parse a bad JSON") {
@@ -97,24 +95,21 @@ class AnimeSpec: QuickSpec {
                     expect(a).to(beNil())
                 }
                 
-                it("should return genres if they are in the database") {
-                    let anime = Anime.parse(json: animeJSON)!
-                    
-                    expect(anime.genres.count).to(equal(0))
-                    
+                it("Should not cause redundant Objects to be present in the database") {
+                    let a = Anime.parse(json: animeJSON)
+                    let b = Anime.parse(json: animeJSON)
                     try! testRealm.write {
-                        for i in 1...3 {
-                            let g = Genre(value: [i, "slug", "genre\(i)", ""])
-                            testRealm.add(g, update: true)
-                        }
+                        testRealm.add(a!, update: true)
                         
+                        //Check to see if genres were added
+                        expect(testRealm.objects(Genre.self)).to(haveCount(3))
+                        
+                        testRealm.add(b!, update: true)
                     }
                     
-                    let genres = anime.genres
-                    expect(genres.count).to(equal(3))
-                    
-                    let gIds: [Int] = genres.map { $0.id }
-                    expect(gIds).to(contain([1,2,3]))
+                    //The number of objects should be the same even if we add more than 1 object with the same info
+                    expect(testRealm.objects(AnimeTitle.self)).to(haveCount(a!.titles.count))
+                    expect(testRealm.objects(Genre.self)).to(haveCount(a!.genres.count))
                 }
             }
         }

@@ -1,0 +1,15 @@
+Reason for compound keys on some objects:
+
+In Realm, if we have a object which contains a list of items, then when you create the object again (which is what we're doing with parse function) and you call realm.add(object, update: true) then you will have 2x the amount of items causing redundancy.
+
+Example:
+You have a `User`(a realm object with a primary key 'id') with 3 names. You store this by having a property: let names = List<UserName>, where UserName is a realm object with just a value field and no primary key.
+When you first add the object you create 3 UserName objects with values "A", "B", "C" and append them to the names list. After saving these UserName objects will be in the database (3 of them to be exact).
+
+However, say we create a new `User` object with the same primary key as before. This is a brand new object and thus its names list count is 0. We add the names "D", "E", "F" to this and save it using realm.add(user, update: true). Now if you get the user from realm and inspect the names property you will see that it has "D", "E" and "F" as expected. If however you get every `UserName` object in the database, you notice that you have 6!. "A", "B", "C", "D", "E", and "F". The first 3 names become redundant and if this continues, with each new user being created and updated (which is what the parse function is doing) you produce 3 redundant objects and over time these clutter space.
+
+To avoid this, we can simple add a compound key with (userId, name) to the `UserName` object and assign it as the primary key so that when we do update the `User` it will not create duplicates of the same object.
+
+However make a note of how you implement the compound keys. If you implement the compound keys with the willSet and didSet property listerners then be warned that realm will not call these after the object has been added to the database.
+
+If you know for certain that these values will not change throughout the life of the application then you may use it (The AnimeTitle object in the Anime model file does this as the title will not be modified at all by the application, only modified by incoming data from server). Otherwise refer to: https://github.com/realm/realm-cocoa/issues/1192#issuecomment-228455097 to see how you can implement it.

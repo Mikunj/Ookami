@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241418991DCDD81100AF1AEA /* LibraryEntry.swift */; };
+		2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */; };
+		2414189E1DCDE00400AF1AEA /* LibraryEntrySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */; };
+		241418A01DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
+		241418A11DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
+		241418A21DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
+		241418A31DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
 		2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246023391DCCA11700B3C99B /* UserSpec.swift */; };
 		2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D11DCC58800028F7B0 /* AppDelegate.swift */; };
 		2464F1D41DCC58800028F7B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D31DCC58800028F7B0 /* ViewController.swift */; };
@@ -18,6 +25,7 @@
 		2464F20C1DCC5AE70028F7B0 /* OokamiKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2470044C1DCD73D9000D987C /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470044B1DCD73D9000D987C /* Genre.swift */; };
 		2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470044E1DCD7A9E000D987C /* GettableObject.swift */; };
+		247362801DCDFF3B004B4AC5 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2473627F1DCDFF3B004B4AC5 /* README */; };
 		248734361DCCB1D1002E7366 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
 		248734371DCCB1D3002E7366 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
 		248734381DCCB1D3002E7366 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
@@ -29,7 +37,6 @@
 		248734411DCCC384002E7366 /* anime-hunter-hunter.json in Resources */ = {isa = PBXBuildFile; fileRef = 2487343D1DCCC274002E7366 /* anime-hunter-hunter.json */; };
 		248734481DCD491E002E7366 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248734471DCD491E002E7366 /* RealmProvider.swift */; };
 		2494D9A81DCC631E0032AC8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A71DCC631E0032AC8E /* User.swift */; };
-		2494D9AA1DCC673F0032AC8E /* RealmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A91DCC673F0032AC8E /* RealmData.swift */; };
 		2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */; };
 		24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */; };
 		24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
@@ -88,6 +95,10 @@
 /* Begin PBXFileReference section */
 		06A3998A92091D3C7CC01CB7 /* Pods-OokamiKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OokamiKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OokamiKit/Pods-OokamiKit.debug.xcconfig"; sourceTree = "<group>"; };
 		18EC37E7569603AFBC8D3B99 /* Pods-Ookami.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ookami.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ookami/Pods-Ookami.debug.xcconfig"; sourceTree = "<group>"; };
+		241418991DCDD81100AF1AEA /* LibraryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntry.swift; sourceTree = "<group>"; };
+		2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsable.swift; sourceTree = "<group>"; };
+		2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntrySpec.swift; sourceTree = "<group>"; };
+		2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "entry-anime-jigglyslime.json"; sourceTree = "<group>"; };
 		246023391DCCA11700B3C99B /* UserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpec.swift; sourceTree = "<group>"; };
 		2464F1CE1DCC58800028F7B0 /* Ookami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ookami.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F1D11DCC58800028F7B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,12 +115,12 @@
 		2464F2071DCC5AE70028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2470044B1DCD73D9000D987C /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		2470044E1DCD7A9E000D987C /* GettableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GettableObject.swift; sourceTree = "<group>"; };
+		2473627F1DCDFF3B004B4AC5 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		248734391DCCB479002E7366 /* Anime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
 		2487343B1DCCC183002E7366 /* AnimeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSpec.swift; sourceTree = "<group>"; };
 		2487343D1DCCC274002E7366 /* anime-hunter-hunter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "anime-hunter-hunter.json"; sourceTree = "<group>"; };
 		248734471DCD491E002E7366 /* RealmProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
 		2494D9A71DCC631E0032AC8E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		2494D9A91DCC673F0032AC8E /* RealmData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmData.swift; sourceTree = "<group>"; };
 		2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
@@ -228,7 +239,8 @@
 			children = (
 				248734391DCCB479002E7366 /* Anime.swift */,
 				2470044B1DCD73D9000D987C /* Genre.swift */,
-				2494D9A91DCC673F0032AC8E /* RealmData.swift */,
+				241418991DCDD81100AF1AEA /* LibraryEntry.swift */,
+				2473627F1DCDFF3B004B4AC5 /* README */,
 				2494D9A71DCC631E0032AC8E /* User.swift */,
 			);
 			path = Models;
@@ -255,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				2470044E1DCD7A9E000D987C /* GettableObject.swift */,
+				2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -289,9 +302,9 @@
 			children = (
 				2487343B1DCCC183002E7366 /* AnimeSpec.swift */,
 				24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */,
+				2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */,
 				246023391DCCA11700B3C99B /* UserSpec.swift */,
 			);
-			name = Models;
 			path = Models;
 			sourceTree = "<group>";
 		};
@@ -299,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				2487343D1DCCC274002E7366 /* anime-hunter-hunter.json */,
+				2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */,
 				24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */,
 				24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */,
 			);
@@ -498,6 +512,7 @@
 				24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
 				248734381DCCB1D3002E7366 /* user-jigglyslime.json in Resources */,
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
+				241418A01DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */,
 				2487343F1DCCC383002E7366 /* anime-hunter-hunter.json in Resources */,
 			);
@@ -508,6 +523,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				248734371DCCB1D3002E7366 /* user-jigglyslime.json in Resources */,
+				241418A11DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
 				248734401DCCC384002E7366 /* anime-hunter-hunter.json in Resources */,
 			);
@@ -517,7 +533,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				247362801DCDFF3B004B4AC5 /* README in Resources */,
 				248734361DCCB1D1002E7366 /* user-jigglyslime.json in Resources */,
+				241418A21DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				24A7EABD1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
 				248734411DCCC384002E7366 /* anime-hunter-hunter.json in Resources */,
 			);
@@ -528,6 +546,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24EEEF601DCCA56700869696 /* user-jigglyslime.json in Resources */,
+				241418A31DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
 				2487343E1DCCC274002E7366 /* anime-hunter-hunter.json in Resources */,
 			);
@@ -725,9 +744,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2487343A1DCCB479002E7366 /* Anime.swift in Sources */,
-				2494D9AA1DCC673F0032AC8E /* RealmData.swift in Sources */,
+				2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */,
 				2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */,
 				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
+				2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */,
 				2470044C1DCD73D9000D987C /* Genre.swift in Sources */,
 				2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */,
 				2494D9A81DCC631E0032AC8E /* User.swift in Sources */,
@@ -742,6 +762,7 @@
 				24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */,
 				24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */,
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,
+				2414189E1DCDE00400AF1AEA /* LibraryEntrySpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
