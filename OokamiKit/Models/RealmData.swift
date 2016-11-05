@@ -1,5 +1,5 @@
 //
-//  RealmString.swift
+//  RealmData.swift
 //  Ookami
 //
 //  Created by Maka on 4/11/16.
@@ -11,4 +11,8 @@ import RealmSwift
 
 class RealmString: Object{
     dynamic var value = ""
+}
+
+class RealmInt: Object {
+    dynamic var value = -1
 }

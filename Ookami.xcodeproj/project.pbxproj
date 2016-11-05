@@ -16,6 +16,8 @@
 		2464F2081DCC5AE70028F7B0 /* OokamiKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464F1F81DCC5AE60028F7B0 /* OokamiKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2464F20B1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; };
 		2464F20C1DCC5AE70028F7B0 /* OokamiKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2470044C1DCD73D9000D987C /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470044B1DCD73D9000D987C /* Genre.swift */; };
+		2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470044E1DCD7A9E000D987C /* GettableObject.swift */; };
 		248734361DCCB1D1002E7366 /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user.json */; };
 		248734371DCCB1D3002E7366 /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user.json */; };
 		248734381DCCB1D3002E7366 /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user.json */; };
@@ -27,7 +29,7 @@
 		248734411DCCC384002E7366 /* hunter-hunter.json in Resources */ = {isa = PBXBuildFile; fileRef = 2487343D1DCCC274002E7366 /* hunter-hunter.json */; };
 		248734481DCD491E002E7366 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248734471DCD491E002E7366 /* RealmProvider.swift */; };
 		2494D9A81DCC631E0032AC8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A71DCC631E0032AC8E /* User.swift */; };
-		2494D9AA1DCC673F0032AC8E /* RealmString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A91DCC673F0032AC8E /* RealmString.swift */; };
+		2494D9AA1DCC673F0032AC8E /* RealmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A91DCC673F0032AC8E /* RealmData.swift */; };
 		2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */; };
 		24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEEF5C1DCCA53100869696 /* Helper.swift */; };
 		24EEEF601DCCA56700869696 /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user.json */; };
@@ -95,12 +97,14 @@
 		2464F1F91DCC5AE60028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2464F1FE1DCC5AE70028F7B0 /* OokamiKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OokamiKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F2071DCC5AE70028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2470044B1DCD73D9000D987C /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		2470044E1DCD7A9E000D987C /* GettableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GettableObject.swift; sourceTree = "<group>"; };
 		248734391DCCB479002E7366 /* Anime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
 		2487343B1DCCC183002E7366 /* AnimeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSpec.swift; sourceTree = "<group>"; };
 		2487343D1DCCC274002E7366 /* hunter-hunter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "hunter-hunter.json"; sourceTree = "<group>"; };
 		248734471DCD491E002E7366 /* RealmProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
 		2494D9A71DCC631E0032AC8E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		2494D9A91DCC673F0032AC8E /* RealmString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmString.swift; sourceTree = "<group>"; };
+		2494D9A91DCC673F0032AC8E /* RealmData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmData.swift; sourceTree = "<group>"; };
 		2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		24EEEF5C1DCCA53100869696 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		24EEEF5F1DCCA56700869696 /* user.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
@@ -216,7 +220,8 @@
 			isa = PBXGroup;
 			children = (
 				248734391DCCB479002E7366 /* Anime.swift */,
-				2494D9A91DCC673F0032AC8E /* RealmString.swift */,
+				2470044B1DCD73D9000D987C /* Genre.swift */,
+				2494D9A91DCC673F0032AC8E /* RealmData.swift */,
 				2494D9A71DCC631E0032AC8E /* User.swift */,
 			);
 			path = Models;
@@ -239,12 +244,21 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2470044D1DCD7A5A000D987C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				2470044E1DCD7A9E000D987C /* GettableObject.swift */,
+			);
+			name = Protocols;
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		248734451DCD490B002E7366 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				248734461DCD4910002E7366 /* Helper */,
+				2470044D1DCD7A5A000D987C /* Protocols */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -253,7 +267,6 @@
 			children = (
 				248734471DCD491E002E7366 /* RealmProvider.swift */,
 			);
-			name = Helper;
 			path = Helper;
 			sourceTree = "<group>";
 		};
@@ -691,8 +704,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2487343A1DCCB479002E7366 /* Anime.swift in Sources */,
-				2494D9AA1DCC673F0032AC8E /* RealmString.swift in Sources */,
+				2494D9AA1DCC673F0032AC8E /* RealmData.swift in Sources */,
+				2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */,
 				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
+				2470044C1DCD73D9000D987C /* Genre.swift in Sources */,
 				2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */,
 				2494D9A81DCC631E0032AC8E /* User.swift in Sources */,
 			);
@@ -764,6 +779,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -814,6 +830,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -843,6 +860,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 18EC37E7569603AFBC8D3B99 /* Pods-Ookami.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = "Ookami/Supporting Files/Info.plist";
@@ -858,6 +876,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 958EA7BCF8D5FE2EEE92E8DE /* Pods-Ookami.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = "Ookami/Supporting Files/Info.plist";
@@ -873,6 +892,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 72A8C67A6A8DCBB9BF71028F /* Pods-OokamiTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiTests/Info.plist;
@@ -888,6 +908,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8C5DC783924AF7569ADB675F /* Pods-OokamiTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiTests/Info.plist;
@@ -954,6 +975,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81AF019151CBF20FF6F085E7 /* Pods-OokamiKitTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -968,6 +990,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 68F388665F937BCB808512F1 /* Pods-OokamiKitTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

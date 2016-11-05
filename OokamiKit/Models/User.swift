@@ -32,13 +32,7 @@ class User: Object {
     dynamic var name = ""
     let _backingPastNames = List<RealmString>()
     var pastNames: [String] {
-        get {
-            return _backingPastNames.map { $0.value }
-        }
-        set {
-            _backingPastNames.removeAll()
-            _backingPastNames.append(objectsIn: newValue.map { RealmString(value: [$0]) })
-        }
+        return _backingPastNames.map { $0.value }
     }
     
     override static func primaryKey() -> String {
@@ -50,17 +44,8 @@ class User: Object {
     }
 }
 
+extension User: GettableObject { typealias T = User }
 extension User {
-    
-    /// Get a user with a given id
-    ///
-    /// - Parameters:
-    ///   - id: The user id
-    /// - Returns: A user if they exist with the given id in the realm
-    class func get(withId id: Int) -> User? {
-        let r = RealmProvider.realm()
-        return r.object(ofType: User.self, forPrimaryKey: id)
-    }
     
     /// Construct a `User` object from JSON Data
     ///
@@ -93,13 +78,10 @@ extension User {
         user.coverImage = attributes["coverImage"]["original"].stringValue
         
         //Parse past names
-        let pastNamesJSON = attributes["pastNames"]
-        var names: [String] = []
-        
-        for (_, subJSON): (String, JSON) in pastNamesJSON {
-            names.append(subJSON.stringValue)
+        let pastNamesJSON = attributes["pastNames"]        
+        for (_, name): (String, JSON) in pastNamesJSON {
+            user._backingPastNames.append(RealmString(value: [name.stringValue]))
         }
-        user.pastNames = names;
         
         
         return user

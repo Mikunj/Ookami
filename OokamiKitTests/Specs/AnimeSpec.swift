@@ -74,12 +74,35 @@ class AnimeSpec: QuickSpec {
                     let startDate = d.date(from: "2011-10-02")
                     expect(anime.startDate).to(equal(startDate))
                     expect(anime.endDate).to(beNil())
+                    
+                    expect(anime._backingGenres.count).to(equal(3))
+                    expect(anime.genres.count).to(equal(0))
                 }
                 
                 it("should not parse a bad JSON") {
                     let j = JSON("bad JSON")
                     let a = Anime.parse(json: j)
                     expect(a).to(beNil())
+                }
+                
+                it("should return genres if they are in the database") {
+                    let anime = Anime.parse(json: animeJSON)!
+                    
+                    expect(anime.genres.count).to(equal(0))
+                    
+                    try! testRealm.write {
+                        for i in 1...3 {
+                            let g = Genre(value: [i, "slug", "genre\(i)", ""])
+                            testRealm.add(g, update: true)
+                        }
+                        
+                    }
+                    
+                    let genres = anime.genres
+                    expect(genres.count).to(equal(3))
+                    
+                    let gIds: [Int] = genres.map { $0.id }
+                    expect(gIds).to(contain([1,2,3]))
                 }
             }
         }

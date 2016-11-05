@@ -37,26 +37,31 @@ class Anime: Object {
     let titles = List<AnimeTitle>()
     dynamic var canonicalTitle = ""
     
+    /**
+     Instead of directly linking Anime to a Genre by the use of a List<Genre>, we instead store the genre ids that the anime has.
+     
+     This prevents a situation where if we parse an Anime object but the Genre objects don't exist in the system yet then the Genre will not be linked to the Anime, unless we parse the Genre first then the Anime.
+     
+     Using this method however, we can store the genre ids we need and use a computed property to fetch the genres as needed.
+     */
+    let _backingGenres = List<RealmInt>()
+    var genres: Results<Genre> {
+        let g: [Int] = _backingGenres.map { $0.value }
+        return Genre.get(withIds: g)
+    }
+    
     override static func primaryKey() -> String {
         return "id"
     }
     
     override static func ignoredProperties() -> [String] {
-        return []
+        return ["genres"]
     }
     
 }
 
+extension Anime: GettableObject { typealias T = Anime }
 extension Anime {
-    
-    /// Get an anime with the given id.
-    ///
-    /// - Parameter id: The anime id
-    /// - Returns: An anime object if it exists with given id
-    class func get(withId id: Int) -> Anime? {
-        let r = RealmProvider.realm()
-        return r.object(ofType: Anime.self, forPrimaryKey: id)
-    }
     
     /// Construct an `Anime` object from JSON Data
     ///
@@ -92,6 +97,13 @@ extension Anime {
             title.id = key
             title.value = value.stringValue
             anime.titles.append(title)
+        }
+        
+        //Add genres
+        let genres = json["relationships"]["genres"]["data"]
+        for (_, genre): (String, JSON) in genres {
+            let id = genre["id"].intValue
+            anime._backingGenres.append(RealmInt(value: [id]))
         }
         
         return anime
