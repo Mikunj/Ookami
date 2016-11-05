@@ -43,7 +43,7 @@ class LibraryEntrySpec: QuickSpec {
                 
                 it("should be able to fetch multiple entries from the database") {
                     var ids: [Int] = []
-                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 3) { (index, entry) in
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 3) { index, entry in
                         entry.id = index
                         ids.append(index)
                     }
@@ -79,7 +79,7 @@ class LibraryEntrySpec: QuickSpec {
                     expect(e.user).to(beNil())
                     
                     //Add the user
-                    TestHelper.create(object: User.self, inRealm: testRealm, amount: 1) { (index, user) in
+                    TestHelper.create(object: User.self, inRealm: testRealm, amount: 1) { index, user in
                         user.id = 1
                         user.name = "bob"
                     }
@@ -89,7 +89,7 @@ class LibraryEntrySpec: QuickSpec {
                 
                 it("should correctly return media and retain only 1 copy") {
                     let media = [Media(value: [1, 0, "hi"]), Media(value: [1, 1, "hello"])]
-                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 2) { (index, entry) in
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 2) { index, entry in
                         entry.id = 1
                         entry.media = media[index]
                     }

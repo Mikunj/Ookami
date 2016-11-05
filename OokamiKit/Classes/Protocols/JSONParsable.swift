@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 
+/// Protocol for an object that can be parsable with JSON data
 protocol JSONParsable {
     associatedtype T
     

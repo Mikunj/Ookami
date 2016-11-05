@@ -42,7 +42,7 @@ class UserSpec: QuickSpec {
                 
                 it("should be able to fetch multiple users from the database") {
                     var ids: [Int] = []
-                    TestHelper.create(object: User.self, inRealm: testRealm, amount: 3) { (index, user) in
+                    TestHelper.create(object: User.self, inRealm: testRealm, amount: 3) { index, user in
                         user.id = index
                         ids.append(index)
                     }

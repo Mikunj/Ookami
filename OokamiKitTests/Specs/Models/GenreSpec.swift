@@ -43,7 +43,7 @@ class GenreSpec: QuickSpec {
                 
                 it("should be able to fetch multiple genres from the database") {
                     var ids: [Int] = []
-                    TestHelper.create(object: Genre.self, inRealm: testRealm, amount: 3) { (index, genre) in
+                    TestHelper.create(object: Genre.self, inRealm: testRealm, amount: 3) { index, genre in
                         genre.id = index
                         ids.append(index)
                     }

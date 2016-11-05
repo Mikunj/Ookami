@@ -43,7 +43,7 @@ class AnimeSpec: QuickSpec {
                 
                 it("should be able to fetch multiple anime from the database") {
                     var ids: [Int] = []
-                    TestHelper.create(object: Anime.self, inRealm: testRealm, amount: 3) { (index, anime) in
+                    TestHelper.create(object: Anime.self, inRealm: testRealm, amount: 3) { index, anime in
                         anime.id = index
                         ids.append(index)
                     }
