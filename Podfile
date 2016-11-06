@@ -14,6 +14,7 @@ def project_pods
     pod 'Realm', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master',:submodules => true
     pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master',:submodules => true
     pod 'SwiftyJSON', '3.0.0'
+    pod 'Heimdallr', git: 'https://github.com/marcelofabri/Heimdallr.swift.git', branch: 'swift-3.0'
 end
 
 def testing_pods

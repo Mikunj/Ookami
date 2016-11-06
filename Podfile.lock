@@ -1,4 +1,8 @@
 PODS:
+  - Heimdallr (3.5.0):
+    - Heimdallr/Core (= 3.5.0)
+  - Heimdallr/Core (3.5.0):
+    - Result (~> 3.0)
   - Keys (1.0.0)
   - Nimble (5.1.1)
   - Quick (0.10.0)
@@ -7,9 +11,11 @@ PODS:
   - Realm/Headers (2.0.3)
   - RealmSwift (2.0.3):
     - Realm (= 2.0.3)
+  - Result (3.0.0)
   - SwiftyJSON (3.0.0)
 
 DEPENDENCIES:
+  - Heimdallr (from `https://github.com/marcelofabri/Heimdallr.swift.git`, branch `swift-3.0`)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Nimble (~> 5.1.1)
   - Quick (~> 0.10.0)
@@ -18,6 +24,9 @@ DEPENDENCIES:
   - SwiftyJSON (= 3.0.0)
 
 EXTERNAL SOURCES:
+  Heimdallr:
+    :branch: swift-3.0
+    :git: https://github.com/marcelofabri/Heimdallr.swift.git
   Keys:
     :path: Pods/CocoaPodsKeys
   Realm:
@@ -30,6 +39,9 @@ EXTERNAL SOURCES:
     :submodules: true
 
 CHECKOUT OPTIONS:
+  Heimdallr:
+    :commit: af40d89fef3300b780c8a1675db70bf3147dfd0f
+    :git: https://github.com/marcelofabri/Heimdallr.swift.git
   Realm:
     :commit: eb4c36f2b7e287f82bb1ca67602fff20ac030a1a
     :git: https://github.com/realm/realm-cocoa.git
@@ -40,13 +52,15 @@ CHECKOUT OPTIONS:
     :submodules: true
 
 SPEC CHECKSUMS:
+  Heimdallr: 6d371eb270d6d06d8c9ef5dc9fe7f7bda1331154
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
   Realm: 5f008bfe3c8c47142eddfc30b8c1584cde22db24
   RealmSwift: 79a9bc83e7ef4fbde17e0f303c5fadb99264a6be
+  Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-PODFILE CHECKSUM: b9eeebbb45580fb57557d460e570fbb35545a5cb
+PODFILE CHECKSUM: 01f2d4f79811f6c50edd31154bbb38d4ae17fb29
 
 COCOAPODS: 1.1.1
