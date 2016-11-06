@@ -10,30 +10,30 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-class Genre: Object {
+public class Genre: Object {
     
-    dynamic var id = -1
-    dynamic var slug = ""
-    dynamic var name = ""
-    dynamic var genreDescription = ""
+    public dynamic var id = -1
+    public dynamic var slug = ""
+    public dynamic var name = ""
+    public dynamic var genreDescription = ""
     
-    override static func primaryKey() -> String {
+    override public static func primaryKey() -> String {
         return "id"
     }
     
-    override static func ignoredProperties() -> [String] {
+    override public static func ignoredProperties() -> [String] {
         return []
     }
 }
 
-extension Genre: GettableObject { typealias T = Genre }
+extension Genre: GettableObject { public typealias T = Genre }
 extension Genre: JSONParsable {
 
     /// Construct an `Genre` object from JSON Data
     ///
     /// - Parameter json: The JSON Data
     /// - Returns: A genre if JSON data was valid
-    static func parse(json: JSON) -> Genre? {
+    public static func parse(json: JSON) -> Genre? {
         guard json["type"].stringValue == "genres" else {
             return nil
         }

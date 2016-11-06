@@ -10,47 +10,48 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-enum LibraryEntryStatus: String {
+public enum LibraryEntryStatus: String {
     case current
     case planned
     case completed
     case onHold = "on_hold"
     case dropped
     
-    static let all:[LibraryEntryStatus] = [.current, .planned, .completed, .onHold, .dropped]
+    public static let all:[LibraryEntryStatus] = [.current, .planned, .completed, .onHold, .dropped]
 }
 
 /*
  We don't need a compound key here are LibraryEntry - Media is a 1-to-1 relationship.
  If this does change in the future then a compound key will be needed
+ We also don't need to restrict it to internal(set) because there is no compound key
  */
-class Media: Object {
-    dynamic var entryId = -1
-    dynamic var id = -1
-    dynamic var type = ""
+public class Media: Object {
+    public dynamic var entryId = -1
+    public dynamic var id = -1
+    public dynamic var type = ""
     
-    override static func primaryKey() -> String {
+    override public static func primaryKey() -> String {
         return "entryId"
     }
 }
 
-class LibraryEntry: Object {
+public class LibraryEntry: Object {
     
-    dynamic var id = -1
-    dynamic var progress = 0
-    dynamic var reconsuming = false
-    dynamic var reconsumeCount = 0
-    dynamic var notes = ""
-    dynamic var isPrivate = false
-    dynamic var rating = 0.0
-    dynamic var updatedAt: Date = Date()
-    dynamic var media: Media? = nil
+    public dynamic var id = -1
+    public dynamic var progress = 0
+    public dynamic var reconsuming = false
+    public dynamic var reconsumeCount = 0
+    public dynamic var notes = ""
+    public dynamic var isPrivate = false
+    public dynamic var rating = 0.0
+    public dynamic var updatedAt: Date = Date()
+    public dynamic var media: Media? = nil
     
     /**
      For `LibraryEntry` it is more convinient to add a getter and setter to the 'status' property so that we can modify it easily that way due to enums
      */
     dynamic var rawStatus = ""
-    var status: LibraryEntryStatus? {
+    public var status: LibraryEntryStatus? {
         get {
             return LibraryEntryStatus(rawValue: rawStatus)
         }
@@ -62,29 +63,29 @@ class LibraryEntry: Object {
     }
     
     //Other properties not present in the JSON
-    dynamic var needsSync = false
-    dynamic var userId = -1
-    var user: User? {
+    public dynamic var needsSync = false
+    public dynamic var userId = -1
+    public var user: User? {
         return User.get(withId: userId)
     }
     
-    override static func primaryKey() -> String {
+    override public static func primaryKey() -> String {
         return "id"
     }
     
-    override static func ignoredProperties() -> [String] {
-        return ["user"]
+    override public static func ignoredProperties() -> [String] {
+        return ["user", "status"]
     }
 }
 
-extension LibraryEntry: GettableObject { typealias T = LibraryEntry }
+extension LibraryEntry: GettableObject { public typealias T = LibraryEntry }
 extension LibraryEntry: JSONParsable {
     
     /// Construct an `LibraryEntry` object from JSON Data
     ///
     /// - Parameter json: The JSON Data
     /// - Returns: A LibraryEntry if JSON data was valid
-    static func parse(json: JSON) -> LibraryEntry? {
+    public static func parse(json: JSON) -> LibraryEntry? {
         guard json["type"].stringValue == "libraryEntries" else {
             return nil
         }

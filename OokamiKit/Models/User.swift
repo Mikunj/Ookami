@@ -9,14 +9,14 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-class UserPastName: Object {
+public class UserPastName: Object {
     //The user this name belongs to
-    dynamic var userId = -1 {
+    public internal(set) dynamic var userId = -1 {
         didSet { compoundKey = self.compoundKeyValue() }
     }
     
     //the past name
-    dynamic var name = "" {
+    public internal(set) dynamic var name = "" {
         didSet { compoundKey = self.compoundKeyValue() }
     }
     
@@ -25,49 +25,49 @@ class UserPastName: Object {
         return "\(userId)-\(name)"
     }
     
-    override static func primaryKey() -> String {
+    override public static func primaryKey() -> String {
         return "compoundKey"
     }
 
 }
 
-class User: Object {
-    dynamic var id = -1
-    dynamic var about = ""
-    dynamic var bio = ""
-    dynamic var location = ""
-    dynamic var website = ""
-    dynamic var waifuOrHusbando = ""
-    dynamic var followersCount = 0
-    dynamic var followingCount = 0
-    dynamic var createdAt: Date = Date()
-    dynamic var updatedAt: Date = Date()
-    dynamic var lifeSpentOnAnime = 0
-    dynamic var birthday = ""
-    dynamic var gender = ""
-    dynamic var avatarImage = ""
-    dynamic var coverImage = ""
+public class User: Object {
+    public dynamic var id = -1
+    public dynamic var about = ""
+    public dynamic var bio = ""
+    public dynamic var location = ""
+    public dynamic var website = ""
+    public dynamic var waifuOrHusbando = ""
+    public dynamic var followersCount = 0
+    public dynamic var followingCount = 0
+    public dynamic var createdAt: Date = Date()
+    public dynamic var updatedAt: Date = Date()
+    public dynamic var lifeSpentOnAnime = 0
+    public dynamic var birthday = ""
+    public dynamic var gender = ""
+    public dynamic var avatarImage = ""
+    public dynamic var coverImage = ""
     
-    dynamic var name = ""
-    let pastNames = List<UserPastName>()
+    public dynamic var name = ""
+    public let pastNames = List<UserPastName>()
     
-    override static func primaryKey() -> String {
+    override public static func primaryKey() -> String {
         return "id"
     }
     
-    override static func ignoredProperties() -> [String] {
+    override public static func ignoredProperties() -> [String] {
         return []
     }
 }
 
-extension User: GettableObject { typealias T = User }
+extension User: GettableObject { public typealias T = User }
 extension User: JSONParsable {
     
     /// Construct a `User` object from JSON Data
     ///
     /// - Parameter json: The JSON data
     /// - Returns: A User if the JSON data was valid
-    static func parse(json: JSON) -> User? {
+    public static func parse(json: JSON) -> User? {
         guard json["type"].stringValue == "users" else {
             return nil
         }

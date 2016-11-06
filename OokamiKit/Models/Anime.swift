@@ -15,75 +15,76 @@ import SwiftyJSON
 /**
  The reason we can safely assign compoundKey via didSet (note realm will not call didSet or willSet after object has been written to database) is because the animeId and the key of the AnimeTitle will not change after it has first been added.
  
- WARNING: If you do decide to change the animeId or key then the compoundKey will be invalid!
+ WARNING: If you do decide to change the animeId or key in OokamiKit then the compoundKey will be invalid!
+ The key and value can only be modified internally (in OokamiKit) thus preventing the problem where apps using this framework modify the values accidentally
  */
-class AnimeTitle: Object {
+public class AnimeTitle: Object {
     //The anime this title belongs to
-    dynamic var animeId = -1 {
+    public internal(set) dynamic var animeId = -1 {
         didSet { compoundKey = self.compoundKeyValue() }
     }
     
     //the language key, E.g en or en_jp
-    dynamic var key = "" {
+    public internal(set) dynamic var key = "" {
         didSet { compoundKey = self.compoundKeyValue() }
     }
     
     //The title for the given key
-    dynamic var value = ""
+    public internal(set) dynamic var value = ""
         
     dynamic var compoundKey: String = "0-"
     func compoundKeyValue() -> String {
         return "\(animeId)-\(key)"
     }
     
-    override static func primaryKey() -> String {
+    override public static func primaryKey() -> String {
         return "compoundKey"
     }
 }
 
-class Anime: Object {
+public class Anime: Object {
     
-    dynamic var id = -1
-    dynamic var slug = ""
-    dynamic var synopsis = ""
-    dynamic var averageRating = 0.0
-    dynamic var startDate: Date?
-    dynamic var endDate: Date?
-    dynamic var episodeCount = -1 //-1 means we don't know the episode count for this anime
-    dynamic var episodeLength = -1
-    dynamic var showType = ""
-    dynamic var youtubeVideoId = ""
-    dynamic var ageRating = ""
-    dynamic var ageRatingGuide = ""
-    dynamic var posterImage = ""
-    dynamic var coverImage = ""
+    public dynamic var id = -1
+    public dynamic var slug = ""
+    public dynamic var synopsis = ""
+    public dynamic var averageRating = 0.0
+    public dynamic var startDate: Date?
+    public dynamic var endDate: Date?
+    public dynamic var episodeCount = -1 //-1 means we don't know the episode count for this anime
+    public dynamic var episodeLength = -1
+    public dynamic var showType = ""
+    public dynamic var youtubeVideoId = ""
+    public dynamic var ageRating = ""
+    public dynamic var ageRatingGuide = ""
+    public dynamic var posterImage = ""
+    public dynamic var coverImage = ""
     
-    let titles = List<AnimeTitle>()
-    dynamic var canonicalTitle = ""
+    public let titles = List<AnimeTitle>()
+    public dynamic var canonicalTitle = ""
     
     /**
      When parsing anime, if a `Genre` cannot be found then it is created with just the `id` set. This is to ensure that the relationship occurs, but we cannot determine the rest of the genre data from the anime JSON itself
      */
-    let genres = List<Genre>()
+    public let genres = List<Genre>()
     
-    override static func primaryKey() -> String {
+    override public static func primaryKey() -> String {
         return "id"
     }
     
-    override static func ignoredProperties() -> [String] {
+    override public static func ignoredProperties() -> [String] {
         return []
     }
     
 }
 
-extension Anime: GettableObject { typealias T = Anime }
+extension Anime: GettableObject { public typealias T = Anime }
 extension Anime: JSONParsable {
     
     /// Construct an `Anime` object from JSON Data
     ///
     /// - Parameter json: The JSON Data
     /// - Returns: An anime if JSON data was valid
-    static func parse(json: JSON) -> Anime? {
+    public static func parse(json: JSON) -> Anime? {
         guard json["type"].stringValue == "anime" else {
             return nil
         }

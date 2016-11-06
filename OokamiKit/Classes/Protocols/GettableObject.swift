@@ -12,7 +12,7 @@ import Foundation
 import RealmSwift
 
 /// A protocol for defining if a object is gettable
-protocol GettableObject {
+public protocol GettableObject {
     //The type of the ID/primary key. E.g: Int, String
     associatedtype IDType
     
@@ -44,7 +44,7 @@ extension GettableObject where T: Object {
     ///
     /// - Parameter id: The object id
     /// - Returns: A realm object for given id
-    static func get(withId id: Int) -> T? {
+    public static func get(withId id: Int) -> T? {
         let r = RealmProvider.realm()
         return r.object(ofType: T.self, forPrimaryKey: id)
     }
@@ -54,7 +54,7 @@ extension GettableObject where T: Object {
     ///
     /// - Parameter ids: An array of genre ids
     /// - Returns: A Realm result of the realm objects
-    static func get(withIds ids: [Int]) -> Results<T> {
+    public static func get(withIds ids: [Int]) -> Results<T> {
         let key = T.primaryKey() ?? "id"
         let r = RealmProvider.realm()
         return r.objects(T.self).filter("\(key) IN %@", ids)
