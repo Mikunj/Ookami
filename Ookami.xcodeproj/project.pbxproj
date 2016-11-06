@@ -27,6 +27,11 @@
 		2470044C1DCD73D9000D987C /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470044B1DCD73D9000D987C /* Genre.swift */; };
 		2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470044E1DCD7A9E000D987C /* GettableObject.swift */; };
 		247362801DCDFF3B004B4AC5 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2473627F1DCDFF3B004B4AC5 /* README */; };
+		2473628B1DCF0181004B4AC5 /* NetworkRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2473628A1DCF0181004B4AC5 /* NetworkRequestProtocol.swift */; };
+		2473628D1DCF01EF004B4AC5 /* NetworkClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2473628C1DCF01EF004B4AC5 /* NetworkClientProtocol.swift */; };
+		247362901DCF0321004B4AC5 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2473628F1DCF0321004B4AC5 /* NetworkRequest.swift */; };
+		247362921DCF035D004B4AC5 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247362911DCF035D004B4AC5 /* NetworkClient.swift */; };
+		247362951DCF0F1C004B4AC5 /* NetworkClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247362941DCF0F1C004B4AC5 /* NetworkClientSpec.swift */; };
 		248734361DCCB1D1002E7366 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
 		248734371DCCB1D3002E7366 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
 		248734381DCCB1D3002E7366 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
@@ -121,6 +126,11 @@
 		2470044B1DCD73D9000D987C /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		2470044E1DCD7A9E000D987C /* GettableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GettableObject.swift; sourceTree = "<group>"; };
 		2473627F1DCDFF3B004B4AC5 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		2473628A1DCF0181004B4AC5 /* NetworkRequestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequestProtocol.swift; sourceTree = "<group>"; };
+		2473628C1DCF01EF004B4AC5 /* NetworkClientProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClientProtocol.swift; sourceTree = "<group>"; };
+		2473628F1DCF0321004B4AC5 /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		247362911DCF035D004B4AC5 /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		247362941DCF0F1C004B4AC5 /* NetworkClientSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClientSpec.swift; sourceTree = "<group>"; };
 		248734391DCCB479002E7366 /* Anime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
 		2487343B1DCCC183002E7366 /* AnimeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSpec.swift; sourceTree = "<group>"; };
 		2487343D1DCCC274002E7366 /* anime-hunter-hunter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "anime-hunter-hunter.json"; sourceTree = "<group>"; };
@@ -280,13 +290,33 @@
 			children = (
 				2470044E1DCD7A9E000D987C /* GettableObject.swift */,
 				2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */,
+				2473628A1DCF0181004B4AC5 /* NetworkRequestProtocol.swift */,
+				2473628C1DCF01EF004B4AC5 /* NetworkClientProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		2473628E1DCF030B004B4AC5 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				2473628F1DCF0321004B4AC5 /* NetworkRequest.swift */,
+				247362911DCF035D004B4AC5 /* NetworkClient.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		247362931DCF0F09004B4AC5 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				247362941DCF0F1C004B4AC5 /* NetworkClientSpec.swift */,
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 		248734451DCD490B002E7366 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2473628E1DCF030B004B4AC5 /* Networking */,
 				248734461DCD4910002E7366 /* Helper */,
 				2470044D1DCD7A5A000D987C /* Protocols */,
 			);
@@ -334,6 +364,7 @@
 		24EEEF611DCCAB1300869696 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				247362931DCF0F09004B4AC5 /* Networking */,
 				24A7EAB71DCDCB67000935E6 /* Models */,
 			);
 			path = Specs;
@@ -761,12 +792,16 @@
 			files = (
 				2487343A1DCCB479002E7366 /* Anime.swift in Sources */,
 				2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */,
+				2473628B1DCF0181004B4AC5 /* NetworkRequestProtocol.swift in Sources */,
 				2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */,
 				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
 				2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */,
 				2470044C1DCD73D9000D987C /* Genre.swift in Sources */,
 				2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */,
+				247362901DCF0321004B4AC5 /* NetworkRequest.swift in Sources */,
 				2494D9A81DCC631E0032AC8E /* User.swift in Sources */,
+				2473628D1DCF01EF004B4AC5 /* NetworkClientProtocol.swift in Sources */,
+				247362921DCF035D004B4AC5 /* NetworkClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,6 +813,7 @@
 				24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */,
 				24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */,
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,
+				247362951DCF0F1C004B4AC5 /* NetworkClientSpec.swift in Sources */,
 				2414189E1DCDE00400AF1AEA /* LibraryEntrySpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

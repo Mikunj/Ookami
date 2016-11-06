@@ -17,7 +17,7 @@ extension Date {
         
         let dateFormatter = DateFormatter()
         
-        switch(dateString.characters.count) {
+        switch dateString.characters.count {
             case 10:
                 dateFormatter.dateFormat = "YYYY-MM-dd"
                 break

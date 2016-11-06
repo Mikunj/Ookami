@@ -14,12 +14,18 @@ def project_pods
     pod 'Realm', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master',:submodules => true
     pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master',:submodules => true
     pod 'SwiftyJSON', '3.0.0'
+
+    #https://github.com/trivago/Heimdallr.swift/pull/94#issuecomment-253346803
     pod 'Heimdallr', git: 'https://github.com/marcelofabri/Heimdallr.swift.git', branch: 'swift-3.0'
+
+    pod 'Alamofire', '~> 4.0'
 end
 
 def testing_pods
     pod 'Quick', '~> 0.10.0'
     pod 'Nimble', '~> 5.1.1'
+    pod 'OHHTTPStubs'
+    pod 'OHHTTPStubs/Swift'
 end
 
 target 'Ookami' do

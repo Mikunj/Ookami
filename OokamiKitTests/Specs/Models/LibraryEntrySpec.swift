@@ -113,10 +113,10 @@ class LibraryEntrySpec: QuickSpec {
                     expect(entry.rawStatus).to(equal("current"))
                     expect(entry.status).to(equal(LibraryEntryStatus.current))
                     expect(entry.progress).to(equal(131))
-                    expect(entry.reconsuming).to(equal(true))
+                    expect(entry.reconsuming).to(beTrue())
                     expect(entry.reconsumeCount).to(equal(0))
                     expect(entry.notes).to(equal(""))
-                    expect(entry.isPrivate).to(equal(true))
+                    expect(entry.isPrivate).to(beTrue())
                     expect(entry.rating).to(equal(5.0))
                     
                     let d = DateFormatter()
