@@ -15,5 +15,5 @@ public protocol NetworkClientProtocol {
     /// - Parameters:
     ///   - request: The network request
     ///   - completion: The callback closure. Passes JSON data and error.
-    func execute(request: NetworkRequestProtocol, completion: @escaping (JSON?, Error?) -> ())
+    func execute(request: NetworkRequestProtocol, completion: @escaping (JSON?, Error?) -> Void)
 }

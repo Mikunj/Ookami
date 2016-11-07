@@ -14,33 +14,6 @@ import Heimdallr
 import Result
 import OHHTTPStubs
 
-private class StubHeimdallr: Heimdallr {
-    
-    typealias VoidClosure = () -> ()
-    
-    var stubError: NSError?
-    var authBlock: VoidClosure?
-    
-    init(stubError: NSError? = nil, authenticationBlock: VoidClosure? = nil) {
-        super.init(tokenURL: URL(string: "http://kitsu.io")!)
-        self.stubError = stubError
-        self.authBlock = authenticationBlock
-    }
-    
-    //A stub authenticate request that return a stub error or the request if stubError is not set
-    //Also calls the callback block
-    override func authenticateRequest(_ request: URLRequest, completion: @escaping (Result<URLRequest, NSError>) -> ()) {
-        
-        authBlock?()
-        
-        if stubError != nil {
-            completion(.failure(stubError!))
-        } else {
-            completion(.success(request))
-        }
-    }
-}
-
 class NetworkClientSpec: QuickSpec {
     override func spec() {
         
@@ -50,7 +23,7 @@ class NetworkClientSpec: QuickSpec {
             
             beforeEach {
                 
-                client = NetworkClient(baseURL: "http://kitsu.io", heimdallr: StubHeimdallr())
+                client = NetworkClient(baseURL: "http://kitsu.io", heimdallr: StubAuthHeimdallr())
                 
                 //Stub the network to return JSON data
                 stub(condition: isHost("kitsu.io")) { _ in
@@ -68,14 +41,15 @@ class NetworkClientSpec: QuickSpec {
                 context("Request needs authentication") {
                     
                     it("Should call the authentication function") {
-                        var authenticationCalled = false
-                        var requestExecuted = false
+                        var authenticationCalled: Bool? = nil
+                        var requestExecuted: Bool? = nil
                         
-                        client = NetworkClient(baseURL: "http://kitsu.io", heimdallr: StubHeimdallr() {
+                        client = NetworkClient(baseURL: "http://kitsu.io", heimdallr: StubAuthHeimdallr() {
                             authenticationCalled = true
                         })
                         
-                        let request = NetworkRequest(method: .get, parameters: nil, headers: nil, needsAuth: true, relativeURL: "/user")
+                        //let request = NetworkRequest(method: .get, parameters: nil, headers: nil, needsAuth: true, relativeURL: "/user")
+                        let request = NetworkRequest(relativeURL: "/user", method: .get, needsAuth: true)
                         client?.execute(request: request) { data, e in
                             requestExecuted = true
                         }
@@ -90,9 +64,9 @@ class NetworkClientSpec: QuickSpec {
                         var data: JSON? = nil
                         
                         //Set the stubError to nil to simulate a signing success
-                        client = NetworkClient(baseURL: "http://kitsu.io", heimdallr: StubHeimdallr())
+                        client = NetworkClient(baseURL: "http://kitsu.io", heimdallr: StubAuthHeimdallr())
                         
-                        let request = NetworkRequest(method: .get, parameters: nil, headers: nil, needsAuth: true, relativeURL: "/user")
+                        let request = NetworkRequest(relativeURL: "/user", method: .get, needsAuth: true)
                         client?.execute(request: request) { d, e in
                             data = d
                             error = e
@@ -103,12 +77,12 @@ class NetworkClientSpec: QuickSpec {
                     }
                     
                     it("Should give an error if user is not logged in") {
-                        var authenticationError = false
+                        var authenticationError: Bool? = nil
                         
                         //Set the stubError to nil to simulate a signing success
-                        client = NetworkClient(baseURL: "http://kitsu.io", heimdallr: StubHeimdallr(stubError: NSError(domain: "client", code: 400, userInfo: nil)))
+                        client = NetworkClient(baseURL: "http://kitsu.io", heimdallr: StubAuthHeimdallr(stubError: NSError(domain: "client", code: 400, userInfo: nil)))
                         
-                        let request = NetworkRequest(method: .get, parameters: nil, headers: nil, needsAuth: true, relativeURL: "/user")
+                        let request = NetworkRequest(relativeURL: "/user", method: .get, needsAuth: true)
                         client?.execute(request: request) { data, e in
                             if let error = e {
                                 if case NetworkClientError.authenticationError(_) = error {
@@ -127,17 +101,24 @@ class NetworkClientSpec: QuickSpec {
                         var authenticationCalled = false
                         var requestExecuted = false
                         
-                        client = NetworkClient(baseURL: "http://kitsu.io", heimdallr: StubHeimdallr() {
+                        client = NetworkClient(baseURL: "http://kitsu.io", heimdallr: StubAuthHeimdallr() {
                             authenticationCalled = true
                         })
                         
-                        let request = NetworkRequest(method: .get, parameters: nil, headers: nil, needsAuth: false, relativeURL: "/user")
+                        let request = NetworkRequest(relativeURL: "/user", method: .get)
                         client?.execute(request: request) { data, e in
                             requestExecuted = true
                         }
                         
-                        expect(authenticationCalled).toEventually(beFalse())
-                        expect(requestExecuted).toEventually(beTrue())
+                        //We use waitUntil so that we can check if the values were set, as using expect(authcalled)toEventually(beFalse()) will automatically resolve as its default value is false
+                        waitUntil { done in
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                expect(authenticationCalled).to(beFalse())
+                                expect(requestExecuted).to(beTrue())
+                                done()
+                            }
+                        }
+                        
                     }
                 }
                 
@@ -148,7 +129,7 @@ class NetworkClientSpec: QuickSpec {
                     
                     var data: JSON? = nil
                     
-                    let request = NetworkRequest(method: .get, parameters: nil , headers: ["header": "1"], needsAuth: false, relativeURL: "/user")
+                    let request = NetworkRequest(relativeURL: "/user", method: .get, headers: ["header": "1"])
                     
                     stub(condition: isHost("kitsu.io")) { _ in
                         return OHHTTPStubsResponse(error: NetworkClientError.error("Failed to get stuff"))
@@ -173,17 +154,13 @@ class NetworkClientSpec: QuickSpec {
                 }
                 
                 it("should correctly return JSON") {
-                    var dataSaysHi = false
-                    var didError = false
+                    var dataSaysHi: Bool? = nil
+                    var didError: Bool? = nil
                     
-                    let request = NetworkRequest(method: .get, parameters: nil , headers: nil, needsAuth: false, relativeURL: "/user")
+                    let request = NetworkRequest(relativeURL: "/user", method: .get)
                     client?.execute(request: request) { data, error in
-                        if data?["data"].stringValue == "hi" {
-                                dataSaysHi = true
-                        }
-                        if error != nil {
-                            didError = true
-                        }
+                        dataSaysHi = data?["data"].stringValue == "hi"
+                        didError = error != nil
                     }
                     
                     expect(dataSaysHi).toEventually(beTrue())
@@ -191,9 +168,9 @@ class NetworkClientSpec: QuickSpec {
                 }
                 
                 it("should not allow bad status codes") {
-                    var didError = false
+                    var didError: Bool? = nil
                     
-                    let request = NetworkRequest(method: .get, parameters: nil , headers: nil, needsAuth: false, relativeURL: "/user")
+                    let request = NetworkRequest(relativeURL: "/user", method: .get)
                     
                     stub(condition: isHost("kitsu.io")) { _ in
                         let obj = ["name": "test"]
@@ -201,27 +178,25 @@ class NetworkClientSpec: QuickSpec {
                     }
                     
                     client?.execute(request: request) { d, e in
-                        if e != nil {
-                            didError = true
-                        }
+                        didError = e != nil
                     }
                     
                     expect(didError).toEventually(beTrue())
                 }
                 
                 it("should propogate network error") {
-                    var hasData = false
-                    var didError = false
+                    var hasData: Bool? = nil
+                    var didError: Bool? = nil
                     
-                    let request = NetworkRequest(method: .get, parameters: nil , headers: ["header": "1"], needsAuth: false, relativeURL: "/user")
+                    let request = NetworkRequest(relativeURL: "/user", method: .get, headers: ["header": "1"])
                     
                     stub(condition: isHost("kitsu.io")) { _ in
                         return OHHTTPStubsResponse(error: NetworkClientError.error("Failed to get stuff"))
                     }
                     
                     client?.execute(request: request) { d, e in
-                        if d != nil { hasData = true }
-                        if e != nil { didError = true }
+                        hasData = d != nil
+                        didError = e != nil
                     }
                     
                     expect(hasData).toEventually(beFalse())

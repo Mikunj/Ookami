@@ -39,7 +39,7 @@ class TestHelper {
     ///   - realm: The realm
     ///   - amount: Amount of objects to create
     ///   - objectModifer: A closure for modifying the properties of the object before it is added to the realm. It passes the index and the object as its arguments.
-    static func create<T: Object>(object: T.Type, inRealm realm: Realm, amount: Int, objectModifer: (Int, T) -> ()) {
+    static func create<T: Object>(object: T.Type, inRealm realm: Realm, amount: Int, objectModifer: (Int, T) -> Void) {
         try! realm.write {
             for i in 0..<amount {
                 let object = T()

@@ -33,7 +33,7 @@ public class NetworkClient: NetworkClientProtocol {
     /// - Parameters:
     ///   - request: The request
     ///   - completion: The callback block. Passes JSON and error
-    public func execute(request: NetworkRequestProtocol, completion: @escaping (JSON?, Error?) -> ()) {
+    public func execute(request: NetworkRequestProtocol, completion: @escaping (JSON?, Error?) -> Void) {
         guard let url = URL(string: "\(baseURL)\(request.relativeURL)") else {
             completion(nil, NetworkClientError.error("Failed to construct URL"))
             return

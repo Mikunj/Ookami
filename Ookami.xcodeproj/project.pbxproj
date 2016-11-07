@@ -49,6 +49,10 @@
 		24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABD1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
+		24D28ECF1DD0157B00773BED /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */; };
+		24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED01DD015FC00773BED /* NetworkOperation.swift */; };
+		24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */; };
+		24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */; };
 		24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEEF5C1DCCA53100869696 /* Helper.swift */; };
 		24EEEF601DCCA56700869696 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
 		4B0602544AED16E809D1EEAF /* Pods_OokamiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 434E929751010464220AF315 /* Pods_OokamiTests.framework */; };
@@ -139,7 +143,11 @@
 		2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
-		24EEEF5C1DCCA53100869696 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
+		24D28ED01DD015FC00773BED /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
+		24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationSpec.swift; sourceTree = "<group>"; };
+		24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubAuthHeimdallr.swift; sourceTree = "<group>"; };
+		24EEEF5C1DCCA53100869696 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = Helper.swift; sourceTree = "<group>"; };
 		24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "user-jigglyslime.json"; sourceTree = "<group>"; };
 		42AF10F67E8E4875D581D508 /* Pods_Ookami.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ookami.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		434E929751010464220AF315 /* Pods_OokamiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OokamiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -250,7 +258,6 @@
 			children = (
 				24EEEF5E1DCCA53500869696 /* Data */,
 				24EEEF611DCCAB1300869696 /* Specs */,
-				24EEEF5C1DCCA53100869696 /* Helper.swift */,
 				2464F2071DCC5AE70028F7B0 /* Info.plist */,
 			);
 			path = OokamiKitTests;
@@ -290,8 +297,8 @@
 			children = (
 				2470044E1DCD7A9E000D987C /* GettableObject.swift */,
 				2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */,
-				2473628A1DCF0181004B4AC5 /* NetworkRequestProtocol.swift */,
 				2473628C1DCF01EF004B4AC5 /* NetworkClientProtocol.swift */,
+				2473628A1DCF0181004B4AC5 /* NetworkRequestProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -299,10 +306,11 @@
 		2473628E1DCF030B004B4AC5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				2473628F1DCF0321004B4AC5 /* NetworkRequest.swift */,
 				247362911DCF035D004B4AC5 /* NetworkClient.swift */,
+				2473628F1DCF0321004B4AC5 /* NetworkRequest.swift */,
 			);
 			name = Networking;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		247362931DCF0F09004B4AC5 /* Networking */ = {
@@ -311,13 +319,15 @@
 				247362941DCF0F1C004B4AC5 /* NetworkClientSpec.swift */,
 			);
 			name = Networking;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		248734451DCD490B002E7366 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				2473628E1DCF030B004B4AC5 /* Networking */,
 				248734461DCD4910002E7366 /* Helper */,
+				2473628E1DCF030B004B4AC5 /* Networking */,
+				24D28ECD1DD0151000773BED /* Operations */,
 				2470044D1DCD7A5A000D987C /* Protocols */,
 			);
 			path = Classes;
@@ -350,6 +360,35 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		24D28ECD1DD0151000773BED /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */,
+				24D28ED01DD015FC00773BED /* NetworkOperation.swift */,
+			);
+			name = Operations;
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		24D28ED21DD017D400773BED /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */,
+			);
+			name = Operations;
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		24D28ED51DD01AA300773BED /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				24EEEF5C1DCCA53100869696 /* Helper.swift */,
+				24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */,
+			);
+			name = Helper;
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		24EEEF5E1DCCA53500869696 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,8 +403,10 @@
 		24EEEF611DCCAB1300869696 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				247362931DCF0F09004B4AC5 /* Networking */,
+				24D28ED51DD01AA300773BED /* Helper */,
 				24A7EAB71DCDCB67000935E6 /* Models */,
+				247362931DCF0F09004B4AC5 /* Networking */,
+				24D28ED21DD017D400773BED /* Operations */,
 			);
 			path = Specs;
 			sourceTree = "<group>";
@@ -790,11 +831,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24D28ECF1DD0157B00773BED /* AsynchronousOperation.swift in Sources */,
 				2487343A1DCCB479002E7366 /* Anime.swift in Sources */,
 				2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */,
 				2473628B1DCF0181004B4AC5 /* NetworkRequestProtocol.swift in Sources */,
 				2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */,
 				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
+				24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */,
 				2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */,
 				2470044C1DCD73D9000D987C /* Genre.swift in Sources */,
 				2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */,
@@ -812,6 +855,8 @@
 				2487343C1DCCC183002E7366 /* AnimeSpec.swift in Sources */,
 				24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */,
 				24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */,
+				24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */,
+				24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */,
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,
 				247362951DCF0F1C004B4AC5 /* NetworkClientSpec.swift in Sources */,
 				2414189E1DCDE00400AF1AEA /* LibraryEntrySpec.swift in Sources */,
