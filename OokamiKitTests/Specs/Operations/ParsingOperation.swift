@@ -281,8 +281,28 @@ class ParsingOperationSpec: QuickSpec {
                         expect(response).toEventually(contain(["hi"]))
                     }
                 }
-
+                
+                context("Actual JSON Data") {
+                    it("should parse everything!") {
+                        var response: [JSON]? = nil
+                        let realm = RealmProvider.realm()
+                        let json = TestHelper.loadJSON(fromFile: "mix-anime-user-entry-genre")
+                        expect(json).toNot(beNil())
+                        
+                        let operation = ParsingOperation(json: json!, realm: RealmProvider.realm) { failed in
+                            response = failed
+                        }
+                        
+                        queue.addOperation(operation)
+                        expect(response).toEventually(beEmpty())
+                        expect(realm.objects(User.self)).toEventually(haveCount(1))
+                        expect(realm.objects(Anime.self)).toEventually(haveCount(1))
+                        expect(realm.objects(Genre.self)).toEventually(haveCount(1))
+                        expect(realm.objects(LibraryEntry.self)).toEventually(haveCount(1))
+                    }
+                }
             }
+            
         }
     }
 }

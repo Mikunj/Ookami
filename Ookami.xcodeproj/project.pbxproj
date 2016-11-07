@@ -50,6 +50,10 @@
 		24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABD1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
+		24A875D21DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */; };
+		24A875D31DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */; };
+		24A875D41DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */; };
+		24A875D51DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */; };
 		24D28ECF1DD0157B00773BED /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */; };
 		24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED01DD015FC00773BED /* NetworkOperation.swift */; };
 		24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */; };
@@ -146,6 +150,7 @@
 		249CF9EA1DD0616E000AE484 /* ParsingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingOperation.swift; sourceTree = "<group>"; };
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
+		24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "mix-anime-user-entry-genre.json"; sourceTree = "<group>"; };
 		24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		24D28ED01DD015FC00773BED /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationSpec.swift; sourceTree = "<group>"; };
@@ -397,6 +402,7 @@
 				2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */,
 				24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */,
 				24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */,
+				24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -599,6 +605,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
+				24A875D21DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */,
 				248734381DCCB1D3002E7366 /* user-jigglyslime.json in Resources */,
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
 				241418A01DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
@@ -611,6 +618,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24A875D31DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */,
 				248734371DCCB1D3002E7366 /* user-jigglyslime.json in Resources */,
 				241418A11DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
@@ -622,6 +630,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24A875D41DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */,
 				247362801DCDFF3B004B4AC5 /* README in Resources */,
 				248734361DCCB1D1002E7366 /* user-jigglyslime.json in Resources */,
 				241418A21DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
@@ -634,6 +643,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24A875D51DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */,
 				24EEEF601DCCA56700869696 /* user-jigglyslime.json in Resources */,
 				241418A31DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
