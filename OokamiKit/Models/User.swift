@@ -97,7 +97,7 @@ extension User: JSONParsable {
         
         //Parse past names
         let pastNamesJSON = attributes["pastNames"]        
-        for (_, name): (String, JSON) in pastNamesJSON {
+        for name in pastNamesJSON.arrayValue {
             let pastName = UserPastName()
             pastName.userId = user.id
             pastName.name = name.stringValue

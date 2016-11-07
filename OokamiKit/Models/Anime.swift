@@ -111,7 +111,7 @@ extension Anime: JSONParsable {
         
         //Add titles
         let attributeTitles = attributes["titles"]
-        for (key, value): (String, JSON) in attributeTitles {
+        for (key, value) in attributeTitles {
             let title = AnimeTitle()
             title.animeId = anime.id
             title.key = key
@@ -122,7 +122,7 @@ extension Anime: JSONParsable {
         //Add genres
         //We first check if the genre with given id exists. If not then we make one with just the id set.
         let genres = json["relationships"]["genres"]["data"]
-        for (_, genre): (String, JSON) in genres {
+        for genre in genres.arrayValue {
             let id = genre["id"].intValue
             var genreObject = Genre.get(withId: id)
             if genreObject == nil {

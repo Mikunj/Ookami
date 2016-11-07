@@ -44,6 +44,7 @@
 		248734481DCD491E002E7366 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248734471DCD491E002E7366 /* RealmProvider.swift */; };
 		2494D9A81DCC631E0032AC8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A71DCC631E0032AC8E /* User.swift */; };
 		2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */; };
+		249CF9EB1DD0616E000AE484 /* ParsingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249CF9EA1DD0616E000AE484 /* ParsingOperation.swift */; };
 		24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */; };
 		24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
@@ -142,6 +143,7 @@
 		248734471DCD491E002E7366 /* RealmProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
 		2494D9A71DCC631E0032AC8E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
+		249CF9EA1DD0616E000AE484 /* ParsingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingOperation.swift; sourceTree = "<group>"; };
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
 		24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */,
+				249CF9EA1DD0616E000AE484 /* ParsingOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -855,6 +858,7 @@
 				24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */,
 				24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */,
 				24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */,
+				249CF9EB1DD0616E000AE484 /* ParsingOperation.swift in Sources */,
 				24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */,
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,
 				247362951DCF0F1C004B4AC5 /* NetworkClientSpec.swift in Sources */,
@@ -999,6 +1003,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 18EC37E7569603AFBC8D3B99 /* Pods-Ookami.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = "Ookami/Supporting Files/Info.plist";
@@ -1014,6 +1019,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 958EA7BCF8D5FE2EEE92E8DE /* Pods-Ookami.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = "Ookami/Supporting Files/Info.plist";
@@ -1029,6 +1035,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 72A8C67A6A8DCBB9BF71028F /* Pods-OokamiTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiTests/Info.plist;
@@ -1044,6 +1051,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8C5DC783924AF7569ADB675F /* Pods-OokamiTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiTests/Info.plist;
@@ -1110,6 +1118,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81AF019151CBF20FF6F085E7 /* Pods-OokamiKitTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1124,6 +1133,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 68F388665F937BCB808512F1 /* Pods-OokamiKitTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

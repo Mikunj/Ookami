@@ -77,7 +77,8 @@ public class ParsingOperation: AsynchronousOperation {
     ///
     /// - Parameter objectArray: An array of JSON objects.
     /// - Returns: An array of objects that failed to parse, or nil if an array wasn't passed in
-    private func parse(objectArray json: JSON) -> [JSON]? {
+    func parse(objectArray json: JSON) -> [JSON]? {
+        
         //Be 100% sure that we have an array
         guard json.type == .array else {
             return nil
@@ -89,7 +90,20 @@ public class ParsingOperation: AsynchronousOperation {
         //Start parsing
         realm.beginWrite()
         
-        for (_, object): (String, JSON) in json {
+        for object in json.arrayValue {
+            
+            //Check if operation was cancelled
+            guard !isCancelled else {
+                realm.cancelWrite()
+                return []
+            }
+            
+            //Make sure the object is a dictionary
+            guard object.type == .dictionary else {
+                failed.append(object)
+                continue
+            }
+            
             //Get the object type
             let type = object["type"].stringValue
             
@@ -114,7 +128,9 @@ public class ParsingOperation: AsynchronousOperation {
         //E.g Anime only has genre ids to link to, but the Genre objects are passed in the `included` array
         
         //First check to see that we have data or included else this is a bad JSON file
-        guard json["include"].exists() || json["data"].exists()  else {
+        let included = json["included"]
+        let data = json["data"]
+        guard json.type == .dictionary && (included.exists() || data.exists())  else {
             self.parseComplete([json])
             self.completeOperation()
             return
@@ -125,21 +141,22 @@ public class ParsingOperation: AsynchronousOperation {
         
         var failed: [JSON] = []
         
-        //Parse included objects
-        if json["included"].exists() {
-            if let result = parse(objectArray: json["included"]) {
-                failed += result
+        let arrays = [included, data]
+        //Parse objects
+        for array in arrays {
+            if array.exists() {
+                if let result = parse(objectArray: array) {
+                    failed += result
+                } else {
+                    failed.append(array)
+                }
             }
         }
         
-        //Parse data objects
-        if json["data"].exists() {
-            if let result = parse(objectArray: json["data"]) {
-                failed += result
-            }
+        if !isCancelled {
+            self.parseComplete(failed)
         }
         
-        self.parseComplete(failed)
         self.completeOperation()
     }
     
