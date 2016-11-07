@@ -80,12 +80,14 @@ public class Anime: Object {
 extension Anime: GettableObject { public typealias T = Anime }
 extension Anime: JSONParsable {
     
+    public static var typeString: String { return "anime" }
+    
     /// Construct an `Anime` object from JSON Data
     ///
     /// - Parameter json: The JSON Data
     /// - Returns: An anime if JSON data was valid
     public static func parse(json: JSON) -> Anime? {
-        guard json["type"].stringValue == "anime" else {
+        guard json["type"].stringValue == Anime.typeString else {
             return nil
         }
         

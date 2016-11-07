@@ -63,12 +63,14 @@ public class User: Object {
 extension User: GettableObject { public typealias T = User }
 extension User: JSONParsable {
     
+    public static var typeString: String { return "users" }
+    
     /// Construct a `User` object from JSON Data
     ///
     /// - Parameter json: The JSON data
     /// - Returns: A User if the JSON data was valid
     public static func parse(json: JSON) -> User? {
-        guard json["type"].stringValue == "users" else {
+        guard json["type"].stringValue == User.typeString else {
             return nil
         }
         

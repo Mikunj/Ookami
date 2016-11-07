@@ -28,13 +28,15 @@ public class Genre: Object {
 
 extension Genre: GettableObject { public typealias T = Genre }
 extension Genre: JSONParsable {
+    
+    public static var typeString: String { return "genres" }
 
     /// Construct an `Genre` object from JSON Data
     ///
     /// - Parameter json: The JSON Data
     /// - Returns: A genre if JSON data was valid
     public static func parse(json: JSON) -> Genre? {
-        guard json["type"].stringValue == "genres" else {
+        guard json["type"].stringValue == Genre.typeString else {
             return nil
         }
         

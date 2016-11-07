@@ -22,13 +22,20 @@ public class NetworkClient: NetworkClientProtocol {
     let baseURL: String
     let sessionManager: SessionManager
     
+    /// Create a network client
+    ///
+    /// - Parameters:
+    ///   - baseURL: The base URL to use for the client
+    ///   - heimdallr: The Heimdallr instance used for OAuth2 authentication
+    ///   - sessionManager: The Alamofire session manager
     init(baseURL: String, heimdallr: Heimdallr, sessionManager: SessionManager = SessionManager()) {
         self.heim = heimdallr
         self.baseURL = baseURL
         self.sessionManager = sessionManager
     }
     
-    /// Execute a request
+    /// Execute a request.
+    /// This encodes the request using JSONEncoding and will only return JSON objects or an Error
     ///
     /// - Parameters:
     ///   - request: The request

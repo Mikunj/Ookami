@@ -81,12 +81,14 @@ public class LibraryEntry: Object {
 extension LibraryEntry: GettableObject { public typealias T = LibraryEntry }
 extension LibraryEntry: JSONParsable {
     
+    public static var typeString: String { return "libraryEntries" }
+    
     /// Construct an `LibraryEntry` object from JSON Data
     ///
     /// - Parameter json: The JSON Data
     /// - Returns: A LibraryEntry if JSON data was valid
     public static func parse(json: JSON) -> LibraryEntry? {
-        guard json["type"].stringValue == "libraryEntries" else {
+        guard json["type"].stringValue == LibraryEntry.typeString else {
             return nil
         }
         

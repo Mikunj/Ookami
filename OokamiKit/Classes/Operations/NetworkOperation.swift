@@ -16,6 +16,12 @@ public class NetworkOperation: AsynchronousOperation {
     public let client: NetworkClientProtocol
     public let networkCompletion: (JSON?, Error?) -> Void
     
+    /// Create a network operation.
+    ///
+    /// - Parameters:
+    ///   - request: The network request
+    ///   - client: The network client
+    ///   - completion: The completion block. Passes an optional JSON object or an optional Error.
     init(request: NetworkRequestProtocol, client: NetworkClientProtocol, completion: @escaping (JSON?, Error?) -> Void) {
         self.request = request
         self.client = client

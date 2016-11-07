@@ -13,6 +13,9 @@ import SwiftyJSON
 public protocol JSONParsable {
     associatedtype T
     
+    ///The type string of the JSON parsable. E.g "anime", "genres"
+    static var typeString: String { get }
+    
     /// Construct an object from JSON Data
     ///
     /// - Parameter json: The JSON data
