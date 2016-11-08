@@ -93,7 +93,7 @@ class ParsingOperationSpec: QuickSpec {
                     }
                     
                     operation.register(type: "parseF") { _ in
-                        let a = Anime()
+                        let a = StubRealmObject()
                         a.id = 1
                         return a
                     }
@@ -101,7 +101,7 @@ class ParsingOperationSpec: QuickSpec {
                     let result = operation.parse(objectArray: json)
                     expect(result).toNot(beNil())
                     expect(result).to(beEmpty())
-                    expect(Anime.get(withId: 1)).toEventuallyNot(beNil())
+                    expect(StubRealmObject.get(withId: 1)).toEventuallyNot(beNil())
                 }
                 
                 it("should call the correct parser") {
@@ -115,7 +115,7 @@ class ParsingOperationSpec: QuickSpec {
                     
                     operation.register(type: "parseF") { _ in
                         parseFCalled = true
-                        let a = Anime()
+                        let a = StubRealmObject()
                         a.id = 1
                         return a
                     }
@@ -125,7 +125,33 @@ class ParsingOperationSpec: QuickSpec {
                     expect(result).to(haveCount(1))
                     expect(result).to(contain(JSON(other)))
                     expect(parseFCalled).to(beTrue())
-                    expect(Anime.get(withId: 1)).toEventuallyNot(beNil())
+                    expect(StubRealmObject.get(withId: 1)).toEventuallyNot(beNil())
+                }
+                
+                it("should be able to parse multiple objects from different parsers") {
+                    let object = ["type": "parseF"]
+                    let other = ["type": "another", "name": "other"]
+                    
+                    let json = JSON([object, other])
+                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                    }
+                    
+                    operation.register(type: "parseF") { _ in
+                        let a = StubRealmObject()
+                        a.id = 1
+                        return a
+                    }
+                    
+                    operation.register(type: "another") { _ in
+                        let a = StubRealmObject()
+                        a.id = 2
+                        return a
+                    }
+                    
+                    let result = operation.parse(objectArray: json)
+                    expect(result).toNot(beNil())
+                    expect(result).to(beEmpty())
+                    expect(StubRealmObject.get(withIds: [1, 2])).toEventually(haveCount(2))
                 }
                 
             }
@@ -139,14 +165,14 @@ class ParsingOperationSpec: QuickSpec {
                         response = failed
                     }
                     operation.register(type: "object") { _ in
-                        let a = Anime()
+                        let a = StubRealmObject()
                         a.id = 1
                         return a
                     }
                     
                     queue.addOperation(operation)
                     expect(response).toEventually(beEmpty())
-                    expect(Anime.get(withId: 1)).toEventuallyNot(beNil())
+                    expect(StubRealmObject.get(withId: 1)).toEventuallyNot(beNil())
                 }
                 
                 it ("should not parse any other values") {
@@ -175,6 +201,49 @@ class ParsingOperationSpec: QuickSpec {
                     expect(response).toEventuallyNot(beNil())
                     expect(response).toEventually(haveCount(1))
                     expect(response).toEventually(contain(json))
+                }
+                
+                context("Cancel") {
+                    it("should not call the callback block") {
+                        var response: [JSON]?
+                        let json = JSON(["name": "hi"])
+                        
+                        let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                            response = failed
+                        }
+                        
+                        waitUntil { done in
+                            operation.completionBlock = {
+                                expect(response).to(beNil())
+                                done()
+                            }
+                            queue.addOperation(operation)
+                            operation.cancel()
+                        }
+                        
+                    }
+                    
+                    it("should not parse any objects") {
+                        let json = JSON(["data":[["type": "test"]]])
+                        
+                        let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                        }
+                        operation.register(type: "test") { json in
+                            let o = StubRealmObject()
+                            o.id = 1
+                            return o
+                        }
+                        
+                        waitUntil { done in
+                            operation.completionBlock = {
+                                let realm = RealmProvider.realm()
+                                expect(realm.objects(StubRealmObject.self)).to(haveCount(0))
+                                done()
+                            }
+                            queue.addOperation(operation)
+                            operation.cancel()
+                        }
+                    }
                 }
                 
                 context("Parsers") {
@@ -224,14 +293,14 @@ class ParsingOperationSpec: QuickSpec {
                             response = failed
                         }
                         operation.register(type: "generic") { json -> Object? in
-                            let a = Anime()
+                            let a = StubRealmObject()
                             a.id = 1
                             return a
                         }
                         
                         queue.addOperation(operation)
                         expect(response).toEventually(beEmpty())
-                        expect(Anime.get(withId: 1)).toEventuallyNot(beNil())
+                        expect(StubRealmObject.get(withId: 1)).toEventuallyNot(beNil())
                     }
                     
                     it("should not parse `included` if it's not an array") {
@@ -258,14 +327,14 @@ class ParsingOperationSpec: QuickSpec {
                             response = failed
                         }
                         operation.register(type: "generic") { json -> Object? in
-                            let a = Anime()
+                            let a = StubRealmObject()
                             a.id = 1
                             return a
                         }
                         
                         queue.addOperation(operation)
                         expect(response).toEventually(beEmpty())
-                        expect(Anime.get(withId: 1)).toEventuallyNot(beNil())
+                        expect(StubRealmObject.get(withId: 1)).toEventuallyNot(beNil())
                     }
                     
                     it("should not parse `data` if it's not an array") {
@@ -283,26 +352,66 @@ class ParsingOperationSpec: QuickSpec {
                 }
                 
                 context("Actual JSON Data") {
+                    
                     it("should parse everything!") {
-                        var response: [JSON]? = nil
-                        let realm = RealmProvider.realm()
-                        let json = TestHelper.loadJSON(fromFile: "mix-anime-user-entry-genre")
-                        expect(json).toNot(beNil())
-                        
-                        let operation = ParsingOperation(json: json!, realm: RealmProvider.realm) { failed in
-                            response = failed
-                        }
-                        
-                        queue.addOperation(operation)
-                        expect(response).toEventually(beEmpty())
-                        expect(realm.objects(User.self)).toEventually(haveCount(1))
-                        expect(realm.objects(Anime.self)).toEventually(haveCount(1))
-                        expect(realm.objects(Genre.self)).toEventually(haveCount(1))
-                        expect(realm.objects(LibraryEntry.self)).toEventually(haveCount(1))
+                        self.testParse(forFile: "anime-hunter-hunter", queue: queue, realmObject: Anime.self, count: 1)
+                        self.testParse(forFile: "user-jigglyslime", queue: queue, realmObject: User.self, count: 1)
+                        self.testParse(forFile: "genre-adventure", queue: queue, realmObject: Genre.self, count: 1)
+                        self.testParse(forFile: "entry-anime-jigglyslime", queue: queue, realmObject: LibraryEntry.self, count: 1)
                     }
                 }
             }
             
+        }
+    }
+    
+    /// Test the parsing operation on JSON from a file and check the count of a realm class
+    ///
+    /// - Parameters:
+    ///   - file: The file name.
+    ///   - queue: The operation queue
+    ///   - realmObject: The object class
+    ///   - count: The amount of objects to expect after parsing
+    func testParse<T: Object>(forFile file: String, queue: OperationQueue, realmObject: T.Type, count: Int) {
+        self.testParse(forFile: file, queue: queue, testBlock: { operation, response, error in
+            DispatchQueue.main.sync {
+                let realm = RealmProvider.realm()
+                expect(error).to(beFalse())
+                expect(realm.objects(realmObject)).to(haveCount(count))
+                
+                //Remove parsed objects
+                try! realm.write {
+                    realm.deleteAll()
+                }
+            }
+        })
+    }
+    
+    /// Test the parsing operation on JSON from a file
+    ///
+    /// - Parameters:
+    ///   - file: The file name. Make sure the JSON in the file is of 1 raw object because this function will append it to { "data": [ <file contents ] } JSON
+    ///   - queue: The operation queue which to run the operation on
+    ///   - testBlock: The test block which passes the operation, result, and a bool which determines if it errored.
+    func testParse(forFile file: String, queue: OperationQueue, testBlock: @escaping (ParsingOperation?, [JSON]?, Bool) -> Void) {
+        var response: [JSON]? = nil
+        guard let json = TestHelper.loadJSON(fromFile: file) else {
+            testBlock(nil, nil, true)
+            return
+        }
+        
+        let data = JSON(["data": [json.dictionaryObject]])
+        
+        let operation = ParsingOperation(json: data, realm: RealmProvider.realm) { failed in
+            response = failed
+        }
+        
+        waitUntil { done in
+            operation.completionBlock = {
+                testBlock(operation, response, false)
+                done()
+            }
+            queue.addOperation(operation)
         }
     }
 }

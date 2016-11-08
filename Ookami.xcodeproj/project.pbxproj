@@ -15,6 +15,8 @@
 		241418A11DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
 		241418A21DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
 		241418A31DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
+		245E59A61DD1C3C4002375A4 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A51DD1C3C4002375A4 /* Default.swift */; };
+		245E59A81DD1D5A1002375A4 /* StubRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */; };
 		2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246023391DCCA11700B3C99B /* UserSpec.swift */; };
 		2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D11DCC58800028F7B0 /* AppDelegate.swift */; };
 		2464F1D41DCC58800028F7B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D31DCC58800028F7B0 /* ViewController.swift */; };
@@ -44,16 +46,12 @@
 		248734481DCD491E002E7366 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248734471DCD491E002E7366 /* RealmProvider.swift */; };
 		2494D9A81DCC631E0032AC8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A71DCC631E0032AC8E /* User.swift */; };
 		2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */; };
-		249CF9EB1DD0616E000AE484 /* ParsingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249CF9EA1DD0616E000AE484 /* ParsingOperation.swift */; };
+		249CF9EB1DD0616E000AE484 /* ParsingOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249CF9EA1DD0616E000AE484 /* ParsingOperationSpec.swift */; };
 		24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */; };
 		24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABD1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
-		24A875D21DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */; };
-		24A875D31DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */; };
-		24A875D41DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */; };
-		24A875D51DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */; };
 		24D28ECF1DD0157B00773BED /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */; };
 		24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED01DD015FC00773BED /* NetworkOperation.swift */; };
 		24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */; };
@@ -119,6 +117,8 @@
 		2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsable.swift; sourceTree = "<group>"; };
 		2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntrySpec.swift; sourceTree = "<group>"; };
 		2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "entry-anime-jigglyslime.json"; sourceTree = "<group>"; };
+		245E59A51DD1C3C4002375A4 /* Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
+		245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubRealmObject.swift; sourceTree = "<group>"; };
 		246023391DCCA11700B3C99B /* UserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpec.swift; sourceTree = "<group>"; };
 		2464F1CE1DCC58800028F7B0 /* Ookami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ookami.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F1D11DCC58800028F7B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -147,10 +147,9 @@
 		248734471DCD491E002E7366 /* RealmProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
 		2494D9A71DCC631E0032AC8E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
-		249CF9EA1DD0616E000AE484 /* ParsingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingOperation.swift; sourceTree = "<group>"; };
+		249CF9EA1DD0616E000AE484 /* ParsingOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingOperationSpec.swift; sourceTree = "<group>"; };
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
-		24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "mix-anime-user-entry-genre.json"; sourceTree = "<group>"; };
 		24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		24D28ED01DD015FC00773BED /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationSpec.swift; sourceTree = "<group>"; };
@@ -246,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				2464F1E81DCC58800028F7B0 /* Info.plist */,
+				245E59A51DD1C3C4002375A4 /* Default.swift */,
 			);
 			path = OokamiTests;
 			sourceTree = "<group>";
@@ -381,7 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */,
-				249CF9EA1DD0616E000AE484 /* ParsingOperation.swift */,
+				249CF9EA1DD0616E000AE484 /* ParsingOperationSpec.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -391,6 +391,7 @@
 			children = (
 				24EEEF5C1DCCA53100869696 /* Helper.swift */,
 				24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */,
+				245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -402,7 +403,6 @@
 				2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */,
 				24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */,
 				24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */,
-				24A875D11DD0C8E10072B1FF /* mix-anime-user-entry-genre.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -561,6 +561,7 @@
 					2464F1E11DCC58800028F7B0 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 5V7RKV36V8;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2464F1CD1DCC58800028F7B0;
 					};
@@ -605,7 +606,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
-				24A875D21DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */,
 				248734381DCCB1D3002E7366 /* user-jigglyslime.json in Resources */,
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
 				241418A01DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
@@ -618,7 +618,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24A875D31DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */,
 				248734371DCCB1D3002E7366 /* user-jigglyslime.json in Resources */,
 				241418A11DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
@@ -630,7 +629,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24A875D41DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */,
 				247362801DCDFF3B004B4AC5 /* README in Resources */,
 				248734361DCCB1D1002E7366 /* user-jigglyslime.json in Resources */,
 				241418A21DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
@@ -643,7 +641,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24A875D51DD0C8E10072B1FF /* mix-anime-user-entry-genre.json in Resources */,
 				24EEEF601DCCA56700869696 /* user-jigglyslime.json in Resources */,
 				241418A31DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
@@ -835,6 +832,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				245E59A61DD1C3C4002375A4 /* Default.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -864,11 +862,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				245E59A81DD1D5A1002375A4 /* StubRealmObject.swift in Sources */,
 				2487343C1DCCC183002E7366 /* AnimeSpec.swift in Sources */,
 				24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */,
 				24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */,
 				24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */,
-				249CF9EB1DD0616E000AE484 /* ParsingOperation.swift in Sources */,
+				249CF9EB1DD0616E000AE484 /* ParsingOperationSpec.swift in Sources */,
 				24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */,
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,
 				247362951DCF0F1C004B4AC5 /* NetworkClientSpec.swift in Sources */,
@@ -1047,11 +1046,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikunjvarsani.OokamiTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ookami.app/Ookami";
 			};
@@ -1063,6 +1064,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
 				INFOPLIST_FILE = OokamiTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
