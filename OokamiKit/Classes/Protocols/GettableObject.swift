@@ -34,6 +34,11 @@ public protocol GettableObject {
     /// - Parameter ids: An array of ids
     /// - Returns: A value of type `MultipleReturnType` which contains objects of type `T`
     static func get(withIds ids: [IDType]) -> MultipleReturnType
+    
+    /// Get all objects of type T
+    ///
+    /// - Returns: A value of type `MultipleReturnType` which contains objects of type `T`
+    static func all() -> MultipleReturnType
 }
 
 /// Apply the extenstion to realm objects
@@ -58,6 +63,14 @@ extension GettableObject where T: Object {
         let key = T.primaryKey() ?? "id"
         let r = RealmProvider.realm()
         return r.objects(T.self).filter("\(key) IN %@", ids)
+    }
+    
+    /// Get all realm objects
+    ///
+    /// - Returns: A Realm result of all realm objects
+    public static func all() -> Results<T> {
+        let r = RealmProvider.realm()
+        return r.objects(T.self)
     }
     
 }

@@ -30,34 +30,6 @@ class GenreSpec: QuickSpec {
                 }
             }
             
-            context("Fetching") {
-                it("should be able to fetch a valid genre from the database") {
-                    let genre = Genre.parse(json: genreJSON)
-                    try! testRealm.write {
-                        testRealm.add(genre!, update: true)
-                    }
-                    let g = Genre.get(withId: 2)
-                    expect(g).toNot(beNil())
-                    expect(g?.name).to(equal("Adventure"))
-                }
-                
-                it("should be able to fetch multiple genres from the database") {
-                    var ids: [Int] = []
-                    TestHelper.create(object: Genre.self, inRealm: testRealm, amount: 3) { index, genre in
-                        genre.id = index
-                        ids.append(index)
-                    }
-                    
-                    let genres = Genre.get(withIds: ids)
-                    expect(genres).to(haveCount(3))
-                }
-                
-                it("should return a nil genre if no id is found") {
-                    let genre = Genre.get(withId: 2)
-                    expect(genre).to(beNil())
-                }
-            }
-            
             context("Parsing") {
                 it("should parse a genre JSON correctly") {
                     let g = Genre.parse(json: genreJSON)

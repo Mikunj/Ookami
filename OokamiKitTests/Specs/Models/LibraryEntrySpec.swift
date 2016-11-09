@@ -29,34 +29,7 @@ class LibraryEntrySpec: QuickSpec {
                 }
             }
             
-            context("Fetching & Modifying") {
-                it("should be able to fetch a valid entry from the database") {
-                    let e = LibraryEntry.parse(json: entryJSON)!
-                    try! testRealm.write {
-                        testRealm.add(e, update: true)
-                    }
-                    
-                    let another = LibraryEntry.get(withId: e.id)
-                    expect(another).toNot(beNil())
-                    expect(another?.rawStatus).to(equal(e.rawStatus))
-                }
-                
-                it("should be able to fetch multiple entries from the database") {
-                    var ids: [Int] = []
-                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 3) { index, entry in
-                        entry.id = index
-                        ids.append(index)
-                    }
-                    
-                    let entry = LibraryEntry.get(withIds: ids)
-                    expect(entry.count).to(equal(3))
-                }
-                
-                
-                it("should return a nil user if no id is found") {
-                    let another = LibraryEntry.get(withId: 1)
-                    expect(another).to(beNil())
-                }
+            context("Modifying") {
                 
                 it("should correctly change the status") {
                     let e = LibraryEntry()
@@ -68,7 +41,7 @@ class LibraryEntrySpec: QuickSpec {
                     expect(e.rawStatus).to(equal("current"))
                 }
                 
-                it("should correctly return user") {
+                it("should correctly return user with userId") {
                     let e = LibraryEntry()
                     
                     //Defaults to no user

@@ -28,35 +28,6 @@ class UserSpec: QuickSpec {
                 }
             }
             
-            context("Fetching") {
-                it("should be able to fetch a valid user from the database") {
-                    let u = User.parse(json: userJSON)!
-                    try! testRealm.write {
-                        testRealm.add(u, update: true)
-                    }
-                    
-                    let another = User.get(withId: u.id)
-                    expect(another).toNot(beNil())
-                    expect(another?.name).to(equal(u.name))
-                }
-                
-                it("should be able to fetch multiple users from the database") {
-                    var ids: [Int] = []
-                    TestHelper.create(object: User.self, inRealm: testRealm, amount: 3) { index, user in
-                        user.id = index
-                        ids.append(index)
-                    }
-                    
-                    let users = User.get(withIds: ids)
-                    expect(users.count).to(equal(3))
-                }
-                
-                it("should return a nil user if no id is found") {
-                    let another = User.get(withId: 1)
-                    expect(another).to(beNil())
-                }
-            }
-            
             context("Parsing") {
                 it("should parse a user JSON correctly") {
                     let u = User.parse(json: userJSON)

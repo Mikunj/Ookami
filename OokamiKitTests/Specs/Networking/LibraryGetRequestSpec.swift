@@ -15,7 +15,7 @@ class LibraryGETRequestSpec: QuickSpec {
     override func spec() {
         describe("LibraryGETRequest") {
             
-            var request: LibraryGETRequest = LibraryGETRequest(relativeURL: "\test")
+            var request: LibraryGETRequest!
             
             beforeEach {
                 request = LibraryGETRequest(relativeURL: "/test", headers: ["test": "test"])

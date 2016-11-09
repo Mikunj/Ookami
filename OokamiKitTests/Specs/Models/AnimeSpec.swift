@@ -28,36 +28,6 @@ class AnimeSpec: QuickSpec {
                     testRealm.deleteAll()
                 }
             }
-
-            context("Fetching") {
-                it("should be able to fetch a valid anime from the database") {
-                    let a = Anime.parse(json: animeJSON)!
-                    try! testRealm.write {
-                        testRealm.add(a, update: true)
-                    }
-                    
-                    let another = Anime.get(withId: a.id)
-                    expect(another).toNot(beNil())
-                    expect(another?.canonicalTitle).to(equal(a.canonicalTitle))
-                }
-                
-                it("should be able to fetch multiple anime from the database") {
-                    var ids: [Int] = []
-                    TestHelper.create(object: Anime.self, inRealm: testRealm, amount: 3) { index, anime in
-                        anime.id = index
-                        ids.append(index)
-                    }
-                    
-                    let anime = Anime.get(withIds: ids)
-                    expect(anime).to(haveCount(3))
-                }
-
-                
-                it("should return a nil user if no id is found") {
-                    let another = Anime.get(withId: 1)
-                    expect(another).to(beNil())
-                }
-            }
             
             context("Parsing") {
                 it("should parse an anime JSON correctly") {
