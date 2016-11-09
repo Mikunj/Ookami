@@ -17,7 +17,7 @@ public enum LibraryEntryStatus: String {
     case onHold = "on_hold"
     case dropped
     
-    public static let all:[LibraryEntryStatus] = [.current, .planned, .completed, .onHold, .dropped]
+    public static let all: [LibraryEntryStatus] = [.current, .planned, .completed, .onHold, .dropped]
 }
 
 /*
