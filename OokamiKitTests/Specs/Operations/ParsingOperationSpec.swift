@@ -208,7 +208,15 @@ class ParsingOperationSpec: QuickSpec {
                         var response: [JSON]?
                         let json = JSON(["name": "hi"])
                         
-                        let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                        //Make it so we can actually call cancel on the parser
+                        class StubParse: ParsingOperation {
+                            override func main() {
+                                Thread.sleep(forTimeInterval: 0.5)
+                                super.main()
+                            }
+                        }
+                        
+                        let operation = StubParse(json: json, realm: RealmProvider.realm) { failed in
                             response = failed
                         }
                         
