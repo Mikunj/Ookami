@@ -57,10 +57,7 @@ public class LibraryFetchOperation: AsynchronousOperation {
         }
         
         //Operation to complete this fetch, this is in a block because we will need to add it after the parsing operation
-        let completedOpBlock = BlockOperation {
-            self.fetchComplete(nil)
-            self.completeOperation()
-        }
+        let operationCompletedBlock = operationCompleted()
         
         let operation = NetworkOperation(request: nRequest, client: client) { json, error in
             
@@ -87,30 +84,48 @@ public class LibraryFetchOperation: AsynchronousOperation {
             }
             
             //Parse the response
-            let parsingOperation = ParsingOperation(json: json, realm: RealmProvider.realm) { badObjects in
-                if badObjects.count > 0 {
-                    print("Some JSON didn't parse properley!")
-                }
-            }
-            self.queue.addOperation(parsingOperation)
+            let pOperation = self.parsingOperation(forJSON: json)
+            self.queue.addOperation(pOperation)
             
             //Check if we can fetch next page or not
             let links = json["links"]
             if links.type == .dictionary && links["next"].exists() {
                 
                 //Get the next page
-                checkPage.addDependency(parsingOperation)
+                checkPage.addDependency(pOperation)
                 self.queue.addOperation(checkPage)
             } else {
                 
                 //There is no next page, so we finish the operation
-                completedOpBlock.addDependency(parsingOperation)
-                self.queue.addOperation(completedOpBlock)
+                operationCompletedBlock.addDependency(pOperation)
+                self.queue.addOperation(operationCompletedBlock)
             }
         }
         
         //Add the operation to the queue
         queue.addOperation(operation)
+    }
+    
+    /// Get the block operation for completing the operation.
+    /// This gets called when there are no more pages to fetch
+    ///
+    /// - Returns: The block operation called when
+    func operationCompleted() -> BlockOperation {
+        return BlockOperation {
+            self.fetchComplete(nil)
+            self.completeOperation()
+        }
+    }
+    
+    /// Return the parsing operation for given json
+    ///
+    /// - Parameter json: The json object
+    func parsingOperation(forJSON json: JSON) -> ParsingOperation {
+        return ParsingOperation(json: json, realm: RealmProvider.realm) { badObjects in
+            if badObjects.count > 0 {
+                print("Some JSON didn't parse properley!")
+            }
+        }
     }
     
     override public func main() {
