@@ -18,7 +18,7 @@ class LibraryGETRequestSpec: QuickSpec {
             var request: LibraryGETRequest!
             
             beforeEach {
-                request = LibraryGETRequest(relativeURL: "/test", headers: ["test": "test"])
+                request = LibraryGETRequest(userID: 1, relativeURL: "/test", headers: ["test": "test"])
             }
             
             context("Building request") {
@@ -32,35 +32,52 @@ class LibraryGETRequestSpec: QuickSpec {
             
             context("Copying") {
                 it("should make a clean copy") {
-                    request.filter(userID: 1)
                     request.include(.user)
                     request.page(offset: 1)
                     
                     let r = request.copy() as! LibraryGETRequest
-                    request.filter(userID: 2)
+                    request.filter(.user(id: 2))
                     request.exclude(.user)
                     request.page(offset: 0)
                     
                     expect(r.includes).to(contain("user"))
-                    expect(r.filters["user_id"] as? Int).to(equal(1))
+                    expect(r.userID).to(equal(1))
                     expect(r.page.offset).to(equal(1))
                 }
             }
             
             context("Filters") {
-                it("should add filters correctly") {
-                    request.filter(userID: 1).filter(media: .anime).filter(status: .completed)
-                    expect(request.filters["user_id"] as? Int).to(equal(1))
-                    expect(request.filters["media_type"] as? String).to(equal("Anime"))
-                    expect(request.filters["status"] as? Int).to(equal(3))
+                it("should correctly modify userID") {
+                    request.filter(.user(id: 1))
+                    expect(request.userID).to(equal(1))
+                    request.filter(.user(id: 2))
+                    expect(request.userID).to(equal(2))
                     
-                    request.filter(statuses: [.completed, .current])
-                    let statuses = request.filters["status"] as? [Int]
-                    expect(statuses).to(contain([1, 3]))
+                    request.filter([.user(id: 3), .user(id: 4)])
+                    expect(request.userID).to(equal(4))
+                    expect(request.filters).to(haveCount(0))
+                }
+                
+                it("should correctly add multiple filters") {
+                    request.filter([.media(type: .anime), .status(.completed)])
+                    expect(request.filters).to(haveCount(2))
+                }
+                
+                it("should apply filters correctly") {
+                    request.filter([.user(id: 1), .media(type: .anime), .status(.completed)])
+                    var filters = request.applyFilters()
+                    expect(filters["user_id"] as? Int).to(equal(1))
+                    expect(filters["media_type"] as? String).to(equal("Anime"))
+                    expect(filters["status"] as? Int).to(equal(3))
+                    
+                    request.filter(.statuses([.current, .planned]))
+                    filters = request.applyFilters()
+                    let statuses = filters["status"] as? [Int]
+                    expect(statuses).to(contain([1, 2]))
                 }
                 
                 it("should build the request correctly") {
-                    request.filter(userID: 1).filter(media: .anime).filter(status: .completed)
+                    request.filter([.user(id: 1), .media(type: .anime), .status(.completed)])
                     let r = request.build()
                     expect(r.parameters?.keys).to(haveCount(3))
                 }
@@ -78,7 +95,7 @@ class LibraryGETRequestSpec: QuickSpec {
                 }
                 
                 it("should build the request correctly") {
-                    request.include(.genres).include(.user)
+                    request.include([.genres, .user])
                     let r = request.build()
                     expect(r.parameters?["include"] as? String).to(equal("media.genres,user"))
                 }
