@@ -30,6 +30,23 @@ class LibraryGETRequestSpec: QuickSpec {
                 }
             }
             
+            context("Copying") {
+                it("should make a clean copy") {
+                    request.filter(userID: 1)
+                    request.include(.user)
+                    request.page(offset: 1)
+                    
+                    let r = request.copy() as! LibraryGETRequest
+                    request.filter(userID: 2)
+                    request.exclude(.user)
+                    request.page(offset: 0)
+                    
+                    expect(r.includes).to(contain("user"))
+                    expect(r.filters["user_id"] as? Int).to(equal(1))
+                    expect(r.page.offset).to(equal(1))
+                }
+            }
+            
             context("Filters") {
                 it("should add filters correctly") {
                     request.filter(userID: 1).filter(media: .anime).filter(status: .completed)

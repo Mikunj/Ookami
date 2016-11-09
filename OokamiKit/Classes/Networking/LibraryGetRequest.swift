@@ -138,3 +138,15 @@ extension LibraryGETRequest {
         return page(offset: page.offset - 1)
     }
 }
+
+//Copying
+extension LibraryGETRequest: NSCopying {
+    
+    public func copy(with zone: NSZone? = nil) -> Any {
+        let r = LibraryGETRequest(relativeURL: url, headers: headers)
+        r.includes = includes
+        r.filters = filters
+        r.page = page
+        return r
+    }
+}
