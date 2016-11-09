@@ -63,15 +63,15 @@ class LibraryGETRequestSpec: QuickSpec {
                     expect(request.filters).to(haveCount(2))
                 }
                 
-                it("should apply filters correctly") {
+                it("should return filters correctly") {
                     request.filter([.user(id: 1), .media(type: .anime), .status(.completed)])
-                    var filters = request.applyFilters()
+                    var filters = request.getFilters()
                     expect(filters["user_id"] as? Int).to(equal(1))
                     expect(filters["media_type"] as? String).to(equal("Anime"))
                     expect(filters["status"] as? Int).to(equal(3))
                     
                     request.filter(.statuses([.current, .planned]))
-                    filters = request.applyFilters()
+                    filters = request.getFilters()
                     let statuses = filters["status"] as? [Int]
                     expect(statuses).to(contain([1, 2]))
                 }

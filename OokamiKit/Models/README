@@ -8,7 +8,7 @@ When you first add the object you create 3 UserName objects with values "A", "B"
 
 However, say we create a new `User` object with the same primary key as before. This is a brand new object and thus its names list count is 0. We add the names "D", "E", "F" to this and save it using realm.add(user, update: true). Now if you get the user from realm and inspect the names property you will see that it has "D", "E" and "F" as expected. If however you get every `UserName` object in the database, you notice that you have 6!. "A", "B", "C", "D", "E", and "F". The first 3 names become redundant and if this continues, with each new user being created and updated (which is what the parse function is doing) you produce 3 redundant objects and over time these clutter space.
 
-To avoid this, we can simple add a compound key with (userId, name) to the `UserName` object and assign it as the primary key so that when we do update the `User` it will not create duplicates of the same object.
+To avoid this, we can simple add a compound key with (userID, name) to the `UserName` object and assign it as the primary key so that when we do update the `User` it will not create duplicates of the same object.
 
 However make a note of how you implement the compound keys. If you implement the compound keys with the willSet and didSet property listerners then be warned that realm will not call these after the object has been added to the database.
 

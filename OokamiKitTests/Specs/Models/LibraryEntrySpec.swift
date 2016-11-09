@@ -41,14 +41,14 @@ class LibraryEntrySpec: QuickSpec {
                     expect(e.rawStatus).to(equal("current"))
                 }
                 
-                it("should correctly return user with userId") {
+                it("should correctly return user with userID") {
                     let e = LibraryEntry()
                     
                     //Defaults to no user
                     expect(e.user).to(beNil())
                     
                     //Set the id
-                    e.userId = 1
+                    e.userID = 1
                     expect(e.user).to(beNil())
                     
                     //Add the user
@@ -97,10 +97,10 @@ class LibraryEntrySpec: QuickSpec {
                     let updatedAt = d.date(from: "2016-08-15T11:01:29.181Z")
                     expect(entry.updatedAt).to(equal(updatedAt))
                     
-                    expect(entry.userId).to(equal(2875))
+                    expect(entry.userID).to(equal(2875))
                     expect(entry.media).toNot(beNil())
                     expect(entry.media?.id).to(equal(6448))
-                    expect(entry.media?.type).to(equal("anime"))
+                    expect(entry.media?.rawType).to(equal("anime"))
                     
                 }
                 

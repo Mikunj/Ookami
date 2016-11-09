@@ -8,7 +8,9 @@
 
 import Foundation
 import Alamofire
+import RealmSwift
 
+/// Enum for the filters
 public enum LibraryRequestFilters {
     case user(id: Int)
     case media(type: LibraryRequestMedia)
@@ -20,6 +22,16 @@ public enum LibraryRequestFilters {
 public enum LibraryRequestMedia: String {
     case anime = "Anime"
     case manga = "Manga"
+    
+    /// Convert LibraryRequestMedia to LibraryEntry Media.MediaType
+    ///
+    /// - Returns: The Media.MediaType of the current value
+    public func toEntryMediaType() -> Media.MediaType {
+        switch self {
+            case .anime: return Media.MediaType.anime
+            case .manga: return Media.MediaType.manga
+        }
+    }
 }
 
 /// Enum for the includes in the request
@@ -66,9 +78,59 @@ public class LibraryGETRequest {
     public func build() -> NetworkRequest {
         var params: Parameters = [:]
         params["include"] = includes.joined(separator: ",")
-        params["filter"] = applyFilters()
+        params["filter"] = getFilters()
         params["page"] = ["offset": page.offset, "limit": page.limit]
         return NetworkRequest(relativeURL: url, method: .get, parameters: params, headers: headers, needsAuth: false)
+    }
+}
+
+/// Getting realm entries
+extension LibraryGETRequest {
+    
+    /// Get Realm results of library entries that comply with the request.
+    /// This then can be used to subscribe to notifcations straight from realm
+    ///
+    /// - Returns: Realm results of library entries linked to the request
+    public func getEntries() -> Results<LibraryEntry> {
+        var entries = LibraryEntry.all().filter("userID = %d", self.userID)
+        entries = applyAdditionalRealmFilters(to: entries)
+        return entries
+    }
+    
+    /// Apply additional realm filters to the entries
+    func applyAdditionalRealmFilters(to entries: Results<LibraryEntry>) -> Results<LibraryEntry> {
+        
+        var e = entries
+        
+        //Look through the filters array backwards and find the relevant filters
+        var mediaFilter: LibraryRequestMedia?
+        var statuses: [LibraryEntryStatus]?
+        filters.reversed().forEach {
+            
+            //Get the media type
+            if mediaFilter == nil {
+                if case .media(let type) = $0 { mediaFilter = type }
+            }
+            
+            if statuses == nil {
+                if case .status(let status) = $0 { statuses = [status] }
+                if case .statuses(let statusArray) = $0 { statuses = statusArray }
+            }
+            
+        }
+        
+        //Apply media type filter
+        if mediaFilter != nil {
+            e = e.filter("media.rawType = %@", mediaFilter!.toEntryMediaType().rawValue)
+        }
+        
+        //Apply status filter
+        if statuses != nil {
+            let rawStatuses = statuses!.map { return $0.rawValue }
+            e = e.filter("rawStatus IN %@", rawStatuses)
+        }
+        
+        return e
     }
 }
 
@@ -94,10 +156,10 @@ extension LibraryGETRequest {
         return self
     }
     
-    /// Apply set filters
+    /// Get the filters set on the request
     ///
     /// - Returns: A dictionary of filter keys and associated values
-    func applyFilters() -> [String: Any] {
+    func getFilters() -> [String: Any] {
         var filters: [String: Any] = [:]
         
         //Add the user filter into the array

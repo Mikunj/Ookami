@@ -20,19 +20,34 @@ public enum LibraryEntryStatus: String {
     public static let all: [LibraryEntryStatus] = [.current, .planned, .completed, .onHold, .dropped]
 }
 
+
 /*
  We don't need a compound key here are LibraryEntry - Media is a 1-to-1 relationship.
  If this does change in the future then a compound key will be needed
  We also don't need to restrict it to internal(set) because there is no compound key
  */
 public class Media: Object {
+    
+    public enum MediaType: String {
+        case anime
+        case manga
+    }
+    
     public dynamic var entryId = -1
     public dynamic var id = -1
-    public dynamic var type = ""
+    public dynamic var rawType = ""
+    public var type: MediaType? {
+        return MediaType(rawValue: rawType)
+    }
     
     override public static func primaryKey() -> String {
         return "entryId"
     }
+    
+    override public static func ignoredProperties() -> [String] {
+        return ["type"]
+    }
+    
 }
 
 public class LibraryEntry: Object {
@@ -64,9 +79,9 @@ public class LibraryEntry: Object {
     
     //Other properties not present in the JSON
     public dynamic var needsSync = false
-    public dynamic var userId = -1
+    public dynamic var userID = -1
     public var user: User? {
-        return User.get(withId: userId)
+        return User.get(withId: userID)
     }
     
     override public static func primaryKey() -> String {
@@ -116,7 +131,7 @@ extension LibraryEntry: JSONParsable {
         
         //Set which user this entry belongs to
         let user = relationships["user"]["data"]
-        entry.userId = user["id"].intValue
+        entry.userID = user["id"].intValue
         
         return entry
     }

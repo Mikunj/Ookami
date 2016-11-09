@@ -11,7 +11,7 @@ import SwiftyJSON
 
 public class UserPastName: Object {
     //The user this name belongs to
-    public internal(set) dynamic var userId = -1 {
+    public internal(set) dynamic var userID = -1 {
         didSet { compoundKey = self.compoundKeyValue() }
     }
     
@@ -22,7 +22,7 @@ public class UserPastName: Object {
     
     dynamic var compoundKey: String = "0-"
     func compoundKeyValue() -> String {
-        return "\(userId)-\(name)"
+        return "\(userID)-\(name)"
     }
     
     override public static func primaryKey() -> String {
@@ -99,7 +99,7 @@ extension User: JSONParsable {
         let pastNamesJSON = attributes["pastNames"]        
         for name in pastNamesJSON.arrayValue {
             let pastName = UserPastName()
-            pastName.userId = user.id
+            pastName.userID = user.id
             pastName.name = name.stringValue
             user.pastNames.append(pastName)
         }
