@@ -13,7 +13,8 @@ import SwiftyJSON
 /// An operation to parse JSON data into objects which then get stored in the realm database
 public class ParsingOperation: AsynchronousOperation {
     
-    typealias ParseCompletionBlock = ([JSON]) -> Void
+    typealias ParsedObjects = [String: [Any]]
+    typealias ParseCompletionBlock = (ParsedObjects?, [JSON]) -> Void
     typealias ParserBlock = (JSON) -> Object?
     public typealias RealmBlock = () -> Realm
     
@@ -21,6 +22,10 @@ public class ParsingOperation: AsynchronousOperation {
     public let json: JSON
     let parseComplete: ParseCompletionBlock
     var parsers: [String: ParserBlock] = [:]
+    
+    /// Dictionary of objects that we have parsed.
+    /// Type of the object is the key and the value is an array of ids that were parsed for that type
+    var parsedObjects: ParsedObjects = [:]
     
     
     /// Create a parsing operation.
@@ -34,7 +39,9 @@ public class ParsingOperation: AsynchronousOperation {
     ///   - json: The JSON data to parse
     ///   - realm: A closure which should return a *brand new Realm instance*.
     ///            A closure is called instead of passing in a realm instance because the operation may not be executed in the same thread as the realm instance which was passed in.
-    ///   - completion: The completion block. Passes an array of JSON objects that could not be parsed.
+    ///   - completion: The completion block. 
+    ///         Passes a dictionary of parsed objects (key: object type, value: array of ids)
+    ///         Passes an array of JSON objects that failed to be parsed
     init(json: JSON, realm: @escaping RealmBlock, completion: @escaping ParseCompletionBlock) {
         self.json = json
         self.realmBlock = realm
@@ -70,6 +77,21 @@ public class ParsingOperation: AsynchronousOperation {
     func register<T: Object>(object: T.Type) where T: JSONParsable {
         register(type: T.typeString) { json in
             return T.parse(json: json) as! Object?
+        }
+    }
+    
+    /// Add a parsed object to the parsedObjects dictionary
+    ///
+    /// - Parameters:
+    ///   - object: The object
+    ///   - type: The key to use for the dictionary.
+    func add(parsedObject object: Object, forType type: String) {
+        if !parsedObjects.keys.contains(type) {
+            parsedObjects[type] = []
+        }
+        
+        if let key = object[type(of: object).primaryKey() ?? ""] {
+            parsedObjects[type]!.append(key)
         }
     }
     
@@ -110,6 +132,17 @@ public class ParsingOperation: AsynchronousOperation {
             //Check if we have parser for it, and that it parsed correcrtly
             if let parser = parsers[type],
                 let parsedObject = parser(object) {
+                
+                //Add this object to the parsed list.
+                //We add this here because we 'parsed' it but the object decides whether it should be stored or not
+                add(parsedObject: parsedObject, forType: type)
+                
+                //TODO: Also need to pass the list of objects that we recieved to the completion block
+                // This can be a simple [String: [Any]] object (Any becase we may have objects that don't use Int ids)
+                // it uses the type as key and stores the id in the value
+                
+                //TODO: Call a function to the object to check if it can be added
+                // E.g for library entry we only want to add the entry if it's more current than what we have
                 realm.add(parsedObject, update: true)
             } else {
                 failed.append(object)
@@ -131,7 +164,7 @@ public class ParsingOperation: AsynchronousOperation {
         let included = json["included"]
         let data = json["data"]
         guard json.type == .dictionary && (included.exists() || data.exists())  else {
-            self.parseComplete([json])
+            self.parseComplete(nil, [json])
             self.completeOperation()
             return
         }
@@ -154,7 +187,7 @@ public class ParsingOperation: AsynchronousOperation {
         }
         
         if !isCancelled {
-            self.parseComplete(failed)
+            self.parseComplete(parsedObjects, failed)
         }
         
         self.completeOperation()

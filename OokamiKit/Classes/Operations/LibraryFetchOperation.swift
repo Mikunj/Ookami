@@ -23,7 +23,11 @@ public class LibraryFetchOperation: AsynchronousOperation {
     let request: LibraryGETRequest
     
     /// The completion block which is called at the end
-    let fetchComplete: (LibraryFetchOperationError?) -> Void
+    typealias FetchedObjects = [String: [Any]]
+    typealias FetchCompleteBlock = (FetchedObjects?, LibraryFetchOperationError?) -> Void
+
+    var fetchedObjects: FetchedObjects = [:]
+    let fetchComplete: FetchCompleteBlock
     
     /// The network client
     let client: NetworkClientProtocol
@@ -37,7 +41,7 @@ public class LibraryFetchOperation: AsynchronousOperation {
     /// - Parameter request: The request
     /// - Parameter client: The network client to use for executing the request
     /// - Parameter completion: The completion block. This Error is set when a page fails to be fetched.
-    init(request: LibraryGETRequest, client: NetworkClientProtocol, completion: @escaping (LibraryFetchOperationError?) -> Void) {
+    init(request: LibraryGETRequest, client: NetworkClientProtocol, completion: @escaping FetchCompleteBlock) {
         self.request = request.copy() as! LibraryGETRequest
         self.fetchComplete = completion
         self.client = client
@@ -69,7 +73,7 @@ public class LibraryFetchOperation: AsynchronousOperation {
                  We can get away with not exiting early here and instead continue to fetch the rest of the pages.
                  The problem with that is that we must find the max offset from the first page call, or else we would be stuck in an infinite recursive loop
                  */
-                self.fetchComplete(.failedToFetchPage(offset: self.request.page.offset, error: error))
+                self.fetchComplete(nil, .failedToFetchPage(offset: self.request.page.offset, error: error))
                 self.cancel()
                 self.completeOperation()
                 return
@@ -77,7 +81,7 @@ public class LibraryFetchOperation: AsynchronousOperation {
             
             //Check if we have the json
             guard let json = json else {
-                self.fetchComplete(.badJSONRecieved)
+                self.fetchComplete(nil, .badJSONRecieved)
                 self.cancel()
                 self.completeOperation()
                 return
@@ -112,7 +116,7 @@ public class LibraryFetchOperation: AsynchronousOperation {
     /// - Returns: The block operation called when
     func operationCompleted() -> BlockOperation {
         return BlockOperation {
-            self.fetchComplete(nil)
+            self.fetchComplete(self.fetchedObjects, nil)
             self.completeOperation()
         }
     }
@@ -121,9 +125,28 @@ public class LibraryFetchOperation: AsynchronousOperation {
     ///
     /// - Parameter json: The json object
     func parsingOperation(forJSON json: JSON) -> ParsingOperation {
-        return ParsingOperation(json: json, realm: RealmProvider.realm) { badObjects in
+        return ParsingOperation(json: json, realm: RealmProvider.realm) { parsed, badObjects in
+            //Add the parsed objects id
+            if parsed != nil {
+                self.add(toFetchedObjects: parsed!)
+            }
+            
             if badObjects.count > 0 {
                 print("Some JSON didn't parse properley!")
+            }
+        }
+    }
+    
+    
+    /// Add objects from another dictionary to the fetched objects
+    ///
+    /// - Parameter objects: The objects to add
+    func add(toFetchedObjects objects: FetchedObjects) {
+        for (key, ids) in objects {
+            if self.fetchedObjects.keys.contains(key) {
+                ids.forEach { self.fetchedObjects[key]!.append($0) }
+            } else {
+                self.fetchedObjects[key] = ids
             }
         }
     }
