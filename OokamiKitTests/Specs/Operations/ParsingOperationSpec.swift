@@ -48,6 +48,24 @@ class ParsingOperationSpec: QuickSpec {
                     expect(operation.parsedObjects.keys).to(contain("test"))
                     expect(operation.parsedObjects["test"] as! [Int]?).to(contain(1))
                 }
+                
+                it("should be able to add object id to an existing key") {
+                    let json = JSON(["name": "hi"])
+                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                    }
+                    
+                    let object = StubRealmObject()
+                    object.id = 1
+                    
+                    let object2 = StubRealmObject()
+                    object2.id = 2
+                    
+                    
+                    operation.add(parsedObject: object, forType: "test")
+                    operation.add(parsedObject: object2, forType: "test")
+                    expect(operation.parsedObjects.keys).to(contain("test"))
+                    expect(operation.parsedObjects["test"] as! [Int]?).to(contain([1, 2]))
+                }
             }
             
             context("Registering parsers") {
@@ -302,24 +320,24 @@ class ParsingOperationSpec: QuickSpec {
                 
                 context("Cancel") {
                     it("should not call the callback block") {
-                        var response: [JSON]?
+                        var blockCalled: Bool = false
                         let json = JSON(["name": "hi"])
                         
                         //Make it so we can actually call cancel on the parser
                         class StubParse: ParsingOperation {
                             override func main() {
-                                Thread.sleep(forTimeInterval: 0.5)
+                                Thread.sleep(forTimeInterval: 2.0)
                                 super.main()
                             }
                         }
                         
                         let operation = StubParse(json: json, realm: RealmProvider.realm) { _, failed in
-                            response = failed
+                            blockCalled = true
                         }
                         
                         waitUntil { done in
                             operation.completionBlock = {
-                                expect(response).to(beNil())
+                                expect(blockCalled).to(beFalse())
                                 done()
                             }
                             queue.addOperation(operation)

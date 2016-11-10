@@ -61,6 +61,7 @@
 		24DBE6EA1DD2D058003B7676 /* LibraryGetRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */; };
 		24DBE6EC1DD2DFD5003B7676 /* LibraryFetchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EB1DD2DFD5003B7676 /* LibraryFetchOperation.swift */; };
 		24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */; };
+		24DBE6F01DD42212003B7676 /* LibraryFetchOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EF1DD42212003B7676 /* LibraryFetchOperationSpec.swift */; };
 		24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEEF5C1DCCA53100869696 /* Helper.swift */; };
 		24EEEF601DCCA56700869696 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
 		4B0602544AED16E809D1EEAF /* Pods_OokamiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 434E929751010464220AF315 /* Pods_OokamiTests.framework */; };
@@ -163,6 +164,7 @@
 		24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryGetRequestSpec.swift; sourceTree = "<group>"; };
 		24DBE6EB1DD2DFD5003B7676 /* LibraryFetchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryFetchOperation.swift; sourceTree = "<group>"; };
 		24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmGettableObjectSpec.swift; sourceTree = "<group>"; };
+		24DBE6EF1DD42212003B7676 /* LibraryFetchOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryFetchOperationSpec.swift; sourceTree = "<group>"; };
 		24EEEF5C1DCCA53100869696 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "user-jigglyslime.json"; sourceTree = "<group>"; };
 		42AF10F67E8E4875D581D508 /* Pods_Ookami.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ookami.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -394,6 +396,7 @@
 			children = (
 				24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */,
 				249CF9EA1DD0616E000AE484 /* ParsingOperationSpec.swift */,
+				24DBE6EF1DD42212003B7676 /* LibraryFetchOperationSpec.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -880,6 +883,7 @@
 				2487343C1DCCC183002E7366 /* AnimeSpec.swift in Sources */,
 				24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */,
 				24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */,
+				24DBE6F01DD42212003B7676 /* LibraryFetchOperationSpec.swift in Sources */,
 				24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */,
 				249CF9EB1DD0616E000AE484 /* ParsingOperationSpec.swift in Sources */,
 				24DBE6EA1DD2D058003B7676 /* LibraryGetRequestSpec.swift in Sources */,

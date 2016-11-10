@@ -35,12 +35,15 @@ public class LibraryFetchOperation: AsynchronousOperation {
     /// Whether the operation errored when fetching a page
     var didError: Bool = false
     
-    /// Create a library fetch operation that will fetch all pages in a library
+    /// Create a library fetch operation that will fetch all pages in a library.
+    ///
     /// Note that this will use a new copy of the request passed in.
     ///
     /// - Parameter request: The request
     /// - Parameter client: The network client to use for executing the request
-    /// - Parameter completion: The completion block. This Error is set when a page fails to be fetched.
+    /// - Parameter completion: The completion block.
+    ///                         Passes back a dictionary of type `[String: [Any]]` which contains the ids of the parsed objects, where the key is the object type
+    ///                         Passes an error instead if failed to fetch
     init(request: LibraryGETRequest, client: NetworkClientProtocol, completion: @escaping FetchCompleteBlock) {
         self.request = request.copy() as! LibraryGETRequest
         self.fetchComplete = completion
@@ -52,6 +55,12 @@ public class LibraryFetchOperation: AsynchronousOperation {
     
     /// Fetch the current page
     func fetchCurrentPage() {
+        //Check that we haven't been cancelled
+        if self.isCancelled {
+            self.completeOperation()
+            return
+        }
+        
         let nRequest = request.build()
         
         //Operation to recursively fetch pages
@@ -116,7 +125,9 @@ public class LibraryFetchOperation: AsynchronousOperation {
     /// - Returns: The block operation called when
     func operationCompleted() -> BlockOperation {
         return BlockOperation {
-            self.fetchComplete(self.fetchedObjects, nil)
+            if !self.isCancelled {
+                self.fetchComplete(self.fetchedObjects, nil)
+            }
             self.completeOperation()
         }
     }
@@ -157,6 +168,7 @@ public class LibraryFetchOperation: AsynchronousOperation {
     
     override public func cancel() {
         queue.cancelAllOperations()
+        queue.addOperation(operationCompleted())
         super.cancel()
     }
 }
