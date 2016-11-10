@@ -14,7 +14,7 @@ import SwiftyJSON
 public class ParsingOperation: AsynchronousOperation {
     
     typealias ParsedObjects = [String: [Any]]
-    typealias ParseCompletionBlock = (ParsedObjects?, [JSON]) -> Void
+    typealias ParseCompletionBlock = (ParsedObjects?, [JSON]?) -> Void
     typealias ParserBlock = (JSON) -> Object?
     public typealias RealmBlock = () -> Realm
     
@@ -187,7 +187,8 @@ public class ParsingOperation: AsynchronousOperation {
         }
         
         if !isCancelled {
-            self.parseComplete(parsedObjects, failed)
+            let fail: [JSON]? = failed.isEmpty ? nil : failed
+            self.parseComplete(parsedObjects, fail)
         }
         
         self.completeOperation()

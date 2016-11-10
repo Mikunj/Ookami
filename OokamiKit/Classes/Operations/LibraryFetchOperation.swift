@@ -131,7 +131,7 @@ public class LibraryFetchOperation: AsynchronousOperation {
                 self.add(toFetchedObjects: parsed!)
             }
             
-            if badObjects.count > 0 {
+            if let count = badObjects?.count, count > 0{
                 print("Some JSON didn't parse properley!")
             }
         }

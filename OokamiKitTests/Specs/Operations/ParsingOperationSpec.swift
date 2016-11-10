@@ -390,7 +390,7 @@ class ParsingOperationSpec: QuickSpec {
                 
                 context("Included objects") {
                     it("should parse included objects correctly") {
-                        var response: [JSON]?
+                        var response: [JSON]? = []
                         
                         let object = ["type": "generic"]
                         let json = JSON(["included": [object]])
@@ -404,7 +404,7 @@ class ParsingOperationSpec: QuickSpec {
                         }
                         
                         queue.addOperation(operation)
-                        expect(response).toEventually(beEmpty())
+                        expect(response).toEventually(beNil())
                         expect(StubRealmObject.get(withId: 1)).toEventuallyNot(beNil())
                     }
                     
@@ -424,7 +424,7 @@ class ParsingOperationSpec: QuickSpec {
                 
                 context("Data objects") {
                     it("should parse data objects correctly") {
-                        var response: [JSON]?
+                        var response: [JSON]? = []
                         
                         let object = ["type": "generic"]
                         let json = JSON(["data": [object]])
@@ -438,7 +438,7 @@ class ParsingOperationSpec: QuickSpec {
                         }
                         
                         queue.addOperation(operation)
-                        expect(response).toEventually(beEmpty())
+                        expect(response).toEventually(beNil())
                         expect(StubRealmObject.get(withId: 1)).toEventuallyNot(beNil())
                     }
                     
