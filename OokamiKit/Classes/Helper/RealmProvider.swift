@@ -10,6 +10,10 @@ import Foundation
 import RealmSwift
 
 public class RealmProvider {
+    
+    //Disable initializer
+    private init() {}
+    
     /// Get a realm instance. This works the same way as calling try! Realm()
     /// Therefore, you should follow it's guidelines such as not using an instance across threads. Instead call this again on the new thread to recieve another instance.
     ///
