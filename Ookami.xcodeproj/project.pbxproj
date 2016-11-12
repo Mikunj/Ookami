@@ -59,9 +59,9 @@
 		24D28ED91DD04CD200773BED /* ParsingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED81DD04CD200773BED /* ParsingOperation.swift */; };
 		24DBE6E81DD2CC0B003B7676 /* LibraryGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */; };
 		24DBE6EA1DD2D058003B7676 /* LibraryGetRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */; };
-		24DBE6EC1DD2DFD5003B7676 /* LibraryFetchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EB1DD2DFD5003B7676 /* LibraryFetchOperation.swift */; };
+		24DBE6EC1DD2DFD5003B7676 /* FetchLibraryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */; };
 		24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */; };
-		24DBE6F01DD42212003B7676 /* LibraryFetchOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EF1DD42212003B7676 /* LibraryFetchOperationSpec.swift */; };
+		24DBE6F01DD42212003B7676 /* FetchLibraryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */; };
 		24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD486D1DD6B405009378AC /* RealmStorable.swift */; };
 		24DD48701DD6B9CA009378AC /* DeleteEntryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD486F1DD6B9CA009378AC /* DeleteEntryOperation.swift */; };
 		24DD48721DD6C2B4009378AC /* DeleteEntryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD48711DD6C2B4009378AC /* DeleteEntryOperationSpec.swift */; };
@@ -165,9 +165,9 @@
 		24D28ED81DD04CD200773BED /* ParsingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingOperation.swift; sourceTree = "<group>"; };
 		24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryGetRequest.swift; sourceTree = "<group>"; };
 		24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryGetRequestSpec.swift; sourceTree = "<group>"; };
-		24DBE6EB1DD2DFD5003B7676 /* LibraryFetchOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryFetchOperation.swift; sourceTree = "<group>"; };
+		24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLibraryOperation.swift; sourceTree = "<group>"; };
 		24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmGettableObjectSpec.swift; sourceTree = "<group>"; };
-		24DBE6EF1DD42212003B7676 /* LibraryFetchOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryFetchOperationSpec.swift; sourceTree = "<group>"; };
+		24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLibraryOperationSpec.swift; sourceTree = "<group>"; };
 		24DD486D1DD6B405009378AC /* RealmStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmStorable.swift; sourceTree = "<group>"; };
 		24DD486F1DD6B9CA009378AC /* DeleteEntryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteEntryOperation.swift; sourceTree = "<group>"; };
 		24DD48711DD6C2B4009378AC /* DeleteEntryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteEntryOperationSpec.swift; sourceTree = "<group>"; };
@@ -393,7 +393,7 @@
 				24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */,
 				24D28ED01DD015FC00773BED /* NetworkOperation.swift */,
 				24D28ED81DD04CD200773BED /* ParsingOperation.swift */,
-				24DBE6EB1DD2DFD5003B7676 /* LibraryFetchOperation.swift */,
+				24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */,
 				24DD486F1DD6B9CA009378AC /* DeleteEntryOperation.swift */,
 			);
 			path = Operations;
@@ -404,7 +404,7 @@
 			children = (
 				24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */,
 				249CF9EA1DD0616E000AE484 /* ParsingOperationSpec.swift */,
-				24DBE6EF1DD42212003B7676 /* LibraryFetchOperationSpec.swift */,
+				24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */,
 				24DD48711DD6C2B4009378AC /* DeleteEntryOperationSpec.swift */,
 			);
 			path = Operations;
@@ -879,7 +879,7 @@
 				2470044C1DCD73D9000D987C /* Genre.swift in Sources */,
 				2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */,
 				247362901DCF0321004B4AC5 /* NetworkRequest.swift in Sources */,
-				24DBE6EC1DD2DFD5003B7676 /* LibraryFetchOperation.swift in Sources */,
+				24DBE6EC1DD2DFD5003B7676 /* FetchLibraryOperation.swift in Sources */,
 				2494D9A81DCC631E0032AC8E /* User.swift in Sources */,
 				2473628D1DCF01EF004B4AC5 /* NetworkClientProtocol.swift in Sources */,
 				247362921DCF035D004B4AC5 /* NetworkClient.swift in Sources */,
@@ -894,7 +894,7 @@
 				2487343C1DCCC183002E7366 /* AnimeSpec.swift in Sources */,
 				24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */,
 				24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */,
-				24DBE6F01DD42212003B7676 /* LibraryFetchOperationSpec.swift in Sources */,
+				24DBE6F01DD42212003B7676 /* FetchLibraryOperationSpec.swift in Sources */,
 				24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */,
 				24DD48721DD6C2B4009378AC /* DeleteEntryOperationSpec.swift in Sources */,
 				249CF9EB1DD0616E000AE484 /* ParsingOperationSpec.swift in Sources */,

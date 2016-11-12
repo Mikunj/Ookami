@@ -1,5 +1,5 @@
 //
-//  LibraryFetchOperationSpec.swift
+//  FetchLibraryOperationSpec.swift
 //  Ookami
 //
 //  Created by Maka on 10/11/16.
@@ -25,7 +25,7 @@ class StubParsingOperation: ParsingOperation {
     }
 }
 
-class StubFetchOperation: LibraryFetchOperation {
+class StubFetchOperation: FetchLibraryOperation {
     
     var fetchCalledAmount: Int = 0
     
@@ -43,9 +43,9 @@ class StubFetchOperation: LibraryFetchOperation {
     }
 }
 
-class LibraryFetchOperationSpec: QuickSpec {
+class FetchLibraryOperationSpec: QuickSpec {
     override func spec() {
-        describe("Library Fetch Operation") {
+        describe("Fetch Library Operation") {
             
             var client: NetworkClient!
             
@@ -68,7 +68,7 @@ class LibraryFetchOperationSpec: QuickSpec {
                     let dict1 = ["type": [1], "type2": ["hi"]]
                     let dict2 = ["type": [2, 3], "type2": ["hello", "bye"]]
                     let request = LibraryGETRequest(userID: 1, relativeURL: "/anime")
-                    let operation = LibraryFetchOperation(request: request, client: client) { objects, error in
+                    let operation = FetchLibraryOperation(request: request, client: client) { objects, error in
                     }
                     operation.add(toFetchedObjects: dict1)
                     var objects = operation.fetchedObjects
@@ -87,7 +87,7 @@ class LibraryFetchOperationSpec: QuickSpec {
             context("Fetching page") {
                 
                 it("should pass a failedToFetchPage error if a network error occurs") {
-                    var error: LibraryFetchOperationError?
+                    var error: FetchLibraryOperationError?
                     let networkError = NetworkClientError.error("test")
                     
                     stub(condition: isHost("kitsu.io")) { _ in
@@ -95,14 +95,14 @@ class LibraryFetchOperationSpec: QuickSpec {
                     }
                     
                     let request = LibraryGETRequest(userID: 1, relativeURL: "/anime")
-                    let operation = LibraryFetchOperation(request: request, client: client) { objects, e in
+                    let operation = FetchLibraryOperation(request: request, client: client) { objects, e in
                         error = e
                     }
                     
                     waitUntil { done in
                         operation.completionBlock = {
                             expect(error).toNot(beNil())
-                            expect(error).to(matchError(LibraryFetchOperationError.failedToFetchPage(offset: 0, error: networkError)))
+                            expect(error).to(matchError(FetchLibraryOperationError.failedToFetchPage(offset: 0, error: networkError)))
                             done()
                         }
                         operation.fetchCurrentPage()
@@ -142,7 +142,7 @@ class LibraryFetchOperationSpec: QuickSpec {
                         var ids: [String: [Any]]?
                         
                         let request = LibraryGETRequest(userID: 1, relativeURL: "/anime")
-                        let operation = LibraryFetchOperation(request: request, client: client) { objects, e in
+                        let operation = FetchLibraryOperation(request: request, client: client) { objects, e in
                             ids = objects
                         }
                         

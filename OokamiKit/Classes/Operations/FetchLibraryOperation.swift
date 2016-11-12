@@ -1,5 +1,5 @@
 //
-//  LibraryFetchOperation.swift
+//  FetchLibraryOperation.swift
 //  Ookami
 //
 //  Created by Maka on 9/11/16.
@@ -10,21 +10,21 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-public enum LibraryFetchOperationError: Error {
+public enum FetchLibraryOperationError: Error {
     case error(String)
     case failedToFetchPage(offset: Int, error: Error?)
     case badJSONRecieved
 }
 
-/// Operation to fetch all the entries in a library
-public class LibraryFetchOperation: AsynchronousOperation {
+/// Operation to fetch the entries in a library for a given status
+public class FetchLibraryOperation: AsynchronousOperation {
     
     var queue = OperationQueue()
     let request: LibraryGETRequest
     
     /// The completion block which is called at the end
     typealias FetchedObjects = [String: [Any]]
-    typealias FetchCompleteBlock = (FetchedObjects?, LibraryFetchOperationError?) -> Void
+    typealias FetchCompleteBlock = (FetchedObjects?, FetchLibraryOperationError?) -> Void
 
     var fetchedObjects: FetchedObjects = [:]
     let fetchComplete: FetchCompleteBlock
