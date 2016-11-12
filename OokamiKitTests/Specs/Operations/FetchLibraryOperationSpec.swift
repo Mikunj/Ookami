@@ -11,8 +11,9 @@ import Nimble
 @testable import OokamiKit
 import SwiftyJSON
 import OHHTTPStubs
+import RealmSwift
 
-class StubParsingOperation: ParsingOperation {
+private class StubParsingOperation: ParsingOperation {
     override func main() {
         let realm = realmBlock()
         try! realm.write {
@@ -25,7 +26,7 @@ class StubParsingOperation: ParsingOperation {
     }
 }
 
-class StubFetchOperation: FetchLibraryOperation {
+private class StubFetchOperation: FetchLibraryOperation {
     
     var fetchCalledAmount: Int = 0
     

@@ -19,7 +19,13 @@ public enum FetchLibraryOperationError: Error {
 /// Operation to fetch the entries in a library for a given status
 public class FetchLibraryOperation: AsynchronousOperation {
     
-    var queue = OperationQueue()
+    var queue: OperationQueue = {
+        let q = OperationQueue()
+        //Make it serial
+        q.maxConcurrentOperationCount = 1
+        return q
+    }()
+    
     let request: LibraryGETRequest
     
     /// The completion block which is called at the end
@@ -42,15 +48,12 @@ public class FetchLibraryOperation: AsynchronousOperation {
     /// - Parameter request: The request
     /// - Parameter client: The network client to use for executing the request
     /// - Parameter completion: The completion block.
-    ///                         Passes back a dictionary of type `[String: [Any]]` which contains the ids of the parsed objects, where the key is the object type
+    ///                         Passes back a dictionary of type `[String: [Any]]?` which contains the ids of the parsed objects, where the key is the object type
     ///                         Passes an error instead if failed to fetch
     init(request: LibraryGETRequest, client: NetworkClientProtocol, completion: @escaping FetchCompleteBlock) {
         self.request = request.copy() as! LibraryGETRequest
         self.fetchComplete = completion
         self.client = client
-        
-        //Make it serial
-        queue.maxConcurrentOperationCount = 1
     }
     
     /// Fetch the current page
@@ -168,7 +171,7 @@ public class FetchLibraryOperation: AsynchronousOperation {
     
     override public func cancel() {
         queue.cancelAllOperations()
-        queue.addOperation(operationCompleted())
         super.cancel()
+        queue.addOperation(operationCompleted())
     }
 }

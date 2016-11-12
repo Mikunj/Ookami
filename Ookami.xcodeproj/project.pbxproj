@@ -65,6 +65,8 @@
 		24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD486D1DD6B405009378AC /* RealmStorable.swift */; };
 		24DD48701DD6B9CA009378AC /* DeleteEntryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD486F1DD6B9CA009378AC /* DeleteEntryOperation.swift */; };
 		24DD48721DD6C2B4009378AC /* DeleteEntryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD48711DD6C2B4009378AC /* DeleteEntryOperationSpec.swift */; };
+		24DD48741DD6CDED009378AC /* FetchAllLibraryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD48731DD6CDED009378AC /* FetchAllLibraryOperation.swift */; };
+		24DD48761DD6D874009378AC /* FetchAllLibraryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */; };
 		24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEEF5C1DCCA53100869696 /* Helper.swift */; };
 		24EEEF601DCCA56700869696 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
 		4B0602544AED16E809D1EEAF /* Pods_OokamiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 434E929751010464220AF315 /* Pods_OokamiTests.framework */; };
@@ -171,6 +173,8 @@
 		24DD486D1DD6B405009378AC /* RealmStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmStorable.swift; sourceTree = "<group>"; };
 		24DD486F1DD6B9CA009378AC /* DeleteEntryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteEntryOperation.swift; sourceTree = "<group>"; };
 		24DD48711DD6C2B4009378AC /* DeleteEntryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteEntryOperationSpec.swift; sourceTree = "<group>"; };
+		24DD48731DD6CDED009378AC /* FetchAllLibraryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAllLibraryOperation.swift; sourceTree = "<group>"; };
+		24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAllLibraryOperationSpec.swift; sourceTree = "<group>"; };
 		24EEEF5C1DCCA53100869696 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "user-jigglyslime.json"; sourceTree = "<group>"; };
 		42AF10F67E8E4875D581D508 /* Pods_Ookami.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ookami.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,9 +336,9 @@
 		2473628E1DCF030B004B4AC5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */,
 				247362911DCF035D004B4AC5 /* NetworkClient.swift */,
 				2473628F1DCF0321004B4AC5 /* NetworkRequest.swift */,
-				24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -391,10 +395,11 @@
 			isa = PBXGroup;
 			children = (
 				24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */,
+				24DD486F1DD6B9CA009378AC /* DeleteEntryOperation.swift */,
+				24DD48731DD6CDED009378AC /* FetchAllLibraryOperation.swift */,
+				24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */,
 				24D28ED01DD015FC00773BED /* NetworkOperation.swift */,
 				24D28ED81DD04CD200773BED /* ParsingOperation.swift */,
-				24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */,
-				24DD486F1DD6B9CA009378AC /* DeleteEntryOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 				249CF9EA1DD0616E000AE484 /* ParsingOperationSpec.swift */,
 				24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */,
 				24DD48711DD6C2B4009378AC /* DeleteEntryOperationSpec.swift */,
+				24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -870,6 +876,7 @@
 				24DD48701DD6B9CA009378AC /* DeleteEntryOperation.swift in Sources */,
 				2487343A1DCCB479002E7366 /* Anime.swift in Sources */,
 				2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */,
+				24DD48741DD6CDED009378AC /* FetchAllLibraryOperation.swift in Sources */,
 				2473628B1DCF0181004B4AC5 /* NetworkRequestProtocol.swift in Sources */,
 				2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */,
 				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
@@ -892,6 +899,7 @@
 			files = (
 				245E59A81DD1D5A1002375A4 /* StubRealmObject.swift in Sources */,
 				2487343C1DCCC183002E7366 /* AnimeSpec.swift in Sources */,
+				24DD48761DD6D874009378AC /* FetchAllLibraryOperationSpec.swift in Sources */,
 				24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */,
 				24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */,
 				24DBE6F01DD42212003B7676 /* FetchLibraryOperationSpec.swift in Sources */,
