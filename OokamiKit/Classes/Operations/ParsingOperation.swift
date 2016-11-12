@@ -137,13 +137,8 @@ public class ParsingOperation: AsynchronousOperation {
                 //We add this here because we 'parsed' it but the object decides whether it should be stored or not
                 add(parsedObject: parsedObject, forType: type)
                 
-                //TODO: Also need to pass the list of objects that we recieved to the completion block
-                // This can be a simple [String: [Any]] object (Any becase we may have objects that don't use Int ids)
-                // it uses the type as key and stores the id in the value
-                
-                //TODO: Call a function to the object to check if it can be added
-                // E.g for library entry we only want to add the entry if it's more current than what we have
-                realm.add(parsedObject, update: true)
+                //Check if we can store the object. If so then add it to realm
+                if parsedObject.canBeStored() { realm.add(parsedObject, update: true) }
             } else {
                 failed.append(object)
             }

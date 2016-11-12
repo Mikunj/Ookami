@@ -91,6 +91,19 @@ public class LibraryEntry: Object {
     override public static func ignoredProperties() -> [String] {
         return ["user", "status"]
     }
+    
+    override public func canBeStored() -> Bool {
+        // We only want to store entries if:
+        // - We don't have it in the database, or
+        // - The updatedAt time for the current entry is more recent than the one in the database
+        // The above constraints allow offline syncing, aswell as the case where entry needs to be synced but the server has a more recent one.
+        
+        guard let dbEntry = LibraryEntry.get(withId: self.id) else {
+            return true
+        }
+        
+        return self.updatedAt >= dbEntry.updatedAt
+    }
 }
 
 extension LibraryEntry: GettableObject { public typealias T = LibraryEntry }

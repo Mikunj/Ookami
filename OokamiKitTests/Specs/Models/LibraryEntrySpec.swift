@@ -29,6 +29,39 @@ class LibraryEntrySpec: QuickSpec {
                 }
             }
             
+            context("Storing") {
+                it("should be able to store if no other entry exists in the database") {
+                    let e = LibraryEntry()
+                    e.id = 1
+                    expect(e.canBeStored()).to(beTrue())
+                }
+                
+                it("should only store entry if the one in the database is old") {
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 1) { _, object in
+                        object.id = 1
+                        object.updatedAt = Date(timeIntervalSince1970: 100)
+                    }
+                    
+                    let e = LibraryEntry()
+                    e.id = 1
+                    e.updatedAt = Date(timeIntervalSince1970: 150)
+                    expect(e.canBeStored()).to(beTrue())
+                }
+                
+                it("should store entry with the same update date") {
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 1) { _, object in
+                        object.id = 1
+                        object.updatedAt = Date(timeIntervalSince1970: 100)
+                    }
+                    
+                    let e = LibraryEntry()
+                    e.id = 1
+                    e.updatedAt = Date(timeIntervalSince1970: 100)
+                    expect(e.canBeStored()).to(beTrue())
+                }
+                
+            }
+            
             context("Modifying") {
                 
                 it("should correctly change the status") {

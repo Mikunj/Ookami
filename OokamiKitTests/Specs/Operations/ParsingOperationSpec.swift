@@ -335,7 +335,7 @@ class ParsingOperationSpec: QuickSpec {
                             blockCalled = true
                         }
                         
-                        waitUntil { done in
+                        waitUntil(timeout: 3.0) { done in
                             operation.completionBlock = {
                                 expect(blockCalled).to(beFalse())
                                 done()
