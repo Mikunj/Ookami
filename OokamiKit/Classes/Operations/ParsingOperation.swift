@@ -41,7 +41,7 @@ public class ParsingOperation: AsynchronousOperation {
     ///            A closure is called instead of passing in a realm instance because the operation may not be executed in the same thread as the realm instance which was passed in.
     ///   - completion: The completion block. 
     ///         Passes a dictionary of parsed objects (key: object type, value: array of ids)
-    ///         Passes an array of JSON objects that failed to be parsed
+    ///         Passes an array of JSON objects that failed to be parsed, or nil if everything was parsed
     init(json: JSON, realm: @escaping RealmBlock, completion: @escaping ParseCompletionBlock) {
         self.json = json
         self.realmBlock = realm
@@ -186,6 +186,14 @@ public class ParsingOperation: AsynchronousOperation {
             self.parseComplete(parsedObjects, fail)
         }
         
+        self.completeOperation()
+    }
+    
+    override public func cancel() {
+        super.cancel()
+        if realmBlock().isInWriteTransaction {
+            realmBlock().cancelWrite()
+        }
         self.completeOperation()
     }
     

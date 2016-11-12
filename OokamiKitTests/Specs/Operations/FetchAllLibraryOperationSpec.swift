@@ -114,6 +114,48 @@ class FetchAllLibraryOperationSpec: QuickSpec {
 
                 }
             }
+            
+            context("Main") {
+                
+                it("should correctly fetch and parse data for each status") {
+                    stub(condition: isHost("kitsu.io")) { _ in
+                        let data = ["data": [["type": LibraryEntry.typeString, "id": 1]]]
+                        return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: nil)
+                    }
+                    
+                    let operation = StubFetchAllOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client) { _ in
+                    }
+                    
+                    waitUntil { done in
+                        operation.completionBlock = {
+                            expect(LibraryEntry.all()).to(haveCount(1))
+                            expect(operation.results.values).to(allPass { $0 == true })
+                            done()
+                        }
+                        queue.addOperation(operation)
+                    }
+                    
+                }
+                
+                it("should set status success to false when errors occur") {
+                    stub(condition: isHost("kitsu.io")) { _ in
+                        return OHHTTPStubsResponse(error: NetworkClientError.error("failed to get page"))
+                    }
+                    
+                    let operation = StubFetchAllOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client) { _ in
+                    }
+                    
+                    waitUntil { done in
+                        operation.completionBlock = {
+                            expect(LibraryEntry.all()).to(haveCount(0))
+                            expect(operation.results.values).to(allPass { $0 == false })
+                            done()
+                        }
+                        queue.addOperation(operation)
+                    }
+                }
+                
+            }
         }
     }
 }

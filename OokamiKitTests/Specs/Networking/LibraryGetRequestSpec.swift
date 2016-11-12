@@ -122,11 +122,6 @@ class LibraryGETRequestSpec: QuickSpec {
                     rStatus.filter(.status(.completed))
                     expect(rStatus.getEntries()).to(haveCount(6))
                     
-                    rStatus.filter(.statuses([.completed, .current]))
-                    
-                    //Remember that it filters user id automatically so we only have 2 + 3 + 4, not 2 + 3 + 4 + 5
-                    expect(rStatus.getEntries()).to(haveCount((9)))
-                    
                     //Test media only
                     let rMediaFilter = request.copy() as! LibraryGETRequest
                     rMediaFilter.filter(.media(type: .manga))
@@ -185,11 +180,6 @@ class LibraryGETRequestSpec: QuickSpec {
                     expect(filters["user_id"] as? Int).to(equal(1))
                     expect(filters["media_type"] as? String).to(equal("Anime"))
                     expect(filters["status"] as? Int).to(equal(3))
-                    
-                    request.filter(.statuses([.current, .planned]))
-                    filters = request.getFilters()
-                    let statuses = filters["status"] as? [Int]
-                    expect(statuses).to(contain([1, 2]))
                 }
                 
                 it("should build the request correctly") {

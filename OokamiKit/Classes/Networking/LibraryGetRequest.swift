@@ -15,7 +15,6 @@ public enum LibraryRequestFilters {
     case user(id: Int)
     case media(type: LibraryRequestMedia)
     case status(LibraryEntryStatus)
-    case statuses([LibraryEntryStatus])
 }
 
 /// Enum for media types
@@ -114,7 +113,6 @@ extension LibraryGETRequest {
             
             if statuses == nil {
                 if case .status(let status) = $0 { statuses = [status] }
-                if case .statuses(let statusArray) = $0 { statuses = statusArray }
             }
             
         }
@@ -176,11 +174,6 @@ extension LibraryGETRequest {
                     break
                 case .status(let status):
                     filters["status"] = LibraryEntryStatus.all.index(of: status)! + 1
-                    break
-                case .statuses(let statuses):
-                    filters["status"] = statuses.map {
-                        return LibraryEntryStatus.all.index(of: $0)! + 1
-                    }
                     break
             }
         }

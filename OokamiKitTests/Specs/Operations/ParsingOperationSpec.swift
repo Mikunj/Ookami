@@ -286,7 +286,7 @@ class ParsingOperationSpec: QuickSpec {
                     }
                     
                     queue.addOperation(operation)
-                    expect(response).toEventually(beEmpty())
+                    expect(response).toEventually(beNil())
                     expect(StubRealmObject.get(withId: 1)).toEventuallyNot(beNil())
                 }
                 

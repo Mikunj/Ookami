@@ -407,11 +407,11 @@
 		24D28ED21DD017D400773BED /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */,
-				249CF9EA1DD0616E000AE484 /* ParsingOperationSpec.swift */,
-				24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */,
 				24DD48711DD6C2B4009378AC /* DeleteEntryOperationSpec.swift */,
 				24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */,
+				24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */,
+				24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */,
+				249CF9EA1DD0616E000AE484 /* ParsingOperationSpec.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
