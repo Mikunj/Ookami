@@ -113,15 +113,17 @@ public class FetchLibraryOperation: AsynchronousOperation {
             let pOperation = self.parsingOperation(forJSON: json)
             self.queue.addOperation(pOperation)
             
+            let addCompletion = {
+                operationCompletedBlock.addDependency(pOperation)
+                self.queue.addOperation(operationCompletedBlock)
+            }
+            
             let links = json["links"]
             if links.type == .dictionary {
                 //Get the max offset from the 'last' value in links
                 if links["last"].exists() {
                     if self.maxOffset == nil {
                         self.maxOffset = self.getOffset(from: links["last"].stringValue)
-                        if self.maxOffset != nil {
-                            self.maxOffset! += 1
-                        }
                     }
                 }
                 
@@ -134,9 +136,12 @@ public class FetchLibraryOperation: AsynchronousOperation {
                 } else {
                     
                     //There is no next page, so we finish the operation
-                    operationCompletedBlock.addDependency(pOperation)
-                    self.queue.addOperation(operationCompletedBlock)
+                    addCompletion()
                 }
+            } else {
+                
+                //Invalid links found
+                addCompletion()
             }
         }
         
