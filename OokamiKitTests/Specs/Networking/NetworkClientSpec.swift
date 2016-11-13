@@ -28,7 +28,7 @@ class NetworkClientSpec: QuickSpec {
                 //Stub the network to return JSON data
                 stub(condition: isHost("kitsu.io")) { _ in
                     let obj = ["data": "hi"]
-                    return OHHTTPStubsResponse(jsonObject: obj, statusCode: 200, headers: nil)
+                    return OHHTTPStubsResponse(jsonObject: obj, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                 }
             }
             
@@ -48,7 +48,7 @@ class NetworkClientSpec: QuickSpec {
                             authenticationCalled = true
                         })
                         
-                        //let request = NetworkRequest(method: .get, parameters: nil, headers: nil, needsAuth: true, relativeURL: "/user")
+                        //let request = NetworkRequest(method: .get, parameters: nil, headers: ["Content-Type": "application/vnd.api+json"], needsAuth: true, relativeURL: "/user")
                         let request = NetworkRequest(relativeURL: "/user", method: .get, needsAuth: true)
                         client?.execute(request: request) { data, e in
                             requestExecuted = true
@@ -143,7 +143,7 @@ class NetworkClientSpec: QuickSpec {
                             request.value(forHTTPHeaderField: "header") == "1"
                     }, withStubResponse: { request -> OHHTTPStubsResponse in
                         let obj = ["data": "hi"]
-                        return OHHTTPStubsResponse(jsonObject: obj, statusCode: 200, headers: nil)
+                        return OHHTTPStubsResponse(jsonObject: obj, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                     })
                     
                     client?.execute(request: request) { d, e in
@@ -174,7 +174,7 @@ class NetworkClientSpec: QuickSpec {
                     
                     stub(condition: isHost("kitsu.io")) { _ in
                         let obj = ["name": "test"]
-                        return OHHTTPStubsResponse(jsonObject: obj, statusCode: 400, headers: nil)
+                        return OHHTTPStubsResponse(jsonObject: obj, statusCode: 400, headers: ["Content-Type": "application/vnd.api+json"])
                     }
                     
                     client?.execute(request: request) { d, e in

@@ -63,6 +63,25 @@ class FetchLibraryOperationSpec: QuickSpec {
                 }
             }
             
+            context("Getting offset") {
+                it("should correctly get offsets") {
+                    let linkString = "https://kitsu-api-staging.herokuapp.com/api/edge/library-entries?filter%5Bmedia_type%5D=Anime&filter%5Bstatus%5D=3&filter%5Buser_id%5D=2875&include=media.genres%2Cuser&page%5Blimit%5D=50&page%5Boffset%5D=100"
+                    let request = LibraryGETRequest(userID: 1, relativeURL: "/anime")
+                    let operation = FetchLibraryOperation(request: request, client: client) { objects, error in
+                    }
+                    let offset = operation.getOffset(from: linkString)
+                    expect(offset).to(equal(100))
+                }
+                it("should return nil if offset is not found") {
+                    let linkString = "https://kitsu-api-staging.herokuapp.com/api/edge/library-entries?filter%5Bmedia_type%5D=Anime&filter%5Bstatus%5D=3&filter%5Buser_id%5D=2875&include=media.genres%2Cuser&page%5Blimit%5D=50"
+                    let request = LibraryGETRequest(userID: 1, relativeURL: "/anime")
+                    let operation = FetchLibraryOperation(request: request, client: client) { objects, error in
+                    }
+                    let offset = operation.getOffset(from: linkString)
+                    expect(offset).to(beNil())
+                }
+            }
+            
             
             context("Combining fetched objects") {
                 it("should be able to correctly combine fetched objects dictionary") {
@@ -115,7 +134,7 @@ class FetchLibraryOperationSpec: QuickSpec {
                     
                     beforeEach {
                         stub(condition: isHost("kitsu.io")) { _ in
-                            return OHHTTPStubsResponse(jsonObject: ["data": ["type": "test"]], statusCode: 200, headers: nil)
+                            return OHHTTPStubsResponse(jsonObject: ["data": ["type": "test"]], statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
                     }
                     
@@ -184,7 +203,7 @@ class FetchLibraryOperationSpec: QuickSpec {
                     
                     it("should complete the operation if links data is not a dictionary") {
                         stub(condition: isHost("kitsu.io")) { _ in
-                            return OHHTTPStubsResponse(jsonObject: ["data": ["type": "test"], "links": "next"], statusCode: 200, headers: nil)
+                            return OHHTTPStubsResponse(jsonObject: ["data": ["type": "test"], "links": "next"], statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
                         
                         checkCompletionCall(expectedFetchCallAmount: 1)
@@ -192,7 +211,7 @@ class FetchLibraryOperationSpec: QuickSpec {
                     
                     it("should complete the operation if no next link is found") {
                         stub(condition: isHost("kitsu.io")) { _ in
-                            return OHHTTPStubsResponse(jsonObject: ["data": ["type": "test"], "links": ["first": "hi", "prev": "hello"]], statusCode: 200, headers: nil)
+                            return OHHTTPStubsResponse(jsonObject: ["data": ["type": "test"], "links": ["first": "hi", "prev": "hello"]], statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
                         
                         checkCompletionCall(expectedFetchCallAmount: 1)
@@ -203,7 +222,7 @@ class FetchLibraryOperationSpec: QuickSpec {
                         stub(condition: isHost("kitsu.io")) { _ in
                             count += 1
                             let linkData = count == 1 ?  ["next": "yay"] : ["first": "oh no"]
-                            return OHHTTPStubsResponse(jsonObject: ["data": ["type": "test"], "links": linkData], statusCode: 200, headers: nil)
+                            return OHHTTPStubsResponse(jsonObject: ["data": ["type": "test"], "links": linkData], statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
                         
                         checkCompletionCall(expectedFetchCallAmount: 2)
@@ -221,7 +240,7 @@ class FetchLibraryOperationSpec: QuickSpec {
                         
                         stub(condition: isHost("kitsu.io")) { _ in
                             operation.cancel()
-                            return OHHTTPStubsResponse(jsonObject: ["data": ["type": "test"], "links": ["next": "yay"]], statusCode: 200, headers: nil)
+                            return OHHTTPStubsResponse(jsonObject: ["data": ["type": "test"], "links": ["next": "yay"]], statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
                         
                         

@@ -14,7 +14,7 @@ import SwiftyJSON
 /// This will also delete any library entries that were not recieved (if everything succeeds)
 public class FetchAllLibraryOperation: AsynchronousOperation {
     
-    typealias StatusDictionary = [LibraryEntryStatus: Bool]
+    public typealias StatusDictionary = [LibraryEntryStatus: Bool]
     
     var queue: OperationQueue = {
         let q = OperationQueue()
@@ -46,7 +46,7 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
     ///   - type: The type of library to fetch
     ///   - client: The network client to execute request on
     ///   - completion: The completion callback which passes a dictionary of Status and bool values indicating if a certain status was fully fetched or not
-    init(relativeURL: String, userID: Int, type: LibraryRequestMedia, client: NetworkClientProtocol, completion: @escaping (StatusDictionary) -> Void) {
+    public init(relativeURL: String, userID: Int, type: LibraryRequestMedia, client: NetworkClientProtocol, completion: @escaping (StatusDictionary) -> Void) {
         self.url = relativeURL
         self.userID = userID
         self.client = client
@@ -110,7 +110,7 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
             request.include([.genres, .user])
             let operation = FetchLibraryOperation(request: request, client: client) { objects, error in
                 guard error == nil else {
-                    print("Error occured")
+                    print("Failed to fetch library: " + (error?.localizedDescription)!)
                     return
                 }
                 
@@ -120,6 +120,7 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
                 
                 self.combine(parsedIds: ids)
                 self.results[status] = true
+                print("Fetched \(status.rawValue) for id: \(self.userID)")
             }
             
             deleteBlock.addDependency(operation)

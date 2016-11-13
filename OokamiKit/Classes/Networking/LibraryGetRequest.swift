@@ -61,7 +61,7 @@ public class LibraryGETRequest {
     ///   - userID: The id of the user to build requests for
     ///   - url: The relative url endpoint of the request
     ///   - headers: Any headers to include with the request
-    init(userID: Int, relativeURL url: String, headers: HTTPHeaders? = nil) {
+    public init(userID: Int, relativeURL url: String, headers: HTTPHeaders? = nil) {
         self.url = url
         self.headers = headers
         
@@ -223,13 +223,17 @@ extension LibraryGETRequest {
     }
     
     /// Increment the page offset
-    @discardableResult public func nextPage() -> Self {
-        return page(offset: page.offset + 1)
+    @discardableResult public func nextPage(maxOffset: Int? = nil) -> Self {
+        let newOffset = page.offset + page.limit
+        let offset = maxOffset != nil ? min(maxOffset!, newOffset) : newOffset
+        return page(offset: offset)
     }
     
     /// Decrement the page offset
-    @discardableResult public func prevPage() -> Self {
-        return page(offset: page.offset - 1)
+    @discardableResult public func prevPage(maxOffset: Int? = nil) -> Self {
+        let newOffset = page.offset - page.limit
+        let offset = maxOffset != nil ? min(maxOffset!, newOffset) : newOffset
+        return page(offset: offset)
     }
 }
 

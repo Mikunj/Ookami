@@ -24,7 +24,7 @@ public struct NetworkRequest: NetworkRequestProtocol {
     ///   - parameters: The parameters of the request
     ///   - headers: The headers to use for the request
     ///   - needsAuth: Whether this request needs a user to be authenticated
-    init(relativeURL: String, method: HTTPMethod, parameters: Parameters? = nil, headers: HTTPHeaders? = nil, needsAuth: Bool = false) {
+    public init(relativeURL: String, method: HTTPMethod, parameters: Parameters? = nil, headers: HTTPHeaders? = nil, needsAuth: Bool = false) {
         self.relativeURL = relativeURL
         self.method = method
         self.parameters = parameters

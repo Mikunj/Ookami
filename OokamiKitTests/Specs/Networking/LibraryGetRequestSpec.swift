@@ -216,12 +216,26 @@ class LibraryGETRequestSpec: QuickSpec {
                     request.page(offset: -1).page(limit: -1)
                     expect(request.page.offset).to(equal(0))
                     expect(request.page.limit).to(equal(0))
-                    
+                }
+                
+                it("should adjust offests correctly") {
+                    request.page(limit: 50)
                     request.nextPage()
-                    expect(request.page.offset).to(equal(1))
+                    expect(request.page.offset).to(equal(50))
                     
+                    request.page(limit: 20)
                     request.prevPage()
-                    expect(request.page.offset).to(equal(0))
+                    expect(request.page.offset).to(equal(30))
+                    
+                    request.page(offset: 0)
+                    request.page(limit: 50)
+                    request.nextPage(maxOffset: 40)
+                    expect(request.page.offset).to(equal(40))
+                    
+                    request.page(offset: 100)
+                    request.page(limit: 50)
+                    request.prevPage(maxOffset: 40)
+                    expect(request.page.offset).to(equal(40))
                 }
                 
                 it("should build the request correctly") {

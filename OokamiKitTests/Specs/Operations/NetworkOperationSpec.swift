@@ -37,7 +37,7 @@ class NetworkOperationSpec: QuickSpec {
                 //Stub the network to return JSON data
                 stub(condition: isHost("kitsu.io")) { _ in
                     let obj = ["message": "hi"]
-                    return OHHTTPStubsResponse(jsonObject: obj, statusCode: 200, headers: nil)
+                    return OHHTTPStubsResponse(jsonObject: obj, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                 }
                 
                 let request = NetworkRequest(relativeURL: "/test", method: .get)
@@ -79,7 +79,7 @@ class NetworkOperationSpec: QuickSpec {
                 //Stub the network to return JSON data
                 stub(condition: isHost("kitsu.io")) { _ in
                     let obj = ["message": "hi"]
-                    return OHHTTPStubsResponse(jsonObject: obj, statusCode: 200, headers: nil).responseTime(0.5)
+                    return OHHTTPStubsResponse(jsonObject: obj, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"]).responseTime(0.5)
                 }
                 
                 let request = NetworkRequest(relativeURL: "/test", method: .get)

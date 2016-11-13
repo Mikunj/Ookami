@@ -28,7 +28,7 @@ public class NetworkClient: NetworkClientProtocol {
     ///   - baseURL: The base URL to use for the client
     ///   - heimdallr: The Heimdallr instance used for OAuth2 authentication
     ///   - sessionManager: The Alamofire session manager
-    init(baseURL: String, heimdallr: Heimdallr, sessionManager: SessionManager = SessionManager()) {
+    public init(baseURL: String, heimdallr: Heimdallr, sessionManager: SessionManager = SessionManager.default) {
         self.heim = heimdallr
         self.baseURL = baseURL
         self.sessionManager = sessionManager
@@ -41,14 +41,17 @@ public class NetworkClient: NetworkClientProtocol {
     ///   - request: The request
     ///   - completion: The callback block. Passes JSON and error
     public func execute(request: NetworkRequestProtocol, completion: @escaping (JSON?, Error?) -> Void) {
-        guard let url = URL(string: "\(baseURL)\(request.relativeURL)") else {
+        let urlString = "\(baseURL)\(request.relativeURL)"
+        guard let url = URL(string: urlString) else {
             completion(nil, NetworkClientError.error("Failed to construct URL"))
             return
         }
         
         do {
             let urlRequest = try URLRequest(url: url, method: request.method, headers: request.headers)
-            let encodedURLRequest = try JSONEncoding.default.encode(urlRequest, with: request.parameters)
+            var encodedURLRequest =  try! URLEncoding.default.encode(urlRequest, with: request.parameters)
+            encodedURLRequest.setValue("application/vnd.api+json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            encodedURLRequest.setValue("application/vnd.api+json", forHTTPHeaderField: "Accept")
             
             //check for authentication
             if request.needsAuth {

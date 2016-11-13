@@ -29,8 +29,8 @@ public class FetchLibraryOperation: AsynchronousOperation {
     let request: LibraryGETRequest
     
     /// The completion block which is called at the end
-    typealias FetchedObjects = [String: [Any]]
-    typealias FetchCompleteBlock = (FetchedObjects?, FetchLibraryOperationError?) -> Void
+    public typealias FetchedObjects = [String: [Any]]
+    public typealias FetchCompleteBlock = (FetchedObjects?, FetchLibraryOperationError?) -> Void
 
     var fetchedObjects: FetchedObjects = [:]
     let fetchComplete: FetchCompleteBlock
@@ -41,6 +41,9 @@ public class FetchLibraryOperation: AsynchronousOperation {
     /// Whether the operation errored when fetching a page
     var didError: Bool = false
     
+    //The max offset that we can go up to
+    var maxOffset: Int? = nil
+    
     /// Create a library fetch operation that will fetch all pages in a library.
     ///
     /// Note that this will use a new copy of the request passed in.
@@ -50,7 +53,7 @@ public class FetchLibraryOperation: AsynchronousOperation {
     /// - Parameter completion: The completion block.
     ///                         Passes back a dictionary of type `[String: [Any]]?` which contains the ids of the parsed objects, where the key is the object type
     ///                         Passes an error instead if failed to fetch
-    init(request: LibraryGETRequest, client: NetworkClientProtocol, completion: @escaping FetchCompleteBlock) {
+    public init(request: LibraryGETRequest, client: NetworkClientProtocol, completion: @escaping FetchCompleteBlock) {
         self.request = request.copy() as! LibraryGETRequest
         self.fetchComplete = completion
         self.client = client
@@ -68,8 +71,15 @@ public class FetchLibraryOperation: AsynchronousOperation {
         
         //Operation to recursively fetch pages
         let checkPage = BlockOperation {
-            self.request.nextPage()
+            self.request.nextPage(maxOffset: self.maxOffset)
             self.fetchCurrentPage()
+        }
+        
+        //Print out debug info, TODO: make this for debugging only, should not show in release
+        if let statusIndex = request.getFilters()["status"] {
+            let index = statusIndex as! Int
+            let status: LibraryEntryStatus = LibraryEntryStatus.all[index - 1]
+            print("Fetching page offset \(request.page.offset) for \(status.rawValue)")
         }
         
         //Operation to complete this fetch, this is in a block because we will need to add it after the parsing operation
@@ -103,23 +113,55 @@ public class FetchLibraryOperation: AsynchronousOperation {
             let pOperation = self.parsingOperation(forJSON: json)
             self.queue.addOperation(pOperation)
             
-            //Check if we can fetch next page or not
             let links = json["links"]
-            if links.type == .dictionary && links["next"].exists() {
+            if links.type == .dictionary {
+                //Get the max offset from the 'last' value in links
+                if links["last"].exists() {
+                    if self.maxOffset == nil {
+                        self.maxOffset = self.getOffset(from: links["last"].stringValue)
+                        if self.maxOffset != nil {
+                            self.maxOffset! += 1
+                        }
+                    }
+                }
                 
-                //Get the next page
-                checkPage.addDependency(pOperation)
-                self.queue.addOperation(checkPage)
-            } else {
-                
-                //There is no next page, so we finish the operation
-                operationCompletedBlock.addDependency(pOperation)
-                self.queue.addOperation(operationCompletedBlock)
+                //Check if we can fetch next page or not
+                if links["next"].exists() {
+                    
+                    //Get the next page
+                    checkPage.addDependency(pOperation)
+                    self.queue.addOperation(checkPage)
+                } else {
+                    
+                    //There is no next page, so we finish the operation
+                    operationCompletedBlock.addDependency(pOperation)
+                    self.queue.addOperation(operationCompletedBlock)
+                }
             }
         }
         
         //Add the operation to the queue
         queue.addOperation(operation)
+    }
+    
+    ///Extract the offset from the given link
+    func getOffset(from link: String) -> Int? {
+        let regex = "offset%5D=(\\d+)"
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let linkString = link as NSString
+            let results = regex.matches(in: link, range: NSRange(location: 0, length: linkString.length))
+            
+            guard results.count > 0 else {
+                return nil
+            }
+            
+            let values = results.map { linkString.substring(with: $0.rangeAt(1)) }
+            return values.count == 1 ? Int(values.first!) : nil
+        } catch {
+            print("Error with regex pattern in FetchLibraryOperation.getOffset()")
+            return nil
+        }
     }
     
     /// Get the block operation for completing the operation.

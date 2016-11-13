@@ -13,9 +13,9 @@ import SwiftyJSON
 /// An operation to parse JSON data into objects which then get stored in the realm database
 public class ParsingOperation: AsynchronousOperation {
     
-    typealias ParsedObjects = [String: [Any]]
-    typealias ParseCompletionBlock = (ParsedObjects?, [JSON]?) -> Void
-    typealias ParserBlock = (JSON) -> Object?
+    public typealias ParsedObjects = [String: [Any]]
+    public typealias ParseCompletionBlock = (ParsedObjects?, [JSON]?) -> Void
+    public typealias ParserBlock = (JSON) -> Object?
     public typealias RealmBlock = () -> Realm
     
     public let realmBlock: RealmBlock
@@ -42,7 +42,7 @@ public class ParsingOperation: AsynchronousOperation {
     ///   - completion: The completion block. 
     ///         Passes a dictionary of parsed objects (key: object type, value: array of ids)
     ///         Passes an array of JSON objects that failed to be parsed, or nil if everything was parsed
-    init(json: JSON, realm: @escaping RealmBlock, completion: @escaping ParseCompletionBlock) {
+    public init(json: JSON, realm: @escaping RealmBlock, completion: @escaping ParseCompletionBlock) {
         self.json = json
         self.realmBlock = realm
         self.parseComplete = completion

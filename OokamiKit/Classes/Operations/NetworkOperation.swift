@@ -22,7 +22,7 @@ public class NetworkOperation: AsynchronousOperation {
     ///   - request: The network request
     ///   - client: The network client
     ///   - completion: The completion block. Passes an optional JSON object or an optional Error.
-    init(request: NetworkRequestProtocol, client: NetworkClientProtocol, completion: @escaping (JSON?, Error?) -> Void) {
+    public init(request: NetworkRequestProtocol, client: NetworkClientProtocol, completion: @escaping (JSON?, Error?) -> Void) {
         self.request = request
         self.client = client
         self.networkCompletion = completion

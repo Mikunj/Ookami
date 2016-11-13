@@ -59,7 +59,7 @@ public class DeleteEntryOperation: AsynchronousOperation {
     ///   - ids: The array of entry ids that should be kept
     ///   - mode: The deletion mode.
     ///   - realm: A closure which returns a realm instance
-    init(userID: Int, ids: [Int], mode: DeleteEntryArrayMode = .notInArray, realm: @escaping () -> Realm) {
+    public init(userID: Int, ids: [Int], mode: DeleteEntryArrayMode = .notInArray, realm: @escaping () -> Realm) {
         self.mode = DeleteMode(rawValue: mode.rawValue)!
         self.id = userID
         self.entryIds = ids
@@ -78,7 +78,7 @@ public class DeleteEntryOperation: AsynchronousOperation {
     ///   - userID: The user id to delete entries from
     ///   - timeInterval: The time interval in seconds (must be positive)
     ///   - realm: A closure which returns a realm instance
-    init(userID: Int, timeInterval: TimeInterval, realm: @escaping () -> Realm) {
+    public init(userID: Int, timeInterval: TimeInterval, realm: @escaping () -> Realm) {
         self.id = userID
         self.mode = .time
         
