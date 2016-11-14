@@ -125,7 +125,7 @@ class NetworkClientSpec: QuickSpec {
             }
             
             context("Executing") {
-                it("should correctly build a URLRequest") {
+                it("should correctly build a relative url URLRequest") {
                     
                     var data: JSON? = nil
                     
@@ -140,6 +140,32 @@ class NetworkClientSpec: QuickSpec {
                         
                         return request.httpMethod == "GET" &&
                             request.url?.path == "/user" &&
+                            request.value(forHTTPHeaderField: "header") == "1"
+                    }, withStubResponse: { request -> OHHTTPStubsResponse in
+                        let obj = ["data": "hi"]
+                        return OHHTTPStubsResponse(jsonObject: obj, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
+                    })
+                    
+                    client?.execute(request: request) { d, e in
+                        data = d
+                    }
+                    
+                    expect(data).toEventuallyNot(beNil())
+                }
+                
+                it("should correctly build a full url URLRequest") {
+                    var data: JSON? = nil
+                    
+                    let request = NetworkRequest(absoluteURL: "http://abc.io/anime", method: .get, headers: ["header": "1"])
+                    
+                    stub(condition: isHost("abc.io")) { _ in
+                        return OHHTTPStubsResponse(error: NetworkClientError.error("Failed to get stuff"))
+                    }
+                    
+                    //This does not produce error if the passingTest return true
+                    OHHTTPStubs.stubRequests(passingTest: { request -> Bool in           
+                        return request.httpMethod == "GET" &&
+                            request.url?.absoluteString == "http://abc.io/anime" &&
                             request.value(forHTTPHeaderField: "header") == "1"
                     }, withStubResponse: { request -> OHHTTPStubsResponse in
                         let obj = ["data": "hi"]

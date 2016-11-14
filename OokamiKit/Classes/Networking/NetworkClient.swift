@@ -18,8 +18,9 @@ public enum NetworkClientError: Error {
 }
 
 public class NetworkClient: NetworkClientProtocol {
+    
+    public internal(set) var baseURL: String
     let heim: Heimdallr
-    let baseURL: String
     let sessionManager: SessionManager
     
     /// Create a network client
@@ -41,7 +42,17 @@ public class NetworkClient: NetworkClientProtocol {
     ///   - request: The request
     ///   - completion: The callback block. Passes JSON and error
     public func execute(request: NetworkRequestProtocol, completion: @escaping (JSON?, Error?) -> Void) {
-        let urlString = "\(baseURL)\(request.relativeURL)"
+        var urlString: String!
+        
+        //Determine url from the url type
+        switch request.urlType {
+        case .absolute:
+            urlString = request.url
+            break
+        case .relative:
+            urlString = "\(baseURL)\(request.url)"
+        }
+        
         guard let url = URL(string: urlString) else {
             completion(nil, NetworkClientError.error("Failed to construct URL"))
             return

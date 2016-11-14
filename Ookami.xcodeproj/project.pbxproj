@@ -47,6 +47,8 @@
 		2494D9A81DCC631E0032AC8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A71DCC631E0032AC8E /* User.swift */; };
 		2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */; };
 		249CF9EB1DD0616E000AE484 /* ParsingOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249CF9EA1DD0616E000AE484 /* ParsingOperationSpec.swift */; };
+		24A1B57C1DD8718F00F7E4E4 /* PaginatedLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */; };
+		24A258AE1DD9455100CC7561 /* PaginatedLibrarySepc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A258AD1DD9455100CC7561 /* PaginatedLibrarySepc.swift */; };
 		24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */; };
 		24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
@@ -158,6 +160,8 @@
 		2494D9A71DCC631E0032AC8E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		249CF9EA1DD0616E000AE484 /* ParsingOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingOperationSpec.swift; sourceTree = "<group>"; };
+		24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedLibrary.swift; sourceTree = "<group>"; };
+		24A258AD1DD9455100CC7561 /* PaginatedLibrarySepc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedLibrarySepc.swift; sourceTree = "<group>"; };
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
 		24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
@@ -339,6 +343,7 @@
 				24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */,
 				247362911DCF035D004B4AC5 /* NetworkClient.swift */,
 				2473628F1DCF0321004B4AC5 /* NetworkRequest.swift */,
+				24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 			children = (
 				247362941DCF0F1C004B4AC5 /* NetworkClientSpec.swift */,
 				24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */,
+				24A258AD1DD9455100CC7561 /* PaginatedLibrarySepc.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -881,6 +887,7 @@
 				2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */,
 				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
 				24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */,
+				24A1B57C1DD8718F00F7E4E4 /* PaginatedLibrary.swift in Sources */,
 				24D28ED91DD04CD200773BED /* ParsingOperation.swift in Sources */,
 				2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */,
 				2470044C1DCD73D9000D987C /* Genre.swift in Sources */,
@@ -899,6 +906,7 @@
 			files = (
 				245E59A81DD1D5A1002375A4 /* StubRealmObject.swift in Sources */,
 				2487343C1DCCC183002E7366 /* AnimeSpec.swift in Sources */,
+				24A258AE1DD9455100CC7561 /* PaginatedLibrarySepc.swift in Sources */,
 				24DD48761DD6D874009378AC /* FetchAllLibraryOperationSpec.swift in Sources */,
 				24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */,
 				24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */,

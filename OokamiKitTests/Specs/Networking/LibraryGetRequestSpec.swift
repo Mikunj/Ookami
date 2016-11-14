@@ -135,7 +135,7 @@ class LibraryGETRequestSpec: QuickSpec {
             context("Building request") {
                 it("should build the request correctly") {
                     let r = request.build()
-                    expect(r.relativeURL).to(equal(request.url))
+                    expect(r.url).to(equal(request.url))
                     expect(r.headers).to(equal(request.headers))
                     expect(r.method).to(equal(HTTPMethod.get))
                 }

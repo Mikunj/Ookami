@@ -10,6 +10,10 @@ import Foundation
 import SwiftyJSON
 
 public protocol NetworkClientProtocol {
+    
+    /// The base url of the api
+    var baseURL: String { get }
+    
     /// Execute a network request
     ///
     /// - Parameters:

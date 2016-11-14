@@ -18,7 +18,7 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
     
     var queue: OperationQueue = {
         let q = OperationQueue()
-        q.maxConcurrentOperationCount = 3
+        q.maxConcurrentOperationCount = 5
         return q
     }()
     
@@ -134,6 +134,8 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
     override public func cancel() {
         queue.cancelAllOperations()
         super.cancel()
-        self.completeOperation()
+        queue.addOperation {
+            self.completeOperation()
+        }
     }
 }

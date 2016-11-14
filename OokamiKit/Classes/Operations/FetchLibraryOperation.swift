@@ -10,6 +10,11 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+//TODO: Split this into FetchPaginatedLibraryOperation so that there is an option to only fetch 1 page at a time, and the user can call the next / prev page options
+//Currently this fetches everything recursively, but for large libraries (e.g introverturtle), no one is going to want to look through EVERY entry in his completed anime library, thus we can save data by paginating.
+//We can also make it so it uses the links provided from the api (first, last, next, prev) to help with the pagination
+//However for the current user library this operation still is very relevant as we need to be able to sync their library with the one on the website, and to do that we have to fetch everything and check if something has been deleted or not.
+
 public enum FetchLibraryOperationError: Error {
     case error(String)
     case failedToFetchPage(offset: Int, error: Error?)

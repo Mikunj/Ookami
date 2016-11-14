@@ -9,10 +9,17 @@
 import Foundation
 import Alamofire
 
+//The type of url specified in the request
+public enum NetworkRequestURLType {
+    case relative
+    case absolute
+}
+
 public protocol NetworkRequestProtocol {
     var method: HTTPMethod { get }
     var parameters: Parameters? { get }
     var headers: HTTPHeaders? { get }
     var needsAuth: Bool { get }
-    var relativeURL: String { get }
+    var url: String { get }
+    var urlType: NetworkRequestURLType { get }
 }

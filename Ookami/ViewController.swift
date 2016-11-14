@@ -18,33 +18,30 @@ class ViewController: UIViewController {
         let url = URL(string: "http://test")
         let h = Heimdallr(tokenURL: url!)
         let client = NetworkClient(baseURL: "http://staging.kitsu.io/api/edge", heimdallr: h)
-        
-        let r = NetworkRequest(relativeURL: "/library-entries", method: .get, parameters: ["filter": ["user_id": 2875, "media_type": "Anime", "status": 1], "page": ["offset": 0, "limit": 50]])
-        
-        let o = NetworkOperation(request: r, client: client) { json, error in
-            print(json ?? "No JSON")
-            print(error ?? "No Error")
+
+        let id = 5097
+        let notif = LibraryEntry.all().addNotificationBlock { changes in
+            if case .initial(let a) = changes {
+                print("\(a.count) entries added.")
+            }
+            
         }
         
         let q = OperationQueue()
-        let libraryOperation = FetchAllLibraryOperation(relativeURL: "/library-entries", userID: 2875, type: .anime, client: client) { results in
-            debugPrint(results)
+        
+        let start = Date()
+        let libraryOperation = FetchAllLibraryOperation(relativeURL: "/library-entries", userID: id, type: .anime, client: client) { results in
+            print("Entries: \(LibraryEntry.all().count)")
+            print("User: \(User.get(withId: id)!.name)")
+            let finish = Date()
+            let executionTime = finish.timeIntervalSince(start)
+            print("Execution Time: \(executionTime)")
+            notif.stop()
         }
         
-        libraryOperation.completionBlock = {
-            print(LibraryEntry.all().count)
-            print(Anime.all().count)
-            print(User.get(withId: 2875)!.name)
-        }
         
         q.addOperation(libraryOperation)
         
-        ///http://staging.kitsu.io/api/edge/anime?filter%5Bslug%5D=ajin-2nd-season
-        
-        
-//        Alamofire.request("http://staging.kitsu.io/api/edge/anime/1", method: .get, parameters: nil, encoding: KitsuJSONEncoding.default, headers: ["Content-Type": "application/vnd.api+json", "Accept": "application/vnd.api+json"]).responseJSON { response in
-//            print(response)
-//        }
     }
 
     override func didReceiveMemoryWarning() {
