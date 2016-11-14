@@ -75,7 +75,8 @@ public class PaginatedLibrary {
     /// The links for pagination
     public internal(set) var links: PaginatedLibraryLinks = PaginatedLibraryLinks()
     
-    /// Create a paginated library
+    /// Create a paginated library.
+    /// call `start()` to begin the fetch
     ///
     /// - Parameters:
     ///   - request: The library get request
@@ -87,8 +88,6 @@ public class PaginatedLibrary {
         self.originalRequest = request.copy() as! LibraryGETRequest
         self.client = client
         self.completion = completion
-        
-        original()
     }
 
     //MARK: - Requesting
@@ -178,7 +177,7 @@ public class PaginatedLibrary {
     ///   - nilError: The error to pass if link was nil
     func performRequest(for link: String?, nilError: PaginatedLibraryError) {
         guard links.hasAnyLinks() else {
-            original()
+            start()
             return
         }
         
@@ -191,7 +190,7 @@ public class PaginatedLibrary {
     }
 
     /// Send out the original request
-    public func original() {
+    public func start() {
         let nRequest = request.build()
         perform(request: nRequest)
     }

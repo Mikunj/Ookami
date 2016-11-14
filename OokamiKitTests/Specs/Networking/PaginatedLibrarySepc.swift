@@ -27,15 +27,15 @@ private class StubParsingOperation: ParsingOperation {
 
 private class StubPaginatedLibrary: PaginatedLibrary {
     
-    var originalCalledCount = 0
+    var startCalledCount = 0
     var nextCalledCount = 0
     var prevCalledCount = 0
     var firstCalledCount = 0
     var lastCalledCount = 0
     
-    override func original() {
-        originalCalledCount += 1
-        super.original()
+    override func start() {
+        startCalledCount += 1
+        super.start()
     }
     
     override func next() {
@@ -94,14 +94,13 @@ class PaginatedLibrarySpec: QuickSpec {
             
             afterEach {
                 OHHTTPStubs.removeAllStubs()
+                let realm = RealmProvider.realm()
+                try! realm.write {
+                    realm.deleteAll()
+                }
             }
             
             context("Requests") {
-                it("should immediately call the original request") {
-                    let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
-                    expect(p.originalCalledCount).toEventually(equal(1))
-                }
-                
                 it("should call original request if there are no links") {
                     let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
                     
@@ -110,7 +109,7 @@ class PaginatedLibrarySpec: QuickSpec {
                     p.prev()
                     p.first()
                     p.last()
-                    expect(p.originalCalledCount).toEventually(equal(5))
+                    expect(p.startCalledCount).toEventually(equal(4))
                 }
                 
                 it("should correctly build requests for links") {
@@ -194,8 +193,9 @@ class PaginatedLibrarySpec: QuickSpec {
                         let q = StubPaginatedLibrary(request: request, client: client) { fetched, _ in
                             ids = fetched
                         }
+                        q.start()
                         
-                        expect(q.originalCalledCount).toEventually(equal(1))
+                        expect(q.startCalledCount).toEventually(equal(1))
                         expect(ids).toEventually(haveCount(1))
                         expect(ids).toEventually(contain(1))
                         expect(StubRealmObject.all()).toEventually(haveCount(1))

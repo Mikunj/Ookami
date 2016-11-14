@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         let start = Date()
         let libraryOperation = FetchAllLibraryOperation(relativeURL: "/library-entries", userID: id, type: .anime, client: client) { results in
             print("Entries: \(LibraryEntry.all().count)")
-            print("User: \(User.get(withId: id)!.name)")
+            print("User: \(User.get(withId: id)?.name)")
             let finish = Date()
             let executionTime = finish.timeIntervalSince(start)
             print("Execution Time: \(executionTime)")
