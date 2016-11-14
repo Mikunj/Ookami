@@ -63,6 +63,13 @@ class FetchAllLibraryOperationSpec: QuickSpec {
                     TestHelper.create(object: LibraryEntry.self, inRealm: RealmProvider.realm(), amount: 3) { index, object in
                         object.id = index
                         object.userID = 1
+                        
+                        let m = Media()
+                        m.entryID = index
+                        m.id = index
+                        m.rawType = Media.MediaType.anime.rawValue
+                        
+                        object.media = m
                     }
                     
                     let operation = StubFetchAllOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client) { _ in}

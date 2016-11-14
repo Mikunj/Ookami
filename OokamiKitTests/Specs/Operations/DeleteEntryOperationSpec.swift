@@ -29,6 +29,31 @@ class DeleteEntryOperationSpec: QuickSpec {
                 queue.cancelAllOperations()
             }
             
+            context("Deletion Type") {
+                it("should not delete entries of a different media type") {
+                    TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 3) { index, object in
+                        object.id = index
+                        object.userID = 1
+                        
+                        let m = Media()
+                        m.entryID = index
+                        m.id = index
+                        m.rawType = Media.MediaType.anime.rawValue
+                        
+                        object.media = m
+                    }
+                    let operation = DeleteEntryOperation(userID: 1, type: .manga, ids: [0, 1], mode: .inArray, realm: RealmProvider.realm)
+                    
+                    waitUntil { done in
+                        operation.completionBlock = {
+                            expect(LibraryEntry.all()).to(haveCount(3))
+                            done()
+                        }
+                        queue.addOperation(operation)
+                    }
+                }
+            }
+            
             context("Array modes") {
                 
                 //Small function that helps with testing methods below
@@ -36,8 +61,15 @@ class DeleteEntryOperationSpec: QuickSpec {
                     TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 3) { index, object in
                         object.id = index
                         object.userID = 1
+                        
+                        let m = Media()
+                        m.entryID = index
+                        m.id = index
+                        m.rawType = Media.MediaType.anime.rawValue
+                        
+                        object.media = m
                     }
-                    let operation = DeleteEntryOperation(userID: id, ids: ids, mode: mode, realm: RealmProvider.realm)
+                    let operation = DeleteEntryOperation(userID: id, type: .anime, ids: ids, mode: mode, realm: RealmProvider.realm)
                     
                     waitUntil { done in
                         operation.completionBlock = {
@@ -77,12 +109,19 @@ class DeleteEntryOperationSpec: QuickSpec {
                         object.id = index
                         object.userID = 1
                         
+                        let m = Media()
+                        m.entryID = index
+                        m.id = index
+                        m.rawType = Media.MediaType.anime.rawValue
+                        
+                        object.media = m
+                        
                         let interval = Double(index) * -60.0 //Each entry is a minute apart
                         object.updatedAt = Date(timeIntervalSinceNow: interval)
                     }
                     
                     //Delete any entries that are 2 minutes or older
-                    let operation = DeleteEntryOperation(userID: 1, timeInterval: 120, realm: RealmProvider.realm)
+                    let operation = DeleteEntryOperation(userID: 1, type: .anime, timeInterval: 120, realm: RealmProvider.realm)
                     waitUntil { done in
                         operation.completionBlock = {
                             expect(LibraryEntry.all()).to(haveCount(2))
@@ -97,12 +136,19 @@ class DeleteEntryOperationSpec: QuickSpec {
                         object.id = index
                         object.userID = 1
                         
+                        let m = Media()
+                        m.entryID = index
+                        m.id = index
+                        m.rawType = Media.MediaType.anime.rawValue
+                        
+                        object.media = m
+                        
                         let interval = Double(index) * -60.0 //Each entry is a minute apart
                         object.updatedAt = Date(timeIntervalSinceNow: interval)
                     }
                     
                     //Delete any entries that are 2 minutes or older
-                    let operation = DeleteEntryOperation(userID: 2, timeInterval: 120, realm: RealmProvider.realm)
+                    let operation = DeleteEntryOperation(userID: 2, type: .anime, timeInterval: 120, realm: RealmProvider.realm)
                     waitUntil { done in
                         operation.completionBlock = {
                             expect(LibraryEntry.all()).to(haveCount(5))

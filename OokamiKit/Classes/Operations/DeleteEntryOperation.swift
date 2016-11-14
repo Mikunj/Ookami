@@ -34,6 +34,9 @@ public class DeleteEntryOperation: AsynchronousOperation {
     //The id of the user
     public let id: Int
     
+    //The type of entries to delete
+    public let type: Media.MediaType
+    
     //The block to get the realm instance from
     public let realmBlock: () -> Realm
     
@@ -56,14 +59,16 @@ public class DeleteEntryOperation: AsynchronousOperation {
     ///
     /// - Parameters:
     ///   - userID: The user id to delete entries from
+    ///   - type: The type of the entries to delete
     ///   - ids: The array of entry ids that should be kept
     ///   - mode: The deletion mode.
     ///   - realm: A closure which returns a realm instance
-    public init(userID: Int, ids: [Int], mode: DeleteEntryArrayMode = .notInArray, realm: @escaping () -> Realm) {
+    public init(userID: Int, type: Media.MediaType, ids: [Int], mode: DeleteEntryArrayMode = .notInArray, realm: @escaping () -> Realm) {
         self.mode = DeleteMode(rawValue: mode.rawValue)!
         self.id = userID
         self.entryIds = ids
         self.realmBlock = realm
+        self.type = type
     }
     
     /// Create an operation which deletes all entries that are older than the given time interval
@@ -76,12 +81,13 @@ public class DeleteEntryOperation: AsynchronousOperation {
     ///
     /// - Parameters:
     ///   - userID: The user id to delete entries from
+    ///   - type: The type of the entries to delete
     ///   - timeInterval: The time interval in seconds (must be positive)
     ///   - realm: A closure which returns a realm instance
-    public init(userID: Int, timeInterval: TimeInterval, realm: @escaping () -> Realm) {
+    public init(userID: Int, type: Media.MediaType, timeInterval: TimeInterval, realm: @escaping () -> Realm) {
         self.id = userID
         self.mode = .time
-        
+        self.type = type
         self.timeInterval = timeInterval
         self.realmBlock = realm
     }
@@ -91,14 +97,14 @@ public class DeleteEntryOperation: AsynchronousOperation {
         switch mode {
         case .inArray:
             guard let ids = entryIds else { return nil }
-            return NSPredicate(format: "userID = %d AND id IN %@", id, ids)
+            return NSPredicate(format: "id IN %@", ids)
         case .notInArray:
             guard let ids = entryIds else { return nil }
-            return NSPredicate(format: "userID = %d AND NOT id IN %@", id, ids)
+            return NSPredicate(format: "NOT id IN %@", ids)
         case .time:
             guard let interval = timeInterval else { return nil }
             let date = Date(timeIntervalSinceNow: -interval) as NSDate
-            return NSPredicate(format: "userID = %d AND updatedAt < %@", id, date)
+            return NSPredicate(format: "updatedAt < %@", date)
         }
     }
     
@@ -108,7 +114,7 @@ public class DeleteEntryOperation: AsynchronousOperation {
             return
         }
         let realm = realmBlock()
-        let entries = LibraryEntry.all().filter(predicate)
+        let entries = LibraryEntry.all().filter("userID = %d", id).filter("media.rawType = %@", type.rawValue).filter(predicate)
         if !isCancelled {
             try! realm.write {
                 realm.delete(entries)

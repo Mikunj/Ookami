@@ -191,10 +191,11 @@ class PaginatedLibrarySpec: QuickSpec {
                             return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
                         
-                        let _ = StubPaginatedLibrary(request: request, client: client) { fetched, _ in
+                        let q = StubPaginatedLibrary(request: request, client: client) { fetched, _ in
                             ids = fetched
                         }
                         
+                        expect(q.originalCalledCount).toEventually(equal(1))
                         expect(ids).toEventually(haveCount(1))
                         expect(ids).toEventually(contain(1))
                         expect(StubRealmObject.all()).toEventually(haveCount(1))

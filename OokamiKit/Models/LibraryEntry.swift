@@ -33,7 +33,7 @@ public class Media: Object {
         case manga
     }
     
-    public dynamic var entryId = -1
+    public dynamic var entryID = -1
     public dynamic var id = -1
     public dynamic var rawType = ""
     public var type: MediaType? {
@@ -41,7 +41,7 @@ public class Media: Object {
     }
     
     override public static func primaryKey() -> String {
-        return "entryId"
+        return "entryID"
     }
     
     override public static func ignoredProperties() -> [String] {
