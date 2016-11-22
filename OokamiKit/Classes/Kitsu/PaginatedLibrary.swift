@@ -43,7 +43,7 @@ public enum PaginatedLibraryError : Error {
 /// Class for fetching a user's library paginated from the server.
 ///
 /// How this works is that it will first fetch entries through the request passed in.
-/// There after it will use the links provided from the response to preform the rest of the fecthes.
+/// There after it will use the links provided from the response to preform the rest of the fetches.
 /// If at any point a request fails, then the current link state will not be overriden.
 ///
 /// E.g nextLink = 5, library.next() -> fails, nextLink will still be 5, thus calling next again will try perform the request again

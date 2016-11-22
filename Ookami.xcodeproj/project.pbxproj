@@ -160,7 +160,7 @@
 		2494D9A71DCC631E0032AC8E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		249CF9EA1DD0616E000AE484 /* ParsingOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingOperationSpec.swift; sourceTree = "<group>"; };
-		24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedLibrary.swift; sourceTree = "<group>"; };
+		24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaginatedLibrary.swift; path = PaginatedLibrary.swift; sourceTree = "<group>"; };
 		24A258AD1DD9455100CC7561 /* PaginatedLibrarySepc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedLibrarySepc.swift; sourceTree = "<group>"; };
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 		24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationSpec.swift; sourceTree = "<group>"; };
 		24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubAuthHeimdallr.swift; sourceTree = "<group>"; };
 		24D28ED81DD04CD200773BED /* ParsingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingOperation.swift; sourceTree = "<group>"; };
-		24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryGetRequest.swift; sourceTree = "<group>"; };
+		24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibraryGetRequest.swift; path = LibraryGetRequest.swift; sourceTree = "<group>"; };
 		24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryGetRequestSpec.swift; sourceTree = "<group>"; };
 		24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLibraryOperation.swift; sourceTree = "<group>"; };
 		24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmGettableObjectSpec.swift; sourceTree = "<group>"; };
@@ -230,6 +230,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		242B2B431DE43E240002903B /* Kitsu */ = {
+			isa = PBXGroup;
+			children = (
+				24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */,
+				24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */,
+			);
+			name = Kitsu;
+			path = Kitsu;
+			sourceTree = "<group>";
+		};
 		2464F1C51DCC58800028F7B0 = {
 			isa = PBXGroup;
 			children = (
@@ -268,8 +278,8 @@
 		2464F1E51DCC58800028F7B0 /* OokamiTests */ = {
 			isa = PBXGroup;
 			children = (
-				2464F1E81DCC58800028F7B0 /* Info.plist */,
 				245E59A51DD1C3C4002375A4 /* Default.swift */,
+				2464F1E81DCC58800028F7B0 /* Info.plist */,
 			);
 			path = OokamiTests;
 			sourceTree = "<group>";
@@ -340,10 +350,8 @@
 		2473628E1DCF030B004B4AC5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */,
 				247362911DCF035D004B4AC5 /* NetworkClient.swift */,
 				2473628F1DCF0321004B4AC5 /* NetworkRequest.swift */,
-				24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -351,8 +359,8 @@
 		247362931DCF0F09004B4AC5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				247362941DCF0F1C004B4AC5 /* NetworkClientSpec.swift */,
 				24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */,
+				247362941DCF0F1C004B4AC5 /* NetworkClientSpec.swift */,
 				24A258AD1DD9455100CC7561 /* PaginatedLibrarySepc.swift */,
 			);
 			path = Networking;
@@ -362,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				248734461DCD4910002E7366 /* Helper */,
+				242B2B431DE43E240002903B /* Kitsu */,
 				2473628E1DCF030B004B4AC5 /* Networking */,
 				24D28ECD1DD0151000773BED /* Operations */,
 				2470044D1DCD7A5A000D987C /* Protocols */,
@@ -391,8 +400,8 @@
 				2487343B1DCCC183002E7366 /* AnimeSpec.swift */,
 				24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */,
 				2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */,
-				246023391DCCA11700B3C99B /* UserSpec.swift */,
 				24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */,
+				246023391DCCA11700B3C99B /* UserSpec.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
