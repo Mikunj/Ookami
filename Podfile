@@ -4,7 +4,7 @@ inhibit_all_warnings!
 use_frameworks!
 
 plugin 'cocoapods-keys', {
-  :project => "Eidolon",
+  :project => "Ookami",
   :keys => [
     "KitsuClientKey",
     "KitsuClientSecret"
