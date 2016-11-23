@@ -20,6 +20,21 @@ public class KitsuAuthenticator {
     /// The key used to store the username in user defaults
     let usernameKey = "kitsu_loggedin_user"
     
+    /// The name of the user that is logged in, nil if not logged in
+    public internal(set) var currentUser: String? {
+        get {
+            return UserDefaults.standard.string(forKey: self.usernameKey)
+        }
+        
+        set(name) {
+            if name != nil {
+                UserDefaults.standard.set(name, forKey: self.usernameKey)
+            } else {
+                UserDefaults.standard.removeObject(forKey: self.usernameKey)
+            }
+        }
+    }
+    
     /// Create an authenticator
     ///
     /// - Parameter heimdallr: The heimdallr instance configured properley for authentication.
@@ -39,7 +54,7 @@ public class KitsuAuthenticator {
                 case .success:
                     
                     //Temporarily store the username passed in as the logged in username, but after fetching the user info it should be updated
-                    UserDefaults.standard.set(username, forKey: self.usernameKey)
+                    self.currentUser = username
                     
                     //TODO: Fetch user info here, things like profile info, library, etc
                     //will need to make sure that username is not an email?
@@ -56,7 +71,7 @@ public class KitsuAuthenticator {
     /// Logout the current user
     public func logout() {
         heimdallr.clearAccessToken()
-        UserDefaults.standard.removeObject(forKey: usernameKey)
+        currentUser = nil
     }
     
     /// Check if a user is logged in/
@@ -65,13 +80,6 @@ public class KitsuAuthenticator {
     /// - Returns: True or false if user is logged in
     public func isLoggedIn() -> Bool {
         return heimdallr.hasAccessToken
-    }
-    
-    /// Get the current user logged in
-    ///
-    /// - Returns: The name of the current logged in user
-    public func currentUser() -> String? {
-        return UserDefaults.standard.string(forKey: usernameKey)
     }
     
 }

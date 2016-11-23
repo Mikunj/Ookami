@@ -67,7 +67,7 @@ class KitsuAuthenticatorSpec: QuickSpec {
                     authenticator = KitsuAuthenticator(heimdallr: StubRequestHeimdallr())
                     authenticator!.authenticate(username: "test", password: "hi") { _ in
                     }
-                    expect(authenticator!.currentUser()).toEventually(equal("test"))
+                    expect(authenticator!.currentUser).toEventually(equal("test"))
                     expect(authenticator!.isLoggedIn()).toEventually(beTrue())
                 }
                 
@@ -91,11 +91,11 @@ class KitsuAuthenticatorSpec: QuickSpec {
                     authenticator = KitsuAuthenticator(heimdallr: h)
                     UserDefaults.standard.set("test", forKey: authenticator!.usernameKey)
                     
-                    expect(authenticator!.currentUser()).to(equal("test"))
+                    expect(authenticator!.currentUser).to(equal("test"))
                     expect(authenticator!.isLoggedIn()).to(beTrue())
                     
                     authenticator!.logout()
-                    expect(authenticator!.currentUser()).to(beNil())
+                    expect(authenticator!.currentUser).to(beNil())
                     expect(authenticator!.isLoggedIn()).to(beFalse())
                 }
             }
