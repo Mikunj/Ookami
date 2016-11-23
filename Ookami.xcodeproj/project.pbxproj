@@ -134,7 +134,7 @@
 		2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "entry-anime-jigglyslime.json"; sourceTree = "<group>"; };
 		242B2B441DE51B8C0002903B /* KitsuAuthenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KitsuAuthenticator.swift; sourceTree = "<group>"; };
 		242B2B471DE521880002903B /* KitsuAuthenticatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KitsuAuthenticatorSpec.swift; sourceTree = "<group>"; };
-		242B2B491DE566E90002903B /* Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Ookami.swift; path = Kitsu/Ookami.swift; sourceTree = "<group>"; };
+		242B2B491DE566E90002903B /* Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Ookami.swift; path = Ookami.swift; sourceTree = "<group>"; };
 		245E59A51DD1C3C4002375A4 /* Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubRealmObject.swift; sourceTree = "<group>"; };
 		246023391DCCA11700B3C99B /* UserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpec.swift; sourceTree = "<group>"; };
@@ -383,12 +383,12 @@
 		248734451DCD490B002E7366 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				242B2B491DE566E90002903B /* Ookami.swift */,
 				248734461DCD4910002E7366 /* Helper */,
 				242B2B431DE43E240002903B /* Kitsu */,
 				2473628E1DCF030B004B4AC5 /* Networking */,
 				24D28ECD1DD0151000773BED /* Operations */,
 				2470044D1DCD7A5A000D987C /* Protocols */,
+				242B2B491DE566E90002903B /* Ookami.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
