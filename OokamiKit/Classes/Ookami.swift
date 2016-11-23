@@ -23,8 +23,10 @@ public class Ookami {
         let keys = OokamiKeys()
         let credentials = OAuthClientCredentials(id: keys.kitsuClientKey(), secret: keys.kitsuClientSecret())
         
+        let store = OokamiTokenStore()
+        
         let tokenURL = URL(string: Ookami.Constants.URL.authToken)!
-        let heim = Heimdallr(tokenURL: tokenURL, credentials: credentials)
+        let heim = Heimdallr(tokenURL: tokenURL, credentials: credentials, accessTokenStore: store)
         return heim
     }()
     

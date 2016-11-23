@@ -63,6 +63,7 @@
 		24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */; };
 		24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */; };
 		24D28ED91DD04CD200773BED /* ParsingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED81DD04CD200773BED /* ParsingOperation.swift */; };
+		24DAC2621DE59E8600279EE6 /* OokamiTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DAC2611DE59E8600279EE6 /* OokamiTokenStore.swift */; };
 		24DBE6E81DD2CC0B003B7676 /* LibraryGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */; };
 		24DBE6EA1DD2D058003B7676 /* LibraryGetRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */; };
 		24DBE6EC1DD2DFD5003B7676 /* FetchLibraryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */; };
@@ -177,6 +178,7 @@
 		24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationSpec.swift; sourceTree = "<group>"; };
 		24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubAuthHeimdallr.swift; sourceTree = "<group>"; };
 		24D28ED81DD04CD200773BED /* ParsingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingOperation.swift; sourceTree = "<group>"; };
+		24DAC2611DE59E8600279EE6 /* OokamiTokenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OokamiTokenStore.swift; sourceTree = "<group>"; };
 		24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryGetRequest.swift; sourceTree = "<group>"; };
 		24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryGetRequestSpec.swift; sourceTree = "<group>"; };
 		24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLibraryOperation.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				248734471DCD491E002E7366 /* RealmProvider.swift */,
+				24DAC2611DE59E8600279EE6 /* OokamiTokenStore.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -915,6 +918,7 @@
 				24DBE6E81DD2CC0B003B7676 /* LibraryGetRequest.swift in Sources */,
 				242B2B451DE51B8C0002903B /* KitsuAuthenticator.swift in Sources */,
 				24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */,
+				24DAC2621DE59E8600279EE6 /* OokamiTokenStore.swift in Sources */,
 				24D28ECF1DD0157B00773BED /* AsynchronousOperation.swift in Sources */,
 				24DD48701DD6B9CA009378AC /* DeleteEntryOperation.swift in Sources */,
 				2487343A1DCCB479002E7366 /* Anime.swift in Sources */,
