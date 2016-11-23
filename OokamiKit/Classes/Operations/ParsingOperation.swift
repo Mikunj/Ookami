@@ -95,11 +95,14 @@ public class ParsingOperation: AsynchronousOperation {
         }
     }
     
-    /// Parse an array of JSON objects.
+    /// Parse a json array of objects.
+    /// Note: This needs to be called in a write transaction.
     ///
-    /// - Parameter objectArray: An array of JSON objects.
-    /// - Returns: An array of objects that failed to parse, or nil if an array wasn't passed in
-    func parse(objectArray json: JSON) -> [JSON]? {
+    /// - Parameters:
+    ///   - json: The JSON array
+    ///   - realm: The realm instance
+    /// - Returns: An array of objects that failed to parse
+    func parseArray(json: JSON, realm: Realm) -> [JSON]? {
         
         //Be 100% sure that we have an array
         guard json.type == .array else {
@@ -107,41 +110,83 @@ public class ParsingOperation: AsynchronousOperation {
         }
         
         var failed: [JSON] = []
-        let realm = realmBlock()
         
-        //Start parsing
-        realm.beginWrite()
-        
+        //Go through all the objects and parse them
         for object in json.arrayValue {
             
-            //Check if operation was cancelled
-            guard !isCancelled else {
-                realm.cancelWrite()
-                return []
-            }
-            
-            //Make sure the object is a dictionary
-            guard object.type == .dictionary else {
-                failed.append(object)
-                continue
-            }
-            
-            //Get the object type
-            let type = object["type"].stringValue
-            
-            //Check if we have parser for it, and that it parsed correcrtly
-            if let parser = parsers[type],
-                let parsedObject = parser(object) {
-                
-                //Add this object to the parsed list.
-                //We add this here because we 'parsed' it but the object decides whether it should be stored or not
-                add(parsedObject: parsedObject, forType: type)
-                
-                //Check if we can store the object. If so then add it to realm
-                if parsedObject.canBeStored() { realm.add(parsedObject, update: true) }
-            } else {
+            //Parse the dictionary object in the array
+            if !parseDictionary(json: object, realm: realm) {
                 failed.append(object)
             }
+        }
+        
+        return failed
+    }
+    
+    /// Parse a json dictionary object.
+    /// Note: This needs to be called in a write transaction.
+    ///
+    /// - Parameters:
+    ///   - json: The JSON dictionary
+    ///   - realm: The realm instance
+    /// - Returns: Whether the object was parsed or not.
+    func parseDictionary(json: JSON, realm: Realm) -> Bool {
+        //Make sure the object is a dictionary
+        guard json.type == .dictionary else {
+            return false
+        }
+        
+        //Get the object type
+        let type = json["type"].stringValue
+        
+        //Make sure we have the parser and the parsed object
+        guard let parser = parsers[type],
+            let parsedObject = parser(json) else {
+            return false
+        }
+        
+        //Add this object to the parsed list.
+        //We add this here because we 'parsed' it but the object decides whether it should be stored or not
+        add(parsedObject: parsedObject, forType: type)
+        
+        //Check if we can store the object. If so then add it to realm
+        if realm.isInWriteTransaction {
+            if parsedObject.canBeStored() { realm.add(parsedObject, update: true) }
+        }
+        
+        return true
+    }
+    
+    /// Parse an arrar or dictionary of JSON objects.
+    ///
+    /// - Parameter json: A JSON array or dictionary contaning object(s)
+    /// - Returns: An array of objects that failed to parse, or nil if an array/dictionary wasn't passed in
+    func parse(json: JSON) -> [JSON]? {
+        
+        let realm = realmBlock()
+        var failed: [JSON] = []
+        
+        //Make sure we're only dealing with arrays and dictionaries
+        guard json.type == .dictionary || json.type == .array else {
+            return nil
+        }
+        
+        realm.beginWrite()
+        
+        switch json.type {
+            case .array:
+                let f = parseArray(json: json, realm: realm)
+                if f != nil {
+                    failed.append(contentsOf: f!)
+                }
+                break
+            case .dictionary:
+                if !parseDictionary(json: json, realm: realm) {
+                    failed.append(json)
+                }
+                break
+            default:
+                break
         }
         
         try! realm.commitWrite()
@@ -170,10 +215,11 @@ public class ParsingOperation: AsynchronousOperation {
         var failed: [JSON] = []
         
         let arrays = [included, data]
-        //Parse objects
+        
+        //Parse objects from included and data fields
         for array in arrays {
             if array.exists() {
-                if let result = parse(objectArray: array) {
+                if let result = parse(json: array) {
                     failed += result
                 } else {
                     failed.append(array)

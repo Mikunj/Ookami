@@ -40,6 +40,13 @@ public class Ookami {
         return authenticator
     }()
     
+    //The main operation queue of the application
+    public lazy var queue: OperationQueue = {
+        let q = OperationQueue()
+        q.maxConcurrentOperationCount = 5
+        return q
+    }()
+    
 }
 
 //MARK: Constants
@@ -52,11 +59,17 @@ extension Ookami {
         
         /// Urls that we use
         struct URL {
+            private init() {}
             static let kitsu = "http://staging.kitsu.io"
             static let api = "\(kitsu)/api/edge"
             static let authToken = "\(kitsu)/api/oauth/token"
         }
         
+        //API endpoints
+        struct Endpoints {
+            private init() {}
+            static let users = "/users"
+        }
         
     }
 }

@@ -29,6 +29,7 @@ class ParsingOperationSpec: QuickSpec {
             
             afterEach {
                 let realm = RealmProvider.realm()
+                
                 try! realm.write {
                     realm.deleteAll()
                 }
@@ -92,20 +93,66 @@ class ParsingOperationSpec: QuickSpec {
                 }
             }
             
-            context("Parse Function") {
-                //We can safely call these tests without worrying about asynchronous code as the .parse function itself is synchronous
-                
+            context("Parse Array Function") {
                 it("should only accept array values") {
+                    let arrayJSON = JSON([1])
                     let intJSON = JSON(1)
-                    let arrayJSON = JSON([intJSON])
-                    let operation = ParsingOperation(json: intJSON, realm: RealmProvider.realm) { failed in
+                    let operation = ParsingOperation(json: arrayJSON, realm: RealmProvider.realm) { failed in
                     }
                     
-                    let result = operation.parse(objectArray: intJSON)
-                    expect(result).to(beNil())
-                    
-                    let arrayResult = operation.parse(objectArray: arrayJSON)
+                    let arrayResult = operation.parseArray(json: arrayJSON, realm: RealmProvider.realm())
                     expect(arrayResult).toNot(beNil())
+                    
+                    let result = operation.parseArray(json: intJSON, realm: RealmProvider.realm())
+                    expect(result).to(beNil())
+                }
+            }
+            
+            context("Parse Dictionary Function") {
+                it("should only accept dictionary values") {
+                    let dictJSON = JSON(["id": 1])
+                    let intJSON = JSON(1)
+                    let operation = ParsingOperation(json: dictJSON, realm: RealmProvider.realm) { failed in
+                    }
+                    
+                    let dictResult = operation.parseDictionary(json: dictJSON, realm: RealmProvider.realm())
+                    expect(dictResult).to(beFalse())
+                    
+                    let result = operation.parseArray(json: intJSON, realm: RealmProvider.realm())
+                    expect(result).to(beNil())
+                }
+            }
+            
+            context("Parse Function") {
+                //We can safely call these tests without worrying about asynchronous code as the .parse function itself is synchronous
+                context("JSON Values") {
+                    it("should accept array values") {
+                        let arrayJSON = JSON([1])
+                        let operation = ParsingOperation(json: arrayJSON, realm: RealmProvider.realm) { failed in
+                        }
+                        
+                        let arrayResult = operation.parse(json: arrayJSON)
+                        expect(arrayResult).toNot(beNil())
+                    }
+                    
+                    it("should accept dictionary values") {
+                        let dictJSON = JSON(["id": 1])
+                        let operation = ParsingOperation(json: dictJSON, realm: RealmProvider.realm) { failed in
+                        }
+                        
+                        let dictResult = operation.parse(json: dictJSON)
+                        expect(dictResult).toNot(beNil())
+                    }
+                    
+                    it("should not accept other values") {
+                        let intJSON = JSON(1)
+                        let operation = ParsingOperation(json: intJSON, realm: RealmProvider.realm) { failed in
+                        }
+                        
+                        let result = operation.parse(json: intJSON)
+                        expect(result).to(beNil())
+                    }
+                    
                 }
                 
                 it("should return the object if no parser exists") {
@@ -114,7 +161,7 @@ class ParsingOperationSpec: QuickSpec {
                     let operation = ParsingOperation(json: arrayJSON, realm: RealmProvider.realm) { failed in
                     }
                     
-                    let result = operation.parse(objectArray: arrayJSON)
+                    let result = operation.parse(json: arrayJSON)
                     expect(result).toNot(beNil())
                     expect(result).to(contain(JSON(object)))
                 }
@@ -131,7 +178,7 @@ class ParsingOperationSpec: QuickSpec {
                         return a
                     }
                     
-                    let result = operation.parse(objectArray: json)
+                    let result = operation.parse(json: json)
                     expect(result).toNot(beNil())
                     expect(result).to(beEmpty())
                     expect(StubRealmObject.get(withId: 1)).toEventuallyNot(beNil())
@@ -153,7 +200,7 @@ class ParsingOperationSpec: QuickSpec {
                         return a
                     }
                     
-                    let result = operation.parse(objectArray: json)
+                    let result = operation.parse(json: json)
                     expect(result).toNot(beNil())
                     expect(result).to(haveCount(1))
                     expect(result).to(contain(JSON(other)))
@@ -181,7 +228,7 @@ class ParsingOperationSpec: QuickSpec {
                         return a
                     }
                     
-                    let result = operation.parse(objectArray: json)
+                    let result = operation.parse(json: json)
                     expect(result).toNot(beNil())
                     expect(result).to(beEmpty())
                     expect(StubRealmObject.get(withIds: [1, 2])).toEventually(haveCount(2))

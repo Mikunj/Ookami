@@ -20,6 +20,9 @@ public class KitsuAuthenticator {
     /// The key used to store the username in user defaults
     let usernameKey = "kitsu_loggedin_user"
     
+    //The user api
+    var api = UserAPI()
+    
     /// The name of the user that is logged in, nil if not logged in
     public internal(set) var currentUser: String? {
         get {
@@ -54,7 +57,15 @@ public class KitsuAuthenticator {
                 case .success:
                     
                     //Temporarily store the username passed in as the logged in username, but after fetching the user info it should be updated
+                    //Reason is that the user may also use the email inplace of the username, thus we wouldn't have the correct user slug/name
                     self.currentUser = username
+                    
+                    self.api.getSelf { user, error in
+                        guard let user = user else {
+                            return
+                        }
+                        self.currentUser = user.name
+                    }
                     
                     //TODO: Fetch user info here, things like profile info, library, etc
                     //will need to make sure that username is not an email?
