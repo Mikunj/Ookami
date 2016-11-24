@@ -71,6 +71,7 @@ extension Ookami {
         struct Endpoints {
             private init() {}
             static let users = "/users"
+            static let libraryEntries = "/library-entries"
         }
         
     }

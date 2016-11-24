@@ -175,7 +175,7 @@ class LibraryGETRequestSpec: QuickSpec {
                 }
                 
                 it("should return filters correctly") {
-                    let status = LibraryEntryStatus.completed
+                    let status = LibraryEntry.Status.completed
                     request.filter([.user(id: 1), .media(type: .anime), .status(status)])
                     var filters = request.getFilters()
                     expect(filters["user_id"] as? Int).to(equal(1))

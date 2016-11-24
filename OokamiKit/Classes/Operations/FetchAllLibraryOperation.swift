@@ -15,7 +15,7 @@ import SwiftyJSON
 public class FetchAllLibraryOperation: AsynchronousOperation {
     
     public typealias FetchCompletion = ([StatusError]) -> Void
-    public typealias StatusError = (LibraryEntryStatus, Error)
+    public typealias StatusError = (LibraryEntry.Status, Error)
     
     var queue: OperationQueue = {
         let q = OperationQueue()
@@ -39,7 +39,7 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
     let fetchCompletion: FetchCompletion
     
     /// The type of library being fetched
-    let type: LibraryRequestMedia
+    let type: Media.MediaType
     
     /// The entry ids recieved from fetching. Used later for deleting unwanted entries
     var ids: [Int] = []
@@ -52,8 +52,8 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
     ///   - userID: The user id to fetch the library for
     ///   - type: The type of library to fetch
     ///   - client: The network client to execute request on
-    ///   - completion: The completion callback which passes an array of tuples of kind `(LibraryEntryStatus, Error)`
-    public init(relativeURL: String, userID: Int, type: LibraryRequestMedia, client: NetworkClientProtocol, completion: @escaping FetchCompletion) {
+    ///   - completion: The completion callback which passes an array of tuples of kind `(LibraryEntry.Status, Error)` which are set when a status failed to fetch
+    public init(relativeURL: String, userID: Int, type: Media.MediaType, client: NetworkClientProtocol, completion: @escaping FetchCompletion) {
         self.url = relativeURL
         self.userID = userID
         self.client = client
@@ -64,7 +64,7 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
     
     /// Get the delete operation with the given entry ids
     func deleteOperation(withEntryIds ids: [Int]) -> DeleteEntryOperation {
-        return DeleteEntryOperation(userID: userID, type: type.toEntryMediaType(), ids: ids, mode: .notInArray, realm: RealmProvider.realm)
+        return DeleteEntryOperation(userID: userID, type: type, ids: ids, mode: .notInArray, realm: RealmProvider.realm)
     }
     
     /// Get the block operation which checks whether we can delete
@@ -94,7 +94,7 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
         var operations: [Operation] = [deleteBlock]
         
         //Go through each of the statuses and make the operations
-        LibraryEntryStatus.all.forEach { status in
+        LibraryEntry.Status.all.forEach { status in
             let request = LibraryGETRequest(userID: userID, relativeURL: url)
             request.filter([.media(type: type), .status(status)])
             request.include([.genres, .user])

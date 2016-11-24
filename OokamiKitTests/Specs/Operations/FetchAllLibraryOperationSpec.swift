@@ -140,7 +140,7 @@ class FetchAllLibraryOperationSpec: QuickSpec {
                     waitUntil { done in
                         operation.completionBlock = {
                             expect(LibraryEntry.all()).to(haveCount(0))
-                            expect(operation.failed).to(haveCount(LibraryEntryStatus.all.count))
+                            expect(operation.failed).to(haveCount(LibraryEntry.Status.all.count))
                             done()
                         }
                         queue.addOperation(operation)

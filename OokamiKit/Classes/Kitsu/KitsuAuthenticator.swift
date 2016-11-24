@@ -21,7 +21,10 @@ public class KitsuAuthenticator {
     let usernameKey = "kitsu_loggedin_user"
     
     //The user api
-    var api = UserAPI()
+    var userAPI = UserAPI()
+    
+    //The library api
+    var libraryAPI = LibraryAPI()
     
     /// The name of the user that is logged in, nil if not logged in
     public internal(set) var currentUser: String? {
@@ -45,6 +48,22 @@ public class KitsuAuthenticator {
         self.heimdallr = heimdallr
     }
     
+    /// Update the information for the current logged in user
+    ///
+    /// - Parameter completion: The completion block which gets called when user info has been updated
+    public func updateInfo(completion: @escaping (Error?) -> Void) {
+        userAPI.getSelf { [weak self] user, error in
+            guard let user = user else {
+                completion(error)
+                return
+            }
+            self?.currentUser = user.name
+            self?.libraryAPI.getAll(userID: user.id, type: .anime) { _ in }
+            //self?.libraryAPI.getAll(userID: user.id, type: .manga) { _ in }
+            completion(nil)
+        }
+    }
+    
     /// Authenticate a user
     ///
     /// - Parameters:
@@ -60,16 +79,12 @@ public class KitsuAuthenticator {
                     //Reason is that the user may also use the email inplace of the username, thus we wouldn't have the correct user slug/name
                     self.currentUser = username
                     
-                    self.api.getSelf { user, error in
-                        guard let user = user else {
-                            return
-                        }
-                        self.currentUser = user.name
-                    }
                     
-                    //TODO: Fetch user info here, things like profile info, library, etc
-                    //will need to make sure that username is not an email?
-                    completion(nil)
+                    // We only want to call the completion block after we are certain we have the correct user info
+                    // updateInfo will pass back an error if it failed so we can directly pass it onto the completion block
+                    self.updateInfo() { error in
+                        completion(error)
+                    }
                     
                     break
                 case .failure(let e):

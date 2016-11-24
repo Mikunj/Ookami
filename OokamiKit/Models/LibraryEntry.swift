@@ -10,17 +10,6 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-public enum LibraryEntryStatus: String {
-    case current
-    case planned
-    case completed
-    case onHold = "on_hold"
-    case dropped
-    
-    public static let all: [LibraryEntryStatus] = [.current, .planned, .completed, .onHold, .dropped]
-}
-
-
 /*
  We don't need a compound key here are LibraryEntry - Media is a 1-to-1 relationship.
  If this does change in the future then a compound key will be needed
@@ -52,6 +41,16 @@ public class Media: Object {
 
 public class LibraryEntry: Object {
     
+    public enum Status: String {
+        case current
+        case planned
+        case completed
+        case onHold = "on_hold"
+        case dropped
+        
+        public static let all: [Status] = [.current, .planned, .completed, .onHold, .dropped]
+    }
+    
     public dynamic var id = -1
     public dynamic var progress = 0
     public dynamic var reconsuming = false
@@ -66,9 +65,9 @@ public class LibraryEntry: Object {
      For `LibraryEntry` it is more convinient to add a getter and setter to the 'status' property so that we can modify it easily that way due to enums
      */
     dynamic var rawStatus = ""
-    public var status: LibraryEntryStatus? {
+    public var status: Status? {
         get {
-            return LibraryEntryStatus(rawValue: rawStatus)
+            return Status(rawValue: rawStatus)
         }
         set {
             if let newStatus = newValue {

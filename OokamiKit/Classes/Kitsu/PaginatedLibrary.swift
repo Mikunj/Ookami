@@ -133,7 +133,7 @@ public class PaginatedLibrary {
             strongSelf.completion(entries, nil)
             
             //Some other messages
-            if let count = badObjects?.count, count > 0{
+            if let count = badObjects?.count, count > 0 {
                 print("Paginated Library: Some JSON didn't parse properley!")
             }
         }

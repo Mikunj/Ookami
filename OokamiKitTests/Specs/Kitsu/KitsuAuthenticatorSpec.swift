@@ -40,6 +40,13 @@ private class StubRequestHeimdallr: Heimdallr {
     }
 }
 
+private class StubAuthenticator: KitsuAuthenticator {
+    override func updateInfo(completion: @escaping (Error?) -> Void) {
+        completion(nil)
+    }
+    
+}
+
 class KitsuAuthenticatorSpec: QuickSpec {
     override func spec() {
         describe("Kitsu Authenticator") {
@@ -52,9 +59,63 @@ class KitsuAuthenticatorSpec: QuickSpec {
                 }
             }
             
+            context("Updating user info") {
+                class StubUserAPI: UserAPI {
+                    let e: Error?
+                    init(error: Error? = nil) {
+                        self.e = error
+                        super.init()
+                    }
+                    override func getSelf(_ completion: @escaping UserAPI.UserCompletion) {
+                        guard e == nil else {
+                            completion(nil, e)
+                            return
+                        }
+                        
+                        let u = User()
+                        u.id = 1
+                        u.name = "test"
+                        completion(u, nil)
+                    }
+                }
+                
+                class StubLibraryAPI: LibraryAPI {
+                    override func getAll(userID: Int, type: Media.MediaType, completion: @escaping ([(LibraryEntry.Status, Error)]) -> Void) {
+                        completion([])
+                    }
+                }
+                
+                it("should not pass error if user is found") {
+                    authenticator = KitsuAuthenticator(heimdallr: StubRequestHeimdallr())
+                    authenticator?.userAPI = StubUserAPI()
+                    authenticator?.libraryAPI = StubLibraryAPI()
+                    waitUntil { done in
+                        authenticator?.updateInfo { error in
+                            expect(error).to(beNil())
+                            expect(authenticator?.currentUser).to(equal("test"))
+                            done()
+                        }
+                    }
+                }
+                
+                it("should pass error if no user is found") {
+                    authenticator = KitsuAuthenticator(heimdallr: StubRequestHeimdallr())
+                    let e = NetworkClientError.error("generic error")
+                    authenticator?.userAPI = StubUserAPI(error: e)
+                    authenticator?.libraryAPI = StubLibraryAPI()
+                    waitUntil { done in
+                        authenticator?.updateInfo { error in
+                            expect(error).toNot(beNil())
+                            expect(error).to(matchError(e))
+                            done()
+                        }
+                    }
+                }
+            }
+            
             context("Authentication") {
                 it("should return no error if successful") {
-                    authenticator = KitsuAuthenticator(heimdallr: StubRequestHeimdallr())
+                    authenticator = StubAuthenticator(heimdallr: StubRequestHeimdallr())
                     waitUntil { done in
                         authenticator!.authenticate(username: "test", password: "hi") { error in
                             expect(error).to(beNil())
@@ -64,7 +125,7 @@ class KitsuAuthenticatorSpec: QuickSpec {
                 }
                 
                 it("should store the username if successful") {
-                    authenticator = KitsuAuthenticator(heimdallr: StubRequestHeimdallr())
+                    authenticator = StubAuthenticator(heimdallr: StubRequestHeimdallr())
                     authenticator!.authenticate(username: "test", password: "hi") { _ in
                     }
                     expect(authenticator!.currentUser).toEventually(equal("test"))
@@ -73,7 +134,7 @@ class KitsuAuthenticatorSpec: QuickSpec {
                 
                 it("should return error if something went wrong") {
                     let nsError: NSError = NSError(domain: "hi", code: 1, userInfo: nil)
-                    authenticator = KitsuAuthenticator(heimdallr: StubRequestHeimdallr(stubError: nsError))
+                    authenticator = StubAuthenticator(heimdallr: StubRequestHeimdallr(stubError: nsError))
                     waitUntil { done in
                         authenticator!.authenticate(username: "test", password: "hi") { error in
                             expect(error).to(matchError(nsError))

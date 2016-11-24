@@ -70,7 +70,7 @@ class LibraryEntrySpec: QuickSpec {
                     expect(e.rawStatus).to(equal(""))
                     
                     e.status = .current
-                    expect(e.status).to(equal(LibraryEntryStatus.current))
+                    expect(e.status).to(equal(LibraryEntry.Status.current))
                     expect(e.rawStatus).to(equal("current"))
                 }
                 
@@ -117,7 +117,7 @@ class LibraryEntrySpec: QuickSpec {
                     let entry = e!
                     expect(entry.id).to(equal(340253))
                     expect(entry.rawStatus).to(equal("current"))
-                    expect(entry.status).to(equal(LibraryEntryStatus.current))
+                    expect(entry.status).to(equal(LibraryEntry.Status.current))
                     expect(entry.progress).to(equal(131))
                     expect(entry.reconsuming).to(beTrue())
                     expect(entry.reconsumeCount).to(equal(0))

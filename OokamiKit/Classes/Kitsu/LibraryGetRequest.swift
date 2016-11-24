@@ -10,35 +10,6 @@ import Foundation
 import Alamofire
 import RealmSwift
 
-/// Enum for the filters
-public enum LibraryRequestFilters {
-    case user(id: Int)
-    case media(type: LibraryRequestMedia)
-    case status(LibraryEntryStatus)
-}
-
-/// Enum for media types
-public enum LibraryRequestMedia: String {
-    case anime = "Anime"
-    case manga = "Manga"
-    
-    /// Convert LibraryRequestMedia to LibraryEntry Media.MediaType
-    ///
-    /// - Returns: The Media.MediaType of the current value
-    public func toEntryMediaType() -> Media.MediaType {
-        switch self {
-            case .anime: return Media.MediaType.anime
-            case .manga: return Media.MediaType.manga
-        }
-    }
-}
-
-/// Enum for the includes in the request
-public enum LibraryRequestIncludes: String {
-    case genres = "media.genres"
-    case user
-}
-
 /// A library GET request builder
 /// Many functions return Self to allow chaining
 public class LibraryGETRequest {
@@ -52,7 +23,7 @@ public class LibraryGETRequest {
     public let url: String
     public let headers: HTTPHeaders?
     public internal(set) var includes: [String] = []
-    public internal(set) var filters: [LibraryRequestFilters] = []
+    public internal(set) var filters: [Filters] = []
     public internal(set) var page: Page = Page()
     
     /// Create a library get request
@@ -83,7 +54,34 @@ public class LibraryGETRequest {
     }
 }
 
-/// Getting realm entries
+//MARK: Enums
+extension LibraryGETRequest {
+    /// Enum for the filters
+    public enum Filters {
+        case user(id: Int)
+        case media(type: Media.MediaType)
+        case status(LibraryEntry.Status)
+    }
+    
+    /// Get the raw string filter for meda type
+    ///
+    /// - Parameter type: The media type
+    /// - Returns: The raw string value of the filter
+    public func rawString(for type: Media.MediaType) -> String {
+        switch type {
+            case .anime: return "Anime"
+            case .manga: return "Manga"
+        }
+    }
+    
+    /// Enum for the includes in the request
+    public enum Includes: String {
+        case genres = "media.genres"
+        case user
+    }
+}
+
+//MARK: Getting realm entries
 extension LibraryGETRequest {
     
     /// Get Realm results of library entries that comply with the request.
@@ -102,8 +100,8 @@ extension LibraryGETRequest {
         var e = entries
         
         //Look through the filters array backwards and find the relevant filters
-        var mediaFilter: LibraryRequestMedia?
-        var statuses: [LibraryEntryStatus]?
+        var mediaFilter: Media.MediaType?
+        var statuses: [LibraryEntry.Status]?
         filters.reversed().forEach {
             
             //Get the media type
@@ -119,7 +117,7 @@ extension LibraryGETRequest {
         
         //Apply media type filter
         if mediaFilter != nil {
-            e = e.filter("media.rawType = %@", mediaFilter!.toEntryMediaType().rawValue)
+            e = e.filter("media.rawType = %@", mediaFilter!.rawValue)
         }
         
         //Apply status filter
@@ -132,14 +130,14 @@ extension LibraryGETRequest {
     }
 }
 
-/// Filters
+//MARK: Filters
 extension LibraryGETRequest {
     
     /// Set a filter on the request
-    @discardableResult public func filter(_ filter: LibraryRequestFilters) -> Self {
+    @discardableResult public func filter(_ filter: Filters) -> Self {
         
         //If it's a user id filter then we must change the id of the request
-        if case LibraryRequestFilters.user(let id) = filter {
+        if case Filters.user(let id) = filter {
             self.userID = id
         } else {
             filters.append(filter)
@@ -149,7 +147,7 @@ extension LibraryGETRequest {
     }
     
     /// Set a filters using a block
-    @discardableResult public func filter(_ filterArray: [LibraryRequestFilters]) -> Self {
+    @discardableResult public func filter(_ filterArray: [Filters]) -> Self {
         filterArray.forEach { filter($0) }
         return self
     }
@@ -170,7 +168,7 @@ extension LibraryGETRequest {
                     filters["user_id"] = id
                     break
                 case .media(let type):
-                    filters["media_type"] = type.rawValue
+                    filters["media_type"] = rawString(for: type)
                     break
                 case .status(let status):
                     filters["status"] = status.rawValue
@@ -183,23 +181,23 @@ extension LibraryGETRequest {
 
 }
 
-/// Includes
+//MARK: Includes
 extension LibraryGETRequest {
     
     /// Include extra information in the request
-    @discardableResult public func include(_ info: LibraryRequestIncludes) -> Self {
+    @discardableResult public func include(_ info: Includes) -> Self {
         includes.append(info.rawValue)
         return self
     }
     
     /// Include extra information in the request
-    @discardableResult public func include(_ infoArray: [LibraryRequestIncludes]) -> Self {
+    @discardableResult public func include(_ infoArray: [Includes]) -> Self {
         infoArray.forEach { include($0) }
         return self
     }
     
     /// Exclude extra information that was included in the request
-    @discardableResult public func exclude(_ info: LibraryRequestIncludes) -> Self {
+    @discardableResult public func exclude(_ info: Includes) -> Self {
         if let index = includes.index(of: info.rawValue) {
             includes.remove(at: index)
         }
@@ -207,7 +205,7 @@ extension LibraryGETRequest {
     }
 }
 
-/// Page
+//MARK: Page
 extension LibraryGETRequest {
     
     /// Set the page offset
@@ -237,7 +235,7 @@ extension LibraryGETRequest {
     }
 }
 
-//Copying
+//MARK: Copying
 extension LibraryGETRequest: NSCopying {
     
     public func copy(with zone: NSZone? = nil) -> Any {

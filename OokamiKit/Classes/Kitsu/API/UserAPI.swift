@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class UserAPI {
+public class UserAPI: BaseAPI {
     
     //Errors
     public enum Errors: Error {
@@ -16,26 +16,7 @@ public class UserAPI {
         case invalidJSONRecieved
     }
     
-    //The operation queue to use
-    public internal(set) var queue: OperationQueue
-    
-    //The network client
-    public internal(set) var client: NetworkClient
-    
-    /// Create a user api class
-    ///
-    /// - Parameters:
-    ///   - queue: The operation queue
-    ///   - client: The network client
-    public init(queue: OperationQueue = Ookami.shared.queue, client: NetworkClient = Ookami.shared.networkClient) {
-        self.queue = queue
-        self.client = client
-    }
-}
-
-//MARK: GET
-extension UserAPI {
-    
+    //MARK: GET
     public typealias UserCompletion = (User?, Error?) -> Void
     
     /// Perform a get request for a user
