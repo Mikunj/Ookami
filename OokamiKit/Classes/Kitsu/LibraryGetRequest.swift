@@ -173,7 +173,7 @@ extension LibraryGETRequest {
                     filters["media_type"] = type.rawValue
                     break
                 case .status(let status):
-                    filters["status"] = LibraryEntryStatus.all.index(of: status)! + 1
+                    filters["status"] = status.rawValue
                     break
             }
         }
