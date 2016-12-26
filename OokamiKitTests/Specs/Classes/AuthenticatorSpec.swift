@@ -41,6 +41,7 @@ private class StubRequestHeimdallr: Heimdallr {
 }
 
 private class StubAuthenticator: Authenticator {
+    
     override func updateInfo(completion: @escaping (Error?) -> Void) {
         completion(nil)
     }

@@ -25,7 +25,7 @@ public class Ookami {
         
         let store = OokamiTokenStore()
         
-        let tokenURL = URL(string: Constants.URL.authToken)!
+        let tokenURL = URL(string: Constants.URL.authToken)! 
         let heim = Heimdallr(tokenURL: tokenURL, credentials: credentials, accessTokenStore: store)
         return heim
     }()

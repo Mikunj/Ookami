@@ -15,7 +15,7 @@ extension Constants {
     
     /// Urls that we use
     enum URL {
-        static let kitsu = "http://kitsu.io"
+        static let kitsu = "https://kitsu.io"
         static let api = "\(kitsu)/api/edge"
         static let authToken = "\(kitsu)/api/oauth/token"
     }

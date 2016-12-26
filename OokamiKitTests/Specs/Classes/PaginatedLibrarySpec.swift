@@ -11,17 +11,14 @@ import Nimble
 @testable import OokamiKit
 import SwiftyJSON
 import OHHTTPStubs
+import RealmSwift
 
-private class StubParsingOperation: ParsingOperation {
-    override func main() {
-        let realm = realmBlock()
-        try! realm.write {
-            let o = StubRealmObject()
-            o.id = 1
-            realm.add(o, update: true)
-        }
-        self.parseComplete(["test": [1]], nil)
-        self.completeOperation()
+private class StubParser: Parser {
+    
+    override func parse(json: JSON) -> [Object] {
+        let o = StubRealmObject()
+        o.id = 1
+        return [o]
     }
 }
 
@@ -58,19 +55,6 @@ private class StubPaginatedLibrary: PaginatedLibrary {
         super.last()
     }
     
-    override func parsingOperation(forJSON json: JSON) -> ParsingOperation {
-        return StubParsingOperation(json: json, realm: RealmProvider().realm) { [weak self] parsed, badObjects in
-            guard let strongSelf = self else { return }
-            
-            let entries = parsed?["test"] as! [Int]? ?? []
-            strongSelf.completion(entries, nil)
-            
-            //Some other messages
-            if let count = badObjects?.count, count > 0{
-                print("Paginated Library: Some JSON didn't parse properley!")
-            }
-        }
-    }
 }
 
 class PaginatedLibrarySpec: QuickSpec {
@@ -94,10 +78,6 @@ class PaginatedLibrarySpec: QuickSpec {
             
             afterEach {
                 OHHTTPStubs.removeAllStubs()
-                let realm = RealmProvider().realm()
-                try! realm.write {
-                    realm.deleteAll()
-                }
             }
             
             context("Requests") {
@@ -147,8 +127,7 @@ class PaginatedLibrarySpec: QuickSpec {
                     }
                     
                     it("should set all links to nil if no links exist in json") {
-                        let data = ["data": "abc"]
-                        let json = JSON(data)
+                        let json = TestHelper.json(data: "abc")
                         let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
                         p.links.first = "abc"
                         p.links.next = "def"
@@ -164,8 +143,7 @@ class PaginatedLibrarySpec: QuickSpec {
                     }
                     
                     it("should set all links to nil if links is not a dictionary in json") {
-                        let data = ["links": "abc"]
-                        let json = JSON(data)
+                        let json = JSON(["links": "abc"])
                         let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
                         p.links.first = "abc"
                         p.links.next = "def"
@@ -181,28 +159,28 @@ class PaginatedLibrarySpec: QuickSpec {
                     }
                 }
                 
-                context("Data") {
-                    it("should correctly return fetched ids") {
-                        var ids: [Int]?
+                context("Objects") {
+                    it("should correctly return fetched objects") {
+                        var objects: [Object]?
+                        
                         
                         stub(condition: isHost("kitsu.io")) { _ in
                             let data = ["data": "hi"]
                             return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
                         
-                        let q = StubPaginatedLibrary(request: request, client: client) { fetched, _ in
-                            ids = fetched
+                        let p = StubPaginatedLibrary(request: request, client: client) { fetched, _ in
+                            objects = fetched
                         }
-                        q.start()
+                        p.parser = StubParser()
+                        p.start()
                         
-                        expect(q.startCalledCount).toEventually(equal(1))
-                        expect(ids).toEventually(haveCount(1))
-                        expect(ids).toEventually(contain(1))
-                        expect(StubRealmObject.all()).toEventually(haveCount(1))
+                        expect(p.startCalledCount).toEventually(equal(1))
+                        expect(objects).toEventually(haveCount(1))
                     }
                     
-                    it("should correctly return data for a link") {
-                        var ids: [Int]?
+                    it("should correctly call the link and return the objects") {
+                        var objects: [Object]?
                         var error: Error? = NetworkClientError.error("an error")
                         
                         stub(condition: isHost("abc.io")) { _ in
@@ -211,17 +189,17 @@ class PaginatedLibrarySpec: QuickSpec {
                         }
                         
                         let p = StubPaginatedLibrary(request: request, client: client) { fetched, e in
-                            ids = fetched
+                            objects = fetched
                             error = e
                         }
                         
+                        p.parser = StubParser()
                         p.links.next = "http://abc.io/anime"
                         p.next()
                         
-                        expect(ids).toEventually(haveCount(1))
-                        expect(ids).toEventually(contain(1))
+                        expect(p.nextCalledCount).toEventually(equal(1))
+                        expect(objects).toEventually(haveCount(1))
                         expect(error).toEventually(beNil())
-                        expect(StubRealmObject.all()).toEventually(haveCount(1))
                     }
                 }
             }

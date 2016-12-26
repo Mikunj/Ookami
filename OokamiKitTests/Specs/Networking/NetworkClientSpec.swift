@@ -34,6 +34,7 @@ class NetworkClientSpec: QuickSpec {
             
             afterEach {
                 OHHTTPStubs.removeAllStubs()
+                
             }
             
             context("Authentication") {
@@ -48,7 +49,6 @@ class NetworkClientSpec: QuickSpec {
                             authenticationCalled = true
                         })
                         
-                        //let request = NetworkRequest(method: .get, parameters: nil, headers: ["Content-Type": "application/vnd.api+json"], needsAuth: true, relativeURL: "/user")
                         let request = NetworkRequest(relativeURL: "/user", method: .get, needsAuth: true)
                         client?.execute(request: request) { data, e in
                             requestExecuted = true

@@ -35,16 +35,12 @@ class FetchLibraryOperationSpec: QuickSpec {
             
             afterEach {
                 OHHTTPStubs.removeAllStubs()
-                
-                let realm = RealmProvider().realm()
-                try! realm.write {
-                    realm.deleteAll()
-                }
             }
             
             context("Fetching page") {
                 
-                it("should pass nil ids if a network error occurs") {
+                it("should not call fetch block if a network error occurs") {
+                    var fetchCalled = false
                     var error: Error?
                     let networkError = NetworkClientError.error("test")
                     
@@ -53,14 +49,17 @@ class FetchLibraryOperationSpec: QuickSpec {
                     }
                     
                     let request = LibraryGETRequest(userID: 1, relativeURL: "/anime")
-                    let operation = FetchLibraryOperation(request: request, client: client) { objects, e in
+                    let operation = FetchLibraryOperation(request: request, client: client, onFetch: { _ in
+                        fetchCalled = true
+                    }, completion: { e in
                         error = e
-                    }
+                    })
                     
                     waitUntil { done in
                         operation.completionBlock = {
                             expect(error).toNot(beNil())
                             expect(error).to(matchError(networkError))
+                            expect(fetchCalled).to(beFalse())
                             done()
                         }
                         operation.fetchNextPage()
@@ -72,18 +71,19 @@ class FetchLibraryOperationSpec: QuickSpec {
                         return OHHTTPStubsResponse(jsonObject: ["data": [["type": LibraryEntry.typeString, "id": 1]], "links": ["first": "yay"]], statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                     }
                     
-                    var ids: [Int]?
+                    var objects: [Object] = []
                     var error: Error?
                     
                     let request = LibraryGETRequest(userID: 1, relativeURL: "/anime")
-                    let operation = StubFetchOperation(request: request, client: client) { i, e in
-                        ids = i
+                    let operation = StubFetchOperation(request: request, client: client, onFetch: { f in
+                        objects = f
+                    }, completion: { e in
                         error = e
-                    }
+                    })
                     
                     waitUntil { done in
                         operation.completionBlock = {
-                            expect(ids).to(contain(1))
+                            expect(objects).to(haveCount(1))
                             expect(error).to(beNil())
                             done()
                         }
@@ -96,9 +96,9 @@ class FetchLibraryOperationSpec: QuickSpec {
                         var calledCompletion: Bool = false
                         
                         let request = LibraryGETRequest(userID: 1, relativeURL: "/anime")
-                        let operation = StubFetchOperation(request: request, client: client) { _, _ in
+                        let operation = StubFetchOperation(request: request, client: client, onFetch: { _ in }, completion: { _ in
                             calledCompletion = true
-                        }
+                        })
                         
                         stub(condition: isHost("kitsu.io")) { _ in
                             operation.cancel()

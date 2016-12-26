@@ -13,14 +13,6 @@ import SwiftyJSON
 import RealmSwift
 import OHHTTPStubs
 
-private class StubFetchAllOperation: FetchAllLibraryOperation {
-    var didCallDeleteOperation: Bool = false
-    
-    override func deleteOperation(withEntryIds ids: [Int]) -> DeleteEntryOperation {
-        didCallDeleteOperation = true
-        return super.deleteOperation(withEntryIds: ids)
-    }
-}
 
 class FetchAllLibraryOperationSpec: QuickSpec {
     override func spec() {
@@ -37,64 +29,15 @@ class FetchAllLibraryOperationSpec: QuickSpec {
             afterEach {
                 queue.cancelAllOperations()
                 OHHTTPStubs.removeAllStubs()
-                
-                let realm = RealmProvider().realm()
-                try! realm.write {
-                    realm.deleteAll()
-                }
-            }
-            
-            context("Deleting entries") {
-                it("should not delete entries if any status was not successful") {
-                    let operation = StubFetchAllOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client) { _ in}
-                    operation.failed.append((.completed, NetworkClientError.error("failed to get status")))
-                    
-                    let bOperation = operation.deleteBlockOperation()
-                    waitUntil { done in
-                        operation.completionBlock = {
-                            expect(operation.didCallDeleteOperation).to(beFalse())
-                            done()
-                        }
-                        queue.addOperation(bOperation)
-                    }
-                }
-                
-                it("should delete entries not in ids array") {
-                    TestHelper.create(object: LibraryEntry.self, inRealm: RealmProvider().realm(), amount: 3) { index, object in
-                        object.id = index
-                        object.userID = 1
-                        
-                        let m = Media()
-                        m.entryID = index
-                        m.id = index
-                        m.rawType = Media.MediaType.anime.rawValue
-                        
-                        object.media = m
-                    }
-                    
-                    let operation = StubFetchAllOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client) { _ in}
-                    operation.ids = [0]
-                    
-                    let bOperation = operation.deleteBlockOperation()
-                    waitUntil { done in
-                        operation.completionBlock = {
-                            expect(operation.didCallDeleteOperation).to(beTrue())
-                            expect(LibraryEntry.all()).to(haveCount(1))
-                            expect(LibraryEntry.get(withId: 0)).toNot(beNil())
-                            done()
-                        }
-                        queue.addOperation(bOperation)
-                    }
-                }
             }
             
             
             context("cancelling") {
                 it("should not call the callback function") {
                     var called: Bool = false
-                    let operation = StubFetchAllOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client) { _ in
+                    let operation = FetchAllLibraryOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client, onFetch: { _ in }, completion: { _ in
                         called = true
-                    }
+                    })
                     waitUntil { done in
                         operation.completionBlock = {
                             expect(called).to(beFalse())
@@ -115,12 +58,15 @@ class FetchAllLibraryOperationSpec: QuickSpec {
                         return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                     }
                     
-                    let operation = StubFetchAllOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client) { _ in
-                    }
+                    var objects: [Object] = []
+                    
+                    let operation = FetchAllLibraryOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client, onFetch: {
+                        objects.append(contentsOf: $0)
+                    }, completion: { _ in })
                     
                     waitUntil { done in
                         operation.completionBlock = {
-                            expect(LibraryEntry.all()).to(haveCount(1))
+                            expect(objects).to(haveCount(LibraryEntry.Status.all.count))
                             expect(operation.failed).to(beEmpty())
                             done()
                         }
@@ -134,12 +80,16 @@ class FetchAllLibraryOperationSpec: QuickSpec {
                         return OHHTTPStubsResponse(error: NetworkClientError.error("failed to get page"))
                     }
                     
-                    let operation = StubFetchAllOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client) { _ in
-                    }
+                    var objects: [Object] = []
+                    
+                    
+                    let operation = FetchAllLibraryOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client, onFetch: {
+                        objects.append(contentsOf: $0)
+                    }, completion: { _ in })
                     
                     waitUntil { done in
                         operation.completionBlock = {
-                            expect(LibraryEntry.all()).to(haveCount(0))
+                            expect(objects).to(haveCount(0))
                             expect(operation.failed).to(haveCount(LibraryEntry.Status.all.count))
                             done()
                         }

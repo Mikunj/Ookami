@@ -79,12 +79,10 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
             request.filter([.media(type: type), .status(status)])
             request.include([.genres, .user])
             
-            let operation = FetchLibraryOperation(request: request, client: client, onFetch: { objects in
-                self.onFetch(objects)
-            }, completion: { error in
+            let operation = FetchLibraryOperation(request: request, client: client, onFetch: onFetch, completion: { error in
                 
                 //Check for any errors
-                if error == nil {
+                if error != nil {
                     self.failed.append((status, error!))
                     print("Failed to fetch \(status.rawValue) library: " + (error?.localizedDescription)!)
                 }

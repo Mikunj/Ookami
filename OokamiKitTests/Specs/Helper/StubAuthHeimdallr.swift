@@ -19,9 +19,13 @@ class StubAuthHeimdallr: Heimdallr {
     var authBlock: VoidClosure?
     
     init(stubError: NSError? = nil, authenticationBlock: VoidClosure? = nil) {
-        super.init(tokenURL: URL(string: "http://kitsu.io")!)
+        super.init(tokenURL: URL(string: "http://ookami-test.kitsu.io")!)
         self.stubError = stubError
         self.authBlock = authenticationBlock
+    }
+    
+    override func requestAccessToken(username: String, password: String, completion: @escaping (Result<Void, NSError>) -> ()) {
+        completion(.success())
     }
     
     //A stub authenticate request that return a stub error or the request if stubError is not set
