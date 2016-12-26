@@ -115,7 +115,7 @@ class PaginatedLibrarySpec: QuickSpec {
                 it("should correctly build requests for links") {
                     let linkString = "http://abc.io/anime"
                     let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
-                    let request = p.buildRequest(for: linkString)
+                    let request = p.request(for: linkString)
                     expect(request.url).to(equal(linkString))
                 }
                 

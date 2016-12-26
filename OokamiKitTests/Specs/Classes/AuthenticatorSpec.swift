@@ -47,9 +47,9 @@ private class StubAuthenticator: Authenticator {
     
 }
 
-class KitsuAuthenticatorSpec: QuickSpec {
+class AuthenticatorSpec: QuickSpec {
     override func spec() {
-        describe("Kitsu Authenticator") {
+        describe("Authenticator") {
             var authenticator: Authenticator?
             
             afterEach {

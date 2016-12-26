@@ -10,6 +10,7 @@ import Foundation
 import Heimdallr
 
 /// A custom token store class for Heimdallr as the default KeychainStore implementation was not working
+// https://github.com/trivago/Heimdallr.swift/issues/98
 public class OokamiTokenStore: OAuthAccessTokenStore {
     
     let defaults = UserDefaults.standard

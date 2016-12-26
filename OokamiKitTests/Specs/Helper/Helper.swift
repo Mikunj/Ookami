@@ -12,6 +12,22 @@ import RealmSwift
 
 class TestHelper {
     
+    /// Create a JSON object with data and includes
+    ///
+    /// - Parameters:
+    ///   - data: The data field value
+    ///   - includes: The includes field value
+    static func json(data: Any? = nil, included: Any? = nil) -> JSON {
+        var dict: [String: Any] = [:]
+        if let data = data {
+            dict["data"] = data
+        }
+        if let included = included {
+            dict["included"] = included
+        }
+        return JSON(dict)
+    }
+    
     /// Load a JSON file
     ///
     /// - Parameter file: The file name without extension
