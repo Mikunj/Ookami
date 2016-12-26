@@ -11,6 +11,9 @@ import SwiftyJSON
 
 public protocol NetworkClientProtocol {
     
+    //The return type
+    associatedtype T
+    
     /// The base url of the api
     var baseURL: String { get }
     
@@ -19,5 +22,5 @@ public protocol NetworkClientProtocol {
     /// - Parameters:
     ///   - request: The network request
     ///   - completion: The callback closure. Passes JSON data and error.
-    func execute(request: NetworkRequestProtocol, completion: @escaping (JSON?, Error?) -> Void)
+    func execute(request: NetworkRequestProtocol, completion: @escaping (T?, Error?) -> Void)
 }

@@ -58,6 +58,7 @@
 		24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABD1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
+		24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C6991E10E3F00048EB9D /* Constants.swift */; };
 		24D28ECF1DD0157B00773BED /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */; };
 		24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED01DD015FC00773BED /* NetworkOperation.swift */; };
 		24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */; };
@@ -175,6 +176,7 @@
 		24A258AD1DD9455100CC7561 /* PaginatedLibrarySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedLibrarySpec.swift; sourceTree = "<group>"; };
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
+		24C8C6991E10E3F00048EB9D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		24D28ED01DD015FC00773BED /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationSpec.swift; sourceTree = "<group>"; };
@@ -272,7 +274,6 @@
 				24DAC2631DE69A9200279EE6 /* LibraryAPI.swift */,
 				242B2B4C1DE575CC0002903B /* UserAPI.swift */,
 			);
-			name = API;
 			path = API;
 			sourceTree = "<group>";
 		};
@@ -409,6 +410,7 @@
 				24D28ECD1DD0151000773BED /* Operations */,
 				2470044D1DCD7A5A000D987C /* Protocols */,
 				242B2B491DE566E90002903B /* Ookami.swift */,
+				24C8C6991E10E3F00048EB9D /* Constants.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -933,6 +935,7 @@
 				24DD48741DD6CDED009378AC /* FetchAllLibraryOperation.swift in Sources */,
 				2473628B1DCF0181004B4AC5 /* NetworkRequestProtocol.swift in Sources */,
 				2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */,
+				24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */,
 				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
 				24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */,
 				242B2B4A1DE566E90002903B /* Ookami.swift in Sources */,

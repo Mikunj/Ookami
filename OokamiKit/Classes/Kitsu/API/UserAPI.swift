@@ -59,7 +59,7 @@ public class UserAPI: BaseAPI {
     ///   - id: The user id
     ///   - completion: The completion block which passes back a user or error
     public func get(id: Int, completion: @escaping UserCompletion) {
-        let endpoint = Ookami.Constants.Endpoints.users
+        let endpoint = Constants.Endpoints.users
         let request = NetworkRequest(relativeURL: "\(endpoint)/\(id)", method: .get)
         get(request: request, completion: completion)
     }
@@ -70,7 +70,7 @@ public class UserAPI: BaseAPI {
     ///   - name: The user name
     ///   - completion: The completion block which passes back a user or error
     public func get(name: String, completion: @escaping UserCompletion) {
-        let endpoint = Ookami.Constants.Endpoints.users
+        let endpoint = Constants.Endpoints.users
         let params = ["filter": ["name": name]]
         let request = NetworkRequest(relativeURL: endpoint, method: .get, parameters: params)
         get(request: request, completion: completion)
@@ -82,7 +82,7 @@ public class UserAPI: BaseAPI {
     ///
     /// - Parameter completion: The completion block which passes back the logged in user or error
     public func getSelf(_ completion: @escaping UserCompletion) {
-        let endpoint = Ookami.Constants.Endpoints.users
+        let endpoint = Constants.Endpoints.users
         let params = ["filter": ["self": true]]
         let request = NetworkRequest(relativeURL: endpoint, method: .get, parameters: params, needsAuth: true)
         get(request: request, completion: completion)

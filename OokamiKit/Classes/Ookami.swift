@@ -25,14 +25,14 @@ public class Ookami {
         
         let store = OokamiTokenStore()
         
-        let tokenURL = URL(string: Ookami.Constants.URL.authToken)!
+        let tokenURL = URL(string: Constants.URL.authToken)!
         let heim = Heimdallr(tokenURL: tokenURL, credentials: credentials, accessTokenStore: store)
         return heim
     }()
     
     //Networking client
     public lazy var networkClient: NetworkClient = {
-        let client = NetworkClient(baseURL: Ookami.Constants.URL.api, heimdallr: self.heimdallr)
+        let client = NetworkClient(baseURL: Constants.URL.api, heimdallr: self.heimdallr)
         return client
     }()
     
@@ -49,30 +49,4 @@ public class Ookami {
         return q
     }()
     
-}
-
-//MARK: Constants
-extension Ookami {
-    
-    /// Constants for the app
-    struct Constants {
-        
-        private init() {}
-        
-        /// Urls that we use
-        struct URL {
-            private init() {}
-            static let kitsu = "http://staging.kitsu.io"
-            static let api = "\(kitsu)/api/edge"
-            static let authToken = "\(kitsu)/api/oauth/token"
-        }
-        
-        //API endpoints
-        struct Endpoints {
-            private init() {}
-            static let users = "/users"
-            static let libraryEntries = "/library-entries"
-        }
-        
-    }
 }

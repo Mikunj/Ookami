@@ -33,6 +33,10 @@ public class NetworkClient: NetworkClientProtocol {
         self.heim = heimdallr
         self.baseURL = baseURL
         self.sessionManager = sessionManager
+        
+        //Set the user agent on the manager
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "x"
+        self.sessionManager.session.configuration.httpAdditionalHeaders = ["User-Agent": "Ookami-\(version)"]
     }
     
     /// Execute a request.
