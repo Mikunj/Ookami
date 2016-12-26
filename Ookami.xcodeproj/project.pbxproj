@@ -59,6 +59,7 @@
 		24A7EABD1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C6991E10E3F00048EB9D /* Constants.swift */; };
+		24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69B1E10EBA70048EB9D /* Parser.swift */; };
 		24D28ECF1DD0157B00773BED /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */; };
 		24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED01DD015FC00773BED /* NetworkOperation.swift */; };
 		24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */; };
@@ -177,6 +178,7 @@
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
 		24C8C6991E10E3F00048EB9D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		24C8C69B1E10EBA70048EB9D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		24D28ED01DD015FC00773BED /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationSpec.swift; sourceTree = "<group>"; };
@@ -420,8 +422,8 @@
 			children = (
 				24DAC2611DE59E8600279EE6 /* OokamiTokenStore.swift */,
 				248734471DCD491E002E7366 /* RealmProvider.swift */,
+				24C8C69B1E10EBA70048EB9D /* Parser.swift */,
 			);
-			name = Utility;
 			path = Utility;
 			sourceTree = "<group>";
 		};
@@ -941,6 +943,7 @@
 				24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */,
 				242B2B4A1DE566E90002903B /* Ookami.swift in Sources */,
 				24A1B57C1DD8718F00F7E4E4 /* PaginatedLibrary.swift in Sources */,
+				24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */,
 				24D28ED91DD04CD200773BED /* ParsingOperation.swift in Sources */,
 				2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */,
 				2470044C1DCD73D9000D987C /* Genre.swift in Sources */,
