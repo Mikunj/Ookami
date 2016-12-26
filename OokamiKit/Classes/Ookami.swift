@@ -37,8 +37,8 @@ public class Ookami {
     }()
     
     //Authentication
-    public lazy var authenticator: KitsuAuthenticator = {
-        let authenticator = KitsuAuthenticator(heimdallr: self.heimdallr)
+    public lazy var authenticator: Authenticator = {
+        let authenticator = Authenticator(heimdallr: self.heimdallr)
         return authenticator
     }()
     

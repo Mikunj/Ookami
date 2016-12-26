@@ -9,10 +9,11 @@
 import Foundation
 import Heimdallr
 
+
 /// Class for handling authentication to the kitsu servers
 /// We use this instead of directly calling authenticate on a `Heimdallr` instance because we still have to do extra stuff after we authenticate the user.
 /// Putting it in a class makes it simpler and easier to manage if we need to add extra things
-public class KitsuAuthenticator {
+public class Authenticator {
     
     /// The heimdallr class used for OAuth2 authentication
     let heimdallr: Heimdallr
@@ -21,10 +22,10 @@ public class KitsuAuthenticator {
     let usernameKey = "kitsu_loggedin_user"
     
     //The user api
-    var userAPI = UserAPI()
+    var userAPI = UserService()
     
     //The library api
-    var libraryAPI = LibraryAPI()
+    var libraryAPI = LibraryService()
     
     /// The name of the user that is logged in, nil if not logged in
     public internal(set) var currentUser: String? {
@@ -73,23 +74,23 @@ public class KitsuAuthenticator {
     public func authenticate(username: String, password: String, completion: @escaping (Error?) -> Void) {
         heimdallr.requestAccessToken(username: username, password: password) { result in
             switch result {
-                case .success:
-                    
-                    //Temporarily store the username passed in as the logged in username, but after fetching the user info it should be updated
-                    //Reason is that the user may also use the email inplace of the username, thus we wouldn't have the correct user slug/name
-                    self.currentUser = username
-                    
-                    
-                    // We only want to call the completion block after we are certain we have the correct user info
-                    // updateInfo will pass back an error if it failed so we can directly pass it onto the completion block
-                    self.updateInfo() { error in
-                        completion(error)
-                    }
-                    
-                    break
-                case .failure(let e):
-                    completion(e)
-                    break
+            case .success:
+                
+                //Temporarily store the username passed in as the logged in username, but after fetching the user info it should be updated
+                //Reason is that the user may also use the email inplace of the username, thus we wouldn't have the correct user slug/name
+                self.currentUser = username
+                
+                
+                // We only want to call the completion block after we are certain we have the correct user info
+                // updateInfo will pass back an error if it failed so we can directly pass it onto the completion block
+                self.updateInfo() { error in
+                    completion(error)
+                }
+                
+                break
+            case .failure(let e):
+                completion(e)
+                break
             }
         }
     }

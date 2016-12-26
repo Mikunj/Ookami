@@ -1,5 +1,5 @@
 //
-//  UserAPI.swift
+//  UserService.swift
 //  Ookami
 //
 //  Created by Maka on 23/11/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class UserAPI: BaseAPI {
+public class UserService: BaseService {
     
     //Errors
     public enum Errors: Error {

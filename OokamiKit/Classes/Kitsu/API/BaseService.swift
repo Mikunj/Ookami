@@ -1,5 +1,5 @@
 //
-//  BaseAPI.swift
+//  BaseService.swift
 //  Ookami
 //
 //  Created by Maka on 24/11/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class BaseAPI {
+public class BaseService {
     
     //The operation queue to use
     public internal(set) var queue: OperationQueue

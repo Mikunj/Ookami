@@ -1,5 +1,5 @@
 //
-//  KitsuAuthenticatorSpec.swift
+//  AuthenticatorSpec.swift
 //  Ookami
 //
 //  Created by Maka on 23/11/16.
@@ -40,7 +40,7 @@ private class StubRequestHeimdallr: Heimdallr {
     }
 }
 
-private class StubAuthenticator: KitsuAuthenticator {
+private class StubAuthenticator: Authenticator {
     override func updateInfo(completion: @escaping (Error?) -> Void) {
         completion(nil)
     }
@@ -50,7 +50,7 @@ private class StubAuthenticator: KitsuAuthenticator {
 class KitsuAuthenticatorSpec: QuickSpec {
     override func spec() {
         describe("Kitsu Authenticator") {
-            var authenticator: KitsuAuthenticator?
+            var authenticator: Authenticator?
             
             afterEach {
                 if authenticator != nil {
@@ -60,13 +60,13 @@ class KitsuAuthenticatorSpec: QuickSpec {
             }
             
             context("Updating user info") {
-                class StubUserAPI: UserAPI {
+                class StubUserService: UserService {
                     let e: Error?
                     init(error: Error? = nil) {
                         self.e = error
                         super.init()
                     }
-                    override func getSelf(_ completion: @escaping UserAPI.UserCompletion) {
+                    override func getSelf(_ completion: @escaping UserService.UserCompletion) {
                         guard e == nil else {
                             completion(nil, e)
                             return
@@ -79,16 +79,16 @@ class KitsuAuthenticatorSpec: QuickSpec {
                     }
                 }
                 
-                class StubLibraryAPI: LibraryAPI {
+                class StubLibraryService: LibraryService {
                     override func getAll(userID: Int, type: Media.MediaType, completion: @escaping ([(LibraryEntry.Status, Error)]) -> Void) {
                         completion([])
                     }
                 }
                 
                 it("should not pass error if user is found") {
-                    authenticator = KitsuAuthenticator(heimdallr: StubRequestHeimdallr())
-                    authenticator?.userAPI = StubUserAPI()
-                    authenticator?.libraryAPI = StubLibraryAPI()
+                    authenticator = Authenticator(heimdallr: StubRequestHeimdallr())
+                    authenticator?.userAPI = StubUserService()
+                    authenticator?.libraryAPI = StubLibraryService()
                     waitUntil { done in
                         authenticator?.updateInfo { error in
                             expect(error).to(beNil())
@@ -99,10 +99,10 @@ class KitsuAuthenticatorSpec: QuickSpec {
                 }
                 
                 it("should pass error if no user is found") {
-                    authenticator = KitsuAuthenticator(heimdallr: StubRequestHeimdallr())
+                    authenticator = Authenticator(heimdallr: StubRequestHeimdallr())
                     let e = NetworkClientError.error("generic error")
-                    authenticator?.userAPI = StubUserAPI(error: e)
-                    authenticator?.libraryAPI = StubLibraryAPI()
+                    authenticator?.userAPI = StubUserService(error: e)
+                    authenticator?.libraryAPI = StubLibraryService()
                     waitUntil { done in
                         authenticator?.updateInfo { error in
                             expect(error).toNot(beNil())
@@ -149,7 +149,7 @@ class KitsuAuthenticatorSpec: QuickSpec {
                     let h = StubRequestHeimdallr()
                     h.token = true
                     
-                    authenticator = KitsuAuthenticator(heimdallr: h)
+                    authenticator = Authenticator(heimdallr: h)
                     UserDefaults.standard.set("test", forKey: authenticator!.usernameKey)
                     
                     expect(authenticator!.currentUser).to(equal("test"))

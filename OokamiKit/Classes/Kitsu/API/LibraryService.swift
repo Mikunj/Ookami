@@ -1,5 +1,5 @@
 //
-//  LibraryAPI.swift
+//  LibraryService.swift
 //  Ookami
 //
 //  Created by Maka on 24/11/16.
@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class LibraryAPI: BaseAPI {
+public class LibraryService: BaseService {
     
     //MARK: GET
     public typealias LibraryCompletion = (Results<LibraryEntry>?, Error?) -> Void
