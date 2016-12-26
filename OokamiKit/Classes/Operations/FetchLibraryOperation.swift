@@ -10,16 +10,20 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-/// Operation to fetch the entries in a library for a given status
+/// Operation to fetch all the entries in a library for a given status
 public class FetchLibraryOperation: AsynchronousOperation {
     
     //The request
     let request: LibraryGETRequest
     
     /// The completion block which is called at the end
-    public typealias FetchCompleteBlock = ([Int]?, Error?) -> Void
+    public typealias FetchCompleteBlock = (Error?) -> Void
+    public typealias OnFetchBlock = ([Object]) -> Void
 
-    var fetchedIds: [Int] = []
+    //Block which gets called everytime we get a page
+    let onFetch: OnFetchBlock
+    
+    //Block that gets called when fetch is finished
     let fetchComplete: FetchCompleteBlock
     
     /// The network client
@@ -33,14 +37,15 @@ public class FetchLibraryOperation: AsynchronousOperation {
     ///
     /// Note that this will use a new copy of the request passed in.
     ///
-    /// - Parameter request: The request
-    /// - Parameter client: The network client to use for executing the request
-    /// - Parameter completion: The completion block.
-    ///                         Passes back a an array of fetched library entry ids
-    ///                         Passes an error instead if failed to fetch
-    public init(request: LibraryGETRequest, client: NetworkClientProtocol, completion: @escaping FetchCompleteBlock) {
+    /// - Parameters:
+    ///     - request: The request
+    ///     - client: The network client to use for executing the request
+    ///     - onFetch: A callback which gets called everytime entries are fetched, and return entries aswell as related objects. This can be called multiple times.
+    ///     - completion: The completion block which passes an error if failed to fetch
+    public init(request: LibraryGETRequest, client: NetworkClientProtocol, onFetch: @escaping OnFetchBlock, completion: @escaping FetchCompleteBlock) {
         self.request = request.copy() as! LibraryGETRequest
         self.fetchComplete = completion
+        self.onFetch = onFetch
         self.client = client
     }
     
@@ -54,30 +59,28 @@ public class FetchLibraryOperation: AsynchronousOperation {
         
         //Setup the library
         if library == nil {
-            library = PaginatedLibrary(request: request, client: client) { [weak self] ids, error in
-                guard let strongSelf = self else { return }
-                
+            library = PaginatedLibrary(request: request, client: client) { [unowned self] objects, error in
+     
                 //Check for completion
-                guard error == nil  else {
+                guard error == nil else {
                     
                     //Check if we have reached the max page
                     if error! == PaginatedLibraryError.noNextPage {
-                        strongSelf.fetchComplete(strongSelf.fetchedIds, nil)
+                        self.fetchComplete(nil)
                     } else {
-                        //We can pass in the already fetched ids here if we want to, something to keep in mind
-                        strongSelf.fetchComplete(nil, error)
+                        self.fetchComplete(error)
                     }
-                    strongSelf.completeOperation()
+                    self.completeOperation()
                     return
                 }
                 
-                //Add the entries
-                if let entryIds = ids {
-                    strongSelf.fetchedIds.append(contentsOf: entryIds)
+                //Pass back the objects
+                if let parsed = objects {
+                    self.onFetch(parsed)
                 }
                 
                 //Get the next page
-                strongSelf.fetchNextPage()
+                self.fetchNextPage()
             }
             
             library?.start()
@@ -85,19 +88,6 @@ public class FetchLibraryOperation: AsynchronousOperation {
             library?.next()
         }
     
-    }
-    
-    /// Get the block operation for completing the operation.
-    /// This gets called when there are no more pages to fetch
-    ///
-    /// - Returns: The block operation called when
-    func operationCompleted() -> BlockOperation {
-        return BlockOperation {
-            if !self.isCancelled {
-                self.fetchComplete(self.fetchedIds, nil)
-            }
-            self.completeOperation()
-        }
     }
     
     override public func main() {

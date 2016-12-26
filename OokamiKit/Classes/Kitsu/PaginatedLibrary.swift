@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
 
 /*
  The reason we have a paginated library class is because users won't look at ALL of another users library if you think about it.
@@ -50,7 +51,10 @@ public enum PaginatedLibraryError : Error {
 public class PaginatedLibrary {
     
     /// The completion block type, return the ids of the fetched entries on the current page, or an Error if something went wrong
-    public typealias PaginatedLibraryCompletion = ([Int]?, Error?) -> Void
+    public typealias PaginatedLibraryCompletion = ([Object]?, Error?) -> Void
+    
+    /// The JSON Parser
+    public var parser: Parser = Parser()
     
     /// The queue for executing the pagination requests on
     var queue: OperationQueue = {
@@ -81,7 +85,7 @@ public class PaginatedLibrary {
     /// - Parameters:
     ///   - request: The library get request
     ///   - client: The client to execute request on
-    ///   - completion: The completion block, return the ids of the fetched entries on the current page, or an Error if something went wrong
+    ///   - completion: The completion block, returns the fetched entries and related objects on the current page, or an Error if something went wrong
     ///                 This gets called everytime a page of entries is recieved.
     ///                 This can be through calls such as `next()`, `prev()` etc ...
     public init(request: LibraryGETRequest, client: NetworkClientProtocol, completion: @escaping PaginatedLibraryCompletion) {
@@ -96,47 +100,28 @@ public class PaginatedLibrary {
     ///
     /// - Parameter request: The network request
     func perform(request: NetworkRequest) {
-        let operation = NetworkOperation(request: request, client: client) { [weak self] json, error in
-            guard let strongSelf = self else { return }
-            
+        let operation = NetworkOperation(request: request, client: client) { [unowned self] json, error in
+
             //Check for errors
             guard error == nil else {
-                strongSelf.completion(nil, error)
+                self.completion(nil, error)
                 return
             }
             
             //Check we have the JSON
             guard json != nil else {
-                strongSelf.completion(nil, PaginatedLibraryError.invalidJSONRecieved)
+                self.completion(nil, PaginatedLibraryError.invalidJSONRecieved)
                 return
             }
             
             //Update the links
-            strongSelf.updateLinks(fromJSON: json!)
+            self.updateLinks(fromJSON: json!)
             
             //Parse the response
-            let pOperation = strongSelf.parsingOperation(forJSON: json!)
-            strongSelf.queue.addOperation(pOperation)
+            let parsed = self.parser.parse(json: json!)
+            self.completion(parsed, nil)
         }
         queue.addOperation(operation)
-    }
-    
-    /// Return the parsing operation for given json
-    ///
-    /// - Parameter json: The json object
-    func parsingOperation(forJSON json: JSON) -> ParsingOperation {
-        return ParsingOperation(json: json, realm: RealmProvider().realm) { [weak self] parsed, badObjects in
-            guard let strongSelf = self else { return }
-            
-            //We either parsed entries, or we didn't parse any.
-            let entries = parsed?[LibraryEntry.typeString] as! [Int]? ?? []
-            strongSelf.completion(entries, nil)
-            
-            //Some other messages
-            if let count = badObjects?.count, count > 0 {
-                print("Paginated Library: Some JSON didn't parse properley!")
-            }
-        }
     }
     
     /// Update the link state from the recieved json.

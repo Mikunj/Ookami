@@ -11,7 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 /// A class to parse objects
-class Parser {
+public class Parser {
     
     public typealias ParserBlock = (JSON) -> Object?
     
@@ -23,7 +23,7 @@ class Parser {
     }
     
     /// Initialize all the parsers
-    func registerParsers() {
+    private func registerParsers() {
         register(object: Anime.self)
         register(object: User.self)
         register(object: Genre.self)
@@ -102,7 +102,7 @@ class Parser {
     /// - Parameters:
     ///   - json: The JSON array
     /// - Returns: An array of parsed objects
-    func parseArray(json: JSON) -> [Object] {
+    private func parseArray(json: JSON) -> [Object] {
         
         //Be 100% sure that we have an array
         guard json.type == .array else {
@@ -128,7 +128,7 @@ class Parser {
     ///   - json: The JSON dictionary
     ///   - realm: The realm instance
     /// - Returns: The parsed object or nil if it failed to parse
-    func parseDictionary(json: JSON) -> Object? {
+    private func parseDictionary(json: JSON) -> Object? {
         //Make sure the object is a dictionary
         guard json.type == .dictionary else {
             return nil
