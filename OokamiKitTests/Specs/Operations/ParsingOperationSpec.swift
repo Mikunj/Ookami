@@ -28,7 +28,7 @@ class ParsingOperationSpec: QuickSpec {
             }
             
             afterEach {
-                let realm = RealmProvider.realm()
+                let realm = RealmProvider().realm()
                 
                 try! realm.write {
                     realm.deleteAll()
@@ -39,7 +39,7 @@ class ParsingOperationSpec: QuickSpec {
             context("Adding parsed objects") {
                 it("should be able to add object id to a clean dictionary") {
                     let json = JSON(["name": "hi"])
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { failed in
                     }
                     
                     let object = StubRealmObject()
@@ -52,7 +52,7 @@ class ParsingOperationSpec: QuickSpec {
                 
                 it("should be able to add object id to an existing key") {
                     let json = JSON(["name": "hi"])
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { failed in
                     }
                     
                     let object = StubRealmObject()
@@ -72,7 +72,7 @@ class ParsingOperationSpec: QuickSpec {
             context("Registering parsers") {
                 it("should correctly register new parsers") {
                     let json = JSON(["name": "hi"])
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { failed in
                     }
                     
                     let t: ParsingOperation.ParserBlock = { json in
@@ -84,7 +84,7 @@ class ParsingOperationSpec: QuickSpec {
                 
                 it("should correctly register default parsers") {
                     let json = JSON(["name": "hi"])
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { failed in
                     }
                     
                     operation.registerParsers()
@@ -97,13 +97,13 @@ class ParsingOperationSpec: QuickSpec {
                 it("should only accept array values") {
                     let arrayJSON = JSON([1])
                     let intJSON = JSON(1)
-                    let operation = ParsingOperation(json: arrayJSON, realm: RealmProvider.realm) { failed in
+                    let operation = ParsingOperation(json: arrayJSON, realm: RealmProvider().realm) { failed in
                     }
                     
-                    let arrayResult = operation.parseArray(json: arrayJSON, realm: RealmProvider.realm())
+                    let arrayResult = operation.parseArray(json: arrayJSON, realm: RealmProvider().realm())
                     expect(arrayResult).toNot(beNil())
                     
-                    let result = operation.parseArray(json: intJSON, realm: RealmProvider.realm())
+                    let result = operation.parseArray(json: intJSON, realm: RealmProvider().realm())
                     expect(result).to(beNil())
                 }
             }
@@ -112,13 +112,13 @@ class ParsingOperationSpec: QuickSpec {
                 it("should only accept dictionary values") {
                     let dictJSON = JSON(["id": 1])
                     let intJSON = JSON(1)
-                    let operation = ParsingOperation(json: dictJSON, realm: RealmProvider.realm) { failed in
+                    let operation = ParsingOperation(json: dictJSON, realm: RealmProvider().realm) { failed in
                     }
                     
-                    let dictResult = operation.parseDictionary(json: dictJSON, realm: RealmProvider.realm())
+                    let dictResult = operation.parseDictionary(json: dictJSON, realm: RealmProvider().realm())
                     expect(dictResult).to(beFalse())
                     
-                    let result = operation.parseArray(json: intJSON, realm: RealmProvider.realm())
+                    let result = operation.parseArray(json: intJSON, realm: RealmProvider().realm())
                     expect(result).to(beNil())
                 }
             }
@@ -128,7 +128,7 @@ class ParsingOperationSpec: QuickSpec {
                 context("JSON Values") {
                     it("should accept array values") {
                         let arrayJSON = JSON([1])
-                        let operation = ParsingOperation(json: arrayJSON, realm: RealmProvider.realm) { failed in
+                        let operation = ParsingOperation(json: arrayJSON, realm: RealmProvider().realm) { failed in
                         }
                         
                         let arrayResult = operation.parse(json: arrayJSON)
@@ -137,7 +137,7 @@ class ParsingOperationSpec: QuickSpec {
                     
                     it("should accept dictionary values") {
                         let dictJSON = JSON(["id": 1])
-                        let operation = ParsingOperation(json: dictJSON, realm: RealmProvider.realm) { failed in
+                        let operation = ParsingOperation(json: dictJSON, realm: RealmProvider().realm) { failed in
                         }
                         
                         let dictResult = operation.parse(json: dictJSON)
@@ -146,7 +146,7 @@ class ParsingOperationSpec: QuickSpec {
                     
                     it("should not accept other values") {
                         let intJSON = JSON(1)
-                        let operation = ParsingOperation(json: intJSON, realm: RealmProvider.realm) { failed in
+                        let operation = ParsingOperation(json: intJSON, realm: RealmProvider().realm) { failed in
                         }
                         
                         let result = operation.parse(json: intJSON)
@@ -158,7 +158,7 @@ class ParsingOperationSpec: QuickSpec {
                 it("should return the object if no parser exists") {
                     let object = ["type": "parseF", "name": "1"]
                     let arrayJSON = JSON([object])
-                    let operation = ParsingOperation(json: arrayJSON, realm: RealmProvider.realm) { failed in
+                    let operation = ParsingOperation(json: arrayJSON, realm: RealmProvider().realm) { failed in
                     }
                     
                     let result = operation.parse(json: arrayJSON)
@@ -169,7 +169,7 @@ class ParsingOperationSpec: QuickSpec {
                 it("should return empty array if object parsed") {
                     let object = ["type": "parseF"]
                     let json = JSON([object])
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { failed in
                     }
                     
                     operation.register(type: "parseF") { _ in
@@ -190,7 +190,7 @@ class ParsingOperationSpec: QuickSpec {
                     var parseFCalled = false
                     
                     let json = JSON([object, other])
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { failed in
                     }
                     
                     operation.register(type: "parseF") { _ in
@@ -213,7 +213,7 @@ class ParsingOperationSpec: QuickSpec {
                     let other = ["type": "another", "name": "other"]
                     
                     let json = JSON([object, other])
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { failed in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { failed in
                     }
                     
                     operation.register(type: "parseF") { _ in
@@ -241,7 +241,7 @@ class ParsingOperationSpec: QuickSpec {
                     var ids: [String: [Any]]? = [:]
                     let json = JSON(1)
                     
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { parsed, _ in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { parsed, _ in
                         ids = parsed
                     }
                     queue.addOperation(operation)
@@ -252,7 +252,7 @@ class ParsingOperationSpec: QuickSpec {
                     var ids: [String: [Any]]? = [:]
                     let json = JSON(["name": "test"])
                     
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { parsed, _ in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { parsed, _ in
                         ids = parsed
                     }
                     
@@ -265,7 +265,7 @@ class ParsingOperationSpec: QuickSpec {
                     let json = JSON(["data": [object]])
                     var ids: [String: [Any]]?
                     
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { parsed, _ in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { parsed, _ in
                         ids = parsed
                     }
                     
@@ -286,7 +286,7 @@ class ParsingOperationSpec: QuickSpec {
                     let json = JSON(["data": [object]])
                     var ids: [String: [Any]]?
                     
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { parsed, _ in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { parsed, _ in
                         ids = parsed
                     }
                     
@@ -305,7 +305,7 @@ class ParsingOperationSpec: QuickSpec {
                     let json = JSON(["data": [object]])
                     var ids: [String: [Any]]?
                     
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { parsed, _ in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { parsed, _ in
                         ids = parsed
                     }
                     
@@ -322,7 +322,7 @@ class ParsingOperationSpec: QuickSpec {
                     let json = JSON(["data": [object]])
                     var response: [JSON]? = []
                     
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { _, failed in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { _, failed in
                         response = failed
                     }
                     
@@ -341,7 +341,7 @@ class ParsingOperationSpec: QuickSpec {
                     var response: [JSON]?
                     let json = JSON(1)
                     
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { _, failed in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { _, failed in
                         response = failed
                     }
                     
@@ -355,7 +355,7 @@ class ParsingOperationSpec: QuickSpec {
                     var response: [JSON]?
                     let json = JSON(["name": "hi"])
                     
-                    let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { _, failed in
+                    let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { _, failed in
                         response = failed
                     }
                     
@@ -378,7 +378,7 @@ class ParsingOperationSpec: QuickSpec {
                             }
                         }
                         
-                        let operation = StubParse(json: json, realm: RealmProvider.realm) { _, failed in
+                        let operation = StubParse(json: json, realm: RealmProvider().realm) { _, failed in
                             blockCalled = true
                         }
                         
@@ -396,7 +396,7 @@ class ParsingOperationSpec: QuickSpec {
                     it("should not parse any objects") {
                         let json = JSON(["data":[["type": "test"]]])
                         
-                        let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { _, _ in
+                        let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { _, _ in
                         }
                         operation.register(type: "test") { json in
                             let o = StubRealmObject()
@@ -406,7 +406,7 @@ class ParsingOperationSpec: QuickSpec {
                         
                         waitUntil { done in
                             operation.completionBlock = {
-                                let realm = RealmProvider.realm()
+                                let realm = RealmProvider().realm()
                                 expect(realm.objects(StubRealmObject.self)).to(haveCount(0))
                                 done()
                             }
@@ -424,7 +424,7 @@ class ParsingOperationSpec: QuickSpec {
                         
                         let other = ["type": "another", "name": "other"]
                         let json = JSON(["data": [other]])
-                        let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { parsed, failed in
+                        let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { parsed, failed in
                             response = failed
                         }
                         operation.register(type: "another") { json -> Object? in
@@ -443,7 +443,7 @@ class ParsingOperationSpec: QuickSpec {
                         
                         let other = ["type": "another", "name": "bad"]
                         let json = JSON(["data": [other]])
-                        let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { parsed, failed in
+                        let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { parsed, failed in
                             response = failed
                         }
                         
@@ -459,7 +459,7 @@ class ParsingOperationSpec: QuickSpec {
                         
                         let object = ["type": "generic"]
                         let json = JSON(["included": [object]])
-                        let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { _, failed in
+                        let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { _, failed in
                             response = failed
                         }
                         operation.register(type: "generic") { json -> Object? in
@@ -477,7 +477,7 @@ class ParsingOperationSpec: QuickSpec {
                         var response: [JSON]? = nil
                         
                         let json = JSON(["included": "hi"])
-                        let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { _, failed in
+                        let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { _, failed in
                             response = failed
                         }
                         
@@ -493,7 +493,7 @@ class ParsingOperationSpec: QuickSpec {
                         
                         let object = ["type": "generic"]
                         let json = JSON(["data": [object]])
-                        let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { _, failed in
+                        let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { _, failed in
                             response = failed
                         }
                         operation.register(type: "generic") { json -> Object? in
@@ -511,7 +511,7 @@ class ParsingOperationSpec: QuickSpec {
                         var response: [JSON]? = nil
                         
                         let json = JSON(["data": "hi"])
-                        let operation = ParsingOperation(json: json, realm: RealmProvider.realm) { _, failed in
+                        let operation = ParsingOperation(json: json, realm: RealmProvider().realm) { _, failed in
                             response = failed
                         }
                         
@@ -545,7 +545,7 @@ class ParsingOperationSpec: QuickSpec {
     func testParse<T: Object>(forFile file: String, queue: OperationQueue, realmObject: T.Type, count: Int) {
         self.testParse(forFile: file, queue: queue, testBlock: { operation, response, error in
             DispatchQueue.main.sync {
-                let realm = RealmProvider.realm()
+                let realm = RealmProvider().realm()
                 expect(error).to(beFalse())
                 
                 realm.refresh()
@@ -574,7 +574,7 @@ class ParsingOperationSpec: QuickSpec {
         
         let data = JSON(["data": [json.dictionaryObject]])
         
-        let operation = ParsingOperation(json: data, realm: RealmProvider.realm) { _, failed in
+        let operation = ParsingOperation(json: data, realm: RealmProvider().realm) { _, failed in
             response = failed
         }
         

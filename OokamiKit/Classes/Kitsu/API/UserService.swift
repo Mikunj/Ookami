@@ -37,7 +37,7 @@ public class UserService: BaseService {
                 return
             }
             
-            let parsingOp = ParsingOperation(json: json, realm: RealmProvider.realm) { objects, errors in
+            let parsingOp = ParsingOperation(json: json, realm: RealmProvider().realm) { objects, errors in
                 guard let users = objects?[User.typeString] else {
                     completion(nil, Errors.failedToParseUser)
                     return

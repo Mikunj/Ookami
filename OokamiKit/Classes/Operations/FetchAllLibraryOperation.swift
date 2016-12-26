@@ -64,7 +64,7 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
     
     /// Get the delete operation with the given entry ids
     func deleteOperation(withEntryIds ids: [Int]) -> DeleteEntryOperation {
-        return DeleteEntryOperation(userID: userID, type: type, ids: ids, mode: .notInArray, realm: RealmProvider.realm)
+        return DeleteEntryOperation(userID: userID, type: type, ids: ids, mode: .notInArray, realm: RealmProvider().realm)
     }
     
     /// Get the block operation which checks whether we can delete

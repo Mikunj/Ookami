@@ -18,7 +18,7 @@ class RealmGettableObjectSpec: QuickSpec {
             var realm: Realm!
             
             beforeEach {
-                realm = RealmProvider.realm()
+                realm = RealmProvider().realm()
             }
             
             afterEach {

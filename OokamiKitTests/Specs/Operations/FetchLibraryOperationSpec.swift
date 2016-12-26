@@ -36,7 +36,7 @@ class FetchLibraryOperationSpec: QuickSpec {
             afterEach {
                 OHHTTPStubs.removeAllStubs()
                 
-                let realm = RealmProvider.realm()
+                let realm = RealmProvider().realm()
                 try! realm.write {
                     realm.deleteAll()
                 }

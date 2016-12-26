@@ -50,7 +50,7 @@ extension GettableObject where T: Object {
     /// - Parameter id: The object id
     /// - Returns: A realm object for given id
     public static func get(withId id: Int) -> T? {
-        let r = RealmProvider.realm()
+        let r = RealmProvider().realm()
         return r.object(ofType: T.self, forPrimaryKey: id)
     }
     
@@ -61,7 +61,7 @@ extension GettableObject where T: Object {
     /// - Returns: A Realm result of the realm objects
     public static func get(withIds ids: [Int]) -> Results<T> {
         let key = T.primaryKey() ?? "id"
-        let r = RealmProvider.realm()
+        let r = RealmProvider().realm()
         return r.objects(T.self).filter("\(key) IN %@", ids)
     }
     
@@ -69,7 +69,7 @@ extension GettableObject where T: Object {
     ///
     /// - Returns: A Realm result of all realm objects
     public static func all() -> Results<T> {
-        let r = RealmProvider.realm()
+        let r = RealmProvider().realm()
         return r.objects(T.self)
     }
     

@@ -125,7 +125,7 @@ public class PaginatedLibrary {
     ///
     /// - Parameter json: The json object
     func parsingOperation(forJSON json: JSON) -> ParsingOperation {
-        return ParsingOperation(json: json, realm: RealmProvider.realm) { [weak self] parsed, badObjects in
+        return ParsingOperation(json: json, realm: RealmProvider().realm) { [weak self] parsed, badObjects in
             guard let strongSelf = self else { return }
             
             //We either parsed entries, or we didn't parse any.
@@ -160,11 +160,11 @@ public class PaginatedLibrary {
 
     //MARK: - Methods
     
-    /// Build a request for a link
+    /// Get the network request for an absolute link
     ///
-    /// - Parameter link: The link
+    /// - Parameter link: The absolute link
     /// - Returns: The request for the link
-    func buildRequest(for link: String) -> NetworkRequest {
+    func request(for link: String) -> NetworkRequest {
         //When we get the link, it should automatically have the baseURL tacked onto it, so we can get away with passing the full url to it
         return NetworkRequest(absoluteURL: link, method: .get)
     }
@@ -186,7 +186,7 @@ public class PaginatedLibrary {
             return
         }
         
-        perform(request: buildRequest(for: link!))
+        perform(request: request(for: link!))
     }
 
     /// Send out the original request

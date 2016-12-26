@@ -20,7 +20,7 @@ class AnimeSpec: QuickSpec {
             var testRealm: Realm!
             
             beforeEach {
-                testRealm = RealmProvider.realm()
+                testRealm = RealmProvider().realm()
             }
             
             afterEach {

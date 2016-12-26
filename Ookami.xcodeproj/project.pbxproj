@@ -404,24 +404,25 @@
 		248734451DCD490B002E7366 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				248734461DCD4910002E7366 /* Helper */,
 				242B2B431DE43E240002903B /* Kitsu */,
 				2473628E1DCF030B004B4AC5 /* Networking */,
 				24D28ECD1DD0151000773BED /* Operations */,
 				2470044D1DCD7A5A000D987C /* Protocols */,
-				242B2B491DE566E90002903B /* Ookami.swift */,
+				248734461DCD4910002E7366 /* Utility */,
 				24C8C6991E10E3F00048EB9D /* Constants.swift */,
+				242B2B491DE566E90002903B /* Ookami.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		248734461DCD4910002E7366 /* Helper */ = {
+		248734461DCD4910002E7366 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
 				24DAC2611DE59E8600279EE6 /* OokamiTokenStore.swift */,
 				248734471DCD491E002E7366 /* RealmProvider.swift */,
 			);
-			path = Helper;
+			name = Utility;
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		2494D9AB1DCC73F40032AC8E /* Extensions */ = {

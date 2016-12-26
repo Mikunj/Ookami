@@ -20,12 +20,12 @@ class LibraryGETRequestSpec: QuickSpec {
             var realm: Realm!
             
             beforeEach {
-                realm = RealmProvider.realm()
+                realm = RealmProvider().realm()
                 request = LibraryGETRequest(userID: 1, relativeURL: "/test", headers: ["test": "test"])
             }
             
             afterEach {
-                let realm = RealmProvider.realm()
+                let realm = RealmProvider().realm()
                 try! realm.write {
                     realm.deleteAll()
                 }

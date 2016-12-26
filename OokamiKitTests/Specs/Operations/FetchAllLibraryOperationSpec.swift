@@ -38,7 +38,7 @@ class FetchAllLibraryOperationSpec: QuickSpec {
                 queue.cancelAllOperations()
                 OHHTTPStubs.removeAllStubs()
                 
-                let realm = RealmProvider.realm()
+                let realm = RealmProvider().realm()
                 try! realm.write {
                     realm.deleteAll()
                 }
@@ -60,7 +60,7 @@ class FetchAllLibraryOperationSpec: QuickSpec {
                 }
                 
                 it("should delete entries not in ids array") {
-                    TestHelper.create(object: LibraryEntry.self, inRealm: RealmProvider.realm(), amount: 3) { index, object in
+                    TestHelper.create(object: LibraryEntry.self, inRealm: RealmProvider().realm(), amount: 3) { index, object in
                         object.id = index
                         object.userID = 1
                         

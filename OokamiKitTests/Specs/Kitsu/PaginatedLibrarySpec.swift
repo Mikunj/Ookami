@@ -59,7 +59,7 @@ private class StubPaginatedLibrary: PaginatedLibrary {
     }
     
     override func parsingOperation(forJSON json: JSON) -> ParsingOperation {
-        return StubParsingOperation(json: json, realm: RealmProvider.realm) { [weak self] parsed, badObjects in
+        return StubParsingOperation(json: json, realm: RealmProvider().realm) { [weak self] parsed, badObjects in
             guard let strongSelf = self else { return }
             
             let entries = parsed?["test"] as! [Int]? ?? []
@@ -94,7 +94,7 @@ class PaginatedLibrarySpec: QuickSpec {
             
             afterEach {
                 OHHTTPStubs.removeAllStubs()
-                let realm = RealmProvider.realm()
+                let realm = RealmProvider().realm()
                 try! realm.write {
                     realm.deleteAll()
                 }
