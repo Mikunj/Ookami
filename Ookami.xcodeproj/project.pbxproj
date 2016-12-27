@@ -59,6 +59,8 @@
 		24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABD1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
+		24BEC5BF1E1215DE0058F5AB /* CacheManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */; };
+		24BEC5C11E121CFB0058F5AB /* StubCacheObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */; };
 		24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C6991E10E3F00048EB9D /* Constants.swift */; };
 		24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69B1E10EBA70048EB9D /* Parser.swift */; };
 		24C8C69E1E10F4810048EB9D /* ParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69D1E10F4810048EB9D /* ParserSpec.swift */; };
@@ -179,6 +181,8 @@
 		24A258AD1DD9455100CC7561 /* PaginatedLibrarySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedLibrarySpec.swift; sourceTree = "<group>"; };
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
+		24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManagerSpec.swift; sourceTree = "<group>"; };
+		24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubCacheObject.swift; sourceTree = "<group>"; };
 		24C8C6991E10E3F00048EB9D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C8C69B1E10EBA70048EB9D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		24C8C69D1E10F4810048EB9D /* ParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserSpec.swift; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 				24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */,
 				24A258AD1DD9455100CC7561 /* PaginatedLibrarySpec.swift */,
 				24C8C69D1E10F4810048EB9D /* ParserSpec.swift */,
+				24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -481,6 +486,7 @@
 				24EEEF5C1DCCA53100869696 /* Helper.swift */,
 				24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */,
 				245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */,
+				24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -974,8 +980,10 @@
 				24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */,
 				24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */,
 				24DBE6F01DD42212003B7676 /* FetchLibraryOperationSpec.swift in Sources */,
+				24BEC5BF1E1215DE0058F5AB /* CacheManagerSpec.swift in Sources */,
 				24C8C69E1E10F4810048EB9D /* ParserSpec.swift in Sources */,
 				24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */,
+				24BEC5C11E121CFB0058F5AB /* StubCacheObject.swift in Sources */,
 				24DD48721DD6C2B4009378AC /* DeleteEntryOperationSpec.swift in Sources */,
 				242B2B481DE521880002903B /* AuthenticatorSpec.swift in Sources */,
 				24DBE6EA1DD2D058003B7676 /* LibraryGetRequestSpec.swift in Sources */,

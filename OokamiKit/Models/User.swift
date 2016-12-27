@@ -56,7 +56,7 @@ public class User: Object, Cacheable {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return []
+        return ["authenticator"]
     }
     
     /// MARK:- Cacheable

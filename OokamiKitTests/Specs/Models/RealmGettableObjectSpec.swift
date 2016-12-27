@@ -35,6 +35,7 @@ class RealmGettableObjectSpec: QuickSpec {
                     
                     let another = StubRealmObject.get(withId: 1)
                     expect(another).toNot(beNil())
+                    expect(another!.id).to(equal(1))
                 }
                 
                 it("should be able to fetch multiple objects from the database") {
