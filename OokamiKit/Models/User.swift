@@ -31,7 +31,7 @@ public class UserPastName: Object {
 
 }
 
-public class User: Object {
+public class User: Object, Cacheable {
     public dynamic var id = -1
     public dynamic var about = ""
     public dynamic var bio = ""
@@ -58,9 +58,28 @@ public class User: Object {
     override public static func ignoredProperties() -> [String] {
         return []
     }
+    
+    /// MARK:- Cacheable
+    public dynamic var localLastUpdate: Date?
+    var authenticator: Authenticator = Ookami.shared.authenticator
+    
 }
 
+extension User {
+    func canClearFromCache() -> Bool {
+        //Don't delete if this is the current user
+        return id != authenticator.currentUserID
+    }
+    
+    func willClearFromCache() {
+        //TODO: Delete UserPastName here
+    }
+}
+
+//MARK:- Gettable
 extension User: GettableObject { public typealias T = User }
+
+//MARK:- Parsable
 extension User: JSONParsable {
     
     public static var typeString: String { return "users" }

@@ -29,6 +29,26 @@ class LibraryEntrySpec: QuickSpec {
                 }
             }
             
+            context("Cache") {
+                it("should not be able to be cleared from cache if it's part of the current users library") {
+                    let authenticator = Authenticator(heimdallr: StubAuthHeimdallr())
+                    authenticator.currentUserID = 999
+                    
+                    let e = LibraryEntry()
+                    e.id = 1
+                    e.userID = 999
+                    e.authenticator = authenticator
+                    
+                    let bad = LibraryEntry()
+                    bad.id = 2
+                    bad.userID = 1000
+                    bad.authenticator = authenticator
+                    
+                    expect(e.canClearFromCache()).to(beFalse())
+                    expect(bad.canClearFromCache()).to(beTrue())
+                }
+            }
+            
             context("Storing") {
                 it("should be able to store if no other entry exists in the database") {
                     let e = LibraryEntry()

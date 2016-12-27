@@ -39,7 +39,7 @@ public class Media: Object {
     
 }
 
-public class LibraryEntry: Object {
+public class LibraryEntry: Object, Cacheable {
     
     public enum Status: String {
         case current
@@ -88,7 +88,7 @@ public class LibraryEntry: Object {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return ["user", "status"]
+        return ["user", "status", "authenticator"]
     }
     
     override public func canBeStored() -> Bool {
@@ -103,9 +103,31 @@ public class LibraryEntry: Object {
         
         return self.updatedAt >= dbEntry.updatedAt
     }
+    
+    //MARK:- Cacheable
+    public dynamic var localLastUpdate: Date?
+    var authenticator: Authenticator = Ookami.shared.authenticator
+    
 }
 
+extension LibraryEntry {
+    
+    func canClearFromCache() -> Bool {
+        let id = authenticator.currentUserID
+        
+        ///Don't delete entry if it's part of the current users library
+        return id == nil ? true : userID != id
+    }
+    
+    func willClearFromCache() {
+        //TODO: Delete Media here
+    }
+}
+
+//MARK:- Gettable
 extension LibraryEntry: GettableObject { public typealias T = LibraryEntry }
+
+//MARK:- Parsable
 extension LibraryEntry: JSONParsable {
     
     public static var typeString: String { return "libraryEntries" }

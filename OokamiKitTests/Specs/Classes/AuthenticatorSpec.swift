@@ -43,6 +43,7 @@ private class StubRequestHeimdallr: Heimdallr {
 private class StubAuthenticator: Authenticator {
     
     override func updateInfo(completion: @escaping (Error?) -> Void) {
+        self.currentUserID = 1
         completion(nil)
     }
     
@@ -88,12 +89,12 @@ class AuthenticatorSpec: QuickSpec {
                 
                 it("should not pass error if user is found") {
                     authenticator = Authenticator(heimdallr: StubRequestHeimdallr())
-                    authenticator?.userAPI = StubUserService()
-                    authenticator?.libraryAPI = StubLibraryService()
+                    authenticator!.userService = StubUserService()
+                    authenticator!.libraryService = StubLibraryService()
                     waitUntil { done in
-                        authenticator?.updateInfo { error in
+                        authenticator!.updateInfo { error in
                             expect(error).to(beNil())
-                            expect(authenticator?.currentUser).to(equal("test"))
+                            expect(authenticator?.currentUserID).to(equal(1))
                             done()
                         }
                     }
@@ -102,8 +103,8 @@ class AuthenticatorSpec: QuickSpec {
                 it("should pass error if no user is found") {
                     authenticator = Authenticator(heimdallr: StubRequestHeimdallr())
                     let e = NetworkClientError.error("generic error")
-                    authenticator?.userAPI = StubUserService(error: e)
-                    authenticator?.libraryAPI = StubLibraryService()
+                    authenticator?.userService = StubUserService(error: e)
+                    authenticator?.libraryService = StubLibraryService()
                     waitUntil { done in
                         authenticator?.updateInfo { error in
                             expect(error).toNot(beNil())
@@ -125,11 +126,11 @@ class AuthenticatorSpec: QuickSpec {
                     }
                 }
                 
-                it("should store the username if successful") {
+                it("should store the user id if successful") {
                     authenticator = StubAuthenticator(heimdallr: StubRequestHeimdallr())
                     authenticator!.authenticate(username: "test", password: "hi") { _ in
                     }
-                    expect(authenticator!.currentUser).toEventually(equal("test"))
+                    expect(authenticator!.currentUserID).toEventually(equal(1))
                     expect(authenticator!.isLoggedIn()).toEventually(beTrue())
                 }
                 
@@ -151,9 +152,9 @@ class AuthenticatorSpec: QuickSpec {
                     h.token = true
                     
                     authenticator = Authenticator(heimdallr: h)
-                    UserDefaults.standard.set("test", forKey: authenticator!.usernameKey)
+                    UserDefaults.standard.set(1, forKey: authenticator!.usernameKey)
                     
-                    expect(authenticator!.currentUser).to(equal("test"))
+                    expect(authenticator!.currentUserID).to(equal(1))
                     expect(authenticator!.isLoggedIn()).to(beTrue())
                     
                     authenticator!.logout()

@@ -22,24 +22,32 @@ public class Authenticator {
     let usernameKey = "kitsu_loggedin_user"
     
     //The user api
-    var userAPI = UserService()
+    var userService = UserService()
     
     //The library api
-    var libraryAPI = LibraryService()
+    var libraryService = LibraryService()
     
-    /// The name of the user that is logged in, nil if not logged in
-    public internal(set) var currentUser: String? {
+    /// The id of the user that is logged in, nil if not logged in
+    public internal(set) var currentUserID: Int? {
         get {
-            return UserDefaults.standard.string(forKey: self.usernameKey)
+            return UserDefaults.standard.integer(forKey: self.usernameKey)
         }
         
-        set(name) {
-            if name != nil {
-                UserDefaults.standard.set(name, forKey: self.usernameKey)
+        set(id) {
+            if id != nil {
+                UserDefaults.standard.set(id, forKey: self.usernameKey)
             } else {
                 UserDefaults.standard.removeObject(forKey: self.usernameKey)
             }
         }
+    }
+    
+    //The user object of the currently logged in user, nil if not logged in
+    public var currentUser: User? {
+        guard let id = currentUserID else {
+            return nil
+        }
+        return User.get(withId: id)
     }
     
     /// Create an authenticator
@@ -53,13 +61,13 @@ public class Authenticator {
     ///
     /// - Parameter completion: The completion block which gets called when user info has been updated
     public func updateInfo(completion: @escaping (Error?) -> Void) {
-        userAPI.getSelf { [weak self] user, error in
+        userService.getSelf { [weak self] user, error in
             guard let user = user else {
                 completion(error)
                 return
             }
-            self?.currentUser = user.name
-            self?.libraryAPI.getAll(userID: user.id, type: .anime) { _ in }
+            self?.currentUserID = user.id
+            self?.libraryService.getAll(userID: user.id, type: .anime) { _ in }
             //self?.libraryAPI.getAll(userID: user.id, type: .manga) { _ in }
             completion(nil)
         }
@@ -75,11 +83,6 @@ public class Authenticator {
         heimdallr.requestAccessToken(username: username, password: password) { result in
             switch result {
             case .success:
-                
-                //Temporarily store the username passed in as the logged in username, but after fetching the user info it should be updated
-                //Reason is that the user may also use the email inplace of the username, thus we wouldn't have the correct user slug/name
-                self.currentUser = username
-                
                 
                 // We only want to call the completion block after we are certain we have the correct user info
                 // updateInfo will pass back an error if it failed so we can directly pass it onto the completion block
@@ -98,7 +101,7 @@ public class Authenticator {
     /// Logout the current user
     public func logout() {
         heimdallr.clearAccessToken()
-        currentUser = nil
+        currentUserID = nil
     }
     
     /// Check if a user is logged in/

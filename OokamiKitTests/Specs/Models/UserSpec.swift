@@ -28,6 +28,24 @@ class UserSpec: QuickSpec {
                 }
             }
             
+            context("Cache") {
+                it("should not clear from cache if it is the current user") {
+                    let authenticator = Authenticator(heimdallr: StubAuthHeimdallr())
+                    authenticator.currentUserID = 1
+                    
+                    let u = User()
+                    u.id = 1
+                    u.authenticator = authenticator
+                    
+                    let bad = User()
+                    bad.id = 2
+                    bad.authenticator = authenticator
+                    
+                    expect(u.canClearFromCache()).to(beFalse())
+                    expect(bad.canClearFromCache()).to(beTrue())
+                }
+            }
+            
             context("Parsing") {
                 it("should parse a user JSON correctly") {
                     let u = User.parse(json: userJSON)

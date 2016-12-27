@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-public class Genre: Object {
+public class Genre: Object, Cacheable {
     
     public dynamic var id = -1
     public dynamic var slug = ""
@@ -24,6 +24,9 @@ public class Genre: Object {
     override public static func ignoredProperties() -> [String] {
         return []
     }
+    
+    /// MARK:- Cacheable
+    public dynamic var localLastUpdate: Date?
 }
 
 extension Genre: GettableObject { public typealias T = Genre }

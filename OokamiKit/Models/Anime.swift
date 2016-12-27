@@ -42,7 +42,7 @@ public class AnimeTitle: Object {
     }
 }
 
-public class Anime: Object {
+public class Anime: Object, Cacheable {
     
     public dynamic var id = -1
     public dynamic var slug = ""
@@ -75,9 +75,26 @@ public class Anime: Object {
         return []
     }
     
+    /// MARK:- Cacheable
+    public dynamic var localLastUpdate: Date?
+    
 }
 
+extension Anime {
+    func canClearFromCache() -> Bool {
+        //TODO: Don't delete if anime is part of current user library
+        return true
+    }
+    
+    func willClearFromCache() {
+        //TODO: Delete AnimeTitle here
+    }
+}
+
+//MARK:- Gettable
 extension Anime: GettableObject { public typealias T = Anime }
+
+//MARK:- Parsable
 extension Anime: JSONParsable {
     
     public static var typeString: String { return "anime" }
