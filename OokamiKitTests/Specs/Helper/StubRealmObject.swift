@@ -13,6 +13,7 @@ import SwiftyJSON
 
 class StubRealmObject: Object {
     dynamic var id = -1
+    dynamic var data = ""
     
     override static func primaryKey() -> String {
         return "id"

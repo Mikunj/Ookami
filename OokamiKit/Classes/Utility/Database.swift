@@ -85,7 +85,7 @@ public class Database {
     /// Checks if an object is `Cacheable` and updates the `lastLocalUpdate`.
     ///
     /// - Parameter object: The object
-    func updateCacheable(_ object: Object) {
+    private func updateCacheable(_ object: Object) {
         guard var c = object as? Cacheable else {
             return
         }

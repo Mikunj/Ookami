@@ -62,6 +62,7 @@
 		24BEC5BF1E1215DE0058F5AB /* CacheManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */; };
 		24BEC5C11E121CFB0058F5AB /* StubCacheObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */; };
 		24BEC5C31E1341F40058F5AB /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C21E1341F40058F5AB /* Database.swift */; };
+		24BEC5C51E1381460058F5AB /* DatabaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */; };
 		24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C6991E10E3F00048EB9D /* Constants.swift */; };
 		24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69B1E10EBA70048EB9D /* Parser.swift */; };
 		24C8C69E1E10F4810048EB9D /* ParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69D1E10F4810048EB9D /* ParserSpec.swift */; };
@@ -185,6 +186,7 @@
 		24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManagerSpec.swift; sourceTree = "<group>"; };
 		24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubCacheObject.swift; sourceTree = "<group>"; };
 		24BEC5C21E1341F40058F5AB /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseSpec.swift; sourceTree = "<group>"; };
 		24C8C6991E10E3F00048EB9D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C8C69B1E10EBA70048EB9D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		24C8C69D1E10F4810048EB9D /* ParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserSpec.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				24A258AD1DD9455100CC7561 /* PaginatedLibrarySpec.swift */,
 				24C8C69D1E10F4810048EB9D /* ParserSpec.swift */,
 				24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */,
+				24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -978,6 +981,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				245E59A81DD1D5A1002375A4 /* StubRealmObject.swift in Sources */,
+				24BEC5C51E1381460058F5AB /* DatabaseSpec.swift in Sources */,
 				2487343C1DCCC183002E7366 /* AnimeSpec.swift in Sources */,
 				24A258AE1DD9455100CC7561 /* PaginatedLibrarySpec.swift in Sources */,
 				24DD48761DD6D874009378AC /* FetchAllLibraryOperationSpec.swift in Sources */,
