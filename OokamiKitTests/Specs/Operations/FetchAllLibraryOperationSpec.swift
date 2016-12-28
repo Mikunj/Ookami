@@ -35,7 +35,9 @@ class FetchAllLibraryOperationSpec: QuickSpec {
             context("cancelling") {
                 it("should not call the callback function") {
                     var called: Bool = false
-                    let operation = FetchAllLibraryOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client, onFetch: { _ in }, completion: { _ in
+                    let operation = FetchAllLibraryOperation(client: client, request: { _ in
+                        return KitsuLibraryRequest(userID: 1, type: .anime)
+                    }, onFetch: { _ in }, completion: { _ in
                         called = true
                     })
                     waitUntil { done in
@@ -60,7 +62,9 @@ class FetchAllLibraryOperationSpec: QuickSpec {
                     
                     var objects: [Object] = []
                     
-                    let operation = FetchAllLibraryOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client, onFetch: {
+                    let operation = FetchAllLibraryOperation(client: client, request: { _ in
+                        return KitsuLibraryRequest(userID: 1, type: .anime)
+                    }, onFetch: {
                         objects.append(contentsOf: $0)
                     }, completion: { _ in })
                     
@@ -83,7 +87,9 @@ class FetchAllLibraryOperationSpec: QuickSpec {
                     var objects: [Object] = []
                     
                     
-                    let operation = FetchAllLibraryOperation(relativeURL: "/entries", userID: 1, type: .anime, client: client, onFetch: {
+                    let operation = FetchAllLibraryOperation(client: client, request: { _ in
+                        return KitsuLibraryRequest(userID: 1, type: .anime)
+                    }, onFetch: {
                         objects.append(contentsOf: $0)
                     }, completion: { _ in })
                     

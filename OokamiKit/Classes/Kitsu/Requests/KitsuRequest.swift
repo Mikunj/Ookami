@@ -21,6 +21,9 @@ public class KitsuRequest {
     //Request specific variables
     public internal(set) var includes: [String] = []
     public internal(set) var filters: [String: Any] = [:]
+    
+    //TODO: Allow sorting on multiple attributes
+    //refer-to: http://docs.kitsu17.apiary.io/#introduction/json-api/sorting
     public internal(set) var sort: String?
     
     /// Create a kitsu GET request
@@ -28,6 +31,7 @@ public class KitsuRequest {
     /// - Parameters:
     ///   - url: The relative url endpoint of the request
     ///   - headers: Any headers to include with the request
+    ///   - needsAuth: Whether the request needs authentication
     public init(relativeURL url: String, headers: HTTPHeaders? = nil, needsAuth: Bool = false) {
         self.url = url
         self.headers = headers
@@ -89,6 +93,8 @@ public class KitsuRequest {
     }
     
     /// Create a copy of the request
+    ///
+    /// TODO: Find a better way to implement this because currently everytime you subclass, you have to reimplement this function in that subclass
     ///
     /// - Returns: The copied request
     public func copy() -> KitsuRequest {

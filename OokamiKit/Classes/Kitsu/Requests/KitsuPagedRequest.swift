@@ -1,5 +1,5 @@
 //
-//  PagedKitsuRequest.swift
+//  KitsuPagedRequest.swift
 //  Ookami
 //
 //  Created by Maka on 28/12/16.
@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class PagedKitsuRequest: KitsuRequest {
+public class KitsuPagedRequest: KitsuRequest {
     
     public struct Page {
         var offset: Int = 0
@@ -39,7 +39,7 @@ public class PagedKitsuRequest: KitsuRequest {
     ///
     /// - Returns: The copied request
     override public func copy() -> KitsuRequest {
-        let request = PagedKitsuRequest(relativeURL: url, headers: headers, needsAuth: needsAuth)
+        let request = KitsuPagedRequest(relativeURL: url, headers: headers, needsAuth: needsAuth)
         request.includes = includes
         request.filters = filters
         request.sort = sort

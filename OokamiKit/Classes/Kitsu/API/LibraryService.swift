@@ -22,15 +22,13 @@ public class LibraryService: BaseService {
     ///   - userID: The user id
     ///   - type: The type of entries
     ///   - status: The status to fetch
+    ///   - since: A date, only entries whos lastUpdate time is more recent than this date will be recieved.
     ///   - onFetch: The callback block which gets called anytime entries are fetched. This can be through calls such as `next()` on the returned `PaginatedLibrary` instance.
     /// - Returns: A Paginated Library instance which can be used to make further calls.
-    public func getPaginated(userID: Int, type: Media.MediaType, status: LibraryEntry.Status, onFetch: @escaping ([LibraryEntry]?, Error?) -> Void) -> PaginatedLibrary {
+    public func getPaginated(userID: Int, type: Media.MediaType, status: LibraryEntry.Status, since: Date = Date(timeIntervalSince1970: 0), onFetch: @escaping ([LibraryEntry]?, Error?) -> Void) -> PaginatedLibrary {
         
         //Make the request
-        let request = PagedKitsuRequest(relativeURL: Constants.Endpoints.libraryEntries)
-        request.filter(key: "user_id", value: userID)
-        request.filter(key: "media_type", value: type.toLibraryMediaTypeString())
-        request.filter(key: "status", value: status.rawValue)
+        let request = KitsuLibraryRequest(userID: userID, type: type, status: status, since: since)
         request.include("media", "user")
         
         let library = PaginatedLibrary(request: request, client: client, completion: { objects, error in
@@ -60,19 +58,20 @@ public class LibraryService: BaseService {
     ///
     /// This will also add the entries to the database.
     ///
+    /// Note that this will disregard the `since` date when returning `Results<LibraryEntry>`
+    ///
     ///
     /// - Parameters:
     ///   - userID: The user id.
     ///   - type: The type of library to fetch.
     ///   - status: The status to fetch.
+    ///   - since: A date, only entries whos lastUpdate time is more recent than this date will be recieved.
     ///   - completion: A block that gets called once the request finishes or an error occured.
     /// - Returns: A Realm Result of LibraryEntries which then can be used for tracking changes, filtering etc
-    @discardableResult public func get(userID: Int, type: Media.MediaType, status: LibraryEntry.Status, completion: @escaping (Error?) -> Void) -> Results<LibraryEntry> {
+    @discardableResult public func get(userID: Int, type: Media.MediaType, status: LibraryEntry.Status, since: Date = Date(timeIntervalSince1970: 0), completion: @escaping (Error?) -> Void) -> Results<LibraryEntry> {
+        
         //Make the request
-        let request = PagedKitsuRequest(relativeURL: Constants.Endpoints.libraryEntries)
-        request.filter(key: "user_id", value: userID)
-        request.filter(key: "media_type", value: type.toLibraryMediaTypeString())
-        request.filter(key: "status", value: status.rawValue)
+        let request = KitsuLibraryRequest(userID: userID, type: type, status: status, since: since)
         request.include("media", "user")
         
         let operation = FetchLibraryOperation(request: request, client: client, onFetch: { objects in
@@ -91,13 +90,21 @@ public class LibraryService: BaseService {
     ///
     /// This adds the entries to the database.
     ///
+    /// Note that this will disregard the `since` date when returning `Results<LibraryEntry>`
+    ///
     /// - Parameters:
     ///   - userID: The user
     ///   - type: The type of entries to fetch
+    ///   - since: A date, only entries whos lastUpdate time is more recent than this date will be recieved.
     ///   - completion: The completion block which passes back an array of tuples of type `(LibraryEntry.Status, Error)`, which are set when fetching a specific status fails
     /// - Returns: A Realm Result of LibraryEntries which then can be used for tracking changes, filtering etc
-    @discardableResult public func getAll(userID: Int, type: Media.MediaType, completion: @escaping ([(LibraryEntry.Status, Error)]) -> Void) -> Results<LibraryEntry> {
-        let operation = FetchAllLibraryOperation(relativeURL: Constants.Endpoints.libraryEntries, userID: userID, type: type, client: client, onFetch: { objects in
+    @discardableResult public func getAll(userID: Int, type: Media.MediaType, since: Date = Date(timeIntervalSince1970: 0), completion: @escaping ([(LibraryEntry.Status, Error)]) -> Void) -> Results<LibraryEntry> {
+        
+        let operation = FetchAllLibraryOperation(client: client, request: { status in
+            let request = KitsuLibraryRequest(userID: userID, type: type, status: status, since: since, needsAuth: true)
+            request.include("media", "user")
+            return request
+        }, onFetch: { objects in
             
             //Add the objects to the database
             self.database.addOrUpdate(objects)

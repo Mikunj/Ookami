@@ -84,7 +84,7 @@ class AuthenticatorSpec: QuickSpec {
                 
                 class StubLibraryService: LibraryService {
                     
-                    override func getAll(userID: Int, type: Media.MediaType, completion: @escaping ([(LibraryEntry.Status, Error)]) -> Void) -> Results<LibraryEntry> {
+                    override func getAll(userID: Int, type: Media.MediaType, since: Date = Date(timeIntervalSince1970: 0), completion: @escaping ([(LibraryEntry.Status, Error)]) -> Void) -> Results<LibraryEntry> {
                         completion([])
                         return LibraryEntry.all()
                     }

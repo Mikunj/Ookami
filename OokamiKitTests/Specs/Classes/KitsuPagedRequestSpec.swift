@@ -1,5 +1,5 @@
 //
-//  PagedKitsuRequestSpec.swift
+//  KitsuPagedRequestSpec.swift
 //  Ookami
 //
 //  Created by Maka on 28/12/16.
@@ -10,14 +10,14 @@ import Quick
 import Nimble
 @testable import OokamiKit
 
-class PagedKitsuRequestSpec: QuickSpec {
+class KitsuPagedRequestSpec: QuickSpec {
     
     override func spec() {
-        describe("Paged Kitsu Request") {
+        describe("Kitsu Paged Request") {
             
             context("Modifiers") {
                 it("should correctly modify page limit") {
-                    let request = PagedKitsuRequest(relativeURL: "/test")
+                    let request = KitsuPagedRequest(relativeURL: "/test")
                     request.page(limit: 1)
                     expect(request.page.limit).to(equal(1))
                     
@@ -26,7 +26,7 @@ class PagedKitsuRequestSpec: QuickSpec {
                 }
                 
                 it("should correctly modify page offset") {
-                    let request = PagedKitsuRequest(relativeURL: "/test")
+                    let request = KitsuPagedRequest(relativeURL: "/test")
                     request.page(offset: 1)
                     expect(request.page.offset).to(equal(1))
                     
@@ -37,7 +37,7 @@ class PagedKitsuRequestSpec: QuickSpec {
             
             context("Building") {
                 it("should correctly return the parameters") {
-                    let request = PagedKitsuRequest(relativeURL: "/test")
+                    let request = KitsuPagedRequest(relativeURL: "/test")
                
                     request.page(limit: 1)
                     request.page(offset: 1)
@@ -56,8 +56,8 @@ class PagedKitsuRequestSpec: QuickSpec {
             
             context("Copying") {
                 it("should make a clean copy") {
-                    let original = PagedKitsuRequest(relativeURL: "/test")
-                    let request = original.copy() as! PagedKitsuRequest
+                    let original = KitsuPagedRequest(relativeURL: "/test")
+                    let request = original.copy() as! KitsuPagedRequest
                     request.filter(key: "abc", value: 1)
                     request.include("abc")
                     request.sort(by: "bob")

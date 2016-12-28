@@ -48,7 +48,7 @@ class FetchLibraryOperationSpec: QuickSpec {
                         return OHHTTPStubsResponse(error: networkError)
                     }
                     
-                    let request = PagedKitsuRequest(relativeURL: "/anime")
+                    let request = KitsuLibraryRequest(userID: 1, type: .anime)
                     let operation = FetchLibraryOperation(request: request, client: client, onFetch: { _ in
                         fetchCalled = true
                     }, completion: { e in
@@ -74,7 +74,7 @@ class FetchLibraryOperationSpec: QuickSpec {
                     var objects: [Object] = []
                     var error: Error?
                     
-                    let request = PagedKitsuRequest(relativeURL: "/anime")
+                    let request = KitsuLibraryRequest(userID: 1, type: .anime)
                     let operation = StubFetchOperation(request: request, client: client, onFetch: { f in
                         objects = f
                     }, completion: { e in
@@ -95,7 +95,7 @@ class FetchLibraryOperationSpec: QuickSpec {
                     it("should not continue fetching if operation was cancelled") {
                         var calledCompletion: Bool = false
                         
-                        let request = PagedKitsuRequest(relativeURL: "/anime")
+                        let request = KitsuLibraryRequest(userID: 1, type: .anime)
                         let operation = StubFetchOperation(request: request, client: client, onFetch: { _ in }, completion: { _ in
                             calledCompletion = true
                         })

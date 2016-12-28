@@ -9,6 +9,21 @@ import Foundation
 
 extension Date {
     
+    //An iso-8601 formatter
+    static let iso8601Formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        return formatter
+    }()
+    
+    /// The ISO8601 string repreentation for the date
+    var iso8601: String {
+        return Date.iso8601Formatter.string(from: self)
+    }
+    
     /// Convert a String to a Date
     ///
     /// - Parameter dateString: The String

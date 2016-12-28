@@ -61,14 +61,14 @@ class PaginatedLibrarySpec: QuickSpec {
     override func spec() {
         
         var client: NetworkClient!
-        var request: PagedKitsuRequest!
+        var request: KitsuLibraryRequest!
         
         describe("Paginated Library") {
             
             beforeEach {
                 
                 client = NetworkClient(baseURL: "http://kitsu.io", heimdallr: StubAuthHeimdallr())
-                request = PagedKitsuRequest(relativeURL: "/library-entry")
+                request = KitsuLibraryRequest(userID: 1, type: .anime)
                 
                 //Stub the network to return JSON data
                 stub(condition: isHost("kitsu.io")) { _ in
