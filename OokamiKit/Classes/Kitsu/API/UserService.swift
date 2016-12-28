@@ -10,12 +10,6 @@ import Foundation
 
 public class UserService: BaseService {
     
-    //Errors
-    public enum Errors: Error {
-        case failedToParseUser
-        case invalidJSONRecieved
-    }
-    
     //MARK: GET
     public typealias UserCompletion = (User?, Error?) -> Void
     
@@ -26,32 +20,27 @@ public class UserService: BaseService {
     ///   - completion: The completion block which passes back a user or error if it occured
     func get(request: NetworkRequest, completion: @escaping UserCompletion) {
         //TODO: Maybe abstarct this out to NetworkParsingOperation which combines network operation and parsing operation
-        /*let operation = NetworkOperation(request: request, client: client) { json, error in
+        let operation = NetworkOperation(request: request, client: client) { json, error in
             guard error == nil else {
                 completion(nil, error)
                 return
             }
             
             guard let json = json else {
-                completion(nil, Errors.invalidJSONRecieved)
+                completion(nil, ServiceError.error(description: "Invalid JSON recieved"))
                 return
             }
             
-            let parsingOp = ParsingOperation(json: json, realm: RealmProvider().realm) { objects, errors in
-                guard let users = objects?[User.typeString] else {
-                    completion(nil, Errors.failedToParseUser)
-                    return
-                }
-                
-                //Get the user we parsed
-                let id: Int = users.first as! Int
-                completion(User.get(withId: id), nil)
-                
-            }
-            self.queue.addOperation(parsingOp)
+            let parsed = Parser().parse(json: json)
+            self.database.addOrUpdate(parsed)
+            
+            //Get the user we parsed
+            let user = parsed.first { $0 is User } as? User
+            completion(user, nil)
+            
         }
         
-        queue.addOperation(operation)*/
+        queue.addOperation(operation)
     }
     
     /// Get a user with the given id

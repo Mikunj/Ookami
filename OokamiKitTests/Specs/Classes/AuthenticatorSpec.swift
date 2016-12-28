@@ -11,6 +11,7 @@ import Nimble
 @testable import OokamiKit
 @testable import Heimdallr
 import Result
+import RealmSwift
 
 private class StubRequestHeimdallr: Heimdallr {
     
@@ -82,9 +83,12 @@ class AuthenticatorSpec: QuickSpec {
                 }
                 
                 class StubLibraryService: LibraryService {
-                    override func getAll(userID: Int, type: Media.MediaType, completion: @escaping ([(LibraryEntry.Status, Error)]) -> Void) {
+                    
+                    override func getAll(userID: Int, type: Media.MediaType, completion: @escaping ([(LibraryEntry.Status, Error)]) -> Void) -> Results<LibraryEntry> {
                         completion([])
+                        return LibraryEntry.all()
                     }
+                    
                 }
                 
                 it("should not pass error if user is found") {

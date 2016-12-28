@@ -6,8 +6,8 @@
 //  Copyright © 2016 Mikunj Varsani. All rights reserved.
 //
 
-import Quick
 import Nimble
+import Quick
 @testable import OokamiKit
 import RealmSwift
 

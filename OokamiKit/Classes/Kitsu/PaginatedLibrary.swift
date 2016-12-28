@@ -50,7 +50,7 @@ public enum PaginatedLibraryError : Error {
 /// E.g nextLink = 5, library.next() -> fails, nextLink will still be 5, thus calling next again will try perform the request again
 public class PaginatedLibrary {
     
-    /// The completion block type, return the ids of the fetched entries on the current page, or an Error if something went wrong
+    /// The completion block type, return the the fetched objects on the current page, or an Error if something went wrong
     public typealias PaginatedLibraryCompletion = ([Object]?, Error?) -> Void
     
     /// The JSON Parser
@@ -85,7 +85,7 @@ public class PaginatedLibrary {
     /// - Parameters:
     ///   - request: The paged kitsu request for the library
     ///   - client: The client to execute request on
-    ///   - completion: The completion block, returns the fetched entries and related objects on the current page, or an Error if something went wrong
+    ///   - completion: The completion block, returns the fetched entries and related objects on the current page, or an Error if something went wrong.
     ///                 This gets called everytime a page of entries is recieved.
     ///                 This can be through calls such as `next()`, `prev()` etc ...
     public init(request: PagedKitsuRequest, client: NetworkClientProtocol, completion: @escaping PaginatedLibraryCompletion) {

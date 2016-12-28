@@ -10,6 +10,13 @@ import Foundation
 
 public class BaseService {
     
+    public enum ServiceError: Error {
+        case error(description: String)
+    }
+    
+    ///The database to use
+    public var database: Database = Database()
+    
     //The operation queue to use
     public internal(set) var queue: OperationQueue
     

@@ -20,6 +20,14 @@ public class Media: Object {
     public enum MediaType: String {
         case anime
         case manga
+        
+        //TODO: Replace this when library accepts type value that is not case-sensitive
+        func toLibraryMediaTypeString() -> String {
+            switch self {
+            case .anime: return "Anime"
+            case .manga: return "Manga"
+            }
+        }
     }
     
     public dynamic var entryID = -1

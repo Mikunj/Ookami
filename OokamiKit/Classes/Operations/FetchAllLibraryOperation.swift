@@ -51,7 +51,6 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
     /// The type of library being fetched
     let type: Media.MediaType
     
-    
     /// Create a library operation to fetch all of the users library for a given type
     ///
     /// - Parameters:
@@ -70,17 +69,6 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
         self.type = type
     }
     
-    /// Get the raw string filter for meda type
-    ///
-    /// - Parameter type: The media type
-    /// - Returns: The raw string value of the filter
-    private func rawString(for type: Media.MediaType) -> String {
-        switch type {
-        case .anime: return "Anime"
-        case .manga: return "Manga"
-        }
-    }
-    
     override public func main() {
         var operations: [Operation] = []
         
@@ -93,7 +81,7 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
             //Make the request
             let request = PagedKitsuRequest(relativeURL: url)
             request.filter(key: "user_id", value: userID)
-            request.filter(key: "media_type", value: rawString(for: type))
+            request.filter(key: "media_type", value: type.toLibraryMediaTypeString())
             request.filter(key: "status", value: status.rawValue)
             request.include("media", "user")
             
