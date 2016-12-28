@@ -63,6 +63,8 @@
 		24BEC5C11E121CFB0058F5AB /* StubCacheObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */; };
 		24BEC5C31E1341F40058F5AB /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C21E1341F40058F5AB /* Database.swift */; };
 		24BEC5C51E1381460058F5AB /* DatabaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */; };
+		24BEC5C71E138C350058F5AB /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C61E138C350058F5AB /* UserHelper.swift */; };
+		24BEC5C91E138E7F0058F5AB /* UserHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C81E138E7F0058F5AB /* UserHelperSpec.swift */; };
 		24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C6991E10E3F00048EB9D /* Constants.swift */; };
 		24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69B1E10EBA70048EB9D /* Parser.swift */; };
 		24C8C69E1E10F4810048EB9D /* ParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69D1E10F4810048EB9D /* ParserSpec.swift */; };
@@ -187,6 +189,8 @@
 		24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubCacheObject.swift; sourceTree = "<group>"; };
 		24BEC5C21E1341F40058F5AB /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseSpec.swift; sourceTree = "<group>"; };
+		24BEC5C61E138C350058F5AB /* UserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
+		24BEC5C81E138E7F0058F5AB /* UserHelperSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHelperSpec.swift; sourceTree = "<group>"; };
 		24C8C6991E10E3F00048EB9D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C8C69B1E10EBA70048EB9D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		24C8C69D1E10F4810048EB9D /* ParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserSpec.swift; sourceTree = "<group>"; };
@@ -273,11 +277,12 @@
 			isa = PBXGroup;
 			children = (
 				242B2B471DE521880002903B /* AuthenticatorSpec.swift */,
+				24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */,
+				24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */,
 				24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */,
 				24A258AD1DD9455100CC7561 /* PaginatedLibrarySpec.swift */,
 				24C8C69D1E10F4810048EB9D /* ParserSpec.swift */,
-				24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */,
-				24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */,
+				24BEC5C81E138E7F0058F5AB /* UserHelperSpec.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				248734471DCD491E002E7366 /* RealmProvider.swift */,
 				243C088E1E11FBD800C44888 /* CacheManager.swift */,
 				24BEC5C21E1341F40058F5AB /* Database.swift */,
+				24BEC5C61E138C350058F5AB /* UserHelper.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -952,6 +958,7 @@
 				2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */,
 				24DD48741DD6CDED009378AC /* FetchAllLibraryOperation.swift in Sources */,
 				2473628B1DCF0181004B4AC5 /* NetworkRequestProtocol.swift in Sources */,
+				24BEC5C71E138C350058F5AB /* UserHelper.swift in Sources */,
 				2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */,
 				243C088F1E11FBD800C44888 /* CacheManager.swift in Sources */,
 				24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */,
@@ -999,6 +1006,7 @@
 				24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */,
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,
 				247362951DCF0F1C004B4AC5 /* NetworkClientSpec.swift in Sources */,
+				24BEC5C91E138E7F0058F5AB /* UserHelperSpec.swift in Sources */,
 				2414189E1DCDE00400AF1AEA /* LibraryEntrySpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

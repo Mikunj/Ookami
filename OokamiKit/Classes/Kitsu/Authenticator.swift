@@ -19,7 +19,7 @@ public class Authenticator {
     let heimdallr: Heimdallr
     
     /// The key used to store the username in user defaults
-    let usernameKey = "kitsu_loggedin_user"
+    let userIDKey: String
     
     //The user api
     var userService = UserService()
@@ -30,14 +30,14 @@ public class Authenticator {
     /// The id of the user that is logged in, nil if not logged in
     public internal(set) var currentUserID: Int? {
         get {
-            return UserDefaults.standard.integer(forKey: self.usernameKey)
+            return UserDefaults.standard.integer(forKey: self.userIDKey)
         }
         
         set(id) {
             if id != nil {
-                UserDefaults.standard.set(id, forKey: self.usernameKey)
+                UserDefaults.standard.set(id, forKey: self.userIDKey)
             } else {
-                UserDefaults.standard.removeObject(forKey: self.usernameKey)
+                UserDefaults.standard.removeObject(forKey: self.userIDKey)
             }
         }
     }
@@ -53,8 +53,10 @@ public class Authenticator {
     /// Create an authenticator
     ///
     /// - Parameter heimdallr: The heimdallr instance configured properley for authentication.
-    public init(heimdallr: Heimdallr) {
+    /// - Parameter userIDKey: The key used for storing the userID
+    public init(heimdallr: Heimdallr, userIDKey: String = "kitsu_loggedin_user") {
         self.heimdallr = heimdallr
+        self.userIDKey = userIDKey
     }
     
     /// Update the information for the current logged in user

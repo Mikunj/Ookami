@@ -47,6 +47,19 @@ class LibraryEntrySpec: QuickSpec {
                     expect(e.canClearFromCache()).to(beFalse())
                     expect(bad.canClearFromCache()).to(beTrue())
                 }
+                
+                it("should delete media when being cleared from cache") {
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 1) { index, entry in
+                        entry.id = 1
+                        entry.userID = 1
+                        let type: Media.MediaType = .anime
+                        entry.media = Media(value: [entry.id, 2, type.rawValue])
+                    }
+                    
+                    expect(LibraryEntry.get(withId: 1)?.media).toNot(beNil())
+                    LibraryEntry.get(withId: 1)!.willClearFromCache()
+                    expect(LibraryEntry.get(withId: 1)?.media).to(beNil())
+                }
             }
             
             context("Storing") {

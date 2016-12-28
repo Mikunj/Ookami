@@ -20,12 +20,52 @@ class AnimeSpec: QuickSpec {
             var testRealm: Realm!
             
             beforeEach {
+                UserHelper.authenticator = Authenticator(heimdallr: StubAuthHeimdallr(), userIDKey: "anime-spec-key")
                 testRealm = RealmProvider().realm()
             }
             
             afterEach {
+                UserHelper.authenticator.currentUserID = nil
                 try! testRealm.write {
                     testRealm.deleteAll()
+                }
+            }
+            
+            context("Cacheable") {
+                it("should not clear from cache if anime is in users library") {
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 1) { _, entry in
+                        entry.id = 1
+                        entry.userID = 1
+                        entry.media = Media(value: [entry.id, 1, Media.MediaType.anime.rawValue])
+                    }
+                    
+                    UserHelper.authenticator.currentUserID = 1
+                    
+                    let anime = Anime()
+                    anime.id = 1
+                    
+                    let bad = Anime()
+                    bad.id = 2
+                    
+                    expect(anime.canClearFromCache()).to(beFalse())
+                    expect(bad.canClearFromCache()).to(beTrue())
+                }
+                
+                it("should delete its titles when clearing from cache") {
+                    TestHelper.create(object: Anime.self, inRealm: testRealm, amount: 1) { _, anime in
+                        anime.id = 1
+                        
+                        for key in ["en", "jp"] {
+                            let title = AnimeTitle()
+                            title.key = key
+                            title.animeId = anime.id
+                            anime.titles.append(title)
+                        }
+                    }
+                    
+                    expect(Anime.get(withId: 1)?.titles).to(haveCount(2))
+                    Anime.get(withId: 1)!.willClearFromCache()
+                    expect(Anime.get(withId: 1)?.titles).to(haveCount(0))
                 }
             }
             

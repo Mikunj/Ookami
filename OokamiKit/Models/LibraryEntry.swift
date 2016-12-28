@@ -120,7 +120,10 @@ extension LibraryEntry {
     }
     
     func willClearFromCache() {
-        //TODO: Delete Media here
+        //Delete Media here
+        if let media = media {
+            Database().delete(media)
+        }
     }
 }
 

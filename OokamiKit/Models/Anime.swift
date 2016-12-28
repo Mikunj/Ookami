@@ -82,12 +82,15 @@ public class Anime: Object, Cacheable {
 
 extension Anime {
     func canClearFromCache() -> Bool {
-        //TODO: Don't delete if anime is part of current user library
-        return true
+        //Don't delete if anime is part of current user library
+        let hasAnime = UserHelper.currentUserHas(media: .anime, id: id)
+        return !hasAnime
     }
     
     func willClearFromCache() {
-        //TODO: Delete AnimeTitle here
+        //Delete anime titles
+        let titleArray = Array(titles)
+        titleArray.forEach { Database().delete($0) }
     }
 }
 
