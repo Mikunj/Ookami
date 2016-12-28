@@ -10,6 +10,9 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+//Note: We can make it so FetchAllLibraryOperation recieves a request from a (LibraryEntry.Status) -> PagedKitsuRequest block so that it is not the one to create the request, rather it is left upon the user to provide the neccessary data.
+// This is advantageos because we may want to fetch a full library with different filters or includes.
+
 /// Operation to fetch all the the entries in a specific library
 /// This will also delete any library entries that were not recieved (if everything succeeds)
 public class FetchAllLibraryOperation: AsynchronousOperation {
@@ -67,6 +70,17 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
         self.type = type
     }
     
+    /// Get the raw string filter for meda type
+    ///
+    /// - Parameter type: The media type
+    /// - Returns: The raw string value of the filter
+    private func rawString(for type: Media.MediaType) -> String {
+        switch type {
+        case .anime: return "Anime"
+        case .manga: return "Manga"
+        }
+    }
+    
     override public func main() {
         var operations: [Operation] = []
         
@@ -75,9 +89,13 @@ public class FetchAllLibraryOperation: AsynchronousOperation {
         
         //Go through each of the statuses and make the operations
         statuses.keys.forEach { status in
-            let request = LibraryGETRequest(userID: userID, relativeURL: url)
-            request.filter([.media(type: type), .status(status)])
-            request.include([.genres, .user])
+            
+            //Make the request
+            let request = PagedKitsuRequest(relativeURL: url)
+            request.filter(key: "user_id", value: userID)
+            request.filter(key: "media_type", value: rawString(for: type))
+            request.filter(key: "status", value: status.rawValue)
+            request.include("media", "user")
             
             let operation = FetchLibraryOperation(request: request, client: client, onFetch: onFetch, completion: { error in
                 

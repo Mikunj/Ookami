@@ -14,7 +14,7 @@ import SwiftyJSON
 public class FetchLibraryOperation: AsynchronousOperation {
     
     //The request
-    let request: LibraryGETRequest
+    let request: PagedKitsuRequest
     
     /// The completion block which is called at the end
     public typealias FetchCompleteBlock = (Error?) -> Void
@@ -42,8 +42,8 @@ public class FetchLibraryOperation: AsynchronousOperation {
     ///     - client: The network client to use for executing the request
     ///     - onFetch: A callback which gets called everytime entries are fetched, and return entries aswell as related objects. This can be called multiple times.
     ///     - completion: The completion block which passes an error if failed to fetch
-    public init(request: LibraryGETRequest, client: NetworkClientProtocol, onFetch: @escaping OnFetchBlock, completion: @escaping FetchCompleteBlock) {
-        self.request = request.copy() as! LibraryGETRequest
+    public init(request: PagedKitsuRequest, client: NetworkClientProtocol, onFetch: @escaping OnFetchBlock, completion: @escaping FetchCompleteBlock) {
+        self.request = request.copy() as! PagedKitsuRequest
         self.fetchComplete = completion
         self.onFetch = onFetch
         self.client = client

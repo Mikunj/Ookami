@@ -79,8 +79,6 @@
 		24DAC2621DE59E8600279EE6 /* OokamiTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DAC2611DE59E8600279EE6 /* OokamiTokenStore.swift */; };
 		24DAC2641DE69A9200279EE6 /* LibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DAC2631DE69A9200279EE6 /* LibraryService.swift */; };
 		24DAC2661DE69AF300279EE6 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DAC2651DE69AF300279EE6 /* BaseService.swift */; };
-		24DBE6E81DD2CC0B003B7676 /* LibraryGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */; };
-		24DBE6EA1DD2D058003B7676 /* LibraryGetRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */; };
 		24DBE6EC1DD2DFD5003B7676 /* FetchLibraryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */; };
 		24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */; };
 		24DBE6F01DD42212003B7676 /* FetchLibraryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */; };
@@ -209,8 +207,6 @@
 		24DAC2611DE59E8600279EE6 /* OokamiTokenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OokamiTokenStore.swift; sourceTree = "<group>"; };
 		24DAC2631DE69A9200279EE6 /* LibraryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryService.swift; sourceTree = "<group>"; };
 		24DAC2651DE69AF300279EE6 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
-		24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryGetRequest.swift; sourceTree = "<group>"; };
-		24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryGetRequestSpec.swift; sourceTree = "<group>"; };
 		24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLibraryOperation.swift; sourceTree = "<group>"; };
 		24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmGettableObjectSpec.swift; sourceTree = "<group>"; };
 		24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLibraryOperationSpec.swift; sourceTree = "<group>"; };
@@ -276,7 +272,6 @@
 				242B2B4B1DE575BC0002903B /* API */,
 				24BEC5CA1E13997F0058F5AB /* Requests */,
 				242B2B441DE51B8C0002903B /* Authenticator.swift */,
-				24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */,
 				24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */,
 			);
 			path = Kitsu;
@@ -288,7 +283,6 @@
 				242B2B471DE521880002903B /* AuthenticatorSpec.swift */,
 				24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */,
 				24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */,
-				24DBE6E91DD2D058003B7676 /* LibraryGetRequestSpec.swift */,
 				24A258AD1DD9455100CC7561 /* PaginatedLibrarySpec.swift */,
 				24C8C69D1E10F4810048EB9D /* ParserSpec.swift */,
 				24BEC5C81E138E7F0058F5AB /* UserHelperSpec.swift */,
@@ -968,7 +962,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24DBE6E81DD2CC0B003B7676 /* LibraryGetRequest.swift in Sources */,
 				242B2B451DE51B8C0002903B /* Authenticator.swift in Sources */,
 				24BEC5CC1E1399AB0058F5AB /* KitsuRequest.swift in Sources */,
 				24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */,
@@ -1023,7 +1016,6 @@
 				24BEC5C11E121CFB0058F5AB /* StubCacheObject.swift in Sources */,
 				24DD48721DD6C2B4009378AC /* DeleteEntryOperationSpec.swift in Sources */,
 				242B2B481DE521880002903B /* AuthenticatorSpec.swift in Sources */,
-				24DBE6EA1DD2D058003B7676 /* LibraryGetRequestSpec.swift in Sources */,
 				24BEC5D21E139FCF0058F5AB /* PagedKitsuRequestSpec.swift in Sources */,
 				24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */,
 				24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */,

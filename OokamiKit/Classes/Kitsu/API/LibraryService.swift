@@ -23,9 +23,9 @@ public class LibraryService: BaseService {
     ///   - completion: The completion block which gets called everytime a fetch is done, Passes the fetched entries or an error if it occured
     /// - Returns: A PaginatedLibrary instance which can be used for further entry fetching
     public func get(userID: Int, type: Media.MediaType, status: LibraryEntry.Status, completion: @escaping LibraryCompletion) -> PaginatedLibrary? {
-        let request = LibraryGETRequest(userID: userID, relativeURL: Constants.Endpoints.libraryEntries)
-        request.filter([.media(type: type), .status(status)])
-        request.include([.genres, .user])
+//        let request = LibraryGETRequest(userID: userID, relativeURL: Constants.Endpoints.libraryEntries)
+//        request.filter([.media(type: type), .status(status)])
+//        request.include([.genres, .user])
        /* let library = PaginatedLibrary(request: request, client: client, completion: { parsed, error in
             guard error == nil else {
                 completion(nil, error)

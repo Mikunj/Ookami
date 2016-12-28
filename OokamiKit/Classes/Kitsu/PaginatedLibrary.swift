@@ -65,9 +65,9 @@ public class PaginatedLibrary {
     }()
     
     /// The library get requests passed in
-    let originalRequest: LibraryGETRequest
-    public var request: LibraryGETRequest {
-        return originalRequest.copy() as! LibraryGETRequest
+    let originalRequest: PagedKitsuRequest
+    public var request: PagedKitsuRequest {
+        return originalRequest.copy() as! PagedKitsuRequest
     }
     
     /// The client to execute request on
@@ -83,13 +83,13 @@ public class PaginatedLibrary {
     /// call `start()` to begin the fetch
     ///
     /// - Parameters:
-    ///   - request: The library get request
+    ///   - request: The paged kitsu request for the library
     ///   - client: The client to execute request on
     ///   - completion: The completion block, returns the fetched entries and related objects on the current page, or an Error if something went wrong
     ///                 This gets called everytime a page of entries is recieved.
     ///                 This can be through calls such as `next()`, `prev()` etc ...
-    public init(request: LibraryGETRequest, client: NetworkClientProtocol, completion: @escaping PaginatedLibraryCompletion) {
-        self.originalRequest = request.copy() as! LibraryGETRequest
+    public init(request: PagedKitsuRequest, client: NetworkClientProtocol, completion: @escaping PaginatedLibraryCompletion) {
+        self.originalRequest = request.copy() as! PagedKitsuRequest
         self.client = client
         self.completion = completion
     }

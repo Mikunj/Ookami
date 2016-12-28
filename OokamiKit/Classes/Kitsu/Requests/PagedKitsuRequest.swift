@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class PagedKitsuRequest: KitsuRequest {
+public class PagedKitsuRequest: KitsuRequest {
     
     public struct Page {
         var offset: Int = 0
