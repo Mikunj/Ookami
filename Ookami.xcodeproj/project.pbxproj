@@ -61,6 +61,7 @@
 		24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24BEC5BF1E1215DE0058F5AB /* CacheManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */; };
 		24BEC5C11E121CFB0058F5AB /* StubCacheObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */; };
+		24BEC5C31E1341F40058F5AB /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C21E1341F40058F5AB /* Database.swift */; };
 		24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C6991E10E3F00048EB9D /* Constants.swift */; };
 		24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69B1E10EBA70048EB9D /* Parser.swift */; };
 		24C8C69E1E10F4810048EB9D /* ParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69D1E10F4810048EB9D /* ParserSpec.swift */; };
@@ -183,6 +184,7 @@
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
 		24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManagerSpec.swift; sourceTree = "<group>"; };
 		24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubCacheObject.swift; sourceTree = "<group>"; };
+		24BEC5C21E1341F40058F5AB /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		24C8C6991E10E3F00048EB9D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C8C69B1E10EBA70048EB9D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		24C8C69D1E10F4810048EB9D /* ParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserSpec.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				24C8C69B1E10EBA70048EB9D /* Parser.swift */,
 				248734471DCD491E002E7366 /* RealmProvider.swift */,
 				243C088E1E11FBD800C44888 /* CacheManager.swift */,
+				24BEC5C21E1341F40058F5AB /* Database.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -962,6 +965,7 @@
 				2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */,
 				24DAC2661DE69AF300279EE6 /* BaseService.swift in Sources */,
 				247362901DCF0321004B4AC5 /* NetworkRequest.swift in Sources */,
+				24BEC5C31E1341F40058F5AB /* Database.swift in Sources */,
 				24DBE6EC1DD2DFD5003B7676 /* FetchLibraryOperation.swift in Sources */,
 				2494D9A81DCC631E0032AC8E /* User.swift in Sources */,
 				2473628D1DCF01EF004B4AC5 /* NetworkClientProtocol.swift in Sources */,

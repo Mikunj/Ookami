@@ -11,6 +11,8 @@
 import Foundation
 import RealmSwift
 
+//MAYBE: This functionality can be moved to the Database class
+
 /// A protocol for defining if a object is gettable
 public protocol GettableObject {
     //The type of the ID/primary key. E.g: Int, String
@@ -50,7 +52,7 @@ extension GettableObject where T: Object {
     /// - Parameter id: The object id
     /// - Returns: A realm object for given id
     public static func get(withId id: Int) -> T? {
-        let r = RealmProvider().realm()
+        let r = Database().realm
         return r.object(ofType: T.self, forPrimaryKey: id)
     }
     
@@ -61,7 +63,7 @@ extension GettableObject where T: Object {
     /// - Returns: A Realm result of the realm objects
     public static func get(withIds ids: [Int]) -> Results<T> {
         let key = T.primaryKey() ?? "id"
-        let r = RealmProvider().realm()
+        let r = Database().realm
         return r.objects(T.self).filter("\(key) IN %@", ids)
     }
     
@@ -69,7 +71,7 @@ extension GettableObject where T: Object {
     ///
     /// - Returns: A Realm result of all realm objects
     public static func all() -> Results<T> {
-        let r = RealmProvider().realm()
+        let r = Database().realm
         return r.objects(T.self)
     }
     
