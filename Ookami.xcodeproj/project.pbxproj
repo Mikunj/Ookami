@@ -65,6 +65,10 @@
 		24BEC5C51E1381460058F5AB /* DatabaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */; };
 		24BEC5C71E138C350058F5AB /* UserHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C61E138C350058F5AB /* UserHelper.swift */; };
 		24BEC5C91E138E7F0058F5AB /* UserHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C81E138E7F0058F5AB /* UserHelperSpec.swift */; };
+		24BEC5CC1E1399AB0058F5AB /* KitsuRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5CB1E1399AB0058F5AB /* KitsuRequest.swift */; };
+		24BEC5CE1E139E330058F5AB /* PagedKitsuRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5CD1E139E330058F5AB /* PagedKitsuRequest.swift */; };
+		24BEC5D01E139FC20058F5AB /* KitsuRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5CF1E139FC20058F5AB /* KitsuRequestSpec.swift */; };
+		24BEC5D21E139FCF0058F5AB /* PagedKitsuRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5D11E139FCF0058F5AB /* PagedKitsuRequestSpec.swift */; };
 		24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C6991E10E3F00048EB9D /* Constants.swift */; };
 		24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69B1E10EBA70048EB9D /* Parser.swift */; };
 		24C8C69E1E10F4810048EB9D /* ParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69D1E10F4810048EB9D /* ParserSpec.swift */; };
@@ -191,6 +195,10 @@
 		24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseSpec.swift; sourceTree = "<group>"; };
 		24BEC5C61E138C350058F5AB /* UserHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHelper.swift; sourceTree = "<group>"; };
 		24BEC5C81E138E7F0058F5AB /* UserHelperSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHelperSpec.swift; sourceTree = "<group>"; };
+		24BEC5CB1E1399AB0058F5AB /* KitsuRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KitsuRequest.swift; sourceTree = "<group>"; };
+		24BEC5CD1E139E330058F5AB /* PagedKitsuRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedKitsuRequest.swift; sourceTree = "<group>"; };
+		24BEC5CF1E139FC20058F5AB /* KitsuRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KitsuRequestSpec.swift; sourceTree = "<group>"; };
+		24BEC5D11E139FCF0058F5AB /* PagedKitsuRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagedKitsuRequestSpec.swift; sourceTree = "<group>"; };
 		24C8C6991E10E3F00048EB9D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C8C69B1E10EBA70048EB9D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		24C8C69D1E10F4810048EB9D /* ParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserSpec.swift; sourceTree = "<group>"; };
@@ -266,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				242B2B4B1DE575BC0002903B /* API */,
+				24BEC5CA1E13997F0058F5AB /* Requests */,
 				242B2B441DE51B8C0002903B /* Authenticator.swift */,
 				24DBE6E71DD2CC0B003B7676 /* LibraryGetRequest.swift */,
 				24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */,
@@ -283,6 +292,8 @@
 				24A258AD1DD9455100CC7561 /* PaginatedLibrarySpec.swift */,
 				24C8C69D1E10F4810048EB9D /* ParserSpec.swift */,
 				24BEC5C81E138E7F0058F5AB /* UserHelperSpec.swift */,
+				24BEC5CF1E139FC20058F5AB /* KitsuRequestSpec.swift */,
+				24BEC5D11E139FCF0058F5AB /* PagedKitsuRequestSpec.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -395,12 +406,12 @@
 		2470044D1DCD7A5A000D987C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				243C08901E11FBF500C44888 /* Cacheable.swift */,
 				2470044E1DCD7A9E000D987C /* GettableObject.swift */,
 				2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */,
 				2473628C1DCF01EF004B4AC5 /* NetworkClientProtocol.swift */,
 				2473628A1DCF0181004B4AC5 /* NetworkRequestProtocol.swift */,
 				24DD486D1DD6B405009378AC /* RealmStorable.swift */,
-				243C08901E11FBF500C44888 /* Cacheable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -439,11 +450,11 @@
 		248734461DCD4910002E7366 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				243C088E1E11FBD800C44888 /* CacheManager.swift */,
+				24BEC5C21E1341F40058F5AB /* Database.swift */,
 				24DAC2611DE59E8600279EE6 /* OokamiTokenStore.swift */,
 				24C8C69B1E10EBA70048EB9D /* Parser.swift */,
 				248734471DCD491E002E7366 /* RealmProvider.swift */,
-				243C088E1E11FBD800C44888 /* CacheManager.swift */,
-				24BEC5C21E1341F40058F5AB /* Database.swift */,
 				24BEC5C61E138C350058F5AB /* UserHelper.swift */,
 			);
 			path = Utility;
@@ -467,6 +478,15 @@
 				246023391DCCA11700B3C99B /* UserSpec.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		24BEC5CA1E13997F0058F5AB /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				24BEC5CB1E1399AB0058F5AB /* KitsuRequest.swift */,
+				24BEC5CD1E139E330058F5AB /* PagedKitsuRequest.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		24D28ECD1DD0151000773BED /* Operations */ = {
@@ -497,8 +517,8 @@
 			children = (
 				24EEEF5C1DCCA53100869696 /* Helper.swift */,
 				24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */,
-				245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */,
 				24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */,
+				245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -950,6 +970,7 @@
 			files = (
 				24DBE6E81DD2CC0B003B7676 /* LibraryGetRequest.swift in Sources */,
 				242B2B451DE51B8C0002903B /* Authenticator.swift in Sources */,
+				24BEC5CC1E1399AB0058F5AB /* KitsuRequest.swift in Sources */,
 				24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */,
 				24DAC2621DE59E8600279EE6 /* OokamiTokenStore.swift in Sources */,
 				24D28ECF1DD0157B00773BED /* AsynchronousOperation.swift in Sources */,
@@ -969,6 +990,7 @@
 				24A1B57C1DD8718F00F7E4E4 /* PaginatedLibrary.swift in Sources */,
 				24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */,
 				2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */,
+				24BEC5CE1E139E330058F5AB /* PagedKitsuRequest.swift in Sources */,
 				2470044C1DCD73D9000D987C /* Genre.swift in Sources */,
 				24DAC2641DE69A9200279EE6 /* LibraryService.swift in Sources */,
 				242B2B4D1DE575CC0002903B /* UserService.swift in Sources */,
@@ -1002,12 +1024,14 @@
 				24DD48721DD6C2B4009378AC /* DeleteEntryOperationSpec.swift in Sources */,
 				242B2B481DE521880002903B /* AuthenticatorSpec.swift in Sources */,
 				24DBE6EA1DD2D058003B7676 /* LibraryGetRequestSpec.swift in Sources */,
+				24BEC5D21E139FCF0058F5AB /* PagedKitsuRequestSpec.swift in Sources */,
 				24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */,
 				24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */,
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,
 				247362951DCF0F1C004B4AC5 /* NetworkClientSpec.swift in Sources */,
 				24BEC5C91E138E7F0058F5AB /* UserHelperSpec.swift in Sources */,
 				2414189E1DCDE00400AF1AEA /* LibraryEntrySpec.swift in Sources */,
+				24BEC5D01E139FC20058F5AB /* KitsuRequestSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
