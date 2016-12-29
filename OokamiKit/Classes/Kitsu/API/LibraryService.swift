@@ -31,7 +31,7 @@ public class LibraryService: BaseService {
         request.include("media", "user")
         
         let library = PaginatedLibrary(request: request, client: client, completion: { objects, error in
-            guard error != nil else {
+            guard error == nil else {
                 onFetch(nil, error)
                 return
             }

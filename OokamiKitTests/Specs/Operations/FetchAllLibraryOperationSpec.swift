@@ -55,7 +55,7 @@ class FetchAllLibraryOperationSpec: QuickSpec {
                 
                 it("should correctly fetch and parse data for each status") {
                     stub(condition: isHost("kitsu.io")) { _ in
-                        let data: [String : Any] = ["data": [["type": LibraryEntry.typeString, "id": 1]], "links": ["first": "need this so FetchLibraryOperation won't wonk out"]]
+                        let data: [String : Any] = ["data": [["type": LibraryEntry.typeString, "id": 1]]]
                         return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                     }
                     

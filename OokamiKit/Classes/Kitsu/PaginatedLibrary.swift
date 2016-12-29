@@ -50,6 +50,10 @@ public enum PaginatedLibraryError : Error {
 /// E.g nextLink = 5, library.next() -> fails, nextLink will still be 5, thus calling next again will try perform the request again
 public class PaginatedLibrary {
     
+    ///A bool to track whether we called the original request, using `start()`
+    ///This is specifically used as to not cause an infinite loop when calling the functions such as `next()` and `prev()` etc
+    var calledOriginalRequest: Bool = false
+    
     /// The completion block type, return the the fetched objects on the current page, or an Error if something went wrong
     public typealias PaginatedLibraryCompletion = ([Object]?, Error?) -> Void
     
@@ -99,8 +103,9 @@ public class PaginatedLibrary {
     /// Perform a request on the client
     ///
     /// - Parameter request: The network request
-    func perform(request: NetworkRequest) {
-        let operation = NetworkOperation(request: request, client: client) { [unowned self] json, error in
+    /// - Parameter isOriginal: Whether the request is the original request
+    func perform(request: NetworkRequest, isOriginal: Bool = false) {
+        let operation = NetworkOperation(request: request, client: client) { json, error in
 
             //Check for errors
             guard error == nil else {
@@ -112,6 +117,11 @@ public class PaginatedLibrary {
             guard json != nil else {
                 self.completion(nil, PaginatedLibraryError.invalidJSONRecieved)
                 return
+            }
+            
+            //Set the bool to indicate we have called the original request
+            if isOriginal {
+                self.calledOriginalRequest = true
             }
             
             //Update the links
@@ -161,13 +171,18 @@ public class PaginatedLibrary {
     ///   - link: The link
     ///   - nilError: The error to pass if link was nil
     func performRequest(for link: String?, nilError: PaginatedLibraryError) {
-        guard links.hasAnyLinks() else {
+        //If we haven't called the original request then call it.
+        //This is to stop an infinite recursion from occurring which can happen if a client keeps calling functions such as `next()` and `prev()`
+        guard calledOriginalRequest else {
             start()
             return
         }
         
-        guard link != nil else {
-            completion(nil, nilError)
+        //At this point we know that `start()` has been called. 
+        //However if we still don't have any links then that must mean the links were not in the response.
+        //We also check that if it does have links, that the current passed in link is valid.
+        guard links.hasAnyLinks(), link != nil else {
+            self.completion(nil, nilError)
             return
         }
         
@@ -177,7 +192,7 @@ public class PaginatedLibrary {
     /// Send out the original request
     public func start() {
         let nRequest = request.build()
-        perform(request: nRequest)
+        perform(request: nRequest, isOriginal: true)
     }
     
     /// Get the next page

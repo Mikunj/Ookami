@@ -81,16 +81,29 @@ class PaginatedLibrarySpec: QuickSpec {
             }
             
             context("Requests") {
-                it("should call original request if there are no links") {
-                    let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
+                context("Calling original request") {
+                    it("should call original request if there are no links") {
+                        let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
+                        
+                        p.next()
+                        p.prev()
+                        p.first()
+                        p.last()
+                        expect(p.startCalledCount).toEventually(equal(4))
+                    }
                     
-                    //Called at creation, then once at each of these functions
-                    p.next()
-                    p.prev()
-                    p.first()
-                    p.last()
-                    expect(p.startCalledCount).toEventually(equal(4))
+                    it("should not call original request if it has already been called") {
+                        let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
+                        p.calledOriginalRequest = true
+                        
+                        p.next()
+                        p.prev()
+                        p.first()
+                        p.last()
+                        expect(p.startCalledCount).toEventually(equal(0))
+                    }
                 }
+                
                 
                 it("should correctly build requests for links") {
                     let linkString = "http://abc.io/anime"
@@ -105,6 +118,7 @@ class PaginatedLibrarySpec: QuickSpec {
                     let p = StubPaginatedLibrary(request: request, client: client) { _, e in
                         error = e
                     }
+                    p.calledOriginalRequest = true
                     p.links.first = "hello"
                     p.performRequest(for: nil, nilError: .noNextPage)
                     expect(error).toEventually(matchError(PaginatedLibraryError.noNextPage))
@@ -194,6 +208,7 @@ class PaginatedLibrarySpec: QuickSpec {
                         }
                         
                         p.parser = StubParser()
+                        p.calledOriginalRequest = true
                         p.links.next = "http://abc.io/anime"
                         p.next()
                         
