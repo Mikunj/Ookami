@@ -65,7 +65,7 @@ public class Database {
     ///
     /// - Parameter objects: The objects to add to the database.
     /// - Returns: Whether adding was successful or not.
-    @discardableResult public func addOrUpdate(_ objects: [Object]) -> Bool {
+    @discardableResult public func addOrUpdate<S : Sequence>(_ objects: S) -> Bool where S.Iterator.Element: Object {
         objects.forEach { updateCacheable($0) }
         return write { realm in
             realm.add(objects, update: true)
@@ -79,6 +79,16 @@ public class Database {
     @discardableResult public func delete(_ object: Object) -> Bool {
         return write { realm in
             realm.delete(object)
+        }
+    }
+    
+    /// Delete objects from the database
+    ///
+    /// - Parameter objects: The objects to delete
+    /// - Returns: Whether deleting was successful or not.
+    @discardableResult public func delete<S : Sequence>(_ objects: S) -> Bool where S.Iterator.Element: Object {
+        return write { realm in
+            realm.delete(objects)
         }
     }
     

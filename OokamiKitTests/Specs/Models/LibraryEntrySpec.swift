@@ -62,6 +62,22 @@ class LibraryEntrySpec: QuickSpec {
                 }
             }
             
+            context("Get") {
+                it("should return entries that belong to a user correctly") {
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 2) { index, object in
+                        object.id = index
+                        object.userID = 1
+                    }
+                    
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 2) { index, object in
+                        object.id = 10 + index
+                        object.userID = 2
+                    }
+                    
+                    expect(LibraryEntry.belongsTo(user: 1)).to(haveCount(2))
+                }
+            }
+            
             context("Storing") {
                 it("should be able to store if no other entry exists in the database") {
                     let e = LibraryEntry()

@@ -136,7 +136,18 @@ extension LibraryEntry {
 }
 
 //MARK:- Gettable
-extension LibraryEntry: GettableObject { public typealias T = LibraryEntry }
+extension LibraryEntry: GettableObject {
+    public typealias T = LibraryEntry
+    
+    /// Get library entries that belongs to a given user
+    ///
+    /// - Parameter id: The user id
+    /// - Returns: Library entries that belong to a given user
+    public static func belongsTo(user id: Int) -> Results<LibraryEntry> {
+        let r = Database().realm
+        return r.objects(LibraryEntry.self).filter("userID = %d", id)
+    }
+}
 
 //MARK:- Parsable
 extension LibraryEntry: JSONParsable {

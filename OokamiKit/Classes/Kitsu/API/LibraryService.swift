@@ -11,7 +11,6 @@ import RealmSwift
 
 public class LibraryService: BaseService {
     
-    
     /// Get a paginated library for a given user and a given status.
     ///
     /// This will add everything except `LibraryEntry` to the database!
@@ -83,10 +82,12 @@ public class LibraryService: BaseService {
         
         queue.addOperation(operation)
         
-        return LibraryEntry.all().filter("userID = %d AND media.rawType = %@ AND rawStatus = %@ ", userID, type.rawValue, status.rawValue)
+        return LibraryEntry.belongsTo(user: userID).filter("media.rawType = %@ AND rawStatus = %@ ", type.rawValue, status.rawValue)
     }
     
     /// Get all the library entries of a user.
+    ///
+    /// Note: This requires that user is authenticated as it will pass private entries.
     ///
     /// This adds the entries to the database.
     ///
@@ -100,6 +101,9 @@ public class LibraryService: BaseService {
     /// - Returns: A Realm Result of LibraryEntries which then can be used for tracking changes, filtering etc
     @discardableResult public func getAll(userID: Int, type: Media.MediaType, since: Date = Date(timeIntervalSince1970: 0), completion: @escaping ([(LibraryEntry.Status, Error)]) -> Void) -> Results<LibraryEntry> {
         
+        //An array of ids that we keep track off so that we can delete entries later
+        var ids: [Int] = []
+        
         let operation = FetchAllLibraryOperation(client: client, request: { status in
             let request = KitsuLibraryRequest(userID: userID, type: type, status: status, since: since, needsAuth: true)
             request.include("media", "user")
@@ -109,16 +113,24 @@ public class LibraryService: BaseService {
             //Add the objects to the database
             self.database.addOrUpdate(objects)
             
-            //TODO: Track which entries we have recieved so that we may delete the ones not present later on
+            //Track which entries we have recieved
+            let entries = objects.filter { $0 is LibraryEntry } as! [LibraryEntry]
+            ids.append(contentsOf: entries.map { $0.id })
             
         }, completion: { error in
-            //TODO: If no error occurs then we need to delete entries that are not present in the users library
+            
+            //Delete any entries not present in the request if we fetched all of them
+            //We only delete these if since = Date(timeIntervalSince1970: 0) as then we are 100% sure we have the full library
+            if error.isEmpty && since == Date(timeIntervalSince1970: 0) {
+                UserHelper.deleteEntries(notIn: ids, type: type, forUser: userID)
+            }
+            
             completion(error)
         })
         
         queue.addOperation(operation)
         
-        return LibraryEntry.all().filter("userID = %d AND media.rawType = %@", userID, type.rawValue)
+        return LibraryEntry.belongsTo(user: userID).filter("media.rawType = %@", type.rawValue)
     }
 
 }

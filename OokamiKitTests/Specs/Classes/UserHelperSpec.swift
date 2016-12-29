@@ -57,6 +57,34 @@ class UserHelperSpec: QuickSpec {
                 expect(UserHelper.currentUserHas(media: .manga, id: 2)).to(beTrue())
             }
             
+            it("should delete entries whos ids were not given") {
+                TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 2) { index, entry in
+                    entry.id = index
+                    entry.userID = 1
+                    let type: Media.MediaType = .anime
+                    entry.media = Media(value: [entry.id, 2, type.rawValue])
+                }
+                
+                TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 1) { index, entry in
+                    entry.id = 10 + index
+                    entry.userID = 1
+                    let type: Media.MediaType = .manga
+                    entry.media = Media(value: [entry.id, 2, type.rawValue])
+                }
+                
+                TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 1) { index, entry in
+                    entry.id = 20 + index
+                    entry.userID = 2
+                    let type: Media.MediaType = .anime
+                    entry.media = Media(value: [entry.id, 2, type.rawValue])
+                }
+                
+                expect(LibraryEntry.all()).to(haveCount(4))
+                UserHelper.deleteEntries(notIn: [1], type: .anime, forUser: 1)
+                expect(LibraryEntry.all()).to(haveCount(3))
+                expect(LibraryEntry.belongsTo(user: 1)).to(haveCount(2))
+            }
+            
             
         }
     }

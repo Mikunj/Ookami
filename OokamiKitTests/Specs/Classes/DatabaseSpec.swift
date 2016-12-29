@@ -124,6 +124,16 @@ class DatabaseSpec: QuickSpec {
                         Database().delete(o)
                         expect(StubRealmObject.get(withId: 1)).to(beNil())
                     }
+                    
+                    it("should correctly delete multiple objects") {
+                        TestHelper.create(object: StubRealmObject.self, inRealm: realm, amount: 2) { index, object in
+                            object.id = index
+                        }
+                        
+                        expect(StubRealmObject.all()).to(haveCount(2))
+                        Database().delete(StubRealmObject.all())
+                        expect(StubRealmObject.all()).to(haveCount(0))
+                    }
                 }
                 
                 context("Cacheable") {
