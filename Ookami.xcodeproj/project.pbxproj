@@ -71,6 +71,8 @@
 		24BEC5D21E139FCF0058F5AB /* KitsuPagedRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5D11E139FCF0058F5AB /* KitsuPagedRequestSpec.swift */; };
 		24BEC5D41E13D8510058F5AB /* KitsuLibraryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5D31E13D8510058F5AB /* KitsuLibraryRequest.swift */; };
 		24BEC5D61E13E1420058F5AB /* KitsuLibraryRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5D51E13E1420058F5AB /* KitsuLibraryRequestSpec.swift */; };
+		24BEC5D81E14E4AB0058F5AB /* UserServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5D71E14E4AB0058F5AB /* UserServiceSpec.swift */; };
+		24BEC5DA1E14E9BB0058F5AB /* LibraryServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5D91E14E9BB0058F5AB /* LibraryServiceSpec.swift */; };
 		24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C6991E10E3F00048EB9D /* Constants.swift */; };
 		24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69B1E10EBA70048EB9D /* Parser.swift */; };
 		24C8C69E1E10F4810048EB9D /* ParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69D1E10F4810048EB9D /* ParserSpec.swift */; };
@@ -85,8 +87,6 @@
 		24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */; };
 		24DBE6F01DD42212003B7676 /* FetchLibraryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */; };
 		24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD486D1DD6B405009378AC /* RealmStorable.swift */; };
-		24DD48701DD6B9CA009378AC /* DeleteEntryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD486F1DD6B9CA009378AC /* DeleteEntryOperation.swift */; };
-		24DD48721DD6C2B4009378AC /* DeleteEntryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD48711DD6C2B4009378AC /* DeleteEntryOperationSpec.swift */; };
 		24DD48741DD6CDED009378AC /* FetchAllLibraryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD48731DD6CDED009378AC /* FetchAllLibraryOperation.swift */; };
 		24DD48761DD6D874009378AC /* FetchAllLibraryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */; };
 		24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEEF5C1DCCA53100869696 /* Helper.swift */; };
@@ -201,6 +201,8 @@
 		24BEC5D11E139FCF0058F5AB /* KitsuPagedRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KitsuPagedRequestSpec.swift; sourceTree = "<group>"; };
 		24BEC5D31E13D8510058F5AB /* KitsuLibraryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KitsuLibraryRequest.swift; sourceTree = "<group>"; };
 		24BEC5D51E13E1420058F5AB /* KitsuLibraryRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KitsuLibraryRequestSpec.swift; sourceTree = "<group>"; };
+		24BEC5D71E14E4AB0058F5AB /* UserServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServiceSpec.swift; sourceTree = "<group>"; };
+		24BEC5D91E14E9BB0058F5AB /* LibraryServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryServiceSpec.swift; sourceTree = "<group>"; };
 		24C8C6991E10E3F00048EB9D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C8C69B1E10EBA70048EB9D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		24C8C69D1E10F4810048EB9D /* ParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserSpec.swift; sourceTree = "<group>"; };
@@ -215,8 +217,6 @@
 		24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmGettableObjectSpec.swift; sourceTree = "<group>"; };
 		24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLibraryOperationSpec.swift; sourceTree = "<group>"; };
 		24DD486D1DD6B405009378AC /* RealmStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmStorable.swift; sourceTree = "<group>"; };
-		24DD486F1DD6B9CA009378AC /* DeleteEntryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteEntryOperation.swift; sourceTree = "<group>"; };
-		24DD48711DD6C2B4009378AC /* DeleteEntryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteEntryOperationSpec.swift; sourceTree = "<group>"; };
 		24DD48731DD6CDED009378AC /* FetchAllLibraryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAllLibraryOperation.swift; sourceTree = "<group>"; };
 		24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAllLibraryOperationSpec.swift; sourceTree = "<group>"; };
 		24EEEF5C1DCCA53100869696 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -287,12 +287,14 @@
 				242B2B471DE521880002903B /* AuthenticatorSpec.swift */,
 				24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */,
 				24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */,
+				24BEC5D51E13E1420058F5AB /* KitsuLibraryRequestSpec.swift */,
+				24BEC5D11E139FCF0058F5AB /* KitsuPagedRequestSpec.swift */,
+				24BEC5CF1E139FC20058F5AB /* KitsuRequestSpec.swift */,
 				24A258AD1DD9455100CC7561 /* PaginatedLibrarySpec.swift */,
 				24C8C69D1E10F4810048EB9D /* ParserSpec.swift */,
 				24BEC5C81E138E7F0058F5AB /* UserHelperSpec.swift */,
-				24BEC5CF1E139FC20058F5AB /* KitsuRequestSpec.swift */,
-				24BEC5D11E139FCF0058F5AB /* KitsuPagedRequestSpec.swift */,
-				24BEC5D51E13E1420058F5AB /* KitsuLibraryRequestSpec.swift */,
+				24BEC5D71E14E4AB0058F5AB /* UserServiceSpec.swift */,
+				24BEC5D91E14E9BB0058F5AB /* LibraryServiceSpec.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -493,7 +495,6 @@
 			isa = PBXGroup;
 			children = (
 				24D28ECE1DD0157B00773BED /* AsynchronousOperation.swift */,
-				24DD486F1DD6B9CA009378AC /* DeleteEntryOperation.swift */,
 				24DD48731DD6CDED009378AC /* FetchAllLibraryOperation.swift */,
 				24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */,
 				24D28ED01DD015FC00773BED /* NetworkOperation.swift */,
@@ -504,7 +505,6 @@
 		24D28ED21DD017D400773BED /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				24DD48711DD6C2B4009378AC /* DeleteEntryOperationSpec.swift */,
 				24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */,
 				24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */,
 				24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */,
@@ -974,7 +974,6 @@
 				24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */,
 				24DAC2621DE59E8600279EE6 /* OokamiTokenStore.swift in Sources */,
 				24D28ECF1DD0157B00773BED /* AsynchronousOperation.swift in Sources */,
-				24DD48701DD6B9CA009378AC /* DeleteEntryOperation.swift in Sources */,
 				2487343A1DCCB479002E7366 /* Anime.swift in Sources */,
 				2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */,
 				24DD48741DD6CDED009378AC /* FetchAllLibraryOperation.swift in Sources */,
@@ -1021,13 +1020,14 @@
 				24C8C69E1E10F4810048EB9D /* ParserSpec.swift in Sources */,
 				24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */,
 				24BEC5C11E121CFB0058F5AB /* StubCacheObject.swift in Sources */,
-				24DD48721DD6C2B4009378AC /* DeleteEntryOperationSpec.swift in Sources */,
+				24BEC5DA1E14E9BB0058F5AB /* LibraryServiceSpec.swift in Sources */,
 				242B2B481DE521880002903B /* AuthenticatorSpec.swift in Sources */,
 				24BEC5D21E139FCF0058F5AB /* KitsuPagedRequestSpec.swift in Sources */,
 				24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */,
 				24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */,
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,
 				247362951DCF0F1C004B4AC5 /* NetworkClientSpec.swift in Sources */,
+				24BEC5D81E14E4AB0058F5AB /* UserServiceSpec.swift in Sources */,
 				24BEC5D61E13E1420058F5AB /* KitsuLibraryRequestSpec.swift in Sources */,
 				24BEC5C91E138E7F0058F5AB /* UserHelperSpec.swift in Sources */,
 				2414189E1DCDE00400AF1AEA /* LibraryEntrySpec.swift in Sources */,

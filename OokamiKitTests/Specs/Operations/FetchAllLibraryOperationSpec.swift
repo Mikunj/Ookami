@@ -13,7 +13,6 @@ import SwiftyJSON
 import RealmSwift
 import OHHTTPStubs
 
-
 class FetchAllLibraryOperationSpec: QuickSpec {
     override func spec() {
         describe("Fetch All Library Operation") {
