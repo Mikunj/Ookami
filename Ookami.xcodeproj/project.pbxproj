@@ -73,6 +73,7 @@
 		24BEC5D61E13E1420058F5AB /* KitsuLibraryRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5D51E13E1420058F5AB /* KitsuLibraryRequestSpec.swift */; };
 		24BEC5D81E14E4AB0058F5AB /* UserServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5D71E14E4AB0058F5AB /* UserServiceSpec.swift */; };
 		24BEC5DA1E14E9BB0058F5AB /* LibraryServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5D91E14E9BB0058F5AB /* LibraryServiceSpec.swift */; };
+		24BEC5DC1E15DB3A0058F5AB /* LastFetched.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5DB1E15DB3A0058F5AB /* LastFetched.swift */; };
 		24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C6991E10E3F00048EB9D /* Constants.swift */; };
 		24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69B1E10EBA70048EB9D /* Parser.swift */; };
 		24C8C69E1E10F4810048EB9D /* ParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69D1E10F4810048EB9D /* ParserSpec.swift */; };
@@ -203,6 +204,7 @@
 		24BEC5D51E13E1420058F5AB /* KitsuLibraryRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KitsuLibraryRequestSpec.swift; sourceTree = "<group>"; };
 		24BEC5D71E14E4AB0058F5AB /* UserServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServiceSpec.swift; sourceTree = "<group>"; };
 		24BEC5D91E14E9BB0058F5AB /* LibraryServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryServiceSpec.swift; sourceTree = "<group>"; };
+		24BEC5DB1E15DB3A0058F5AB /* LastFetched.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFetched.swift; sourceTree = "<group>"; };
 		24C8C6991E10E3F00048EB9D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C8C69B1E10EBA70048EB9D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		24C8C69D1E10F4810048EB9D /* ParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserSpec.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				241418991DCDD81100AF1AEA /* LibraryEntry.swift */,
 				2473627F1DCDFF3B004B4AC5 /* README */,
 				2494D9A71DCC631E0032AC8E /* User.swift */,
+				24BEC5DB1E15DB3A0058F5AB /* LastFetched.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -981,6 +984,7 @@
 				24BEC5C71E138C350058F5AB /* UserHelper.swift in Sources */,
 				2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */,
 				243C088F1E11FBD800C44888 /* CacheManager.swift in Sources */,
+				24BEC5DC1E15DB3A0058F5AB /* LastFetched.swift in Sources */,
 				24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */,
 				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
 				243C08911E11FBF500C44888 /* Cacheable.swift in Sources */,

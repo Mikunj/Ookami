@@ -119,10 +119,17 @@ public class LibraryService: BaseService {
             
         }, completion: { error in
             
-            //Delete any entries not present in the request if we fetched all of them
-            //We only delete these if since = Date(timeIntervalSince1970: 0) as then we are 100% sure we have the full library
-            if error.isEmpty && since == Date(timeIntervalSince1970: 0) {
-                UserHelper.deleteEntries(notIn: ids, type: type, forUser: userID)
+            //Check that we sucessfully fetched all the entries
+            if error.isEmpty {
+                
+                //Update last fetched
+                self.updateLastFetched(forUser: userID, type: type)
+                
+                //Delete any entries not present in the request if we fetched all of them
+                //We only delete these if since = Date(timeIntervalSince1970: 0) as then we are 100% sure we have the full library
+                if since == Date(timeIntervalSince1970: 0) {
+                    UserHelper.deleteEntries(notIn: ids, type: type, forUser: userID)
+                }
             }
             
             completion(error)
@@ -131,6 +138,33 @@ public class LibraryService: BaseService {
         queue.addOperation(operation)
         
         return LibraryEntry.belongsTo(user: userID).filter("media.rawType = %@", type.rawValue)
+    }
+    
+    /// Update the last fetched library time for a given user
+    ///
+    /// - Parameters:
+    ///   - userID: The user to update for
+    ///   - type: The type of library fetched
+    private func updateLastFetched(forUser userID: Int, type: Media.MediaType) {
+        var fetched = LastFetched.get(withId: userID)
+        if fetched != nil {
+            //We need to get the unmanaged object, so we can update values
+            fetched = LastFetched(value: fetched!)
+        } else {
+            fetched = LastFetched()
+            fetched!.userID = userID
+        }
+        
+        //Update the times
+        switch type {
+        case .anime:
+            fetched!.anime = Date()
+        case .manga:
+            fetched!.manga = Date()
+        }
+        
+        //Add it to the database
+        database.addOrUpdate(fetched!)
     }
 
 }

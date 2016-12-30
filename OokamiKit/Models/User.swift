@@ -72,7 +72,12 @@ extension User {
     }
     
     func willClearFromCache() {
-        //TODO: Delete UserPastName here
+        //Delete the past names and LastFetched
+        Database().delete(pastNames)
+        
+        if let fetched = LastFetched.get(withId: id) {
+            Database().delete(fetched)
+        }
     }
 }
 

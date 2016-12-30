@@ -39,6 +39,8 @@ class LibraryServiceSpec: QuickSpec {
                     let entryJSON = TestHelper.loadJSON(fromFile: "entry-anime-jigglyslime")!
                     let animeJSON = TestHelper.loadJSON(fromFile: "anime-hunter-hunter")!
                     
+                    let entryID = entryJSON["id"].intValue
+                    
                     stub(condition: isHost("kitsu.io")) { _ in
                         let data: [String : Any] = ["data": [entryJSON.dictionaryObject!, animeJSON.dictionaryObject!]]
                         return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
@@ -47,7 +49,7 @@ class LibraryServiceSpec: QuickSpec {
                     waitUntil { done in
                         let _ = LibraryService(client: client).getPaginated(userID: 1, type: .anime, status: .current) { _, error in
                             expect(error).to(beNil())
-                            expect(LibraryEntry.all()).to(haveCount(0))
+                            expect(LibraryEntry.get(withId: entryID)).to(beNil())
                             expect(Anime.all()).to(haveCount(1))
                             done()
                         }
@@ -131,6 +133,83 @@ class LibraryServiceSpec: QuickSpec {
                         }
                     }
                 }
+                
+                context("Last fetched") {
+                    it("should not update last fetched if an error occured") {
+                        stub(condition: isHost("kitsu.io")) { _ in
+                            return OHHTTPStubsResponse(error: NetworkClientError.error("failed to get page"))
+                        }
+                        
+                        waitUntil { done in
+                            LibraryService(client: client).getAll(userID: 1, type: .anime) { errors in
+                                expect(LastFetched.get(withId: 1)).to(beNil())
+                                done()
+                            }
+                        }
+                    }
+                    
+                    it("should update last fetched time for anime") {
+                        let entryJSON = TestHelper.loadJSON(fromFile: "entry-anime-jigglyslime")!
+                        
+                        stub(condition: isHost("kitsu.io")) { _ in
+                            let data: [String : Any] = ["data": entryJSON.dictionaryObject!]
+                            return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
+                        }
+                        
+                        waitUntil { done in
+                            LibraryService(client: client).getAll(userID: 1, type: .anime) { errors in
+                                expect(LastFetched.get(withId: 1)).toNot(beNil())
+                                expect(LastFetched.get(withId: 1)?.anime).toNot(equal(Date(timeIntervalSince1970: 0)))
+                                expect(LastFetched.get(withId: 1)?.manga).to(equal(Date(timeIntervalSince1970: 0)))
+                                done()
+                            }
+                        }
+                    }
+                    
+                    it("should update last fetched time for manga") {
+                        let entryJSON = TestHelper.loadJSON(fromFile: "entry-anime-jigglyslime")!
+                        
+                        stub(condition: isHost("kitsu.io")) { _ in
+                            let data: [String : Any] = ["data": entryJSON.dictionaryObject!]
+                            return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
+                        }
+                        
+                        waitUntil { done in
+                            LibraryService(client: client).getAll(userID: 1, type: .manga) { errors in
+                                expect(LastFetched.get(withId: 1)).toNot(beNil())
+                                expect(LastFetched.get(withId: 1)?.anime).to(equal(Date(timeIntervalSince1970: 0)))
+                                expect(LastFetched.get(withId: 1)?.manga).toNot(equal(Date(timeIntervalSince1970: 0)))
+                                done()
+                            }
+                        }
+                    }
+
+                    it("should use exisiting LastFetched if it exists") {
+                        let animeDate = Date(timeIntervalSince1970: 100)
+                        TestHelper.create(object: LastFetched.self, inRealm: realm, amount: 1) { _, fetched in
+                            fetched.userID = 1
+                            fetched.anime = animeDate
+                        }
+                        
+                        let entryJSON = TestHelper.loadJSON(fromFile: "entry-anime-jigglyslime")!
+                        
+                        stub(condition: isHost("kitsu.io")) { _ in
+                            let data: [String : Any] = ["data": entryJSON.dictionaryObject!]
+                            return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
+                        }
+                        
+                        waitUntil { done in
+                            LibraryService(client: client).getAll(userID: 1, type: .manga) { errors in
+                                expect(LastFetched.get(withId: 1)).toNot(beNil())
+                                expect(LastFetched.get(withId: 1)?.anime).to(equal(animeDate))
+                                expect(LastFetched.get(withId: 1)?.manga).toNot(equal(Date(timeIntervalSince1970: 0)))
+                                done()
+                            }
+                        }
+                        
+                    }
+                }
+                
                 
                 context("Entry deletion") {
                     

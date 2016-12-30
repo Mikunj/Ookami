@@ -44,6 +44,29 @@ class UserSpec: QuickSpec {
                     expect(u.canClearFromCache()).to(beFalse())
                     expect(bad.canClearFromCache()).to(beTrue())
                 }
+                
+                it("should delete past names and last fetched if it's about to be cleared from cache") {
+                    
+                    TestHelper.create(object: User.self, inRealm: testRealm, amount: 1) { _, u in
+                        u.id = 1
+                        
+                        let pastName = UserPastName()
+                        pastName.userID = u.id
+                        pastName.name = "test"
+                        u.pastNames.append(pastName)
+                    }
+                    
+                    TestHelper.create(object: LastFetched.self, inRealm: testRealm, amount: 1) { _, f in
+                        f.userID = 1
+                    }
+                    
+                    expect(LastFetched.all()).to(haveCount(1))
+                    expect(testRealm.objects(UserPastName.self)).to(haveCount(1))
+                    User.get(withId: 1)!.willClearFromCache()
+                    expect(testRealm.objects(UserPastName.self)).to(haveCount(0))
+                    expect(LastFetched.all()).to(haveCount(0))
+                    
+                }
             }
             
             context("Parsing") {

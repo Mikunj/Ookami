@@ -89,8 +89,7 @@ extension Anime {
     
     func willClearFromCache() {
         //Delete anime titles
-        let titleArray = Array(titles)
-        titleArray.forEach { Database().delete($0) }
+        Database().delete(titles)
     }
 }
 
