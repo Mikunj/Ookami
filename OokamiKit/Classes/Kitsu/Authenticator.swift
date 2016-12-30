@@ -22,10 +22,18 @@ public class Authenticator {
     let userIDKey: String
     
     //The user api
-    var userService = UserService()
+    lazy var userService: UserService = {
+        var service = UserService()
+        service.authenticator = self
+        return service
+    }()
     
     //The library api
-    var libraryService = LibraryService()
+    lazy var libraryService: LibraryService = {
+        var service = LibraryService()
+        service.authenticator = self
+        return service
+    }()
     
     /// The id of the user that is logged in, nil if not logged in
     public internal(set) var currentUserID: Int? {
@@ -54,7 +62,7 @@ public class Authenticator {
     ///
     /// - Parameter heimdallr: The heimdallr instance configured properley for authentication.
     /// - Parameter userIDKey: The key used for storing the userID
-    public init(heimdallr: Heimdallr, userIDKey: String = "kitsu_loggedin_user") {
+    public init(heimdallr: Heimdallr = Ookami.shared.heimdallr, userIDKey: String = "kitsu_loggedin_user") {
         self.heimdallr = heimdallr
         self.userIDKey = userIDKey
     }
@@ -70,7 +78,7 @@ public class Authenticator {
             }
             self?.currentUserID = user.id
             self?.libraryService.getAll(userID: user.id, type: .anime) { _ in }
-            //self?.libraryAPI.getAll(userID: user.id, type: .manga) { _ in }
+            self?.libraryService.getAll(userID: user.id, type: .manga) { _ in }
             completion(nil)
         }
     }

@@ -8,8 +8,57 @@
 
 import Foundation
 import RealmSwift
+import Alamofire
 
 public class LibraryService: BaseService {
+    
+    /// Update a library entry on the server
+    ///
+    /// - Important: The authenticator must be set or else an error is passed back.
+    ///
+    /// User must be logged in, and the entry must belong to them, else an error will be passed back.
+    ///
+    /// - Parameters:
+    ///   - entry: The library entry to update
+    ///   - completion: The completion block which passes back an entry if successful or an error if not
+    public func update(entry: LibraryEntry, completion: @escaping (LibraryEntry?, Error?) -> Void) {
+        guard let authenticator = authenticator, authenticator.isLoggedIn() else {
+            completion(nil, ServiceError.notAuthenticated)
+            return
+        }
+        
+        //Check if the entry belongs to the user
+        guard entry.userID == authenticator.currentUserID else {
+            completion(nil, ServiceError.error(description: "Cannot update entry that belongs to another user."))
+            return
+        }
+        
+        let params = entry.toJSON().dictionaryObject
+        let url = "\(Constants.Endpoints.libraryEntries)/\(entry.id)"
+        
+        let request = NetworkRequest(relativeURL: url, method: .patch, parameters: params, needsAuth: true)
+        let operation = NetworkOperation(request: request, client: client) { json, error in
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            guard let json = json else {
+                completion(nil, ServiceError.error(description: "Failed to get json - LibraryService Update"))
+                return
+            }
+            
+            //Add the updated info to the library
+            let parsed = Parser().parse(json: json)
+            self.database.addOrUpdate(parsed)
+            
+            //Get the entry we parsed
+            let pEntry = parsed.first { $0 is LibraryEntry } as? LibraryEntry
+            completion(pEntry, nil)
+        }
+        
+        queue.addOperation(operation)
+    }
     
     /// Get a paginated library for a given user and a given status.
     ///

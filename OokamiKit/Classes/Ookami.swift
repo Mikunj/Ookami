@@ -38,12 +38,6 @@ public class Ookami {
         return client
     }()
     
-    //Authentication
-    public lazy var authenticator: Authenticator = {
-        let authenticator = Authenticator(heimdallr: self.heimdallr)
-        return authenticator
-    }()
-    
     //The main operation queue of the application
     public lazy var queue: OperationQueue = {
         let q = OperationQueue()

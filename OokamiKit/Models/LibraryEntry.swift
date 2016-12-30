@@ -114,7 +114,7 @@ public class LibraryEntry: Object, Cacheable {
     
     //MARK:- Cacheable
     public dynamic var localLastUpdate: Date?
-    var authenticator: Authenticator = Ookami.shared.authenticator
+    var authenticator: Authenticator = Authenticator()
     
 }
 
@@ -190,5 +190,30 @@ extension LibraryEntry: JSONParsable {
         entry.userID = user["id"].intValue
         
         return entry
+    }
+}
+
+//MARK:- JSON
+extension LibraryEntry {
+    /// Convert the entry to JSON data
+    ///
+    /// - Returns: The JSON data containing attributes only.
+    public func toJSON() -> JSON {
+        
+        var attributes: [String: Any] = [:]
+        attributes["progress"] = progress
+        attributes["reconsuming"] = reconsuming
+        attributes["reconsumeCount"] = reconsumeCount
+        attributes["private"] = isPrivate
+        attributes["notes"] = notes
+        attributes["rating"] = rating
+        attributes["status"] = rawStatus
+        
+        var params: [String: Any] = [:]
+        params["id"] = id
+        params["type"] = LibraryEntry.typeString
+        params["attributes"] = attributes
+        
+        return JSON(["data": params])
     }
 }

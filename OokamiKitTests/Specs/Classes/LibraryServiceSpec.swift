@@ -11,6 +11,15 @@ import Nimble
 @testable import OokamiKit
 import RealmSwift
 import OHHTTPStubs
+import Result
+
+private class LibAuth: Authenticator {
+    
+    override func isLoggedIn() -> Bool {
+        return currentUserID != nil
+    }
+    
+}
 
 class LibraryServiceSpec: QuickSpec {
     
@@ -20,14 +29,15 @@ class LibraryServiceSpec: QuickSpec {
             
             var client: NetworkClient!
             var realm: Realm!
+            let authenticator: LibAuth = LibAuth(heimdallr: StubAuthHeimdallr(), userIDKey: "library-service-spec-key")
             
             beforeEach {
-                
                 realm = RealmProvider().realm()
                 client = NetworkClient(baseURL: "https://kitsu.io", heimdallr: StubAuthHeimdallr())
             }
             
             afterEach {
+                authenticator.currentUserID = nil
                 OHHTTPStubs.removeAllStubs()
                 try! realm.write {
                     realm.deleteAll()
@@ -69,6 +79,114 @@ class LibraryServiceSpec: QuickSpec {
                     }
                     
                 }
+            }
+            
+            context("Update") {
+                it("should throw an error if authenticator is not set") {
+                    let service = LibraryService(client: client)
+                    
+                    let entry = LibraryEntry()
+                    entry.id = 1
+                    
+                    waitUntil { done in
+                        service.update(entry: entry) { l, error in
+                            expect(service.authenticator).to(beNil())
+                            expect(l).to(beNil())
+                            expect(error).toNot(beNil())
+                            done()
+                        }
+                    }
+                }
+                
+                it("should throw an error is user is not authenticated") {
+                    let service = LibraryService(client: client)
+                    
+                    authenticator.currentUserID = nil
+                    service.authenticator = authenticator
+                    
+                    let entry = LibraryEntry()
+                    entry.id = 1
+                    
+                    waitUntil { done in
+                        service.update(entry: entry) { l, error in
+                            expect(l).to(beNil())
+                            expect(error).toNot(beNil())
+                            done()
+                        }
+                    }
+                }
+                
+                it("should throw an error if entry doesn't belong to the current user") {
+                    let service = LibraryService(client: client)
+                    
+                    authenticator.currentUserID = 2
+                    service.authenticator = authenticator
+                    
+                    let entry = LibraryEntry()
+                    entry.id = 1
+                    entry.userID = 1
+                    
+                    waitUntil { done in
+                        service.update(entry: entry) { l, error in
+                            expect(l).to(beNil())
+                            expect(error).toNot(beNil())
+                            done()
+                        }
+                    }
+                }
+                
+                it("should return the error if something went wrong in the request") {
+                    let error = NetworkClientError.error("failed to get page")
+                    stub(condition: isHost("kitsu.io")) { _ in
+                        return OHHTTPStubsResponse(error: error)
+                    }
+                    
+                    let service = LibraryService(client: client)
+                    
+                    authenticator.currentUserID = 1
+                    service.authenticator = authenticator
+                    
+                    let entry = LibraryEntry()
+                    entry.id = 1
+                    entry.userID = 1
+                    
+                    waitUntil { done in
+                        service.update(entry: entry) { l, e in
+                            expect(l).to(beNil())
+                            expect(e).to(matchError(error))
+                            done()
+                        }
+                    }
+                    
+                }
+                
+                it("should add the updated entry to the database and return it if successful") {
+                    let entryJSON = TestHelper.loadJSON(fromFile: "entry-anime-jigglyslime")!
+                    
+                    stub(condition: isHost("kitsu.io")) { _ in
+                        let data: [String : Any] = ["data": entryJSON.dictionaryObject!]
+                        return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
+                    }
+                    
+                    let service = LibraryService(client: client)
+                    
+                    authenticator.currentUserID = 1
+                    service.authenticator = authenticator
+                    
+                    let entry = LibraryEntry()
+                    entry.id = 1
+                    entry.userID = 1
+                    
+                    waitUntil { done in
+                        service.update(entry: entry) { l, error in
+                            expect(l).toNot(beNil())
+                            expect(error).to(beNil())
+                            expect(LibraryEntry.all()).to(haveCount(1))
+                            done()
+                        }
+                    }
+                }
+                
             }
             
             context("Get") {
@@ -183,7 +301,7 @@ class LibraryServiceSpec: QuickSpec {
                             }
                         }
                     }
-
+                    
                     it("should use exisiting LastFetched if it exists") {
                         let animeDate = Date(timeIntervalSince1970: 100)
                         TestHelper.create(object: LastFetched.self, inRealm: realm, amount: 1) { _, fetched in

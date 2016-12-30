@@ -11,7 +11,7 @@ import Foundation
 ///A bunch of helper functions for user
 class UserHelper {
     
-    static var authenticator: Authenticator = Ookami.shared.authenticator
+    static var authenticator: Authenticator = Authenticator()
     static var database: Database = Database()
     
     private init() {}

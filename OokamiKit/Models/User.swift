@@ -61,7 +61,7 @@ public class User: Object, Cacheable {
     
     /// MARK:- Cacheable
     public dynamic var localLastUpdate: Date?
-    var authenticator: Authenticator = Ookami.shared.authenticator
+    var authenticator: Authenticator = Authenticator()
     
 }
 

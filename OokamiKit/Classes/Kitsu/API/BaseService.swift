@@ -12,10 +12,14 @@ public class BaseService {
     
     public enum ServiceError: Error {
         case error(description: String)
+        case notAuthenticated
     }
     
     ///The database to use
     public var database: Database = Database()
+    
+    ///The authenticator to use.
+    public weak var authenticator: Authenticator?
     
     //The operation queue to use
     public internal(set) var queue: OperationQueue
