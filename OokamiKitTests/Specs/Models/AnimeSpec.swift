@@ -56,9 +56,10 @@ class AnimeSpec: QuickSpec {
                         anime.id = 1
                         
                         for key in ["en", "jp"] {
-                            let title = AnimeTitle()
+                            let title = MediaTitle()
                             title.key = key
-                            title.animeId = anime.id
+                            title.mediaID = anime.id
+                            title.mediaType = Media.MediaType.anime.rawValue
                             anime.titles.append(title)
                         }
                     }
@@ -118,7 +119,7 @@ class AnimeSpec: QuickSpec {
                     }
                     
                     //The number of objects should be the same even if we add more than 1 object with the same info
-                    expect(testRealm.objects(AnimeTitle.self)).to(haveCount(a!.titles.count))
+                    expect(testRealm.objects(MediaTitle.self)).to(haveCount(a!.titles.count))
                     expect(testRealm.objects(Genre.self)).to(haveCount(a!.genres.count))
                 }
             }

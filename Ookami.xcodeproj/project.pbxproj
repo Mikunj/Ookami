@@ -15,6 +15,13 @@
 		241418A11DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
 		241418A21DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
 		241418A31DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
+		242A03D51E163D0C000E8B06 /* MediaTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03D41E163D0C000E8B06 /* MediaTitle.swift */; };
+		242A03D71E163EAB000E8B06 /* Manga.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03D61E163EAB000E8B06 /* Manga.swift */; };
+		242A03D91E1643B0000E8B06 /* manga-one-punch-man.json in Resources */ = {isa = PBXBuildFile; fileRef = 242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */; };
+		242A03DB1E1643D9000E8B06 /* MangaSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03DA1E1643D9000E8B06 /* MangaSpec.swift */; };
+		242A03DC1E1646EF000E8B06 /* manga-one-punch-man.json in Resources */ = {isa = PBXBuildFile; fileRef = 242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */; };
+		242A03DD1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */ = {isa = PBXBuildFile; fileRef = 242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */; };
+		242A03DE1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */ = {isa = PBXBuildFile; fileRef = 242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */; };
 		242B2B451DE51B8C0002903B /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B441DE51B8C0002903B /* Authenticator.swift */; };
 		242B2B481DE521880002903B /* AuthenticatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B471DE521880002903B /* AuthenticatorSpec.swift */; };
 		242B2B4A1DE566E90002903B /* Ookami.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B491DE566E90002903B /* Ookami.swift */; };
@@ -150,6 +157,10 @@
 		2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsable.swift; sourceTree = "<group>"; };
 		2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntrySpec.swift; sourceTree = "<group>"; };
 		2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "entry-anime-jigglyslime.json"; sourceTree = "<group>"; };
+		242A03D41E163D0C000E8B06 /* MediaTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTitle.swift; sourceTree = "<group>"; };
+		242A03D61E163EAB000E8B06 /* Manga.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manga.swift; sourceTree = "<group>"; };
+		242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "manga-one-punch-man.json"; sourceTree = "<group>"; };
+		242A03DA1E1643D9000E8B06 /* MangaSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaSpec.swift; sourceTree = "<group>"; };
 		242B2B441DE51B8C0002903B /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		242B2B471DE521880002903B /* AuthenticatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorSpec.swift; sourceTree = "<group>"; };
 		242B2B491DE566E90002903B /* Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ookami.swift; sourceTree = "<group>"; };
@@ -292,11 +303,11 @@
 				24BEC5D51E13E1420058F5AB /* KitsuLibraryRequestSpec.swift */,
 				24BEC5D11E139FCF0058F5AB /* KitsuPagedRequestSpec.swift */,
 				24BEC5CF1E139FC20058F5AB /* KitsuRequestSpec.swift */,
+				24BEC5D91E14E9BB0058F5AB /* LibraryServiceSpec.swift */,
 				24A258AD1DD9455100CC7561 /* PaginatedLibrarySpec.swift */,
 				24C8C69D1E10F4810048EB9D /* ParserSpec.swift */,
 				24BEC5C81E138E7F0058F5AB /* UserHelperSpec.swift */,
 				24BEC5D71E14E4AB0058F5AB /* UserServiceSpec.swift */,
-				24BEC5D91E14E9BB0058F5AB /* LibraryServiceSpec.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -382,10 +393,12 @@
 			children = (
 				248734391DCCB479002E7366 /* Anime.swift */,
 				2470044B1DCD73D9000D987C /* Genre.swift */,
+				24BEC5DB1E15DB3A0058F5AB /* LastFetched.swift */,
 				241418991DCDD81100AF1AEA /* LibraryEntry.swift */,
+				242A03D61E163EAB000E8B06 /* Manga.swift */,
+				242A03D41E163D0C000E8B06 /* MediaTitle.swift */,
 				2473627F1DCDFF3B004B4AC5 /* README */,
 				2494D9A71DCC631E0032AC8E /* User.swift */,
-				24BEC5DB1E15DB3A0058F5AB /* LastFetched.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -478,6 +491,7 @@
 				2487343B1DCCC183002E7366 /* AnimeSpec.swift */,
 				24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */,
 				2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */,
+				242A03DA1E1643D9000E8B06 /* MangaSpec.swift */,
 				24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */,
 				246023391DCCA11700B3C99B /* UserSpec.swift */,
 			);
@@ -532,6 +546,7 @@
 				2487343D1DCCC274002E7366 /* anime-hunter-hunter.json */,
 				2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */,
 				24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */,
+				242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */,
 				24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */,
 			);
 			path = Data;
@@ -739,6 +754,7 @@
 				24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
 				248734381DCCB1D3002E7366 /* user-jigglyslime.json in Resources */,
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
+				242A03DD1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */,
 				241418A01DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */,
 				2487343F1DCCC383002E7366 /* anime-hunter-hunter.json in Resources */,
@@ -753,6 +769,7 @@
 				241418A11DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
 				248734401DCCC384002E7366 /* anime-hunter-hunter.json in Resources */,
+				242A03DE1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +780,7 @@
 				247362801DCDFF3B004B4AC5 /* README in Resources */,
 				248734361DCCB1D1002E7366 /* user-jigglyslime.json in Resources */,
 				241418A21DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
+				242A03DC1E1646EF000E8B06 /* manga-one-punch-man.json in Resources */,
 				24A7EABD1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
 				248734411DCCC384002E7366 /* anime-hunter-hunter.json in Resources */,
 			);
@@ -776,6 +794,7 @@
 				241418A31DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
 				2487343E1DCCC274002E7366 /* anime-hunter-hunter.json in Resources */,
+				242A03D91E1643B0000E8B06 /* manga-one-punch-man.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,6 +991,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24BEC5D41E13D8510058F5AB /* KitsuLibraryRequest.swift in Sources */,
+				242A03D51E163D0C000E8B06 /* MediaTitle.swift in Sources */,
 				242B2B451DE51B8C0002903B /* Authenticator.swift in Sources */,
 				24BEC5CC1E1399AB0058F5AB /* KitsuRequest.swift in Sources */,
 				24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */,
@@ -988,6 +1008,7 @@
 				24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */,
 				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
 				243C08911E11FBF500C44888 /* Cacheable.swift in Sources */,
+				242A03D71E163EAB000E8B06 /* Manga.swift in Sources */,
 				24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */,
 				242B2B4A1DE566E90002903B /* Ookami.swift in Sources */,
 				24A1B57C1DD8718F00F7E4E4 /* PaginatedLibrary.swift in Sources */,
@@ -1027,6 +1048,7 @@
 				24BEC5DA1E14E9BB0058F5AB /* LibraryServiceSpec.swift in Sources */,
 				242B2B481DE521880002903B /* AuthenticatorSpec.swift in Sources */,
 				24BEC5D21E139FCF0058F5AB /* KitsuPagedRequestSpec.swift in Sources */,
+				242A03DB1E1643D9000E8B06 /* MangaSpec.swift in Sources */,
 				24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */,
 				24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */,
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,

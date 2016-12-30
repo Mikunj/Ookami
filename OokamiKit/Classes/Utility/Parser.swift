@@ -25,6 +25,7 @@ public class Parser {
     /// Initialize all the parsers
     private func registerParsers() {
         register(object: Anime.self)
+        register(object: Manga.self)
         register(object: User.self)
         register(object: Genre.self)
         register(object: LibraryEntry.self)

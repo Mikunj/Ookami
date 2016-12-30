@@ -12,36 +12,6 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-/**
- The reason we can safely assign compoundKey via didSet (note realm will not call didSet or willSet after object has been written to database) is because the animeId and the key of the AnimeTitle will not change after it has first been added.
- 
- WARNING: If you do decide to change the animeId or key in OokamiKit then the compoundKey will be invalid!
- The key and value can only be modified internally (in OokamiKit) thus preventing the problem where apps using this framework modify the values accidentally
- */
-public class AnimeTitle: Object {
-    //The anime this title belongs to
-    public internal(set) dynamic var animeId = -1 {
-        didSet { compoundKey = self.compoundKeyValue() }
-    }
-    
-    //the language key, E.g en or en_jp
-    public internal(set) dynamic var key = "" {
-        didSet { compoundKey = self.compoundKeyValue() }
-    }
-    
-    //The title for the given key
-    public internal(set) dynamic var value = ""
-        
-    dynamic var compoundKey: String = "0-"
-    func compoundKeyValue() -> String {
-        return "\(animeId)-\(key)"
-    }
-    
-    override public static func primaryKey() -> String {
-        return "compoundKey"
-    }
-}
-
 public class Anime: Object, Cacheable {
     
     public dynamic var id = -1
@@ -59,7 +29,7 @@ public class Anime: Object, Cacheable {
     public dynamic var posterImage = ""
     public dynamic var coverImage = ""
     
-    public let titles = List<AnimeTitle>()
+    public let titles = List<MediaTitle>()
     public dynamic var canonicalTitle = ""
     
     /**
@@ -131,8 +101,9 @@ extension Anime: JSONParsable {
         //Add titles
         let attributeTitles = attributes["titles"]
         for (key, value) in attributeTitles {
-            let title = AnimeTitle()
-            title.animeId = anime.id
+            let title = MediaTitle()
+            title.mediaID = anime.id
+            title.mediaType = Media.MediaType.anime.rawValue
             title.key = key
             title.value = value.stringValue
             anime.titles.append(title)

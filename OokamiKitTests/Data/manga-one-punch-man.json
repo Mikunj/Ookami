@@ -1,0 +1,108 @@
+{
+    "id": "24147",
+    "type": "manga",
+    "links": {
+        "self": "https://kitsu.io/api/edge/manga/24147"
+    },
+    "attributes": {
+        "slug": "one-punch-man",
+        "synopsis": "Everything about a young man named Saitama screams \"AVERAGE,” from his lifeless expression, to his bald head, to his unimpressive physique. However, this average-looking fellow doesn't have your average problem... He's actually a superhero that's looking for tough opponents! The problem is, every time he finds a promising candidate he beats the snot out of them in one punch. Can Saitama finally find an evil villain strong enough to challenge him? Follow Saitama through his hilarious romps as he searches for new bad guys to challenge!\n\n(Source: Viz)",
+        "coverImageTopOffset": 0,
+        "titles": {
+            "en": "One-Punch Man",
+            "en_jp": "One Punch-Man"
+        },
+        "canonicalTitle": "One Punch-Man",
+        "abbreviatedTitles": null,
+        "averageRating": 4.49896219123721,
+        "ratingFrequencies": {
+            "0.5": "3",
+            "1.0": "3",
+            "1.5": "1",
+            "2.0": "4",
+            "2.5": "12",
+            "3.0": "59",
+            "3.5": "79",
+            "4.0": "237",
+            "4.5": "326",
+            "5.0": "765",
+            "nil": "99"
+        },
+        "startDate": "2012-06-14",
+        "endDate": null,
+        "posterImage": {
+            "tiny": "https://media.kitsu.io/manga/poster_images/24147/tiny.jpg?1434302168",
+            "small": "https://media.kitsu.io/manga/poster_images/24147/small.jpg?1434302168",
+            "medium": "https://media.kitsu.io/manga/poster_images/24147/medium.jpg?1434302168",
+            "large": "https://media.kitsu.io/manga/poster_images/24147/large.jpg?1434302168",
+            "original": "https://media.kitsu.io/manga/poster_images/24147/original.jpg?1434302168"
+        },
+        "coverImage": {
+            "small": "https://media.kitsu.io/manga/cover_images/24147/small.jpg?1430793546",
+            "large": "https://media.kitsu.io/manga/cover_images/24147/large.jpg?1430793546",
+            "original": "https://media.kitsu.io/manga/cover_images/24147/original.jpg?1430793546"
+        },
+        "mangaType": "manga",
+        "chapterCount": null,
+        "volumeCount": 0,
+        "serialization": "Tonari no Young Jump"
+    },
+    "relationships": {
+        "genres": {
+            "links": {
+                "self": "https://kitsu.io/api/edge/manga/24147/relationships/genres",
+                "related": "https://kitsu.io/api/edge/manga/24147/genres"
+            },
+            "data": [
+                {
+                    "type": "genres",
+                    "id": "3"
+                },
+                {
+                    "type": "genres",
+                    "id": "5"
+                },
+                {
+                    "type": "genres",
+                    "id": "9"
+                },
+                {
+                    "type": "genres",
+                    "id": "23"
+                },
+                {
+                    "type": "genres",
+                    "id": "36"
+                },
+                {
+                    "type": "genres",
+                    "id": "1"
+                }
+            ]
+        },
+        "castings": {
+            "links": {
+                "self": "https://kitsu.io/api/edge/manga/24147/relationships/castings",
+                "related": "https://kitsu.io/api/edge/manga/24147/castings"
+            }
+        },
+        "installments": {
+            "links": {
+                "self": "https://kitsu.io/api/edge/manga/24147/relationships/installments",
+                "related": "https://kitsu.io/api/edge/manga/24147/installments"
+            }
+        },
+        "mappings": {
+            "links": {
+                "self": "https://kitsu.io/api/edge/manga/24147/relationships/mappings",
+                "related": "https://kitsu.io/api/edge/manga/24147/mappings"
+            }
+        },
+        "reviews": {
+            "links": {
+                "self": "https://kitsu.io/api/edge/manga/24147/relationships/reviews",
+                "related": "https://kitsu.io/api/edge/manga/24147/reviews"
+            }
+        }
+    }
+}

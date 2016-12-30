@@ -12,4 +12,4 @@ To avoid this, we can simple add a compound key with (userID, name) to the `User
 
 However make a note of how you implement the compound keys. If you implement the compound keys with the willSet and didSet property listerners then be warned that realm will not call these after the object has been added to the database.
 
-If you know for certain that these values will not change throughout the life of the application then you may use it (The AnimeTitle object in the Anime model file does this as the title will not be modified at all by the application, only modified by incoming data from server). Otherwise refer to: https://github.com/realm/realm-cocoa/issues/1192#issuecomment-228455097 to see how you can implement it.
+If you know for certain that these values will not change throughout the life of the application then you may use it (The MediaTitle object does this as the title will not be modified at all by the application, only modified by incoming data from server). Otherwise refer to: https://github.com/realm/realm-cocoa/issues/1192#issuecomment-228455097 to see how you can implement it.

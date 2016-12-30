@@ -17,6 +17,7 @@ public class CacheManager {
         let manager = CacheManager()
         
         manager.register(Anime.self)
+        manager.register(Manga.self)
         manager.register(Genre.self)
         manager.register(LibraryEntry.self)
         manager.register(User.self)
