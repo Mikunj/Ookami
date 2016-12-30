@@ -13,7 +13,7 @@ public class KitsuPagedRequest: KitsuRequest {
     
     public struct Page {
         var offset: Int = 0
-        var limit: Int = 50
+        var limit: Int = 100
     }
     
     //The current page
