@@ -34,11 +34,12 @@ public class LibraryService: BaseService {
         //Contruct the params
         let media: [String: Any] = ["data": ["id": mediaID, "type": mediaType.rawValue]]
         let user: [String: Any] = ["data": ["id": currentUser, "type": User.typeString]]
-        let params: [String: Any] = ["type": "library-entries",
+        let params: [String: Any] = ["type": LibraryEntry.typeString,
                                      "attributes": ["status": status.rawValue],
                                      "relationships": ["media": media, "user": user]]
+        let data = ["data": params]
         
-        let request = NetworkRequest(relativeURL: Constants.Endpoints.libraryEntries, method: .post, parameters: params, needsAuth: true)
+        let request = NetworkRequest(relativeURL: Constants.Endpoints.libraryEntries, method: .post, parameters: data, needsAuth: true)
         let operation = NetworkOperation(request: request, client: client) { json, error in
             guard error == nil else {
                 completion(nil, error)

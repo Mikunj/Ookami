@@ -63,8 +63,9 @@ public class NetworkClient: NetworkClientProtocol {
         }
         
         do {
+            let encoding: ParameterEncoding = request.method == .get ? URLEncoding.default : JSONEncoding.default
             let urlRequest = try URLRequest(url: url, method: request.method, headers: request.headers)
-            var encodedURLRequest =  try! URLEncoding.default.encode(urlRequest, with: request.parameters)
+            var encodedURLRequest =  try! encoding.encode(urlRequest, with: request.parameters)
             encodedURLRequest.setValue("application/vnd.api+json; charset=utf-8", forHTTPHeaderField: "Content-Type")
             encodedURLRequest.setValue("application/vnd.api+json", forHTTPHeaderField: "Accept")
             
