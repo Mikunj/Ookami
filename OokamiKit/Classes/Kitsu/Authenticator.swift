@@ -38,7 +38,7 @@ public class Authenticator {
     /// The id of the user that is logged in, nil if not logged in
     public internal(set) var currentUserID: Int? {
         get {
-            return UserDefaults.standard.integer(forKey: self.userIDKey)
+            return UserDefaults.standard.object(forKey: self.userIDKey) as? Int
         }
         
         set(id) {

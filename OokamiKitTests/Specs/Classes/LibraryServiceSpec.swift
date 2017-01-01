@@ -81,6 +81,81 @@ class LibraryServiceSpec: QuickSpec {
                 }
             }
             
+            context("Add") {
+                it("should throw an error if authenticator is not set") {
+                    let service = LibraryService(client: client)
+                    
+                    waitUntil { done in
+                        service.add(mediaID: 1, mediaType: .anime, status: .current) { l, error in
+                            expect(service.authenticator).to(beNil())
+                            expect(l).to(beNil())
+                            expect(error).toNot(beNil())
+                            done()
+                        }
+                    }
+                }
+                
+                it("should throw an error is user is not loggedIn") {
+                    let service = LibraryService(client: client)
+                    
+                    authenticator.currentUserID = nil
+                    service.authenticator = authenticator
+                    
+                    waitUntil { done in
+                        service.add(mediaID: 1, mediaType: .anime, status: .current) { l, e in
+                            expect(l).to(beNil())
+                            expect(e).toNot(beNil())
+                            done()
+                        }
+                    }
+                }
+                
+                it("should return the error if something went wrong in the request") {
+                    let error = NetworkClientError.error("failed to get page")
+                    stub(condition: isHost("kitsu.io")) { _ in
+                        return OHHTTPStubsResponse(error: error)
+                    }
+                    
+                    let service = LibraryService(client: client)
+                    
+                    authenticator.currentUserID = 1
+                    service.authenticator = authenticator
+                    
+                    waitUntil { done in
+                        service.add(mediaID: 1, mediaType: .anime, status: .current) { l, e in
+                            expect(l).to(beNil())
+                            expect(e).to(matchError(error))
+                            done()
+                        }
+                    }
+                    
+                }
+                
+                it("should add the new entry to the database if successful") {
+                    let entryJSON = TestHelper.loadJSON(fromFile: "entry-anime-jigglyslime")!
+                    
+                    stub(condition: isHost("kitsu.io")) { _ in
+                        let data: [String : Any] = ["data": entryJSON.dictionaryObject!]
+                        return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
+                    }
+                    
+                    let service = LibraryService(client: client)
+                    
+                    authenticator.currentUserID = 1
+                    service.authenticator = authenticator
+                    
+                    waitUntil { done in
+                        service.add(mediaID: 1, mediaType: .anime, status: .current) { l, error in
+                            expect(l).toNot(beNil())
+                            expect(error).to(beNil())
+                            expect(LibraryEntry.all()).to(haveCount(1))
+                            done()
+                        }
+                    }
+                }
+                
+            }
+            
             context("Update") {
                 it("should throw an error if authenticator is not set") {
                     let service = LibraryService(client: client)

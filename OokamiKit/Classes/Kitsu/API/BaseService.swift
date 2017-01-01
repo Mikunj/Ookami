@@ -19,6 +19,8 @@ public class BaseService {
     public var database: Database = Database()
     
     ///The authenticator to use.
+    ///TODO: I don't like this approach of the user setting the authenticator manually, find a better way.
+    /// If we set it ourselves, it'll go into an infinite loop and crash because `Authenticator` uses `LibraryService` aswell.
     public weak var authenticator: Authenticator?
     
     //The operation queue to use

@@ -12,6 +12,57 @@ import Alamofire
 
 public class LibraryService: BaseService {
     
+    /// Create a library entry on the server
+    ///
+    /// - Important: The authenticator must be set or else an error is passed back.
+    ///
+    /// - Parameters:
+    ///   - mediaID: The media to add the entry for
+    ///   - mediaType: The type of media it is
+    ///   - status: The status of the entry
+    ///   - completion: The completion block which passes back an entry if successful or an error if not
+    public func add(mediaID: Int, mediaType: Media.MediaType, status: LibraryEntry.Status, completion: @escaping (LibraryEntry?, Error?) -> Void) {
+        guard let authenticator = authenticator, authenticator.isLoggedIn() else {
+            completion(nil, ServiceError.notAuthenticated)
+            return
+        }
+        
+        guard let currentUser = authenticator.currentUserID else {
+            completion(nil, ServiceError.error(description: "User is logged in but id has not been set"))
+            return
+        }
+        
+        //Contruct the params
+        let media: [String: Any] = ["data": ["id": mediaID, "type": mediaType.rawValue]]
+        let user: [String: Any] = ["data": ["id": currentUser, "type": User.typeString]]
+        let params: [String: Any] = ["type": LibraryEntry.typeString,
+                                     "attributes": ["status": status.rawValue],
+                                     "relationships": ["media": media, "user": user]]
+        
+        let request = NetworkRequest(relativeURL: Constants.Endpoints.libraryEntries, method: .post, parameters: params, needsAuth: true)
+        let operation = NetworkOperation(request: request, client: client) { json, error in
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            guard let json = json else {
+                completion(nil, ServiceError.error(description: "Failed to get json - LibraryService Add"))
+                return
+            }
+            
+            //Add the new entry to the library
+            let parsed = Parser().parse(json: json)
+            self.database.addOrUpdate(parsed)
+            
+            //Get the entry we parsed
+            let pEntry = parsed.first { $0 is LibraryEntry } as? LibraryEntry
+            completion(pEntry, nil)
+        }
+        
+        queue.addOperation(operation)
+    }
+    
     /// Update a library entry on the server
     ///
     /// - Important: The authenticator must be set or else an error is passed back.
@@ -218,5 +269,5 @@ public class LibraryService: BaseService {
         //Add it to the database
         database.addOrUpdate(fetched!)
     }
-
+    
 }

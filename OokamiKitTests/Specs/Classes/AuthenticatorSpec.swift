@@ -119,6 +119,17 @@ class AuthenticatorSpec: QuickSpec {
                 }
             }
             
+            context("Current user id") {
+                it("should correctly store values") {
+                    authenticator = StubAuthenticator(heimdallr: StubRequestHeimdallr(), userIDKey: "auth-spec-user")
+                    authenticator!.currentUserID = 1
+                    expect(authenticator!.currentUserID).to(equal(1))
+                    
+                    authenticator!.currentUserID = nil
+                    expect(authenticator!.currentUserID).to(beNil())
+                }
+            }
+            
             context("Authentication") {
                 it("should return no error if successful") {
                     authenticator = StubAuthenticator(heimdallr: StubRequestHeimdallr(), userIDKey: "auth-spec-user")
