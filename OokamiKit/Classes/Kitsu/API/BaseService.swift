@@ -18,10 +18,8 @@ public class BaseService {
     ///The database to use
     public var database: Database = Database()
     
-    ///The authenticator to use.
-    ///TODO: I don't like this approach of the user setting the authenticator manually, find a better way.
-    /// If we set it ourselves, it'll go into an infinite loop and crash because `Authenticator` uses `LibraryService` aswell.
-    public weak var authenticator: Authenticator?
+    ///The current user class
+    public var currentUser: CurrentUser = CurrentUser()
     
     //The operation queue to use
     public internal(set) var queue: OperationQueue
@@ -34,8 +32,9 @@ public class BaseService {
     /// - Parameters:
     ///   - queue: The operation queue
     ///   - client: The network client
-    public init(queue: OperationQueue = Ookami.shared.queue, client: NetworkClient = Ookami.shared.networkClient) {
+    public init(queue: OperationQueue = Ookami.shared.queue, client: NetworkClient = Ookami.shared.networkClient, currentUser: CurrentUser = CurrentUser()) {
         self.queue = queue
         self.client = client
+        self.currentUser = currentUser
     }
 }

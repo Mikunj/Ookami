@@ -22,8 +22,10 @@
 		242A03DC1E1646EF000E8B06 /* manga-one-punch-man.json in Resources */ = {isa = PBXBuildFile; fileRef = 242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */; };
 		242A03DD1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */ = {isa = PBXBuildFile; fileRef = 242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */; };
 		242A03DE1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */ = {isa = PBXBuildFile; fileRef = 242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */; };
-		242B2B451DE51B8C0002903B /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B441DE51B8C0002903B /* Authenticator.swift */; };
-		242B2B481DE521880002903B /* AuthenticatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B471DE521880002903B /* AuthenticatorSpec.swift */; };
+		242A03E21E189510000E8B06 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03E11E189510000E8B06 /* CurrentUser.swift */; };
+		242A03E41E18CB06000E8B06 /* CurrentUserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03E31E18CB06000E8B06 /* CurrentUserSpec.swift */; };
+		242B2B451DE51B8C0002903B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B441DE51B8C0002903B /* AuthenticationService.swift */; };
+		242B2B481DE521880002903B /* AuthentionServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B471DE521880002903B /* AuthentionServiceSpec.swift */; };
 		242B2B4A1DE566E90002903B /* Ookami.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B491DE566E90002903B /* Ookami.swift */; };
 		242B2B4D1DE575CC0002903B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B4C1DE575CC0002903B /* UserService.swift */; };
 		243C088F1E11FBD800C44888 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243C088E1E11FBD800C44888 /* CacheManager.swift */; };
@@ -161,8 +163,10 @@
 		242A03D61E163EAB000E8B06 /* Manga.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manga.swift; sourceTree = "<group>"; };
 		242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "manga-one-punch-man.json"; sourceTree = "<group>"; };
 		242A03DA1E1643D9000E8B06 /* MangaSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaSpec.swift; sourceTree = "<group>"; };
-		242B2B441DE51B8C0002903B /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
-		242B2B471DE521880002903B /* AuthenticatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorSpec.swift; sourceTree = "<group>"; };
+		242A03E11E189510000E8B06 /* CurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		242A03E31E18CB06000E8B06 /* CurrentUserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserSpec.swift; sourceTree = "<group>"; };
+		242B2B441DE51B8C0002903B /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationService.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		242B2B471DE521880002903B /* AuthentionServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentionServiceSpec.swift; sourceTree = "<group>"; };
 		242B2B491DE566E90002903B /* Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ookami.swift; sourceTree = "<group>"; };
 		242B2B4C1DE575CC0002903B /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		243C088E1E11FBD800C44888 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
@@ -288,7 +292,7 @@
 			children = (
 				242B2B4B1DE575BC0002903B /* API */,
 				24BEC5CA1E13997F0058F5AB /* Requests */,
-				242B2B441DE51B8C0002903B /* Authenticator.swift */,
+				242A03E11E189510000E8B06 /* CurrentUser.swift */,
 				24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */,
 			);
 			path = Kitsu;
@@ -297,8 +301,9 @@
 		242B2B461DE521710002903B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				242B2B471DE521880002903B /* AuthenticatorSpec.swift */,
+				242B2B471DE521880002903B /* AuthentionServiceSpec.swift */,
 				24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */,
+				242A03E31E18CB06000E8B06 /* CurrentUserSpec.swift */,
 				24BEC5C41E1381460058F5AB /* DatabaseSpec.swift */,
 				24BEC5D51E13E1420058F5AB /* KitsuLibraryRequestSpec.swift */,
 				24BEC5D11E139FCF0058F5AB /* KitsuPagedRequestSpec.swift */,
@@ -315,6 +320,7 @@
 		242B2B4B1DE575BC0002903B /* API */ = {
 			isa = PBXGroup;
 			children = (
+				242B2B441DE51B8C0002903B /* AuthenticationService.swift */,
 				24DAC2651DE69AF300279EE6 /* BaseService.swift */,
 				24DAC2631DE69A9200279EE6 /* LibraryService.swift */,
 				242B2B4C1DE575CC0002903B /* UserService.swift */,
@@ -501,9 +507,9 @@
 		24BEC5CA1E13997F0058F5AB /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				24BEC5CB1E1399AB0058F5AB /* KitsuRequest.swift */,
-				24BEC5CD1E139E330058F5AB /* KitsuPagedRequest.swift */,
 				24BEC5D31E13D8510058F5AB /* KitsuLibraryRequest.swift */,
+				24BEC5CD1E139E330058F5AB /* KitsuPagedRequest.swift */,
+				24BEC5CB1E1399AB0058F5AB /* KitsuRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -992,11 +998,12 @@
 			files = (
 				24BEC5D41E13D8510058F5AB /* KitsuLibraryRequest.swift in Sources */,
 				242A03D51E163D0C000E8B06 /* MediaTitle.swift in Sources */,
-				242B2B451DE51B8C0002903B /* Authenticator.swift in Sources */,
+				242B2B451DE51B8C0002903B /* AuthenticationService.swift in Sources */,
 				24BEC5CC1E1399AB0058F5AB /* KitsuRequest.swift in Sources */,
 				24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */,
 				24DAC2621DE59E8600279EE6 /* OokamiTokenStore.swift in Sources */,
 				24D28ECF1DD0157B00773BED /* AsynchronousOperation.swift in Sources */,
+				242A03E21E189510000E8B06 /* CurrentUser.swift in Sources */,
 				2487343A1DCCB479002E7366 /* Anime.swift in Sources */,
 				2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */,
 				24DD48741DD6CDED009378AC /* FetchAllLibraryOperation.swift in Sources */,
@@ -1046,7 +1053,7 @@
 				24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */,
 				24BEC5C11E121CFB0058F5AB /* StubCacheObject.swift in Sources */,
 				24BEC5DA1E14E9BB0058F5AB /* LibraryServiceSpec.swift in Sources */,
-				242B2B481DE521880002903B /* AuthenticatorSpec.swift in Sources */,
+				242B2B481DE521880002903B /* AuthentionServiceSpec.swift in Sources */,
 				24BEC5D21E139FCF0058F5AB /* KitsuPagedRequestSpec.swift in Sources */,
 				242A03DB1E1643D9000E8B06 /* MangaSpec.swift in Sources */,
 				24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */,
@@ -1054,6 +1061,7 @@
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,
 				247362951DCF0F1C004B4AC5 /* NetworkClientSpec.swift in Sources */,
 				24BEC5D81E14E4AB0058F5AB /* UserServiceSpec.swift in Sources */,
+				242A03E41E18CB06000E8B06 /* CurrentUserSpec.swift in Sources */,
 				24BEC5D61E13E1420058F5AB /* KitsuLibraryRequestSpec.swift in Sources */,
 				24BEC5C91E138E7F0058F5AB /* UserHelperSpec.swift in Sources */,
 				2414189E1DCDE00400AF1AEA /* LibraryEntrySpec.swift in Sources */,

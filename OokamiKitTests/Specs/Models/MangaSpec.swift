@@ -20,12 +20,12 @@ class MangaSpec: QuickSpec {
             var testRealm: Realm!
             
             beforeEach {
-                UserHelper.authenticator = Authenticator(heimdallr: StubAuthHeimdallr(), userIDKey: "manga-spec-key")
+                UserHelper.currentUser = CurrentUser(heimdallr: StubAuthHeimdallr(), userIDKey: "manga-spec-key")
                 testRealm = RealmProvider().realm()
             }
             
             afterEach {
-                UserHelper.authenticator.currentUserID = nil
+                UserHelper.currentUser.userID = nil
                 try! testRealm.write {
                     testRealm.deleteAll()
                 }
@@ -39,7 +39,7 @@ class MangaSpec: QuickSpec {
                         entry.media = Media(value: [entry.id, 1, Media.MediaType.manga.rawValue])
                     }
                     
-                    UserHelper.authenticator.currentUserID = 1
+                    UserHelper.currentUser.userID = 1
                     
                     let manga = Manga()
                     manga.id = 1

@@ -11,7 +11,7 @@ import Foundation
 ///A bunch of helper functions for user
 class UserHelper {
     
-    static var authenticator: Authenticator = Authenticator()
+    static var currentUser: CurrentUser = CurrentUser()
     static var database: Database = Database()
     
     private init() {}
@@ -37,7 +37,7 @@ class UserHelper {
     ///   - id: The id of the media
     /// - Returns: Whether the media is present in the user's library
     static func currentUserHas(media: Media.MediaType, id: Int) -> Bool {
-        guard let currentID = authenticator.currentUserID else {
+        guard let currentID = currentUser.userID else {
             return false
         }
         

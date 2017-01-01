@@ -96,7 +96,7 @@ public class LibraryEntry: Object, Cacheable {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return ["user", "status", "authenticator"]
+        return ["user", "status", "currentUser"]
     }
     
     override public func canBeStored() -> Bool {
@@ -114,14 +114,14 @@ public class LibraryEntry: Object, Cacheable {
     
     //MARK:- Cacheable
     public dynamic var localLastUpdate: Date?
-    var authenticator: Authenticator = Authenticator()
+    var currentUser: CurrentUser = CurrentUser()
     
 }
 
 extension LibraryEntry {
     
     func canClearFromCache() -> Bool {
-        let id = authenticator.currentUserID
+        let id = currentUser.userID
         
         ///Don't delete entry if it's part of the current users library
         return id == nil ? true : userID != id

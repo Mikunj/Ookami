@@ -1,5 +1,5 @@
 //
-//  AuthenticatorSpec.swift
+//  AuthenticationServiceSpec.swift
 //  Ookami
 //
 //  Created by Maka on 23/11/16.
@@ -41,25 +41,26 @@ private class StubRequestHeimdallr: Heimdallr {
     }
 }
 
-private class StubAuthenticator: Authenticator {
+private class StubAuthenticationService: AuthenticationService {
     
     override func updateInfo(completion: @escaping (Error?) -> Void) {
-        self.currentUserID = 1
+        currentUser.userID = 1
         completion(nil)
     }
     
 }
 
-class AuthenticatorSpec: QuickSpec {
+class AuthenticationServiceSpec: QuickSpec {
     override func spec() {
-        describe("Authenticator") {
-            var authenticator: Authenticator?
+        describe("AuthenticationService") {
+            var currentUser: CurrentUser!
+            
+            beforeEach {
+                currentUser = CurrentUser(heimdallr: StubRequestHeimdallr(), userIDKey: "auth-spec-key")
+            }
             
             afterEach {
-                if authenticator != nil {
-                    UserDefaults.standard.removeObject(forKey: authenticator!.userIDKey)
-                    authenticator = nil
-                }
+                currentUser.userID = nil
             }
             
             context("Updating user info") {
@@ -92,25 +93,25 @@ class AuthenticatorSpec: QuickSpec {
                 }
                 
                 it("should not pass error if user is found") {
-                    authenticator = Authenticator(heimdallr: StubRequestHeimdallr(), userIDKey: "auth-spec-user")
-                    authenticator!.userService = StubUserService()
-                    authenticator!.libraryService = StubLibraryService()
+                    let a = AuthenticationService(currentUser: currentUser)
+                    a.userService = StubUserService()
+                    a.libraryService = StubLibraryService()
                     waitUntil { done in
-                        authenticator!.updateInfo { error in
+                        a.updateInfo { error in
                             expect(error).to(beNil())
-                            expect(authenticator?.currentUserID).to(equal(1))
+                            expect(currentUser.userID).to(equal(1))
                             done()
                         }
                     }
                 }
                 
                 it("should pass error if no user is found") {
-                    authenticator = Authenticator(heimdallr: StubRequestHeimdallr(), userIDKey: "auth-spec-user")
+                    let a = AuthenticationService(currentUser: currentUser)
                     let e = NetworkClientError.error("generic error")
-                    authenticator?.userService = StubUserService(error: e)
-                    authenticator?.libraryService = StubLibraryService()
+                    a.userService = StubUserService(error: e)
+                    a.libraryService = StubLibraryService()
                     waitUntil { done in
-                        authenticator?.updateInfo { error in
+                        a.updateInfo { error in
                             expect(error).toNot(beNil())
                             expect(error).to(matchError(e))
                             done()
@@ -119,22 +120,11 @@ class AuthenticatorSpec: QuickSpec {
                 }
             }
             
-            context("Current user id") {
-                it("should correctly store values") {
-                    authenticator = StubAuthenticator(heimdallr: StubRequestHeimdallr(), userIDKey: "auth-spec-user")
-                    authenticator!.currentUserID = 1
-                    expect(authenticator!.currentUserID).to(equal(1))
-                    
-                    authenticator!.currentUserID = nil
-                    expect(authenticator!.currentUserID).to(beNil())
-                }
-            }
-            
             context("Authentication") {
                 it("should return no error if successful") {
-                    authenticator = StubAuthenticator(heimdallr: StubRequestHeimdallr(), userIDKey: "auth-spec-user")
+                    let a = StubAuthenticationService(currentUser: currentUser)
                     waitUntil { done in
-                        authenticator!.authenticate(username: "test", password: "hi") { error in
+                        a.authenticate(username: "test", password: "hi") { error in
                             expect(error).to(beNil())
                             done()
                         }
@@ -142,18 +132,19 @@ class AuthenticatorSpec: QuickSpec {
                 }
                 
                 it("should store the user id if successful") {
-                    authenticator = StubAuthenticator(heimdallr: StubRequestHeimdallr(), userIDKey: "auth-spec-user")
-                    authenticator!.authenticate(username: "test", password: "hi") { _ in
+                    let a = StubAuthenticationService(currentUser: currentUser)
+                    a.authenticate(username: "test", password: "hi") { _ in
                     }
-                    expect(authenticator!.currentUserID).toEventually(equal(1))
-                    expect(authenticator!.isLoggedIn()).toEventually(beTrue())
+                    expect(currentUser.userID).toEventually(equal(1))
+                    expect(currentUser.isLoggedIn()).toEventually(beTrue())
                 }
                 
                 it("should return error if something went wrong") {
                     let nsError: NSError = NSError(domain: "hi", code: 1, userInfo: nil)
-                    authenticator = StubAuthenticator(heimdallr: StubRequestHeimdallr(stubError: nsError), userIDKey: "auth-spec-user")
+                    let cUser = CurrentUser(heimdallr: StubRequestHeimdallr(stubError: nsError), userIDKey: "auth-spec-key")
+                    let a = StubAuthenticationService(currentUser: cUser)
                     waitUntil { done in
-                        authenticator!.authenticate(username: "test", password: "hi") { error in
+                        a.authenticate(username: "test", password: "hi") { error in
                             expect(error).to(matchError(nsError))
                             done()
                         }
@@ -161,22 +152,6 @@ class AuthenticatorSpec: QuickSpec {
                 }
             }
             
-            context("Logout") {
-                it("should clear the username and token") {
-                    let h = StubRequestHeimdallr()
-                    h.token = true
-                    
-                    authenticator = Authenticator(heimdallr: h, userIDKey: "auth-spec-user")
-                    UserDefaults.standard.set(1, forKey: authenticator!.userIDKey)
-                    
-                    expect(authenticator!.currentUserID).to(equal(1))
-                    expect(authenticator!.isLoggedIn()).to(beTrue())
-                    
-                    authenticator!.logout()
-                    expect(authenticator!.currentUser).to(beNil())
-                    expect(authenticator!.isLoggedIn()).to(beFalse())
-                }
-            }
         }
     }
 }

@@ -56,19 +56,19 @@ public class User: Object, Cacheable {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return ["authenticator"]
+        return ["currentUser"]
     }
     
     /// MARK:- Cacheable
     public dynamic var localLastUpdate: Date?
-    var authenticator: Authenticator = Authenticator()
+    var currentUser: CurrentUser = CurrentUser()
     
 }
 
 extension User {
     func canClearFromCache() -> Bool {
         //Don't delete if this is the current user
-        return id != authenticator.currentUserID
+        return id != currentUser.userID
     }
     
     func willClearFromCache() {

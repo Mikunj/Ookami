@@ -14,20 +14,19 @@ public class LibraryService: BaseService {
     
     /// Create a library entry on the server
     ///
-    /// - Important: The authenticator must be set or else an error is passed back.
-    ///
     /// - Parameters:
     ///   - mediaID: The media to add the entry for
     ///   - mediaType: The type of media it is
     ///   - status: The status of the entry
     ///   - completion: The completion block which passes back an entry if successful or an error if not
     public func add(mediaID: Int, mediaType: Media.MediaType, status: LibraryEntry.Status, completion: @escaping (LibraryEntry?, Error?) -> Void) {
-        guard let authenticator = authenticator, authenticator.isLoggedIn() else {
+        
+        guard currentUser.isLoggedIn() else {
             completion(nil, ServiceError.notAuthenticated)
             return
         }
         
-        guard let currentUser = authenticator.currentUserID else {
+        guard let currentUser = currentUser.userID else {
             completion(nil, ServiceError.error(description: "User is logged in but id has not been set"))
             return
         }
@@ -35,7 +34,7 @@ public class LibraryService: BaseService {
         //Contruct the params
         let media: [String: Any] = ["data": ["id": mediaID, "type": mediaType.rawValue]]
         let user: [String: Any] = ["data": ["id": currentUser, "type": User.typeString]]
-        let params: [String: Any] = ["type": LibraryEntry.typeString,
+        let params: [String: Any] = ["type": "library-entries",
                                      "attributes": ["status": status.rawValue],
                                      "relationships": ["media": media, "user": user]]
         
@@ -73,13 +72,14 @@ public class LibraryService: BaseService {
     ///   - entry: The library entry to update
     ///   - completion: The completion block which passes back an entry if successful or an error if not
     public func update(entry: LibraryEntry, completion: @escaping (LibraryEntry?, Error?) -> Void) {
-        guard let authenticator = authenticator, authenticator.isLoggedIn() else {
+        
+        guard currentUser.isLoggedIn() else {
             completion(nil, ServiceError.notAuthenticated)
             return
         }
         
         //Check if the entry belongs to the user
-        guard entry.userID == authenticator.currentUserID else {
+        guard entry.userID == currentUser.userID else {
             completion(nil, ServiceError.error(description: "Cannot update entry that belongs to another user."))
             return
         }

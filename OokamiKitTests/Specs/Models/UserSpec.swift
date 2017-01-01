@@ -30,16 +30,17 @@ class UserSpec: QuickSpec {
             
             context("Cache") {
                 it("should not clear from cache if it is the current user") {
-                    let authenticator = Authenticator(heimdallr: StubAuthHeimdallr())
-                    authenticator.currentUserID = 1
+                    let currentUser = CurrentUser(heimdallr: StubAuthHeimdallr(), userIDKey: "user-spec-key")
+                    
+                    currentUser.userID = 1
                     
                     let u = User()
                     u.id = 1
-                    u.authenticator = authenticator
+                    u.currentUser = currentUser
                     
                     let bad = User()
                     bad.id = 2
-                    bad.authenticator = authenticator
+                    bad.currentUser = currentUser
                     
                     expect(u.canClearFromCache()).to(beFalse())
                     expect(bad.canClearFromCache()).to(beTrue())

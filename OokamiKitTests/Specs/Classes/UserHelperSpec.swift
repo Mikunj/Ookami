@@ -17,25 +17,25 @@ class UserHelperSpec: QuickSpec {
     override func spec() {
         describe("User Helper") {
             
-            var authenticator: Authenticator!
+            var currentUser: CurrentUser!
             var realm: Realm!
             
             beforeEach {
                 realm = RealmProvider().realm()
-                authenticator = Authenticator(heimdallr: StubAuthHeimdallr(), userIDKey: "user-helper-spec-key")
+                currentUser = CurrentUser(heimdallr: StubAuthHeimdallr(), userIDKey: "user-helper-spec-key")
                 
-                UserHelper.authenticator = authenticator!
+                UserHelper.currentUser = currentUser
             }
             
             afterEach {
-                UserDefaults.standard.removeObject(forKey: authenticator!.userIDKey)
+                UserDefaults.standard.removeObject(forKey: currentUser.userIDKey)
                 try! realm.write {
                     realm.deleteAll()
                 }
             }
             
             it("should return false if user is not logged in") {
-                authenticator.currentUserID = nil
+                currentUser.userID = nil
                 expect(UserHelper.currentUserHas(media: .anime, id: 1)).to(beFalse())
                 expect(UserHelper.currentUserHas(media: .manga, id: 1)).to(beFalse())
             }
@@ -49,7 +49,7 @@ class UserHelperSpec: QuickSpec {
                     entry.media = Media(value: [entry.id, 2, type.rawValue])
                 }
                 
-                authenticator.currentUserID = 1
+                currentUser.userID = 1
                 expect(UserHelper.currentUserHas(media: .anime, id: 1)).to(beFalse())
                 expect(UserHelper.currentUserHas(media: .manga, id: 1)).to(beFalse())
                 

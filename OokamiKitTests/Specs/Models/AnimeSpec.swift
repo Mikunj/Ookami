@@ -20,12 +20,12 @@ class AnimeSpec: QuickSpec {
             var testRealm: Realm!
             
             beforeEach {
-                UserHelper.authenticator = Authenticator(heimdallr: StubAuthHeimdallr(), userIDKey: "anime-spec-key")
+                UserHelper.currentUser = CurrentUser(heimdallr: StubAuthHeimdallr(), userIDKey: "anime-spec-key")
                 testRealm = RealmProvider().realm()
             }
             
             afterEach {
-                UserHelper.authenticator.currentUserID = nil
+                UserHelper.currentUser.userID = nil
                 try! testRealm.write {
                     testRealm.deleteAll()
                 }
@@ -39,7 +39,7 @@ class AnimeSpec: QuickSpec {
                         entry.media = Media(value: [entry.id, 1, Media.MediaType.anime.rawValue])
                     }
                     
-                    UserHelper.authenticator.currentUserID = 1
+                    UserHelper.currentUser.userID = 1
                     
                     let anime = Anime()
                     anime.id = 1

@@ -59,7 +59,7 @@ public class FetchLibraryOperation: AsynchronousOperation {
         
         //Setup the library
         if library == nil {
-            library = PaginatedLibrary(request: request, client: client) { [unowned self] objects, error in
+            library = PaginatedLibrary(request: request, client: client) { objects, error in
      
                 //Check for completion
                 guard error == nil else {

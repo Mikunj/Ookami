@@ -13,10 +13,10 @@ import RealmSwift
 import OHHTTPStubs
 import Result
 
-private class LibAuth: Authenticator {
+private class LibUser: CurrentUser {
     
     override func isLoggedIn() -> Bool {
-        return currentUserID != nil
+        return userID != nil
     }
     
 }
@@ -29,7 +29,7 @@ class LibraryServiceSpec: QuickSpec {
             
             var client: NetworkClient!
             var realm: Realm!
-            let authenticator: LibAuth = LibAuth(heimdallr: StubAuthHeimdallr(), userIDKey: "library-service-spec-key")
+            let currentUser: LibUser = LibUser(heimdallr: StubAuthHeimdallr(), userIDKey: "library-service-spec-key")
             
             beforeEach {
                 realm = RealmProvider().realm()
@@ -37,7 +37,7 @@ class LibraryServiceSpec: QuickSpec {
             }
             
             afterEach {
-                authenticator.currentUserID = nil
+                currentUser.userID = nil
                 OHHTTPStubs.removeAllStubs()
                 try! realm.write {
                     realm.deleteAll()
@@ -82,24 +82,9 @@ class LibraryServiceSpec: QuickSpec {
             }
             
             context("Add") {
-                it("should throw an error if authenticator is not set") {
-                    let service = LibraryService(client: client)
-                    
-                    waitUntil { done in
-                        service.add(mediaID: 1, mediaType: .anime, status: .current) { l, error in
-                            expect(service.authenticator).to(beNil())
-                            expect(l).to(beNil())
-                            expect(error).toNot(beNil())
-                            done()
-                        }
-                    }
-                }
-                
-                it("should throw an error is user is not loggedIn") {
-                    let service = LibraryService(client: client)
-                    
-                    authenticator.currentUserID = nil
-                    service.authenticator = authenticator
+                it("should throw an error if user is not loggedIn") {
+                    let service = LibraryService(client: client, currentUser: currentUser)
+                    currentUser.userID = nil
                     
                     waitUntil { done in
                         service.add(mediaID: 1, mediaType: .anime, status: .current) { l, e in
@@ -116,10 +101,8 @@ class LibraryServiceSpec: QuickSpec {
                         return OHHTTPStubsResponse(error: error)
                     }
                     
-                    let service = LibraryService(client: client)
-                    
-                    authenticator.currentUserID = 1
-                    service.authenticator = authenticator
+                    let service = LibraryService(client: client, currentUser: currentUser)
+                    currentUser.userID = 1
                     
                     waitUntil { done in
                         service.add(mediaID: 1, mediaType: .anime, status: .current) { l, e in
@@ -139,10 +122,8 @@ class LibraryServiceSpec: QuickSpec {
                         return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                     }
                     
-                    let service = LibraryService(client: client)
-                    
-                    authenticator.currentUserID = 1
-                    service.authenticator = authenticator
+                    let service = LibraryService(client: client, currentUser: currentUser)
+                    currentUser.userID = 1
                     
                     waitUntil { done in
                         service.add(mediaID: 1, mediaType: .anime, status: .current) { l, error in
@@ -157,27 +138,9 @@ class LibraryServiceSpec: QuickSpec {
             }
             
             context("Update") {
-                it("should throw an error if authenticator is not set") {
-                    let service = LibraryService(client: client)
-                    
-                    let entry = LibraryEntry()
-                    entry.id = 1
-                    
-                    waitUntil { done in
-                        service.update(entry: entry) { l, error in
-                            expect(service.authenticator).to(beNil())
-                            expect(l).to(beNil())
-                            expect(error).toNot(beNil())
-                            done()
-                        }
-                    }
-                }
-                
                 it("should throw an error is user is not authenticated") {
-                    let service = LibraryService(client: client)
-                    
-                    authenticator.currentUserID = nil
-                    service.authenticator = authenticator
+                    let service = LibraryService(client: client, currentUser: currentUser)
+                    currentUser.userID = nil
                     
                     let entry = LibraryEntry()
                     entry.id = 1
@@ -192,10 +155,8 @@ class LibraryServiceSpec: QuickSpec {
                 }
                 
                 it("should throw an error if entry doesn't belong to the current user") {
-                    let service = LibraryService(client: client)
-                    
-                    authenticator.currentUserID = 2
-                    service.authenticator = authenticator
+                    let service = LibraryService(client: client, currentUser: currentUser)
+                    currentUser.userID = 2
                     
                     let entry = LibraryEntry()
                     entry.id = 1
@@ -216,10 +177,8 @@ class LibraryServiceSpec: QuickSpec {
                         return OHHTTPStubsResponse(error: error)
                     }
                     
-                    let service = LibraryService(client: client)
-                    
-                    authenticator.currentUserID = 1
-                    service.authenticator = authenticator
+                    let service = LibraryService(client: client, currentUser: currentUser)
+                    currentUser.userID = 1
                     
                     let entry = LibraryEntry()
                     entry.id = 1
@@ -243,10 +202,8 @@ class LibraryServiceSpec: QuickSpec {
                         return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                     }
                     
-                    let service = LibraryService(client: client)
-                    
-                    authenticator.currentUserID = 1
-                    service.authenticator = authenticator
+                    let service = LibraryService(client: client, currentUser: currentUser)
+                    currentUser.userID = 1
                     
                     let entry = LibraryEntry()
                     entry.id = 1
