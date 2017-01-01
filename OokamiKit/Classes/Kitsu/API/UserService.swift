@@ -19,7 +19,6 @@ public class UserService: BaseService {
     ///   - request: The request
     ///   - completion: The completion block which passes back a user or error if it occured
     func get(request: NetworkRequest, completion: @escaping UserCompletion) {
-        //TODO: Maybe abstarct this out to NetworkParsingOperation which combines network operation and parsing operation
         let operation = NetworkOperation(request: request, client: client) { json, error in
             guard error == nil else {
                 completion(nil, error)

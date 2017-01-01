@@ -1,10 +1,13 @@
 PODS:
   - Alamofire (4.0.1)
+  - Cartography (1.0.1)
+  - Dwifft (0.5)
   - Heimdallr (3.5.0):
     - Heimdallr/Core (= 3.5.0)
   - Heimdallr/Core (3.5.0):
     - Result (~> 3.0)
   - Keys (1.0.0)
+  - Kingfisher (3.2.4)
   - Nimble (5.1.1)
   - OHHTTPStubs (5.2.2):
     - OHHTTPStubs/Default (= 5.2.2)
@@ -28,18 +31,27 @@ PODS:
   - RealmSwift (2.0.3):
     - Realm (= 2.0.3)
   - Result (3.0.0)
+  - Reusable (3.0.1):
+    - Reusable/Storyboard (= 3.0.1)
+    - Reusable/View (= 3.0.1)
+  - Reusable/Storyboard (3.0.1)
+  - Reusable/View (3.0.1)
   - SwiftyJSON (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - Cartography (~> 1.0)
+  - Dwifft (= 0.5)
   - Heimdallr (from `https://github.com/marcelofabri/Heimdallr.swift.git`, branch `swift-3.0`)
   - Keys (from `Pods/CocoaPodsKeys`)
+  - Kingfisher (~> 3.0)
   - Nimble (~> 5.1.1)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
   - Quick (~> 0.10.0)
   - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
   - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
+  - Reusable (~> 3.0)
   - SwiftyJSON (= 3.0.0)
 
 EXTERNAL SOURCES:
@@ -72,16 +84,20 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Cartography: c1460e99395b824d9d75360b0382faeb0b33dcd7
+  Dwifft: 9b7f1e55950e27b9dcdbb4d48502625cb4690b97
   Heimdallr: 6d371eb270d6d06d8c9ef5dc9fe7f7bda1331154
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
+  Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   OHHTTPStubs: 34d9d0994e64fcf8552dbfade5ce82ada913ee31
   Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
   Realm: 5f008bfe3c8c47142eddfc30b8c1584cde22db24
   RealmSwift: 79a9bc83e7ef4fbde17e0f303c5fadb99264a6be
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
+  Reusable: 5362d10271ca8316b104698a21e90498f47e8339
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-PODFILE CHECKSUM: b05c6a24a4dcded6486abedd2bd2760d7663398d
+PODFILE CHECKSUM: a892aab5c6278800e7ee5d9c5517aa8f6b8edc01
 
 COCOAPODS: 1.1.1

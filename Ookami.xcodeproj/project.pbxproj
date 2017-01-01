@@ -24,6 +24,10 @@
 		242A03DE1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */ = {isa = PBXBuildFile; fileRef = 242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */; };
 		242A03E21E189510000E8B06 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03E11E189510000E8B06 /* CurrentUser.swift */; };
 		242A03E41E18CB06000E8B06 /* CurrentUserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03E31E18CB06000E8B06 /* CurrentUserSpec.swift */; };
+		242A03EC1E18FC3C000E8B06 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03EB1E18FC3C000E8B06 /* ItemViewController.swift */; };
+		242A03EF1E190730000E8B06 /* ItemDetailGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03ED1E190730000E8B06 /* ItemDetailGridCell.swift */; };
+		242A03F01E190730000E8B06 /* ItemDetailGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 242A03EE1E190730000E8B06 /* ItemDetailGridCell.xib */; };
+		242A03F21E1909AC000E8B06 /* ItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03F11E1909AC000E8B06 /* ItemData.swift */; };
 		242B2B451DE51B8C0002903B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B441DE51B8C0002903B /* AuthenticationService.swift */; };
 		242B2B481DE521880002903B /* AuthentionServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B471DE521880002903B /* AuthentionServiceSpec.swift */; };
 		242B2B4A1DE566E90002903B /* Ookami.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B491DE566E90002903B /* Ookami.swift */; };
@@ -165,7 +169,11 @@
 		242A03DA1E1643D9000E8B06 /* MangaSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaSpec.swift; sourceTree = "<group>"; };
 		242A03E11E189510000E8B06 /* CurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		242A03E31E18CB06000E8B06 /* CurrentUserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserSpec.swift; sourceTree = "<group>"; };
-		242B2B441DE51B8C0002903B /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationService.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		242A03EB1E18FC3C000E8B06 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
+		242A03ED1E190730000E8B06 /* ItemDetailGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemDetailGridCell.swift; sourceTree = "<group>"; };
+		242A03EE1E190730000E8B06 /* ItemDetailGridCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemDetailGridCell.xib; sourceTree = "<group>"; };
+		242A03F11E1909AC000E8B06 /* ItemData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemData.swift; sourceTree = "<group>"; };
+		242B2B441DE51B8C0002903B /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		242B2B471DE521880002903B /* AuthentionServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentionServiceSpec.swift; sourceTree = "<group>"; };
 		242B2B491DE566E90002903B /* Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ookami.swift; sourceTree = "<group>"; };
 		242B2B4C1DE575CC0002903B /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -287,6 +295,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		242A03E51E18FB39000E8B06 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		242A03EA1E18FC20000E8B06 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				242A03F31E190D2E000E8B06 /* Item View */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		242A03F31E190D2E000E8B06 /* Item View */ = {
+			isa = PBXGroup;
+			children = (
+				242A03EB1E18FC3C000E8B06 /* ItemViewController.swift */,
+				242A03ED1E190730000E8B06 /* ItemDetailGridCell.swift */,
+				242A03EE1E190730000E8B06 /* ItemDetailGridCell.xib */,
+				242A03F11E1909AC000E8B06 /* ItemData.swift */,
+			);
+			name = "Item View";
+			sourceTree = "<group>";
+		};
 		242B2B431DE43E240002903B /* Kitsu */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +389,8 @@
 		2464F1D01DCC58800028F7B0 /* Ookami */ = {
 			isa = PBXGroup;
 			children = (
+				242A03EA1E18FC20000E8B06 /* Shared */,
+				242A03E51E18FB39000E8B06 /* Library */,
 				2464F2161DCC5C400028F7B0 /* Supporting Files */,
 				2464F1D11DCC58800028F7B0 /* AppDelegate.swift */,
 				2464F1D81DCC58800028F7B0 /* Assets.xcassets */,
@@ -760,6 +796,7 @@
 				24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
 				248734381DCCB1D3002E7366 /* user-jigglyslime.json in Resources */,
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
+				242A03F01E190730000E8B06 /* ItemDetailGridCell.xib in Resources */,
 				242A03DD1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */,
 				241418A01DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */,
@@ -980,7 +1017,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2464F1D41DCC58800028F7B0 /* ViewController.swift in Sources */,
+				242A03EC1E18FC3C000E8B06 /* ItemViewController.swift in Sources */,
+				242A03EF1E190730000E8B06 /* ItemDetailGridCell.swift in Sources */,
 				2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */,
+				242A03F21E1909AC000E8B06 /* ItemData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

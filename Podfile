@@ -28,8 +28,16 @@ def testing_pods
     pod 'OHHTTPStubs/Swift'
 end
 
+def ui_pods
+    pod 'Cartography', '~> 1.0'
+    pod 'Dwifft', '0.5'
+    pod 'Kingfisher', '~> 3.0'
+    pod 'Reusable', '~> 3.0'
+end
+
 target 'Ookami' do
     project_pods
+    ui_pods
 end
 
 target 'OokamiTests' do

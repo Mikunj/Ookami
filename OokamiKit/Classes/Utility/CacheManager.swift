@@ -25,8 +25,6 @@ public class CacheManager {
         return manager
     }()
     
-    //TODO: Change from RealmProvider to Database.provider once it's implemented
-    
     /// The classes to manage cache for.
     var registered: [Object.Type] = []
     
