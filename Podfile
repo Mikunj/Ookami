@@ -29,6 +29,7 @@ def testing_pods
 end
 
 def ui_pods
+    #Maybe remove this dependency and use pure autolayout code instead
     pod 'Cartography', '~> 1.0'
     pod 'Dwifft', '0.5'
     pod 'Kingfisher', '~> 3.0'

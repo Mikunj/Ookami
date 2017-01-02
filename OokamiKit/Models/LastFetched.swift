@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 //An object to track when a library was last fetched
-class LastFetched: Object {
+public class LastFetched: Object {
     
     //The user to track the last library fetch for
     public dynamic var userID: Int = -1

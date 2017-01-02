@@ -10,6 +10,7 @@ import Foundation
 import OokamiKit
 import Cartography
 import Dwifft
+import XLPagerTabStrip
 
 //TODO: Add more cells, clean up code a bit, fix layouts
 //Also look into performance with KingFisher
@@ -91,10 +92,13 @@ class ItemViewController: UIViewController {
     init(dataSource: ItemViewControllerDataSource? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.dataSource = dataSource
+        self.diffCalculator = CollectionViewDiffCalculator(collectionView: collectionView)
     }
     
+    /// Do not use this to initialize `ItemViewController`
+    /// It will throw a fatal error if you do.
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("Use ItemViewController.init(dataSource:)")
     }
     
     override func viewDidLoad() {
@@ -106,13 +110,10 @@ class ItemViewController: UIViewController {
             view.edges == view.superview!.edges
         }
         
-        diffCalculator = CollectionViewDiffCalculator(collectionView: collectionView)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        
         applySpacer()
         collectionView.collectionViewLayout.invalidateLayout()
     }
@@ -139,6 +140,13 @@ class ItemViewController: UIViewController {
         case .DetailGrid:
             return [CGSize(width: 100, height: 175), CGSize(width: 120, height: 210)]
         }
+    }
+}
+
+//MARK:- Indicator Info Provider
+extension ItemViewController: IndicatorInfoProvider {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: self.title ?? "-")
     }
 }
 
