@@ -55,12 +55,26 @@ public class Parser {
         }
     }
     
+    /// Parse JSON data on a background thread
+    ///
+    /// - Parameters:
+    ///   - json: the JSON data
+    ///   - callback: An block which passes back an array of parsed objects
+    public func parse(json: JSON, callback: @escaping ([Object]) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            let parsed = self.parse(json: json)
+            DispatchQueue.main.async {
+                callback(parsed)
+            }
+        }
+        
+    }
+    
     /// Parse JSON data
     ///
-    /// - Parameter json: The JSON data
+    /// - Parameter json: The json data
     /// - Returns: An array of parsed objects
-    public func parse(json: JSON) -> [Object] {
-        
+    private func parse(json: JSON) -> [Object] {
         //We need to parse the included objects first then the data objects.
         //This is because some data objects may depend/have a link with the objects inside the `included` array
         //E.g Anime only has genre ids to link to, but the Genre objects are passed in the `included` array
@@ -71,7 +85,7 @@ public class Parser {
         guard json.type == .dictionary && (included.exists() || data.exists())  else {
             return []
         }
-
+        
         //The results of the other parsers
         var results: [Object] = []
         
@@ -81,21 +95,22 @@ public class Parser {
                 
                 //Parse objects based on the type, since we can have both arrays and dictionary in the json data.
                 switch field.type {
-                    case .dictionary:
-                        if let parsed = parseDictionary(json: field) {
-                            results.append(parsed)
-                        }
-                        break
-                    case .array:
-                        results.append(contentsOf: parseArray(json: field))
-                        break
-                    default:
-                        break
+                case .dictionary:
+                    if let parsed = self.parseDictionary(json: field) {
+                        results.append(parsed)
+                    }
+                    break
+                case .array:
+                    results.append(contentsOf: self.parseArray(json: field))
+                    break
+                default:
+                    break
                 }
             }
         }
         
         return results
+        
     }
     
     /// Parse a json array of objects.

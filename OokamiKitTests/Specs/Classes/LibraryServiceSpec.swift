@@ -209,6 +209,8 @@ class LibraryServiceSpec: QuickSpec {
                     entry.id = 1
                     entry.userID = 1
                     
+                    expect(LibraryEntry.all()).to(haveCount(0))
+                    
                     waitUntil { done in
                         service.update(entry: entry) { l, error in
                             expect(l).toNot(beNil())
@@ -261,6 +263,8 @@ class LibraryServiceSpec: QuickSpec {
                         let data: [String : Any] = ["data": entryJSON.dictionaryObject!]
                         return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                     }
+                    
+                    expect(LibraryEntry.all()).to(haveCount(0))
                     
                     waitUntil { done in
                         LibraryService(client: client).getAll(userID: 1, type: .anime) { errors in
@@ -438,6 +442,8 @@ class LibraryServiceSpec: QuickSpec {
                             return OHHTTPStubsResponse(error: NetworkClientError.error("failed to get page - Entry deletion"))
                         }
                         
+                        expect(LibraryEntry.all()).to(haveCount(1))
+                        
                         waitUntil { done in
                             LibraryService(client: client).getAll(userID: 1, type: .anime) { errors in
                                 
@@ -465,6 +471,8 @@ class LibraryServiceSpec: QuickSpec {
                             let data: [String : Any] = ["data": entryJSON.dictionaryObject!]
                             return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
+                        
+                        expect(LibraryEntry.all()).to(haveCount(1))
                         
                         waitUntil { done in
                             LibraryService(client: client).getAll(userID: 1, type: .anime, since: Date()) { errors in

@@ -30,13 +30,13 @@ public class UserService: BaseService {
                 return
             }
             
-            let parsed = Parser().parse(json: json)
-            self.database.addOrUpdate(parsed)
-            
-            //Get the user we parsed
-            let user = parsed.first { $0 is User } as? User
-            completion(user, nil)
-            
+            Parser().parse(json: json) { parsed in
+                self.database.addOrUpdate(parsed)
+                
+                //Get the user we parsed
+                let user = parsed.first { $0 is User } as? User
+                completion(user, nil)
+            }
         }
         
         queue.addOperation(operation)

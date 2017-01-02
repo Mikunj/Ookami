@@ -15,10 +15,10 @@ import RealmSwift
 
 private class StubParser: Parser {
     
-    override func parse(json: JSON) -> [Object] {
+    override func parse(json: JSON, callback: @escaping ([Object]) -> Void) {
         let o = StubRealmObject()
         o.id = 1
-        return [o]
+        callback([o])
     }
 }
 

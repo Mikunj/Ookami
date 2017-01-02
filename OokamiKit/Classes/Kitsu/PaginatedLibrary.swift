@@ -128,8 +128,10 @@ public class PaginatedLibrary {
             self.updateLinks(fromJSON: json!)
             
             //Parse the response
-            let parsed = self.parser.parse(json: json!)
-            self.completion(parsed, nil)
+            self.parser.parse(json: json!) { parsed in
+                self.completion(parsed, nil)
+            }
+            
         }
         queue.addOperation(operation)
     }

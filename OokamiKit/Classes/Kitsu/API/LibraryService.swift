@@ -52,12 +52,13 @@ public class LibraryService: BaseService {
             }
             
             //Add the new entry to the library
-            let parsed = Parser().parse(json: json)
-            self.database.addOrUpdate(parsed)
-            
-            //Get the entry we parsed
-            let pEntry = parsed.first { $0 is LibraryEntry } as? LibraryEntry
-            completion(pEntry, nil)
+            Parser().parse(json: json) { parsed in
+                self.database.addOrUpdate(parsed)
+                
+                //Get the entry we parsed
+                let pEntry = parsed.first { $0 is LibraryEntry } as? LibraryEntry
+                completion(pEntry, nil)
+            }
         }
         
         queue.addOperation(operation)
@@ -101,12 +102,13 @@ public class LibraryService: BaseService {
             }
             
             //Add the updated info to the library
-            let parsed = Parser().parse(json: json)
-            self.database.addOrUpdate(parsed)
-            
-            //Get the entry we parsed
-            let pEntry = parsed.first { $0 is LibraryEntry } as? LibraryEntry
-            completion(pEntry, nil)
+            Parser().parse(json: json) { parsed in
+                self.database.addOrUpdate(parsed)
+                
+                //Get the entry we parsed
+                let pEntry = parsed.first { $0 is LibraryEntry } as? LibraryEntry
+                completion(pEntry, nil)
+            }
         }
         
         queue.addOperation(operation)

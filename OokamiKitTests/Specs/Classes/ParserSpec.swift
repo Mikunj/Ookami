@@ -35,8 +35,13 @@ class ParserSpec: QuickSpec {
             context("JSON") {
                 it("should not parse any non-dictionary objects") {
                     let json = JSON(1)
-                    let parsed = Parser().parse(json: json)
-                    expect(parsed).to(beEmpty())
+                    
+                    waitUntil { done in
+                        Parser().parse(json: json) { parsed in
+                            expect(parsed).to(beEmpty())
+                            done()
+                        }
+                    }
                 }
                 
                 context("JSON") {
@@ -52,14 +57,27 @@ class ParserSpec: QuickSpec {
                         let includeJSON = TestHelper.json(included: ["type": "object"])
                         let badJSON = JSON(["string": "hi"])
                         
-                        let data = parser.parse(json: dataJSON)
-                        expect(data).to(haveCount(1))
+                        waitUntil { done in
+                            parser.parse(json: dataJSON) { data in
+                                expect(data).to(haveCount(1))
+                                done()
+                            }
+                        }
                         
-                        let include = parser.parse(json: includeJSON)
-                        expect(include).to(haveCount(1))
+                        waitUntil { done in
+                            parser.parse(json: includeJSON) { include in
+                                expect(include).to(haveCount(1))
+                                done()
+                            }
+                        }
                         
-                        let bad = parser.parse(json: badJSON)
-                        expect(bad).to(beEmpty())
+                        waitUntil { done in
+                            parser.parse(json: badJSON) { bad in
+                                expect(bad).to(beEmpty())
+                                done()
+                            }
+                        }
+                        
                     }
                     
                     it("should parse only dictionary and array objects") {
@@ -74,26 +92,48 @@ class ParserSpec: QuickSpec {
                         let arrayJSON = TestHelper.json(data: [["type": "object"]])
                         let badJSON = TestHelper.json(data: 1)
                         
-                        let data = parser.parse(json: dictJSON)
-                        expect(data).to(haveCount(1))
+                        waitUntil { done in
+                            parser.parse(json: dictJSON) { dict in
+                                expect(dict).to(haveCount(1))
+                                done()
+                            }
+                        }
                         
-                        let include = parser.parse(json: arrayJSON)
-                        expect(include).to(haveCount(1))
+                        waitUntil { done in
+                            parser.parse(json: arrayJSON) { array in
+                                expect(array).to(haveCount(1))
+                                done()
+                            }
+                        }
                         
-                        let bad = parser.parse(json: badJSON)
-                        expect(bad).to(beEmpty())
+                        waitUntil { done in
+                            parser.parse(json: badJSON) { bad in
+                                expect(bad).to(beEmpty())
+                                done()
+                            }
+                        }
                     }
                     
                     it("should not parse an object if they are not registered") {
                         let unregistred = ["type": "unregistered"]
                         
                         let dictJSON = TestHelper.json(data: unregistred)
-                        let p1 = Parser().parse(json: dictJSON)
-                        expect(p1).to(beEmpty())
+                        waitUntil { done in
+                            Parser().parse(json: dictJSON) { data in
+                                expect(data).to(beEmpty())
+                                done()
+                            }
+                        }
+                        
                         
                         let arrayJSON = TestHelper.json(data: [unregistred])
-                        let p2 = Parser().parse(json: arrayJSON)
-                        expect(p2).to(beEmpty())
+                        
+                        waitUntil { done in
+                            Parser().parse(json: arrayJSON) { data in
+                                expect(data).to(beEmpty())
+                                done()
+                            }
+                        }
                     }
                     
                 }
