@@ -80,13 +80,41 @@ class CollectionCellSpacer {
             }
         }
     }
+    
+    func snap(float: CGFloat, toScale scale: CGFloat) -> CGFloat {
+        let value = Float(float * scale)
+        return (CGFloat(floorf(value)) / scale)
+    }
 
 }
 
 //MARK:- Static
 extension CollectionCellSpacer {
-    func snap(float: CGFloat, toScale scale: CGFloat) -> CGFloat {
-        let value = Float(float * scale)
-        return (CGFloat(floorf(value)) / scale)
+    /// Finds the best spacing from a given array of options
+    ///
+    /// - Parameter options: An array of options
+    /// - Returns: The best option from the array
+    static func bestSpacing(with options: [CollectionCellSpacerOption]) -> CollectionCellSpacerOption? {
+        
+        var bestOption: CollectionCellSpacerOption? = nil
+        var bestSpacing: CollectionCellSpacing = CollectionCellSpacing.zero
+        bestSpacing.gutter = CGFloat.greatestFiniteMagnitude
+        bestSpacing.extra = CGFloat.greatestFiniteMagnitude
+        
+        for option in options {
+            let spacer = CollectionCellSpacer(option: option)
+            let spacing = spacer.spacing
+            if spacing.itemCount > 0 && (spacing.gutter < bestSpacing.gutter ||
+                (spacing.gutter == bestSpacing.gutter && spacing.extra < bestSpacing.extra)) {
+                bestOption = option
+                bestSpacing = spacing
+            }
+            
+            if bestSpacing.gutter == option.minimumGutter && bestSpacing.extra == 0.0 {
+                break
+            }
+        }
+        
+        return bestOption
     }
 }

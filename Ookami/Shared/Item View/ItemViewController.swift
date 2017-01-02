@@ -56,6 +56,14 @@ class ItemViewController: UIViewController {
             _source?.delegate = nil
             _source = newSource
             _source?.delegate = self
+            
+            //Reload the data in the view
+            collectionView.setContentOffset(CGPoint.zero, animated: true)
+            if let source = _source {
+                didReloadItems(dataSource: source)
+            } else {
+                diffCalculator?.rows = []
+            }
         }
     }
     
@@ -67,6 +75,7 @@ class ItemViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         
         let c = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        c.backgroundColor = UIColor.groupTableViewBackground
         c.dataSource = self
         c.delegate = self
         
@@ -110,22 +119,25 @@ class ItemViewController: UIViewController {
     
     //Apply CollectionCellSpacer to the layout
     func applySpacer() {
-        let size = itemSize()
+        let sizes = itemSize()
         let width = UIScreen.main.bounds.width
-        let option = try? CollectionCellSpacerOption(itemSize: size, minimumGutter: 1.0, availableWidth: width)
+        let options = sizes.flatMap { try? CollectionCellSpacerOption(itemSize: $0, minimumGutter: 1.0, availableWidth: width) }
+        
+        guard let best = CollectionCellSpacer.bestSpacing(with: options) else {
+                return
+        }
         
         //Apply the options
-        if let option = option {
-            let spacer = CollectionCellSpacer(option: option)
-            spacer.applySpacing(to: collectionView.collectionViewLayout as! UICollectionViewFlowLayout)
-        }
+        let spacer = CollectionCellSpacer(option: best)
+        spacer.applySpacing(to: collectionView.collectionViewLayout as! UICollectionViewFlowLayout)
+        
     }
     
-    /// Get the item size
-    func itemSize() -> CGSize {
+    /// An array of item sizes to use
+    func itemSize() -> [CGSize] {
         switch type {
         case .DetailGrid:
-            return CGSize(width: 100, height: 150)
+            return [CGSize(width: 100, height: 175), CGSize(width: 120, height: 210)]
         }
     }
 }
