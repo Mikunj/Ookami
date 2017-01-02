@@ -11,10 +11,13 @@ import Kingfisher
 import Reusable
 
 //TODO: Make nameView fade from black to clear
+//Maybe find a better image caching library, king fisher seems too slow
 
-final class ItemDetailGridCell: UICollectionViewCell, NibReusable {
+final class ItemDetailGridCell: UICollectionViewCell {
 
     @IBOutlet weak var posterImage: UIImageView!
+    
+    @IBOutlet weak var nameView: UIView!
     
     @IBOutlet weak var nameLabel: UILabel!
     
@@ -22,8 +25,15 @@ final class ItemDetailGridCell: UICollectionViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
+
+}
+
+//MARK:- Reusable
+extension ItemDetailGridCell: NibReusable {}
+
+//MARK:- Item Updatable
+extension ItemDetailGridCell: ItemUpdatable {
     
     /// Update the cell with the given data
     ///
@@ -35,11 +45,16 @@ final class ItemDetailGridCell: UICollectionViewCell, NibReusable {
         //Set the image
         if let poster = data.posterImage {
             posterImage.kf.indicatorType = .activity
-            posterImage.kf.setImage(with: URL(string: poster))
+            posterImage.kf.setImage(with: URL(string: poster), options: [.transition(.fade(0.2))])
         }else {
             posterImage.image = nil
         }
         
     }
-
+    
+    func stopUpdating() {
+        posterImage.kf.cancelDownloadTask()
+    }
 }
+
+

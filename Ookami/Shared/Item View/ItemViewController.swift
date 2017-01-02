@@ -30,8 +30,22 @@ protocol ItemViewControllerDelegate {
 //Controller for displaying a grid of items
 class ItemViewController: UIViewController {
     
+    //Different cells that we can set
+    enum CellType {
+        case DetailGrid
+    }
+    
+    //Types of cell to use
+    var type: CellType = .DetailGrid {
+        didSet {
+            applySpacer()
+            collectionView.collectionViewLayout.invalidateLayout()
+            collectionView.reloadData()
+        }
+    }
+    
     //The datasource we are going to use
-    fileprivate var _source: ItemViewControllerDataSource?
+    private var _source: ItemViewControllerDataSource?
     var dataSource: ItemViewControllerDataSource? {
         
         get {
@@ -45,23 +59,27 @@ class ItemViewController: UIViewController {
         }
     }
     
+    //A difference calculator used for animating collection view
     fileprivate var diffCalculator: CollectionViewDiffCalculator<ItemData>?
     
     //The collection view
     lazy var collectionView: UICollectionView = {
-        
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 150)
         
         let c = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         c.dataSource = self
         c.delegate = self
         
         c.register(cellType: ItemDetailGridCell.self)
+        
         return c
     }()
     
-    init(dataSource: ItemViewControllerDataSource) {
+    
+    /// Create an ItemViewController
+    ///
+    /// - Parameter dataSource: The datasource to use.
+    init(dataSource: ItemViewControllerDataSource? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.dataSource = dataSource
     }
@@ -79,8 +97,36 @@ class ItemViewController: UIViewController {
             view.edges == view.superview!.edges
         }
         
-        //The diff calculator which automatically animates collection view
         diffCalculator = CollectionViewDiffCalculator(collectionView: collectionView)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        
+        applySpacer()
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    //Apply CollectionCellSpacer to the layout
+    func applySpacer() {
+        let size = itemSize()
+        let width = UIScreen.main.bounds.width
+        let option = try? CollectionCellSpacerOption(itemSize: size, minimumGutter: 1.0, availableWidth: width)
+        
+        //Apply the options
+        if let option = option {
+            let spacer = CollectionCellSpacer(option: option)
+            spacer.applySpacing(to: collectionView.collectionViewLayout as! UICollectionViewFlowLayout)
+        }
+    }
+    
+    /// Get the item size
+    func itemSize() -> CGSize {
+        switch type {
+        case .DetailGrid:
+            return CGSize(width: 100, height: 150)
+        }
     }
 }
 
@@ -105,10 +151,6 @@ extension ItemViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: ItemDetailGridCell = collectionView.dequeueReusableCell(for: indexPath)
         
-        if let item = diffCalculator?.rows[indexPath.row] {
-           cell.update(data: item)
-        }
-        
         return cell
     }
     
@@ -116,5 +158,20 @@ extension ItemViewController: UICollectionViewDataSource {
 
 //MARK:- Collection Delegate
 extension ItemViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        dataSource?.didSelectItem(at: indexPath)
+    }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        //Update the cell if we can
+        if let updatable = cell as? ItemUpdatable,
+            let item = diffCalculator?.rows[indexPath.row] {
+            updatable.update(data: item)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        (cell as? ItemUpdatable)?.stopUpdating()
+    }
 }
