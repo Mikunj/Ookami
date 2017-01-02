@@ -33,6 +33,7 @@ def ui_pods
     pod 'Dwifft', '0.5'
     pod 'Kingfisher', '~> 3.0'
     pod 'Reusable', '~> 3.0'
+    pod 'XLPagerTabStrip', '~> 6.0'
 end
 
 target 'Ookami' do
