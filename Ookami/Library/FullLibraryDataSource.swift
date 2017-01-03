@@ -24,11 +24,19 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
         }
     }
     
+    //The user id
     let userID: Int
+    
+    //The type of library
     let type: Media.MediaType
+    
+    //The status of the library
     let status: LibraryEntry.Status
     
+    //Realm tokem
     var token: NotificationToken?
+    
+    //Realm results
     var results: Results<LibraryEntry>?
     
     /// Create a library data source that fetches a full library for the given `user` and `status`
@@ -77,7 +85,6 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
         }
     }
     
-    
 }
 
 //MARK: - LibraryEntryDataSource
@@ -110,7 +117,7 @@ extension FullLibraryDataSource {
             }
         }
         
-        data.posterImage = nil
+        //data.posterImage = nil
         
         data.countString = maxCount > 0 ? "\(entry.progress) / \(maxCount)" : "\(entry.progress)"
         

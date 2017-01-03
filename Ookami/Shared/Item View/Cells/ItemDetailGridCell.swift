@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import Reusable
 
-//Maybe find a better image caching library, king fisher seems too slow and it uses too much memory and hence crashes
+//Constraints still breaking on mobile .... WHY!!
 
 final class ItemDetailGridCell: UICollectionViewCell {
 
