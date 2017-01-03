@@ -7,7 +7,6 @@
 
 import UIKit
 
-@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -17,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds);
         
         let nav = UINavigationController(rootViewController: ViewController())
+        
         window?.rootViewController = nav;
         window?.makeKeyAndVisible();
         

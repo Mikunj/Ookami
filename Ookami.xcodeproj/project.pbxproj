@@ -35,6 +35,7 @@
 		242A04011E1A183D000E8B06 /* CollectionCellSpacerOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A04001E1A183D000E8B06 /* CollectionCellSpacerOption.swift */; };
 		242A04031E1A64C2000E8B06 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A04021E1A64C2000E8B06 /* LibraryViewController.swift */; };
 		242A04051E1A7220000E8B06 /* FullLibraryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A04041E1A7220000E8B06 /* FullLibraryDataSource.swift */; };
+		242A04071E1B904D000E8B06 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A04061E1B904D000E8B06 /* main.swift */; };
 		242B2B451DE51B8C0002903B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B441DE51B8C0002903B /* AuthenticationService.swift */; };
 		242B2B481DE521880002903B /* AuthentionServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B471DE521880002903B /* AuthentionServiceSpec.swift */; };
 		242B2B4A1DE566E90002903B /* Ookami.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B491DE566E90002903B /* Ookami.swift */; };
@@ -185,8 +186,9 @@
 		242A03FB1E1A15B8000E8B06 /* CollectionCellSpacer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCellSpacer.swift; sourceTree = "<group>"; };
 		242A03FE1E1A180C000E8B06 /* CollectionCellSpacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCellSpacing.swift; sourceTree = "<group>"; };
 		242A04001E1A183D000E8B06 /* CollectionCellSpacerOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCellSpacerOption.swift; sourceTree = "<group>"; };
-		242A04021E1A64C2000E8B06 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LibraryViewController.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
-		242A04041E1A7220000E8B06 /* FullLibraryDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FullLibraryDataSource.swift; path = FullLibraryDataSource.swift; sourceTree = "<group>"; };
+		242A04021E1A64C2000E8B06 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
+		242A04041E1A7220000E8B06 /* FullLibraryDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullLibraryDataSource.swift; sourceTree = "<group>"; };
+		242A04061E1B904D000E8B06 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		242B2B441DE51B8C0002903B /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		242B2B471DE521880002903B /* AuthentionServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentionServiceSpec.swift; sourceTree = "<group>"; };
 		242B2B491DE566E90002903B /* Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ookami.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 				2464F1D11DCC58800028F7B0 /* AppDelegate.swift */,
 				2464F1D81DCC58800028F7B0 /* Assets.xcassets */,
 				2464F1D31DCC58800028F7B0 /* ViewController.swift */,
+				242A04061E1B904D000E8B06 /* main.swift */,
 			);
 			path = Ookami;
 			sourceTree = "<group>";
@@ -1054,6 +1057,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2464F1D41DCC58800028F7B0 /* ViewController.swift in Sources */,
+				242A04071E1B904D000E8B06 /* main.swift in Sources */,
 				242A04031E1A64C2000E8B06 /* LibraryViewController.swift in Sources */,
 				242A03F61E19C949000E8B06 /* ItemUpdatable.swift in Sources */,
 				242A03EC1E18FC3C000E8B06 /* ItemViewController.swift in Sources */,
