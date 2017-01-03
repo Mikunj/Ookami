@@ -9,6 +9,7 @@ PODS:
   - Keys (1.0.0)
   - Kingfisher (3.2.4)
   - Nimble (5.1.1)
+  - NVActivityIndicatorView (3.1)
   - OHHTTPStubs (5.2.2):
     - OHHTTPStubs/Default (= 5.2.2)
   - OHHTTPStubs/Core (5.2.2)
@@ -47,6 +48,7 @@ DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
   - Kingfisher (~> 3.0)
   - Nimble (~> 5.1.1)
+  - NVActivityIndicatorView (~> 3.0)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
   - Quick (~> 0.10.0)
@@ -92,6 +94,7 @@ SPEC CHECKSUMS:
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
+  NVActivityIndicatorView: 9f47e8a4affb860ef729aeec99b1550219e6c233
   OHHTTPStubs: 34d9d0994e64fcf8552dbfade5ce82ada913ee31
   Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
   Realm: 5f008bfe3c8c47142eddfc30b8c1584cde22db24
@@ -101,6 +104,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: 12a1df7224e3e11c4a1892a22709fd106fa9ab24
+PODFILE CHECKSUM: 2056d12bb721bd8316f4597c6595ca1b35d4deca
 
 COCOAPODS: 1.1.1

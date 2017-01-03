@@ -10,8 +10,7 @@ import UIKit
 import Kingfisher
 import Reusable
 
-//TODO: Make nameView fade from black to clear
-//Maybe find a better image caching library, king fisher seems too slow
+//Maybe find a better image caching library, king fisher seems too slow and it uses too much memory and hence crashes
 
 final class ItemDetailGridCell: UICollectionViewCell {
 

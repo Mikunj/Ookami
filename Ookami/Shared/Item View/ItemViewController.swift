@@ -11,6 +11,7 @@ import OokamiKit
 import Cartography
 import Dwifft
 import XLPagerTabStrip
+import NVActivityIndicatorView
 
 //TODO: Add more cells, clean up code a bit, fix layouts
 //Also look into performance with KingFisher
@@ -26,6 +27,8 @@ protocol ItemViewControllerDataSource {
 //The delegate which is implemented by the controller
 protocol ItemViewControllerDelegate {
     func didReloadItems(dataSource: ItemViewControllerDataSource)
+    func showActivityIndicator()
+    func hideActivityIndicator()
 }
 
 //Controller for displaying a grid of items
@@ -74,6 +77,7 @@ class ItemViewController: UIViewController {
     //The collection view
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 100, height: 150)
         
         let c = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         c.backgroundColor = UIColor.groupTableViewBackground
@@ -85,6 +89,11 @@ class ItemViewController: UIViewController {
         return c
     }()
     
+    //The activity indicator
+    var activityIndicator: NVActivityIndicatorView = {
+        let view = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40), type: .ballSpinFadeLoader, color: UIColor.darkGray)
+        return view
+    }()
     
     /// Create an ItemViewController
     ///
@@ -110,6 +119,13 @@ class ItemViewController: UIViewController {
             view.edges == view.superview!.edges
         }
         
+        //Add the indicator
+        self.view.addSubview(activityIndicator)
+        constrain(activityIndicator) { view in
+            view.center == view.superview!.center
+            view.width == 40
+            view.height == 40
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -154,6 +170,14 @@ extension ItemViewController: IndicatorInfoProvider {
 extension ItemViewController: ItemViewControllerDelegate {
     func didReloadItems(dataSource: ItemViewControllerDataSource) {
         diffCalculator?.rows = dataSource.items()
+    }
+    
+    func showActivityIndicator() {
+        activityIndicator.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        activityIndicator.stopAnimating()
     }
 }
 

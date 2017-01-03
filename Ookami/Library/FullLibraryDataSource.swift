@@ -13,7 +13,15 @@ import RealmSwift
 //A datasource which displays an entire library of a certain type and status
 final class FullLibraryDataSource: LibraryEntryDataSource {
     var delegate: ItemViewControllerDelegate? {
-        didSet { delegate?.didReloadItems(dataSource: self) }
+        didSet {
+            delegate?.didReloadItems(dataSource: self)
+            
+            //Check if we have the results and if we don't then show the indicator
+            if let results = results,
+                results.count == 0 {
+                delegate?.showActivityIndicator()
+            }
+        }
     }
     
     let userID: Int
@@ -56,7 +64,17 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
             }
         }
         
-        LibraryService().get(userID: userID, type: type, status: status, since: lastFetched) { error in }
+        LibraryService().get(userID: userID, type: type, status: status, since: lastFetched) { error in
+            
+            //Hide the indicator if we have recieved all the results
+            self.delegate?.hideActivityIndicator()
+            
+            guard let error = error else {
+                return
+            }
+            
+            print(error)
+        }
     }
     
     
@@ -92,6 +110,8 @@ extension FullLibraryDataSource {
             }
         }
         
+        data.posterImage = nil
+        
         data.countString = maxCount > 0 ? "\(entry.progress) / \(maxCount)" : "\(entry.progress)"
         
         return data
@@ -118,8 +138,13 @@ extension FullLibraryDataSource {
         results = LibraryEntry.belongsTo(user: userID).filter("media.rawType = %@ AND rawStatus = %@", type.rawValue, status.rawValue).sorted(byProperty: "updatedAt", ascending: false)
         
         token?.stop()
-        token = results?.addNotificationBlock { (changes: RealmCollectionChange) in
+        token = results?.addNotificationBlock { changes in
             self.delegate?.didReloadItems(dataSource: self)
+            
+            //Hide the indicator if results were updated
+            if case .update(_, _, _, _) = changes {
+                self.delegate?.hideActivityIndicator()
+            }
         }
     }
     

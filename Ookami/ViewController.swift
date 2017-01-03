@@ -12,7 +12,6 @@ import RealmSwift
 import Alamofire
 import Cartography
 
-
 class ViewController: UIViewController {
     
     var libraryView: LibraryViewController?

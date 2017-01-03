@@ -35,6 +35,7 @@ def ui_pods
     pod 'Kingfisher', '~> 3.0'
     pod 'Reusable', '~> 3.0'
     pod 'XLPagerTabStrip', '~> 6.0'
+    pod 'NVActivityIndicatorView', '~> 3.0'
 end
 
 target 'Ookami' do
