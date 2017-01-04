@@ -11,7 +11,7 @@ import BTNavigationDropdownMenu
 import OokamiKit
 import Cartography
 
-//NOTE: Sometimes the entries get loaded but don't show up. find out why
+//TODO: Need to add PagedLibraryDataSource
 
 //Class used for displaying a users library (both anime and manga)
 final class UserLibraryViewController: UIViewController {
@@ -44,11 +44,17 @@ final class UserLibraryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        //Themeing
+        let theme = Theme.DropDownTheme()
+        dropDownMenu.cellBackgroundColor = theme.backgroundColor
+        dropDownMenu.cellTextLabelColor = theme.textColor
+        dropDownMenu.menuTitleColor = theme.textColor
+        dropDownMenu.arrowTintColor = theme.textColor
+        dropDownMenu.cellSelectionColor = theme.selectionBackgroundColor
+        dropDownMenu.cellSeparatorColor = theme.seperatorColor
         
         self.navigationController?.navigationBar.topItem?.titleView = dropDownMenu
+        
     }
     
     override func viewDidLoad() {
@@ -71,10 +77,8 @@ final class UserLibraryViewController: UIViewController {
         
         //Setup dropdown menu
         dropDownMenu = BTNavigationDropdownMenu(title: dropDownMenuItems[0], items: dropDownMenuItems as [AnyObject])
-        dropDownMenu.cellBackgroundColor = UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
-        dropDownMenu.cellTextLabelColor = UIColor.white
-        dropDownMenu.menuTitleColor = UIColor.white
         dropDownMenu.animationDuration = 0.2
+        dropDownMenu.shouldKeepSelectedCellColor = true
         
         dropDownMenu.didSelectItemAtIndexHandler = { [weak self] index in
             if let item = self?.dropDownMenuItems[index] {
@@ -84,6 +88,10 @@ final class UserLibraryViewController: UIViewController {
         }
         
         show(.anime)
+    }
+    
+    func applyTheme() {
+
     }
     
     /// Show the appropriate view controller for the given media type

@@ -39,6 +39,7 @@
 		242A040A1E1C7CA5000E8B06 /* LibraryEntry+Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A04091E1C7CA5000E8B06 /* LibraryEntry+Library.swift */; };
 		242A040C1E1C858D000E8B06 /* UserLibraryViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A040B1E1C858D000E8B06 /* UserLibraryViewDataSource.swift */; };
 		242A04161E1CAAEA000E8B06 /* UserLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A04151E1CAAEA000E8B06 /* UserLibraryViewController.swift */; };
+		242A041B1E1CC33C000E8B06 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A041A1E1CC33C000E8B06 /* Theme.swift */; };
 		242B2B451DE51B8C0002903B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B441DE51B8C0002903B /* AuthenticationService.swift */; };
 		242B2B481DE521880002903B /* AuthentionServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B471DE521880002903B /* AuthentionServiceSpec.swift */; };
 		242B2B4A1DE566E90002903B /* Ookami.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B491DE566E90002903B /* Ookami.swift */; };
@@ -195,6 +196,7 @@
 		242A04091E1C7CA5000E8B06 /* LibraryEntry+Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LibraryEntry+Library.swift"; sourceTree = "<group>"; };
 		242A040B1E1C858D000E8B06 /* UserLibraryViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLibraryViewDataSource.swift; sourceTree = "<group>"; };
 		242A04151E1CAAEA000E8B06 /* UserLibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLibraryViewController.swift; sourceTree = "<group>"; };
+		242A041A1E1CC33C000E8B06 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		242B2B441DE51B8C0002903B /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		242B2B471DE521880002903B /* AuthentionServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentionServiceSpec.swift; sourceTree = "<group>"; };
 		242B2B491DE566E90002903B /* Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ookami.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 		2464F1D01DCC58800028F7B0 /* Ookami */ = {
 			isa = PBXGroup;
 			children = (
+				242A041A1E1CC33C000E8B06 /* Theme.swift */,
 				242A03E51E18FB39000E8B06 /* Library */,
 				242A03EA1E18FC20000E8B06 /* Shared */,
 				2464F2161DCC5C400028F7B0 /* Supporting Files */,
@@ -1073,6 +1076,7 @@
 				242A03EC1E18FC3C000E8B06 /* ItemViewController.swift in Sources */,
 				242A03FC1E1A15B8000E8B06 /* CollectionCellSpacer.swift in Sources */,
 				242A03EF1E190730000E8B06 /* ItemDetailGridCell.swift in Sources */,
+				242A041B1E1CC33C000E8B06 /* Theme.swift in Sources */,
 				242A03F81E1A0E2C000E8B06 /* GradientView.swift in Sources */,
 				242A04051E1A7220000E8B06 /* FullLibraryDataSource.swift in Sources */,
 				242A04011E1A183D000E8B06 /* CollectionCellSpacerOption.swift in Sources */,

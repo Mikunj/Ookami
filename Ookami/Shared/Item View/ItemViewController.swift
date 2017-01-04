@@ -100,7 +100,8 @@ class ItemViewController: UIViewController {
     
     //The activity indicator
     var activityIndicator: NVActivityIndicatorView = {
-        let view = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40), type: .ballSpinFadeLoader, color: UIColor.darkGray)
+        let theme = Theme.ActivityIndicatorTheme()
+        let view = NVActivityIndicatorView(frame: CGRect(origin: CGPoint.zero, size: theme.size), type: .ballSpinFadeLoader, color: theme.color)
         return view
     }()
     
@@ -129,11 +130,14 @@ class ItemViewController: UIViewController {
         }
         
         //Add the indicator
+        let size = Theme.ActivityIndicatorTheme().size
+        
         self.view.addSubview(activityIndicator)
+        
         constrain(activityIndicator) { view in
             view.center == view.superview!.center
-            view.width == 40
-            view.height == 40
+            view.width == size.width
+            view.height == size.height
         }
         
         //Add the refresh control

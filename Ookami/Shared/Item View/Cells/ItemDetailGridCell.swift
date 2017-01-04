@@ -9,6 +9,7 @@
 import UIKit
 import Kingfisher
 import Reusable
+import DynamicColor
 
 //Constraints still breaking on mobile .... WHY!!
 //It resolves itself automatically anyway but the console gets spammed with messages
@@ -25,6 +26,14 @@ final class ItemDetailGridCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        let labelTheme = Theme.TextTheme()
+        detailLabel.textColor = labelTheme.textColor
+        
+        let viewTheme = Theme.ViewTheme()
+        let color = viewTheme.backgroundColor
+        detailLabel.backgroundColor = color
+        posterImage.backgroundColor = color.isLight() ? color.darkened(amount: 0.1) : color.lighter(amount: 0.1)
     }
 }
 

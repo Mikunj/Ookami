@@ -26,7 +26,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     
     //The controllers to display
     fileprivate var itemControllers: [LibraryEntry.Status: ItemViewController] = [:]
-
+    
     
     /// Create an `LibraryViewController`
     ///
@@ -44,12 +44,13 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     }
     
     override func viewDidLoad() {
+        let theme = Theme.PagerButtonBarTheme()
         self.settings.style.buttonBarItemsShouldFillAvailiableWidth = true
-        self.settings.style.buttonBarItemTitleColor = UIColor.white
-        self.settings.style.buttonBarBackgroundColor = UIColor.black
-        self.settings.style.buttonBarItemBackgroundColor = UIColor.darkGray
         self.settings.style.buttonBarItemLeftRightMargin = 12
         self.settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 14)
+        self.settings.style.buttonBarItemTitleColor = theme.buttonTextColor
+        self.settings.style.buttonBarBackgroundColor = theme.backgroundColor
+        self.settings.style.buttonBarItemBackgroundColor = theme.buttonColor
         
         super.viewDidLoad()
         
@@ -93,6 +94,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
             self.buttonBarView.selectedBar.backgroundColor = statuses[toIndex].color()
         }
     }
+
 }
 
 //Mark:- Filter

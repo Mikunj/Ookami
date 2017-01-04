@@ -62,7 +62,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="yD0-ew-IHl" secondAttribute="trailing" id="6X4-dT-wq7"/>
                                     <constraint firstItem="qUl-4l-ClB" firstAttribute="leading" secondItem="k0m-z6-kWl" secondAttribute="leading" id="Aic-CF-8Ej"/>
@@ -83,7 +83,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="2Lq-46-o7d"/>
                                     <constraint firstAttribute="trailing" secondItem="KuW-Wy-Bnp" secondAttribute="trailing" id="HE3-y5-ncO"/>
@@ -93,7 +93,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="I1b-qr-a9V" firstAttribute="leading" secondItem="OL9-Qq-Rlk" secondAttribute="leading" id="4ku-kC-eld"/>
                             <constraint firstItem="I1b-qr-a9V" firstAttribute="top" secondItem="k0m-z6-kWl" secondAttribute="bottom" id="Cg3-fe-9Vv"/>
