@@ -36,6 +36,7 @@ def ui_pods
     pod 'Reusable', '~> 3.0'
     pod 'XLPagerTabStrip', '~> 6.0'
     pod 'NVActivityIndicatorView', '~> 3.0'
+    pod 'BTNavigationDropdownMenu', '~ 0.4', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
 end
 
 target 'Ookami' do

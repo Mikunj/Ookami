@@ -9,62 +9,10 @@
 import UIKit
 import OokamiKit
 import XLPagerTabStrip
-
-//TODO: Maybe move this into its own swift file
-extension LibraryEntry.Status {
-    //Get the UIColor for a given status
-    func color() -> UIColor {
-        switch self {
-        case .current:
-            return UIColor(red: 155/255.0, green: 225/255.0, blue: 130/255.0, alpha: 1.0)
-        case .completed:
-            return UIColor(red: 112/255.0, green: 154/255.0, blue: 225/255.0, alpha: 1.0)
-        case .planned:
-            return UIColor(red: 225/255.0, green: 215/255.0, blue: 124/255.0, alpha: 1.0)
-        case .onHold:
-            return UIColor(red: 211/255.0, green: 84/255.0, blue: 0/255.0, alpha: 1.0)
-        case .dropped:
-            return UIColor(red: 100/255.0, green: 100/255.0, blue: 100/255.0, alpha: 1.0)
-            
-        }
-    }
-}
+import BTNavigationDropdownMenu
 
 protocol LibraryEntryDataSource: ItemViewControllerDataSource {
     func didSet(filter: LibraryViewController.Filter)
-}
-
-/// A struct which holds the datasources
-struct LibraryViewDataSource {
-    
-    enum Errors: Error {
-        case invalidSources(description: String)
-    }
-    
-    typealias StatusDataSource = [LibraryEntry.Status: LibraryEntryDataSource]
-    var anime: StatusDataSource
-    var manga: StatusDataSource
-    
-    /// Create library data that holds all `LibraryViewDataSource` needed for `LibraryViewController`
-    ///
-    /// - Important: All statuses must have a data source.
-    ///
-    /// - Parameters:
-    ///   - anime: A dictionary of anime data sources
-    ///   - manga: A dictionary of manga data sources
-    /// - Throws: `Errors.invalidSources(:)` if there were not enough data sources.
-    init(anime: StatusDataSource, manga: StatusDataSource) throws {
-        guard anime.count == LibraryEntry.Status.all.count else {
-            throw Errors.invalidSources(description: "Anime - All statuses must have a datasource")
-        }
-        
-        guard manga.count == LibraryEntry.Status.all.count else {
-            throw Errors.invalidSources(description: "Manga - All statuses must have a datasource")
-        }
-        
-        self.anime = anime
-        self.manga = manga
-    }
 }
 
 //Class used for displaying library entries
@@ -80,6 +28,12 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     
     //The controllers to display
     fileprivate var itemControllers: [LibraryEntry.Status: ItemViewController] = [:]
+    
+    //The list of items which can be selected in the dropdown menu
+    fileprivate var dropDownMenuItems = ["Anime", "Manga"]
+    
+    //The dropdown menu
+    fileprivate var dropDownMenu: BTNavigationDropdownMenu!
     
     /// Create an `LibraryViewController`
     ///
@@ -99,6 +53,11 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        
+        self.navigationController?.navigationBar.topItem?.titleView = dropDownMenu
+        
     }
     
     override func viewDidLoad() {
@@ -110,6 +69,21 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         self.settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 14)
         
         super.viewDidLoad()
+        
+        //Add the dropdown menu
+        dropDownMenu = BTNavigationDropdownMenu(title: dropDownMenuItems[0], items: dropDownMenuItems as [AnyObject])
+        dropDownMenu.cellBackgroundColor = UIColor(red: 0.0/255.0, green:180/255.0, blue:220/255.0, alpha: 1.0)
+        dropDownMenu.cellTextLabelColor = UIColor.white
+        dropDownMenu.menuTitleColor = UIColor.white
+        dropDownMenu.animationDuration = 0.2
+        
+        dropDownMenu.didSelectItemAtIndexHandler = { [weak self] index in
+            if let item = self?.dropDownMenuItems[index] {
+                if item == "Anime" { self?.currentLibrary = .anime }
+                if item == "Manga" { self?.currentLibrary = .manga }
+            }
+        }
+
     }
     
     func updateItemViewControllers() {
@@ -132,8 +106,10 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         //Update the sources
         for status in LibraryEntry.Status.all {
             itemControllers[status]?.dataSource = sources[status]
+            itemControllers[status]?.title = status.toReadableString(for: currentLibrary)
         }
         
+        self.buttonBarView.reloadData()
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {

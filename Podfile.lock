@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.0.1)
+  - BTNavigationDropdownMenu (0.4.1)
   - Cartography (1.0.1)
   - Dwifft (0.5)
   - Heimdallr (3.5.0):
@@ -42,6 +43,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`, branch `swift-3.0`)
   - Cartography (~> 1.0)
   - Dwifft (= 0.5)
   - Heimdallr (from `https://github.com/marcelofabri/Heimdallr.swift.git`, branch `swift-3.0`)
@@ -59,6 +61,9 @@ DEPENDENCIES:
   - XLPagerTabStrip (~> 6.0)
 
 EXTERNAL SOURCES:
+  BTNavigationDropdownMenu:
+    :branch: swift-3.0
+    :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
   Heimdallr:
     :branch: swift-3.0
     :git: https://github.com/marcelofabri/Heimdallr.swift.git
@@ -74,6 +79,9 @@ EXTERNAL SOURCES:
     :submodules: true
 
 CHECKOUT OPTIONS:
+  BTNavigationDropdownMenu:
+    :commit: 2c08c8579cf7a53ecb3dbf578e6e1034080a9859
+    :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
   Heimdallr:
     :commit: af40d89fef3300b780c8a1675db70bf3147dfd0f
     :git: https://github.com/marcelofabri/Heimdallr.swift.git
@@ -88,6 +96,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
   Cartography: c1460e99395b824d9d75360b0382faeb0b33dcd7
   Dwifft: 9b7f1e55950e27b9dcdbb4d48502625cb4690b97
   Heimdallr: 6d371eb270d6d06d8c9ef5dc9fe7f7bda1331154
@@ -104,6 +113,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: 2056d12bb721bd8316f4597c6595ca1b35d4deca
+PODFILE CHECKSUM: 4c00fa114df77547864a8cf5dd573f6a532f88c8
 
 COCOAPODS: 1.1.1

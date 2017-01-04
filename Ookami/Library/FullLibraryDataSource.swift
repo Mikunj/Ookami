@@ -18,7 +18,8 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
             
             //Check if we have the results and if we don't then show the indicator
             if let results = results,
-                results.count == 0 {
+                results.count == 0,
+                fetchedEntries == false {
                 delegate?.showActivityIndicator()
             }
         }
@@ -44,6 +45,9 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
     
     //Current retry count
     var retryCount = 0
+    
+    //Bool to indicate whether we have fetched entries or not
+    var fetchedEntries = false
     
     /// Create a library data source that fetches a full library for the given `user` and `status`
     ///
@@ -92,9 +96,16 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
                     return
                 }
                 
+                //We successfully fetched entries
+                self.fetchedEntries = true
+                
                 //Hide the indicator if we have recieved all the results
                 self.delegate?.hideActivityIndicator()
             }
+        } else {
+            
+            //We have reached the retry count. Hide the indicator.
+            self.delegate?.hideActivityIndicator()
         }
     }
     
@@ -102,47 +113,13 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
 
 //MARK: - LibraryEntryDataSource
 extension FullLibraryDataSource {
-    /// Convert a `LibraryEntry` to `ItemData`
-    /// TODO: Move this into LibraryEntry+Library file
-    ///
-    /// - Parameter entry: The library entry to convert
-    /// - Returns: The `ItemData` that was converted
-    func toItemData(entry: LibraryEntry) -> ItemData {
-        var data = ItemData()
-        
-        var maxCount = -1
-        
-        //Name
-        if let media = entry.media, let type = media.type {
-            switch type {
-            case .anime:
-                let anime = Anime.get(withId: media.id)
-                data.name = anime?.canonicalTitle
-                data.posterImage = anime?.posterImage
-                maxCount = anime?.episodeCount ?? -1
-                break
-            case .manga:
-                let manga = Manga.get(withId: media.id)
-                data.name = manga?.canonicalTitle
-                data.posterImage = manga?.posterImage
-                maxCount = manga?.chapterCount ?? -1
-                break
-            }
-        }
-        
-        //data.posterImage = nil
-        
-        data.countString = maxCount > 0 ? "\(entry.progress) / \(maxCount)" : "\(entry.progress)"
-        
-        return data
-    }
     
     func items() -> [ItemData] {
         guard let results = results else {
             return []
         }
         
-        return Array(results).map { toItemData(entry: $0) }
+        return Array(results).map { $0.toItemData() }
     }
     
     func didSelectItem(at indexpath: IndexPath) {
@@ -158,12 +135,15 @@ extension FullLibraryDataSource {
         results = LibraryEntry.belongsTo(user: userID).filter("media.rawType = %@ AND rawStatus = %@", type.rawValue, status.rawValue).sorted(byProperty: "updatedAt", ascending: false)
         
         token?.stop()
-        token = results?.addNotificationBlock { changes in
-            self.delegate?.didReloadItems(dataSource: self)
-            
-            //Hide the indicator if results were updated
-            if case .update(_, _, _, _) = changes {
-                self.delegate?.hideActivityIndicator()
+        token = results?.addNotificationBlock { [weak self] changes in
+            if let strong = self {
+                strong.delegate?.didReloadItems(dataSource: strong)
+                
+                //Hide the indicator if results were updated
+                let count = strong.results?.count ?? 0
+                if count > 0 {
+                    strong.delegate?.hideActivityIndicator()
+                }
             }
         }
     }
