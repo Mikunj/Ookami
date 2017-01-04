@@ -15,13 +15,7 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
     var delegate: ItemViewControllerDelegate? {
         didSet {
             delegate?.didReloadItems(dataSource: self)
-            
-            //Check if we have the results and if we don't then show the indicator
-            if let results = results,
-                results.count == 0,
-                fetchedEntries == false {
-                delegate?.showActivityIndicator()
-            }
+            showIndicator()
         }
     }
     
@@ -68,10 +62,32 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
         token?.stop()
     }
     
-    /// Fetch the library info
-    func fetchLibrary(resetRetry: Bool = false) {
+    func refresh() {
+        fetchedEntries = false
+        fetchLibrary(forced: true)
+    }
+    
+    func showIndicator(forced: Bool = false) {
+        if forced {
+            delegate?.showActivityIndicator()
+            return
+        }
         
-        if resetRetry { retryCount = 0 }
+        //Check if we have the results and if we don't then show the indicator
+        if let results = results,
+            results.count == 0,
+            fetchedEntries == false {
+            delegate?.showActivityIndicator()
+        }
+    }
+    
+    /// Fetch the library info
+    func fetchLibrary(forced: Bool = false) {
+        
+        if forced {
+            fetchedEntries = false
+            retryCount = 0
+        }
         
         var lastFetched: Date = Date(timeIntervalSince1970: 0)
         
@@ -87,6 +103,8 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
         
         if retryCount <= self.maxRetryCount {
             
+            showIndicator(forced: forced)
+            
             LibraryService().get(userID: userID, type: type, status: status, since: lastFetched) { error in
                 
                 //If we get an error and we can still retry then do it
@@ -98,6 +116,9 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
                 
                 //We successfully fetched entries
                 self.fetchedEntries = true
+                
+                //Tell delegate to reload the items
+                self.delegate?.didReloadItems(dataSource: self)
                 
                 //Hide the indicator if we have recieved all the results
                 self.delegate?.hideActivityIndicator()

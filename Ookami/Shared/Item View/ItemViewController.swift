@@ -22,6 +22,7 @@ protocol ItemViewControllerDataSource {
     
     func items() -> [ItemData]
     func didSelectItem(at indexpath: IndexPath)
+    func refresh()
 }
 
 //The delegate which is implemented by the controller
@@ -47,6 +48,13 @@ class ItemViewController: UIViewController {
             collectionView.reloadData()
         }
     }
+    
+    //The refresh control
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh(_:)), for: UIControlEvents.valueChanged)
+        return refreshControl
+    }()
     
     //The datasource we are going to use
     private var _source: ItemViewControllerDataSource?
@@ -80,6 +88,7 @@ class ItemViewController: UIViewController {
         layout.itemSize = CGSize(width: 100, height: 150)
         
         let c = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        c.alwaysBounceVertical = true
         c.backgroundColor = UIColor.groupTableViewBackground
         c.dataSource = self
         c.delegate = self
@@ -126,6 +135,10 @@ class ItemViewController: UIViewController {
             view.width == 40
             view.height == 40
         }
+        
+        //Add the refresh control
+        collectionView.addSubview(refreshControl)
+        collectionView.sendSubview(toBack: refreshControl)
     }
     
     override func viewWillLayoutSubviews() {
@@ -156,6 +169,12 @@ class ItemViewController: UIViewController {
         case .DetailGrid:
             return [CGSize(width: 100, height: 175), CGSize(width: 120, height: 210)]
         }
+    }
+    
+    func handleRefresh(_ refreshControl: UIRefreshControl) {
+        refreshControl.endRefreshing()
+        dataSource?.refresh()
+        
     }
 }
 
