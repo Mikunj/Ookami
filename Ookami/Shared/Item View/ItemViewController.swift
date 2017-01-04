@@ -155,7 +155,7 @@ class ItemViewController: UIViewController {
     func applySpacer() {
         let sizes = itemSize()
         let width = UIScreen.main.bounds.width
-        let options = sizes.flatMap { try? CollectionCellSpacerOption(itemSize: $0, minimumGutter: 1.0, availableWidth: width) }
+        let options = sizes.flatMap { try? CollectionCellSpacerOption(itemSize: $0, minimumGutter: 2.0, availableWidth: width) }
         
         guard let best = CollectionCellSpacer.bestSpacing(with: options) else {
             return

@@ -187,7 +187,7 @@ public class LibraryService: BaseService {
         
         queue.addOperation(operation)
         
-        return LibraryEntry.belongsTo(user: userID).filter("media.rawType = %@ AND rawStatus = %@ ", type.rawValue, status.rawValue)
+        return LibraryEntry.belongsTo(user: userID, type: type, status: status)
     }
     
     /// Get all the library entries of a user.
@@ -243,7 +243,7 @@ public class LibraryService: BaseService {
         
         queue.addOperation(operation)
         
-        return LibraryEntry.belongsTo(user: userID).filter("media.rawType = %@", type.rawValue)
+        return LibraryEntry.belongsTo(user: userID, type: type)
     }
     
     /// Update the last fetched library time for a given user

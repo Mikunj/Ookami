@@ -139,13 +139,29 @@ extension LibraryEntry {
 extension LibraryEntry: GettableObject {
     public typealias T = LibraryEntry
     
-    /// Get library entries that belongs to a given user
+    /// Get library entries that belongs to a given user, of a specific type and of a specific status
     ///
-    /// - Parameter id: The user id
-    /// - Returns: Library entries that belong to a given user
-    public static func belongsTo(user id: Int) -> Results<LibraryEntry> {
+    /// - Parameters:
+    ///   - id: The user id
+    ///   - type: The type of the entries
+    ///   - status: The status of the entry
+    /// - Returns: A realm result of LibraryEntries
+    public static func belongsTo(user id: Int, type: Media.MediaType? = nil, status: Status? = nil) -> Results<LibraryEntry> {
         let r = Database().realm
-        return r.objects(LibraryEntry.self).filter("userID = %d", id)
+        
+        var objects = r.objects(LibraryEntry.self).filter("userID = %d", id)
+        
+        //Filter media type
+        if let type = type {
+            objects = objects.filter("media.rawType = %@", type.rawValue)
+        }
+        
+        //Filter status
+        if let status = status {
+            objects = objects.filter("rawStatus = %@", status.rawValue)
+        }
+        
+        return objects
     }
 }
 

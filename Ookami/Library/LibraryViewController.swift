@@ -12,7 +12,7 @@ import XLPagerTabStrip
 import BTNavigationDropdownMenu
 
 protocol LibraryEntryDataSource: ItemViewControllerDataSource {
-    func didSet(filter: LibraryViewController.Filter)
+    func didSet(sort: LibraryViewController.Sort)
 }
 
 //Class used for displaying library entries of a specific type
@@ -26,6 +26,11 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     
     //The controllers to display
     fileprivate var itemControllers: [LibraryEntry.Status: ItemViewController] = [:]
+    
+    //Filter the results
+    fileprivate var sort: Sort = .updatedAt(ascending: false) {
+        didSet { source.values.forEach { $0.didSet(sort: sort) } }
+    }
     
     
     /// Create an `LibraryViewController`
@@ -59,6 +64,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     func updateItemViewControllers() {
         //Update the sources
         for status in LibraryEntry.Status.all {
+            source[status]?.didSet(sort: sort)
             itemControllers[status]?.dataSource = source[status]
         }
         
@@ -99,7 +105,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
 
 //Mark:- Filter
 extension LibraryViewController {
-    enum Filter: String {
-        case updatedAt
+    enum Sort {
+        case updatedAt(ascending: Bool)
     }
 }

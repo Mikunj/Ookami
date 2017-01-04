@@ -23,9 +23,7 @@ class UserHelper {
     ///   - type: The type of entries to check.
     ///   - id: The user id to check library of.
     @discardableResult static func deleteEntries(notIn array: [Int], type: Media.MediaType, forUser id: Int) {
-        let entries = LibraryEntry.belongsTo(user: id)
-            .filter("media.rawType = %@", type.rawValue)
-            .filter("NOT id in %@", array)
+        let entries = LibraryEntry.belongsTo(user: id, type: type).filter("NOT id in %@", array)
         
         database.delete(entries)
     }
@@ -41,7 +39,7 @@ class UserHelper {
             return false
         }
         
-        let entries = LibraryEntry.belongsTo(user: currentID).filter("media.id = %d AND media.rawType = %@", id,  media.rawValue)
+        let entries = LibraryEntry.belongsTo(user: currentID, type: media).filter("media.id = %d", id)
         return entries.count > 0
     }
 }

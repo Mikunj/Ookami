@@ -54,7 +54,7 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
         self.type = type
         self.status = status
         
-        updateResults(with: .updatedAt)
+        updateResults(with: .updatedAt(ascending: false))
         fetchLibrary()
     }
     
@@ -147,13 +147,21 @@ extension FullLibraryDataSource {
         
     }
     
-    /// Update the realm results we are storing with a filter
+    /// Update the realm results we are storing and sort them
     ///
-    /// - Parameter filter: The filter that is to be used
-    func updateResults(with filter: LibraryViewController.Filter?) {
+    /// - Parameter sort: The sort that is to be used
+    func updateResults(with sort: LibraryViewController.Sort?) {
         
-        //TODO: Add function in LibraryEntry to make this more readable
-        results = LibraryEntry.belongsTo(user: userID).filter("media.rawType = %@ AND rawStatus = %@", type.rawValue, status.rawValue).sorted(byProperty: "updatedAt", ascending: false)
+        results = LibraryEntry.belongsTo(user: userID, type: type, status: status)
+        
+        //Sort the results
+        if let sort = sort {
+            switch sort {
+            case .updatedAt(let ascending):
+                results = results?.sorted(byProperty: "updatedAt", ascending: ascending)
+                break
+            }
+        }
         
         //Tell the delegate that we have some results
         //This is there to ensure data gets loaded properley before token is set
@@ -173,7 +181,7 @@ extension FullLibraryDataSource {
         }
     }
     
-    func didSet(filter: LibraryViewController.Filter) {
-        updateResults(with: filter)
+    func didSet(sort: LibraryViewController.Sort) {
+        updateResults(with: sort)
     }
 }

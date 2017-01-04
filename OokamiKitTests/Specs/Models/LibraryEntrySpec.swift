@@ -76,6 +76,39 @@ class LibraryEntrySpec: QuickSpec {
                     
                     expect(LibraryEntry.belongsTo(user: 1)).to(haveCount(2))
                 }
+                
+                it("Should return entries that belong to a user and are of a given type") {
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 1) { index, object in
+                        object.id = index
+                        object.userID = 1
+                        object.media = Media(value: [object.id, 1, Media.MediaType.anime.rawValue])
+                    }
+                    
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 1) { index, object in
+                        object.id = 10 + index
+                        object.userID = 1
+                        object.media = Media(value: [object.id, 1, Media.MediaType.manga.rawValue])
+                    }
+                    
+                    expect(LibraryEntry.belongsTo(user: 1, type: .anime)).to(haveCount(1))
+                }
+                
+                it("Should return entries that belong to a user and have a specific status") {
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 1) { index, object in
+                        object.id = index
+                        object.userID = 1
+                        object.status = .current
+                    }
+                    
+                    TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 1) { index, object in
+                        object.id = 10 + index
+                        object.userID = 1
+                        object.status = .dropped
+                    }
+                    
+                    expect(LibraryEntry.belongsTo(user: 1, status: .current)).to(haveCount(1))
+
+                }
             }
             
             context("Storing") {
