@@ -96,7 +96,7 @@ extension Anime: JSONParsable {
         anime.ageRating = attributes["ageRating"].stringValue
         anime.ageRatingGuide = attributes["ageRatingGuide"].stringValue
         anime.posterImage = attributes["posterImage"]["small"].stringValue
-        anime.coverImage = attributes["coverImage"]["small"].stringValue
+        anime.coverImage = attributes["coverImage"]["large"].stringValue
         
         //Add titles
         let attributeTitles = attributes["titles"]

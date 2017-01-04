@@ -89,7 +89,7 @@ extension Manga: JSONParsable {
         manga.volumeCount = attributes["volumeCount"].int ?? -1
         manga.mangaType = attributes["mangaType"].stringValue
         manga.posterImage = attributes["posterImage"]["small"].stringValue
-        manga.coverImage = attributes["coverImage"]["small"].stringValue
+        manga.coverImage = attributes["coverImage"]["large"].stringValue
         
         //Add titles
         let attributeTitles = attributes["titles"]

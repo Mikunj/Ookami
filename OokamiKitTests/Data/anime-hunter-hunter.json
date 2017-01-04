@@ -40,10 +40,16 @@
         "startDate": "2011-10-02",
         "endDate": null,
         "posterImage": {
-            "original": "https://static.hummingbird.me/anime/poster_images/000/006/448/original/QxC5cby.png?1431828590"
+            "tiny": "https://media.kitsu.io/anime/poster_images/6448/tiny.jpg?1431828590",
+            "small": "https://media.kitsu.io/anime/poster_images/6448/small.jpg?1431828590",
+            "medium": "https://media.kitsu.io/anime/poster_images/6448/medium.jpg?1431828590",
+            "large": "https://media.kitsu.io/anime/poster_images/6448/large.jpg?1431828590",
+            "original": "https://media.kitsu.io/anime/poster_images/6448/original.png?1431828590"
         },
         "coverImage": {
-            "original": "https://static.hummingbird.me/anime/cover_images/000/006/448/original/kANsAC1.jpg?1435367957"
+            "large": "https://media.kitsu.io/anime/cover_images/6448/large.jpg?1435367957",
+            "original": "https://media.kitsu.io/anime/cover_images/6448/original.jpg?1435367957",
+            "small": "https://media.kitsu.io/anime/cover_images/6448/small.jpg?1435367957"
         },
         "episodeCount": 148,
         "episodeLength": null,
