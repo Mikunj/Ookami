@@ -14,7 +14,7 @@ import Cartography
 
 class ViewController: UIViewController {
     
-    var libraryView: LibraryViewController?
+    var libraryView: UserLibraryViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +31,10 @@ class ViewController: UIViewController {
             manga[status] = FullLibraryDataSource(userID: 2875, type: .manga, status: status)
         }
         
-        let data = try! LibraryViewDataSource(anime: anime, manga: manga)
+        let data = try! UserLibraryViewDataSource(anime: anime, manga: manga)
         
         
-        libraryView = LibraryViewController(dataSource: data)
+        libraryView = UserLibraryViewController(dataSource: data)
         
         addChildViewController(libraryView!)
         

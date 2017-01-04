@@ -134,6 +134,10 @@ extension FullLibraryDataSource {
         //TODO: Add function in LibraryEntry to make this more readable
         results = LibraryEntry.belongsTo(user: userID).filter("media.rawType = %@ AND rawStatus = %@", type.rawValue, status.rawValue).sorted(byProperty: "updatedAt", ascending: false)
         
+        //Tell the delegate that we have some results
+        //This is there to ensure data gets loaded properley before token is set
+        self.delegate?.didReloadItems(dataSource: self)
+        
         token?.stop()
         token = results?.addNotificationBlock { [weak self] changes in
             if let strong = self {

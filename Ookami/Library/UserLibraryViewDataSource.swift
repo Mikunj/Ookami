@@ -1,5 +1,5 @@
 //
-//  LibraryViewDataSource.swift
+//  UserLibraryViewDataSource.swift
 //  Ookami
 //
 //  Created by Maka on 4/1/17.
@@ -10,7 +10,7 @@ import Foundation
 import OokamiKit
 
 /// A struct which holds the datasources
-struct LibraryViewDataSource {
+struct UserLibraryViewDataSource {
     
     enum Errors: Error {
         case invalidSources(description: String)
