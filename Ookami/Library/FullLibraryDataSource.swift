@@ -39,6 +39,12 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
     //Realm results
     var results: Results<LibraryEntry>?
     
+    //Max amount of time we are allowed to retry
+    let maxRetryCount = 3
+    
+    //Current retry count
+    var retryCount = 0
+    
     /// Create a library data source that fetches a full library for the given `user` and `status`
     ///
     /// - Parameters:
@@ -59,7 +65,10 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
     }
     
     /// Fetch the library info
-    func fetchLibrary() {
+    func fetchLibrary(resetRetry: Bool = false) {
+        
+        if resetRetry { retryCount = 0 }
+        
         var lastFetched: Date = Date(timeIntervalSince1970: 0)
         
         //Get the fetch time if user has it
@@ -72,16 +81,20 @@ final class FullLibraryDataSource: LibraryEntryDataSource {
             }
         }
         
-        LibraryService().get(userID: userID, type: type, status: status, since: lastFetched) { error in
+        if retryCount <= self.maxRetryCount {
             
-            //Hide the indicator if we have recieved all the results
-            self.delegate?.hideActivityIndicator()
-            
-            guard let error = error else {
-                return
+            LibraryService().get(userID: userID, type: type, status: status, since: lastFetched) { error in
+                
+                //If we get an error and we can still retry then do it
+                if let _ = error, self.retryCount + 1 <= self.maxRetryCount {
+                    self.retryCount += 1
+                    self.fetchLibrary()
+                    return
+                }
+                
+                //Hide the indicator if we have recieved all the results
+                self.delegate?.hideActivityIndicator()
             }
-            
-            print(error)
         }
     }
     

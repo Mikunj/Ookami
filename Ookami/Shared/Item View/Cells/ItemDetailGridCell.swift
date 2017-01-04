@@ -11,6 +11,7 @@ import Kingfisher
 import Reusable
 
 //Constraints still breaking on mobile .... WHY!!
+//It resolves itself automatically anyway but the console gets spammed with messages
 
 final class ItemDetailGridCell: UICollectionViewCell {
 
@@ -25,7 +26,6 @@ final class ItemDetailGridCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
 }
 
 //MARK:- Reusable
@@ -53,6 +53,9 @@ extension ItemDetailGridCell: ItemUpdatable {
     
     func stopUpdating() {
         posterImage.kf.cancelDownloadTask()
+        
+        //This is to lower memory usage
+        posterImage.image = nil
     }
 }
 

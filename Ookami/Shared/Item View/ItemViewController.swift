@@ -141,7 +141,7 @@ class ItemViewController: UIViewController {
         let options = sizes.flatMap { try? CollectionCellSpacerOption(itemSize: $0, minimumGutter: 1.0, availableWidth: width) }
         
         guard let best = CollectionCellSpacer.bestSpacing(with: options) else {
-                return
+            return
         }
         
         //Apply the options
