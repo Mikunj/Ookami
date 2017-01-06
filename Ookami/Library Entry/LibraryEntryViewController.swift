@@ -10,7 +10,6 @@ import UIKit
 import OokamiKit
 import Cartography
 import Reusable
-import Iconic
 
 private enum DataType {
     case string

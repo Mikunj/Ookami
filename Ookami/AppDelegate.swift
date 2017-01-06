@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Iconic
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

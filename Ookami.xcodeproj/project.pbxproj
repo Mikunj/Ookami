@@ -15,6 +15,9 @@
 		241418A11DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
 		241418A21DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
 		241418A31DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */; };
+		24175E8E1E1FA88A009FBDE6 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24175E851E1FA88A009FBDE6 /* FontAwesome.otf */; };
+		24175E921E1FA88A009FBDE6 /* FontAwesomeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24175E891E1FA88A009FBDE6 /* FontAwesomeIcon.swift */; };
+		24175E931E1FA88A009FBDE6 /* IconDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24175E8A1E1FA88A009FBDE6 /* IconDrawable.swift */; };
 		242A03D51E163D0C000E8B06 /* MediaTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03D41E163D0C000E8B06 /* MediaTitle.swift */; };
 		242A03D71E163EAB000E8B06 /* Manga.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03D61E163EAB000E8B06 /* Manga.swift */; };
 		242A03D91E1643B0000E8B06 /* manga-one-punch-man.json in Resources */ = {isa = PBXBuildFile; fileRef = 242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */; };
@@ -184,6 +187,15 @@
 		2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsable.swift; sourceTree = "<group>"; };
 		2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntrySpec.swift; sourceTree = "<group>"; };
 		2414189F1DCDE19500AF1AEA /* entry-anime-jigglyslime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "entry-anime-jigglyslime.json"; sourceTree = "<group>"; };
+		24175E801E1FA88A009FBDE6 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		24175E811E1FA88A009FBDE6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		24175E841E1FA88A009FBDE6 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		24175E851E1FA88A009FBDE6 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
+		24175E861E1FA88A009FBDE6 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		24175E871E1FA88A009FBDE6 /* script.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
+		24175E881E1FA88A009FBDE6 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		24175E891E1FA88A009FBDE6 /* FontAwesomeIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontAwesomeIcon.swift; sourceTree = "<group>"; };
+		24175E8A1E1FA88A009FBDE6 /* IconDrawable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconDrawable.swift; sourceTree = "<group>"; };
 		242A03D41E163D0C000E8B06 /* MediaTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTitle.swift; sourceTree = "<group>"; };
 		242A03D61E163EAB000E8B06 /* Manga.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manga.swift; sourceTree = "<group>"; };
 		242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "manga-one-punch-man.json"; sourceTree = "<group>"; };
@@ -337,6 +349,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24175E7E1E1FA844009FBDE6 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				24175E7F1E1FA88A009FBDE6 /* Iconic */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		24175E7F1E1FA88A009FBDE6 /* Iconic */ = {
+			isa = PBXGroup;
+			children = (
+				24175E821E1FA88A009FBDE6 /* Source */,
+				24175E801E1FA88A009FBDE6 /* LICENSE */,
+				24175E811E1FA88A009FBDE6 /* README.md */,
+			);
+			path = Iconic;
+			sourceTree = "<group>";
+		};
+		24175E821E1FA88A009FBDE6 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				24175E831E1FA88A009FBDE6 /* Catalog */,
+				24175E891E1FA88A009FBDE6 /* FontAwesomeIcon.swift */,
+				24175E8A1E1FA88A009FBDE6 /* IconDrawable.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		24175E831E1FA88A009FBDE6 /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				24175E851E1FA88A009FBDE6 /* FontAwesome.otf */,
+				24175E841E1FA88A009FBDE6 /* data.json */,
+				24175E861E1FA88A009FBDE6 /* index.html */,
+				24175E871E1FA88A009FBDE6 /* script.js */,
+				24175E881E1FA88A009FBDE6 /* style.css */,
+			);
+			path = Catalog;
+			sourceTree = "<group>";
+		};
 		242A03E51E18FB39000E8B06 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +407,7 @@
 				242A03FD1E1A17FB000E8B06 /* CollectionCellSpacer */,
 				242A03F31E190D2E000E8B06 /* Item View */,
 				242A042A1E1F47D7000E8B06 /* Views */,
+				242A041A1E1CC33C000E8B06 /* Theme.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -482,9 +535,9 @@
 				242A041E1E1F117F000E8B06 /* Library Entry */,
 				242A03EA1E18FC20000E8B06 /* Shared */,
 				2464F2161DCC5C400028F7B0 /* Supporting Files */,
+				24175E7E1E1FA844009FBDE6 /* Vendor */,
 				2464F1D11DCC58800028F7B0 /* AppDelegate.swift */,
 				2464F1D81DCC58800028F7B0 /* Assets.xcassets */,
-				242A041A1E1CC33C000E8B06 /* Theme.swift */,
 				2464F1D31DCC58800028F7B0 /* ViewController.swift */,
 				242A04061E1B904D000E8B06 /* main.swift */,
 			);
@@ -904,6 +957,7 @@
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
 				242A03F01E190730000E8B06 /* ItemDetailGridCell.xib in Resources */,
 				242A03DD1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */,
+				24175E8E1E1FA88A009FBDE6 /* FontAwesome.otf in Resources */,
 				241418A01DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */,
 				2487343F1DCCC383002E7366 /* anime-hunter-hunter.json in Resources */,
@@ -1126,12 +1180,14 @@
 				248FE15E1E1F58AC009ACA66 /* EntryStringTableViewCell.swift in Sources */,
 				2464F1D41DCC58800028F7B0 /* ViewController.swift in Sources */,
 				242A04071E1B904D000E8B06 /* main.swift in Sources */,
+				24175E921E1FA88A009FBDE6 /* FontAwesomeIcon.swift in Sources */,
 				242A042E1E1F487B000E8B06 /* EntryMediaHeaderView.swift in Sources */,
 				242A04031E1A64C2000E8B06 /* LibraryViewController.swift in Sources */,
 				242A03F61E19C949000E8B06 /* ItemUpdatable.swift in Sources */,
 				242A03EC1E18FC3C000E8B06 /* ItemViewController.swift in Sources */,
 				242A03FC1E1A15B8000E8B06 /* CollectionCellSpacer.swift in Sources */,
 				242A03EF1E190730000E8B06 /* ItemDetailGridCell.swift in Sources */,
+				24175E931E1FA88A009FBDE6 /* IconDrawable.swift in Sources */,
 				242A041B1E1CC33C000E8B06 /* Theme.swift in Sources */,
 				242A03F81E1A0E2C000E8B06 /* GradientView.swift in Sources */,
 				242A04051E1A7220000E8B06 /* FullLibraryDataSource.swift in Sources */,
