@@ -10,6 +10,7 @@ import UIKit
 import OokamiKit
 import Cartography
 import Reusable
+import Iconic
 
 private enum DataType {
     case string
@@ -54,11 +55,12 @@ class LibraryEntryViewController: UIViewController {
         return t
     }()
     
-    var editAccessory: UIView {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        view.backgroundColor = UIColor.blue
-        return view
-    }
+    //The accessory to indicate we can edit the field
+    var editAccessory: UIImageView = {
+        let size = CGSize(width: 20, height: 20)
+        let image = FontAwesomeIcon.pencilIcon.image(ofSize: size , color: Theme.Colors().primary)
+        return UIImageView(image: image)
+    }()
     
     //Whether the entry is editable
     let editable: Bool
@@ -87,7 +89,6 @@ class LibraryEntryViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.title = unmanaged.toEntryMediaHeaderData().name
         //TODO: Add button bar items here
     }
     

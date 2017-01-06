@@ -41,7 +41,7 @@ class EntryMediaHeaderView: NibLoadableView {
     
     init(data: EntryMediaHeaderViewData) {
         let width = UIScreen.main.bounds.width
-        super.init(frame: CGRect(origin: .zero, size: CGSize(width: width, height: 180)))
+        super.init(frame: CGRect(origin: .zero, size: CGSize(width: width, height: 166)))
         update(data: data)
     }
     
@@ -79,8 +79,15 @@ class EntryMediaHeaderView: NibLoadableView {
         
         //Set the cover image
         if let cover = data.coverImage {
-            let processor = BlurImageProcessor(blurRadius: 4)
-            coverImage.kf.setImage(with: URL(string: cover), options: [.backgroundDecode, .processor(processor), .transition(.fade(0.2))])
+            
+            //Default to poster image if cover is empty
+            var url = URL(string: cover)
+            if cover.isEmpty, let poster = data.posterImage {
+                url = URL(string: poster)
+            }
+            
+            let processor = BlurImageProcessor(blurRadius: 6)
+            coverImage.kf.setImage(with: url, options: [.backgroundDecode, .processor(processor), .transition(.fade(0.2))])
         } else {
             coverImage.image = nil
         }
