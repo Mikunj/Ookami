@@ -11,7 +11,12 @@ import OokamiKit
 import XLPagerTabStrip
 import BTNavigationDropdownMenu
 
-protocol LibraryEntryDataSource: ItemViewControllerDataSource {
+protocol LibraryDataSourceParent: class {
+    func didTapEntry(entry: LibraryEntry)
+}
+
+protocol LibraryDataSource: ItemViewControllerDataSource {
+    weak var parent: LibraryDataSourceParent? { get set }
     func didSet(sort: LibraryViewController.Sort)
 }
 
@@ -22,7 +27,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     fileprivate var type: Media.MediaType
     
     //The source of data to use
-    fileprivate var source: [LibraryEntry.Status: LibraryEntryDataSource]
+    fileprivate var source: [LibraryEntry.Status: LibraryDataSource]
     
     //The controllers to display
     fileprivate var itemControllers: [LibraryEntry.Status: ItemViewController] = [:]
@@ -36,7 +41,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     /// Create an `LibraryViewController`
     ///
     /// - Parameter dataSource: The datasource to use.
-    init(dataSource: [LibraryEntry.Status: LibraryEntryDataSource], type: Media.MediaType) {
+    init(dataSource: [LibraryEntry.Status: LibraryDataSource], type: Media.MediaType) {
         self.source = dataSource
         self.type = type
         super.init(nibName: nil, bundle: nil)

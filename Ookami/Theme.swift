@@ -13,13 +13,18 @@ enum Theme {}
 
 extension Theme {
     
+    struct Colors {
+        var primary = UIColor(hexString: "#2F343B")
+        var secondary = UIColor(hexString: "#02b4ef")
+    }
+    
     struct ActivityIndicatorTheme {
-        var color = UIColor(hexString: "#02b4ef")
+        var color = Colors().secondary
         var size = CGSize(width: 40, height: 40)
     }
     
     struct NavigationTheme {
-        var barColor = UIColor(hexString: "#2F343B")
+        var barColor = Colors().primary
         var barTextColor = UIColor.white
         
         func apply() {
@@ -32,15 +37,15 @@ extension Theme {
     }
     
     struct DropDownTheme {
-        var backgroundColor = UIColor(hexString: "#2F343B").darkened(amount: 0.04)
-        var selectionBackgroundColor = UIColor(hexString: "#2F343B").darkened(amount: 0.1)
+        var backgroundColor = Colors().primary.darkened(amount: 0.04)
+        var selectionBackgroundColor = Colors().primary.darkened(amount: 0.1)
         var seperatorColor = UIColor.black
         var textColor = UIColor.white
     }
     
     struct PagerButtonBarTheme {
-        var backgroundColor = UIColor(hexString: "#2F343B").darkened(amount: 0.02)
-        var buttonColor = UIColor(hexString: "#2F343B").darkened(amount: 0.02)
+        var backgroundColor = Colors().primary.darkened(amount: 0.02)
+        var buttonColor = Colors().primary.darkened(amount: 0.02)
         var buttonTextColor = UIColor.white
     }
     

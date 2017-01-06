@@ -17,16 +17,16 @@ import NVActivityIndicatorView
 //Also look into performance with KingFisher
 
 //The datasource which is used by the controller
-protocol ItemViewControllerDataSource {
-    var delegate: ItemViewControllerDelegate? { get set }
+protocol ItemViewControllerDataSource: class {
+    weak var delegate: ItemViewControllerDelegate? { get set }
     
     func items() -> [ItemData]
-    func didSelectItem(at indexpath: IndexPath)
+    func didSelectItem(at indexPath: IndexPath)
     func refresh()
 }
 
 //The delegate which is implemented by the controller
-protocol ItemViewControllerDelegate {
+protocol ItemViewControllerDelegate: class {
     func didReloadItems(dataSource: ItemViewControllerDataSource)
     func showActivityIndicator()
     func hideActivityIndicator()

@@ -1,5 +1,5 @@
 //
-//  LibraryEntry+Library.swift
+//  LibraryEntry+LibraryView.swift
 //  Ookami
 //
 //  Created by Maka on 4/1/17.
@@ -43,6 +43,7 @@ extension LibraryEntry.Status {
     }
 }
 
+//MARK:- Item Data
 extension LibraryEntry {
     /// Convert a `LibraryEntry` to `ItemData`
     ///
@@ -64,7 +65,7 @@ extension LibraryEntry {
             switch type {
             case .anime:
                 //Make sure we have an anime
-                guard let anime = Anime.get(withId: media.id) else {
+                guard let anime = self.anime else {
                     break
                 }
                 
@@ -92,7 +93,7 @@ extension LibraryEntry {
                 
                 break
             case .manga:
-                guard let manga = Manga.get(withId: media.id) else {
+                guard let manga = self.manga else {
                     break
                 }
                 
@@ -113,3 +114,4 @@ extension LibraryEntry {
         return data
     }
 }
+

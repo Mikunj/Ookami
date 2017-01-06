@@ -11,13 +11,16 @@ import OokamiKit
 import RealmSwift
 
 //A datasource which displays an entire library of a certain type and status
-final class FullLibraryDataSource: LibraryEntryDataSource {
-    var delegate: ItemViewControllerDelegate? {
+final class FullLibraryDataSource: LibraryDataSource {
+    weak var delegate: ItemViewControllerDelegate? {
         didSet {
             delegate?.didReloadItems(dataSource: self)
             showIndicator()
         }
     }
+    
+    //The parent to report to
+    weak var parent: LibraryDataSourceParent?
     
     //The user id
     let userID: Int
@@ -144,7 +147,9 @@ extension FullLibraryDataSource {
     }
     
     func didSelectItem(at indexpath: IndexPath) {
-        
+        if let entry = results?[indexpath.row] {
+            parent?.didTapEntry(entry: entry)
+        }
     }
     
     /// Update the realm results we are storing and sort them

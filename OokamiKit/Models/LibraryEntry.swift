@@ -233,3 +233,22 @@ extension LibraryEntry {
         return JSON(["data": params])
     }
 }
+
+//MARK:- Media
+extension LibraryEntry {
+    public var anime: Anime? {
+        guard let media = media, media.type == .anime else {
+            return nil
+        }
+        
+        return Anime.get(withId: media.id)
+    }
+    
+    public var manga: Manga? {
+        guard let media = media, media.type == .manga else {
+            return nil
+        }
+        
+        return Manga.get(withId: media.id)
+    }
+}

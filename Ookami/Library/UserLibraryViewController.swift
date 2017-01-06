@@ -41,6 +41,9 @@ final class UserLibraryViewController: UIViewController {
         self.userID = userID
         self.source = dataSource
         super.init(nibName: nil, bundle: nil)
+        
+        //Set ourselves as the parent so we can show the appropriate VC when an entry is tapped
+        self.source.parent = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -96,10 +99,6 @@ final class UserLibraryViewController: UIViewController {
         show(.anime)
     }
     
-    func applyTheme() {
-
-    }
-    
     /// Show the appropriate view controller for the given media type
     ///
     /// - Parameter type: The media type
@@ -108,5 +107,12 @@ final class UserLibraryViewController: UIViewController {
         mangaController.view.isHidden = type != .manga
     }
     
-    
+}
+
+extension UserLibraryViewController: LibraryDataSourceParent {
+    func didTapEntry(entry: LibraryEntry) {
+        //TODO: Show Entry VC here
+        let entry = LibraryEntryViewController(entry: entry)
+        self.navigationController?.pushViewController(entry, animated: true)
+    }
 }

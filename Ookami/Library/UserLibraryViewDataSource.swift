@@ -16,9 +16,17 @@ struct UserLibraryViewDataSource {
         case invalidSources(description: String)
     }
     
-    typealias StatusDataSource = [LibraryEntry.Status: LibraryEntryDataSource]
+    typealias StatusDataSource = [LibraryEntry.Status: LibraryDataSource]
     var anime: StatusDataSource
     var manga: StatusDataSource
+    
+    //The parent of the LibraryDataSources passed in
+    weak var parent: LibraryDataSourceParent? {
+        didSet {
+            anime.values.forEach { $0.parent = parent }
+            manga.values.forEach { $0.parent = parent }
+        }
+    }
     
     /// Create library data that holds all `LibraryViewDataSource` needed for `LibraryViewController`
     ///
