@@ -86,7 +86,8 @@ class MangaSpec: QuickSpec {
                     expect(manga.coverImage).to(equal("https://media.kitsu.io/manga/cover_images/24147/large.jpg?1430793546"))
                     expect(manga.chapterCount).to(equal(-1))
                     expect(manga.volumeCount).to(equal(0))
-                    
+                    expect(manga.mangaTypeRaw).to(equal("manga"))
+
                     let d = DateFormatter()
                     d.dateFormat = "YYYY-MM-dd"
                     

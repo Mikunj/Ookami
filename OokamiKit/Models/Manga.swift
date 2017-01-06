@@ -19,7 +19,6 @@ public class Manga: Object, Cacheable {
     public dynamic var averageRating = 0.0
     public dynamic var startDate: Date?
     public dynamic var endDate: Date?
-    public dynamic var mangaType: String = ""
     public dynamic var chapterCount: Int = -1 //-1 means we don't know the count
     public dynamic var volumeCount: Int = -1
     public dynamic var posterImage = ""
@@ -27,6 +26,12 @@ public class Manga: Object, Cacheable {
     
     public let titles = List<MediaTitle>()
     public dynamic var canonicalTitle = ""
+    
+    //The manga type we use to represent with an enum
+    public dynamic var mangaTypeRaw: String = ""
+    public var mangaType: MangaType? {
+        return MangaType(rawValue: mangaTypeRaw)
+    }
     
     /**
      When parsing manga, if a `Genre` cannot be found then it is created with just the `id` set. This is to ensure that the relationship occurs, but we cannot determine the rest of the genre data from the manga JSON itself
@@ -38,7 +43,7 @@ public class Manga: Object, Cacheable {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return []
+        return ["mangaType"]
     }
     
     /// MARK:- Cacheable
@@ -87,7 +92,7 @@ extension Manga: JSONParsable {
         manga.endDate = Date.from(string: attributes["endDate"].stringValue)
         manga.chapterCount = attributes["chapterCount"].int ?? -1
         manga.volumeCount = attributes["volumeCount"].int ?? -1
-        manga.mangaType = attributes["mangaType"].stringValue
+        manga.mangaTypeRaw = attributes["mangaType"].stringValue
         manga.posterImage = attributes["posterImage"]["small"].stringValue
         manga.coverImage = attributes["coverImage"]["large"].stringValue
         
@@ -117,6 +122,16 @@ extension Manga: JSONParsable {
         }
         
         return manga
+    }
+}
+
+extension Manga {
+    public enum MangaType: String {
+        case manga
+        case novel
+        case manhua
+        case oneshot
+        case doujin
     }
 }
 

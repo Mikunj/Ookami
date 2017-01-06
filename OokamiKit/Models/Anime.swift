@@ -22,7 +22,6 @@ public class Anime: Object, Cacheable {
     public dynamic var endDate: Date?
     public dynamic var episodeCount = -1 //-1 means we don't know the episode count for this anime
     public dynamic var episodeLength = -1
-    public dynamic var showType = ""
     public dynamic var youtubeVideoId = ""
     public dynamic var ageRating = ""
     public dynamic var ageRatingGuide = ""
@@ -31,6 +30,12 @@ public class Anime: Object, Cacheable {
     
     public let titles = List<MediaTitle>()
     public dynamic var canonicalTitle = ""
+    
+    //The show type which we use an enum to represent
+    public dynamic var showTypeRaw = ""
+    public var showType: ShowType? {
+        return ShowType(rawValue: showTypeRaw)
+    }
     
     /**
      When parsing anime, if a `Genre` cannot be found then it is created with just the `id` set. This is to ensure that the relationship occurs, but we cannot determine the rest of the genre data from the anime JSON itself
@@ -42,7 +47,7 @@ public class Anime: Object, Cacheable {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return []
+        return ["showType"]
     }
     
     /// MARK:- Cacheable
@@ -91,7 +96,7 @@ extension Anime: JSONParsable {
         anime.endDate = Date.from(string: attributes["endDate"].stringValue)
         anime.episodeCount = attributes["episodeCount"].int ?? -1
         anime.episodeLength = attributes["episodeLength"].int ?? -1
-        anime.showType = attributes["showType"].stringValue
+        anime.showTypeRaw = attributes["showType"].stringValue
         anime.youtubeVideoId = attributes["youtubeVideoId"].stringValue
         anime.ageRating = attributes["ageRating"].stringValue
         anime.ageRatingGuide = attributes["ageRatingGuide"].stringValue
@@ -124,5 +129,17 @@ extension Anime: JSONParsable {
         }
         
         return anime
+    }
+}
+
+//MARK:- Show Type
+extension Anime {
+    public enum ShowType: String {
+        case movie
+        case special
+        case music
+        case tv = "TV"
+        case ova = "OVA"
+        case ona = "ONA"
     }
 }
