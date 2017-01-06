@@ -14,8 +14,6 @@ import DynamicColor
 //Constraints still breaking on mobile .... WHY!!
 //It resolves itself automatically anyway but the console gets spammed with messages
 
-//TODO: Add a view at the top aswell
-
 
 final class ItemDetailGridCell: UICollectionViewCell {
 
@@ -25,17 +23,21 @@ final class ItemDetailGridCell: UICollectionViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     
-    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var countLabel: UILabel!
+    
+    @IBOutlet weak var contentDetailView: GradientView!
+    
+    @IBOutlet weak var contentDetailLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         let labelTheme = Theme.TextTheme()
-        detailLabel.textColor = labelTheme.textColor
+        countLabel.textColor = labelTheme.textColor
         
         let viewTheme = Theme.ViewTheme()
         let color = viewTheme.backgroundColor
-        detailLabel.backgroundColor = color
+        countLabel.backgroundColor = color
         posterImage.backgroundColor = color.isLight() ? color.darkened(amount: 0.1) : color.lighter(amount: 0.1)
     }
 }
@@ -51,7 +53,12 @@ extension ItemDetailGridCell: ItemUpdatable {
     /// - Parameter data: The item data to update with
     func update(data: ItemData) {
         nameLabel.text = data.name ?? "-"
-        detailLabel.text = data.countString ?? "-"
+        countLabel.text = data.countString ?? "-"
+        
+        //Check if we have details, else just hide the view
+        let isEmpty = data.details?.isEmpty ?? true
+        contentDetailView.isHidden = data.details == nil || isEmpty
+        contentDetailLabel.text = data.details ?? ""
         
         //Set the image
         if let poster = data.posterImage {

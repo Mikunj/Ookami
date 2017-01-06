@@ -50,26 +50,64 @@ extension LibraryEntry {
     func toItemData() -> ItemData {
         var data = ItemData()
         
-        var maxCount = -1
+        //An array of the details to include
+        var details: [String] = []
+        if self.rating > 0 {
+            details.append("\(self.rating) ★")
+        }
         
+        //Max progress count
+        var maxCount = -1
+    
         //Name
         if let media = self.media, let type = media.type {
             switch type {
             case .anime:
-                let anime = Anime.get(withId: media.id)
-                data.name = anime?.canonicalTitle
-                data.posterImage = anime?.posterImage
-                maxCount = anime?.episodeCount ?? -1
+                //Make sure we have an anime
+                guard let anime = Anime.get(withId: media.id) else {
+                    break
+                }
+                
+                data.name = anime.canonicalTitle
+                data.posterImage = anime.posterImage
+                maxCount = anime.episodeCount 
+                
+                //check if anime has started before current date
+                let current = Date()
+                let startDate = anime.startDate ?? current
+                if startDate < current {
+                    //Note: If it's a movie though then we don't show Airing
+                    //Kitsu may also not set endDates for Music, will have to check
+                    guard let showType = anime.showType,
+                            showType != .movie else {
+                        break
+                    }
+                    
+                    //Check if we have an end date, if we don't then anime is airing.
+                    //If we do then check if the current date is before it
+                    if anime.endDate == nil || anime.endDate! > current {
+                        details.append("Airing")
+                    }
+                }
+                
                 break
             case .manga:
-                let manga = Manga.get(withId: media.id)
-                data.name = manga?.canonicalTitle
-                data.posterImage = manga?.posterImage
-                maxCount = manga?.chapterCount ?? -1
+                guard let manga = Manga.get(withId: media.id) else {
+                    break
+                }
+                
+                data.name = manga.canonicalTitle
+                data.posterImage = manga.posterImage
+                maxCount = manga.chapterCount
                 break
             }
         }
         
+        //Combine the details
+        let detailString = details.joined(separator: " ᛫ ")
+        data.details = detailString.isEmpty ? nil : detailString
+       
+        //Set the progress count
         data.countString = maxCount > 0 ? "\(self.progress) / \(maxCount)" : "\(self.progress)"
         
         return data
