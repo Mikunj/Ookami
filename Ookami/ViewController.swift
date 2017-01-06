@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         let data = try! UserLibraryViewDataSource(anime: anime, manga: manga)
         
         
-        libraryView = UserLibraryViewController(dataSource: data)
+        libraryView = UserLibraryViewController(userID: 2875, dataSource: data)
         
         addChildViewController(libraryView!)
         

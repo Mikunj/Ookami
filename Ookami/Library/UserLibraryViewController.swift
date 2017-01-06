@@ -16,6 +16,9 @@ import Cartography
 //Class used for displaying a users library (both anime and manga)
 final class UserLibraryViewController: UIViewController {
     
+    //The current user we're fetching library for
+    fileprivate var userID: Int
+    
     //The source of the data
     fileprivate var source: UserLibraryViewDataSource
     
@@ -31,8 +34,11 @@ final class UserLibraryViewController: UIViewController {
     
     /// Create a `UserLibraryViewController`
     ///
-    /// - Parameter dataSource: The datasource to use.
-    init(dataSource: UserLibraryViewDataSource) {
+    /// - Parameters:
+    ///   - userID: The user id who we are showing the library of
+    ///   - dataSource: The data source to use.
+    init(userID: Int, dataSource: UserLibraryViewDataSource) {
+        self.userID = userID
         self.source = dataSource
         super.init(nibName: nil, bundle: nil)
     }

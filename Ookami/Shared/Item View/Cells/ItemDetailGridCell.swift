@@ -14,6 +14,9 @@ import DynamicColor
 //Constraints still breaking on mobile .... WHY!!
 //It resolves itself automatically anyway but the console gets spammed with messages
 
+//TODO: Add a view at the top aswell
+
+
 final class ItemDetailGridCell: UICollectionViewCell {
 
     @IBOutlet weak var posterImage: UIImageView!
