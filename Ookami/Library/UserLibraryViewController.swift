@@ -111,8 +111,7 @@ final class UserLibraryViewController: UIViewController {
 
 extension UserLibraryViewController: LibraryDataSourceParent {
     func didTapEntry(entry: LibraryEntry) {
-        //TODO: Show Entry VC here
-        let entry = LibraryEntryViewController(entry: entry)
-        self.navigationController?.pushViewController(entry, animated: true)
+        let entryVC = LibraryEntryViewController(entry: entry)
+        self.navigationController?.pushViewController(entryVC, animated: true)
     }
 }

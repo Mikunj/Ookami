@@ -25,7 +25,7 @@ private struct TableData {
 
 //TODO: Add entry editing and syncing
 class LibraryEntryViewController: UIViewController {
-
+    
     //The entry we are viewing
     let entry: LibraryEntry
     
@@ -55,11 +55,8 @@ class LibraryEntryViewController: UIViewController {
         return t
     }()
     
-    //The accessory to indicate we can edit the field
-    var editAccessory: UIImageView = {
-        let size = CGSize(width: 20, height: 20)
-        let image = FontAwesomeIcon.pencilIcon.image(ofSize: size , color: Theme.Colors().primary)
-        return UIImageView(image: image)
+    lazy var pencilImage: UIImage = {
+        return FontAwesomeIcon.pencilIcon.image(ofSize: CGSize(width: 10, height: 10), color: Theme.Colors().primary)
     }()
     
     //Whether the entry is editable
@@ -89,28 +86,30 @@ class LibraryEntryViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //TODO: Add button bar items here
+        
+        // Show the save icon if we can edit the entries
+        if editable {
+            let save = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(didSave))
+            
+            self.navigationItem.rightBarButtonItem = save
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Add the table view
         self.view.addSubview(tableView)
         constrain(tableView) { view in
             view.edges == view.superview!.edges
         }
         
         //Add the header
-        //Testing to see if media is copied or just the basic values
-        let header = EntryMediaHeaderView(data: unmanaged.toEntryMediaHeaderData())
+        let header = EntryMediaHeaderView(data: entry.toEntryMediaHeaderData())
         header.delegate = self
         tableView.tableHeaderView = header
         
         updateData()
-        
-        //Force tableview to resize cells properley
-        tableView.setNeedsLayout()
-        tableView.layoutIfNeeded()
     }
     
     //Update the table data
@@ -139,6 +138,11 @@ class LibraryEntryViewController: UIViewController {
         tableView.reloadData()
     }
     
+    //Save was tapped
+    func didSave() {
+        
+    }
+    
 }
 
 //MARK:- Data source
@@ -147,32 +151,37 @@ extension LibraryEntryViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let type = tableData[indexPath.row].type
+        var cell: UITableViewCell = UITableViewCell()
         switch type {
         case .bool:
-            return tableView.dequeueReusableCell(for: indexPath) as EntryBoolTableViewCell
+            cell = tableView.dequeueReusableCell(for: indexPath) as EntryBoolTableViewCell
         case .string:
-            return tableView.dequeueReusableCell(for: indexPath) as EntryStringTableViewCell
+            cell = tableView.dequeueReusableCell(for: indexPath) as EntryStringTableViewCell
         }
+        
+        //We update here because tableview won't automatically adjust height in willDisplayCell, unless we change orientation
+        update(cell: cell, indexPath: indexPath)
+        
+        return cell
     }
     
-}
-
-//MARK:- Delegate
-extension LibraryEntryViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func update(cell: UITableViewCell, indexPath: IndexPath) {
         let data = tableData[indexPath.row]
         cell.tintColor = Theme.Colors().secondary
         
         if let stringCell = cell as? EntryStringTableViewCell {
+            
+            let pencil = UIImageView(image: pencilImage)
+            
             cell.accessoryType = .none
-            cell.accessoryView = editAccessory
+            cell.accessoryView = pencil
             stringCell.headingLabel.text = data.heading
             
             let value = data.value as? String ?? ""
@@ -190,6 +199,11 @@ extension LibraryEntryViewController: UITableViewDelegate {
             cell.accessoryView = nil
         }
     }
+    
+}
+
+//MARK:- Delegate
+extension LibraryEntryViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
