@@ -13,9 +13,14 @@ enum Theme {}
 
 extension Theme {
     
+    struct EntryView {
+        var headingColor = Colors().primary.lighter(amount: 0.2)
+        var valueColor = Colors().primary
+    }
+    
     struct Colors {
         var primary = UIColor(hexString: "#2F343B")
-        var secondary = UIColor(hexString: "#02b4ef")
+        var secondary = UIColor(hexString: "#22b4e5")
     }
     
     struct ActivityIndicatorTheme {

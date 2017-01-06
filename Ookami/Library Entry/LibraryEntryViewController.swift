@@ -42,7 +42,7 @@ class LibraryEntryViewController: UIViewController {
         t.register(cellType: EntryStringTableViewCell.self)
         t.register(cellType: EntryBoolTableViewCell.self)
         
-        t.tintColor = Theme.Colors().secondary
+        t.tintColor = Theme.EntryView().valueColor
         
         //Auto table height
         t.estimatedRowHeight = 60
@@ -51,9 +51,13 @@ class LibraryEntryViewController: UIViewController {
         //Set the footer view so we don't get extra seperators
         t.tableFooterView = UIView(frame: .zero)
         
+        //Disable default reading margins
+        t.cellLayoutMarginsFollowReadableWidth = false
+        
         return t
     }()
     
+    //Pencil image used to indicate that user can edit the field
     lazy var pencilImage: UIImage = {
         return FontAwesomeIcon.pencilIcon.image(ofSize: CGSize(width: 10, height: 10), color: Theme.Colors().primary)
     }()
@@ -173,7 +177,6 @@ extension LibraryEntryViewController: UITableViewDataSource {
     
     func update(cell: UITableViewCell, indexPath: IndexPath) {
         let data = tableData[indexPath.row]
-        cell.tintColor = Theme.Colors().secondary
         
         if let stringCell = cell as? EntryStringTableViewCell {
             

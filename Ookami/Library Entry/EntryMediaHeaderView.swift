@@ -40,9 +40,15 @@ class EntryMediaHeaderView: NibLoadableView {
     weak var delegate: EntryMediaHeaderViewDelegate?
     
     init(data: EntryMediaHeaderViewData) {
+        let isIpad = UIDevice.current.userInterfaceIdiom == .pad
         let width = UIScreen.main.bounds.width
-        super.init(frame: CGRect(origin: .zero, size: CGSize(width: width, height: 166)))
+        let height: CGFloat = isIpad ? 332 : 166
+        
+        super.init(frame: CGRect(origin: .zero, size: CGSize(width: width, height: height)))
+        
         update(data: data)
+        
+        mediaButton.backgroundColor = Theme.Colors().secondary
     }
     
     required init?(coder aDecoder: NSCoder) {

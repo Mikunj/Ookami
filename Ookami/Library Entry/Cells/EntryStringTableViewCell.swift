@@ -17,6 +17,9 @@ class EntryStringTableViewCell: UITableViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        headingLabel.textColor = Theme.EntryView().headingColor
+        valueLabel.textColor = Theme.EntryView().valueColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
