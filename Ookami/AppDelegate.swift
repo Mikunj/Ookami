@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IQKeyboardManager
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -14,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         FontAwesomeIcon.register()
+        IQKeyboardManager.shared().isEnabled = true
+        Theme.NavigationTheme().apply()
         
         window = UIWindow(frame: UIScreen.main.bounds);
 
@@ -21,8 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = nav;
         window?.makeKeyAndVisible();
-        
-        Theme.NavigationTheme().apply()
         
         return true
     }

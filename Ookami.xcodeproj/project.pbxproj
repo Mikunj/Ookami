@@ -21,6 +21,8 @@
 		24175E961E206351009FBDE6 /* EntryButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24175E941E206351009FBDE6 /* EntryButtonTableViewCell.swift */; };
 		24175E971E206351009FBDE6 /* EntryButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24175E951E206351009FBDE6 /* EntryButtonTableViewCell.xib */; };
 		24175E991E207CB1009FBDE6 /* LibraryEntryViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24175E981E207CB1009FBDE6 /* LibraryEntryViewData.swift */; };
+		24175EA01E209266009FBDE6 /* TextEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24175E9E1E209266009FBDE6 /* TextEditingViewController.swift */; };
+		24175EA11E209266009FBDE6 /* TextEditingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24175E9F1E209266009FBDE6 /* TextEditingViewController.xib */; };
 		242A03D51E163D0C000E8B06 /* MediaTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03D41E163D0C000E8B06 /* MediaTitle.swift */; };
 		242A03D71E163EAB000E8B06 /* Manga.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03D61E163EAB000E8B06 /* Manga.swift */; };
 		242A03D91E1643B0000E8B06 /* manga-one-punch-man.json in Resources */ = {isa = PBXBuildFile; fileRef = 242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */; };
@@ -202,6 +204,8 @@
 		24175E941E206351009FBDE6 /* EntryButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryButtonTableViewCell.swift; sourceTree = "<group>"; };
 		24175E951E206351009FBDE6 /* EntryButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryButtonTableViewCell.xib; sourceTree = "<group>"; };
 		24175E981E207CB1009FBDE6 /* LibraryEntryViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryViewData.swift; sourceTree = "<group>"; };
+		24175E9E1E209266009FBDE6 /* TextEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditingViewController.swift; sourceTree = "<group>"; };
+		24175E9F1E209266009FBDE6 /* TextEditingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextEditingViewController.xib; sourceTree = "<group>"; };
 		242A03D41E163D0C000E8B06 /* MediaTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTitle.swift; sourceTree = "<group>"; };
 		242A03D61E163EAB000E8B06 /* Manga.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manga.swift; sourceTree = "<group>"; };
 		242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "manga-one-punch-man.json"; sourceTree = "<group>"; };
@@ -457,6 +461,8 @@
 				242A04311E1F4E6B000E8B06 /* LibraryEntry+EntryViewData.swift */,
 				242A04201E1F11E0000E8B06 /* LibraryEntryViewController.swift */,
 				24175E981E207CB1009FBDE6 /* LibraryEntryViewData.swift */,
+				24175E9E1E209266009FBDE6 /* TextEditingViewController.swift */,
+				24175E9F1E209266009FBDE6 /* TextEditingViewController.xib */,
 			);
 			path = "Library Entry";
 			sourceTree = "<group>";
@@ -958,6 +964,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24175EA11E209266009FBDE6 /* TextEditingViewController.xib in Resources */,
 				248FE15F1E1F58AC009ACA66 /* EntryStringTableViewCell.xib in Resources */,
 				24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
 				248734381DCCB1D3002E7366 /* user-jigglyslime.json in Resources */,
@@ -1192,6 +1199,7 @@
 				242A04071E1B904D000E8B06 /* main.swift in Sources */,
 				24175E921E1FA88A009FBDE6 /* FontAwesomeIcon.swift in Sources */,
 				242A042E1E1F487B000E8B06 /* EntryMediaHeaderView.swift in Sources */,
+				24175EA01E209266009FBDE6 /* TextEditingViewController.swift in Sources */,
 				242A04031E1A64C2000E8B06 /* LibraryViewController.swift in Sources */,
 				242A03F61E19C949000E8B06 /* ItemUpdatable.swift in Sources */,
 				242A03EC1E18FC3C000E8B06 /* ItemViewController.swift in Sources */,

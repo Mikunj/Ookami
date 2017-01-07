@@ -9,6 +9,7 @@ PODS:
     - Heimdallr/Core (= 3.5.0)
   - Heimdallr/Core (3.5.0):
     - Result (~> 3.0)
+  - IQKeyboardManager (4.0.8)
   - Keys (1.0.0)
   - Kingfisher (3.2.4)
   - Nimble (5.1.1)
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - Dwifft (= 0.5)
   - DynamicColor (~> 3.2.1)
   - Heimdallr (from `https://github.com/marcelofabri/Heimdallr.swift.git`, branch `swift-3.0`)
+  - IQKeyboardManager (~> 4.0.8)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Kingfisher (~> 3.0)
   - Nimble (~> 5.1.1)
@@ -106,6 +108,7 @@ SPEC CHECKSUMS:
   Dwifft: 9b7f1e55950e27b9dcdbb4d48502625cb4690b97
   DynamicColor: 4786d650c69da6c3f2cbfe068348288ec4e5521f
   Heimdallr: 6d371eb270d6d06d8c9ef5dc9fe7f7bda1331154
+  IQKeyboardManager: 1a8189fa153bf09044355ee0ad36826f6767e7f7
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
@@ -119,6 +122,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: 3cf15c8a84c98e42c6ca14b0574e5ee6580f4278
+PODFILE CHECKSUM: 0725303664f85602d8ccf9d815ea4a8e44896a38
 
 COCOAPODS: 1.1.1

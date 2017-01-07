@@ -12,8 +12,6 @@ import Cartography
 import Reusable
 import ActionSheetPicker_3_0
 
-
-
 //TODO: Add entry editing and syncing
 class LibraryEntryViewController: UIViewController {
     
@@ -94,7 +92,7 @@ class LibraryEntryViewController: UIViewController {
         constrain(tableView) { view in
             view.edges == view.superview!.edges
         }
-
+        
         //Add the header
         let header = EntryMediaHeaderView(data: data.unmanaged.toEntryMediaHeaderData())
         header.delegate = self
@@ -131,7 +129,6 @@ extension LibraryEntryViewController: UITableViewDataSource {
         case .button:
             cell = tableView.dequeueReusableCell(for: indexPath) as EntryButtonTableViewCell
             break
-            
         }
         
         //We update here because tableview won't automatically adjust height in willDisplayCell, unless we change orientation
@@ -190,8 +187,91 @@ extension LibraryEntryViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if !editable { return }
+        let unmanaged = data.unmanaged
+        let tableData = data.tableData()
+        let heading = tableData[indexPath.row].heading
         
-        data.editData(at: indexPath, tableView: tableView)
+        switch heading {
+        case .progress:
+            
+            let max = unmanaged.maxProgress() ?? 999
+            let rows = Array(0...max)
+            ActionSheetStringPicker.show(withTitle: "Progress", rows: rows, initialSelection: unmanaged.progress, doneBlock: { picker, index, value in
+                if let newValue = value as? Int {
+                    self.data.update(progress: newValue)
+                    tableView.reloadData()
+                }
+            }, cancel: { _ in }, origin: tableView)
+            
+            break
+            
+        case .status:
+            
+            let statuses = LibraryEntry.Status.all
+            let rows: [String] = statuses.map {
+                if let media = unmanaged.media {
+                    return $0.toString(forMedia: media.type)
+                }
+                
+                return "-"
+            }
+            
+            let initial = statuses.index(of: unmanaged.status ?? .current) ?? 0
+            ActionSheetStringPicker.show(withTitle: "Status", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
+                self.data.update(status: statuses[index])
+                tableView.reloadData()
+            }, cancel: { _ in }, origin: tableView)
+            
+            break
+            
+        case .rating:
+            
+            let ratings = Array(stride(from: 0, to: 5.5, by: 0.5))
+            let initial = ratings.index(of: unmanaged.rating) ?? 0
+            
+            //Format it to 1 decimal place display so it's consitent
+            let rows = ratings.map { String(format: "%.1f", $0) }
+            
+            ActionSheetStringPicker.show(withTitle: "Rating", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
+                
+                //We know that we will have 10 values, so to get the rating just divide by 2
+                self.data.update(rating: Double(index) / 2)
+                tableView.reloadData()
+            }, cancel: { _ in }, origin: tableView)
+            
+            break
+            
+        case .notes:
+            //TODO: Show a text edit modal here?
+            let editingVC = TextEditingViewController(title: "Notes", text: unmanaged.notes, placeholder: "Type your notes here!")
+            editingVC.modalPresentationStyle = .overCurrentContext
+            editingVC.delegate = self
+            present(editingVC, animated: false)
+            
+            break
+            
+        case .reconsumeCount:
+            let rows = Array(0...999)
+            ActionSheetStringPicker.show(withTitle: "Reconsume Count", rows: rows, initialSelection: unmanaged.reconsumeCount, doneBlock: { picker, index, value in
+                if let newValue = value as? Int {
+                    self.data.update(reconsumeCount: newValue)
+                    tableView.reloadData()
+                }
+            }, cancel: { _ in }, origin: tableView)
+            break
+            
+        case .reconsuming:
+            //Just invert the value
+            self.data.update(reconsuming: !unmanaged.reconsuming)
+            tableView.reloadData()
+            break
+            
+        case .isPrivate:
+            self.data.update(isPrivate: !unmanaged.isPrivate)
+            tableView.reloadData()
+            break
+        }
+        
     }
 }
 
@@ -201,21 +281,43 @@ extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonD
         
     }
     
+    //+1 button tapped
     func didTapButton(inCell: EntryButtonTableViewCell, indexPath: IndexPath?) {
         if let indexPath = indexPath {
-            data.incrementValue(at: indexPath)
+            let tableData = self.data.tableData()
+            let d = tableData[indexPath.row]
+            
+            //Update the values accordingly
+            switch d.heading {
+            case .progress:
+                data.update(progress: data.unmanaged.progress + 1)
+                break
+            case .reconsumeCount:
+                data.update(reconsumeCount: data.unmanaged.reconsumeCount + 1)
+                break
+                
+            default:
+                break
+            }
+
             tableView.reloadData()
         }
     }
 }
 
-//Mark:- Entry editing
+extension LibraryEntryViewController: TextEditingViewControllerDelegate {
+    func textEditingViewController(_ controller: TextEditingViewController, didSave text: String) {
+        data.update(notes: text)
+        tableView.reloadData()
+    }
+}
+
+//Mark:- Entry saving
 extension LibraryEntryViewController {
     
     //Save was tapped
     func didSave() {
         
     }
-    
     
 }
