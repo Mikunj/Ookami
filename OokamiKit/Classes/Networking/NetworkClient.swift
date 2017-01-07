@@ -17,6 +17,19 @@ public enum NetworkClientError: Error {
     case urlEncodingError
 }
 
+extension NetworkClientError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .error(let string):
+            return string
+        case .authenticationError(let string):
+            return string
+        case .urlEncodingError:
+            return "Failed to encode URL"
+        }
+    }
+}
+
 public class NetworkClient: NetworkClientProtocol {
     
     public internal(set) var baseURL: String

@@ -38,3 +38,15 @@ public class BaseService {
         self.currentUser = currentUser
     }
 }
+
+
+extension BaseService.ServiceError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .error(let description):
+            return description
+        case .notAuthenticated:
+            return "User is not authenticated!"
+        }
+    }
+}

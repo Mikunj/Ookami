@@ -381,10 +381,26 @@ extension LibraryEntryViewController {
         data.save { error in
             self.hideIndicator()
             guard error == nil else {
-                //TODO: Show error here
-                print(error)
+                
+                //Show an alert to the user
+                let alert = UIAlertController(title: "Error", message: "\(error!.localizedDescription). Please try again.", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Ok", style: .cancel, handler: { _ in
+                    alert.dismiss(animated: true)
+                })
+                
+                alert.addAction(action)
+                
+                //Present the alert if we haven't
+                if self.presentedViewController == nil {
+                    self.present(alert, animated: true)
+                }
+                
+                print(error!.localizedDescription)
+                
                 return
             }
+            
+            self.navigationController?.popViewController(animated: true)
             
         }
     }
