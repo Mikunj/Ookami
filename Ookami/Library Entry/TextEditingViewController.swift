@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Cartography
 
 protocol TextEditingViewControllerDelegate: class {
     func textEditingViewController(_ controller: TextEditingViewController, didSave text: String)
@@ -30,7 +31,10 @@ class TextEditingViewController: UIViewController, UITextViewDelegate {
     
     /// Create a TextEditingViewController
     ///
-    /// - Parameter text: The text to edit
+    /// - Parameters:
+    ///   - title: The title to show
+    ///   - text: The text to edit
+    ///   - placeholder: The place holder text, shown if text is empty
     init(title: String, text: String, placeholder: String) {
         self.viewTitle = title
         self.initialText = text
@@ -41,7 +45,7 @@ class TextEditingViewController: UIViewController, UITextViewDelegate {
     /// Do not use this to initialize `LibraryEntryViewController`
     /// It will throw a fatal error if you do.
     required init?(coder aDecoder: NSCoder) {
-        fatalError("Use TextEditingViewController(text:)")
+        fatalError("Use TextEditingViewController(title:text:placeholder:)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,9 +80,11 @@ class TextEditingViewController: UIViewController, UITextViewDelegate {
         //Add blur effect
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.view.frame
         
         self.view.insertSubview(blurEffectView, at: 0)
+        constrain(blurEffectView) { view in
+            view.edges == view.superview!.edges
+        }
         
         //Add slight round corner
         containerView.layer.cornerRadius = 2

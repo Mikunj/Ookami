@@ -55,6 +55,10 @@ class LibraryEntryViewController: UIViewController {
     //The data we are going to use for the table view
     fileprivate var tableData: [LibraryEntryViewData.TableData] = []
     
+    //Bar buttons
+    var saveBarButton: UIBarButtonItem?
+    var clearBarButton: UIBarButtonItem?
+    
     /// Create an LibraryEntryViewController
     ///
     /// - Parameter entry: The library entry to view.
@@ -78,9 +82,11 @@ class LibraryEntryViewController: UIViewController {
         
         // Show the save icon if we can edit the entries
         if editable {
-            let save = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(didSave))
+            let size = CGSize(width: 22, height: 22)
+            saveBarButton = UIBarButtonItem(withIcon: .okIcon, size: size, target: self, action: #selector(didSave))
+            clearBarButton = UIBarButtonItem(withIcon: .trashIcon, size: size, target: self, action: #selector(didClear))
             
-            self.navigationItem.rightBarButtonItem = save
+            self.navigationItem.rightBarButtonItems = [saveBarButton!, clearBarButton!]
         }
     }
     
@@ -190,6 +196,9 @@ extension LibraryEntryViewController: UITableViewDelegate {
         let unmanaged = data.unmanaged
         let tableData = data.tableData()
         let heading = tableData[indexPath.row].heading
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
         
         switch heading {
         case .progress:
@@ -201,7 +210,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
                     self.data.update(progress: newValue)
                     tableView.reloadData()
                 }
-            }, cancel: { _ in }, origin: tableView)
+            }, cancel: { _ in }, origin: cell)
             
             break
             
@@ -220,7 +229,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
             ActionSheetStringPicker.show(withTitle: "Status", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
                 self.data.update(status: statuses[index])
                 tableView.reloadData()
-            }, cancel: { _ in }, origin: tableView)
+            }, cancel: { _ in }, origin: cell)
             
             break
             
@@ -237,12 +246,12 @@ extension LibraryEntryViewController: UITableViewDelegate {
                 //We know that we will have 10 values, so to get the rating just divide by 2
                 self.data.update(rating: Double(index) / 2)
                 tableView.reloadData()
-            }, cancel: { _ in }, origin: tableView)
+            }, cancel: { _ in }, origin: cell)
             
             break
             
         case .notes:
-            //TODO: Show a text edit modal here?
+            
             let editingVC = TextEditingViewController(title: "Notes", text: unmanaged.notes, placeholder: "Type your notes here!")
             editingVC.modalPresentationStyle = .overCurrentContext
             editingVC.delegate = self
@@ -257,7 +266,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
                     self.data.update(reconsumeCount: newValue)
                     tableView.reloadData()
                 }
-            }, cancel: { _ in }, origin: tableView)
+            }, cancel: { _ in }, origin: cell)
             break
             
         case .reconsuming:
@@ -320,4 +329,8 @@ extension LibraryEntryViewController {
         
     }
     
+    func didClear() {
+        data.reset()
+        tableView.reloadData()
+    }
 }

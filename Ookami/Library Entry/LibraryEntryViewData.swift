@@ -11,7 +11,7 @@ import OokamiKit
 import ActionSheetPicker_3_0
 
 //A class to handle the data in LibraryEntryViewController
-struct LibraryEntryViewData {
+class LibraryEntryViewData {
     
     //The entry we are viewing
     let entry: LibraryEntry
@@ -25,6 +25,11 @@ struct LibraryEntryViewData {
     /// - Parameter entry: The entry to use as the data source
     init(entry: LibraryEntry) {
         self.entry = entry
+        self.unmanaged = LibraryEntry(value: entry)
+    }
+    
+    //Reset the changes
+    func reset() {
         self.unmanaged = LibraryEntry(value: entry)
     }
     
