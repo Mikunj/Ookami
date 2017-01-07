@@ -85,7 +85,7 @@ class ItemViewController: UIViewController {
     //The collection view
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 150)
+        layout.itemSize = CGSize(width: 100, height: 175)
         
         let c = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         c.alwaysBounceVertical = true

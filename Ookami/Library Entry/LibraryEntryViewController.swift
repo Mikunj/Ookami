@@ -114,11 +114,6 @@ class LibraryEntryViewController: UIViewController {
             view.edges == view.superview!.edges
         }
         
-        //Add the header
-        let header = EntryMediaHeaderView(data: data.unmanaged.toEntryMediaHeaderData())
-        header.delegate = self
-        tableView.tableHeaderView = header
-        
         //Add the dark overlay
         self.view.addSubview(darkOverlay)
         constrain(darkOverlay) { view in
@@ -137,6 +132,16 @@ class LibraryEntryViewController: UIViewController {
         //Hide them both
         hideIndicator()
         
+        //Force tableview layout
+        tableView.setNeedsLayout()
+        tableView.layoutIfNeeded()
+        
+        //Add the header
+        let header = EntryMediaHeaderView(data: data.unmanaged.toEntryMediaHeaderData())
+        header.delegate = self
+        tableView.tableHeaderView = header
+        
+        //Reload the data
         tableView.reloadData()
     }
     

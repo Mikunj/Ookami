@@ -118,7 +118,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="2Lq-46-o7d"/>
+                                    <constraint firstAttribute="height" priority="999" constant="25" id="2Lq-46-o7d"/>
                                     <constraint firstAttribute="trailing" secondItem="KuW-Wy-Bnp" secondAttribute="trailing" id="HE3-y5-ncO"/>
                                     <constraint firstAttribute="bottom" secondItem="KuW-Wy-Bnp" secondAttribute="bottom" id="k7R-9L-Ki4"/>
                                     <constraint firstItem="KuW-Wy-Bnp" firstAttribute="leading" secondItem="I1b-qr-a9V" secondAttribute="leading" id="k8V-9A-Cls"/>

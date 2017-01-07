@@ -53,17 +53,11 @@ final class UserLibraryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //Themeing
-        let theme = Theme.DropDownTheme()
-        dropDownMenu.cellBackgroundColor = theme.backgroundColor
-        dropDownMenu.cellTextLabelColor = theme.textColor
-        dropDownMenu.menuTitleColor = theme.textColor
-        dropDownMenu.arrowTintColor = theme.textColor
-        dropDownMenu.cellSelectionColor = theme.selectionBackgroundColor
-        dropDownMenu.cellSeparatorColor = theme.seperatorColor
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.navigationController?.navigationBar.topItem?.titleView = dropDownMenu
-        
     }
     
     override func viewDidLoad() {
@@ -88,6 +82,15 @@ final class UserLibraryViewController: UIViewController {
         dropDownMenu = BTNavigationDropdownMenu(title: dropDownMenuItems[0], items: dropDownMenuItems as [AnyObject])
         dropDownMenu.animationDuration = 0.2
         dropDownMenu.shouldKeepSelectedCellColor = true
+        
+        //Themeing
+        let theme = Theme.DropDownTheme()
+        dropDownMenu.cellBackgroundColor = theme.backgroundColor
+        dropDownMenu.cellTextLabelColor = theme.textColor
+        dropDownMenu.menuTitleColor = theme.textColor
+        dropDownMenu.arrowTintColor = theme.textColor
+        dropDownMenu.cellSelectionColor = theme.selectionBackgroundColor
+        dropDownMenu.cellSeparatorColor = theme.seperatorColor
         
         dropDownMenu.didSelectItemAtIndexHandler = { [weak self] index in
             if let item = self?.dropDownMenuItems[index] {
