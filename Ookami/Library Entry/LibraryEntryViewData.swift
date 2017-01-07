@@ -28,6 +28,13 @@ class LibraryEntryViewData {
         self.unmanaged = LibraryEntry(value: entry)
     }
     
+    //Save the entry
+    func save(completion: @escaping (Error?) -> Void) {
+        LibraryService().update(entry: unmanaged) { entry, error in
+            completion(error)
+        }
+    }
+    
     //Reset the changes
     func reset() {
         self.unmanaged = LibraryEntry(value: entry)

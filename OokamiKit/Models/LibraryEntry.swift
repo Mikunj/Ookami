@@ -15,7 +15,9 @@ import SwiftyJSON
  If this does change in the future then a compound key will be needed
  We also don't need to restrict it to internal(set) because there is no compound key
  */
-public class Media: Object {
+public class Media: Object, GettableObject {
+    
+    public typealias T = Media
     
     public enum MediaType: String {
         case anime
@@ -215,12 +217,18 @@ extension LibraryEntry: JSONParsable {
         
         let relationships = json["relationships"]
         
-        //Add which media this entry belongs to
-        let media = relationships["media"]["data"]
-        if media.exists() {
-            let type = media["type"].stringValue
-            let id = media["id"].intValue
-            entry.media = Media(value: [entry.id, id, type])
+        //Check if we already have a media, if not then make a new one
+        if let mediaObject = Media.get(withId: entry.id) {
+            //Use an unmanaged object so we don't get realm clashes
+            entry.media = Media(value: mediaObject)
+        } else {
+            //Check if we have a media relationship
+            let media = relationships["media"]["data"]
+            if media.exists() {
+                let type = media["type"].stringValue
+                let id = media["id"].intValue
+                entry.media = Media(value: [entry.id, id, type])
+            }
         }
         
         //Set which user this entry belongs to
@@ -244,8 +252,10 @@ extension LibraryEntry {
         attributes["reconsumeCount"] = reconsumeCount
         attributes["private"] = isPrivate
         attributes["notes"] = notes
-        attributes["rating"] = rating
         attributes["status"] = rawStatus
+        
+        let rating: Any = self.rating > 0 ? self.rating : NSNull()
+        attributes["rating"] = rating
         
         var params: [String: Any] = [:]
         params["id"] = id

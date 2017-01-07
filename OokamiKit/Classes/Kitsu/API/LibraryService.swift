@@ -103,11 +103,17 @@ public class LibraryService: BaseService {
             
             //Add the updated info to the library
             Parser().parse(json: json) { parsed in
-                self.database.addOrUpdate(parsed)
                 
-                //Get the entry we parsed
-                let pEntry = parsed.first { $0 is LibraryEntry } as? LibraryEntry
-                completion(pEntry, nil)
+                let parsedEntry = parsed.first { $0 is LibraryEntry } as? LibraryEntry
+                if let parsedEntry = parsedEntry {
+                    //Before we add the entry we have to set the userID on it
+                    //This is because the entry in the response does not contain the relationship data for user
+                    parsedEntry.userID = entry.userID
+                }
+                
+                //Add the objects to the database
+                self.database.addOrUpdate(parsed)
+                completion(parsedEntry, nil)
             }
         }
         

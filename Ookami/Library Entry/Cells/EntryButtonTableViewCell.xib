@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNG-l0-LZ1" userLabel="Heading">
-                        <rect key="frame" x="8" y="8" width="253" height="17"/>
+                        <rect key="frame" x="8" y="8" width="245" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="f1b-xc-DGG"/>
                         </constraints>
@@ -28,18 +27,18 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJj-7l-T6t" userLabel="Value">
-                        <rect key="frame" x="8" y="29" width="253" height="22"/>
+                        <rect key="frame" x="8" y="29" width="245" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKL-pE-80n">
-                        <rect key="frame" x="257" y="8" width="55" height="43"/>
+                        <rect key="frame" x="257" y="0.0" width="63" height="59"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="55" id="3Lc-Hv-7ul"/>
+                            <constraint firstAttribute="width" constant="63" id="3Lc-Hv-7ul"/>
                         </constraints>
-                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="4" maxY="0.0"/>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
                         <state key="normal" title="+1"/>
                         <connections>
                             <action selector="didTapButton:" destination="o6H-J2-DNg" eventType="touchUpInside" id="kuf-tJ-JCT"/>
@@ -47,16 +46,16 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="JKL-pE-80n" secondAttribute="bottom" constant="8" id="22O-Nk-ktH"/>
                     <constraint firstItem="MNG-l0-LZ1" firstAttribute="top" secondItem="vVf-Ew-Fkp" secondAttribute="top" constant="8" id="44s-iF-go3"/>
-                    <constraint firstItem="JKL-pE-80n" firstAttribute="leading" secondItem="MNG-l0-LZ1" secondAttribute="trailing" constant="-4" id="GLd-Ds-pPV"/>
-                    <constraint firstAttribute="topMargin" secondItem="JKL-pE-80n" secondAttribute="top" id="Hwc-io-ea1"/>
+                    <constraint firstAttribute="trailing" secondItem="JKL-pE-80n" secondAttribute="trailing" id="7gS-Fr-Fyw"/>
+                    <constraint firstItem="JKL-pE-80n" firstAttribute="leading" secondItem="NJj-7l-T6t" secondAttribute="trailing" constant="4" id="9Hh-Hk-ckY"/>
                     <constraint firstItem="NJj-7l-T6t" firstAttribute="top" secondItem="MNG-l0-LZ1" secondAttribute="bottom" constant="4" id="JiZ-4d-Z4A"/>
                     <constraint firstItem="MNG-l0-LZ1" firstAttribute="leading" secondItem="vVf-Ew-Fkp" secondAttribute="leading" constant="8" id="RSW-wY-CnR"/>
+                    <constraint firstItem="JKL-pE-80n" firstAttribute="leading" secondItem="MNG-l0-LZ1" secondAttribute="trailing" constant="4" id="Xrw-3B-Qkc"/>
                     <constraint firstItem="NJj-7l-T6t" firstAttribute="leading" secondItem="vVf-Ew-Fkp" secondAttribute="leading" constant="8" id="ag3-Z2-Fmm"/>
                     <constraint firstAttribute="bottom" secondItem="NJj-7l-T6t" secondAttribute="bottom" constant="8" id="bJt-F8-F7S"/>
-                    <constraint firstItem="JKL-pE-80n" firstAttribute="leading" secondItem="NJj-7l-T6t" secondAttribute="trailing" constant="-4" id="k5K-Cw-rjQ"/>
-                    <constraint firstItem="JKL-pE-80n" firstAttribute="trailing" secondItem="vVf-Ew-Fkp" secondAttribute="trailingMargin" id="nRs-5P-c3o"/>
+                    <constraint firstItem="JKL-pE-80n" firstAttribute="top" secondItem="vVf-Ew-Fkp" secondAttribute="top" id="dlS-Ne-p7q"/>
+                    <constraint firstAttribute="bottom" secondItem="JKL-pE-80n" secondAttribute="bottom" id="esl-Gc-k2s"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

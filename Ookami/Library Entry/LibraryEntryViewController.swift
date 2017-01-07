@@ -11,6 +11,7 @@ import OokamiKit
 import Cartography
 import Reusable
 import ActionSheetPicker_3_0
+import NVActivityIndicatorView
 
 //TODO: Add entry editing and syncing
 class LibraryEntryViewController: UIViewController {
@@ -59,6 +60,20 @@ class LibraryEntryViewController: UIViewController {
     var saveBarButton: UIBarButtonItem?
     var clearBarButton: UIBarButtonItem?
     
+    //The activity indicator
+    var activityIndicator: NVActivityIndicatorView = {
+        let theme = Theme.ActivityIndicatorTheme()
+        let view = NVActivityIndicatorView(frame: CGRect(origin: CGPoint.zero, size: theme.size), type: .ballSpinFadeLoader, color: theme.color)
+        return view
+    }()
+    
+    //The dark overlay for displaying
+    var darkOverlay: UIView = {
+        let v = UIView()
+        v.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        return v
+    }()
+    
     /// Create an LibraryEntryViewController
     ///
     /// - Parameter entry: The library entry to view.
@@ -103,6 +118,24 @@ class LibraryEntryViewController: UIViewController {
         let header = EntryMediaHeaderView(data: data.unmanaged.toEntryMediaHeaderData())
         header.delegate = self
         tableView.tableHeaderView = header
+        
+        //Add the dark overlay
+        self.view.addSubview(darkOverlay)
+        constrain(darkOverlay) { view in
+            view.edges == view.superview!.edges
+        }
+        
+        //Add the indicator ontop of the overlay
+        darkOverlay.addSubview(activityIndicator)
+        let size = Theme.ActivityIndicatorTheme().size
+        constrain(activityIndicator) { view in
+            view.center == view.superview!.center
+            view.width == size.width
+            view.height == size.height
+        }
+        
+        //Hide them both
+        hideIndicator()
         
         tableView.reloadData()
     }
@@ -308,7 +341,7 @@ extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonD
             default:
                 break
             }
-
+            
             tableView.reloadData()
         }
     }
@@ -324,9 +357,36 @@ extension LibraryEntryViewController: TextEditingViewControllerDelegate {
 //Mark:- Entry saving
 extension LibraryEntryViewController {
     
+    func showIndicator() {
+        UIView.animate(withDuration: 0.25) {
+            self.activityIndicator.startAnimating()
+            self.darkOverlay.isHidden = false
+            self.navigationController?.navigationBar.isUserInteractionEnabled = false
+            self.navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = false }
+        }
+    }
+    
+    func hideIndicator() {
+        UIView.animate(withDuration: 0.25) {
+            self.activityIndicator.stopAnimating()
+            self.darkOverlay.isHidden = true
+            self.navigationController?.navigationBar.isUserInteractionEnabled = true
+            self.navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = true }
+        }
+    }
+    
     //Save was tapped
     func didSave() {
-        
+        showIndicator()
+        data.save { error in
+            self.hideIndicator()
+            guard error == nil else {
+                //TODO: Show error here
+                print(error)
+                return
+            }
+            
+        }
     }
     
     func didClear() {

@@ -97,13 +97,23 @@ public class NetworkClient: NetworkClientProtocol {
     ///   - completion: The callback block
     private func run(request: URLRequest, completion: @escaping (JSON?, Error?) -> ()) {
         self.sessionManager.request(request).validate().responseJSON { response in
+            
             switch response.result {
-                case .success(let data):
-                    completion(JSON(data), nil)
-                    break
-                case .failure(let error):
-                    completion(nil, error)
-                    break
+            case .success(let data):
+                completion(JSON(data), nil)
+                break
+            case .failure(let error):
+                
+                //Try and extract the error from the JSON
+                if let data = response.data ,
+                    let stringData = String(data: data, encoding: .utf8),
+                    let errorString = JSON.parse(stringData)["errors"][0]["detail"].string {
+                    completion(nil, NetworkClientError.error(errorString.capitalized))
+                }
+                
+                //If we failed then pass back the Alamofire error
+                completion(nil, error)
+                break
             }
         }
     }
