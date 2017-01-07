@@ -13,7 +13,9 @@ import Reusable
 import ActionSheetPicker_3_0
 import NVActivityIndicatorView
 
-//TODO: Add entry editing and syncing
+//TODO: Only show nav buttons if changes have occured.
+//E.g if i change progress then they should be shown.
+//just compare unmanaged and entry
 class LibraryEntryViewController: UIViewController {
     
     let data: LibraryEntryViewData
@@ -114,11 +116,6 @@ class LibraryEntryViewController: UIViewController {
             view.edges == view.superview!.edges
         }
         
-        //Add the header
-        let header = EntryMediaHeaderView(data: data.unmanaged.toEntryMediaHeaderData())
-        header.delegate = self
-        tableView.tableHeaderView = header
-        
         //Add the dark overlay
         self.view.addSubview(darkOverlay)
         constrain(darkOverlay) { view in
@@ -137,6 +134,16 @@ class LibraryEntryViewController: UIViewController {
         //Hide them both
         hideIndicator()
         
+        //Force tableview layout
+        tableView.setNeedsLayout()
+        tableView.layoutIfNeeded()
+        
+        //Add the header
+        let header = EntryMediaHeaderView(data: data.unmanaged.toEntryMediaHeaderData())
+        header.delegate = self
+        tableView.tableHeaderView = header
+        
+        //Reload the data
         tableView.reloadData()
     }
     

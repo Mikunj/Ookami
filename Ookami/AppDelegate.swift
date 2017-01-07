@@ -8,6 +8,7 @@
 import UIKit
 import IQKeyboardManager
 
+//TODO: NEED A REALM MIGRATION CLASS!! DON'T FORGET!!
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?

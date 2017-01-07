@@ -11,10 +11,6 @@ import Kingfisher
 import Reusable
 import DynamicColor
 
-//Constraints still breaking on mobile .... WHY!!
-//It resolves itself automatically anyway but the console gets spammed with messages
-
-
 final class ItemDetailGridCell: UICollectionViewCell {
 
     @IBOutlet weak var posterImage: UIImageView!
