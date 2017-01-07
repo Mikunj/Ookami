@@ -284,3 +284,20 @@ extension LibraryEntry {
         return Manga.get(withId: media.id)
     }
 }
+
+//MARK:- Equatable
+extension LibraryEntry {
+    public override func isEqual(_ object: Any?) -> Bool {
+        guard let other = object as? LibraryEntry else {
+            return false
+        }
+        
+        return self.id == other.id &&
+            self.progress == other.progress &&
+            self.reconsuming == other.reconsuming &&
+            self.reconsumeCount == other.reconsumeCount &&
+            self.notes == other.notes &&
+            self.isPrivate == other.isPrivate &&
+            self.rating == other.rating
+    }
+}

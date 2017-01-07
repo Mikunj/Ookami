@@ -29,6 +29,45 @@ class LibraryEntrySpec: QuickSpec {
                 }
             }
             
+            context("Equatable") {
+                it("Should be equal to the same entry") {
+                    let e = LibraryEntry()
+                    e.id = 1
+                    e.progress = 0
+                    e.reconsuming = true
+                    e.reconsumeCount = 1
+                    e.rating = 0.0
+                    e.status = .current
+                    e.notes = "hi"
+                    
+                    let other = LibraryEntry(value: e)
+                    
+                    expect(e).to(equal(other))
+                }
+                
+                it("Should not be equal to a different entry") {
+                    let e = LibraryEntry()
+                    e.id = 1
+                    e.progress = 0
+                    e.reconsuming = true
+                    e.reconsumeCount = 1
+                    e.rating = 0.0
+                    e.status = .current
+                    e.notes = "hi"
+                    
+                    let o = LibraryEntry()
+                    o.id = 2
+                    o.progress = 0
+                    o.reconsuming = false
+                    o.reconsumeCount = 10
+                    o.rating = 5.0
+                    o.status = .completed
+                    o.notes = "hi"
+                    
+                    expect(e).toNot(equal(o))
+                }
+            }
+            
             context("Cache") {
                 it("should not be able to be cleared from cache if it's part of the current users library") {
                     let currentUser = CurrentUser(heimdallr: StubAuthHeimdallr())
