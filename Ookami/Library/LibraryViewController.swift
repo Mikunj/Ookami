@@ -83,7 +83,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         //Create the item view controllers and add them in order
         for status in LibraryEntry.Status.all {
             let itemController = ItemViewController(dataSource: nil)
-            itemController.title = status.toReadableString(for: type)
+            itemController.title = status.toString(forMedia: type)
             itemControllers[status] = itemController
             
             controllers.append(itemController)

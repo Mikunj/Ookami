@@ -16,6 +16,7 @@ extension Theme {
     struct EntryView {
         var headingColor = Colors().primary.lighter(amount: 0.2)
         var valueColor = Colors().primary
+        var tintColor = Colors().secondary
     }
     
     struct Colors {

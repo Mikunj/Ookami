@@ -38,6 +38,7 @@ def ui_pods
     pod 'NVActivityIndicatorView', '~> 3.0'
     pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
     pod 'DynamicColor', '~> 3.2.1'
+    pod 'ActionSheetPicker-3.0', '~> 2.2.0'
 end
 
 target 'Ookami' do

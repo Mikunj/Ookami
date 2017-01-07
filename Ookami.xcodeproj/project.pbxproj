@@ -18,6 +18,9 @@
 		24175E8E1E1FA88A009FBDE6 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 24175E851E1FA88A009FBDE6 /* FontAwesome.otf */; };
 		24175E921E1FA88A009FBDE6 /* FontAwesomeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24175E891E1FA88A009FBDE6 /* FontAwesomeIcon.swift */; };
 		24175E931E1FA88A009FBDE6 /* IconDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24175E8A1E1FA88A009FBDE6 /* IconDrawable.swift */; };
+		24175E961E206351009FBDE6 /* EntryButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24175E941E206351009FBDE6 /* EntryButtonTableViewCell.swift */; };
+		24175E971E206351009FBDE6 /* EntryButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24175E951E206351009FBDE6 /* EntryButtonTableViewCell.xib */; };
+		24175E991E207CB1009FBDE6 /* LibraryEntryViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24175E981E207CB1009FBDE6 /* LibraryEntryViewData.swift */; };
 		242A03D51E163D0C000E8B06 /* MediaTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03D41E163D0C000E8B06 /* MediaTitle.swift */; };
 		242A03D71E163EAB000E8B06 /* Manga.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A03D61E163EAB000E8B06 /* Manga.swift */; };
 		242A03D91E1643B0000E8B06 /* manga-one-punch-man.json in Resources */ = {isa = PBXBuildFile; fileRef = 242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */; };
@@ -196,6 +199,9 @@
 		24175E881E1FA88A009FBDE6 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		24175E891E1FA88A009FBDE6 /* FontAwesomeIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontAwesomeIcon.swift; sourceTree = "<group>"; };
 		24175E8A1E1FA88A009FBDE6 /* IconDrawable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconDrawable.swift; sourceTree = "<group>"; };
+		24175E941E206351009FBDE6 /* EntryButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryButtonTableViewCell.swift; sourceTree = "<group>"; };
+		24175E951E206351009FBDE6 /* EntryButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryButtonTableViewCell.xib; sourceTree = "<group>"; };
+		24175E981E207CB1009FBDE6 /* LibraryEntryViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryViewData.swift; sourceTree = "<group>"; };
 		242A03D41E163D0C000E8B06 /* MediaTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTitle.swift; sourceTree = "<group>"; };
 		242A03D61E163EAB000E8B06 /* Manga.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manga.swift; sourceTree = "<group>"; };
 		242A03D81E1643B0000E8B06 /* manga-one-punch-man.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "manga-one-punch-man.json"; sourceTree = "<group>"; };
@@ -450,6 +456,7 @@
 				242A042F1E1F4887000E8B06 /* EntryMediaHeaderView.xib */,
 				242A04311E1F4E6B000E8B06 /* LibraryEntry+EntryViewData.swift */,
 				242A04201E1F11E0000E8B06 /* LibraryEntryViewController.swift */,
+				24175E981E207CB1009FBDE6 /* LibraryEntryViewData.swift */,
 			);
 			path = "Library Entry";
 			sourceTree = "<group>";
@@ -671,6 +678,8 @@
 				248FE1611E1F5A47009ACA66 /* EntryBoolTableViewCell.xib */,
 				248FE15C1E1F58AC009ACA66 /* EntryStringTableViewCell.swift */,
 				248FE15D1E1F58AC009ACA66 /* EntryStringTableViewCell.xib */,
+				24175E941E206351009FBDE6 /* EntryButtonTableViewCell.swift */,
+				24175E951E206351009FBDE6 /* EntryButtonTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -953,6 +962,7 @@
 				24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
 				248734381DCCB1D3002E7366 /* user-jigglyslime.json in Resources */,
 				242A04301E1F4887000E8B06 /* EntryMediaHeaderView.xib in Resources */,
+				24175E971E206351009FBDE6 /* EntryButtonTableViewCell.xib in Resources */,
 				248FE1631E1F5A47009ACA66 /* EntryBoolTableViewCell.xib in Resources */,
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
 				242A03F01E190730000E8B06 /* ItemDetailGridCell.xib in Resources */,
@@ -1186,6 +1196,7 @@
 				242A03F61E19C949000E8B06 /* ItemUpdatable.swift in Sources */,
 				242A03EC1E18FC3C000E8B06 /* ItemViewController.swift in Sources */,
 				242A03FC1E1A15B8000E8B06 /* CollectionCellSpacer.swift in Sources */,
+				24175E991E207CB1009FBDE6 /* LibraryEntryViewData.swift in Sources */,
 				242A03EF1E190730000E8B06 /* ItemDetailGridCell.swift in Sources */,
 				24175E931E1FA88A009FBDE6 /* IconDrawable.swift in Sources */,
 				242A041B1E1CC33C000E8B06 /* Theme.swift in Sources */,
@@ -1194,6 +1205,7 @@
 				242A04011E1A183D000E8B06 /* CollectionCellSpacerOption.swift in Sources */,
 				2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */,
 				242A040C1E1C858D000E8B06 /* UserLibraryViewDataSource.swift in Sources */,
+				24175E961E206351009FBDE6 /* EntryButtonTableViewCell.swift in Sources */,
 				242A04321E1F4E6B000E8B06 /* LibraryEntry+EntryViewData.swift in Sources */,
 				242A04161E1CAAEA000E8B06 /* UserLibraryViewController.swift in Sources */,
 				248FE1621E1F5A47009ACA66 /* EntryBoolTableViewCell.swift in Sources */,

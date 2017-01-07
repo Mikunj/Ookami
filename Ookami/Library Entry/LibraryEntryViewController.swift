@@ -10,26 +10,14 @@ import UIKit
 import OokamiKit
 import Cartography
 import Reusable
+import ActionSheetPicker_3_0
 
-private enum DataType {
-    case string
-    case bool
-}
 
-private struct TableData {
-    var type: DataType
-    var value: Any
-    var heading: String
-}
 
 //TODO: Add entry editing and syncing
 class LibraryEntryViewController: UIViewController {
     
-    //The entry we are viewing
-    let entry: LibraryEntry
-    
-    //The unmanaged entry
-    var unmanaged: LibraryEntry
+    let data: LibraryEntryViewData
     
     //The tableview to display data in
     lazy var tableView: UITableView = {
@@ -41,8 +29,9 @@ class LibraryEntryViewController: UIViewController {
         
         t.register(cellType: EntryStringTableViewCell.self)
         t.register(cellType: EntryBoolTableViewCell.self)
+        t.register(cellType: EntryButtonTableViewCell.self)
         
-        t.tintColor = Theme.EntryView().valueColor
+        t.tintColor = Theme.EntryView().tintColor
         
         //Auto table height
         t.estimatedRowHeight = 60
@@ -58,23 +47,22 @@ class LibraryEntryViewController: UIViewController {
     }()
     
     //Pencil image used to indicate that user can edit the field
-    lazy var pencilImage: UIImage = {
-        return FontAwesomeIcon.pencilIcon.image(ofSize: CGSize(width: 10, height: 10), color: Theme.Colors().primary)
+    fileprivate lazy var pencilImage: UIImage = {
+        return FontAwesomeIcon.pencilIcon.image(ofSize: CGSize(width: 10, height: 10), color: Theme.EntryView().tintColor)
     }()
     
     //Whether the entry is editable
     let editable: Bool
     
     //The data we are going to use for the table view
-    fileprivate var tableData: [TableData] = []
+    fileprivate var tableData: [LibraryEntryViewData.TableData] = []
     
     /// Create an LibraryEntryViewController
     ///
     /// - Parameter entry: The library entry to view.
     init(entry: LibraryEntry) {
         //Get the unmanaged entry
-        self.entry = entry
-        unmanaged = LibraryEntry(value: entry)
+        self.data = LibraryEntryViewData(entry: entry)
         
         //entry is only editabe if we are the current user
         editable = entry.userID == CurrentUser().userID
@@ -106,44 +94,13 @@ class LibraryEntryViewController: UIViewController {
         constrain(tableView) { view in
             view.edges == view.superview!.edges
         }
-        
+
         //Add the header
-        let header = EntryMediaHeaderView(data: entry.toEntryMediaHeaderData())
+        let header = EntryMediaHeaderView(data: data.unmanaged.toEntryMediaHeaderData())
         header.delegate = self
         tableView.tableHeaderView = header
         
-        updateData()
-    }
-    
-    //Update the table data
-    func updateData() {
-        
-        let progress = TableData(type: .string, value: String(unmanaged.progress), heading: "Progress")
-        
-        let ratingString = unmanaged.rating > 0 ? String(unmanaged.rating) : "-"
-        let rating = TableData(type: .string, value: ratingString, heading: "Rating")
-        
-        let notes = TableData(type: .string, value: unmanaged.notes, heading: "Notes")
-        
-        let reconsumeCount = TableData(type: .string, value: String(unmanaged.reconsumeCount), heading: "Reconsume Count")
-        
-        let reconsuming = TableData(type: .bool, value: unmanaged.reconsuming, heading: "Reconsuming")
-        
-        let isPrivate = TableData(type: .bool, value: unmanaged.isPrivate, heading: "Private")
-        
-        tableData = [progress, rating, notes, reconsumeCount, reconsuming]
-        
-        //Only add private if entry belongs to current user
-        if entry.userID == CurrentUser().userID {
-            tableData.append(isPrivate)
-        }
-        
         tableView.reloadData()
-    }
-    
-    //Save was tapped
-    func didSave() {
-        
     }
     
 }
@@ -156,17 +113,25 @@ extension LibraryEntryViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.count
+        //We can do it this was because we are 100% certain the data count won't change randomly while view is up
+        return data.tableData().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let tableData = data.tableData()
         let type = tableData[indexPath.row].type
         var cell: UITableViewCell = UITableViewCell()
         switch type {
         case .bool:
             cell = tableView.dequeueReusableCell(for: indexPath) as EntryBoolTableViewCell
+            break
         case .string:
             cell = tableView.dequeueReusableCell(for: indexPath) as EntryStringTableViewCell
+            break
+        case .button:
+            cell = tableView.dequeueReusableCell(for: indexPath) as EntryButtonTableViewCell
+            break
+            
         }
         
         //We update here because tableview won't automatically adjust height in willDisplayCell, unless we change orientation
@@ -176,25 +141,39 @@ extension LibraryEntryViewController: UITableViewDataSource {
     }
     
     func update(cell: UITableViewCell, indexPath: IndexPath) {
+        let tableData = self.data.tableData()
         let data = tableData[indexPath.row]
+        let heading = data.heading.rawValue
         
+        //String cell
         if let stringCell = cell as? EntryStringTableViewCell {
             
             let pencil = UIImageView(image: pencilImage)
             
             cell.accessoryType = .none
             cell.accessoryView = pencil
-            stringCell.headingLabel.text = data.heading
+            stringCell.headingLabel.text = heading
             
             let value = data.value as? String ?? ""
             stringCell.valueLabel.text = value.isEmpty ? "-" : value
         }
         
+        //Bool cell
         if let boolCell = cell as? EntryBoolTableViewCell {
-            boolCell.headingLabel.text = data.heading
+            boolCell.headingLabel.text = heading
             
             let value = data.value as? Bool ?? false
             cell.accessoryType = value ? .checkmark : .none
+        }
+        
+        //Button cell
+        if let buttonCell = cell as? EntryButtonTableViewCell {
+            let value = data.value as? String ?? ""
+            buttonCell.headingLabel.text = heading
+            buttonCell.valueLabel.text = value.isEmpty ? "-" : value
+            buttonCell.button.isHidden = !editable
+            buttonCell.delegate = self
+            buttonCell.indexPath = indexPath
         }
         
         if !editable {
@@ -210,13 +189,33 @@ extension LibraryEntryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        //TODO: Handle value editing here
+        if !editable { return }
+        
+        data.editData(at: indexPath, tableView: tableView)
     }
 }
 
-//MARK:- EntryMediaHeaderViewDelegate
-extension LibraryEntryViewController: EntryMediaHeaderViewDelegate {
+//MARK:- EntryMediaHeaderViewDelegate & Entry Button Delegate
+extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonDelegate {
     func didTapMediaButton() {
         
     }
+    
+    func didTapButton(inCell: EntryButtonTableViewCell, indexPath: IndexPath?) {
+        if let indexPath = indexPath {
+            data.incrementValue(at: indexPath)
+            tableView.reloadData()
+        }
+    }
+}
+
+//Mark:- Entry editing
+extension LibraryEntryViewController {
+    
+    //Save was tapped
+    func didSave() {
+        
+    }
+    
+    
 }

@@ -27,24 +27,33 @@ extension LibraryEntry.Status {
         }
     }
     
-    func toReadableString(for type: Media.MediaType) -> String {
-        switch self {
-        case .current:
-            return type == .anime ? "Currently Watching": "Currently Reading"
-        case .planned:
-            return type == .anime ? "Plan to Watch": "Plan to Read"
-        case .completed:
-            return "Completed"
-        case .onHold:
-            return "On Hold"
-        case .dropped:
-            return "Dropped"
-        }
-    }
 }
 
 //MARK:- Item Data
 extension LibraryEntry {
+    
+    /// Get the maximum progress of the entry
+    ///
+    /// - Returns: The maximum progress or nil if there is none
+    func maxProgress() -> Int? {
+        //Max progress count
+        var maxCount: Int? = nil
+        
+        if let media = self.media, let type = media.type {
+            switch type {
+            case .anime:
+                maxCount = self.anime?.episodeCount
+                break
+            case .manga:
+                maxCount = self.manga?.chapterCount
+                break
+            }
+        }
+        
+        //If we get -1 then we don't have a max count for the media
+        return maxCount == nil || maxCount! < 0 ? nil : maxCount
+    }
+    
     /// Convert a `LibraryEntry` to `ItemData`
     ///
     /// - Returns: The `ItemData` that was converted
@@ -57,8 +66,6 @@ extension LibraryEntry {
             details.append("\(self.rating) ★")
         }
         
-        //Max progress count
-        var maxCount = -1
     
         //Name
         if let media = self.media, let type = media.type {
@@ -71,7 +78,6 @@ extension LibraryEntry {
                 
                 data.name = anime.canonicalTitle
                 data.posterImage = anime.posterImage
-                maxCount = anime.episodeCount 
                 
                 //check if anime has started before current date
                 let current = Date()
@@ -99,7 +105,6 @@ extension LibraryEntry {
                 
                 data.name = manga.canonicalTitle
                 data.posterImage = manga.posterImage
-                maxCount = manga.chapterCount
                 break
             }
         }
@@ -109,7 +114,8 @@ extension LibraryEntry {
         data.details = detailString.isEmpty ? nil : detailString
        
         //Set the progress count
-        data.countString = maxCount > 0 ? "\(self.progress) / \(maxCount)" : "\(self.progress)"
+        let maxCount = self.maxProgress()
+        data.countString = maxCount != nil ? "\(self.progress) / \(maxCount!)" : "\(self.progress)"
         
         return data
     }

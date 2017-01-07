@@ -1,4 +1,5 @@
 PODS:
+  - ActionSheetPicker-3.0 (2.2.0)
   - Alamofire (4.0.1)
   - BTNavigationDropdownMenu (0.4.1)
   - Cartography (1.0.1)
@@ -43,6 +44,7 @@ PODS:
   - XLPagerTabStrip (6.0.0)
 
 DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 2.2.0)
   - Alamofire (~> 4.0)
   - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`, branch `swift-3.0`)
   - Cartography (~> 1.0)
@@ -97,6 +99,7 @@ CHECKOUT OPTIONS:
     :submodules: true
 
 SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
   Cartography: c1460e99395b824d9d75360b0382faeb0b33dcd7
@@ -116,6 +119,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: ecf32fc855f4ae4e34f3109ad864f31832a9ab58
+PODFILE CHECKSUM: 3cf15c8a84c98e42c6ca14b0574e5ee6580f4278
 
 COCOAPODS: 1.1.1

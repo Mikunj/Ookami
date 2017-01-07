@@ -57,6 +57,28 @@ public class LibraryEntry: Object, Cacheable {
         case dropped
         
         public static let all: [Status] = [.current, .planned, .completed, .onHold, .dropped]
+        
+        ///Get the string representation of the status for a given media
+        public func toString(forMedia type: Media.MediaType?) -> String {
+            switch self {
+            case .current:
+                if type == nil {
+                    return "Current"
+                }
+                return type == .anime ? "Currently Watching": "Currently Reading"
+            case .planned:
+                if type == nil {
+                    return "Planning"
+                }
+                return type == .anime ? "Plan to Watch": "Plan to Read"
+            case .completed:
+                return "Completed"
+            case .onHold:
+                return "On Hold"
+            case .dropped:
+                return "Dropped"
+            }
+        }
     }
     
     public dynamic var id = -1
