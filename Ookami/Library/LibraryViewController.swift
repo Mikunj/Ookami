@@ -20,7 +20,7 @@ protocol LibraryDataSource: ItemViewControllerDataSource {
     func didSet(sort: LibraryViewController.Sort)
 }
 
-//Class used for displaying library entries of a specific type
+//Class used for displaying library entries of a specific type (e.g anime, manga)
 final class LibraryViewController: ButtonBarPagerTabStripViewController {
     
     //The current library we are displaying
@@ -36,6 +36,23 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     fileprivate var sort: Sort = .updatedAt(ascending: false) {
         didSet { source.values.forEach { $0.didSet(sort: sort) } }
     }
+    
+    ///A clean flow layout for the buttonBarView.
+    ///This is there because there is a bug in XLPagerTabStrip where if you set the buttonBarItemFont, 
+    ///the bar buttons don't size properley when setting buttonBarItemsShouldFillAvailiableWidth = true.
+    //By setting a layout with all zero values, it seems to fix the issue
+    fileprivate var flowLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.itemSize = .zero
+        layout.headerReferenceSize = .zero
+        layout.footerReferenceSize = .zero
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = .zero
+        
+        return layout
+    }()
     
     
     /// Create an `LibraryViewController`
@@ -54,6 +71,8 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     }
     
     override func viewDidLoad() {
+        buttonBarView.collectionViewLayout = flowLayout
+        
         let theme = Theme.PagerButtonBarTheme()
         self.settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         self.settings.style.buttonBarItemLeftRightMargin = 12
@@ -63,7 +82,6 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         self.settings.style.buttonBarItemBackgroundColor = theme.buttonColor
         
         super.viewDidLoad()
-        
     }
     
     func updateItemViewControllers() {

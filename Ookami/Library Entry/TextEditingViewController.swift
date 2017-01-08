@@ -94,6 +94,15 @@ class TextEditingViewController: UIViewController, UITextViewDelegate {
         textView.text = initialText.isEmpty ? placeHolderText : initialText
         textView.textColor = initialText.isEmpty ? UIColor.lightGray : UIColor.black
         textView.delegate = self
+        
+        //Set the icons on the buttons
+        let size = CGSize(width: 22, height: 22)
+        cancelButton.setIconImage(withIcon: .removeIcon, size: size, color: nil, forState: .normal)
+        doneButton.setIconImage(withIcon: .okIcon, size: size, color: nil, forState: .normal)
+        
+        cancelButton.setTitle(nil, for: .normal)
+        doneButton.setTitle(nil, for: .normal)
+        
     }
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {
