@@ -18,6 +18,7 @@ import NVActivityIndicatorView
 //just compare unmanaged and entry
 class LibraryEntryViewController: UIViewController {
     
+    //The data to use for the controller
     let data: LibraryEntryViewData
     
     //The tableview to display data in
@@ -105,6 +106,8 @@ class LibraryEntryViewController: UIViewController {
             
             self.navigationItem.rightBarButtonItems = [saveBarButton!, clearBarButton!]
         }
+        
+        reloadData()
     }
     
     override func viewDidLoad() {
@@ -144,6 +147,15 @@ class LibraryEntryViewController: UIViewController {
         tableView.tableHeaderView = header
         
         //Reload the data
+        self.reloadData()
+    }
+    
+    //Reload the data and update the button bar items
+    func reloadData() {
+        //Only enable the buttons if there was a change
+        saveBarButton?.isEnabled = data.hasChanged()
+        clearBarButton?.isEnabled = data.hasChanged()
+        
         tableView.reloadData()
     }
     
@@ -248,7 +260,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
             ActionSheetStringPicker.show(withTitle: "Progress", rows: rows, initialSelection: unmanaged.progress, doneBlock: { picker, index, value in
                 if let newValue = value as? Int {
                     self.data.update(progress: newValue)
-                    tableView.reloadData()
+                    self.reloadData()
                 }
             }, cancel: { _ in }, origin: cell)
             
@@ -268,7 +280,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
             let initial = statuses.index(of: unmanaged.status ?? .current) ?? 0
             ActionSheetStringPicker.show(withTitle: "Status", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
                 self.data.update(status: statuses[index])
-                tableView.reloadData()
+                self.reloadData()
             }, cancel: { _ in }, origin: cell)
             
             break
@@ -285,7 +297,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
                 
                 //We know that we will have 10 values, so to get the rating just divide by 2
                 self.data.update(rating: Double(index) / 2)
-                tableView.reloadData()
+                self.reloadData()
             }, cancel: { _ in }, origin: cell)
             
             break
@@ -304,7 +316,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
             ActionSheetStringPicker.show(withTitle: "Reconsume Count", rows: rows, initialSelection: unmanaged.reconsumeCount, doneBlock: { picker, index, value in
                 if let newValue = value as? Int {
                     self.data.update(reconsumeCount: newValue)
-                    tableView.reloadData()
+                    self.reloadData()
                 }
             }, cancel: { _ in }, origin: cell)
             break
@@ -312,12 +324,12 @@ extension LibraryEntryViewController: UITableViewDelegate {
         case .reconsuming:
             //Just invert the value
             self.data.update(reconsuming: !unmanaged.reconsuming)
-            tableView.reloadData()
+            self.reloadData()
             break
             
         case .isPrivate:
             self.data.update(isPrivate: !unmanaged.isPrivate)
-            tableView.reloadData()
+            self.reloadData()
             break
         }
         
@@ -349,7 +361,7 @@ extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonD
                 break
             }
             
-            tableView.reloadData()
+            self.reloadData()
         }
     }
 }
@@ -357,7 +369,7 @@ extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonD
 extension LibraryEntryViewController: TextEditingViewControllerDelegate {
     func textEditingViewController(_ controller: TextEditingViewController, didSave text: String) {
         data.update(notes: text)
-        tableView.reloadData()
+        self.reloadData()
     }
 }
 
@@ -369,7 +381,8 @@ extension LibraryEntryViewController {
             self.activityIndicator.startAnimating()
             self.darkOverlay.isHidden = false
             self.navigationController?.navigationBar.isUserInteractionEnabled = false
-            self.navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = false }
+            self.saveBarButton?.isEnabled = false
+            self.clearBarButton?.isEnabled = false
         }
     }
     
@@ -378,7 +391,8 @@ extension LibraryEntryViewController {
             self.activityIndicator.stopAnimating()
             self.darkOverlay.isHidden = true
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
-            self.navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = true }
+            self.saveBarButton?.isEnabled = true
+            self.clearBarButton?.isEnabled = true
         }
     }
     
@@ -407,13 +421,13 @@ extension LibraryEntryViewController {
                 return
             }
             
-            self.navigationController?.popViewController(animated: true)
+            let _ = self.navigationController?.popViewController(animated: true)
             
         }
     }
     
     func didClear() {
         data.reset()
-        tableView.reloadData()
+        self.reloadData()
     }
 }

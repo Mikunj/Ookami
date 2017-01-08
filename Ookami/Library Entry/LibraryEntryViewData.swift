@@ -28,6 +28,11 @@ class LibraryEntryViewData {
         self.unmanaged = LibraryEntry(value: entry)
     }
     
+    /// Check whether the unmanaged entry has changed from the original entry
+    func hasChanged() -> Bool {
+        return entry != unmanaged
+    }
+    
     //Save the entry
     func save(completion: @escaping (Error?) -> Void) {
         LibraryService().update(entry: unmanaged) { entry, error in
