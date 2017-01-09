@@ -42,7 +42,7 @@
             "large": "https://media.kitsu.io/manga/cover_images/24147/large.jpg?1430793546",
             "original": "https://media.kitsu.io/manga/cover_images/24147/original.jpg?1430793546"
         },
-        "mangaType": "manga",
+        "subtype": "manga",
         "chapterCount": null,
         "volumeCount": 0,
         "serialization": "Tonari no Young Jump"

@@ -28,9 +28,9 @@ public class Manga: Object, Cacheable {
     public dynamic var canonicalTitle = ""
     
     //The manga type we use to represent with an enum
-    public dynamic var mangaTypeRaw: String = ""
-    public var mangaType: MangaType? {
-        return MangaType(rawValue: mangaTypeRaw)
+    public dynamic var subtypeRaw: String = ""
+    public var subtype: SubType? {
+        return SubType(rawValue: subtypeRaw)
     }
     
     /**
@@ -43,7 +43,7 @@ public class Manga: Object, Cacheable {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return ["mangaType"]
+        return ["subtype"]
     }
     
     /// MARK:- Cacheable
@@ -92,7 +92,7 @@ extension Manga: JSONParsable {
         manga.endDate = Date.from(string: attributes["endDate"].stringValue)
         manga.chapterCount = attributes["chapterCount"].int ?? -1
         manga.volumeCount = attributes["volumeCount"].int ?? -1
-        manga.mangaTypeRaw = attributes["mangaType"].stringValue
+        manga.subtypeRaw = attributes["subtype"].stringValue
         manga.posterImage = attributes["posterImage"]["small"].stringValue
         
         //TODO: Default to original image until other styles are added
@@ -128,7 +128,7 @@ extension Manga: JSONParsable {
 }
 
 extension Manga {
-    public enum MangaType: String {
+    public enum SubType: String {
         case manga
         case novel
         case manhua

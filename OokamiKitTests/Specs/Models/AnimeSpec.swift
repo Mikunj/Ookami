@@ -89,7 +89,7 @@ class AnimeSpec: QuickSpec {
                     expect(anime.youtubeVideoId).to(equal("5Vy0Hzkxndc"))
                     expect(anime.ageRating).to(equal("R"))
                     expect(anime.ageRatingGuide).to(equal("Violence, Profanity"))
-                    expect(anime.showTypeRaw).to(equal("TV"))
+                    expect(anime.subtypeRaw).to(equal("TV"))
                     
                     let d = DateFormatter()
                     d.dateFormat = "YYYY-MM-dd"

@@ -85,8 +85,8 @@ extension LibraryEntry {
                 if startDate < current {
                     //Note: If it's a movie though then we don't show Airing
                     //Kitsu may also not set endDates for Music, will have to check
-                    guard let showType = anime.showType,
-                            showType != .movie else {
+                    guard let subtype = anime.subtype,
+                            subtype != .movie else {
                         break
                     }
                     

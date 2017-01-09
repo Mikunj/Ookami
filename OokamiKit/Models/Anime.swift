@@ -32,9 +32,9 @@ public class Anime: Object, Cacheable {
     public dynamic var canonicalTitle = ""
     
     //The show type which we use an enum to represent
-    public dynamic var showTypeRaw = ""
-    public var showType: ShowType? {
-        return ShowType(rawValue: showTypeRaw)
+    public dynamic var subtypeRaw = ""
+    public var subtype: SubType? {
+        return SubType(rawValue: subtypeRaw)
     }
     
     /**
@@ -47,7 +47,7 @@ public class Anime: Object, Cacheable {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return ["showType"]
+        return ["subtype"]
     }
     
     /// MARK:- Cacheable
@@ -96,7 +96,7 @@ extension Anime: JSONParsable {
         anime.endDate = Date.from(string: attributes["endDate"].stringValue)
         anime.episodeCount = attributes["episodeCount"].int ?? -1
         anime.episodeLength = attributes["episodeLength"].int ?? -1
-        anime.showTypeRaw = attributes["showType"].stringValue
+        anime.subtypeRaw = attributes["subtype"].stringValue
         anime.youtubeVideoId = attributes["youtubeVideoId"].stringValue
         anime.ageRating = attributes["ageRating"].stringValue
         anime.ageRatingGuide = attributes["ageRatingGuide"].stringValue
@@ -136,7 +136,7 @@ extension Anime: JSONParsable {
 
 //MARK:- Show Type
 extension Anime {
-    public enum ShowType: String {
+    public enum SubType: String {
         case movie
         case special
         case music

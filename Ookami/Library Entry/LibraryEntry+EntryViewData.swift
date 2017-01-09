@@ -35,7 +35,7 @@ extension LibraryEntry {
                 data.posterImage = anime.posterImage
                 data.synopsis = anime.synopsis
                 data.coverImage = anime.coverImage
-                details.append(anime.showTypeRaw.uppercased())
+                details.append(anime.subtypeRaw.uppercased())
                 
                 if anime.episodeCount > 0 {
                     details.append("\(anime.episodeCount) episodes")
@@ -55,7 +55,7 @@ extension LibraryEntry {
                 data.posterImage = manga.posterImage
                 data.synopsis = manga.synopsis
                 data.coverImage = manga.coverImage
-                details.append(manga.mangaTypeRaw.uppercased())
+                details.append(manga.subtypeRaw.uppercased())
                 break
             }
         }
