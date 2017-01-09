@@ -21,9 +21,11 @@ class KitsuLibraryRequestSpec: QuickSpec {
                 let request = KitsuLibraryRequest(userID: 1, type: type, status: status, since: date)
                 
                 let filters = request.filters
+                let includes = request.includes
                 
                 expect(filters["user_id"] as? Int).to(equal(1))
-                expect(filters["media_type"] as? String).to(equal(type.toLibraryMediaTypeString()))
+                expect(filters["kind"] as? String).to(equal(type.rawValue))
+                expect(includes).to(contain(type.rawValue))
                 expect(filters["status"] as? String).to(equal(status.rawValue))
                 //expect(filters["since"] as? String).to(equal("1970-01-01T00:00:01.000Z"))
             }

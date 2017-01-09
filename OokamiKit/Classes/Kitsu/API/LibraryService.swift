@@ -36,7 +36,7 @@ public class LibraryService: BaseService {
         let user: [String: Any] = ["data": ["id": currentUser, "type": User.typeString]]
         let params: [String: Any] = ["type": LibraryEntry.typeString,
                                      "attributes": ["status": status.rawValue],
-                                     "relationships": ["media": media, "user": user]]
+                                     "relationships": [mediaType.rawValue: media, "user": user]]
         let data = ["data": params]
         
         let request = NetworkRequest(relativeURL: Constants.Endpoints.libraryEntries, method: .post, parameters: data, needsAuth: true)
@@ -137,7 +137,7 @@ public class LibraryService: BaseService {
         
         //Make the request
         let request = KitsuLibraryRequest(userID: userID, type: type, status: status, since: since)
-        request.include("media", "user")
+        request.include("user")
         request.sort(by: "updated_at", ascending: false)
         
         let library = PaginatedLibrary(request: request, client: client, completion: { objects, error in
@@ -181,7 +181,7 @@ public class LibraryService: BaseService {
         
         //Make the request
         let request = KitsuLibraryRequest(userID: userID, type: type, status: status, since: since)
-        request.include("media", "user")
+        request.include("user")
         request.sort(by: "updated_at", ascending: false)
         
         let operation = FetchLibraryOperation(request: request, client: client, onFetch: { objects in
@@ -217,7 +217,7 @@ public class LibraryService: BaseService {
         
         let operation = FetchAllLibraryOperation(client: client, request: { status in
             let request = KitsuLibraryRequest(userID: userID, type: type, status: status, since: since, needsAuth: true)
-            request.include("media", "user")
+            request.include("user")
             request.sort(by: "updated_at", ascending: false)
             return request
         }, onFetch: { objects in

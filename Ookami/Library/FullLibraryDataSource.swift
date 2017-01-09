@@ -94,8 +94,8 @@ final class FullLibraryDataSource: LibraryDataSource {
         
         var lastFetched: Date = Date(timeIntervalSince1970: 0)
         
-        //Get the fetch time if user has it
-        if let fetched = LastFetched.get(withId: userID) {
+        //Get the fetch time if user has it, only if we're not force refreshing library
+        if !forced, let fetched = LastFetched.get(withId: userID) {
             switch type {
             case .anime:
                 lastFetched = fetched.anime

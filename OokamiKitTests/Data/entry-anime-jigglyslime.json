@@ -25,7 +25,7 @@
                 "id": "2875"
             }
         },
-        "media": {
+        "anime": {
             "links": {
                 "self": "https://kitsu-api-staging.herokuapp.com/api/edge/library-entries/340253/relationships/media",
                 "related": "https://kitsu-api-staging.herokuapp.com/api/edge/library-entries/340253/media"

@@ -13,9 +13,7 @@ import Reusable
 import ActionSheetPicker_3_0
 import NVActivityIndicatorView
 
-//TODO: Only show nav buttons if changes have occured.
-//E.g if i change progress then they should be shown.
-//just compare unmanaged and entry
+//A class to show/edit a library entry
 class LibraryEntryViewController: UIViewController {
     
     //The data to use for the controller

@@ -22,14 +22,6 @@ public class Media: Object, GettableObject {
     public enum MediaType: String {
         case anime
         case manga
-        
-        //TODO: Replace this when library accepts type value that is not case-sensitive
-        func toLibraryMediaTypeString() -> String {
-            switch self {
-            case .anime: return "Anime"
-            case .manga: return "Manga"
-            }
-        }
     }
     
     public dynamic var entryID = -1
@@ -223,11 +215,13 @@ extension LibraryEntry: JSONParsable {
             entry.media = Media(value: mediaObject)
         } else {
             //Check if we have a media relationship
-            let media = relationships["media"]["data"]
-            if media.exists() {
-                let type = media["type"].stringValue
-                let id = media["id"].intValue
-                entry.media = Media(value: [entry.id, id, type])
+            for type in ["anime", "manga", "drama"] {
+                let media = relationships[type]["data"]
+                if media.exists() {
+                    let type = media["type"].stringValue
+                    let id = media["id"].intValue
+                    entry.media = Media(value: [entry.id, id, type])
+                }
             }
         }
         

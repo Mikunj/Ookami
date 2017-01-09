@@ -21,7 +21,9 @@ public class KitsuLibraryRequest: KitsuPagedRequest {
     ///The type of library to fetch
     public private(set) var type: Media.MediaType! {
         didSet {
-            self.filter(key: "media_type", value: type.toLibraryMediaTypeString())
+            //Set the kind and also include it in the response
+            self.filter(key: "kind", value: type.rawValue)
+            self.include(type.rawValue)
         }
     }
     

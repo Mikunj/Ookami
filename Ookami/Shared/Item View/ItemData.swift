@@ -8,8 +8,6 @@
 
 import Foundation
 
-//TODO: Add more properties
-
 struct ItemData: Equatable {
     var name: String?
     var details: String?

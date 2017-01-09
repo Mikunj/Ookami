@@ -13,9 +13,7 @@ import Dwifft
 import XLPagerTabStrip
 import NVActivityIndicatorView
 
-//TODO: Add more cells, clean up code a bit, fix layouts
-//Also look into performance with KingFisher
-
+//TODO: Add more cells, clean up code a bit
 //The datasource which is used by the controller
 protocol ItemViewControllerDataSource: class {
     weak var delegate: ItemViewControllerDelegate? { get set }
