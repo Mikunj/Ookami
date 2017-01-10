@@ -101,6 +101,8 @@
 		24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABD1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABE1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
+		24AF0E3A1E24BAC100F11809 /* MediaTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AF0E391E24BAC100F11809 /* MediaTableHeaderView.swift */; };
+		24AF0E3C1E24BACE00F11809 /* MediaTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24AF0E3B1E24BACE00F11809 /* MediaTableHeaderView.xib */; };
 		24BEC5BF1E1215DE0058F5AB /* CacheManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */; };
 		24BEC5C11E121CFB0058F5AB /* StubCacheObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */; };
 		24BEC5C31E1341F40058F5AB /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5C21E1341F40058F5AB /* Database.swift */; };
@@ -277,6 +279,8 @@
 		24A258AD1DD9455100CC7561 /* PaginatedLibrarySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedLibrarySpec.swift; sourceTree = "<group>"; };
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
+		24AF0E391E24BAC100F11809 /* MediaTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTableHeaderView.swift; sourceTree = "<group>"; };
+		24AF0E3B1E24BACE00F11809 /* MediaTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediaTableHeaderView.xib; sourceTree = "<group>"; };
 		24BEC5BE1E1215DE0058F5AB /* CacheManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManagerSpec.swift; sourceTree = "<group>"; };
 		24BEC5C01E121CFB0058F5AB /* StubCacheObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubCacheObject.swift; sourceTree = "<group>"; };
 		24BEC5C21E1341F40058F5AB /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
@@ -416,6 +420,7 @@
 			children = (
 				242A03FD1E1A17FB000E8B06 /* CollectionCellSpacer */,
 				242A03F31E190D2E000E8B06 /* Item View */,
+				24AF0E381E24BA8E00F11809 /* Media */,
 				242A042A1E1F47D7000E8B06 /* Views */,
 				242A041A1E1CC33C000E8B06 /* Theme.swift */,
 			);
@@ -682,10 +687,10 @@
 			children = (
 				248FE1601E1F5A47009ACA66 /* EntryBoolTableViewCell.swift */,
 				248FE1611E1F5A47009ACA66 /* EntryBoolTableViewCell.xib */,
-				248FE15C1E1F58AC009ACA66 /* EntryStringTableViewCell.swift */,
-				248FE15D1E1F58AC009ACA66 /* EntryStringTableViewCell.xib */,
 				24175E941E206351009FBDE6 /* EntryButtonTableViewCell.swift */,
 				24175E951E206351009FBDE6 /* EntryButtonTableViewCell.xib */,
+				248FE15C1E1F58AC009ACA66 /* EntryStringTableViewCell.swift */,
+				248FE15D1E1F58AC009ACA66 /* EntryStringTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -709,6 +714,15 @@
 				246023391DCCA11700B3C99B /* UserSpec.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		24AF0E381E24BA8E00F11809 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				24AF0E391E24BAC100F11809 /* MediaTableHeaderView.swift */,
+				24AF0E3B1E24BACE00F11809 /* MediaTableHeaderView.xib */,
+			);
+			path = Media;
 			sourceTree = "<group>";
 		};
 		24BEC5CA1E13997F0058F5AB /* Requests */ = {
@@ -971,6 +985,7 @@
 				242A04301E1F4887000E8B06 /* EntryMediaHeaderView.xib in Resources */,
 				24175E971E206351009FBDE6 /* EntryButtonTableViewCell.xib in Resources */,
 				248FE1631E1F5A47009ACA66 /* EntryBoolTableViewCell.xib in Resources */,
+				24AF0E3C1E24BACE00F11809 /* MediaTableHeaderView.xib in Resources */,
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
 				242A03F01E190730000E8B06 /* ItemDetailGridCell.xib in Resources */,
 				242A03DD1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */,
@@ -1207,6 +1222,7 @@
 				24175E991E207CB1009FBDE6 /* LibraryEntryViewData.swift in Sources */,
 				242A03EF1E190730000E8B06 /* ItemDetailGridCell.swift in Sources */,
 				24175E931E1FA88A009FBDE6 /* IconDrawable.swift in Sources */,
+				24AF0E3A1E24BAC100F11809 /* MediaTableHeaderView.swift in Sources */,
 				242A041B1E1CC33C000E8B06 /* Theme.swift in Sources */,
 				242A03F81E1A0E2C000E8B06 /* GradientView.swift in Sources */,
 				242A04051E1A7220000E8B06 /* FullLibraryDataSource.swift in Sources */,

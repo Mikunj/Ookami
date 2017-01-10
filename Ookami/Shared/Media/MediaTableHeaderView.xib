@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MediaTableHeaderView" customModule="Ookami" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="287"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ccs-kt-xDV">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="207"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjL-EI-wVh" userLabel="Bottom View">
+                    <rect key="frame" x="0.0" y="207" width="375" height="80"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vIp-MK-4Jv">
+                            <rect key="frame" x="8" y="-78" width="100" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="vIp-MK-4Jv" secondAttribute="height" multiplier="2:3" id="CqP-qM-T8S"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hunter x Hunter" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkd-2C-iaH" userLabel="Media Name">
+                            <rect key="frame" x="116" y="8" width="251" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="YVD-5q-lrT"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            </variation>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KU-sH-HYu" userLabel="Detail">
+                            <rect key="frame" x="116" y="33" width="251" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="FUZ-35-TcM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="1KU-sH-HYu" firstAttribute="leading" secondItem="vIp-MK-4Jv" secondAttribute="trailing" constant="8" id="1al-lc-8UR"/>
+                        <constraint firstItem="1KU-sH-HYu" firstAttribute="top" secondItem="mkd-2C-iaH" secondAttribute="bottom" constant="4" id="9dG-8M-O0K"/>
+                        <constraint firstItem="vIp-MK-4Jv" firstAttribute="top" secondItem="cjL-EI-wVh" secondAttribute="top" constant="-78" id="HK3-Yy-PdV"/>
+                        <constraint firstItem="vIp-MK-4Jv" firstAttribute="bottom" secondItem="cjL-EI-wVh" secondAttribute="bottomMargin" id="WjB-ZI-CBI"/>
+                        <constraint firstAttribute="height" constant="80" id="dwm-KM-Eni"/>
+                        <constraint firstItem="mkd-2C-iaH" firstAttribute="leading" secondItem="vIp-MK-4Jv" secondAttribute="trailing" constant="8" id="l43-q5-Cxq"/>
+                        <constraint firstItem="mkd-2C-iaH" firstAttribute="top" secondItem="cjL-EI-wVh" secondAttribute="top" constant="8" id="oJ9-q8-ZyX"/>
+                        <constraint firstAttribute="trailing" secondItem="mkd-2C-iaH" secondAttribute="trailing" constant="8" id="qtm-Dn-ztH"/>
+                        <constraint firstItem="vIp-MK-4Jv" firstAttribute="leading" secondItem="cjL-EI-wVh" secondAttribute="leading" constant="8" id="rok-aw-Fhe"/>
+                        <constraint firstAttribute="trailing" secondItem="1KU-sH-HYu" secondAttribute="trailing" constant="8" id="xWX-oa-kKg"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ccs-kt-xDV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0oO-GD-2bf"/>
+                <constraint firstItem="cjL-EI-wVh" firstAttribute="top" secondItem="ccs-kt-xDV" secondAttribute="bottom" id="F2g-FK-aji"/>
+                <constraint firstAttribute="trailing" secondItem="ccs-kt-xDV" secondAttribute="trailing" id="HS1-oR-Kdk"/>
+                <constraint firstAttribute="trailing" secondItem="cjL-EI-wVh" secondAttribute="trailing" id="Tco-Ux-HGX"/>
+                <constraint firstAttribute="bottom" secondItem="cjL-EI-wVh" secondAttribute="bottom" id="bIA-A6-c8w"/>
+                <constraint firstItem="cjL-EI-wVh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gkw-w1-t5c"/>
+                <constraint firstItem="ccs-kt-xDV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="spA-GB-WMd"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="coverImage" destination="ccs-kt-xDV" id="nt5-VH-qSQ"/>
+                <outlet property="detailLabel" destination="1KU-sH-HYu" id="mg7-rg-3oX"/>
+                <outlet property="infoView" destination="cjL-EI-wVh" id="hv1-mb-pdc"/>
+                <outlet property="posterImage" destination="vIp-MK-4Jv" id="62I-JO-Wh6"/>
+                <outlet property="titleLabel" destination="mkd-2C-iaH" id="Lne-CG-ykU"/>
+            </connections>
+            <point key="canvasLocation" x="34.5" y="142.5"/>
+        </view>
+    </objects>
+</document>
