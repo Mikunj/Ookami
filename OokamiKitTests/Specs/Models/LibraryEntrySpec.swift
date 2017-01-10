@@ -29,6 +29,54 @@ class LibraryEntrySpec: QuickSpec {
                 }
             }
             
+            context("Max Progress") {
+                it("should return nil if media is not set") {
+                    let e = LibraryEntry()
+                    expect(e.maxProgress()).to(beNil())
+                }
+                
+                it("should return nil if media counts are invalid") {
+                    TestHelper.create(object: Anime.self, inRealm: testRealm, amount: 1) { _, anime in
+                        anime.id = 1
+                        anime.episodeCount = -200
+                    }
+                    
+                    TestHelper.create(object: Manga.self, inRealm: testRealm, amount: 1) { _, manga in
+                        manga.id = 1
+                        manga.chapterCount = -200
+                    }
+                    
+                    let e = LibraryEntry()
+                    e.id = 1
+                    e.media = Media(value: [1, 1, "anime"])
+                    expect(e.maxProgress()).to(beNil())
+                    
+                    e.media = Media(value: [1, 1, "manga"])
+                    expect(e.maxProgress()).to(beNil())
+                    
+                }
+                
+                it("should return the correct max progress count") {
+                    TestHelper.create(object: Anime.self, inRealm: testRealm, amount: 1) { _, anime in
+                        anime.id = 1
+                        anime.episodeCount = 100
+                    }
+                    
+                    TestHelper.create(object: Manga.self, inRealm: testRealm, amount: 1) { _, manga in
+                        manga.id = 1
+                        manga.chapterCount = 200
+                    }
+                    
+                    let e = LibraryEntry()
+                    e.id = 1
+                    e.media = Media(value: [1, 1, "anime"])
+                    expect(e.maxProgress()).to(equal(100))
+                    
+                    e.media = Media(value: [1, 1, "manga"])
+                    expect(e.maxProgress()).to(equal(200))
+                }
+            }
+            
             context("Equatable") {
                 it("Should be equal to the same entry") {
                     let e = LibraryEntry()

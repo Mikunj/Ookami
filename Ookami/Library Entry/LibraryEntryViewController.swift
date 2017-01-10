@@ -79,7 +79,7 @@ class LibraryEntryViewController: UIViewController {
     ///
     /// - Parameter entry: The library entry to view.
     init(entry: LibraryEntry) {
-        //Get the unmanaged entry
+        //Set the data
         self.data = LibraryEntryViewData(entry: entry)
         
         //entry is only editabe if we are the current user
@@ -140,7 +140,7 @@ class LibraryEntryViewController: UIViewController {
         tableView.layoutIfNeeded()
         
         //Add the header
-        let header = EntryMediaHeaderView(data: data.unmanaged.toEntryMediaHeaderData())
+        let header = EntryMediaHeaderView(data: data.updater.entry.toEntryMediaHeaderData())
         header.delegate = self
         tableView.tableHeaderView = header
         
@@ -151,10 +151,14 @@ class LibraryEntryViewController: UIViewController {
     //Reload the data and update the button bar items
     func reloadData() {
         //Only enable the buttons if there was a change
-        saveBarButton?.isEnabled = data.hasChanged()
-        clearBarButton?.isEnabled = data.hasChanged()
+        saveBarButton?.isEnabled = data.updater.wasEdited()
+        clearBarButton?.isEnabled = data.updater.wasEdited()
         
+        //We set the offset again because tableview jumps when reloading if the entry has long notes
+        let offset = tableView.contentOffset
         tableView.reloadData()
+        tableView.layoutIfNeeded()
+        tableView.setContentOffset(offset, animated: false)
     }
     
 }
@@ -243,7 +247,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if !editable { return }
-        let unmanaged = data.unmanaged
+        let entry = data.updater.entry
         let tableData = data.tableData()
         let heading = tableData[indexPath.row].heading
         guard let cell = tableView.cellForRow(at: indexPath) else {
@@ -253,11 +257,11 @@ extension LibraryEntryViewController: UITableViewDelegate {
         switch heading {
         case .progress:
             
-            let max = unmanaged.maxProgress() ?? 999
+            let max = entry.maxProgress() ?? 999
             let rows = Array(0...max)
-            ActionSheetStringPicker.show(withTitle: "Progress", rows: rows, initialSelection: unmanaged.progress, doneBlock: { picker, index, value in
+            ActionSheetStringPicker.show(withTitle: "Progress", rows: rows, initialSelection: entry.progress, doneBlock: { picker, index, value in
                 if let newValue = value as? Int {
-                    self.data.update(progress: newValue)
+                    self.data.updater.update(progress: newValue)
                     self.reloadData()
                 }
             }, cancel: { _ in }, origin: cell)
@@ -268,16 +272,16 @@ extension LibraryEntryViewController: UITableViewDelegate {
             
             let statuses = LibraryEntry.Status.all
             let rows: [String] = statuses.map {
-                if let media = unmanaged.media {
+                if let media = entry.media {
                     return $0.toString(forMedia: media.type)
                 }
                 
                 return "-"
             }
             
-            let initial = statuses.index(of: unmanaged.status ?? .current) ?? 0
+            let initial = statuses.index(of: entry.status ?? .current) ?? 0
             ActionSheetStringPicker.show(withTitle: "Status", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
-                self.data.update(status: statuses[index])
+                self.data.updater.update(status: statuses[index])
                 self.reloadData()
             }, cancel: { _ in }, origin: cell)
             
@@ -286,7 +290,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
         case .rating:
             
             let ratings = Array(stride(from: 0, to: 5.5, by: 0.5))
-            let initial = ratings.index(of: unmanaged.rating) ?? 0
+            let initial = ratings.index(of: entry.rating) ?? 0
             
             //Format it to 1 decimal place display so it's consitent
             let rows = ratings.map { String(format: "%.1f", $0) }
@@ -294,7 +298,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
             ActionSheetStringPicker.show(withTitle: "Rating", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
                 
                 //We know that we will have 10 values, so to get the rating just divide by 2
-                self.data.update(rating: Double(index) / 2)
+                self.data.updater.update(rating: Double(index) / 2)
                 self.reloadData()
             }, cancel: { _ in }, origin: cell)
             
@@ -302,7 +306,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
             
         case .notes:
             
-            let editingVC = TextEditingViewController(title: "Notes", text: unmanaged.notes, placeholder: "Type your notes here!")
+            let editingVC = TextEditingViewController(title: "Notes", text: entry.notes, placeholder: "Type your notes here!")
             editingVC.modalPresentationStyle = .overCurrentContext
             editingVC.delegate = self
             present(editingVC, animated: false)
@@ -311,9 +315,9 @@ extension LibraryEntryViewController: UITableViewDelegate {
             
         case .reconsumeCount:
             let rows = Array(0...999)
-            ActionSheetStringPicker.show(withTitle: "Reconsume Count", rows: rows, initialSelection: unmanaged.reconsumeCount, doneBlock: { picker, index, value in
+            ActionSheetStringPicker.show(withTitle: "Reconsume Count", rows: rows, initialSelection: entry.reconsumeCount, doneBlock: { picker, index, value in
                 if let newValue = value as? Int {
-                    self.data.update(reconsumeCount: newValue)
+                    self.data.updater.update(reconsumeCount: newValue)
                     self.reloadData()
                 }
             }, cancel: { _ in }, origin: cell)
@@ -321,12 +325,12 @@ extension LibraryEntryViewController: UITableViewDelegate {
             
         case .reconsuming:
             //Just invert the value
-            self.data.update(reconsuming: !unmanaged.reconsuming)
+            self.data.updater.update(reconsuming: !entry.reconsuming)
             self.reloadData()
             break
             
         case .isPrivate:
-            self.data.update(isPrivate: !unmanaged.isPrivate)
+            self.data.updater.update(isPrivate: !entry.isPrivate)
             self.reloadData()
             break
         }
@@ -349,10 +353,10 @@ extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonD
             //Update the values accordingly
             switch d.heading {
             case .progress:
-                data.update(progress: data.unmanaged.progress + 1)
+                data.updater.incrementProgress()
                 break
             case .reconsumeCount:
-                data.update(reconsumeCount: data.unmanaged.reconsumeCount + 1)
+                data.updater.incrementReconsumeCount()
                 break
                 
             default:
@@ -366,7 +370,7 @@ extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonD
 
 extension LibraryEntryViewController: TextEditingViewControllerDelegate {
     func textEditingViewController(_ controller: TextEditingViewController, didSave text: String) {
-        data.update(notes: text)
+        data.updater.update(notes: text)
         self.reloadData()
     }
 }
@@ -397,7 +401,7 @@ extension LibraryEntryViewController {
     //Save was tapped
     func didSave() {
         showIndicator()
-        data.save { error in
+        data.updater.save { error in
             self.hideIndicator()
             guard error == nil else {
                 
@@ -425,7 +429,7 @@ extension LibraryEntryViewController {
     }
     
     func didClear() {
-        data.reset()
+        data.updater.reset()
         self.reloadData()
     }
 }

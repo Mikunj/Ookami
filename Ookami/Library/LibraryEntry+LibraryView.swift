@@ -32,28 +32,6 @@ extension LibraryEntry.Status {
 //MARK:- Item Data
 extension LibraryEntry {
     
-    /// Get the maximum progress of the entry
-    ///
-    /// - Returns: The maximum progress or nil if there is none
-    func maxProgress() -> Int? {
-        //Max progress count
-        var maxCount: Int? = nil
-        
-        if let media = self.media, let type = media.type {
-            switch type {
-            case .anime:
-                maxCount = self.anime?.episodeCount
-                break
-            case .manga:
-                maxCount = self.manga?.chapterCount
-                break
-            }
-        }
-        
-        //If we get -1 then we don't have a max count for the media
-        return maxCount == nil || maxCount! < 0 ? nil : maxCount
-    }
-    
     /// Convert a `LibraryEntry` to `ItemData`
     ///
     /// - Returns: The `ItemData` that was converted

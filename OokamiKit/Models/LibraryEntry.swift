@@ -288,6 +288,7 @@ extension LibraryEntry {
         
         return self.id == other.id &&
             self.progress == other.progress &&
+            self.rawStatus == other.rawStatus &&
             self.reconsuming == other.reconsuming &&
             self.reconsumeCount == other.reconsumeCount &&
             self.notes == other.notes &&
@@ -295,3 +296,30 @@ extension LibraryEntry {
             self.rating == other.rating
     }
 }
+
+//MARK:- Updating
+extension LibraryEntry {
+    
+    /// Get the maximum progress of the entry.
+    ///
+    /// - Returns: The maximum progress or nil if there is none
+    public func maxProgress() -> Int? {
+        //Max progress count
+        var maxCount: Int? = nil
+        
+        if let media = self.media, let type = media.type {
+            switch type {
+            case .anime:
+                maxCount = self.anime?.episodeCount
+                break
+            case .manga:
+                maxCount = self.manga?.chapterCount
+                break
+            }
+        }
+        
+        //If we get -1 then we don't have a max count for the media
+        return maxCount == nil || maxCount! < 0 ? nil : maxCount
+    }
+}
+
