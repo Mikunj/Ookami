@@ -63,7 +63,6 @@
 		245E59A81DD1D5A1002375A4 /* StubRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */; };
 		2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246023391DCCA11700B3C99B /* UserSpec.swift */; };
 		2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D11DCC58800028F7B0 /* AppDelegate.swift */; };
-		2464F1D41DCC58800028F7B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D31DCC58800028F7B0 /* ViewController.swift */; };
 		2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2464F1D81DCC58800028F7B0 /* Assets.xcassets */; };
 		2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */; };
 		2464F1FF1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; };
@@ -80,6 +79,12 @@
 		247362951DCF0F1C004B4AC5 /* NetworkClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247362941DCF0F1C004B4AC5 /* NetworkClientSpec.swift */; };
 		247BF50F1E2617AE00FF643F /* LibraryEntryUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BF50E1E2617AE00FF643F /* LibraryEntryUpdater.swift */; };
 		247BF5111E26197A00FF643F /* LibraryEntryUpdaterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BF5101E26197A00FF643F /* LibraryEntryUpdaterSpec.swift */; };
+		247BF5151E26FEF200FF643F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BF5131E26FEF200FF643F /* LoginViewController.swift */; };
+		247BF5161E26FEF200FF643F /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 247BF5141E26FEF200FF643F /* LoginViewController.xib */; };
+		247BF5181E2705BC00FF643F /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BF5171E2705BC00FF643F /* ErrorAlert.swift */; };
+		247BF51A1E2706FD00FF643F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BF5191E2706FD00FF643F /* AppCoordinator.swift */; };
+		247BF51D1E27080F00FF643F /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247BF51B1E27080F00FF643F /* SignupViewController.swift */; };
+		247BF51E1E27080F00FF643F /* SignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 247BF51C1E27080F00FF643F /* SignupViewController.xib */; };
 		248734361DCCB1D1002E7366 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
 		248734371DCCB1D3002E7366 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
 		248734381DCCB1D3002E7366 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
@@ -248,7 +253,6 @@
 		246023391DCCA11700B3C99B /* UserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpec.swift; sourceTree = "<group>"; };
 		2464F1CE1DCC58800028F7B0 /* Ookami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ookami.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F1D11DCC58800028F7B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2464F1D31DCC58800028F7B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2464F1D81DCC58800028F7B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2464F1DB1DCC58800028F7B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2464F1DD1DCC58800028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -269,6 +273,12 @@
 		247362941DCF0F1C004B4AC5 /* NetworkClientSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClientSpec.swift; sourceTree = "<group>"; };
 		247BF50E1E2617AE00FF643F /* LibraryEntryUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryUpdater.swift; sourceTree = "<group>"; };
 		247BF5101E26197A00FF643F /* LibraryEntryUpdaterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryUpdaterSpec.swift; sourceTree = "<group>"; };
+		247BF5131E26FEF200FF643F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		247BF5141E26FEF200FF643F /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		247BF5171E2705BC00FF643F /* ErrorAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
+		247BF5191E2706FD00FF643F /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppCoordinator.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		247BF51B1E27080F00FF643F /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		247BF51C1E27080F00FF643F /* SignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupViewController.xib; sourceTree = "<group>"; };
 		248734391DCCB479002E7366 /* Anime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
 		2487343B1DCCC183002E7366 /* AnimeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSpec.swift; sourceTree = "<group>"; };
 		2487343D1DCCC274002E7366 /* anime-hunter-hunter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "anime-hunter-hunter.json"; sourceTree = "<group>"; };
@@ -426,6 +436,7 @@
 				242A03F31E190D2E000E8B06 /* Item View */,
 				24AF0E381E24BA8E00F11809 /* Media */,
 				242A042A1E1F47D7000E8B06 /* Views */,
+				247BF5171E2705BC00FF643F /* ErrorAlert.swift */,
 				242A041A1E1CC33C000E8B06 /* Theme.swift */,
 			);
 			path = Shared;
@@ -506,12 +517,12 @@
 				24BEC5D51E13E1420058F5AB /* KitsuLibraryRequestSpec.swift */,
 				24BEC5D11E139FCF0058F5AB /* KitsuPagedRequestSpec.swift */,
 				24BEC5CF1E139FC20058F5AB /* KitsuRequestSpec.swift */,
+				247BF5101E26197A00FF643F /* LibraryEntryUpdaterSpec.swift */,
 				24BEC5D91E14E9BB0058F5AB /* LibraryServiceSpec.swift */,
 				24A258AD1DD9455100CC7561 /* PaginatedLibrarySpec.swift */,
 				24C8C69D1E10F4810048EB9D /* ParserSpec.swift */,
 				24BEC5C81E138E7F0058F5AB /* UserHelperSpec.swift */,
 				24BEC5D71E14E4AB0058F5AB /* UserServiceSpec.swift */,
-				247BF5101E26197A00FF643F /* LibraryEntryUpdaterSpec.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -556,12 +567,13 @@
 			children = (
 				242A03E51E18FB39000E8B06 /* Library */,
 				242A041E1E1F117F000E8B06 /* Library Entry */,
+				247BF5121E26FED300FF643F /* Login */,
 				242A03EA1E18FC20000E8B06 /* Shared */,
 				2464F2161DCC5C400028F7B0 /* Supporting Files */,
 				24175E7E1E1FA844009FBDE6 /* Vendor */,
+				247BF5191E2706FD00FF643F /* AppCoordinator.swift */,
 				2464F1D11DCC58800028F7B0 /* AppDelegate.swift */,
 				2464F1D81DCC58800028F7B0 /* Assets.xcassets */,
-				2464F1D31DCC58800028F7B0 /* ViewController.swift */,
 				242A04061E1B904D000E8B06 /* main.swift */,
 			);
 			path = Ookami;
@@ -660,6 +672,17 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		247BF5121E26FED300FF643F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				247BF5131E26FEF200FF643F /* LoginViewController.swift */,
+				247BF5141E26FEF200FF643F /* LoginViewController.xib */,
+				247BF51B1E27080F00FF643F /* SignupViewController.swift */,
+				247BF51C1E27080F00FF643F /* SignupViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		248734451DCD490B002E7366 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -679,11 +702,11 @@
 			children = (
 				243C088E1E11FBD800C44888 /* CacheManager.swift */,
 				24BEC5C21E1341F40058F5AB /* Database.swift */,
+				247BF50E1E2617AE00FF643F /* LibraryEntryUpdater.swift */,
 				24DAC2611DE59E8600279EE6 /* OokamiTokenStore.swift */,
 				24C8C69B1E10EBA70048EB9D /* Parser.swift */,
 				248734471DCD491E002E7366 /* RealmProvider.swift */,
 				24BEC5C61E138C350058F5AB /* UserHelper.swift */,
-				247BF50E1E2617AE00FF643F /* LibraryEntryUpdater.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -984,6 +1007,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				247BF5161E26FEF200FF643F /* LoginViewController.xib in Resources */,
 				24175EA11E209266009FBDE6 /* TextEditingViewController.xib in Resources */,
 				248FE15F1E1F58AC009ACA66 /* EntryStringTableViewCell.xib in Resources */,
 				24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */,
@@ -993,6 +1017,7 @@
 				248FE1631E1F5A47009ACA66 /* EntryBoolTableViewCell.xib in Resources */,
 				24AF0E3C1E24BACE00F11809 /* MediaTableHeaderView.xib in Resources */,
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
+				247BF51E1E27080F00FF643F /* SignupViewController.xib in Resources */,
 				242A03F01E190730000E8B06 /* ItemDetailGridCell.xib in Resources */,
 				242A03DD1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */,
 				24175E8E1E1FA88A009FBDE6 /* FontAwesome.otf in Resources */,
@@ -1216,7 +1241,6 @@
 			files = (
 				242A040A1E1C7CA5000E8B06 /* LibraryEntry+LibraryView.swift in Sources */,
 				248FE15E1E1F58AC009ACA66 /* EntryStringTableViewCell.swift in Sources */,
-				2464F1D41DCC58800028F7B0 /* ViewController.swift in Sources */,
 				242A04071E1B904D000E8B06 /* main.swift in Sources */,
 				24175E921E1FA88A009FBDE6 /* FontAwesomeIcon.swift in Sources */,
 				242A042E1E1F487B000E8B06 /* EntryMediaHeaderView.swift in Sources */,
@@ -1232,9 +1256,13 @@
 				242A041B1E1CC33C000E8B06 /* Theme.swift in Sources */,
 				242A03F81E1A0E2C000E8B06 /* GradientView.swift in Sources */,
 				242A04051E1A7220000E8B06 /* FullLibraryDataSource.swift in Sources */,
+				247BF5181E2705BC00FF643F /* ErrorAlert.swift in Sources */,
+				247BF5151E26FEF200FF643F /* LoginViewController.swift in Sources */,
+				247BF51A1E2706FD00FF643F /* AppCoordinator.swift in Sources */,
 				242A04011E1A183D000E8B06 /* CollectionCellSpacerOption.swift in Sources */,
 				2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */,
 				242A040C1E1C858D000E8B06 /* UserLibraryViewDataSource.swift in Sources */,
+				247BF51D1E27080F00FF643F /* SignupViewController.swift in Sources */,
 				24175E961E206351009FBDE6 /* EntryButtonTableViewCell.swift in Sources */,
 				242A04321E1F4E6B000E8B06 /* LibraryEntry+EntryViewData.swift in Sources */,
 				242A04161E1CAAEA000E8B06 /* UserLibraryViewController.swift in Sources */,

@@ -103,6 +103,10 @@ class TextEditingViewController: UIViewController, UITextViewDelegate {
         cancelButton.setTitle(nil, for: .normal)
         doneButton.setTitle(nil, for: .normal)
         
+        let theme = Theme.Colors()
+        cancelButton.setTitleColor(theme.red, for: .normal)
+        doneButton.setTitleColor(theme.green, for: .normal)
+        
     }
     
     @IBAction func saveButtonPressed(_ sender: UIButton) {

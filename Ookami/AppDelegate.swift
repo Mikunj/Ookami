@@ -7,6 +7,7 @@
 
 import UIKit
 import IQKeyboardManager
+import OokamiKit
 
 //TODO: NEED A REALM MIGRATION CLASS!! DON'T FORGET!!
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,13 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Theme.NavigationTheme().apply()
         
         window = UIWindow(frame: UIScreen.main.bounds);
-
-        let nav = UINavigationController(rootViewController: ViewController())
         
-        window?.rootViewController = nav;
-        window?.makeKeyAndVisible();
+        if CurrentUser().isLoggedIn() {
+            AppCoordinator.showStartingVC(in: window!)
+        } else {
+            AppCoordinator.showLoginVC(in: window!)
+        }
         
         return true
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        CacheManager().clearCache()
     }
 
 }

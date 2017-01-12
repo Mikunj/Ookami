@@ -109,7 +109,10 @@ class ItemViewController: UIViewController {
     init(dataSource: ItemViewControllerDataSource? = nil) {
         super.init(nibName: nil, bundle: nil)
         self.dataSource = dataSource
-        self.diffCalculator = CollectionViewDiffCalculator(collectionView: collectionView)
+        
+        //Set the initial items if we have them
+        let items = dataSource?.items() ?? []
+        self.diffCalculator = CollectionViewDiffCalculator(collectionView: collectionView, initialRows: items)
     }
     
     /// Do not use this to initialize `ItemViewController`

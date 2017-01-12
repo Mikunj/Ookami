@@ -39,11 +39,11 @@ public class AuthenticationService: BaseService {
     /// Authenticate a user
     ///
     /// - Parameters:
-    ///   - username: The username
+    ///   - usernameOrEmail: The username or email of the user
     ///   - password: The password
     ///   - completion: Completion block which passes an error if it occured
-    public func authenticate(username: String, password: String, completion: @escaping (Error?) -> Void) {
-        currentUser.heimdallr.requestAccessToken(username: username, password: password) { result in
+    public func authenticate(usernameOrEmail: String, password: String, completion: @escaping (Error?) -> Void) {
+        currentUser.heimdallr.requestAccessToken(username: usernameOrEmail, password: password) { result in
             switch result {
             case .success:
                 
@@ -54,10 +54,41 @@ public class AuthenticationService: BaseService {
                 }
                 
                 break
-            case .failure(let e):
-                completion(e)
+            case .failure(_):
+                completion(BaseService.ServiceError.error(description: "Invalid Username or Password"))
                 break
             }
         }
+    }
+    
+    /// Sign up a user
+    ///
+    /// - Parameters:
+    ///   - name: The name of the user
+    ///   - email: The email of the user
+    ///   - password: The password of the user
+    ///   - completion: The completion block which passes back an error if it occurred
+    public func signup(name: String, email: String, password: String, completion: @escaping (Error?) -> Void) {
+        
+        //Construct the params
+        let attributes: [String: Any] = ["name": name, "email": email, "password": password]
+        let data: [String: Any] = ["attributes": attributes, "type": User.typeString]
+        let payload: [String: Any] = ["data": data]
+        
+        //Send the request
+        let request = NetworkRequest(relativeURL: Constants.Endpoints.users, method: .post, parameters: payload, needsAuth: false)
+        let operation = NetworkOperation(request: request, client: client) { json, error in
+            guard error == nil else {
+                completion(error)
+                return
+            }
+            
+            //Authenticate the user instantly
+            self.authenticate(usernameOrEmail: email, password: password) { error in
+                completion(error)
+            }
+        }
+        
+        queue.addOperation(operation)
     }
 }

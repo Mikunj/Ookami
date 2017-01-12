@@ -52,16 +52,13 @@ final class UserLibraryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.topItem?.titleView = dropDownMenu
+        self.navigationItem.titleView = dropDownMenu
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = Theme.ControllerTheme().backgroundColor
         
         //Add the library views
         animeController = LibraryViewController(dataSource: source.anime, type: .anime)
@@ -114,7 +111,6 @@ final class UserLibraryViewController: UIViewController {
 
 extension UserLibraryViewController: LibraryDataSourceParent {
     func didTapEntry(entry: LibraryEntry) {
-        let entryVC = LibraryEntryViewController(entry: entry)
-        self.navigationController?.pushViewController(entryVC, animated: true)
+        AppCoordinator.showLibraryEntryVC(in: self.navigationController, entry: entry)
     }
 }

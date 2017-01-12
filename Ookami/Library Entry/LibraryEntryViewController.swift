@@ -406,18 +406,7 @@ extension LibraryEntryViewController {
             guard error == nil else {
                 
                 //Show an alert to the user
-                let alert = UIAlertController(title: "Error", message: "\(error!.localizedDescription). Please try again.", preferredStyle: .alert)
-                let action = UIAlertAction(title: "Ok", style: .cancel, handler: { _ in
-                    alert.dismiss(animated: true)
-                })
-                
-                alert.addAction(action)
-                
-                //Present the alert if we haven't
-                if self.presentedViewController == nil {
-                    self.present(alert, animated: true)
-                }
-                
+                ErrorAlert.showAlert(in: self, title: "Error", message: "\(error!.localizedDescription). Please try again.")
                 print(error!.localizedDescription)
                 
                 return

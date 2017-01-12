@@ -124,7 +124,7 @@ class AuthenticationServiceSpec: QuickSpec {
                 it("should return no error if successful") {
                     let a = StubAuthenticationService(currentUser: currentUser)
                     waitUntil { done in
-                        a.authenticate(username: "test", password: "hi") { error in
+                        a.authenticate(usernameOrEmail: "test", password: "hi") { error in
                             expect(error).to(beNil())
                             done()
                         }
@@ -133,7 +133,7 @@ class AuthenticationServiceSpec: QuickSpec {
                 
                 it("should store the user id if successful") {
                     let a = StubAuthenticationService(currentUser: currentUser)
-                    a.authenticate(username: "test", password: "hi") { _ in
+                    a.authenticate(usernameOrEmail: "test", password: "hi") { _ in
                     }
                     expect(currentUser.userID).toEventually(equal(1))
                     expect(currentUser.isLoggedIn()).toEventually(beTrue())
@@ -144,7 +144,7 @@ class AuthenticationServiceSpec: QuickSpec {
                     let cUser = CurrentUser(heimdallr: StubRequestHeimdallr(stubError: nsError), userIDKey: "auth-spec-key")
                     let a = StubAuthenticationService(currentUser: cUser)
                     waitUntil { done in
-                        a.authenticate(username: "test", password: "hi") { error in
+                        a.authenticate(usernameOrEmail: "test", password: "hi") { error in
                             expect(error).to(matchError(nsError))
                             done()
                         }

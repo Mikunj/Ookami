@@ -44,7 +44,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     fileprivate var flowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = .zero
+        layout.itemSize = CGSize(width: 1, height: 1)
         layout.headerReferenceSize = .zero
         layout.footerReferenceSize = .zero
         layout.minimumLineSpacing = 0
@@ -100,7 +100,8 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         
         //Create the item view controllers and add them in order
         for status in LibraryEntry.Status.all {
-            let itemController = ItemViewController(dataSource: nil)
+            let dataSource = source[status]
+            let itemController = ItemViewController(dataSource: dataSource)
             itemController.title = status.toString(forMedia: type)
             itemControllers[status] = itemController
             
