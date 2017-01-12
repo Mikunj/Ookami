@@ -49,7 +49,8 @@ class MediaTableHeaderView: NibLoadableView {
         }
         
         if let cover = data?.coverImage {
-            coverImage.kf.setImage(with: URL(string: cover), options: options)
+            let placeholder = UIImage(named: "default-cover")
+            coverImage.kf.setImage(with: URL(string: cover), placeholder: placeholder, options: options)
         } else {
             coverImage.image = nil
         }

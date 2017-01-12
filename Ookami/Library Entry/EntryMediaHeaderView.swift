@@ -93,7 +93,8 @@ class EntryMediaHeaderView: NibLoadableView {
             }
             
             let processor = BlurImageProcessor(blurRadius: 6)
-            coverImage.kf.setImage(with: url, options: [.backgroundDecode, .processor(processor), .transition(.fade(0.2))])
+            let placeholder = UIImage(named: "default-cover")
+            coverImage.kf.setImage(with: url, placeholder: placeholder, options: [.backgroundDecode, .processor(processor), .transition(.fade(0.2))])
         } else {
             coverImage.image = nil
         }

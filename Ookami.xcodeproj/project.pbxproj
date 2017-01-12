@@ -138,6 +138,7 @@
 		24DBE6EC1DD2DFD5003B7676 /* FetchLibraryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */; };
 		24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */; };
 		24DBE6F01DD42212003B7676 /* FetchLibraryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */; };
+		24DC7DF81E2766F4007D14FB /* default-cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 24DC7DF71E2766F4007D14FB /* default-cover.png */; };
 		24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD486D1DD6B405009378AC /* RealmStorable.swift */; };
 		24DD48741DD6CDED009378AC /* FetchAllLibraryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD48731DD6CDED009378AC /* FetchAllLibraryOperation.swift */; };
 		24DD48761DD6D874009378AC /* FetchAllLibraryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */; };
@@ -323,6 +324,7 @@
 		24DBE6EB1DD2DFD5003B7676 /* FetchLibraryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLibraryOperation.swift; sourceTree = "<group>"; };
 		24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmGettableObjectSpec.swift; sourceTree = "<group>"; };
 		24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLibraryOperationSpec.swift; sourceTree = "<group>"; };
+		24DC7DF71E2766F4007D14FB /* default-cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-cover.png"; sourceTree = "<group>"; };
 		24DD486D1DD6B405009378AC /* RealmStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmStorable.swift; sourceTree = "<group>"; };
 		24DD48731DD6CDED009378AC /* FetchAllLibraryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAllLibraryOperation.swift; sourceTree = "<group>"; };
 		24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAllLibraryOperationSpec.swift; sourceTree = "<group>"; };
@@ -628,6 +630,7 @@
 		2464F2161DCC5C400028F7B0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				24DC7DF61E2766DB007D14FB /* Images */,
 				2464F1DD1DCC58800028F7B0 /* Info.plist */,
 				2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */,
 			);
@@ -794,6 +797,15 @@
 				245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		24DC7DF61E2766DB007D14FB /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				24DC7DF71E2766F4007D14FB /* default-cover.png */,
+			);
+			name = Images;
+			path = Images;
 			sourceTree = "<group>";
 		};
 		24EEEF5E1DCCA53500869696 /* Data */ = {
@@ -1024,6 +1036,7 @@
 				241418A01DCDE19500AF1AEA /* entry-anime-jigglyslime.json in Resources */,
 				2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */,
 				2487343F1DCCC383002E7366 /* anime-hunter-hunter.json in Resources */,
+				24DC7DF81E2766F4007D14FB /* default-cover.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
