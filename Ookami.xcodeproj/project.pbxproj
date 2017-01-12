@@ -139,6 +139,7 @@
 		24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */; };
 		24DBE6F01DD42212003B7676 /* FetchLibraryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */; };
 		24DC7DF81E2766F4007D14FB /* default-cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 24DC7DF71E2766F4007D14FB /* default-cover.png */; };
+		24DC7DFA1E2776AF007D14FB /* LibraryFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DC7DF91E2776AF007D14FB /* LibraryFetcher.swift */; };
 		24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD486D1DD6B405009378AC /* RealmStorable.swift */; };
 		24DD48741DD6CDED009378AC /* FetchAllLibraryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD48731DD6CDED009378AC /* FetchAllLibraryOperation.swift */; };
 		24DD48761DD6D874009378AC /* FetchAllLibraryOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */; };
@@ -325,6 +326,7 @@
 		24DBE6ED1DD2E295003B7676 /* RealmGettableObjectSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmGettableObjectSpec.swift; sourceTree = "<group>"; };
 		24DBE6EF1DD42212003B7676 /* FetchLibraryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLibraryOperationSpec.swift; sourceTree = "<group>"; };
 		24DC7DF71E2766F4007D14FB /* default-cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-cover.png"; sourceTree = "<group>"; };
+		24DC7DF91E2776AF007D14FB /* LibraryFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryFetcher.swift; sourceTree = "<group>"; };
 		24DD486D1DD6B405009378AC /* RealmStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmStorable.swift; sourceTree = "<group>"; };
 		24DD48731DD6CDED009378AC /* FetchAllLibraryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAllLibraryOperation.swift; sourceTree = "<group>"; };
 		24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAllLibraryOperationSpec.swift; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 				247BF5191E2706FD00FF643F /* AppCoordinator.swift */,
 				2464F1D11DCC58800028F7B0 /* AppDelegate.swift */,
 				2464F1D81DCC58800028F7B0 /* Assets.xcassets */,
+				24DC7DF91E2776AF007D14FB /* LibraryFetcher.swift */,
 				242A04061E1B904D000E8B06 /* main.swift */,
 			);
 			path = Ookami;
@@ -804,7 +807,6 @@
 			children = (
 				24DC7DF71E2766F4007D14FB /* default-cover.png */,
 			);
-			name = Images;
 			path = Images;
 			sourceTree = "<group>";
 		};
@@ -971,6 +973,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 5V7RKV36V8;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					2464F1E11DCC58800028F7B0 = {
 						CreatedOnToolsVersion = 8.1;
@@ -1272,6 +1279,7 @@
 				247BF5181E2705BC00FF643F /* ErrorAlert.swift in Sources */,
 				247BF5151E26FEF200FF643F /* LoginViewController.swift in Sources */,
 				247BF51A1E2706FD00FF643F /* AppCoordinator.swift in Sources */,
+				24DC7DFA1E2776AF007D14FB /* LibraryFetcher.swift in Sources */,
 				242A04011E1A183D000E8B06 /* CollectionCellSpacerOption.swift in Sources */,
 				2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */,
 				242A040C1E1C858D000E8B06 /* UserLibraryViewDataSource.swift in Sources */,

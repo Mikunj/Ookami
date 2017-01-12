@@ -11,19 +11,27 @@ import OokamiKit
 
 //TODO: NEED A REALM MIGRATION CLASS!! DON'T FORGET!!
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    var fetcher: LibraryFetcher?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         FontAwesomeIcon.register()
         IQKeyboardManager.shared().isEnabled = true
         Theme.NavigationTheme().apply()
         
+        //Start the fetching timer
+        fetcher = LibraryFetcher()
+        fetcher?.startFetching()
+        
         window = UIWindow(frame: UIScreen.main.bounds);
         
         if CurrentUser().isLoggedIn() {
             AppCoordinator.showStartingVC(in: window!)
+            
+            //Update the user info
+            AuthenticationService().updateInfo() { _ in }
         } else {
             AppCoordinator.showLoginVC(in: window!)
         }
@@ -33,7 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         CacheManager().clearCache()
+        fetcher?.stopFetching()
     }
-
+    
 }
 
