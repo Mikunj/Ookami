@@ -11,8 +11,10 @@ import Foundation
 protocol ItemUpdatable {
     /// Update class based on the given data
     ///
-    /// - Parameter data: The item data
-    func update(data: ItemData)
+    /// - Parameters:
+    ///   - data: The item data
+    ///   - loadImages: Whether to load the images
+    func update(data: ItemData, loadImages: Bool)
     
     //Called when item is out of view
     func stopUpdating()

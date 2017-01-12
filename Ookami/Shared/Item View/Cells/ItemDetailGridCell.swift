@@ -47,7 +47,7 @@ extension ItemDetailGridCell: ItemUpdatable {
     /// Update the cell with the given data
     ///
     /// - Parameter data: The item data to update with
-    func update(data: ItemData) {
+    func update(data: ItemData, loadImages: Bool) {
         nameLabel.text = data.name ?? "-"
         countLabel.text = data.countString ?? "-"
         
@@ -57,7 +57,7 @@ extension ItemDetailGridCell: ItemUpdatable {
         contentDetailLabel.text = data.details ?? ""
         
         //Set the image
-        if let poster = data.posterImage {
+        if loadImages, let poster = data.posterImage {
             posterImage.kf.indicatorType = .activity
             posterImage.kf.setImage(with: URL(string: poster), options: [.transition(.fade(0.2)), .backgroundDecode])
         } else {

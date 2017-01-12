@@ -67,7 +67,7 @@ class AppCoordinator {
             return
         }
         
-        let libraryView = userLibraryVC(for: user)
+        let libraryView = userLibraryVC(for: user) //42603 - Wopians id to test large libraries
         
         let nav = UINavigationController(rootViewController: libraryView)
         window.setRootViewController(nav)

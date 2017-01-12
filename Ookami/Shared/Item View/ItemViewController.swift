@@ -9,7 +9,7 @@
 import Foundation
 import OokamiKit
 import Cartography
-import Dwifft
+import Diff
 import XLPagerTabStrip
 import NVActivityIndicatorView
 
@@ -69,16 +69,25 @@ class ItemViewController: UIViewController {
             
             //Reload the data in the view
             collectionView.setContentOffset(CGPoint.zero, animated: true)
-            if let source = _source {
-                didReloadItems(dataSource: source)
-            } else {
-                diffCalculator?.rows = []
+            data = _source == nil ? [] : _source!.items()
+        }
+    }
+    
+    //A variable to indicate whether images should be loaded
+    var shouldLoadImages: Bool = true {
+        didSet {
+            if oldValue != shouldLoadImages {
+                collectionView.reloadData()
             }
         }
     }
     
-    //A difference calculator used for animating collection view
-    fileprivate var diffCalculator: CollectionViewDiffCalculator<ItemData>?
+    //The current array of data
+    fileprivate var data: [ItemData] {
+        didSet {
+            collectionView.animateItemChanges(oldData: oldValue, newData: data)
+        }
+    }
     
     //The collection view
     lazy var collectionView: UICollectionView = {
@@ -107,12 +116,12 @@ class ItemViewController: UIViewController {
     ///
     /// - Parameter dataSource: The datasource to use.
     init(dataSource: ItemViewControllerDataSource? = nil) {
-        super.init(nibName: nil, bundle: nil)
-        self.dataSource = dataSource
         
         //Set the initial items if we have them
-        let items = dataSource?.items() ?? []
-        self.diffCalculator = CollectionViewDiffCalculator(collectionView: collectionView, initialRows: items)
+        self.data = dataSource?.items() ?? []
+
+        super.init(nibName: nil, bundle: nil)
+        self.dataSource = dataSource
     }
     
     /// Do not use this to initialize `ItemViewController`
@@ -179,7 +188,6 @@ class ItemViewController: UIViewController {
     func handleRefresh(_ refreshControl: UIRefreshControl) {
         refreshControl.endRefreshing()
         dataSource?.refresh()
-        
     }
 }
 
@@ -193,7 +201,7 @@ extension ItemViewController: IndicatorInfoProvider {
 //MARK:- Item Delegate
 extension ItemViewController: ItemViewControllerDelegate {
     func didReloadItems(dataSource: ItemViewControllerDataSource) {
-        diffCalculator?.rows = dataSource.items()
+        data = dataSource.items()
     }
     
     func showActivityIndicator() {
@@ -213,7 +221,7 @@ extension ItemViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return diffCalculator?.rows.count ?? 0
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -233,9 +241,9 @@ extension ItemViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         //Update the cell if we can
-        if let updatable = cell as? ItemUpdatable,
-            let item = diffCalculator?.rows[indexPath.row] {
-            updatable.update(data: item)
+        if let updatable = cell as? ItemUpdatable {
+            let item = data[indexPath.row]
+            updatable.update(data: item, loadImages: shouldLoadImages)
         }
     }
     

@@ -104,6 +104,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
             let itemController = ItemViewController(dataSource: dataSource)
             itemController.title = status.toString(forMedia: type)
             itemControllers[status] = itemController
+            itemController.shouldLoadImages = false
             
             controllers.append(itemController)
         }
@@ -122,6 +123,27 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
             self.buttonBarView.selectedBar.backgroundColor = statuses[fromIndex].color()
         } else {
             self.buttonBarView.selectedBar.backgroundColor = statuses[toIndex].color()
+        }
+        
+        //Just double check bounds incase of index errors
+        guard fromIndex >= 0,
+                fromIndex < self.viewControllers.count,
+                toIndex >= 0,
+                toIndex < self.viewControllers.count else {
+            return
+        }
+        
+        //Set the image should load on the view controller
+        //This is to improve memory usage, so controllers which are hidden don't store the images.
+        let from = self.viewControllers[fromIndex] as? ItemViewController
+        let to = self.viewControllers[toIndex] as? ItemViewController
+        
+        to?.shouldLoadImages = true
+        if progressPercentage >= 0.98 {
+            from?.shouldLoadImages = false
+            
+            //Just incase from == to
+            to?.shouldLoadImages = true
         }
     }
 
