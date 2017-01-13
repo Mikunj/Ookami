@@ -667,6 +667,7 @@
 				246658681E2886BA00BB15EC /* AnimeViewController.swift */,
 			);
 			name = Anime;
+			path = Anime;
 			sourceTree = "<group>";
 		};
 		2466586C1E288C5900BB15EC /* Cells */ = {
@@ -678,6 +679,7 @@
 				246658721E28999E00BB15EC /* MediaTextTableViewCell.xib */,
 			);
 			name = Cells;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		2470044D1DCD7A5A000D987C /* Protocols */ = {

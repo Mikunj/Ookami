@@ -83,13 +83,20 @@ class MediaViewController: UIViewController {
         return t
     }()
     
+    var headerHeight: CGFloat {
+        let isIpad = UIDevice.current.userInterfaceIdiom == .pad
+        return isIpad ? 464 : 344
+    }
+    
     //The header view
     lazy var mediaHeader: MediaTableHeaderView = {
-        let isIpad = UIDevice.current.userInterfaceIdiom == .pad
         let width = self.view.bounds.width
-        let height: CGFloat = isIpad ? 464 : 344
+        let height = self.headerHeight
         return MediaTableHeaderView(frame: CGRect(origin: .zero, size: CGSize(width: width, height: height)))
     }()
+    
+    var mediaHeaderTop: NSLayoutConstraint?
+    var mediaHeaderHeight: NSLayoutConstraint?
     
     //The backing data for the table view
     var data: [MediaViewControllerSection] = []
@@ -101,7 +108,9 @@ class MediaViewController: UIViewController {
         
         topView.isHidden = false
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        updateNavigationBar()
+        
+        //Force the scrollview scroll
+        scrollViewDidScroll(tableView)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -118,6 +127,16 @@ class MediaViewController: UIViewController {
         self.view.addSubview(tableView)
         constrain(tableView) { view in
             view.edges == view.superview!.edges
+        }
+        
+        //Add the header to the table view
+        tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
+        tableView.addSubview(mediaHeader)
+        constrain(mediaHeader, self.view) { header, view in
+            mediaHeaderTop = (header.top == view.top)
+            header.left == view.left
+            header.right == view.right
+            mediaHeaderHeight = (header.height == headerHeight)
         }
         
         //Add the bar
@@ -144,8 +163,6 @@ class MediaViewController: UIViewController {
         //Force tableview layout
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
-        
-        tableView.tableHeaderView = mediaHeader
     }
     
     override func viewWillLayoutSubviews() {
@@ -158,7 +175,7 @@ class MediaViewController: UIViewController {
         let statusHeight = UIApplication.shared.statusBarFrame.height
         let barHeight = self.navigationController?.navigationBar.frame.size.height ?? 44
         topViewHeight?.constant = barHeight + statusHeight
-        UIView.animate(withDuration: 0.5, animations: topView.layoutIfNeeded)
+        topView.layoutIfNeeded()
     }
     
     func didDismiss() {
@@ -236,19 +253,43 @@ extension MediaViewController: UITableViewDelegate {
 extension MediaViewController {
     
     //Update the display of the navigation bar
-    func updateNavigationBar(offset: CGFloat = 0) {
+    func updateNavigationBar(offset: CGFloat) {
         
-        let minOffset = mediaHeader.coverImage.frame.height + 44
+        let minOffset: CGFloat = 100
         
         UIView.animate(withDuration: 0.3) {
-            let color = offset > minOffset ? Theme.NavigationTheme().barColor : UIColor.clear
-            self.navigationBar.topItem?.title = offset > minOffset ? self.barTitle() : ""
+            let shouldShow = offset > -minOffset
+            let color = shouldShow ? Theme.NavigationTheme().barColor : UIColor.clear
+            self.navigationBar.topItem?.title = shouldShow ? self.barTitle() : ""
             self.topView.backgroundColor = color
         }
+    }
+    
+    func updateHeaderConstraints(offset: CGFloat) {
+        //We use the diff because media header is attached to the top of the base view
+        //We need to know how much we moved up / down
+        let diff = headerHeight + offset
+        
+        //The minimal offset that squash will occur until
+        let minSquash: CGFloat = headerHeight - 100
+        
+        //Stick the top until we reach min squash
+        let topDiff = (diff > 0 && diff < minSquash) ? 0 : diff
+        mediaHeaderTop?.constant = min(0, -topDiff)
+        
+        //Squish the height until we reach the min squash
+        let excessHeight = topDiff == 0 ? minSquash : 0
+        mediaHeaderHeight?.constant = max(headerHeight - excessHeight, -offset)
+        
+        //This will cause a space to be left at the bottom if the table contents height is less than the header height.
+        let topViewHeight = topView.frame.height
+        let topInset = min(headerHeight, max(topViewHeight, -offset))
+        tableView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
         updateNavigationBar(offset: offset)
+        updateHeaderConstraints(offset: offset)
     }
 }

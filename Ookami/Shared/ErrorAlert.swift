@@ -12,14 +12,15 @@ class ErrorAlert {
     private init() {}
     
     static func showAlert(in controller: UIViewController, title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-        alert.addAction(action)
-        
-        //Present the alert if we haven't
-        if controller.presentedViewController == nil {
-            controller.present(alert, animated: true)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alert.addAction(action)
+            
+            //Present the alert if we haven't
+            if controller.presentedViewController == nil {
+                controller.present(alert, animated: true)
+            }
         }
-        
     }
 }
