@@ -73,9 +73,10 @@ class AppCoordinator {
         window.setRootViewController(nav)
     }
     
-    static func showAnimeVC(in nav: UINavigationController, anime: Anime) {
+    static func showAnimeVC(in parent: UINavigationController, anime: Anime) {
         let animeVC = AnimeViewController(anime: anime)
-        nav.pushViewController(animeVC, animated: true)
+        let nav = UINavigationController(rootViewController: animeVC)
+        parent.present(nav, animated: true)
     }
     
     

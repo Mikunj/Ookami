@@ -47,6 +47,10 @@ class AnimeViewController: MediaViewController {
         return sections.flatMap { $0 }
     }
     
+    override func barTitle() -> String {
+        return anime.canonicalTitle
+    }
+    
 }
 
 //MARK:- Sections
