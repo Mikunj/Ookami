@@ -69,6 +69,12 @@
 		2464F2081DCC5AE70028F7B0 /* OokamiKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464F1F81DCC5AE60028F7B0 /* OokamiKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2464F20B1DCC5AE70028F7B0 /* OokamiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; };
 		2464F20C1DCC5AE70028F7B0 /* OokamiKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2464F1F61DCC5AE60028F7B0 /* OokamiKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		246658691E2886BA00BB15EC /* AnimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246658681E2886BA00BB15EC /* AnimeViewController.swift */; };
+		2466586B1E28876800BB15EC /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466586A1E28876800BB15EC /* MediaViewController.swift */; };
+		2466586E1E288C8700BB15EC /* MediaTableSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466586D1E288C8700BB15EC /* MediaTableSectionView.swift */; };
+		246658701E288C9300BB15EC /* MediaTableSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2466586F1E288C9300BB15EC /* MediaTableSectionView.xib */; };
+		246658731E28999E00BB15EC /* MediaTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246658711E28999E00BB15EC /* MediaTextTableViewCell.swift */; };
+		246658741E28999E00BB15EC /* MediaTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 246658721E28999E00BB15EC /* MediaTextTableViewCell.xib */; };
 		2470044C1DCD73D9000D987C /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470044B1DCD73D9000D987C /* Genre.swift */; };
 		2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470044E1DCD7A9E000D987C /* GettableObject.swift */; };
 		247362801DCDFF3B004B4AC5 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2473627F1DCDFF3B004B4AC5 /* README */; };
@@ -265,6 +271,12 @@
 		2464F1F91DCC5AE60028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2464F1FE1DCC5AE70028F7B0 /* OokamiKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OokamiKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F2071DCC5AE70028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		246658681E2886BA00BB15EC /* AnimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeViewController.swift; sourceTree = "<group>"; };
+		2466586A1E28876800BB15EC /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
+		2466586D1E288C8700BB15EC /* MediaTableSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTableSectionView.swift; sourceTree = "<group>"; };
+		2466586F1E288C9300BB15EC /* MediaTableSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediaTableSectionView.xib; sourceTree = "<group>"; };
+		246658711E28999E00BB15EC /* MediaTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTextTableViewCell.swift; sourceTree = "<group>"; };
+		246658721E28999E00BB15EC /* MediaTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediaTextTableViewCell.xib; sourceTree = "<group>"; };
 		2470044B1DCD73D9000D987C /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		2470044E1DCD7A9E000D987C /* GettableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GettableObject.swift; sourceTree = "<group>"; };
 		2473627F1DCDFF3B004B4AC5 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -569,6 +581,7 @@
 		2464F1D01DCC58800028F7B0 /* Ookami */ = {
 			isa = PBXGroup;
 			children = (
+				246658671E2886AA00BB15EC /* Anime */,
 				242A03E51E18FB39000E8B06 /* Library */,
 				242A041E1E1F117F000E8B06 /* Library Entry */,
 				247BF5121E26FED300FF643F /* Login */,
@@ -646,6 +659,25 @@
 				2464F1F91DCC5AE60028F7B0 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		246658671E2886AA00BB15EC /* Anime */ = {
+			isa = PBXGroup;
+			children = (
+				246658681E2886BA00BB15EC /* AnimeViewController.swift */,
+			);
+			name = Anime;
+			sourceTree = "<group>";
+		};
+		2466586C1E288C5900BB15EC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2466586D1E288C8700BB15EC /* MediaTableSectionView.swift */,
+				2466586F1E288C9300BB15EC /* MediaTableSectionView.xib */,
+				246658711E28999E00BB15EC /* MediaTextTableViewCell.swift */,
+				246658721E28999E00BB15EC /* MediaTextTableViewCell.xib */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		2470044D1DCD7A5A000D987C /* Protocols */ = {
@@ -754,8 +786,10 @@
 		24AF0E381E24BA8E00F11809 /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				2466586C1E288C5900BB15EC /* Cells */,
 				24AF0E391E24BAC100F11809 /* MediaTableHeaderView.swift */,
 				24AF0E3B1E24BACE00F11809 /* MediaTableHeaderView.xib */,
+				2466586A1E28876800BB15EC /* MediaViewController.swift */,
 			);
 			path = Media;
 			sourceTree = "<group>";
@@ -1033,8 +1067,10 @@
 				248734381DCCB1D3002E7366 /* user-jigglyslime.json in Resources */,
 				242A04301E1F4887000E8B06 /* EntryMediaHeaderView.xib in Resources */,
 				24175E971E206351009FBDE6 /* EntryButtonTableViewCell.xib in Resources */,
+				246658741E28999E00BB15EC /* MediaTextTableViewCell.xib in Resources */,
 				248FE1631E1F5A47009ACA66 /* EntryBoolTableViewCell.xib in Resources */,
 				24AF0E3C1E24BACE00F11809 /* MediaTableHeaderView.xib in Resources */,
+				246658701E288C9300BB15EC /* MediaTableSectionView.xib in Resources */,
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
 				247BF51E1E27080F00FF643F /* SignupViewController.xib in Resources */,
 				242A03F01E190730000E8B06 /* ItemDetailGridCell.xib in Resources */,
@@ -1260,9 +1296,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				242A040A1E1C7CA5000E8B06 /* LibraryEntry+LibraryView.swift in Sources */,
+				2466586B1E28876800BB15EC /* MediaViewController.swift in Sources */,
+				246658691E2886BA00BB15EC /* AnimeViewController.swift in Sources */,
 				248FE15E1E1F58AC009ACA66 /* EntryStringTableViewCell.swift in Sources */,
 				242A04071E1B904D000E8B06 /* main.swift in Sources */,
 				24175E921E1FA88A009FBDE6 /* FontAwesomeIcon.swift in Sources */,
+				246658731E28999E00BB15EC /* MediaTextTableViewCell.swift in Sources */,
 				242A042E1E1F487B000E8B06 /* EntryMediaHeaderView.swift in Sources */,
 				24175EA01E209266009FBDE6 /* TextEditingViewController.swift in Sources */,
 				242A04031E1A64C2000E8B06 /* LibraryViewController.swift in Sources */,
@@ -1287,6 +1326,7 @@
 				24175E961E206351009FBDE6 /* EntryButtonTableViewCell.swift in Sources */,
 				242A04321E1F4E6B000E8B06 /* LibraryEntry+EntryViewData.swift in Sources */,
 				242A04161E1CAAEA000E8B06 /* UserLibraryViewController.swift in Sources */,
+				2466586E1E288C8700BB15EC /* MediaTableSectionView.swift in Sources */,
 				248FE1621E1F5A47009ACA66 /* EntryBoolTableViewCell.swift in Sources */,
 				242A042C1E1F480B000E8B06 /* NibLoadableView.swift in Sources */,
 				242A03F21E1909AC000E8B06 /* ItemData.swift in Sources */,

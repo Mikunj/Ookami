@@ -9,6 +9,8 @@
 import UIKit
 import Kingfisher
 
+//TODO: Improve this view ... it just looks ugly
+
 protocol MediaTableHeaderViewDelegate: class {
     func didTapEntryButton(state: MediaTableHeaderView.EntryButtonState)
     func didTapTrailerButton()
@@ -20,7 +22,7 @@ struct MediaTableHeaderViewData {
     var airing: String?
     var posterImage: String?
     var coverImage: String?
-    var showTrailerIcon: Bool
+    var showTrailerIcon: Bool = false
     var entryState: MediaTableHeaderView.EntryButtonState = .add
 }
 
@@ -49,9 +51,12 @@ class MediaTableHeaderView: NibLoadableView {
     
     @IBOutlet weak var entryButton: UIButton!
     
-    @IBOutlet weak var trailerButton: UIButton!
+    @IBOutlet weak var trailerView: UIView!
+    
+    @IBOutlet weak var trailerImage: UIImageView!
     
     weak var delegate: MediaTableHeaderViewDelegate?
+    var tapGesture: UITapGestureRecognizer?
     
     private func updateData() {
         infoView.isHidden = data == nil
@@ -68,8 +73,13 @@ class MediaTableHeaderView: NibLoadableView {
         }
         
         let showIcon = data?.showTrailerIcon ?? false
-        trailerButton.isHidden = !showIcon
-        trailerButton.setIconImage(withIcon: FontAwesomeIcon.playIcon, size: CGSize(width: 22, height: 22), color: UIColor.white, forState: .normal)
+        trailerView.isHidden = !showIcon
+        trailerImage.image = FontAwesomeIcon.playIcon.image(ofSize: CGSize(width: 18, height: 18), color: UIColor.white)
+        
+        if tapGesture == nil {
+            tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTrailerButton(_:)))
+            trailerView.addGestureRecognizer(tapGesture!)
+        }
         
         let options: KingfisherOptionsInfo = [.transition(.fade(0.2)), .backgroundDecode]
         
@@ -99,7 +109,7 @@ class MediaTableHeaderView: NibLoadableView {
             break
         case .edit:
             entryButton.setTitle("Entry", for: .normal)
-            entryButton.setIconImage(withIcon: FontAwesomeIcon.pencilIcon, size: CGSize(width: 10, height: 10), color: UIColor.white, forState: .normal)
+            entryButton.setIconImage(withIcon: FontAwesomeIcon.pencilIcon, size: CGSize(width: 14, height: 14), color: UIColor.white, forState: .normal)
             break
         }
     }

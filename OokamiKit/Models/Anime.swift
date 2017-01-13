@@ -56,6 +56,28 @@ public class Anime: Object, Cacheable {
 }
 
 extension Anime {
+    /// Check whether an anime is currently airing
+    ///
+    /// - Returns: True if anime is airing, false if not
+    public func isAiring() -> Bool {
+        
+        //If it's a movie then sometimes they don't have endDates which causes it to pass true for airing. To avoid that we just simply pass false if this is a movie
+        guard let subtype = self.subtype,
+            subtype != .movie else {
+                return false
+        }
+
+        let current = Date()
+        let startDate = self.startDate ?? current
+        let endDate = self.endDate
+        
+        //Anime is airing if it started before the current date and it doesn't have an end date or the end date is sometime in the future
+        return (startDate < current) && (endDate == nil || endDate! > current)
+    }
+}
+
+//MARK:- Cache
+extension Anime {
     func canClearFromCache() -> Bool {
         //Don't delete if anime is part of current user library
         let hasAnime = UserHelper.currentUserHas(media: .anime, id: id)

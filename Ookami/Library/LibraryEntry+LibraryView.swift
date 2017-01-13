@@ -57,22 +57,9 @@ extension LibraryEntry {
                 data.name = anime.canonicalTitle
                 data.posterImage = anime.posterImage
                 
-                //check if anime has started before current date
-                let current = Date()
-                let startDate = anime.startDate ?? current
-                if startDate < current {
-                    //Note: If it's a movie though then we don't show Airing
-                    //Kitsu may also not set endDates for Music, will have to check
-                    guard let subtype = anime.subtype,
-                            subtype != .movie else {
-                        break
-                    }
-                    
-                    //Check if we have an end date, if we don't then anime is airing.
-                    //If we do then check if the current date is before it
-                    if anime.endDate == nil || anime.endDate! > current {
-                        details.append("Airing")
-                    }
+                //check if anime is airing
+                if anime.isAiring() {
+                    details.append("Airing")
                 }
                 
                 break

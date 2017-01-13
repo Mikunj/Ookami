@@ -10,6 +10,7 @@ import OokamiKit
 
 extension LibraryEntry {
     
+    ///TODO: Maybe let the media build the data themselves? E.g anime.toEntryMediaHeaderData()
     /// Convert `LibraryEntry` to `EntryMediaHeaderViewData`
     ///
     /// - Returns: The data representation of entry

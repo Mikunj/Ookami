@@ -73,6 +73,11 @@ class AppCoordinator {
         window.setRootViewController(nav)
     }
     
+    static func showAnimeVC(in nav: UINavigationController, anime: Anime) {
+        let animeVC = AnimeViewController(anime: anime)
+        nav.pushViewController(animeVC, animated: true)
+    }
+    
     
     //Get the library view controller for the given user id
     private static func userLibraryVC(for user: Int) -> UserLibraryViewController {

@@ -341,7 +341,14 @@ extension LibraryEntryViewController: UITableViewDelegate {
 //MARK:- EntryMediaHeaderViewDelegate & Entry Button Delegate
 extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonDelegate {
     func didTapMediaButton() {
+        let entry = data.updater.entry
+        if let anime = entry.anime {
+            AppCoordinator.showAnimeVC(in: self.navigationController!, anime: anime)
+        }
         
+        if let manga = entry.manga {
+            //Show MangaVC here
+        }
     }
     
     //+1 button tapped
