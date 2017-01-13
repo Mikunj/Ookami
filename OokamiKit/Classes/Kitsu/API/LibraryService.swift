@@ -120,6 +120,28 @@ public class LibraryService: BaseService {
         queue.addOperation(operation)
     }
     
+    /// Delete an entry from the server
+    ///
+    /// - Parameters:
+    ///   - entry: The entry to delete
+    ///   - completion: The completion block which passes back an error if something went wrong
+    public func delete(entry: LibraryEntry, completion: @escaping (Error?) -> Void) {
+        let url = "\(Constants.Endpoints.libraryEntries)/\(entry.id)"
+        let request = NetworkRequest(relativeURL: url, method: .delete, needsAuth: true)
+        let operation = NetworkOperation(request: request, client: client) { json, error in
+            
+            if error == nil {
+                //Remove the entry from the db, make sure we get it for the current realm
+                if let e = LibraryEntry.get(withId: entry.id) {
+                    self.database.delete(e)
+                }
+            }
+            
+            completion(error)
+        }
+        queue.addOperation(operation)
+    }
+    
     /// Get a paginated library for a given user and a given status.
     ///
     /// This will add everything except `LibraryEntry` to the database!

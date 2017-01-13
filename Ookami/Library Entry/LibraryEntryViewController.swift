@@ -189,6 +189,9 @@ extension LibraryEntryViewController: UITableViewDataSource {
         case .button:
             cell = tableView.dequeueReusableCell(for: indexPath) as EntryButtonTableViewCell
             break
+        case .delete:
+            cell = UITableViewCell()
+            break
         }
         
         //We update here because tableview won't automatically adjust height in willDisplayCell, unless we change orientation
@@ -233,6 +236,12 @@ extension LibraryEntryViewController: UITableViewDataSource {
             buttonCell.indexPath = indexPath
         }
         
+        if data.heading == .delete {
+            cell.backgroundColor = Theme.Colors().red
+            cell.textLabel?.text = data.value as? String ?? "Delete"
+            cell.textLabel?.textColor = UIColor.white
+        }
+        
         if !editable {
             cell.accessoryView = nil
         }
@@ -255,6 +264,34 @@ extension LibraryEntryViewController: UITableViewDelegate {
         }
         
         switch heading {
+        case .delete:
+            let sheet = UIAlertController(title: nil, message: "Are you sure?", preferredStyle: .actionSheet)
+            
+            
+            sheet.addAction(UIAlertAction(title: "Yes, Delete it!", style: .destructive) { action in
+                
+                //Send the delete action and show error if it occurred
+                self.showIndicator()
+                LibraryService().delete(entry: entry) { error in
+                    self.hideIndicator()
+                    guard error == nil else {
+                        ErrorAlert.showAlert(in: self, title: "Failed to delete entry", message: error!.localizedDescription)
+                        return
+                    }
+                    
+                    let _ = self.navigationController?.popViewController(animated: true)
+                }
+            })
+            
+            sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            //Present the sheet if we haven't
+            if self.presentedViewController == nil {
+                self.present(sheet, animated: true)
+            }
+            
+            break
+            
         case .progress:
             
             let max = entry.maxProgress() ?? 999

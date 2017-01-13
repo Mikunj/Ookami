@@ -56,12 +56,17 @@ class LibraryEntryViewData {
         //Private
         let isPrivate = TableData(type: .bool, value: entry.isPrivate, heading: .isPrivate)
         
+        let delete = TableData(type: .delete, value: "Delete library entry", heading: .delete)
+        
         var tableData = [progress, status, rating, notes, reconsumeCount, reconsuming]
         
         //Only add private if entry belongs to current user
         if entry.userID == CurrentUser().userID {
             tableData.append(isPrivate)
         }
+        
+        //Add the delete at the very end
+        tableData.append(delete)
         
         return tableData
     }
@@ -80,9 +85,11 @@ extension LibraryEntryViewData {
         case string
         case bool
         case button
+        case delete
     }
     
     enum Heading: String {
+        case delete = "Delete"
         case progress = "Progress"
         case status = "Status"
         case rating = "Rating"
