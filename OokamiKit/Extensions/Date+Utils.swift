@@ -49,7 +49,7 @@ public extension Date {
                 dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"
                 break
             default:
-                return nil
+                break
         }
 
         return dateFormatter.date(from: dateString)

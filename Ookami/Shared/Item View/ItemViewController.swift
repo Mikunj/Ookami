@@ -77,7 +77,7 @@ class ItemViewController: UIViewController {
     var shouldLoadImages: Bool = true {
         didSet {
             if oldValue != shouldLoadImages {
-                collectionView.reloadData()
+                collectionView.animateItemChanges(oldData: data, newData: data)
             }
         }
     }
@@ -119,7 +119,7 @@ class ItemViewController: UIViewController {
         
         //Set the initial items if we have them
         self.data = dataSource?.items() ?? []
-
+        
         super.init(nibName: nil, bundle: nil)
         self.dataSource = dataSource
     }

@@ -27,6 +27,7 @@ struct MediaViewControllerSection {
 }
 
 //A controller which allows the display of media
+//TODO: Maybe experiment with removing the section headers so that the parallax effect becomes simpler to manage (don't have to adjust insets on scroll, which causes a big gap to appear if content is too small)
 class MediaViewController: NavigationHidingViewController {
     
     //The tableview to display data in
@@ -80,11 +81,6 @@ class MediaViewController: NavigationHidingViewController {
         
         //Force the scrollview scroll
         scrollViewDidScroll(tableView)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
@@ -209,6 +205,9 @@ extension MediaViewController {
         mediaHeaderHeight?.constant = max(headerHeight - excessHeight, -offset)
         
         //This will cause a space to be left at the bottom if the table contents height is less than the header height.
+        //We set the insets so that it looks like mediaHeader is actually the tableHeaderView.
+        //Without setting them the section headers will float when scrolling.
+        //If in the future, section headers are removed then this should also be removed.
         let barViewHeight = barView.frame.height
         let topInset = min(headerHeight, max(barViewHeight, -offset))
         tableView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
