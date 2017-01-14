@@ -75,6 +75,7 @@
 		246658701E288C9300BB15EC /* MediaTableSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2466586F1E288C9300BB15EC /* MediaTableSectionView.xib */; };
 		246658731E28999E00BB15EC /* MediaTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246658711E28999E00BB15EC /* MediaTextTableViewCell.swift */; };
 		246658741E28999E00BB15EC /* MediaTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 246658721E28999E00BB15EC /* MediaTextTableViewCell.xib */; };
+		246658771E29BCE000BB15EC /* NavigationHidingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246658761E29BCE000BB15EC /* NavigationHidingViewController.swift */; };
 		2470044C1DCD73D9000D987C /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470044B1DCD73D9000D987C /* Genre.swift */; };
 		2470044F1DCD7A9E000D987C /* GettableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2470044E1DCD7A9E000D987C /* GettableObject.swift */; };
 		247362801DCDFF3B004B4AC5 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 2473627F1DCDFF3B004B4AC5 /* README */; };
@@ -277,6 +278,7 @@
 		2466586F1E288C9300BB15EC /* MediaTableSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediaTableSectionView.xib; sourceTree = "<group>"; };
 		246658711E28999E00BB15EC /* MediaTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTextTableViewCell.swift; sourceTree = "<group>"; };
 		246658721E28999E00BB15EC /* MediaTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediaTextTableViewCell.xib; sourceTree = "<group>"; };
+		246658761E29BCE000BB15EC /* NavigationHidingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationHidingViewController.swift; sourceTree = "<group>"; };
 		2470044B1DCD73D9000D987C /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		2470044E1DCD7A9E000D987C /* GettableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GettableObject.swift; sourceTree = "<group>"; };
 		2473627F1DCDFF3B004B4AC5 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				242A03FD1E1A17FB000E8B06 /* CollectionCellSpacer */,
+				246658751E29BCBE00BB15EC /* Controllers */,
 				242A03F31E190D2E000E8B06 /* Item View */,
 				24AF0E381E24BA8E00F11809 /* Media */,
 				242A042A1E1F47D7000E8B06 /* Views */,
@@ -666,7 +669,6 @@
 			children = (
 				246658681E2886BA00BB15EC /* AnimeViewController.swift */,
 			);
-			name = Anime;
 			path = Anime;
 			sourceTree = "<group>";
 		};
@@ -678,8 +680,16 @@
 				246658711E28999E00BB15EC /* MediaTextTableViewCell.swift */,
 				246658721E28999E00BB15EC /* MediaTextTableViewCell.xib */,
 			);
-			name = Cells;
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		246658751E29BCBE00BB15EC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				246658761E29BCE000BB15EC /* NavigationHidingViewController.swift */,
+			);
+			name = Controllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		2470044D1DCD7A5A000D987C /* Protocols */ = {
@@ -1316,6 +1326,7 @@
 				24AF0E3A1E24BAC100F11809 /* MediaTableHeaderView.swift in Sources */,
 				242A041B1E1CC33C000E8B06 /* Theme.swift in Sources */,
 				242A03F81E1A0E2C000E8B06 /* GradientView.swift in Sources */,
+				246658771E29BCE000BB15EC /* NavigationHidingViewController.swift in Sources */,
 				242A04051E1A7220000E8B06 /* FullLibraryDataSource.swift in Sources */,
 				247BF5181E2705BC00FF643F /* ErrorAlert.swift in Sources */,
 				247BF5151E26FEF200FF643F /* LoginViewController.swift in Sources */,
