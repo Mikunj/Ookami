@@ -15,36 +15,20 @@ class LibraryFetcher {
     
     var timer: Timer?
     var interval: TimeInterval = 1200
-    var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
     
-    @objc func updateLibrary(completion: (() -> Void)? = nil) {
-        
-        var fetched = Set<Media.MediaType>()
-        let checkForCompletion = {
-            if fetched.count == 2 {
-                completion?()
-            }
-        }
+    @objc func updateLibrary() {
         
         //Fetch the libraries for the current user
         if CurrentUser().isLoggedIn(), let user = CurrentUser().userID {
-            LibraryService().getAll(userID: user, type: .anime) { _ in
-                fetched.insert(.anime)
-                checkForCompletion()
-            }
-            LibraryService().getAll(userID: user, type: .manga) { _ in
-                fetched.insert(.manga)
-                checkForCompletion()
-            }
-        } else {
-            completion?()
+            LibraryService().getAll(userID: user, type: .anime) { _ in }
+            LibraryService().getAll(userID: user, type: .manga) { _ in }
         }
     }
     
     func startFetching() {
         if timer != nil { timer?.invalidate() }
         
-        timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(updateLibrary(completion:)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(updateLibrary), userInfo: nil, repeats: true)
     }
     
     func stopFetching() {

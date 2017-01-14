@@ -39,6 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func applicationWillResignActive(_ application: UIApplication) {
+        fetcher?.stopFetching()
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        fetcher?.startFetching()
+    }
+    
     func applicationWillTerminate(_ application: UIApplication) {
         CacheManager().clearCache()
         fetcher?.stopFetching()
