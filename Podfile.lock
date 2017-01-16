@@ -41,6 +41,7 @@ PODS:
     - Reusable/View (= 3.0.1)
   - Reusable/Storyboard (3.0.1)
   - Reusable/View (3.0.1)
+  - SKPhotoBrowser (4.0.0)
   - SwiftyJSON (3.0.0)
   - XLPagerTabStrip (6.0.0)
 
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
   - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
   - Reusable (~> 3.0)
+  - SKPhotoBrowser (~> 4.0.0)
   - SwiftyJSON (= 3.0.0)
   - XLPagerTabStrip (~> 6.0)
 
@@ -119,9 +121,10 @@ SPEC CHECKSUMS:
   RealmSwift: 79a9bc83e7ef4fbde17e0f303c5fadb99264a6be
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   Reusable: 5362d10271ca8316b104698a21e90498f47e8339
+  SKPhotoBrowser: bc33eca22f4abd6b99d8d260509ca30c01752a87
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: 691aca1afe2f0f06af0c49965a574167c452f9e6
+PODFILE CHECKSUM: c94e53407efdec6d36ad8d219565541d80ae5208
 
 COCOAPODS: 1.1.1

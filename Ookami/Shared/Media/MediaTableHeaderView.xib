@@ -16,6 +16,7 @@
                 <outlet property="entryButton" destination="qmQ-FR-agb" id="ua8-4r-5Fz"/>
                 <outlet property="infoView" destination="cjL-EI-wVh" id="dgP-5Z-mWO"/>
                 <outlet property="posterImage" destination="vIp-MK-4Jv" id="jFt-ym-NkU"/>
+                <outlet property="seperatorView" destination="PPa-wr-mZ7" id="Hmy-z4-eO1"/>
                 <outlet property="titleLabel" destination="mkd-2C-iaH" id="QH5-WB-t0c"/>
                 <outlet property="trailerImage" destination="Sa2-gN-4Ll" id="50I-3B-fYj"/>
                 <outlet property="trailerView" destination="CWT-MS-Wnf" id="mMe-Lh-3LD"/>

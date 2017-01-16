@@ -14,6 +14,7 @@ import Kingfisher
 protocol MediaTableHeaderViewDelegate: class {
     func didTapEntryButton(state: MediaTableHeaderView.EntryButtonState)
     func didTapTrailerButton()
+    func didTapCoverImage(_ imageView: UIImageView)
 }
 
 struct MediaTableHeaderViewData {
@@ -55,8 +56,11 @@ class MediaTableHeaderView: NibLoadableView {
     
     @IBOutlet weak var trailerImage: UIImageView!
     
+    @IBOutlet weak var seperatorView: UIView!
+    
     weak var delegate: MediaTableHeaderViewDelegate?
-    var tapGesture: UITapGestureRecognizer?
+    var trailerTapGesture: UITapGestureRecognizer?
+    var coverTapGesture: UITapGestureRecognizer?
     
     private func updateData() {
         infoView.isHidden = data == nil
@@ -76,9 +80,14 @@ class MediaTableHeaderView: NibLoadableView {
         trailerView.isHidden = !showIcon
         trailerImage.image = FontAwesomeIcon.playIcon.image(ofSize: CGSize(width: 18, height: 18), color: UIColor.white)
         
-        if tapGesture == nil {
-            tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTrailerButton(_:)))
-            trailerView.addGestureRecognizer(tapGesture!)
+        if trailerTapGesture == nil {
+            trailerTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTrailerButton(_:)))
+            trailerView.addGestureRecognizer(trailerTapGesture!)
+        }
+        
+        if coverTapGesture == nil {
+            coverTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapCoverImage(_:)))
+            seperatorView.addGestureRecognizer(coverTapGesture!)
         }
         
         let options: KingfisherOptionsInfo = [.transition(.fade(0.2)), .backgroundDecode]
@@ -117,6 +126,10 @@ class MediaTableHeaderView: NibLoadableView {
     @IBAction func didTapEntryButton(_ sender: Any) {
         let state = data?.entryState ?? .add
         delegate?.didTapEntryButton(state: state)
+    }
+    
+    @IBAction func didTapCoverImage(_ sender: Any) {
+        delegate?.didTapCoverImage(coverImage)
     }
     
 

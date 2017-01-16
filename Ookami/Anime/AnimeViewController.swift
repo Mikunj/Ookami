@@ -9,6 +9,7 @@
 import UIKit
 import OokamiKit
 import RealmSwift
+import SKPhotoBrowser
 
 //TODO: Add more sections (characters, franchise)
 
@@ -173,5 +174,13 @@ extension AnimeViewController: MediaTableHeaderViewDelegate {
     
     func didTapTrailerButton() {
         
+    }
+    
+    func didTapCoverImage(_ imageView: UIImageView) {
+        if !anime.coverImage.isEmpty, let image = imageView.image {
+            SKPhotoBrowserOptions.displayStatusbar = false
+            let vc = SKPhotoBrowser(originImage: image, photos: [SKPhoto.photoWithImage(image)], animatedFromView: imageView)
+            present(vc, animated: true)
+        }
     }
 }
