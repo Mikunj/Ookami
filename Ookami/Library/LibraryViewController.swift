@@ -104,7 +104,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
             let itemController = ItemViewController(dataSource: dataSource)
             itemController.title = status.toString(forMedia: type)
             itemControllers[status] = itemController
-            itemController.shouldLoadImages = false
+            itemController.shouldLoadImages = status == .current
             
             controllers.append(itemController)
         }
@@ -139,11 +139,8 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         let to = self.viewControllers[toIndex] as? ItemViewController
         
         to?.shouldLoadImages = true
-        if progressPercentage >= 0.98 {
+        if progressPercentage >= 0.98, fromIndex != toIndex {
             from?.shouldLoadImages = false
-            
-            //Just incase from == to
-            to?.shouldLoadImages = true
         }
     }
 

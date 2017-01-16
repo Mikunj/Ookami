@@ -74,10 +74,10 @@ class ItemViewController: UIViewController {
     }
     
     //A variable to indicate whether images should be loaded
-    var shouldLoadImages: Bool = true {
+    var shouldLoadImages: Bool = false {
         didSet {
             if oldValue != shouldLoadImages {
-                collectionView.animateItemChanges(oldData: data, newData: data)
+                collectionView.reloadData()
             }
         }
     }

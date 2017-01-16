@@ -59,7 +59,7 @@ extension ItemDetailGridCell: ItemUpdatable {
         //Set the image
         if loadImages, let poster = data.posterImage {
             posterImage.kf.indicatorType = .activity
-            posterImage.kf.setImage(with: URL(string: poster), options: [.transition(.fade(0.2)), .backgroundDecode])
+            posterImage.kf.setImage(with: URL(string: poster), options: [.transition(.fade(0.4)), .backgroundDecode])
         } else {
             posterImage.image = nil
         }
