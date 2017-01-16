@@ -93,8 +93,9 @@ class MediaTableHeaderView: NibLoadableView {
         let options: KingfisherOptionsInfo = [.transition(.fade(0.2)), .backgroundDecode]
         
         if let poster = data?.posterImage {
+            let placeholder = UIImage(named: "default-poster.jpg")
             posterImage.kf.indicatorType = .activity
-            posterImage.kf.setImage(with: URL(string: poster), options: options)
+            posterImage.kf.setImage(with: URL(string: poster), placeholder: placeholder, options: options)
         } else {
             posterImage.image = nil
         }

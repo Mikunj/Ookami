@@ -77,8 +77,9 @@ class EntryMediaHeaderView: NibLoadableView {
         
         //Set the poster image
         if let poster = data.posterImage {
+            let placeholder = UIImage(named: "default-poster.jpg")
             posterImage.kf.indicatorType = .activity
-            posterImage.kf.setImage(with: URL(string: poster), options: [.transition(.fade(0.2)), .backgroundDecode])
+            posterImage.kf.setImage(with: URL(string: poster), placeholder: placeholder, options: [.transition(.fade(0.2)), .backgroundDecode])
         }else {
             posterImage.image = nil
         }
