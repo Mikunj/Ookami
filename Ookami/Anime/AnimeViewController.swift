@@ -173,7 +173,10 @@ extension AnimeViewController: MediaTableHeaderViewDelegate {
     }
     
     func didTapTrailerButton() {
-        
+        if !anime.youtubeVideoId.isEmpty {
+            let id = anime.youtubeVideoId
+            AppCoordinator.showYoutubeVideo(videoID: id, in: self)
+        }
     }
     
     func didTapCoverImage(_ imageView: UIImageView) {

@@ -8,6 +8,8 @@
 
 import UIKit
 import OokamiKit
+import XCDYouTubeKit
+import AVFoundation
 
 extension UIWindow {
     
@@ -93,5 +95,18 @@ class AppCoordinator {
         let data = try! UserLibraryViewDataSource(anime: anime, manga: manga)
         
         return UserLibraryViewController(userID: user, dataSource: data)
+    }
+    
+    ///Show a youtube video in a controller.
+    static func showYoutubeVideo(videoID: String, in controller: UIViewController) {
+        guard !videoID.isEmpty else { return }
+        
+        //Allow audio
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        
+        //Show the video
+        let player = XCDYouTubeVideoPlayerViewController(videoIdentifier: videoID)
+        controller.present(player, animated: true)
+        
     }
 }

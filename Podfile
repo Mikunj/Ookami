@@ -40,7 +40,8 @@ def ui_pods
     pod 'ActionSheetPicker-3.0', '~> 2.2.0'
     pod 'IQKeyboardManager', '~> 4.0.8'
     pod 'Diff', '~> 0.5'
-    pod "SKPhotoBrowser", "~> 4.0.0"
+    pod 'SKPhotoBrowser', '~> 4.0.0'
+    pod 'XCDYouTubeKit', '~> 2.5.0'
 end
 
 target 'Ookami' do
