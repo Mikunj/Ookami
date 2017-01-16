@@ -30,6 +30,8 @@ public extension Date {
     /// - Returns: A Date if string could be converted else nil
     static func from(string dateString: String) -> Date? {
         
+        if dateString.isEmpty { return nil }
+        
         let dateFormatter = DateFormatter()
         
         switch dateString.characters.count {

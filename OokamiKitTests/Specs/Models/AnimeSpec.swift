@@ -31,6 +31,56 @@ class AnimeSpec: QuickSpec {
                 }
             }
             
+            context("Airing") {
+                it("should return false if it's a movie") {
+                    let a = Anime()
+                    a.subtypeRaw = Anime.SubType.movie.rawValue
+                    
+                    expect(a.isAiring()).to(beFalse())
+                }
+                
+                it("should return false if start date is nil") {
+                    let a = Anime()
+                    a.subtypeRaw = Anime.SubType.tv.rawValue
+                    
+                    expect(a.isAiring()).to(beFalse())
+                }
+                
+                it("should return false if the start date if after the current date") {
+                    let a = Anime()
+                    a.subtypeRaw = Anime.SubType.tv.rawValue
+                    a.startDate = Date().addingTimeInterval(999999)
+                    
+                    expect(a.isAiring()).to(beFalse())
+                }
+                
+                it("should return false if end date is before the current date") {
+                    let a = Anime()
+                    a.subtypeRaw = Anime.SubType.tv.rawValue
+                    a.startDate = Date(timeIntervalSince1970: 0)
+                    a.endDate = Date(timeIntervalSince1970: 2)
+                    
+                    expect(a.isAiring()).to(beFalse())
+                }
+                
+                it("should return true if end date is nil") {
+                    let a = Anime()
+                    a.subtypeRaw = Anime.SubType.tv.rawValue
+                    a.startDate = Date(timeIntervalSince1970: 0)
+                    
+                    expect(a.isAiring()).to(beTrue())
+                }
+                
+                it("should return true if end date is after current date") {
+                    let a = Anime()
+                    a.subtypeRaw = Anime.SubType.tv.rawValue
+                    a.startDate = Date(timeIntervalSince1970: 0)
+                    a.endDate = Date().addingTimeInterval(999999)
+                    
+                    expect(a.isAiring()).to(beTrue())
+                }
+            }
+            
             context("Cacheable") {
                 it("should not clear from cache if anime is in users library") {
                     TestHelper.create(object: LibraryEntry.self, inRealm: testRealm, amount: 1) { _, entry in

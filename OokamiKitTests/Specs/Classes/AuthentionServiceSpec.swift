@@ -12,6 +12,7 @@ import Nimble
 @testable import Heimdallr
 import Result
 import RealmSwift
+import OHHTTPStubs
 
 private class StubRequestHeimdallr: Heimdallr {
     
@@ -61,6 +62,7 @@ class AuthenticationServiceSpec: QuickSpec {
             
             afterEach {
                 currentUser.userID = nil
+                OHHTTPStubs.removeAllStubs()
             }
             
             context("Updating user info") {
@@ -145,12 +147,82 @@ class AuthenticationServiceSpec: QuickSpec {
                     let a = StubAuthenticationService(currentUser: cUser)
                     waitUntil { done in
                         a.authenticate(usernameOrEmail: "test", password: "hi") { error in
-                            expect(error).to(matchError(nsError))
+                            expect(error).toNot(beNil())
                             done()
                         }
                     }
                 }
             }
+            
+            context("Signup") {
+                
+                class StubSignup: AuthenticationService {
+                    
+                    var authCount = 0
+                    var authError: Error? = nil
+                    
+                    override func authenticate(usernameOrEmail: String, password: String, completion: @escaping (Error?) -> Void) {
+                        authCount += 1
+                        completion(authError)
+                    }
+                }
+                
+                it("should return an error if something went wrong in the signup") {
+                    let error = NetworkClientError.error("failed to signup - Authentication Service test")
+                    stub(condition: isHost("kitsu.io")) { _ in
+                        return OHHTTPStubsResponse(error: error)
+                    }
+                    
+                    let s = StubSignup()
+                    waitUntil { done in
+                        s.signup(name: "test", email: "test@email.com", password: "test1", completion: { e in
+                            expect(e).to(matchError(error))
+                            expect(s.authCount).to(equal(0))
+                            done()
+                        })
+                    }
+                    
+                }
+                
+                it("should return the authentication error if it occured") {
+                    stub(condition: isHost("kitsu.io")) { _ in
+                        let data: [String : Any] = ["data": ["name": "test"]]
+                        return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
+                    }
+                    
+                    let s = StubSignup()
+                    let error = NetworkClientError.authenticationError("oh no!")
+                    s.authError = error
+                    
+                    waitUntil { done in
+                        s.signup(name: "test", email: "test@email.com", password: "test1", completion: { e in
+                            expect(e).to(matchError(error))
+                            expect(s.authCount).to(equal(1))
+                            
+                            done()
+                        })
+                    }
+                    
+                }
+                
+                it("should return no error if successful") {
+                    stub(condition: isHost("kitsu.io")) { _ in
+                        let data: [String : Any] = ["data": ["name": "test"]]
+                        return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
+                        
+                    }
+                    
+                    let s = StubSignup()
+                    waitUntil { done in
+                        s.signup(name: "test", email: "test@email.com", password: "test1", completion: { e in
+                            expect(e).to(beNil())
+                            done()
+                        })
+                    }
+                }
+            }
+            
+            
             
         }
     }
