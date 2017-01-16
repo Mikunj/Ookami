@@ -10,6 +10,7 @@ import IQKeyboardManager
 import OokamiKit
 
 //TODO: NEED A REALM MIGRATION CLASS!! DON'T FORGET!!
+//TODO: Handle the case where user changes password but doesn't logout in the app. (maybe during launch, check auth and if valid then show main vc else show the login?)
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
