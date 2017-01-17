@@ -24,6 +24,8 @@ extension Constants {
     enum Endpoints {
         static let users = "/users"
         static let libraryEntries = "/library-entries"
+        static let anime = "/anime"
+        static let manga = "/manga"
     }
     
 }

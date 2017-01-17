@@ -34,57 +34,86 @@ class UserHelperSpec: QuickSpec {
                 }
             }
             
-            it("should return false if user is not logged in") {
-                currentUser.userID = nil
-                expect(UserHelper.currentUserHas(media: .anime, id: 1)).to(beFalse())
-                expect(UserHelper.currentUserHas(media: .manga, id: 1)).to(beFalse())
+            context("Entry") {
+                it("should return false if user is not logged in") {
+                    currentUser.userID = nil
+                    expect(UserHelper.entry(forMedia: .anime, id: 1)).to(beNil())
+                    expect(UserHelper.entry(forMedia: .manga, id: 1)).to(beNil())
+                }
+                
+                it("should return correclty if media is/isn't in users library") {
+                    
+                    TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 2) { index, entry in
+                        entry.id = index
+                        entry.userID = 1
+                        let type: Media.MediaType = index % 2 == 0 ? .anime : .manga
+                        entry.media = Media(value: [entry.id, 2, type.rawValue])
+                    }
+                    
+                    currentUser.userID = 1
+                    expect(UserHelper.entry(forMedia: .anime, id: 1)).to(beNil())
+                    expect(UserHelper.entry(forMedia: .manga, id: 1)).to(beNil())
+                    
+                    expect(UserHelper.entry(forMedia: .anime, id: 2)).toNot(beNil())
+                    expect(UserHelper.entry(forMedia: .manga, id: 2)).toNot(beNil())
+                }
             }
             
-            it("should return correclty if media is/isn't in users library") {
-                
-                TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 2) { index, entry in
-                    entry.id = index
-                    entry.userID = 1
-                    let type: Media.MediaType = index % 2 == 0 ? .anime : .manga
-                    entry.media = Media(value: [entry.id, 2, type.rawValue])
+            context("Current user has") {
+                it("should return false if user is not logged in") {
+                    currentUser.userID = nil
+                    expect(UserHelper.currentUserHas(media: .anime, id: 1)).to(beFalse())
+                    expect(UserHelper.currentUserHas(media: .manga, id: 1)).to(beFalse())
                 }
                 
-                currentUser.userID = 1
-                expect(UserHelper.currentUserHas(media: .anime, id: 1)).to(beFalse())
-                expect(UserHelper.currentUserHas(media: .manga, id: 1)).to(beFalse())
-                
-                expect(UserHelper.currentUserHas(media: .anime, id: 2)).to(beTrue())
-                expect(UserHelper.currentUserHas(media: .manga, id: 2)).to(beTrue())
+                it("should return correclty if media is/isn't in users library") {
+                    
+                    TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 2) { index, entry in
+                        entry.id = index
+                        entry.userID = 1
+                        let type: Media.MediaType = index % 2 == 0 ? .anime : .manga
+                        entry.media = Media(value: [entry.id, 2, type.rawValue])
+                    }
+                    
+                    currentUser.userID = 1
+                    expect(UserHelper.currentUserHas(media: .anime, id: 1)).to(beFalse())
+                    expect(UserHelper.currentUserHas(media: .manga, id: 1)).to(beFalse())
+                    
+                    expect(UserHelper.currentUserHas(media: .anime, id: 2)).to(beTrue())
+                    expect(UserHelper.currentUserHas(media: .manga, id: 2)).to(beTrue())
+                }
             }
             
-            it("should delete entries whos ids were not given") {
-                TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 2) { index, entry in
-                    entry.id = index
-                    entry.userID = 1
-                    let type: Media.MediaType = .anime
-                    entry.media = Media(value: [entry.id, 2, type.rawValue])
+            context("Delete") {
+                it("should delete entries whos ids were not given") {
+                    TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 2) { index, entry in
+                        entry.id = index
+                        entry.userID = 1
+                        let type: Media.MediaType = .anime
+                        entry.media = Media(value: [entry.id, 2, type.rawValue])
+                    }
+                    
+                    TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 1) { index, entry in
+                        entry.id = 10 + index
+                        entry.userID = 1
+                        let type: Media.MediaType = .manga
+                        entry.media = Media(value: [entry.id, 2, type.rawValue])
+                    }
+                    
+                    TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 1) { index, entry in
+                        entry.id = 20 + index
+                        entry.userID = 2
+                        let type: Media.MediaType = .anime
+                        entry.media = Media(value: [entry.id, 2, type.rawValue])
+                    }
+                    
+                    expect(LibraryEntry.all()).to(haveCount(4))
+                    UserHelper.deleteEntries(notIn: [1], type: .anime, forUser: 1)
+                    expect(LibraryEntry.all()).to(haveCount(3))
+                    expect(LibraryEntry.belongsTo(user: 1)).to(haveCount(2))
                 }
                 
-                TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 1) { index, entry in
-                    entry.id = 10 + index
-                    entry.userID = 1
-                    let type: Media.MediaType = .manga
-                    entry.media = Media(value: [entry.id, 2, type.rawValue])
-                }
-                
-                TestHelper.create(object: LibraryEntry.self, inRealm: realm, amount: 1) { index, entry in
-                    entry.id = 20 + index
-                    entry.userID = 2
-                    let type: Media.MediaType = .anime
-                    entry.media = Media(value: [entry.id, 2, type.rawValue])
-                }
-                
-                expect(LibraryEntry.all()).to(haveCount(4))
-                UserHelper.deleteEntries(notIn: [1], type: .anime, forUser: 1)
-                expect(LibraryEntry.all()).to(haveCount(3))
-                expect(LibraryEntry.belongsTo(user: 1)).to(haveCount(2))
             }
-            
             
         }
     }

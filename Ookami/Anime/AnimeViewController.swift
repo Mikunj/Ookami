@@ -91,17 +91,7 @@ extension AnimeViewController {
 extension AnimeViewController {
     
     func getEntry() -> LibraryEntry? {
-        guard let user = CurrentUser().userID else {
-            return nil
-        }
-        
-        let entries = LibraryEntry.belongsTo(user: user, type: .anime)
-        let entry = entries.first { e in
-            guard let media = e.media else { return false }
-            return media.id == anime.id
-        }
-        
-        return entry
+        return UserHelper.entry(forMedia: .anime, id: anime.id)
     }
     
     func headerData() -> MediaTableHeaderViewData {

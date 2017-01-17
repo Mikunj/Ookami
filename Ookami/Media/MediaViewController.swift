@@ -164,14 +164,13 @@ extension MediaViewController: UITableViewDataSource {
 extension MediaViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = MediaTableSectionView()
+        let view = TitleTableSectionView()
         view.titleLabel.text = data[section].title
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let isIpad = UIDevice.current.userInterfaceIdiom == .pad
-        return isIpad ? 50 : 35
+        return 35
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

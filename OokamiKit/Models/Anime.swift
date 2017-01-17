@@ -165,5 +165,7 @@ extension Anime {
         case tv = "TV"
         case ova = "OVA"
         case ona = "ONA"
+        
+        public static let all: [SubType] = [.tv, .ova, .ona, .movie, .special, .music]
     }
 }

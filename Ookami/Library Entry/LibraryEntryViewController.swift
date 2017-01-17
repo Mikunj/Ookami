@@ -384,7 +384,7 @@ extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonD
         }
         
         if let manga = entry.manga {
-            //Show MangaVC here
+            //TODO: Show MangaVC here
         }
     }
     

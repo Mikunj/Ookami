@@ -75,7 +75,7 @@ class AppCoordinator {
         window.setRootViewController(nav)
     }
     
-    static func showAnimeVC(in parent: UINavigationController, anime: Anime) {
+    static func showAnimeVC(in parent: UIViewController, anime: Anime) {
         let animeVC = AnimeViewController(anime: anime)
         let nav = UINavigationController(rootViewController: animeVC)
         parent.present(nav, animated: true)
@@ -108,5 +108,11 @@ class AppCoordinator {
         let player = XCDYouTubeVideoPlayerViewController(videoIdentifier: videoID)
         controller.present(player, animated: true)
         
+    }
+    
+    static func showSearch(with scope: SearchViewController.Scope, in controller: UIViewController) {
+        let search = SearchViewController(scope: scope)
+        let nav = UINavigationController(rootViewController: search)
+        controller.present(nav, animated: true)
     }
 }

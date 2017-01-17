@@ -96,6 +96,9 @@ final class UserLibraryViewController: UIViewController {
             }
         }
         
+        let search = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
+        self.navigationItem.setRightBarButton(search, animated: false)
+        
         show(.anime)
     }
     
@@ -105,6 +108,10 @@ final class UserLibraryViewController: UIViewController {
     func show(_ type: Media.MediaType) {
         animeController.view.isHidden = type != .anime
         mangaController.view.isHidden = type != .manga
+    }
+    
+    func searchTapped() {
+        AppCoordinator.showSearch(with: .anime, in: self)
     }
     
 }

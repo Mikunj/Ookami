@@ -1,5 +1,5 @@
 //
-//  MediaTableSectionView.swift
+//  TitleTableSectionView.swift
 //  Ookami
 //
 //  Created by Maka on 13/1/17.
@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Reusable
 
-class MediaTableSectionView: NibLoadableView {
+class TitleTableSectionView: NibLoadableView {
 
     @IBOutlet weak var titleLabel: UILabel!
     

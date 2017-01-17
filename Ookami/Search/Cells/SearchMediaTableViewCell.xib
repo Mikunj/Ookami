@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="137" id="KGk-i7-Jjw" customClass="SearchMediaTableViewCell" customModule="Ookami" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="166"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="165"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FKK-AJ-wms" userLabel="Indicator view">
+                        <rect key="frame" x="316" y="0.0" width="4" height="166"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="4" id="Feq-2Z-ERZ"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vp3-55-baf">
+                        <rect key="frame" x="0.0" y="0.0" width="316" height="165"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ngl-9n-eq7" userLabel="Front View">
+                                <rect key="frame" x="8" y="8" width="300" height="149"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6On-yR-tH0" userLabel="Media Poster">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="149"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="6On-yR-tH0" secondAttribute="height" multiplier="2:3" id="ILl-PW-Pwu"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hunter x Hunter" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gq-5t-QhW" userLabel="Media Name">
+                                        <rect key="frame" x="108" y="0.0" width="192" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWn-Yo-532" userLabel="Detail">
+                                        <rect key="frame" x="108" y="24" width="192" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNK-3J-6OJ" userLabel="Synopsis">
+                                        <rect key="frame" x="108" y="42.5" width="192" height="93.5"/>
+                                        <string key="text">A remake of the 1999 TV series of Hunter x Hunter based on the manga by Togashi Yoshihiro.\r\n\r\nA Hunter is one who travels the world doing all sorts of </string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="6On-yR-tH0" firstAttribute="top" secondItem="Ngl-9n-eq7" secondAttribute="top" id="3pI-vr-KTx"/>
+                                    <constraint firstItem="4Gq-5t-QhW" firstAttribute="leading" secondItem="6On-yR-tH0" secondAttribute="trailing" constant="8" id="4Yh-5h-u4s"/>
+                                    <constraint firstAttribute="bottom" secondItem="6On-yR-tH0" secondAttribute="bottom" id="4t1-sa-4Nb"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MNK-3J-6OJ" secondAttribute="bottom" id="5Vg-AH-ajn"/>
+                                    <constraint firstItem="MNK-3J-6OJ" firstAttribute="top" secondItem="bWn-Yo-532" secondAttribute="bottom" constant="4" id="BDG-Xm-cH6"/>
+                                    <constraint firstAttribute="trailing" secondItem="MNK-3J-6OJ" secondAttribute="trailing" id="IU8-ru-RZ3"/>
+                                    <constraint firstAttribute="trailing" secondItem="MNK-3J-6OJ" secondAttribute="trailing" id="If8-Li-mk3"/>
+                                    <constraint firstItem="4Gq-5t-QhW" firstAttribute="top" secondItem="6On-yR-tH0" secondAttribute="top" id="MNJ-9l-1Hs"/>
+                                    <constraint firstAttribute="trailing" secondItem="bWn-Yo-532" secondAttribute="trailing" id="VXK-Ys-p1m"/>
+                                    <constraint firstItem="bWn-Yo-532" firstAttribute="leading" secondItem="6On-yR-tH0" secondAttribute="trailing" constant="8" id="XH2-3f-sg8"/>
+                                    <constraint firstItem="bWn-Yo-532" firstAttribute="top" secondItem="4Gq-5t-QhW" secondAttribute="bottom" constant="4" id="qPZ-GK-PMY"/>
+                                    <constraint firstItem="MNK-3J-6OJ" firstAttribute="leading" secondItem="6On-yR-tH0" secondAttribute="trailing" constant="8" id="qaE-hf-1rE"/>
+                                    <constraint firstAttribute="trailing" secondItem="4Gq-5t-QhW" secondAttribute="trailing" id="vwa-L8-pha"/>
+                                    <constraint firstItem="6On-yR-tH0" firstAttribute="leading" secondItem="Ngl-9n-eq7" secondAttribute="leading" id="wbJ-f3-brk"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Ngl-9n-eq7" secondAttribute="bottom" constant="8" id="DYp-Kf-ArE"/>
+                            <constraint firstItem="Ngl-9n-eq7" firstAttribute="top" secondItem="Vp3-55-baf" secondAttribute="top" constant="8" id="OEb-Ds-mSv"/>
+                            <constraint firstItem="Ngl-9n-eq7" firstAttribute="leading" secondItem="Vp3-55-baf" secondAttribute="leading" constant="8" id="eKO-td-7bf"/>
+                            <constraint firstAttribute="trailing" secondItem="Ngl-9n-eq7" secondAttribute="trailing" constant="8" id="qRf-Uw-uqS"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Vp3-55-baf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="26b-YQ-bWa"/>
+                    <constraint firstItem="Vp3-55-baf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="2pg-6D-xfY"/>
+                    <constraint firstItem="FKK-AJ-wms" firstAttribute="leading" secondItem="Vp3-55-baf" secondAttribute="trailing" id="cQE-9d-dop"/>
+                    <constraint firstAttribute="bottom" secondItem="Vp3-55-baf" secondAttribute="bottom" id="uGJ-5d-NE8"/>
+                </constraints>
+            </tableViewCellContentView>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="FKK-AJ-wms" secondAttribute="bottom" id="OYZ-lu-Uuf"/>
+                <constraint firstAttribute="trailing" secondItem="FKK-AJ-wms" secondAttribute="trailing" id="eUd-hU-P7E"/>
+                <constraint firstItem="FKK-AJ-wms" firstAttribute="top" secondItem="KGk-i7-Jjw" secondAttribute="top" id="n9K-la-i46"/>
+            </constraints>
+            <connections>
+                <outlet property="detailLabel" destination="bWn-Yo-532" id="VdZ-9B-J2R"/>
+                <outlet property="indicatorView" destination="FKK-AJ-wms" id="gpa-wb-VAK"/>
+                <outlet property="nameLabel" destination="4Gq-5t-QhW" id="M50-aY-HEG"/>
+                <outlet property="posterImage" destination="6On-yR-tH0" id="2jD-fl-0Cn"/>
+                <outlet property="synopsisLabel" destination="MNK-3J-6OJ" id="9nw-ak-1cH"/>
+            </connections>
+            <point key="canvasLocation" x="46" y="170"/>
+        </tableViewCell>
+    </objects>
+</document>

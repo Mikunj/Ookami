@@ -134,6 +134,8 @@ extension Manga {
         case manhua
         case oneshot
         case doujin
+        
+        public static let all: [SubType] = [.manga, .novel, .manhua, .doujin, .oneshot]
     }
 }
 

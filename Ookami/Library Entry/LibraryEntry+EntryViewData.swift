@@ -8,6 +8,7 @@
 
 import OokamiKit
 
+//TODO: clean up this mess :/
 extension LibraryEntry {
     
     ///TODO: Maybe let the media build the data themselves? E.g anime.toEntryMediaHeaderData()
