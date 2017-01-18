@@ -15,7 +15,7 @@ class LibraryFetcher {
     
     var timer: Timer?
     var interval: TimeInterval = 60 * 3 //Every 3 minutes
-    var timePassed: Int = 0
+    var timesCalled: Int = 0
     
     @objc func updateLibrary() {
         //We need the current user to be logged in
@@ -23,16 +23,15 @@ class LibraryFetcher {
             return
         }
         
-        //First check if 15 minutes have passed, if so then fetch the whole library
-        if timePassed >= 5 {
-            timePassed = 0
+        //Every 5 calls we should fetch the main library
+        if timesCalled >= 5 {
+            timesCalled = 0
             print("Updated full library")
             LibraryService().getAll(userID: user, type: .anime) { _ in }
             LibraryService().getAll(userID: user, type: .manga) { _ in }
             return
         }
         
-        //If it hasn't passed then we fetch the library since the last fetch
         //Check if we have a last fetched object, if not then don't get the library
         //This avoids the issue of fetching a full users library every 3 minutes if we haven't initially fetched all of it
         if let fetched = LastFetched.get(withId: user) {
@@ -41,7 +40,7 @@ class LibraryFetcher {
             LibraryService().getAll(userID: user, type: .manga, since: fetched.manga) { _ in }
         }
         
-        timePassed += 1
+        timesCalled += 1
     }
     
     func startFetching() {

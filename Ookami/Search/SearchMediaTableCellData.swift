@@ -26,7 +26,7 @@ struct SearchMediaTableCellData {
         let seperator = " ᛫ "
         self.details = details(for: anime).joined(separator: seperator)
         self.moreDetails = moreDetails(for: anime).joined(separator: seperator)
-
+        
         //Indicator color
         if let entry = UserHelper.entry(forMedia: .anime, id: anime.id) {
             self.indicatorColor = entry.status?.color() ?? UIColor.clear
@@ -37,7 +37,15 @@ struct SearchMediaTableCellData {
         var details: [String] = []
         
         details.append(anime.subtypeRaw.uppercased())
-        details.append(anime.ageRating.uppercased())
+        
+        if !anime.ageRating.isEmpty {
+            details.append(anime.ageRating.uppercased())
+        }
+        
+        if let date = anime.startDate {
+            let year = Calendar.current.component(.year, from: date)
+            details.append(String(year))
+        }
         
         if anime.averageRating > 0 {
             details.append(String(format: "%.2f ★", anime.averageRating))
@@ -84,10 +92,15 @@ struct SearchMediaTableCellData {
         var details: [String] = []
         details.append(manga.subtypeRaw.uppercased())
         
+        if let date = manga.startDate {
+            let year = Calendar.current.component(.year, from: date)
+            details.append(String(year))
+        }
+        
         if manga.averageRating > 0 {
             details.append(String(format: "%.2f ★", manga.averageRating))
         }
-    
+        
         return details
     }
     
