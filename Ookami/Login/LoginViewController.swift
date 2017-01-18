@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         loginButton.isEnabled = false
         
         let theme = Theme.ActivityIndicatorTheme()
-        startAnimating(theme.size, color: theme.color)
+        startAnimating(theme.size, type: theme.type, color: theme.color)
         
         AuthenticationService().authenticate(usernameOrEmail: username, password: password) { error in
             self.loginButton.isEnabled = true

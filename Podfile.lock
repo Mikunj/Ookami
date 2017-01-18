@@ -13,7 +13,7 @@ PODS:
   - Keys (1.0.0)
   - Kingfisher (3.2.4)
   - Nimble (5.1.1)
-  - NVActivityIndicatorView (3.1)
+  - NVActivityIndicatorView (3.2)
   - OHHTTPStubs (5.2.2):
     - OHHTTPStubs/Default (= 5.2.2)
   - OHHTTPStubs/Core (5.2.2)
@@ -116,7 +116,7 @@ SPEC CHECKSUMS:
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
-  NVActivityIndicatorView: 9f47e8a4affb860ef729aeec99b1550219e6c233
+  NVActivityIndicatorView: 28942c18ced111a6a3ce5e6f5b27d9d40116d639
   OHHTTPStubs: 34d9d0994e64fcf8552dbfade5ce82ada913ee31
   Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
   Realm: 5f008bfe3c8c47142eddfc30b8c1584cde22db24

@@ -8,6 +8,7 @@
 
 import UIKit
 import Cartography
+import NVActivityIndicatorView
 
 //TODO: Refactor SearchAnimeDS and SearchMangaDS as code is basically duplicated
 
@@ -84,6 +85,12 @@ class SearchViewController: UIViewController {
         return t
     }()
     
+    //The activity indicator
+    var activityIndicator: NVActivityIndicatorView = {
+        let theme = Theme.ActivityIndicatorTheme()
+        return theme.view()
+    }()
+    
     //The search bar to search in
     lazy var searchBar: UISearchBar = {
         let s = UISearchBar()
@@ -144,12 +151,23 @@ class SearchViewController: UIViewController {
         stackView.distribution = .fill
         stackView.axis = .vertical
         
+        //Add the views
         self.view.addSubview(stackView)
         constrain(stackView, statusView, searchBar) { stack, status, bar in
             stack.edges == stack.superview!.edges
             
             statusViewHeight = (status.height == UIApplication.shared.statusBarFrame.height)
             bar.height >= 40 ~ LayoutPriority(999)
+        }
+        
+        //Add the indicator
+        let size = Theme.ActivityIndicatorTheme().size
+        
+        self.view.addSubview(activityIndicator)
+        constrain(activityIndicator, tableView) { view, table in
+            view.center == table.center
+            view.width == size.width
+            view.height == size.height
         }
         
         //Set the sources
@@ -254,11 +272,11 @@ extension SearchViewController: UISearchBarDelegate {
 //MARK:- Delegate
 extension SearchViewController: SearchViewControllerDelegate {
     func showIndicator() {
-        
+        activityIndicator.startAnimating()
     }
     
     func hideIndicator() {
-        
+        activityIndicator.stopAnimating()
     }
     
     func reloadTableView() {

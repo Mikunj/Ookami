@@ -8,6 +8,7 @@
 
 import UIKit
 import DynamicColor
+import NVActivityIndicatorView
 
 enum Theme {}
 
@@ -29,6 +30,12 @@ extension Theme {
     struct ActivityIndicatorTheme {
         var color = Colors().secondary
         var size = CGSize(width: 40, height: 40)
+        var type: NVActivityIndicatorType = NVActivityIndicatorType.ballRotateChase
+        
+        //The constructed activity indicator view
+        func view() -> NVActivityIndicatorView {
+            return  NVActivityIndicatorView(frame: CGRect(origin: CGPoint.zero, size: size), type: type, color: color)
+        }
     }
     
     struct NavigationTheme {

@@ -55,7 +55,7 @@ class SignupViewController: UIViewController, NVActivityIndicatorViewable {
         signupButton.isEnabled = false
         
         let theme = Theme.ActivityIndicatorTheme()
-        startAnimating(theme.size, color: theme.color)
+        startAnimating(theme.size, type: theme.type, color: theme.color)
         
         AuthenticationService().signup(name: name, email: email, password: pass) { error in
             self.signupButton.isEnabled = true

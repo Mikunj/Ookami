@@ -108,8 +108,7 @@ class ItemViewController: UIViewController {
     //The activity indicator
     var activityIndicator: NVActivityIndicatorView = {
         let theme = Theme.ActivityIndicatorTheme()
-        let view = NVActivityIndicatorView(frame: CGRect(origin: CGPoint.zero, size: theme.size), type: .ballSpinFadeLoader, color: theme.color)
-        return view
+        return theme.view()
     }()
     
     /// Create an ItemViewController
