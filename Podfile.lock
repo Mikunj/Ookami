@@ -1,6 +1,6 @@
 PODS:
   - ActionSheetPicker-3.0 (2.2.0)
-  - Alamofire (4.0.1)
+  - Alamofire (4.3.0)
   - BTNavigationDropdownMenu (0.4.1)
   - Cartography (1.0.1)
   - Diff (0.5.0)
@@ -29,7 +29,7 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (5.2.2)
   - OHHTTPStubs/Swift (5.2.2):
     - OHHTTPStubs/Core
-  - Quick (0.10.0)
+  - Quick (1.0.0)
   - Realm (2.0.3):
     - Realm/Headers (= 2.0.3)
   - Realm/Headers (2.0.3)
@@ -42,13 +42,13 @@ PODS:
   - Reusable/Storyboard (3.0.1)
   - Reusable/View (3.0.1)
   - SKPhotoBrowser (4.0.0)
-  - SwiftyJSON (3.0.0)
+  - SwiftyJSON (3.1.4)
   - XCDYouTubeKit (2.5.3)
   - XLPagerTabStrip (6.0.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (~> 2.2.0)
-  - Alamofire (~> 4.0)
+  - Alamofire (~> 4.3)
   - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`, branch `swift-3.0`)
   - Cartography (~> 1.0)
   - Diff (~> 0.5)
@@ -57,16 +57,16 @@ DEPENDENCIES:
   - IQKeyboardManager (~> 4.0.8)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Kingfisher (~> 3.0)
-  - Nimble (~> 5.1.1)
+  - Nimble (~> 5.1)
   - NVActivityIndicatorView (~> 3.0)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
-  - Quick (~> 0.10.0)
+  - Quick (~> 1.0)
   - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
   - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
   - Reusable (~> 3.0)
   - SKPhotoBrowser (~> 4.0.0)
-  - SwiftyJSON (= 3.0.0)
+  - SwiftyJSON (~> 3.1)
   - XCDYouTubeKit (~> 2.5.0)
   - XLPagerTabStrip (~> 6.0)
 
@@ -106,7 +106,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
-  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
   Cartography: c1460e99395b824d9d75360b0382faeb0b33dcd7
   Diff: eceb93a3adf508574ba9b8560da185ace83de055
@@ -118,16 +118,16 @@ SPEC CHECKSUMS:
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   NVActivityIndicatorView: 28942c18ced111a6a3ce5e6f5b27d9d40116d639
   OHHTTPStubs: 34d9d0994e64fcf8552dbfade5ce82ada913ee31
-  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
+  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
   Realm: 5f008bfe3c8c47142eddfc30b8c1584cde22db24
   RealmSwift: 79a9bc83e7ef4fbde17e0f303c5fadb99264a6be
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   Reusable: 5362d10271ca8316b104698a21e90498f47e8339
   SKPhotoBrowser: bc33eca22f4abd6b99d8d260509ca30c01752a87
-  SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   XCDYouTubeKit: 90690f9e3523735dc93b8024269d991b0cfffe78
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: 9d61902a216619983c3b1ee7ceac8d6b9e450be0
+PODFILE CHECKSUM: c2aac01353c98d2f0bc4f153aa1f9da561120b62
 
 COCOAPODS: 1.1.1
