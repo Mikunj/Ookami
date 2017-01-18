@@ -9,14 +9,6 @@
 import UIKit
 import Reusable
 
-struct SearchMediaTableCellData {
-    var name: String = ""
-    var details: String = ""
-    var synopsis: String = ""
-    var posterImage: String? = nil
-    var indicatorColor: UIColor = UIColor.white
-}
-
 class SearchMediaTableViewCell: UITableViewCell, NibReusable {
 
     @IBOutlet weak var indicatorView: UIView!
@@ -26,6 +18,8 @@ class SearchMediaTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var detailLabel: UILabel!
+    
+    @IBOutlet weak var moreDetailLabel: UILabel!
     
     @IBOutlet weak var synopsisLabel: UILabel!
     
@@ -38,6 +32,7 @@ class SearchMediaTableViewCell: UITableViewCell, NibReusable {
         nameLabel.text = data.name
         detailLabel.text = data.details
         synopsisLabel.text = data.synopsis
+        moreDetailLabel.text = data.moreDetails
         
         //Set the poster image
         if let poster = data.posterImage {

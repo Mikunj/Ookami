@@ -94,8 +94,6 @@ extension Manga: JSONParsable {
         manga.volumeCount = attributes["volumeCount"].int ?? -1
         manga.subtypeRaw = attributes["subtype"].stringValue
         manga.posterImage = attributes["posterImage"]["small"].stringValue
-        
-        //TODO: Default to original image until other styles are added
         manga.coverImage = attributes["coverImage"]["original"].stringValue
         
         //Add titles

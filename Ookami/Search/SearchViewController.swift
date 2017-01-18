@@ -30,6 +30,7 @@ protocol SearchViewControllerDelegate: class {
     func showIndicator()
     func hideIndicator()
     func reloadTableView()
+    func reloadTableView<T: Collection>(oldData: T, newData: T) where T.Iterator.Element: Equatable
 }
 
 //A view controller for searching kitsu
@@ -209,8 +210,9 @@ extension SearchViewController: UITableViewDelegate {
         return nil
     }
     
+    //Only show header if we have a title
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 35
+        return dataSource?.title(for: section) == nil ? 0 : 35
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -240,6 +242,10 @@ extension SearchViewController: UISearchBarDelegate {
         dataSource?.didUpdateSearch(text: searchText)
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         dismiss(animated: true)
     }
@@ -257,5 +263,9 @@ extension SearchViewController: SearchViewControllerDelegate {
     
     func reloadTableView() {
         tableView.reloadData()
+    }
+    
+    func reloadTableView<T: Collection>(oldData: T, newData: T) where T.Iterator.Element: Equatable {
+        tableView.animateRowChanges(oldData: oldData, newData: newData)
     }
 }

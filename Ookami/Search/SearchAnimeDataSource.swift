@@ -13,10 +13,13 @@ class SearchAnimeDataSource: SearchViewControllerDataSource {
     
     weak var delegate: SearchViewControllerDelegate? = nil
     
-    //An array of sections that are populated
-    var populatedSections: [Anime.SubType] = []
-    var data: [Anime.SubType: [Anime]] = [:]
+    //The anime we have loaded
+    var anime: [Anime] = []
     
+    //The data used for animation
+    var data: [SearchMediaTableCellData] = []
+    
+    //The network operation
     var operation: Operation? = nil
     
     init(parent: UITableView) {
@@ -26,59 +29,21 @@ class SearchAnimeDataSource: SearchViewControllerDataSource {
     //We use populatedSections to only show sections which have data
     //No point in showing Movie if there is no movie in the response
     func numberOfSection(in tableView: UITableView) -> Int {
-        return populatedSections.count
+        return 1
     }
     
     func numberOfRows(in section: Int, tableView: UITableView) -> Int {
-        let type = populatedSections[section]
-        return data[type]?.count ?? 0
+        return data.count
     }
     
     func cellForRow(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as SearchMediaTableViewCell
         
-        let type = populatedSections[indexPath.section]
-        if let anime = data[type]?[indexPath.row] {
-            cell.update(data: data(for: anime))
-        }
+        let animeData = data[indexPath.row]
+        cell.update(data: animeData)
+        
         
         return cell
-    }
-    
-    func data(for anime: Anime) -> SearchMediaTableCellData {
-        var data = SearchMediaTableCellData()
-        
-        data.name = anime.canonicalTitle
-        data.posterImage = anime.posterImage
-        data.synopsis = anime.synopsis
-        
-        //TODO: make a function in Anime extension to create details as it's being duplicated
-        var details: [String] = []
-        
-        if anime.averageRating > 0 {
-            details.append(String(format: "%.2f ★", anime.averageRating))
-        }
-        
-        let episodeCount = anime.episodeCount > 0 ? "\(anime.episodeCount)" : "?"
-        let episodeText = anime.episodeCount == 1 ? "episode" : "episodes"
-        details.append("\(episodeCount) \(episodeText)")
-        
-        let episodeLength = anime.episodeLength > 0 ? "\(anime.episodeLength)" : "?"
-        details.append("\(episodeLength) minutes")
-        
-        
-        if anime.isAiring() {
-            details.append("Airing")
-        }
-        
-        data.details = details.joined(separator: " ᛫ ")
-        
-        //Indicator color
-        if let entry = UserHelper.entry(forMedia: .anime, id: anime.id) {
-            data.indicatorColor = entry.status?.color() ?? UIColor.clear
-        }
-        
-        return data
     }
     
     func heightForRow(at indexPath: IndexPath) -> CGFloat {
@@ -88,24 +53,17 @@ class SearchAnimeDataSource: SearchViewControllerDataSource {
     
     //If you return nil then no section header is displayed
     func title(for section: Int) -> String? {
-        let type = populatedSections[section]
-        return type.rawValue.uppercased()
+        return nil
     }
     
     //Update the anime data
     func updateData(anime: [Anime]) {
+        let newData = anime.map { SearchMediaTableCellData(anime: $0) }
+        let oldData = self.data
         
-        populatedSections.removeAll()
-        var data: [Anime.SubType: [Anime]] = [:]
-        
-        for type in Anime.SubType.all {
-            let subAnime = anime.filter { $0.subtype == type }
-            if !subAnime.isEmpty { populatedSections.append(type) }
-            data[type] = subAnime
-        }
-        
-        self.data = data
-        delegate?.reloadTableView()
+        self.anime = anime
+        self.data = newData
+        delegate?.reloadTableView(oldData: oldData, newData: newData)
     }
     
     
@@ -113,10 +71,8 @@ class SearchAnimeDataSource: SearchViewControllerDataSource {
         
         //Don't bother calling api if text is empty
         if text.isEmpty {
-            populatedSections.removeAll()
-            data = [:]
+            updateData(anime: [])
             operation?.cancel()
-            delegate?.reloadTableView()
             delegate?.hideIndicator()
             return
         }
@@ -152,9 +108,8 @@ class SearchAnimeDataSource: SearchViewControllerDataSource {
     }
     
     func didTapCell(at indexPath: IndexPath, controller: SearchViewController) {
-        let type = populatedSections[indexPath.section]
-        if let anime = data[type]?[indexPath.row] {
-            AppCoordinator.showAnimeVC(in: controller, anime: anime)
-        }
+        let anime = self.anime[indexPath.row]
+        AppCoordinator.showAnimeVC(in: controller, anime: anime)
+        
     }
 }

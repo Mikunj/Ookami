@@ -27,7 +27,6 @@ struct MediaViewControllerSection {
 }
 
 //A controller which allows the display of media
-//TODO: Maybe experiment with removing the section headers so that the parallax effect becomes simpler to manage (don't have to adjust insets on scroll, which causes a big gap to appear if content is too small)
 class MediaViewController: NavigationHidingViewController {
     
     //The tableview to display data in

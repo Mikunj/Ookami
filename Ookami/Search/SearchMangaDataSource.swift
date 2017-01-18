@@ -13,10 +13,13 @@ class SearchMangaDataSource: SearchViewControllerDataSource {
     
     weak var delegate: SearchViewControllerDelegate? = nil
     
-    //An array of sections that are populated
-    var populatedSections: [Manga.SubType] = []
-    var data: [Manga.SubType: [Manga]] = [:]
+    //The manga we are showing
+    var manga: [Manga] = []
     
+    //The data used for animating
+    var data: [SearchMediaTableCellData] = []
+    
+    //The network operation
     var operation: Operation? = nil
     
     init(parent: UITableView) {
@@ -26,52 +29,19 @@ class SearchMangaDataSource: SearchViewControllerDataSource {
     //We use populatedSections to only show sections which have data
     //No point in showing Movie if there is no movie in the response
     func numberOfSection(in tableView: UITableView) -> Int {
-        return populatedSections.count
+        return 1
     }
     
     func numberOfRows(in section: Int, tableView: UITableView) -> Int {
-        let type = populatedSections[section]
-        return data[type]?.count ?? 0
+        return data.count
     }
     
     func cellForRow(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath) as SearchMediaTableViewCell
-        
-        let type = populatedSections[indexPath.section]
-        if let anime = data[type]?[indexPath.row] {
-            cell.update(data: data(for: anime))
-        }
+        let manga = data[indexPath.row]
+        cell.update(data: manga)
         
         return cell
-    }
-    
-    func data(for manga: Manga) -> SearchMediaTableCellData {
-        var data = SearchMediaTableCellData()
-        
-        data.name = manga.canonicalTitle
-        data.posterImage = manga.posterImage
-        data.synopsis = manga.synopsis
-        
-        var details: [String] = []
-        
-        if manga.averageRating > 0 {
-            details.append(String(format: "%.2f ★", manga.averageRating))
-        }
-        
-        let chapterCount = manga.chapterCount > 0 ? "\(manga.chapterCount)" : "?"
-        details.append("\(chapterCount) chapters")
-        
-        let volumeCount = manga.volumeCount > 0 ? "\(manga.volumeCount)" : "?"
-        details.append("\(volumeCount) volumes")
-        
-        data.details = details.joined(separator: " ᛫ ")
-        
-        //Indicator color
-        if let entry = UserHelper.entry(forMedia: .manga, id: manga.id) {
-            data.indicatorColor = entry.status?.color() ?? UIColor.clear
-        }
-        
-        return data
     }
     
     func heightForRow(at indexPath: IndexPath) -> CGFloat {
@@ -81,24 +51,17 @@ class SearchMangaDataSource: SearchViewControllerDataSource {
     
     //If you return nil then no section header is displayed
     func title(for section: Int) -> String? {
-        let type = populatedSections[section]
-        return type.rawValue.uppercased()
+        return nil
     }
     
-    //Update the anime data
+    //Update the manga data
     func updateData(manga: [Manga]) {
+        let newData = manga.map { SearchMediaTableCellData(manga: $0) }
+        let oldData = self.data
         
-        populatedSections.removeAll()
-        var data: [Manga.SubType: [Manga]] = [:]
-        
-        for type in Manga.SubType.all {
-            let subManga = manga.filter { $0.subtype == type }
-            if !subManga.isEmpty { populatedSections.append(type) }
-            data[type] = subManga
-        }
-        
-        self.data = data
-        delegate?.reloadTableView()
+        self.manga = manga
+        self.data = newData
+        delegate?.reloadTableView(oldData: oldData, newData: newData)
     }
     
     
@@ -106,10 +69,8 @@ class SearchMangaDataSource: SearchViewControllerDataSource {
         
         //Don't bother calling api if text is empty
         if text.isEmpty {
-            populatedSections.removeAll()
-            data = [:]
+            updateData(manga: [])
             operation?.cancel()
-            delegate?.reloadTableView()
             delegate?.hideIndicator()
             return
         }
@@ -134,7 +95,7 @@ class SearchMangaDataSource: SearchViewControllerDataSource {
             }
             
             guard let ids = ids else {
-                print("Didn't get any ids - Search Anime")
+                print("Didn't get any ids - Search Manga")
                 return
             }
             
@@ -145,9 +106,7 @@ class SearchMangaDataSource: SearchViewControllerDataSource {
     }
     
     func didTapCell(at indexPath: IndexPath, controller: SearchViewController) {
-        let type = populatedSections[indexPath.section]
-        if let manga = data[type]?[indexPath.row] {
-            //TODO: show manga vc here
-        }
+        let _ = self.manga[indexPath.row]
+        //TODO: show manga vc here
     }
 }

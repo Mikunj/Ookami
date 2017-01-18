@@ -112,8 +112,6 @@ extension User: JSONParsable {
         user.lifeSpentOnAnime = attributes["lifeSpentOnAnime"].intValue
         user.createdAt = Date.from(string: attributes["createdAt"].stringValue) ?? Date()
         user.updatedAt = Date.from(string: attributes["updatedAt"].stringValue) ?? Date()
-        
-        //TODO: This may actually return a date, at the current time of writing this it returns null
         user.birthday = attributes["birthday"].stringValue
         user.gender = attributes["gender"].stringValue
         user.avatarImage = attributes["avatar"]["original"].stringValue

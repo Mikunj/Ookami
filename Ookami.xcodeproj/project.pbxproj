@@ -67,6 +67,7 @@
 		2457614B1E2E316700BEB18C /* SearchMediaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 245761491E2E316700BEB18C /* SearchMediaTableViewCell.xib */; };
 		2457614D1E2E3EC800BEB18C /* SearchMangaDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2457614C1E2E3EC800BEB18C /* SearchMangaDataSource.swift */; };
 		2457614F1E2E3F3F00BEB18C /* MangaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2457614E1E2E3F3F00BEB18C /* MangaService.swift */; };
+		245761511E2EE92A00BEB18C /* SearchMediaTableCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245761501E2EE92A00BEB18C /* SearchMediaTableCellData.swift */; };
 		245E59A61DD1C3C4002375A4 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A51DD1C3C4002375A4 /* Default.swift */; };
 		245E59A81DD1D5A1002375A4 /* StubRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */; };
 		2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246023391DCCA11700B3C99B /* UserSpec.swift */; };
@@ -273,6 +274,7 @@
 		245761491E2E316700BEB18C /* SearchMediaTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchMediaTableViewCell.xib; sourceTree = "<group>"; };
 		2457614C1E2E3EC800BEB18C /* SearchMangaDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMangaDataSource.swift; sourceTree = "<group>"; };
 		2457614E1E2E3F3F00BEB18C /* MangaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaService.swift; sourceTree = "<group>"; };
+		245761501E2EE92A00BEB18C /* SearchMediaTableCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMediaTableCellData.swift; sourceTree = "<group>"; };
 		245E59A51DD1C3C4002375A4 /* Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubRealmObject.swift; sourceTree = "<group>"; };
 		246023391DCCA11700B3C99B /* UserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpec.swift; sourceTree = "<group>"; };
@@ -582,6 +584,7 @@
 				245761471E2E314F00BEB18C /* Cells */,
 				2457613E1E2DB08C00BEB18C /* SearchAnimeDataSource.swift */,
 				2457614C1E2E3EC800BEB18C /* SearchMangaDataSource.swift */,
+				245761501E2EE92A00BEB18C /* SearchMediaTableCellData.swift */,
 				2457613A1E2DA69800BEB18C /* SearchViewController.swift */,
 			);
 			path = Search;
@@ -593,7 +596,6 @@
 				245761481E2E316700BEB18C /* SearchMediaTableViewCell.swift */,
 				245761491E2E316700BEB18C /* SearchMediaTableViewCell.xib */,
 			);
-			name = Cells;
 			path = Cells;
 			sourceTree = "<group>";
 		};
@@ -1353,6 +1355,7 @@
 				2466586B1E28876800BB15EC /* MediaViewController.swift in Sources */,
 				246658691E2886BA00BB15EC /* AnimeViewController.swift in Sources */,
 				248FE15E1E1F58AC009ACA66 /* EntryStringTableViewCell.swift in Sources */,
+				245761511E2EE92A00BEB18C /* SearchMediaTableCellData.swift in Sources */,
 				242A04071E1B904D000E8B06 /* main.swift in Sources */,
 				24175E921E1FA88A009FBDE6 /* FontAwesomeIcon.swift in Sources */,
 				246658731E28999E00BB15EC /* MediaTextTableViewCell.swift in Sources */,
