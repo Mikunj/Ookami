@@ -41,8 +41,7 @@ public class KitsuLibraryRequest: KitsuPagedRequest {
     ///The min date that entries have to be updated since
     public private(set) var since: Date! {
         didSet {
-            //TODO: This is passing an internal server error atm, need to ask Nuck, disable it while it's not fixed
-            //self.filter(key: "since", value: since.iso8601)
+            self.filter(key: "since", value: since.iso8601)
         }
     }
     

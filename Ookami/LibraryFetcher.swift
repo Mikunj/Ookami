@@ -47,6 +47,9 @@ class LibraryFetcher {
         if timer != nil { timer?.invalidate() }
         
         timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(updateLibrary), userInfo: nil, repeats: true)
+        
+        //Call the update function at the start
+        updateLibrary()
     }
     
     func stopFetching() {
