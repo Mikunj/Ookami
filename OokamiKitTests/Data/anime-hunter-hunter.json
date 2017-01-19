@@ -56,7 +56,10 @@
         "subtype": "TV",
         "youtubeVideoId": "5Vy0Hzkxndc",
         "ageRating": "R",
-        "ageRatingGuide": "Violence, Profanity"
+        "ageRatingGuide": "Violence, Profanity",
+        "nsfw": true,
+        "popularityRank": 25,
+        "ratingRank": 4
     },
     "relationships": {
         "genres": {

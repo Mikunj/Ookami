@@ -25,7 +25,10 @@ public class Anime: Object, Cacheable {
     public dynamic var ageRatingGuide = ""
     public dynamic var posterImage = ""
     public dynamic var coverImage = ""
+    public dynamic var nsfw = false
     
+    public dynamic var popularityRank = -1
+    public dynamic var ratingRank = -1
     
     public dynamic var episodeCount = -1 //-1 means we don't know the episode count for this anime
     public dynamic var episodeLength = -1
@@ -140,6 +143,9 @@ extension Anime: JSONParsable {
         anime.youtubeVideoId = attributes["youtubeVideoId"].stringValue
         anime.ageRating = attributes["ageRating"].stringValue
         anime.ageRatingGuide = attributes["ageRatingGuide"].stringValue
+        anime.nsfw = attributes["nsfw"].boolValue
+        anime.popularityRank = attributes["popularityRank"].int ?? -1
+        anime.ratingRank = attributes["ratingRank"].int ?? -1
         anime.posterImage = attributes["posterImage"]["small"].stringValue
         anime.coverImage = attributes["coverImage"]["original"].stringValue
         

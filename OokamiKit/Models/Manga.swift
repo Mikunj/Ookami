@@ -19,8 +19,15 @@ public class Manga: Object, Cacheable {
     public dynamic var averageRating = 0.0
     public dynamic var startDate: Date?
     public dynamic var endDate: Date?
+    public dynamic var ageRating: String = ""
+    public dynamic var ageRatingGuide: String = ""
+    public dynamic var serialization: String = ""
+    public dynamic var nsfw = false
     public dynamic var posterImage = ""
     public dynamic var coverImage = ""
+    
+    public dynamic var popularityRank: Int = -1
+    public dynamic var ratingRank: Int = -1
     
     public dynamic var chapterCount: Int = -1 //-1 means we don't know the count
     public dynamic var volumeCount: Int = -1
@@ -60,7 +67,7 @@ public class Manga: Object, Cacheable {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return ["subtype"]
+        return []
     }
     
     /// MARK:- Cacheable
@@ -110,8 +117,15 @@ extension Manga: JSONParsable {
         manga.chapterCount = attributes["chapterCount"].int ?? -1
         manga.volumeCount = attributes["volumeCount"].int ?? -1
         manga.subtypeRaw = attributes["subtype"].stringValue
+        manga.ageRating = attributes["ageRating"].stringValue
+        manga.ageRatingGuide = attributes["ageRatingGuide"].stringValue
+        manga.serialization = attributes["serialization"].stringValue
+        manga.popularityRank = attributes["popularityRank"].int ?? -1
+        manga.ratingRank = attributes["ratingRank"].int ?? -1
+        manga.nsfw = attributes["nsfw"].boolValue
         manga.posterImage = attributes["posterImage"]["small"].stringValue
         manga.coverImage = attributes["coverImage"]["original"].stringValue
+        
         
         //Add titles
         let attributeTitles = attributes["titles"]

@@ -13,6 +13,8 @@
             "en_jp": "One Punch-Man"
         },
         "canonicalTitle": "One Punch-Man",
+        "ageRating": null,
+        "ageRatingGuide": null,
         "abbreviatedTitles": null,
         "averageRating": 4.49896219123721,
         "ratingFrequencies": {
@@ -28,6 +30,8 @@
             "5.0": "765",
             "nil": "99"
         },
+        "popularityRank": 6,
+        "ratingRank": null,
         "startDate": "2012-06-14",
         "endDate": null,
         "posterImage": {

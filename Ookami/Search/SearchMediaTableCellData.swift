@@ -86,6 +86,10 @@ struct SearchMediaTableCellData {
         var details: [String] = []
         details.append(manga.subtypeRaw.uppercased())
         
+        if !manga.ageRating.isEmpty {
+            details.append(manga.ageRating.uppercased())
+        }
+        
         if let date = manga.startDate {
             let year = Calendar.current.component(.year, from: date)
             details.append(String(year))

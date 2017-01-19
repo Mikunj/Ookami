@@ -140,6 +140,9 @@ class AnimeSpec: QuickSpec {
                     expect(anime.ageRating).to(equal("R"))
                     expect(anime.ageRatingGuide).to(equal("Violence, Profanity"))
                     expect(anime.subtypeRaw).to(equal("TV"))
+                    expect(anime.nsfw).to(beTrue())
+                    expect(anime.popularityRank).to(equal(25))
+                    expect(anime.ratingRank).to(equal(4))
                     
                     let d = DateFormatter()
                     d.dateFormat = "YYYY-MM-dd"

@@ -87,6 +87,15 @@ class MangaSpec: QuickSpec {
                     expect(manga.chapterCount).to(equal(-1))
                     expect(manga.volumeCount).to(equal(0))
                     expect(manga.subtypeRaw).to(equal("manga"))
+                    
+                    //TODO: Update these when ageRating and ageRatingGuide are non-null in response
+                    expect(manga.ageRating).to(equal(""))
+                    expect(manga.ageRatingGuide).to(equal(""))
+                    
+                    expect(manga.popularityRank).to(equal(6))
+                    expect(manga.ratingRank).to(equal(-1))
+                    expect(manga.serialization).to(equal("Tonari no Young Jump"))
+                    expect(manga.nsfw).to(beFalse())
 
                     let d = DateFormatter()
                     d.dateFormat = "YYYY-MM-dd"

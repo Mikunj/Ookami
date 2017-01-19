@@ -9,7 +9,6 @@ import UIKit
 import IQKeyboardManager
 import OokamiKit
 
-//TODO: NEED A REALM MIGRATION CLASS!! DON'T FORGET!!
 //TODO: Handle the case where user changes password but doesn't logout in the app. (maybe during launch, check auth and if valid then show main vc else show the login?)
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -18,9 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        MigrationManager().applyMigrations()
         FontAwesomeIcon.register()
-        IQKeyboardManager.shared().isEnabled = true
         Theme.NavigationTheme().apply()
+        IQKeyboardManager.shared().isEnabled = true
         
         //Start the fetching timer
         fetcher = LibraryFetcher()
