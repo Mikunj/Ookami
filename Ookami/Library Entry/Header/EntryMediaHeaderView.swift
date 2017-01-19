@@ -14,15 +14,6 @@ protocol EntryMediaHeaderViewDelegate: class {
     func didTapMediaButton()
 }
 
-struct EntryMediaHeaderViewData {
-    var mediaType: Media.MediaType? = nil
-    var posterImage: String? = nil
-    var coverImage: String? = nil
-    var name: String = ""
-    var details: String = ""
-    var synopsis: String = ""
-}
-
 class EntryMediaHeaderView: NibLoadableView {
     
     @IBOutlet weak var posterImage: UIImageView!

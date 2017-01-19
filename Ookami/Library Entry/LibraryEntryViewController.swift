@@ -13,6 +13,20 @@ import Reusable
 import ActionSheetPicker_3_0
 import NVActivityIndicatorView
 
+private extension LibraryEntry {
+    
+    /// Convert `LibraryEntry` to `EntryMediaHeaderViewData`
+    ///
+    /// - Returns: The data representation of entry
+    func toEntryMediaHeaderData() -> EntryMediaHeaderViewData {
+        if let anime = self.anime { return EntryMediaHeaderViewData(anime: anime) }
+        if let manga = self.manga { return EntryMediaHeaderViewData(manga: manga) }
+        
+        return EntryMediaHeaderViewData()
+    }
+}
+
+
 //A class to show/edit a library entry
 class LibraryEntryViewController: UIViewController {
     

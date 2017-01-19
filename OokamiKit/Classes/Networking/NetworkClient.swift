@@ -120,7 +120,7 @@ public class NetworkClient: NetworkClientProtocol {
                 //Try and extract the error from the JSON
                 if let data = response.data ,
                     let stringData = String(data: data, encoding: .utf8),
-                    let errorString = JSON.parse(stringData)["errors"][0]["detail"].string {
+                    let errorString = JSON(parseJSON: stringData)["errors"][0]["detail"].string {
                     completion(nil, NetworkClientError.error(errorString.capitalized))
                 }
                 

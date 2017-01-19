@@ -52,7 +52,6 @@
 		242A042C1E1F480B000E8B06 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A042B1E1F480B000E8B06 /* NibLoadableView.swift */; };
 		242A042E1E1F487B000E8B06 /* EntryMediaHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A042D1E1F487B000E8B06 /* EntryMediaHeaderView.swift */; };
 		242A04301E1F4887000E8B06 /* EntryMediaHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 242A042F1E1F4887000E8B06 /* EntryMediaHeaderView.xib */; };
-		242A04321E1F4E6B000E8B06 /* LibraryEntry+EntryViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A04311E1F4E6B000E8B06 /* LibraryEntry+EntryViewData.swift */; };
 		242B2B451DE51B8C0002903B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B441DE51B8C0002903B /* AuthenticationService.swift */; };
 		242B2B481DE521880002903B /* AuthentionServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B471DE521880002903B /* AuthentionServiceSpec.swift */; };
 		242B2B4A1DE566E90002903B /* Ookami.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B491DE566E90002903B /* Ookami.swift */; };
@@ -68,6 +67,8 @@
 		2457614D1E2E3EC800BEB18C /* SearchMangaDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2457614C1E2E3EC800BEB18C /* SearchMangaDataSource.swift */; };
 		2457614F1E2E3F3F00BEB18C /* MangaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2457614E1E2E3F3F00BEB18C /* MangaService.swift */; };
 		245761511E2EE92A00BEB18C /* SearchMediaTableCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245761501E2EE92A00BEB18C /* SearchMediaTableCellData.swift */; };
+		245761531E30607900BEB18C /* ItemData+LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245761521E30607900BEB18C /* ItemData+LibraryView.swift */; };
+		245761551E30622600BEB18C /* EntryMediaHeaderViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245761541E30622600BEB18C /* EntryMediaHeaderViewData.swift */; };
 		245E59A61DD1C3C4002375A4 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A51DD1C3C4002375A4 /* Default.swift */; };
 		245E59A81DD1D5A1002375A4 /* StubRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */; };
 		2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246023391DCCA11700B3C99B /* UserSpec.swift */; };
@@ -259,7 +260,6 @@
 		242A042B1E1F480B000E8B06 /* NibLoadableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
 		242A042D1E1F487B000E8B06 /* EntryMediaHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryMediaHeaderView.swift; sourceTree = "<group>"; };
 		242A042F1E1F4887000E8B06 /* EntryMediaHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryMediaHeaderView.xib; sourceTree = "<group>"; };
-		242A04311E1F4E6B000E8B06 /* LibraryEntry+EntryViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LibraryEntry+EntryViewData.swift"; sourceTree = "<group>"; };
 		242B2B441DE51B8C0002903B /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		242B2B471DE521880002903B /* AuthentionServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthentionServiceSpec.swift; sourceTree = "<group>"; };
 		242B2B491DE566E90002903B /* Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ookami.swift; sourceTree = "<group>"; };
@@ -275,6 +275,8 @@
 		2457614C1E2E3EC800BEB18C /* SearchMangaDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMangaDataSource.swift; sourceTree = "<group>"; };
 		2457614E1E2E3F3F00BEB18C /* MangaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaService.swift; sourceTree = "<group>"; };
 		245761501E2EE92A00BEB18C /* SearchMediaTableCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMediaTableCellData.swift; sourceTree = "<group>"; };
+		245761521E30607900BEB18C /* ItemData+LibraryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ItemData+LibraryView.swift"; sourceTree = "<group>"; };
+		245761541E30622600BEB18C /* EntryMediaHeaderViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryMediaHeaderViewData.swift; path = EntryMediaHeaderViewData.swift; sourceTree = "<group>"; };
 		245E59A51DD1C3C4002375A4 /* Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubRealmObject.swift; sourceTree = "<group>"; };
 		246023391DCCA11700B3C99B /* UserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpec.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				242A04041E1A7220000E8B06 /* FullLibraryDataSource.swift */,
+				245761521E30607900BEB18C /* ItemData+LibraryView.swift */,
 				242A04091E1C7CA5000E8B06 /* LibraryEntry+LibraryView.swift */,
 				242A04021E1A64C2000E8B06 /* LibraryViewController.swift */,
 				242A04151E1CAAEA000E8B06 /* UserLibraryViewController.swift */,
@@ -512,9 +515,7 @@
 			isa = PBXGroup;
 			children = (
 				248FE15B1E1F586E009ACA66 /* Cells */,
-				242A042D1E1F487B000E8B06 /* EntryMediaHeaderView.swift */,
-				242A042F1E1F4887000E8B06 /* EntryMediaHeaderView.xib */,
-				242A04311E1F4E6B000E8B06 /* LibraryEntry+EntryViewData.swift */,
+				245761561E30624100BEB18C /* Header */,
 				242A04201E1F11E0000E8B06 /* LibraryEntryViewController.swift */,
 				24175E981E207CB1009FBDE6 /* LibraryEntryViewData.swift */,
 				24175E9E1E209266009FBDE6 /* TextEditingViewController.swift */,
@@ -597,6 +598,17 @@
 				245761491E2E316700BEB18C /* SearchMediaTableViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		245761561E30624100BEB18C /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				242A042D1E1F487B000E8B06 /* EntryMediaHeaderView.swift */,
+				242A042F1E1F4887000E8B06 /* EntryMediaHeaderView.xib */,
+				245761541E30622600BEB18C /* EntryMediaHeaderViewData.swift */,
+			);
+			name = Header;
+			path = Header;
 			sourceTree = "<group>";
 		};
 		2464F1C51DCC58800028F7B0 = {
@@ -1352,6 +1364,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				242A040A1E1C7CA5000E8B06 /* LibraryEntry+LibraryView.swift in Sources */,
+				245761531E30607900BEB18C /* ItemData+LibraryView.swift in Sources */,
 				2466586B1E28876800BB15EC /* MediaViewController.swift in Sources */,
 				246658691E2886BA00BB15EC /* AnimeViewController.swift in Sources */,
 				248FE15E1E1F58AC009ACA66 /* EntryStringTableViewCell.swift in Sources */,
@@ -1383,9 +1396,9 @@
 				242A04011E1A183D000E8B06 /* CollectionCellSpacerOption.swift in Sources */,
 				2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */,
 				242A040C1E1C858D000E8B06 /* UserLibraryViewDataSource.swift in Sources */,
+				245761551E30622600BEB18C /* EntryMediaHeaderViewData.swift in Sources */,
 				247BF51D1E27080F00FF643F /* SignupViewController.swift in Sources */,
 				24175E961E206351009FBDE6 /* EntryButtonTableViewCell.swift in Sources */,
-				242A04321E1F4E6B000E8B06 /* LibraryEntry+EntryViewData.swift in Sources */,
 				242A04161E1CAAEA000E8B06 /* UserLibraryViewController.swift in Sources */,
 				2466586E1E288C8700BB15EC /* TitleTableSectionView.swift in Sources */,
 				248FE1621E1F5A47009ACA66 /* EntryBoolTableViewCell.swift in Sources */,

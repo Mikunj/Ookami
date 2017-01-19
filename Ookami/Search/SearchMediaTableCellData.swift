@@ -60,14 +60,8 @@ struct SearchMediaTableCellData {
     
     private func moreDetails(for anime: Anime) -> [String] {
         var moreDetails: [String] = []
-        
-        let episodeCount = anime.episodeCount > 0 ? "\(anime.episodeCount)" : "?"
-        let episodeText = anime.episodeCount == 1 ? "episode" : "episodes"
-        moreDetails.append("\(episodeCount) \(episodeText)")
-        
-        let episodeLength = anime.episodeLength > 0 ? "\(anime.episodeLength)" : "?"
-        let lengthText = anime.episodeLength == 1 ? "minute" : "minutes"
-        moreDetails.append("\(episodeLength) \(lengthText)")
+        moreDetails.append(anime.episodeCountString)
+        moreDetails.append(anime.episodeLengthString)
         
         return moreDetails
     }

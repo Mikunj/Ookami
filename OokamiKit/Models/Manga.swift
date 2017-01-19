@@ -19,10 +19,27 @@ public class Manga: Object, Cacheable {
     public dynamic var averageRating = 0.0
     public dynamic var startDate: Date?
     public dynamic var endDate: Date?
-    public dynamic var chapterCount: Int = -1 //-1 means we don't know the count
-    public dynamic var volumeCount: Int = -1
     public dynamic var posterImage = ""
     public dynamic var coverImage = ""
+    
+    public dynamic var chapterCount: Int = -1 //-1 means we don't know the count
+    public dynamic var volumeCount: Int = -1
+    
+    ///Get the string representation of the chapter count
+    ///Format: [chapter count] chapter(s)
+    public var chapterCountString: String {
+        let chapterText = chapterCount > 0 ? String(chapterCount) : "?"
+        let chapterSuffix = chapterCount == 1 ? "chapter" : "chapters"
+        return "\(chapterText) \(chapterSuffix)"
+    }
+    
+    ///Get the string representation of the volume count
+    ///Format: [volume count] volume(s)
+    public var volumeCountString: String {
+        let volumeText = volumeCount > 0 ? String(volumeCount) : "?"
+        let volumeSuffix = volumeCount == 1 ? "volume" : "volumes"
+        return "\(volumeText) \(volumeSuffix)"
+    }
     
     public let titles = List<MediaTitle>()
     public dynamic var canonicalTitle = ""

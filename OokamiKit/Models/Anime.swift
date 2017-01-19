@@ -20,14 +20,32 @@ public class Anime: Object, Cacheable {
     public dynamic var averageRating = 0.0
     public dynamic var startDate: Date?
     public dynamic var endDate: Date?
-    public dynamic var episodeCount = -1 //-1 means we don't know the episode count for this anime
-    public dynamic var episodeLength = -1
     public dynamic var youtubeVideoId = ""
     public dynamic var ageRating = ""
     public dynamic var ageRatingGuide = ""
     public dynamic var posterImage = ""
     public dynamic var coverImage = ""
     
+    
+    public dynamic var episodeCount = -1 //-1 means we don't know the episode count for this anime
+    public dynamic var episodeLength = -1
+    
+    ///Get the string representation of the episode count
+    ///Format: [episode count] episode(s)
+    public var episodeCountString: String {
+        let episodeText = episodeCount > 0 ? String(episodeCount) : "?"
+        let episodeSuffix = episodeCount == 1 ? "episode" : "episodes"
+        return "\(episodeText) \(episodeSuffix)"
+    }
+    
+    ///Get the string representation of the episode length
+    ///Format: [episode length] minute(s)
+    public var episodeLengthString: String {
+        let lengthText = episodeLength > 0 ? String(episodeLength) : "?"
+        let lengthSuffix = episodeLength == 1 ? "minute" : "minutes"
+        return "\(lengthText) \(lengthSuffix)"
+    }
+
     public let titles = List<MediaTitle>()
     public dynamic var canonicalTitle = ""
     
@@ -47,7 +65,7 @@ public class Anime: Object, Cacheable {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return ["subtype"]
+        return []
     }
     
     /// MARK:- Cacheable
