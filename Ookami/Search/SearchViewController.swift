@@ -47,7 +47,7 @@ class SearchViewController: UIViewController {
     var initialScope: Scope
     
     //The current scope
-    var currentScope: Scope
+    var currentScope: Scope? = nil
     
     //A dictionary of data sources
     var sources: [Scope: SearchViewControllerDataSource] = [:]
@@ -126,7 +126,6 @@ class SearchViewController: UIViewController {
     /// - Parameter scope: The starting scope
     init(scope: Scope = .anime) {
         self.initialScope = scope
-        self.currentScope = initialScope
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -176,8 +175,12 @@ class SearchViewController: UIViewController {
         
         searchBar.sizeToFit()
         searchBar.becomeFirstResponder()
-
-        setScope(scope: initialScope)
+        
+        //Update search bar to reflect the scope
+        let index = Scope.all.index(of: initialScope) ?? 0
+        searchBar.selectedScopeButtonIndex = index
+        searchBar(searchBar, selectedScopeButtonIndexDidChange: index)
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -244,11 +247,10 @@ extension SearchViewController: UISearchBarDelegate {
     
     func setScope(scope: Scope) {
         currentScope = scope
-        dataSource = sources[currentScope] ?? nil
+        dataSource = sources[currentScope!] ?? nil
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        let selectedScope = searchBar.selectedScopeButtonIndex
         let scope = Scope.all[selectedScope]
         if currentScope != scope {
             setScope(scope: scope)
