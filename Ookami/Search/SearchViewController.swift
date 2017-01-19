@@ -10,8 +10,6 @@ import UIKit
 import Cartography
 import NVActivityIndicatorView
 
-//TODO: Refactor SearchAnimeDS and SearchMangaDS as code is basically duplicated
-
 protocol SearchViewControllerDataSource {
     weak var delegate: SearchViewControllerDelegate? { get set }
     

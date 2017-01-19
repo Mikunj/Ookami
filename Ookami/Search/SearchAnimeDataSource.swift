@@ -9,87 +9,22 @@
 import UIKit
 import OokamiKit
 
-class SearchAnimeDataSource: SearchViewControllerDataSource {
-    
-    weak var delegate: SearchViewControllerDelegate? = nil
+class SearchAnimeDataSource: SearchMediaDataSource {
     
     //The anime we have loaded
     var anime: [Anime] = []
     
-    //The data used for animation
-    var data: [SearchMediaTableCellData] = []
-    
-    //The network operation
-    var operation: Operation? = nil
-    
-    init(parent: UITableView) {
-        parent.register(cellType: SearchMediaTableViewCell.self)
+    override func willClearData() {
+        anime = []
     }
     
-    //We use populatedSections to only show sections which have data
-    //No point in showing Movie if there is no movie in the response
-    func numberOfSection(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func numberOfRows(in section: Int, tableView: UITableView) -> Int {
-        return data.count
-    }
-    
-    func cellForRow(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(for: indexPath) as SearchMediaTableViewCell
-        
-        let animeData = data[indexPath.row]
-        cell.update(data: animeData)
-        
-        
-        return cell
-    }
-    
-    func heightForRow(at indexPath: IndexPath) -> CGFloat {
-        let isIpad = UIDevice.current.userInterfaceIdiom == .pad
-        return isIpad ? 332 : 166
-    }
-    
-    //If you return nil then no section header is displayed
-    func title(for section: Int) -> String? {
-        return nil
-    }
-    
-    //Update the anime data
-    func updateData(anime: [Anime]) {
-        let newData = anime.map { SearchMediaTableCellData(anime: $0) }
-        let oldData = self.data
-        
-        self.anime = anime
-        self.data = newData
-        delegate?.reloadTableView(oldData: oldData, newData: newData)
-    }
-    
-    
-    func didUpdateSearch(text: String) {
-        
-        //Don't bother calling api if text is empty
-        if text.isEmpty {
-            updateData(anime: [])
-            operation?.cancel()
-            delegate?.hideIndicator()
-            return
-        }
-        
-        //Check if we have a operation in progress, if so then cancel it
-        if operation != nil {
-            operation?.cancel()
-        }
-        
-        delegate?.showIndicator()
-        operation = AnimeService().find(title: text) { [weak self] ids, error in
+    override func operation(for searchText: String, completion: @escaping () -> Void) -> Operation {
+        return AnimeService().find(title: searchText) { [weak self] ids, error in
             guard let strong = self else {
                 return
             }
             
-            strong.operation = nil
-            strong.delegate?.hideIndicator()
+            completion()
             
             guard error == nil else {
                 print(error!.localizedDescription)
@@ -102,14 +37,14 @@ class SearchAnimeDataSource: SearchViewControllerDataSource {
             }
             
             //We should return the results in order they were recieved so that users can get the best results
-            let anime = ids.flatMap { Anime.get(withId: $0) }
-            strong.updateData(anime: anime)
+            strong.anime = ids.flatMap { Anime.get(withId: $0) }
+            let data = strong.anime.map { SearchMediaTableCellData(anime: $0) }
+            strong.updateData(newData: data)
         }
     }
     
-    func didTapCell(at indexPath: IndexPath, controller: SearchViewController) {
+    override func didTapCell(at indexPath: IndexPath, controller: SearchViewController) {
         let anime = self.anime[indexPath.row]
         AppCoordinator.showAnimeVC(in: controller, anime: anime)
-        
     }
 }
