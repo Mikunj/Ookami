@@ -48,6 +48,7 @@ class SignupViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     @IBAction func didTapSignup(_ sender: UIButton) {
+        self.view.endEditing(true)
         
         let name = nameField.text ?? ""
         let email = emailField.text ?? ""

@@ -12,6 +12,7 @@ import OokamiKit
 import Cartography
 
 //TODO: Need to add PagedLibraryDataSource
+//TODO: Move settings to a page later
 
 //Class used for displaying a users library (both anime and manga)
 final class UserLibraryViewController: UIViewController {
@@ -102,6 +103,9 @@ final class UserLibraryViewController: UIViewController {
         let search = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
         self.navigationItem.setRightBarButton(search, animated: false)
         
+        let settings = UIBarButtonItem(withIcon: .cogIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(settingsTapped))
+        self.navigationItem.setLeftBarButton(settings, animated: false)
+        
         show(.anime)
     }
     
@@ -116,6 +120,25 @@ final class UserLibraryViewController: UIViewController {
     
     func searchTapped() {
         AppCoordinator.showSearch(with: searchScope, in: self)
+    }
+    
+    func settingsTapped() {
+        //TODO: Move this out of here after main pages (discovery, user, library) have been implemented
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        if CurrentUser().isLoggedIn() {
+            let logout = UIAlertAction(title: "Logout", style: .destructive) { _ in
+                CurrentUser().logout()
+            }
+            alert.addAction(logout)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+            alert.addAction(cancel)
+            
+            self.present(alert, animated: true)
+        }
+        
+        
     }
     
 }

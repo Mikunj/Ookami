@@ -26,6 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fetcher = LibraryFetcher()
         fetcher?.startFetching()
         
+        //Register for logout notification
+        let logout = CurrentUser.Notifications.userLoggedOut.name
+        NotificationCenter.default.addObserver(self, selector: #selector(showLogin), name: logout, object: nil)
+        
         window = UIWindow(frame: UIScreen.main.bounds);
         
         if CurrentUser().isLoggedIn() {
@@ -34,10 +38,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //Update the user info
             AuthenticationService().updateInfo() { _ in }
         } else {
-            AppCoordinator.showLoginVC(in: window!)
+            showLogin()
         }
         
         return true
+    }
+    
+    func showLogin() {
+        if let window = window {
+            AppCoordinator.showLoginVC(in: window)
+        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -49,7 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        CacheManager().clearCache()
+        NotificationCenter.default.removeObserver(self)
+        CacheManager.shared.clearCache()
         fetcher?.stopFetching()
     }
     

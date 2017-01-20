@@ -12,6 +12,16 @@ import Heimdallr
 //A class that is used to store current user data.
 public class CurrentUser {
     
+    //Notifications to send
+    public enum Notifications: String {
+        case userLoggedIn
+        case userLoggedOut
+        
+        public var name: Notification.Name {
+            return Notification.Name(rawValue: self.rawValue)
+        }
+    }
+    
     /// The heimdallr class used for OAuth2 authentication
     let heimdallr: Heimdallr
     
@@ -27,6 +37,7 @@ public class CurrentUser {
         set(id) {
             if id != nil {
                 UserDefaults.standard.set(id, forKey: self.userIDKey)
+                send(notification: .userLoggedIn)
             } else {
                 UserDefaults.standard.removeObject(forKey: self.userIDKey)
             }
@@ -55,6 +66,7 @@ public class CurrentUser {
     public func logout() {
         heimdallr.clearAccessToken()
         userID = nil
+        send(notification: .userLoggedOut)
     }
     
     /// Check if a user is logged in
@@ -63,5 +75,12 @@ public class CurrentUser {
     /// - Returns: True or false if user is logged in
     public func isLoggedIn() -> Bool {
         return heimdallr.hasAccessToken
+    }
+    
+    /// Send a notification
+    ///
+    /// - Parameter notification: The notification to send
+    private func send(notification: Notifications) {
+        NotificationCenter.default.post(name: notification.name, object: nil)
     }
 }

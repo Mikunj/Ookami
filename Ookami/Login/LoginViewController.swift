@@ -38,6 +38,8 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     }
 
     @IBAction func didTapLogin(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         let username = usernameField.text ?? ""
         let password = passwordField.text ?? ""
         loginButton.isEnabled = false
