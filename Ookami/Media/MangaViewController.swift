@@ -116,10 +116,6 @@ extension MangaViewController {
 //MARK:- Header
 extension MangaViewController {
     
-    func getEntry() -> LibraryEntry? {
-        return UserHelper.entry(forMedia: .manga, id: manga.id)
-    }
-    
     func headerData() -> MediaTableHeaderViewData {
         var data = MediaTableHeaderViewData()
         data.title = manga.canonicalTitle
@@ -129,7 +125,7 @@ extension MangaViewController {
         data.coverImage = manga.coverImage
         
         //Update if we have the entry or not
-        let entry = getEntry()
+        let entry = MediaViewControllerHelper.getEntry(id: manga.id, type: .manga)
         data.entryState = entry == nil ? .add : .edit
         
         return data
@@ -141,14 +137,15 @@ extension MangaViewController {
 extension MangaViewController: MediaTableHeaderViewDelegate {
     
     func didTapEntryButton(state: MediaTableHeaderView.EntryButtonState) {
-        switch state {
-        case .edit:
-            if let entry = getEntry() {
-                AppCoordinator.showLibraryEntryVC(in: self.navigationController, entry: entry)
+        MediaViewControllerHelper.tappedEntryButton(state: state, mediaID: manga.id, mediaType: .manga, parent: self) { error in
+            
+            //User added manga
+            guard error == nil else {
+                ErrorAlert.showAlert(in: self, title: "Error Occured", message: error!.localizedDescription)
+                return
             }
-            break
-        case .add:
-            break
+            
+            self.mediaHeader.data = self.headerData()
         }
     }
     

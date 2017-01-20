@@ -6,7 +6,7 @@
 //  Copyright © 2017 Mikunj Varsani. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import OokamiKit
 import RealmSwift
 import SKPhotoBrowser
@@ -92,6 +92,43 @@ class MediaViewControllerHelper {
             let photo = SKPhotoBrowser(originImage: image, photos: [SKPhoto.photoWithImage(image)], animatedFromView: imageView)
             vc.present(photo, animated: true)
         }
+    }
+    
+    //Either edit or add the entry
+    static func tappedEntryButton(state: MediaTableHeaderView.EntryButtonState, mediaID: Int, mediaType: Media.MediaType, parent: UIViewController, completion: @escaping (Error?) -> Void) {
+        switch state {
+        case .edit:
+            if let entry = getEntry(id: mediaID, type: mediaType) {
+                AppCoordinator.showLibraryEntryVC(in: parent.navigationController, entry: entry)
+            }
+            break
+            
+        case .add:
+            
+            let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            for status in LibraryEntry.Status.all {
+                let action = UIAlertAction(title: status.toString(forMedia: mediaType), style: .default) { _ in
+                    addEntry(id: mediaID, type: mediaType, status: status, completion: completion)
+                }
+                sheet.addAction(action)
+            }
+            
+            sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            parent.present(sheet, animated: true)
+            
+            break
+        }
+    }
+    
+    private static func addEntry(id: Int, type: Media.MediaType, status: LibraryEntry.Status, completion: @escaping (Error?) -> Void) {
+        LibraryService().add(mediaID: id, mediaType: type, status: status) { _, error in
+            completion(error)
+        }
+    }
+    
+    static func getEntry(id: Int, type: Media.MediaType) -> LibraryEntry? {
+        return UserHelper.entry(forMedia: type, id: id)
     }
     
 }

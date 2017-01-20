@@ -115,10 +115,6 @@ extension AnimeViewController {
 //MARK:- Header
 extension AnimeViewController {
     
-    func getEntry() -> LibraryEntry? {
-        return UserHelper.entry(forMedia: .anime, id: anime.id)
-    }
-    
     func headerData() -> MediaTableHeaderViewData {
         var data = MediaTableHeaderViewData()
         data.title = anime.canonicalTitle
@@ -129,7 +125,7 @@ extension AnimeViewController {
         data.coverImage = anime.coverImage
         
         //Update if we have the entry or not
-        let entry = getEntry()
+        let entry = MediaViewControllerHelper.getEntry(id: anime.id, type: .anime)
         data.entryState = entry == nil ? .add : .edit
         
         return data
@@ -140,16 +136,19 @@ extension AnimeViewController {
 extension AnimeViewController: MediaTableHeaderViewDelegate {
     
     func didTapEntryButton(state: MediaTableHeaderView.EntryButtonState) {
-        switch state {
-        case .edit:
-            if let entry = getEntry() {
-                AppCoordinator.showLibraryEntryVC(in: self.navigationController, entry: entry)
-            }
-            break
+        MediaViewControllerHelper.tappedEntryButton(state: state, mediaID: anime.id, mediaType: .anime, parent: self) { error in
             
-        case .add:
-            break
+            //User added anime
+            guard error == nil else {
+                ErrorAlert.showAlert(in: self, title: "Error Occured", message: error!.localizedDescription)
+                return
+            }
+            self.mediaHeader.data = self.headerData()
         }
+    }
+    
+    func didAddToLibrary(status: LibraryEntry.Status) {
+        
     }
     
     func didTapTrailerButton() {

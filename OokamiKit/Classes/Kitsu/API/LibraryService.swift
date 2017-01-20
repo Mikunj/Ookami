@@ -53,11 +53,26 @@ public class LibraryService: BaseService {
             
             //Add the new entry to the library
             Parser().parse(json: json) { parsed in
-                self.database.addOrUpdate(parsed)
                 
-                //Get the entry we parsed
-                let pEntry = parsed.first { $0 is LibraryEntry } as? LibraryEntry
-                completion(pEntry, nil)
+                let parsedEntry = parsed.first { $0 is LibraryEntry } as? LibraryEntry
+                if let parsedEntry = parsedEntry {
+                    //Before we add the entry we have to set the userID on it
+                    //This is because the entry in the response does not contain the relationship data for user
+                    parsedEntry.userID = CurrentUser().userID ?? -1
+                    
+                    //We also set the media on it
+                    let media = Media()
+                    media.entryID = parsedEntry.id
+                    media.id = mediaID
+                    media.rawType = mediaType.rawValue
+                    parsedEntry.media = media
+                }
+                
+                self.database.addOrUpdate(parsed)
+                print(parsed)
+                
+  
+                completion(parsedEntry, nil)
             }
         }
         
