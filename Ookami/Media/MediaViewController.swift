@@ -19,6 +19,9 @@ struct MediaViewControllerSection {
     var heightForRow: (IndexPath) -> CGFloat = { _ in
         return UITableViewAutomaticDimension
     }
+    var estimatedHeightForRow: (IndexPath) -> CGFloat = { _ in
+        return 44
+    }
     
     init(title: String, cellCount: Int) {
         self.title = title
@@ -41,9 +44,10 @@ class MediaViewController: NavigationHidingViewController {
         t.separatorStyle = .none
         
         t.register(cellType: MediaTextTableViewCell.self)
+        t.register(cellType: MediaInfoTableViewCell.self)
         
         //Auto table height
-        t.estimatedRowHeight = 44
+        t.estimatedRowHeight = 15
         t.rowHeight = UITableViewAutomaticDimension
         
         //Set the footer view so we don't get extra seperators
@@ -130,7 +134,7 @@ class MediaViewController: NavigationHidingViewController {
     }
     
     override func visibleOffset() -> CGFloat {
-        return -100
+        return -150
     }
     
 }
@@ -157,6 +161,10 @@ extension MediaViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return data[indexPath.section].heightForRow(indexPath)
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return data[indexPath.section].estimatedHeightForRow(indexPath)
+    }
 }
 
 //MARK:- Delegate
@@ -169,7 +177,7 @@ extension MediaViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 35
+        return 27
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

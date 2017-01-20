@@ -231,7 +231,7 @@ extension SearchViewController: UITableViewDelegate {
     
     //Only show header if we have a title
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return dataSource?.title(for: section) == nil ? 0 : 35
+        return dataSource?.title(for: section) == nil ? 0 : 27
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -272,7 +272,9 @@ extension SearchViewController: UISearchBarDelegate {
 //MARK:- Delegate
 extension SearchViewController: SearchViewControllerDelegate {
     func showIndicator() {
-        activityIndicator.startAnimating()
+        if !activityIndicator.isAnimating {
+            activityIndicator.startAnimating()
+        }
     }
     
     func hideIndicator() {

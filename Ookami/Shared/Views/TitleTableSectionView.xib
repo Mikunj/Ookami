@@ -16,37 +16,37 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="27"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wgm-mJ-x1t">
-                    <rect key="frame" x="4" y="4" width="367" height="27"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="27"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8F-iO-afx">
-                            <rect key="frame" x="4" y="0.0" width="359" height="27"/>
+                            <rect key="frame" x="8" y="0.0" width="363" height="27"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="backgroundColor" red="0.96117538924845469" green="0.96802870029255939" blue="0.98858863342487313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="s8F-iO-afx" firstAttribute="top" secondItem="Wgm-mJ-x1t" secondAttribute="top" id="6B4-ht-UWc"/>
                         <constraint firstAttribute="bottom" secondItem="s8F-iO-afx" secondAttribute="bottom" id="VOD-xB-elc"/>
                         <constraint firstAttribute="trailing" secondItem="s8F-iO-afx" secondAttribute="trailing" constant="4" id="dVF-pM-Lq9"/>
-                        <constraint firstItem="s8F-iO-afx" firstAttribute="leading" secondItem="Wgm-mJ-x1t" secondAttribute="leading" constant="4" id="jNK-vD-wFV"/>
+                        <constraint firstItem="s8F-iO-afx" firstAttribute="leading" secondItem="Wgm-mJ-x1t" secondAttribute="leading" constant="8" id="jNK-vD-wFV"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Wgm-mJ-x1t" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="0mR-Pr-kIs"/>
-                <constraint firstItem="Wgm-mJ-x1t" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="7m4-gF-80i"/>
-                <constraint firstAttribute="trailing" secondItem="Wgm-mJ-x1t" secondAttribute="trailing" constant="4" id="S5n-i5-VaZ"/>
-                <constraint firstAttribute="bottom" secondItem="Wgm-mJ-x1t" secondAttribute="bottom" constant="4" id="n61-GJ-sY6"/>
+                <constraint firstItem="Wgm-mJ-x1t" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0mR-Pr-kIs"/>
+                <constraint firstItem="Wgm-mJ-x1t" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7m4-gF-80i"/>
+                <constraint firstAttribute="trailing" secondItem="Wgm-mJ-x1t" secondAttribute="trailing" id="S5n-i5-VaZ"/>
+                <constraint firstAttribute="bottom" secondItem="Wgm-mJ-x1t" secondAttribute="bottom" id="n61-GJ-sY6"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="46.5" y="131"/>
+            <point key="canvasLocation" x="46.5" y="130.5"/>
         </view>
     </objects>
 </document>

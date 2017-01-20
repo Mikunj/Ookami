@@ -16,6 +16,24 @@ import RealmSwift
  The key and value can only be modified internally (in OokamiKit) thus preventing the problem where apps using this framework modify the values accidentally
  */
 public class MediaTitle: Object {
+    
+    public enum LanguageKey: String {
+        case english = "en"
+        case japanese = "ja_jp"
+        case romanized = "en_jp"
+        
+        public func toString() -> String {
+            switch self {
+            case .english:
+                return "English"
+            case .japanese:
+                return "Japanese"
+            case .romanized:
+                return "Romanized"
+            }
+        }
+    }
+    
     //The media this title belongs to
     public internal(set) dynamic var mediaID = -1 {
         didSet { compoundKey = self.compoundKeyValue() }
@@ -29,6 +47,11 @@ public class MediaTitle: Object {
     //the language key, E.g en or en_jp
     public internal(set) dynamic var key = "" {
         didSet { compoundKey = self.compoundKeyValue() }
+    }
+    
+    //The language key in an enum format
+    public var languageKey: LanguageKey? {
+        return LanguageKey(rawValue: key)
     }
     
     //The title for the given key

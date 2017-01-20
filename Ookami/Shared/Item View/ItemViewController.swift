@@ -204,7 +204,9 @@ extension ItemViewController: ItemViewControllerDelegate {
     }
     
     func showActivityIndicator() {
-        activityIndicator.startAnimating()
+        if !activityIndicator.isAnimating {
+            activityIndicator.startAnimating()
+        }
     }
     
     func hideActivityIndicator() {
