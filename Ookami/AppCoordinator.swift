@@ -81,6 +81,11 @@ class AppCoordinator {
         parent.present(nav, animated: true)
     }
     
+    static func showMangaVC(in parent: UIViewController, manga: Manga) {
+        let mangaVC = MangaViewController(manga: manga)
+        let nav = UINavigationController(rootViewController: mangaVC)
+        parent.present(nav, animated: true)
+    }
     
     //Get the library view controller for the given user id
     private static func userLibraryVC(for user: Int) -> UserLibraryViewController {

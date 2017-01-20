@@ -58,38 +58,9 @@ class AnimeViewController: MediaViewController {
 //MARK:- Titles section
 extension AnimeViewController {
     fileprivate func titleSection() -> MediaViewControllerSection? {
-        
-        let titles = getTitles()
-        if titles.isEmpty {
-            return nil
-        }
-        
-        var section = MediaViewControllerSection(title: "Alternate Titles", cellCount: titles.count)
-        section.cellForIndexPath = { indexPath, tableView in
-            let cell = tableView.dequeueReusableCell(for: indexPath) as MediaInfoTableViewCell
-            
-            let (title, value) = titles[indexPath.row]
-            cell.infoTitleLabel.text = title
-            cell.infoLabel.text = value
-            
-            return cell
-        }
-        section.estimatedHeightForRow = { _ in return 20 }
-        
-        return section
+        return MediaViewControllerHelper.getTitleSection(for: anime.titles)
     }
     
-    private func getTitles() -> [(String, String)] {
-        let titles = anime.titles.sorted(byProperty: "key")
-        let info: [(String, String)] = titles.flatMap { title in
-            if let titleString = title.languageKey?.toString().capitalized, !title.value.isEmpty {
-                return (titleString, title.value)
-            }
-            return nil
-        }
-        
-        return info
-    }
 }
 
 //MARK:- Info section
@@ -97,19 +68,7 @@ extension AnimeViewController {
     
     fileprivate func infoSection() -> MediaViewControllerSection {
         let info = getInfo()
-        var section = MediaViewControllerSection(title: "Information", cellCount: info.count)
-        section.cellForIndexPath = { indexPath, tableView in
-            let cell = tableView.dequeueReusableCell(for: indexPath) as MediaInfoTableViewCell
-            
-            let (title, value) = info[indexPath.row]
-            cell.infoTitleLabel.text = title
-            cell.infoLabel.text = value
-            
-            return cell
-        }
-        section.estimatedHeightForRow = { _ in return 20 }
-        
-        return section
+        return MediaViewControllerHelper.getSectionWithMediaInfoCell(title: "Information", info: info)
     }
     
     fileprivate func getInfo() -> [(title: String, value: String)] {
@@ -121,7 +80,8 @@ extension AnimeViewController {
         info.append(("Status", status))
         
         let airingTitle = anime.isAiring() ? "Airing": "Aired"
-        info.append((airingTitle, airingText()))
+        let airingText = MediaViewControllerHelper.dateRangeText(start: anime.startDate, end: anime.endDate)
+        info.append((airingTitle, airingText))
         
         let episodes = anime.episodeCount > 0 ? "\(anime.episodeCount)" : "?"
         info.append(("Episodes", episodes))
@@ -143,38 +103,12 @@ extension AnimeViewController {
         
         return info
     }
-    
-    private func airingText() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM yyyy"
-        
-        var startDate = "?"
-        if let date = anime.startDate {
-            startDate = formatter.string(from: date)
-        }
-        
-        var endDate: String = "?"
-        if let date = anime.endDate {
-            endDate = formatter.string(from: date)
-        }
-        
-        return "\(startDate) to \(endDate)"
-    }
 }
 
 //MARK:- Synopsis Section
 extension AnimeViewController {
     fileprivate func synopsisSection() -> MediaViewControllerSection {
-        var synopsis = MediaViewControllerSection(title: "Synopsis", cellCount: 1)
-        synopsis.cellForIndexPath = { indexPath, tableView in
-            let cell = tableView.dequeueReusableCell(for: indexPath) as MediaTextTableViewCell
-            
-            cell.isUserInteractionEnabled = false
-            cell.simpleTextLabel.text = self.anime.synopsis
-            return cell
-        }
-        
-        return synopsis
+        return MediaViewControllerHelper.getSynopsisSection(synopsis: anime.synopsis)
     }
 }
 
@@ -188,7 +122,7 @@ extension AnimeViewController {
     func headerData() -> MediaTableHeaderViewData {
         var data = MediaTableHeaderViewData()
         data.title = anime.canonicalTitle
-        data.details = detailText()
+        data.details = ""
         data.airing = ""
         data.showTrailerIcon = !anime.youtubeVideoId.isEmpty
         data.posterImage = anime.posterImage
@@ -199,24 +133,6 @@ extension AnimeViewController {
         data.entryState = entry == nil ? .add : .edit
         
         return data
-    }
-    
-    private func detailText() -> String {
-        var details: [String] = []
-        details.append(anime.subtypeRaw.uppercased())
-        
-        details.append(anime.ageRating)
-        
-        let episodes = anime.episodeCount > 0 ? "\(anime.episodeCount)" : "?"
-        details.append("\(episodes) eps")
-        
-        let length = anime.episodeLength > 0 ? "\(anime.episodeLength)" : "?"
-        details.append("\(length) mins")
-        
-        let rating = String(format: "%.2f ★", anime.averageRating)
-        details.append(rating)
-        
-        return details.joined(separator: " ᛫ ")
     }
 }
 
@@ -230,7 +146,8 @@ extension AnimeViewController: MediaTableHeaderViewDelegate {
                 AppCoordinator.showLibraryEntryVC(in: self.navigationController, entry: entry)
             }
             break
-        default:
+            
+        case .add:
             break
         }
     }
@@ -243,10 +160,6 @@ extension AnimeViewController: MediaTableHeaderViewDelegate {
     }
     
     func didTapCoverImage(_ imageView: UIImageView) {
-        if !anime.coverImage.isEmpty, let image = imageView.image {
-            SKPhotoBrowserOptions.displayStatusbar = false
-            let vc = SKPhotoBrowser(originImage: image, photos: [SKPhoto.photoWithImage(image)], animatedFromView: imageView)
-            present(vc, animated: true)
-        }
+        MediaViewControllerHelper.tappedImageView(imageView, in: self)
     }
 }

@@ -45,7 +45,8 @@ class SearchMangaDataSource: SearchMediaDataSource {
     }
     
     override func didTapCell(at indexPath: IndexPath, controller: SearchViewController) {
-        let _ = self.manga[indexPath.row]
-        //TODO: show manga vc here
+        let manga = self.manga[indexPath.row]
+        AppCoordinator.showMangaVC(in: controller, manga: manga)
+
     }
 }

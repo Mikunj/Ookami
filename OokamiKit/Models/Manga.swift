@@ -159,6 +159,19 @@ extension Manga: JSONParsable {
 }
 
 extension Manga {
+    /// Check whether a manga is finished
+    ///
+    /// - Returns: True if manga is finished, false if not
+    public func isFinished() -> Bool {
+        let current = Date()
+        let endDate = self.endDate
+        
+        //Manga is finished if we have an end date and it is before the current date
+        return (endDate != nil && endDate! < current)
+    }
+}
+
+extension Manga {
     public enum SubType: String {
         case manga
         case novel
