@@ -14,26 +14,27 @@ public class MangaService: BaseService {
     ///
     /// - Parameters:
     ///   - title: The title to search for
-    ///   - limit: The amount of anime to return
+    ///   - limit: The amount of manga to return
     ///   - completion: The completion block which passes an array of manga ids that were found or an error if it occured
     /// - Returns: The search operation which can be cancelled.
     public func find(title: String, limit: Int = 20, completion: @escaping ([Int]?, Error?) -> Void) -> Operation {
         let url = Constants.Endpoints.manga
-        let params: [String: Any] = ["filter": ["text": title], "page":["limit": limit]]
+        let request = KitsuPagedRequest(relativeURL: url)
+        request.filter(key: "text", value: title)
+        request.page(limit: limit)
         
-        let request = NetworkRequest(relativeURL: url, method: .get, parameters: params)
-        let operation = NetworkOperation(request: request, client: client) { json, error in
+        let operation = NetworkOperation(request: request.build(), client: client) { json, error in
             guard error == nil else {
                 completion(nil, error)
                 return
             }
             
             guard let json = json else {
-                completion(nil, NetworkClientError.error("Failed to parse json - Anime Service"))
+                completion(nil, NetworkClientError.error("Failed to parse json - Manga Service FIND"))
                 return
             }
             
-            //Parse the objects and return the ids of the anime back
+            //Parse the objects and return the ids of the manga back
             Parser().parse(json: json, callback: { objects in
                 
                 //Add the objects to the database
@@ -41,8 +42,8 @@ public class MangaService: BaseService {
                 
                 //Return the results to the user
                 let filtered = objects.flatMap { $0 is Manga ? $0 : nil }
-                if let filteredAnime = filtered as? [Manga] {
-                    let ids = filteredAnime.map { $0.id }
+                if let filteredManga = filtered as? [Manga] {
+                    let ids = filteredManga.map { $0.id }
                     
                     completion(ids, nil)
                     return
@@ -54,5 +55,39 @@ public class MangaService: BaseService {
         queue.addOperation(operation)
         
         return operation
+    }
+    
+    /// Get a manga with the given id.
+    ///
+    /// - Parameters:
+    ///   - id: The manga id.
+    ///   - completion: A completion block which passes back the manga object or and error if something went wrong
+    public func get(id: Int, completion: @escaping (Manga?, Error?) -> Void) {
+        let endpoint = Constants.Endpoints.manga
+        let request = KitsuRequest(relativeURL: "\(endpoint)/\(id)")
+        request.include("genres")
+        
+        let operation = NetworkOperation(request: request.build(), client: client) { json, error in
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            guard let json = json else {
+                completion(nil, ServiceError.error(description: "Invalid JSON recieved - Manga Service GET"))
+                return
+            }
+            
+            Parser().parse(json: json) { parsed in
+                self.database.addOrUpdate(parsed)
+                
+                //Get the user we parsed
+                let manga = parsed.first { $0 is Manga } as? Manga
+                completion(manga, nil)
+            }
+            
+        }
+        
+        queue.addOperation(operation)
     }
 }

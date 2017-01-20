@@ -58,10 +58,11 @@ public class Anime: Object, Cacheable {
         return SubType(rawValue: subtypeRaw)
     }
     
-    /**
-     When parsing anime, if a `Genre` cannot be found then it is created with just the `id` set. This is to ensure that the relationship occurs, but we cannot determine the rest of the genre data from the anime JSON itself
-     */
-    public let genres = List<Genre>()
+    //We use MediaGenre object for linking the anime and genre to avoid direct relationships
+    public let mediaGenres = List<MediaGenre>()
+    public var genres: [Genre] {
+        return mediaGenres.flatMap { $0.genre }
+    }
     
     override public static func primaryKey() -> String {
         return "id"
@@ -108,6 +109,9 @@ extension Anime {
     func willClearFromCache() {
         //Delete anime titles
         Database().delete(titles)
+        
+        //Delete media genres
+        Database().delete(mediaGenres)
     }
 }
 
@@ -161,17 +165,16 @@ extension Anime: JSONParsable {
         }
         
         //Add genres
-        //We first check if the genre with given id exists. If not then we make one with just the id set.
+        //We use a MediaGenre object as directly linking genre will cause issues with saving to realm (values get overriden, realm exceptions etc..)
         let genres = json["relationships"]["genres"]["data"]
         for genre in genres.arrayValue {
-            let id = genre["id"].intValue
-            var genreObject = Genre.get(withId: id)
-            if genreObject == nil {
-                genreObject = Genre()
-                genreObject!.id = id
-            }
             
-            anime.genres.append(genreObject!)
+            let id = genre["id"].intValue
+            let mediaGenre = MediaGenre()
+            mediaGenre.mediaID = anime.id
+            mediaGenre.mediaType = Media.MediaType.anime.rawValue
+            mediaGenre.genreID = id
+            anime.mediaGenres.append(mediaGenre)
         }
         
         return anime

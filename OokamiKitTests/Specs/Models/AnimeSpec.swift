@@ -118,6 +118,24 @@ class AnimeSpec: QuickSpec {
                     Anime.get(withId: 1)!.willClearFromCache()
                     expect(Anime.get(withId: 1)?.titles).to(haveCount(0))
                 }
+                
+                it("should delete its media genres when clearing from cache") {
+                    TestHelper.create(object: Anime.self, inRealm: testRealm, amount: 1) { _, anime in
+                        anime.id = 1
+                        
+                        for id in [1, 2] {
+                            let genre = MediaGenre()
+                            genre.genreID = id
+                            genre.mediaID = anime.id
+                            genre.mediaType = Media.MediaType.anime.rawValue
+                            anime.mediaGenres.append(genre)
+                        }
+                    }
+                    
+                    expect(Anime.get(withId: 1)?.mediaGenres).to(haveCount(2))
+                    Anime.get(withId: 1)!.willClearFromCache()
+                    expect(Anime.get(withId: 1)?.mediaGenres).to(haveCount(0))
+                }
             }
             
             context("Parsing") {
@@ -151,7 +169,7 @@ class AnimeSpec: QuickSpec {
                     expect(anime.startDate).to(equal(startDate))
                     expect(anime.endDate).to(beNil())
                     
-                    expect(anime.genres).to(haveCount(3))
+                    expect(anime.mediaGenres).to(haveCount(3))
                 }
                 
                 it("should not parse a bad JSON") {
@@ -167,14 +185,14 @@ class AnimeSpec: QuickSpec {
                         testRealm.add(a!, update: true)
                         
                         //Check to see if genres were added
-                        expect(testRealm.objects(Genre.self)).to(haveCount(3))
+                        expect(testRealm.objects(MediaGenre.self)).to(haveCount(3))
                         
                         testRealm.add(b!, update: true)
                     }
                     
                     //The number of objects should be the same even if we add more than 1 object with the same info
                     expect(testRealm.objects(MediaTitle.self)).to(haveCount(a!.titles.count))
-                    expect(testRealm.objects(Genre.self)).to(haveCount(a!.genres.count))
+                    expect(testRealm.objects(MediaGenre.self)).to(haveCount(a!.mediaGenres.count))
                 }
             }
         }

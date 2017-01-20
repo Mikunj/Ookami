@@ -71,6 +71,7 @@
 		245761551E30622600BEB18C /* EntryMediaHeaderViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245761541E30622600BEB18C /* EntryMediaHeaderViewData.swift */; };
 		245761591E308E9D00BEB18C /* SearchMediaDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245761581E308E9D00BEB18C /* SearchMediaDataSource.swift */; };
 		2457615B1E30ACF900BEB18C /* MigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2457615A1E30ACF900BEB18C /* MigrationManager.swift */; };
+		2457615E1E31DEEE00BEB18C /* Media+Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2457615D1E31DEEE00BEB18C /* Media+Genre.swift */; };
 		245E59A61DD1C3C4002375A4 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A51DD1C3C4002375A4 /* Default.swift */; };
 		245E59A81DD1D5A1002375A4 /* StubRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */; };
 		2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246023391DCCA11700B3C99B /* UserSpec.swift */; };
@@ -281,6 +282,7 @@
 		245761541E30622600BEB18C /* EntryMediaHeaderViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryMediaHeaderViewData.swift; sourceTree = "<group>"; };
 		245761581E308E9D00BEB18C /* SearchMediaDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMediaDataSource.swift; sourceTree = "<group>"; };
 		2457615A1E30ACF900BEB18C /* MigrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationManager.swift; sourceTree = "<group>"; };
+		2457615D1E31DEEE00BEB18C /* Media+Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Media+Genre.swift"; sourceTree = "<group>"; };
 		245E59A51DD1C3C4002375A4 /* Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubRealmObject.swift; sourceTree = "<group>"; };
 		246023391DCCA11700B3C99B /* UserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpec.swift; sourceTree = "<group>"; };
@@ -620,7 +622,6 @@
 				2457614C1E2E3EC800BEB18C /* SearchMangaDataSource.swift */,
 				245761581E308E9D00BEB18C /* SearchMediaDataSource.swift */,
 			);
-			name = "Media Data Source";
 			path = "Media Data Source";
 			sourceTree = "<group>";
 		};
@@ -704,6 +705,7 @@
 			isa = PBXGroup;
 			children = (
 				248734391DCCB479002E7366 /* Anime.swift */,
+				2457615D1E31DEEE00BEB18C /* Media+Genre.swift */,
 				2470044B1DCD73D9000D987C /* Genre.swift */,
 				24BEC5DB1E15DB3A0058F5AB /* LastFetched.swift */,
 				241418991DCDD81100AF1AEA /* LibraryEntry.swift */,
@@ -1463,6 +1465,7 @@
 				24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */,
 				242B2B4A1DE566E90002903B /* Ookami.swift in Sources */,
 				2457615B1E30ACF900BEB18C /* MigrationManager.swift in Sources */,
+				2457615E1E31DEEE00BEB18C /* Media+Genre.swift in Sources */,
 				24A1B57C1DD8718F00F7E4E4 /* PaginatedLibrary.swift in Sources */,
 				24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */,
 				2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */,

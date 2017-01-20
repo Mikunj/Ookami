@@ -26,7 +26,7 @@ public class UserService: BaseService {
             }
             
             guard let json = json else {
-                completion(nil, ServiceError.error(description: "Invalid JSON recieved"))
+                completion(nil, ServiceError.error(description: "Invalid JSON recieved - User Service GET"))
                 return
             }
             
@@ -60,9 +60,9 @@ public class UserService: BaseService {
     ///   - completion: The completion block which passes back a user or error
     public func get(name: String, completion: @escaping UserCompletion) {
         let endpoint = Constants.Endpoints.users
-        let params = ["filter": ["name": name]]
-        let request = NetworkRequest(relativeURL: endpoint, method: .get, parameters: params)
-        get(request: request, completion: completion)
+        let request = KitsuRequest(relativeURL: endpoint)
+        request.filter(key: "name", value: name)
+        get(request: request.build(), completion: completion)
     }
     
     
@@ -72,9 +72,9 @@ public class UserService: BaseService {
     /// - Parameter completion: The completion block which passes back the logged in user or error
     public func getSelf(_ completion: @escaping UserCompletion) {
         let endpoint = Constants.Endpoints.users
-        let params = ["filter": ["self": true]]
-        let request = NetworkRequest(relativeURL: endpoint, method: .get, parameters: params, needsAuth: true)
-        get(request: request, completion: completion)
+        let request = KitsuRequest(relativeURL: endpoint, needsAuth: true)
+        request.filter(key: "self", value: true)
+        get(request: request.build(), completion: completion)
     }
     
     

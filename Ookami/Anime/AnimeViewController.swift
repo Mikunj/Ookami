@@ -37,7 +37,8 @@ class AnimeViewController: MediaViewController {
         mediaHeader.data = headerData()
         mediaHeader.delegate = self
         
-        //TODO: Update anime here
+        //Update the anime
+        AnimeService().get(id: anime.id) { _, _ in self.reloadData() }
         
         //Reload the data
         reloadData()

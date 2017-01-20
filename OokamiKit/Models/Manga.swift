@@ -57,10 +57,11 @@ public class Manga: Object, Cacheable {
         return SubType(rawValue: subtypeRaw)
     }
     
-    /**
-     When parsing manga, if a `Genre` cannot be found then it is created with just the `id` set. This is to ensure that the relationship occurs, but we cannot determine the rest of the genre data from the manga JSON itself
-     */
-    public let genres = List<Genre>()
+    //We use MediaGenre object for linking the manga and genre to avoid direct relationships
+    public let mediaGenres = List<MediaGenre>()
+    public var genres: [Genre] {
+        return mediaGenres.flatMap { $0.genre }
+    }
     
     override public static func primaryKey() -> String {
         return "id"
@@ -85,6 +86,9 @@ extension Manga {
     func willClearFromCache() {
         //Delete manga titles
         Database().delete(titles)
+        
+        //Delete media genres
+        Database().delete(mediaGenres)
     }
 }
 
@@ -143,13 +147,11 @@ extension Manga: JSONParsable {
         let genres = json["relationships"]["genres"]["data"]
         for genre in genres.arrayValue {
             let id = genre["id"].intValue
-            var genreObject = Genre.get(withId: id)
-            if genreObject == nil {
-                genreObject = Genre()
-                genreObject!.id = id
-            }
-            
-            manga.genres.append(genreObject!)
+            let mediaGenre = MediaGenre()
+            mediaGenre.mediaID = manga.id
+            mediaGenre.mediaType = Media.MediaType.manga.rawValue
+            mediaGenre.genreID = id
+            manga.mediaGenres.append(mediaGenre)
         }
         
         return manga

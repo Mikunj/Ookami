@@ -19,17 +19,18 @@ public class AnimeService: BaseService {
     /// - Returns: The search operation which can be cancelled.
     public func find(title: String, limit: Int = 20, completion: @escaping ([Int]?, Error?) -> Void) -> Operation {
         let url = Constants.Endpoints.anime
-        let params: [String: Any] = ["filter": ["text": title], "page":["limit": limit]]
+        let request = KitsuPagedRequest(relativeURL: url)
+        request.filter(key: "text", value: title)
+        request.page(limit: limit)
         
-        let request = NetworkRequest(relativeURL: url, method: .get, parameters: params)
-        let operation = NetworkOperation(request: request, client: client) { json, error in
+        let operation = NetworkOperation(request: request.build(), client: client) { json, error in
             guard error == nil else {
                 completion(nil, error)
                 return
             }
             
             guard let json = json else {
-                completion(nil, NetworkClientError.error("Failed to parse json - Anime Service"))
+                completion(nil, NetworkClientError.error("Failed to parse json - Anime Service FIND"))
                 return
             }
             
@@ -54,5 +55,39 @@ public class AnimeService: BaseService {
         queue.addOperation(operation)
         
         return operation
+    }
+    
+    /// Get an anime with the given id.
+    ///
+    /// - Parameters:
+    ///   - id: The anime id.
+    ///   - completion: A completion block which passes back the anime object or and error if something went wrong
+    public func get(id: Int, completion: @escaping (Anime?, Error?) -> Void) {
+        let endpoint = Constants.Endpoints.anime
+        let request = KitsuRequest(relativeURL: "\(endpoint)/\(id)")
+        request.include("genres")
+        
+        let operation = NetworkOperation(request: request.build(), client: client) { json, error in
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            guard let json = json else {
+                completion(nil, ServiceError.error(description: "Invalid JSON recieved - Anime Service GET"))
+                return
+            }
+            
+            Parser().parse(json: json) { parsed in
+                self.database.addOrUpdate(parsed)
+                
+                //Get the user we parsed
+                let anime = parsed.first { $0 is Anime } as? Anime
+                completion(anime, nil)
+            }
+
+        }
+        
+        queue.addOperation(operation)
     }
 }
