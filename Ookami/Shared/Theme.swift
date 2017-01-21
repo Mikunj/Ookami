@@ -14,6 +14,14 @@ enum Theme {}
 
 extension Theme {
     
+    struct Status {
+        var current = UIColor(hexString: "#9BE182")
+        var planned = UIColor(hexString: "#E1D77C")
+        var completed = UIColor(hexString: "#22B4E5").lighter(amount: 0.08)
+        var onHold = UIColor(hexString: "#F84D1A").lighter(amount: 0.05)
+        var dropped = UIColor(hexString: "#95A4A7")
+    }
+    
     struct EntryView {
         var headingColor = Colors().primary.lighter(amount: 0.2)
         var valueColor = Colors().primary
