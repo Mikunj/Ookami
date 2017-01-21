@@ -25,7 +25,7 @@ class MediaViewControllerHelper {
     }
     
     private static func getTitles(from mediaTitles: List<MediaTitle>) -> [(String, String)] {
-        let titles = mediaTitles.sorted(byProperty: "key")
+        let titles = mediaTitles.sorted(byKeyPath: "key")
         let info: [(String, String)] = titles.flatMap { title in
             if let titleString = title.languageKey?.toString().capitalized, !title.value.isEmpty {
                 return (titleString, title.value)

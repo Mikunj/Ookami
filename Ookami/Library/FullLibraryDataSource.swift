@@ -163,7 +163,7 @@ extension FullLibraryDataSource {
         if let sort = sort {
             switch sort {
             case .updatedAt(let ascending):
-                results = results?.sorted(byProperty: "updatedAt", ascending: ascending)
+                results = results?.sorted(byKeyPath: "updatedAt", ascending: ascending)
                 break
             }
         }
@@ -173,16 +173,15 @@ extension FullLibraryDataSource {
         self.delegate?.didReloadItems(dataSource: self)
         
         token?.stop()
-        token = results?.addNotificationBlock { [weak self] changes in
-            if let strong = self {
-                strong.delegate?.didReloadItems(dataSource: strong)
-                
-                //Hide the indicator if results were updated
-                let count = strong.results?.count ?? 0
-                if count > 0 {
-                    strong.delegate?.hideActivityIndicator()
-                }
+        token = results?.addNotificationBlock { [unowned self] changes in
+            self.delegate?.didReloadItems(dataSource: self)
+            
+            //Hide the indicator if results were updated
+            let count = self.results?.count ?? 0
+            if count > 0 {
+                self.delegate?.hideActivityIndicator()
             }
+            
         }
     }
     

@@ -11,8 +11,7 @@ plugin 'cocoapods-keys', {
  ]}
 
 def project_pods
-    pod 'Realm', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master',:submodules => true
-    pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master',:submodules => true
+    pod 'RealmSwift', '~> 2.3.0'
     pod 'SwiftyJSON', '~> 3.1'
     pod 'Alamofire', '~> 4.3'
 

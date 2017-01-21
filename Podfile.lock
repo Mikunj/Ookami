@@ -30,11 +30,11 @@ PODS:
   - OHHTTPStubs/Swift (5.2.2):
     - OHHTTPStubs/Core
   - Quick (1.0.0)
-  - Realm (2.0.3):
-    - Realm/Headers (= 2.0.3)
-  - Realm/Headers (2.0.3)
-  - RealmSwift (2.0.3):
-    - Realm (= 2.0.3)
+  - Realm (2.3.0):
+    - Realm/Headers (= 2.3.0)
+  - Realm/Headers (2.3.0)
+  - RealmSwift (2.3.0):
+    - Realm (= 2.3.0)
   - Result (3.0.0)
   - Reusable (3.0.1):
     - Reusable/Storyboard (= 3.0.1)
@@ -62,8 +62,7 @@ DEPENDENCIES:
   - OHHTTPStubs
   - OHHTTPStubs/Swift
   - Quick (~> 1.0)
-  - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
-  - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
+  - RealmSwift (~> 2.3.0)
   - Reusable (~> 3.0)
   - SKPhotoBrowser (~> 4.0.0)
   - SwiftyJSON (~> 3.1)
@@ -79,14 +78,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/marcelofabri/Heimdallr.swift.git
   Keys:
     :path: Pods/CocoaPodsKeys
-  Realm:
-    :branch: master
-    :git: https://github.com/realm/realm-cocoa.git
-    :submodules: true
-  RealmSwift:
-    :branch: master
-    :git: https://github.com/realm/realm-cocoa.git
-    :submodules: true
 
 CHECKOUT OPTIONS:
   BTNavigationDropdownMenu:
@@ -95,14 +86,6 @@ CHECKOUT OPTIONS:
   Heimdallr:
     :commit: af40d89fef3300b780c8a1675db70bf3147dfd0f
     :git: https://github.com/marcelofabri/Heimdallr.swift.git
-  Realm:
-    :commit: eb4c36f2b7e287f82bb1ca67602fff20ac030a1a
-    :git: https://github.com/realm/realm-cocoa.git
-    :submodules: true
-  RealmSwift:
-    :commit: eb4c36f2b7e287f82bb1ca67602fff20ac030a1a
-    :git: https://github.com/realm/realm-cocoa.git
-    :submodules: true
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
@@ -119,8 +102,8 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: 28942c18ced111a6a3ce5e6f5b27d9d40116d639
   OHHTTPStubs: 34d9d0994e64fcf8552dbfade5ce82ada913ee31
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
-  Realm: 5f008bfe3c8c47142eddfc30b8c1584cde22db24
-  RealmSwift: 79a9bc83e7ef4fbde17e0f303c5fadb99264a6be
+  Realm: 69d7de9aa569a11eed490aaabc8f2109e3985ecf
+  RealmSwift: dc6f99ea55e59490cec69c860f91932b6bf7efb6
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   Reusable: 5362d10271ca8316b104698a21e90498f47e8339
   SKPhotoBrowser: bc33eca22f4abd6b99d8d260509ca30c01752a87
@@ -128,6 +111,6 @@ SPEC CHECKSUMS:
   XCDYouTubeKit: 90690f9e3523735dc93b8024269d991b0cfffe78
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: c2aac01353c98d2f0bc4f153aa1f9da561120b62
+PODFILE CHECKSUM: 611f9bf92edc7df1b73c9f92a9b4ac6c17444916
 
 COCOAPODS: 1.1.1
