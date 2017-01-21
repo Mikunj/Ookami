@@ -21,7 +21,7 @@ extension Theme {
     }
     
     struct Colors {
-        var primary = UIColor(hexString: "#2F343B")
+        var primary = UIColor(hexString: "#283038")
         var secondary = UIColor(hexString: "#22b4e5")
         var red = UIColor(hexString: "#F84D1A")
         var green = UIColor(hexString: "#5BDE32")
