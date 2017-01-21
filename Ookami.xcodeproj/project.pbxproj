@@ -60,6 +60,7 @@
 		243C08911E11FBF500C44888 /* Cacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243C08901E11FBF500C44888 /* Cacheable.swift */; };
 		245179141E3216D30025F9C7 /* MangaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245179131E3216D30025F9C7 /* MangaViewController.swift */; };
 		245179161E3218AF0025F9C7 /* MediaViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245179151E3218AF0025F9C7 /* MediaViewControllerHelper.swift */; };
+		2451793D1E336CCF0025F9C7 /* ookami-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2451793C1E336CCF0025F9C7 /* ookami-icon.png */; };
 		245761381E2CBD6000BEB18C /* default-poster.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 245761371E2CBD6000BEB18C /* default-poster.jpg */; };
 		2457613B1E2DA69800BEB18C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2457613A1E2DA69800BEB18C /* SearchViewController.swift */; };
 		2457613F1E2DB08C00BEB18C /* SearchAnimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2457613E1E2DB08C00BEB18C /* SearchAnimeDataSource.swift */; };
@@ -273,8 +274,9 @@
 		242B2B4C1DE575CC0002903B /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		243C088E1E11FBD800C44888 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		243C08901E11FBF500C44888 /* Cacheable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cacheable.swift; sourceTree = "<group>"; };
-		245179131E3216D30025F9C7 /* MangaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MangaViewController.swift; path = MangaViewController.swift; sourceTree = "<group>"; };
-		245179151E3218AF0025F9C7 /* MediaViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaViewControllerHelper.swift; path = MediaViewControllerHelper.swift; sourceTree = "<group>"; };
+		245179131E3216D30025F9C7 /* MangaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaViewController.swift; sourceTree = "<group>"; };
+		245179151E3218AF0025F9C7 /* MediaViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewControllerHelper.swift; sourceTree = "<group>"; };
+		2451793C1E336CCF0025F9C7 /* ookami-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ookami-icon.png"; sourceTree = "<group>"; };
 		245761371E2CBD6000BEB18C /* default-poster.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default-poster.jpg"; sourceTree = "<group>"; };
 		2457613A1E2DA69800BEB18C /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		2457613E1E2DB08C00BEB18C /* SearchAnimeDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAnimeDataSource.swift; sourceTree = "<group>"; };
@@ -306,7 +308,7 @@
 		2464F1F91DCC5AE60028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2464F1FE1DCC5AE70028F7B0 /* OokamiKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OokamiKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F2071DCC5AE70028F7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		246658681E2886BA00BB15EC /* AnimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnimeViewController.swift; path = AnimeViewController.swift; sourceTree = "<group>"; };
+		246658681E2886BA00BB15EC /* AnimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeViewController.swift; sourceTree = "<group>"; };
 		2466586A1E28876800BB15EC /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		2466586D1E288C8700BB15EC /* TitleTableSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableSectionView.swift; sourceTree = "<group>"; };
 		2466586F1E288C9300BB15EC /* TitleTableSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTableSectionView.xib; sourceTree = "<group>"; };
@@ -924,6 +926,7 @@
 		24DC7DF61E2766DB007D14FB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2451793C1E336CCF0025F9C7 /* ookami-icon.png */,
 				24DC7DF71E2766F4007D14FB /* default-cover.png */,
 				245761371E2CBD6000BEB18C /* default-poster.jpg */,
 			);
@@ -1146,6 +1149,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2451793D1E336CCF0025F9C7 /* ookami-icon.png in Resources */,
 				2457614B1E2E316700BEB18C /* SearchMediaTableViewCell.xib in Resources */,
 				247BF5161E26FEF200FF643F /* LoginViewController.xib in Resources */,
 				24175EA11E209266009FBDE6 /* TextEditingViewController.xib in Resources */,
