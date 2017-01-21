@@ -31,6 +31,12 @@ class MangaViewController: MediaViewController {
         fatalError("Use init(manga:) instead")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        mediaHeader.data = headerData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +58,17 @@ class MangaViewController: MediaViewController {
     
     override func barTitle() -> String {
         return manga.canonicalTitle
+    }
+    
+    override func entryDidChange(notification: Notification) {
+        //Check if the entry that changed was for this manga
+        if let info = notification.userInfo,
+            let mediaID = info["mediaID"] as? Int,
+            let mediaType = info["mediaType"] as? Media.MediaType,
+            mediaID == manga.id,
+            mediaType == .manga {
+            mediaHeader.data = headerData()
+        }
     }
     
 }
@@ -144,8 +161,6 @@ extension MangaViewController: MediaTableHeaderViewDelegate {
                 ErrorAlert.showAlert(in: self, title: "Error Occured", message: error!.localizedDescription)
                 return
             }
-            
-            self.mediaHeader.data = self.headerData()
         }
     }
     

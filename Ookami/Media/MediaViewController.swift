@@ -8,6 +8,8 @@
 
 import UIKit
 import Cartography
+import NVActivityIndicatorView
+import OokamiKit
 
 //A section of data that can be displayed in the controller
 struct MediaViewControllerSection {
@@ -30,7 +32,7 @@ struct MediaViewControllerSection {
 }
 
 //A controller which allows the display of media
-class MediaViewController: NavigationHidingViewController {
+class MediaViewController: NavigationHidingViewController, NVActivityIndicatorViewable {
     
     //The tableview to display data in
     lazy var tableView: UITableView = {
@@ -111,7 +113,17 @@ class MediaViewController: NavigationHidingViewController {
         
         //Bring the bar at the front
         self.view.bringSubview(toFront: barView)
+        
+        //Add notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(entryDidChange(notification:)), name: LibraryService.Notifications.addedEntry.name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(entryDidChange(notification:)), name: LibraryService.Notifications.deletedEntry.name, object: nil)
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func entryDidChange(notification: Notification) {}
     
     func reloadData() {
         data = sectionData()

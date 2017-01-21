@@ -12,6 +12,16 @@ import Alamofire
 
 public class LibraryService: BaseService {
     
+    /// The notifications this service sends
+    public enum Notifications: String {
+        case addedEntry = "Added Library Entry"
+        case deletedEntry = "Deleted Library Entry"
+        
+        public var name: Notification.Name {
+            return Notification.Name(rawValue: self.rawValue)
+        }
+    }
+    
     /// Create a library entry on the server
     ///
     /// - Parameters:
@@ -58,7 +68,7 @@ public class LibraryService: BaseService {
                 if let parsedEntry = parsedEntry {
                     //Before we add the entry we have to set the userID on it
                     //This is because the entry in the response does not contain the relationship data for user
-                    parsedEntry.userID = CurrentUser().userID ?? -1
+                    parsedEntry.userID = currentUser
                     
                     //We also set the media on it
                     let media = Media()
@@ -69,9 +79,11 @@ public class LibraryService: BaseService {
                 }
                 
                 self.database.addOrUpdate(parsed)
-                print(parsed)
                 
-  
+                //Send the notification of adding entry
+                let id = parsedEntry?.id ?? -1
+                NotificationCenter.default.post(name: Notifications.addedEntry.name, object: nil, userInfo: ["id": id, "mediaID": mediaID, "mediaType": mediaType])
+                
                 completion(parsedEntry, nil)
             }
         }
@@ -148,6 +160,11 @@ public class LibraryService: BaseService {
             if error == nil {
                 //Remove the entry from the db, make sure we get it for the current realm
                 if let e = LibraryEntry.get(withId: entry.id) {
+                    
+                    //Send notification for delete
+                    if let media = e.media, let type = media.type {
+                        NotificationCenter.default.post(name: Notifications.deletedEntry.name, object: nil, userInfo: ["id": entry.id, "mediaID": media.id, "mediaType": type])
+                    }
                     self.database.delete(e)
                 }
             }

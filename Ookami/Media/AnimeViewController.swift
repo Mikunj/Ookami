@@ -30,6 +30,13 @@ class AnimeViewController: MediaViewController {
         fatalError("Use init(anime:) instead")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //Update the header because it may have changed
+        mediaHeader.data = headerData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +58,17 @@ class AnimeViewController: MediaViewController {
     
     override func barTitle() -> String {
         return anime.canonicalTitle
+    }
+    
+    override func entryDidChange(notification: Notification) {
+        //Check if the entry that changed was for this anime
+        if let info = notification.userInfo,
+            let mediaID = info["mediaID"] as? Int,
+            let mediaType = info["mediaType"] as? Media.MediaType,
+            mediaID == anime.id,
+            mediaType == .anime {
+            mediaHeader.data = headerData()
+        }
     }
     
 }
@@ -143,7 +161,6 @@ extension AnimeViewController: MediaTableHeaderViewDelegate {
                 ErrorAlert.showAlert(in: self, title: "Error Occured", message: error!.localizedDescription)
                 return
             }
-            self.mediaHeader.data = self.headerData()
         }
     }
     

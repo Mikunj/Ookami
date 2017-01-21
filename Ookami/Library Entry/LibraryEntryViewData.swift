@@ -14,19 +14,46 @@ import ActionSheetPicker_3_0
 class LibraryEntryViewData {
     
     //The updater
-    let updater: LibraryEntryUpdater
+    var updater: LibraryEntryUpdater?
     
     /// Create a data source for LibraryEntryViewController
     ///
     /// - Parameter entry: The entry to use as the data source
     init(entry: LibraryEntry) {
         self.updater = LibraryEntryUpdater(entry: entry)
+        NotificationCenter.default.addObserver(self, selector: #selector(didDeleteEntry(notification:)), name: LibraryService.Notifications.deletedEntry.name, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    //Check if entry was deleted, if so then invalidate the updater
+    @objc func didDeleteEntry(notification: Notification) {
+        guard let entry = updater?.entry else {
+            return
+        }
+        
+        //Check if the entry that changed was for this entry data
+        if let info = notification.userInfo,
+            let id = info["id"] as? Int,
+            id == entry.id {
+            updater = nil
+        }
+    }
+    
+    //Check whether the entry was invalidated by realm (this can happen if it gets deleted while we still have it)
+    func isInvalid() -> Bool {
+        return updater == nil || updater!.entry.isInvalidated
     }
     
     //Get the table data
     func tableData() -> [TableData] {
         //Progress
-        let entry = updater.entry
+        guard let entry = updater?.entry else {
+            return []
+        }
+        
         let max = entry.maxProgress()
         let progressValue = max != nil ? "\(entry.progress) of \(max!)" : "\(entry.progress)"
         let progress = TableData(type: .button, value: progressValue, heading: .progress)

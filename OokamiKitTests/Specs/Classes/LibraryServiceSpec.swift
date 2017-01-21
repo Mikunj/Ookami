@@ -128,6 +128,8 @@ class LibraryServiceSpec: QuickSpec {
                     waitUntil { done in
                         service.add(mediaID: 1, mediaType: .anime, status: .current) { l, error in
                             expect(l).toNot(beNil())
+                            expect(l?.userID).to(equal(1))
+                            expect(l?.media).toNot(beNil())
                             expect(error).to(beNil())
                             expect(LibraryEntry.all()).to(haveCount(1))
                             done()
@@ -214,6 +216,8 @@ class LibraryServiceSpec: QuickSpec {
                     waitUntil { done in
                         service.update(entry: entry) { l, error in
                             expect(l).toNot(beNil())
+                            expect(l?.userID).to(equal(1))
+                            expect(l?.media).toNot(beNil())
                             expect(error).to(beNil())
                             expect(LibraryEntry.all()).to(haveCount(1))
                             done()

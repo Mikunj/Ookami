@@ -95,7 +95,7 @@ class MediaViewControllerHelper {
     }
     
     //Either edit or add the entry
-    static func tappedEntryButton(state: MediaTableHeaderView.EntryButtonState, mediaID: Int, mediaType: Media.MediaType, parent: UIViewController, completion: @escaping (Error?) -> Void) {
+    static func tappedEntryButton(state: MediaTableHeaderView.EntryButtonState, mediaID: Int, mediaType: Media.MediaType, parent: MediaViewController, completion: @escaping (Error?) -> Void) {
         switch state {
         case .edit:
             if let entry = getEntry(id: mediaID, type: mediaType) {
@@ -109,7 +109,7 @@ class MediaViewControllerHelper {
             
             for status in LibraryEntry.Status.all {
                 let action = UIAlertAction(title: status.toString(forMedia: mediaType), style: .default) { _ in
-                    addEntry(id: mediaID, type: mediaType, status: status, completion: completion)
+                    addEntry(id: mediaID, type: mediaType, status: status, parent: parent, completion: completion)
                 }
                 sheet.addAction(action)
             }
@@ -121,8 +121,12 @@ class MediaViewControllerHelper {
         }
     }
     
-    private static func addEntry(id: Int, type: Media.MediaType, status: LibraryEntry.Status, completion: @escaping (Error?) -> Void) {
+    private static func addEntry(id: Int, type: Media.MediaType, status: LibraryEntry.Status, parent: MediaViewController, completion: @escaping (Error?) -> Void) {
+        let theme = Theme.ActivityIndicatorTheme()
+        parent.startAnimating(theme.size, type: theme.type, color: theme.color)
+        
         LibraryService().add(mediaID: id, mediaType: type, status: status) { _, error in
+            parent.stopAnimating()
             completion(error)
         }
     }

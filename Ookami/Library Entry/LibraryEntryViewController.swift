@@ -78,7 +78,7 @@ class LibraryEntryViewController: UIViewController {
     //The activity indicator
     var activityIndicator: NVActivityIndicatorView = {
         let theme = Theme.ActivityIndicatorTheme()
-        let view = NVActivityIndicatorView(frame: CGRect(origin: CGPoint.zero, size: theme.size), type: .ballSpinFadeLoader, color: theme.color)
+        let view = NVActivityIndicatorView(frame: CGRect(origin: CGPoint.zero, size: theme.size), type: theme.type, color: theme.color)
         return view
     }()
     
@@ -109,6 +109,7 @@ class LibraryEntryViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         // Show the save icon if we can edit the entries
         if editable {
@@ -120,6 +121,14 @@ class LibraryEntryViewController: UIViewController {
         }
         
         reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if self.data.isInvalid() {
+            let _ = self.navigationController?.popViewController(animated: true)
+            return
+        }
     }
     
     override func viewDidLoad() {
@@ -154,9 +163,11 @@ class LibraryEntryViewController: UIViewController {
         tableView.layoutIfNeeded()
         
         //Add the header
-        let header = EntryMediaHeaderView(data: data.updater.entry.toEntryMediaHeaderData())
-        header.delegate = self
-        tableView.tableHeaderView = header
+        if let updater = data.updater {
+            let header = EntryMediaHeaderView(data: updater.entry.toEntryMediaHeaderData())
+            header.delegate = self
+            tableView.tableHeaderView = header
+        }
         
         //Reload the data
         self.reloadData()
@@ -164,9 +175,10 @@ class LibraryEntryViewController: UIViewController {
     
     //Reload the data and update the button bar items
     func reloadData() {
+        
         //Only enable the buttons if there was a change
-        saveBarButton?.isEnabled = data.updater.wasEdited()
-        clearBarButton?.isEnabled = data.updater.wasEdited()
+        saveBarButton?.isEnabled = data.updater?.wasEdited() ?? false
+        clearBarButton?.isEnabled = data.updater?.wasEdited() ?? false
         
         //We set the offset again because tableview jumps when reloading if the entry has long notes
         let offset = tableView.contentOffset
@@ -270,7 +282,10 @@ extension LibraryEntryViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if !editable { return }
-        let entry = data.updater.entry
+        guard let entry = data.updater?.entry else {
+            return
+        }
+        
         let tableData = data.tableData()
         let heading = tableData[indexPath.row].heading
         guard let cell = tableView.cellForRow(at: indexPath) else {
@@ -312,7 +327,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
             let rows = Array(0...max)
             ActionSheetStringPicker.show(withTitle: "Progress", rows: rows, initialSelection: entry.progress, doneBlock: { picker, index, value in
                 if let newValue = value as? Int {
-                    self.data.updater.update(progress: newValue)
+                    self.data.updater?.update(progress: newValue)
                     self.reloadData()
                 }
             }, cancel: { _ in }, origin: cell)
@@ -332,7 +347,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
             
             let initial = statuses.index(of: entry.status ?? .current) ?? 0
             ActionSheetStringPicker.show(withTitle: "Status", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
-                self.data.updater.update(status: statuses[index])
+                self.data.updater?.update(status: statuses[index])
                 self.reloadData()
             }, cancel: { _ in }, origin: cell)
             
@@ -349,7 +364,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
             ActionSheetStringPicker.show(withTitle: "Rating", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
                 
                 //We know that we will have 10 values, so to get the rating just divide by 2
-                self.data.updater.update(rating: Double(index) / 2)
+                self.data.updater?.update(rating: Double(index) / 2)
                 self.reloadData()
             }, cancel: { _ in }, origin: cell)
             
@@ -368,7 +383,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
             let rows = Array(0...999)
             ActionSheetStringPicker.show(withTitle: "Reconsume Count", rows: rows, initialSelection: entry.reconsumeCount, doneBlock: { picker, index, value in
                 if let newValue = value as? Int {
-                    self.data.updater.update(reconsumeCount: newValue)
+                    self.data.updater?.update(reconsumeCount: newValue)
                     self.reloadData()
                 }
             }, cancel: { _ in }, origin: cell)
@@ -376,12 +391,12 @@ extension LibraryEntryViewController: UITableViewDelegate {
             
         case .reconsuming:
             //Just invert the value
-            self.data.updater.update(reconsuming: !entry.reconsuming)
+            self.data.updater?.update(reconsuming: !entry.reconsuming)
             self.reloadData()
             break
             
         case .isPrivate:
-            self.data.updater.update(isPrivate: !entry.isPrivate)
+            self.data.updater?.update(isPrivate: !entry.isPrivate)
             self.reloadData()
             break
         }
@@ -392,7 +407,10 @@ extension LibraryEntryViewController: UITableViewDelegate {
 //MARK:- EntryMediaHeaderViewDelegate & Entry Button Delegate
 extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonDelegate {
     func didTapMediaButton() {
-        let entry = data.updater.entry
+        guard let entry = data.updater?.entry else {
+            return
+        }
+        
         if let anime = entry.anime {
             AppCoordinator.showAnimeVC(in: self.navigationController!, anime: anime)
         }
@@ -411,10 +429,10 @@ extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonD
             //Update the values accordingly
             switch d.heading {
             case .progress:
-                data.updater.incrementProgress()
+                data.updater?.incrementProgress()
                 break
             case .reconsumeCount:
-                data.updater.incrementReconsumeCount()
+                data.updater?.incrementReconsumeCount()
                 break
                 
             default:
@@ -428,7 +446,7 @@ extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonD
 
 extension LibraryEntryViewController: TextEditingViewControllerDelegate {
     func textEditingViewController(_ controller: TextEditingViewController, didSave text: String) {
-        data.updater.update(notes: text)
+        data.updater?.update(notes: text)
         self.reloadData()
     }
 }
@@ -459,7 +477,7 @@ extension LibraryEntryViewController {
     //Save was tapped
     func didSave() {
         showIndicator()
-        data.updater.save { error in
+        data.updater?.save { error in
             self.hideIndicator()
             guard error == nil else {
                 
@@ -476,7 +494,7 @@ extension LibraryEntryViewController {
     }
     
     func didClear() {
-        data.updater.reset()
+        data.updater?.reset()
         self.reloadData()
     }
 }
