@@ -1,0 +1,36 @@
+###################### NOTE ######################
+# Rename this to Deliverfile after filling it out
+
+###################### More Options ######################
+# If you want to have even more control, check out the documentation
+# https://github.com/fastlane/fastlane/blob/master/deliver/Deliverfile.md
+
+
+###################### Automatically generated ######################
+# Feel free to remove the following line if you use fastlane (which you should)
+
+app_identifier "[identifier]" # The bundle identifier of your app
+username "[apple id]" # your Apple ID user
+app_icon './fastlane/metadata/iTunesArtwork@2x.png'
+copyright "#{Time.now.year} Mikunj Varsani"
+
+price_tier 0
+
+app_review_information(
+  first_name: "[Name]",
+  last_name: "[Last Name]",
+  phone_number: "[Number]",
+  email_address: "[Email]",
+  demo_user: "[Demo user]",
+  demo_password: "[Demo pass]",
+  notes: "App requires user to be logged in."
+)
+
+submission_information({
+    export_compliance_encryption_updated: false,
+    export_compliance_uses_encryption: false,
+    content_rights_contains_third_party_content: false,
+    add_id_info_uses_idfa: false
+})
+
+app_rating_config_path "./fastlane/metadata/itunes_rating_config.json"

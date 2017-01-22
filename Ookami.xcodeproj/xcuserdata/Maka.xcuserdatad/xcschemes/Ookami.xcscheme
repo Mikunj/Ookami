@@ -49,6 +49,16 @@
                ReferencedContainer = "container:Ookami.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "245179431E345CD20025F9C7"
+               BuildableName = "OokamiUITests.xctest"
+               BlueprintName = "OokamiUITests"
+               ReferencedContainer = "container:Ookami.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

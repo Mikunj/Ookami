@@ -23,7 +23,7 @@ public class Ookami {
     //Heimdallr client
     public lazy var heimdallr: Heimdallr = {
         let keys = OokamiKeys()
-        let credentials = OAuthClientCredentials(id: keys.kitsuClientKey(), secret: keys.kitsuClientSecret())
+        let credentials = OAuthClientCredentials(id: keys.kitsuClientKey, secret: keys.kitsuClientSecret)
         
         let store = OokamiTokenStore()
         

@@ -24,6 +24,9 @@ xcuserdata/
 ## Other
 *.moved-aside
 *.xcuserstate
+*.cer
+*.mobileprovision
+
 
 ## Obj-C/Swift specific
 *.hmap
@@ -65,5 +68,14 @@ Carthage/Build
 
 fastlane/report.xml
 fastlane/Preview.html
+Preview.html
 fastlane/screenshots
 fastlane/test_output
+
+#Ignore the Deliverfile as that contains some private info
+#Use the TemplateDeliverfile
+Deliverfile
+Appfile
+
+#We ignore the Fastfile so that `fastlane init` works properley
+Fastfile
