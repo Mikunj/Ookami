@@ -38,7 +38,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ookami-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ0-Et-D3N">
+                                    <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ookami-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ0-Et-D3N">
                                         <rect key="frame" x="129" y="40" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="0rg-7B-rYT"/>

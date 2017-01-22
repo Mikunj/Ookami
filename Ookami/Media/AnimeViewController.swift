@@ -105,7 +105,7 @@ extension AnimeViewController {
         info.append(("Episodes", episodes))
         
         let duration = anime.episodeLength > 0 ? "\(anime.episodeLength)" : "?"
-        info.append(("Duration", "\(duration) minutes"))
+        info.append(("Duration", "\(duration) minutes each"))
         
         if !anime.ageRating.isEmpty {
             let prefix = anime.ageRating
@@ -118,6 +118,12 @@ extension AnimeViewController {
             let genres = anime.genres.map { $0.name }.filter { !$0.isEmpty }
             info.append(("Genres", genres.joined(separator: ", ")))
         }
+        
+        let rating = anime.averageRating > 0 ? String(format: "%.2f", anime.averageRating) : "?"
+        info.append(("Rating", rating))
+        
+        info.append(("Popularity", "#\(anime.popularityRank)"))
+        info.append(("Ranked", "#\(anime.ratingRank)"))
         
         return info
     }
@@ -136,8 +142,9 @@ extension AnimeViewController {
     func headerData() -> MediaTableHeaderViewData {
         var data = MediaTableHeaderViewData()
         data.title = anime.canonicalTitle
-        data.details = ""
-        data.airing = ""
+        data.userRating = anime.averageRating
+        data.popularityRank = anime.popularityRank
+        data.ratingRank = anime.ratingRank
         data.showTrailerIcon = !anime.youtubeVideoId.isEmpty
         data.posterImage = anime.posterImage
         data.coverImage = anime.coverImage

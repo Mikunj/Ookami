@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import DynamicColor
 
 //TODO: Improve this view ... it just looks ugly
 
@@ -19,8 +20,9 @@ protocol MediaTableHeaderViewDelegate: class {
 
 struct MediaTableHeaderViewData {
     var title: String?
-    var details: String?
-    var airing: String?
+    var userRating: Double = 0
+    var popularityRank: Int = 0
+    var ratingRank: Int = 0
     var posterImage: String?
     var coverImage: String?
     var showTrailerIcon: Bool = false
@@ -28,7 +30,7 @@ struct MediaTableHeaderViewData {
 }
 
 class MediaTableHeaderView: NibLoadableView {
-
+    
     enum EntryButtonState {
         case add
         case edit
@@ -45,8 +47,6 @@ class MediaTableHeaderView: NibLoadableView {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var detailLabel: UILabel!
-    
-    @IBOutlet weak var airingLabel: UILabel!
     
     @IBOutlet weak var infoView: UIView!
     
@@ -66,10 +66,9 @@ class MediaTableHeaderView: NibLoadableView {
         infoView.isHidden = data == nil
         
         titleLabel.text = data?.title ?? ""
-        detailLabel.text = data?.details ?? ""
         
-        airingLabel.isHidden = data?.airing == nil
-        airingLabel.text = data?.airing ?? ""
+        //detail
+        detailLabel.attributedText = getAttributedDetailText()
         
         updateEntryButton(with: .add)
         if let state = data?.entryState {
@@ -108,6 +107,47 @@ class MediaTableHeaderView: NibLoadableView {
         }
     }
     
+    func iconAttributedString(icon: FontAwesomeIcon, color: UIColor) -> NSAttributedString {
+        let iconFont = FontAwesomeIcon.font(ofSize: detailLabel.font.pointSize)
+        let attributes: [String: Any] = [NSForegroundColorAttributeName: color,
+                                         NSFontAttributeName: iconFont]
+        return NSAttributedString(string: icon.unicode, attributes: attributes)
+    }
+    
+    func getAttributedDetailText() -> NSAttributedString {
+        
+        let userRatingText = data == nil ? "-" : String(format: "%.2f", data!.userRating)
+        let popularityRankText = data == nil ? "-" : String(data!.popularityRank)
+        let ratingRankText = data == nil ? "-" : String(data!.ratingRank)
+        
+        
+        let userRatingIcon = iconAttributedString(icon: FontAwesomeIcon.starIcon, color: UIColor(hexString: "#FFB33B"))
+        let popularityRankIcon = iconAttributedString(icon: FontAwesomeIcon.heartIcon, color: UIColor(hexString: "#E74C3C"))
+        let ratingRankIcon = iconAttributedString(icon: FontAwesomeIcon.barChartIcon, color: UIColor(hexString: "#22B4E5"))
+        
+        //Construct the attributed text
+        let final = NSMutableAttributedString()
+        
+        let userRating = NSMutableAttributedString(attributedString: userRatingIcon)
+        userRating.append(NSAttributedString(string: " " + userRatingText))
+        
+        let popularityRank = NSMutableAttributedString(attributedString: popularityRankIcon)
+        popularityRank.append(NSAttributedString(string: " " + popularityRankText))
+        
+        let ratingRank = NSMutableAttributedString(attributedString: ratingRankIcon)
+        ratingRank.append(NSAttributedString(string: " " + ratingRankText))
+        
+        let seperator = NSAttributedString(string: " ᛫ ")
+        
+        final.append(userRating)
+        final.append(seperator)
+        final.append(popularityRank)
+        final.append(seperator)
+        final.append(ratingRank)
+        
+        return final
+    }
+    
     func updateEntryButton(with state: MediaTableHeaderView.EntryButtonState) {
         
         entryButton.backgroundColor = Theme.Colors().secondary
@@ -123,7 +163,7 @@ class MediaTableHeaderView: NibLoadableView {
             break
         }
     }
-
+    
     @IBAction func didTapEntryButton(_ sender: Any) {
         let state = data?.entryState ?? .add
         delegate?.didTapEntryButton(state: state)
@@ -133,7 +173,7 @@ class MediaTableHeaderView: NibLoadableView {
         delegate?.didTapCoverImage(coverImage)
     }
     
-
+    
     @IBAction func didTapTrailerButton(_ sender: Any) {
         delegate?.didTapTrailerButton()
     }

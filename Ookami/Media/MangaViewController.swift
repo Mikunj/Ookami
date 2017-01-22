@@ -119,6 +119,12 @@ extension MangaViewController {
             info.append(("Genres", genres.joined(separator: ", ")))
         }
         
+        let rating = manga.averageRating > 0 ? String(format: "%.2f", manga.averageRating) : "?"
+        info.append(("Rating", rating))
+        
+        info.append(("Popularity", "#\(manga.popularityRank)"))
+        info.append(("Ranked", "#\(manga.ratingRank)"))
+        
         return info
     }
 }
@@ -136,8 +142,9 @@ extension MangaViewController {
     func headerData() -> MediaTableHeaderViewData {
         var data = MediaTableHeaderViewData()
         data.title = manga.canonicalTitle
-        data.details = ""
-        data.airing = ""
+        data.userRating = manga.averageRating
+        data.popularityRank = manga.popularityRank
+        data.ratingRank = manga.ratingRank
         data.posterImage = manga.posterImage
         data.coverImage = manga.coverImage
         

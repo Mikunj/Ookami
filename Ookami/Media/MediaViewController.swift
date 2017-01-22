@@ -64,7 +64,7 @@ class MediaViewController: NavigationHidingViewController, NVActivityIndicatorVi
     //The height of the header
     var headerHeight: CGFloat {
         let isIpad = UIDevice.current.userInterfaceIdiom == .pad
-        return isIpad ? 464 : 344
+        return isIpad ? 420 : 300
     }
     
     //The header view
