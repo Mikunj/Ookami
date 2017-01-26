@@ -12,6 +12,7 @@ import Cartography
 import Diff
 import XLPagerTabStrip
 import NVActivityIndicatorView
+import DZNEmptyDataSet
 
 //TODO: Add more cells, clean up code a bit
 //The datasource which is used by the controller
@@ -21,6 +22,10 @@ protocol ItemViewControllerDataSource: class {
     func items() -> [ItemData]
     func didSelectItem(at indexPath: IndexPath)
     func refresh()
+    func shouldShowEmptyDataSet() -> Bool
+    func dataSetImage() -> UIImage?
+    func dataSetTitle() -> NSAttributedString?
+    func dataSetDescription() -> NSAttributedString?
 }
 
 //The delegate which is implemented by the controller
@@ -99,6 +104,9 @@ class ItemViewController: UIViewController {
         c.backgroundColor = UIColor.groupTableViewBackground
         c.dataSource = self
         c.delegate = self
+        
+        c.emptyDataSetSource = self
+        c.emptyDataSetDelegate = self
         
         c.register(cellType: ItemDetailGridCell.self)
         
@@ -250,5 +258,41 @@ extension ItemViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         (cell as? ItemUpdatable)?.stopUpdating()
+    }
+}
+
+//MARK:- DZNEmptyDataSet Data Source
+extension ItemViewController: DZNEmptyDataSetSource {
+    
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return dataSource?.dataSetImage() ?? UIImage()
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return dataSource?.dataSetTitle() ?? NSAttributedString(string: "")
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return dataSource?.dataSetDescription() ?? NSAttributedString(string: "")
+    }
+    
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.clear
+    }
+    
+    func spaceHeight(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return 4
+    }
+}
+
+//MARK:- DZNEmptyDataSet Delegate
+extension ItemViewController: DZNEmptyDataSetDelegate {
+    
+    func emptyDataSetShouldDisplay(_ scrollView: UIScrollView!) -> Bool {
+        return dataSource?.shouldShowEmptyDataSet() ?? true
+    }
+    
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
+        return true
     }
 }

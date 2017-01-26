@@ -6,6 +6,11 @@ sudo gem install fastlane
 ```
 # Available Actions
 ## iOS
+### ios create
+```
+fastlane ios create
+```
+Create the app in Developer and Itunes Connect
 ### ios provision
 ```
 fastlane ios provision

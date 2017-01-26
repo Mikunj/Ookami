@@ -40,6 +40,7 @@ def ui_pods
     pod 'Diff', '~> 0.5'
     pod 'SKPhotoBrowser', '~> 4.0.0'
     pod 'XCDYouTubeKit', '~> 2.5.0'
+    pod 'DZNEmptyDataSet', '~> 1.8'
 end
 
 target 'Ookami' do

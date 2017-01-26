@@ -451,7 +451,7 @@ extension LibraryEntryViewController: TextEditingViewControllerDelegate {
     }
 }
 
-//Mark:- Entry saving
+//MARK:- Entry saving
 extension LibraryEntryViewController {
     
     func showIndicator() {
@@ -488,7 +488,8 @@ extension LibraryEntryViewController {
                 return
             }
             
-            let _ = self.navigationController?.popViewController(animated: true)
+            //NOTE: Disabled for now, but we can always add an option to automatically pop upon save
+            //let _ = self.navigationController?.popViewController(animated: true)
             
         }
     }
