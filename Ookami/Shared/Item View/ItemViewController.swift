@@ -209,6 +209,7 @@ extension ItemViewController: IndicatorInfoProvider {
 extension ItemViewController: ItemViewControllerDelegate {
     func didReloadItems(dataSource: ItemViewControllerDataSource) {
         data = dataSource.items()
+        collectionView.reloadEmptyDataSet()
     }
     
     func showActivityIndicator() {

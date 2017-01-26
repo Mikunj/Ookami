@@ -488,6 +488,9 @@ extension LibraryEntryViewController {
                 return
             }
             
+            //Reload the display
+            self.reloadData()
+            
             //NOTE: Disabled for now, but we can always add an option to automatically pop upon save
             //let _ = self.navigationController?.popViewController(animated: true)
             
