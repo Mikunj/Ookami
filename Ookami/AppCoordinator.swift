@@ -47,8 +47,9 @@ class AppCoordinator {
     private init() {}
     
     //Show the library entry view controller for a given entry
-    static func showLibraryEntryVC(in nav: UINavigationController?, entry: LibraryEntry) {
+    static func showLibraryEntryVC(in nav: UINavigationController?, entry: LibraryEntry, shouldShowMediaButton: Bool = true) {
         let e = LibraryEntryViewController(entry: entry)
+        e.shouldShowMediaButton = shouldShowMediaButton
         nav?.pushViewController(e, animated: true)
     }
     

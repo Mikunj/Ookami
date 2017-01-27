@@ -89,6 +89,10 @@ class LibraryEntryViewController: UIViewController {
         return v
     }()
     
+    //Setting for disabling the media button on the header view
+    //Useful to stop infinite recurrsion, E.g from entry -> media -> entry -> media ... etc
+    var shouldShowMediaButton: Bool = true
+    
     /// Create an LibraryEntryViewController
     ///
     /// - Parameter entry: The library entry to view.
@@ -163,8 +167,11 @@ class LibraryEntryViewController: UIViewController {
         tableView.layoutIfNeeded()
         
         //Add the header
-        if let updater = data.updater {
-            let header = EntryMediaHeaderView(data: updater.entry.toEntryMediaHeaderData())
+        if let entry = data.updater?.entry {
+            var data = entry.toEntryMediaHeaderData()
+            data.shouldShowMediaButton = shouldShowMediaButton
+            
+            let header = EntryMediaHeaderView(data: data)
             header.delegate = self
             tableView.tableHeaderView = header
         }

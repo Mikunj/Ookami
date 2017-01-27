@@ -14,6 +14,7 @@
                 <outlet property="coverImage" destination="xZT-jg-3lW" id="Lah-U9-Bl9"/>
                 <outlet property="detailLabel" destination="P28-rP-ROo" id="PHN-Jl-yUa"/>
                 <outlet property="mediaButton" destination="fJ1-RJ-2dC" id="X5I-VI-pxM"/>
+                <outlet property="mediaButtonHeight" destination="qnk-VR-PP6" id="xwa-Fo-Dbv"/>
                 <outlet property="nameLabel" destination="p99-HR-W66" id="qBO-wN-dL3"/>
                 <outlet property="posterImage" destination="gKd-R4-eb7" id="Kpf-Z2-Z5b"/>
                 <outlet property="synopsisLabel" destination="9Sa-Pc-5zD" id="h5P-uo-zN3"/>

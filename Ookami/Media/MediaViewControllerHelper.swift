@@ -99,7 +99,7 @@ class MediaViewControllerHelper {
         switch state {
         case .edit:
             if let entry = getEntry(id: mediaID, type: mediaType) {
-                AppCoordinator.showLibraryEntryVC(in: parent.navigationController, entry: entry)
+                AppCoordinator.showLibraryEntryVC(in: parent.navigationController, entry: entry, shouldShowMediaButton: false)
             }
             break
             

@@ -28,6 +28,9 @@ class EntryMediaHeaderView: NibLoadableView {
     
     @IBOutlet weak var mediaButton: UIButton!
     
+    //The height contraint. Default: 30
+    @IBOutlet weak var mediaButtonHeight: NSLayoutConstraint!
+    
     weak var delegate: EntryMediaHeaderViewDelegate?
     
     init(data: EntryMediaHeaderViewData) {
@@ -60,6 +63,8 @@ class EntryMediaHeaderView: NibLoadableView {
             mediaText = type == .anime ? "Anime" : "Manga"
         }
         mediaButton.setTitle("Go To \(mediaText) Page", for: .normal)
+        mediaButton.isHidden = !data.shouldShowMediaButton
+        mediaButtonHeight.constant = data.shouldShowMediaButton ? 30 : 0
         
         //Set header stuff
         nameLabel.text = data.name
