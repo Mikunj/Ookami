@@ -61,6 +61,7 @@ target 'OokamiKitTests' do
 end
 
 target 'OokamiUITests' do
+    project_pods
 end
 
 post_install do |installer|

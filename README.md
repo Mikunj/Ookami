@@ -41,7 +41,7 @@ Make sure your developer account is valid (has subscription) before attempting t
 4.  run `fastlane deliver init` which will create a `Deliverfile`. A Template `Deliverfile` has been provided, copy the contents of it and paste it in the new `Deliverfile`. Edit the values accordingly.
 5.  Finally run `fastlane provision` to create the app in Developer portal and Itunes Connect.
 
-To deploy the app simply run `fastlane release`. **Note:** Make sure the devices specified in the Snapfile are all logged into an account, otherwise the screenshots will fail to be captured, hence the release will fail. **This will be fixed in the future.**
+To deploy the app simply run `fastlane release`.
 
 To deploy it for testing, simply run `fastlane beta` instead.
 

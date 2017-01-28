@@ -7,13 +7,56 @@
 //
 
 import XCTest
+@testable import OokamiKit
+@testable import Heimdallr
+import Result
+
+private class StubHeimdallr: Heimdallr {
+    
+    override public var hasAccessToken: Bool {
+        return true
+    }
+    
+    init() {
+        super.init(tokenURL: URL(string: "http://uiTest.kitsu.io")!)
+    }
+    
+    override func clearAccessToken() {
+    }
+    
+    override func requestAccessToken(username: String, password: String, completion: @escaping (Result<Void, NSError>) -> ()) {
+        completion(.success())
+    }
+    
+    override func authenticateRequest(_ request: URLRequest, completion: @escaping (Result<URLRequest, NSError>) -> ()) {
+        completion(.success(request))
+    }
+    
+}
 
 class OokamiUITests: XCTestCase {
-        
+    
     override func setUp() {
         super.setUp()
         
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        //Force a fake login
+        Ookami.shared.heimdallr = StubHeimdallr()
+        CurrentUser().userID = 2875
+        
+        //Populate the data
+        //We need to make sure we have the data there so that the screenshots remain consistent
+        let anime = expectation(description: "Anime Current")
+        LibraryService().get(userID: 2875, type: .anime, status: .current) { _ in
+            anime.fulfill()
+        }
+        
+        let manga = expectation(description: "Manga Current")
+        LibraryService().get(userID: 2875, type: .manga, status: .current) { _ in
+            manga.fulfill()
+        }
+        
+        //Wait for them
+        waitForExpectations(timeout: 60, handler: nil)
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
@@ -29,39 +72,34 @@ class OokamiUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testSnapshot() {
         
         let app = XCUIApplication()
         
+        let ookamiUserlibraryviewNavigationBar = app.navigationBars["Ookami.UserLibraryView"]
+        ookamiUserlibraryviewNavigationBar.buttons["Search"].tap()
+        app.searchFields["Enter your search"].typeText("One punch man")
         
+        let tablesQuery = app.tables
+        tablesQuery.staticTexts["12 episodes ᛫ 24 minutes"].tap()
+        
+        snapshot("03 - Anime page")
+        
+        app.navigationBars.buttons["Stop"].tap()
+        
+        snapshot("04 - Search")
+        
+        let cancelButton = app.buttons["Cancel"]
+        cancelButton.tap()
+        cancelButton.tap()
         
         snapshot("01 - Anime library")
         
-        app.scrollViews.otherElements.collectionViews.children(matching: .cell).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 0).children(matching: .image).element.tap()
-        
-        
-        app.tables.buttons["Go To Anime Page"].tap()
-        
-        snapshot("02 - Anime page")
-        
-        app.navigationBars.buttons["Stop"].tap()
-        app.navigationBars["Ookami.LibraryEntryView"].children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
-        
-        let ookamiUserlibraryviewNavigationBar = app.navigationBars["Ookami.UserLibraryView"]
         ookamiUserlibraryviewNavigationBar.otherElements.children(matching: .button).element.tap()
+        tablesQuery.staticTexts["Manga"].tap()
         
-        app.tables.staticTexts["Manga"].tap()
+        snapshot("02 - Manga library")
         
-        snapshot("01 - Manga library")
-        
-        ookamiUserlibraryviewNavigationBar.buttons["Search"].tap()
-        
-        let enterYourSearchSearchField = app.searchFields["Enter your search"]
-        enterYourSearchSearchField.typeText("Attack on titan")
-        
-        app.buttons["Search"].tap()
-        
-        snapshot("03 - Search")
     }
     
 }
