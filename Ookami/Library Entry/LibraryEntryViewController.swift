@@ -215,16 +215,15 @@ extension LibraryEntryViewController: UITableViewDataSource {
         switch type {
         case .bool:
             cell = tableView.dequeueReusableCell(for: indexPath) as EntryBoolTableViewCell
-            break
+            
         case .string:
             cell = tableView.dequeueReusableCell(for: indexPath) as EntryStringTableViewCell
-            break
+            
         case .button:
             cell = tableView.dequeueReusableCell(for: indexPath) as EntryButtonTableViewCell
-            break
+            
         case .delete:
             cell = UITableViewCell()
-            break
         }
         
         //We update here because tableview won't automatically adjust height in willDisplayCell, unless we change orientation
@@ -326,8 +325,6 @@ extension LibraryEntryViewController: UITableViewDelegate {
                 self.present(sheet, animated: true)
             }
             
-            break
-            
         case .progress:
             
             let max = entry.maxProgress() ?? 999
@@ -338,8 +335,6 @@ extension LibraryEntryViewController: UITableViewDelegate {
                     self.reloadData()
                 }
             }, cancel: { _ in }, origin: cell)
-            
-            break
             
         case .status:
             
@@ -358,8 +353,6 @@ extension LibraryEntryViewController: UITableViewDelegate {
                 self.reloadData()
             }, cancel: { _ in }, origin: cell)
             
-            break
-            
         case .rating:
             
             let ratings = Array(stride(from: 0, to: 5.5, by: 0.5))
@@ -375,16 +368,12 @@ extension LibraryEntryViewController: UITableViewDelegate {
                 self.reloadData()
             }, cancel: { _ in }, origin: cell)
             
-            break
-            
         case .notes:
             
             let editingVC = TextEditingViewController(title: "Notes", text: entry.notes, placeholder: "Type your notes here!")
             editingVC.modalPresentationStyle = .overCurrentContext
             editingVC.delegate = self
             present(editingVC, animated: false)
-            
-            break
             
         case .reconsumeCount:
             let rows = Array(0...999)
@@ -394,18 +383,15 @@ extension LibraryEntryViewController: UITableViewDelegate {
                     self.reloadData()
                 }
             }, cancel: { _ in }, origin: cell)
-            break
             
         case .reconsuming:
             //Just invert the value
             self.data.updater?.update(reconsuming: !entry.reconsuming)
             self.reloadData()
-            break
             
         case .isPrivate:
             self.data.updater?.update(isPrivate: !entry.isPrivate)
             self.reloadData()
-            break
         }
         
     }
@@ -437,10 +423,9 @@ extension LibraryEntryViewController: EntryMediaHeaderViewDelegate, EntryButtonD
             switch d.heading {
             case .progress:
                 data.updater?.incrementProgress()
-                break
+                
             case .reconsumeCount:
                 data.updater?.incrementReconsumeCount()
-                break
                 
             default:
                 break

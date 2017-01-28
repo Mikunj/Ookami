@@ -37,19 +37,19 @@ public extension Date {
         switch dateString.characters.count {
             case 10:
                 dateFormatter.dateFormat = "YYYY-MM-dd"
-                break
+            
             case 19:
                 dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss"
-                break
+            
             case 21:
                 dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.S"
-                break
+            
             case 22:
                 dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SS"
-                break
+            
             case 24:
                 dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"
-                break
+            
             default:
                 break
         }

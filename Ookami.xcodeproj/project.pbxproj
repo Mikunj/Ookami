@@ -152,6 +152,7 @@
 		24BEC5D81E14E4AB0058F5AB /* UserServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5D71E14E4AB0058F5AB /* UserServiceSpec.swift */; };
 		24BEC5DA1E14E9BB0058F5AB /* LibraryServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5D91E14E9BB0058F5AB /* LibraryServiceSpec.swift */; };
 		24BEC5DC1E15DB3A0058F5AB /* LastFetched.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BEC5DB1E15DB3A0058F5AB /* LastFetched.swift */; };
+		24BF37151E3C163A0055972C /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BF37141E3C163A0055972C /* MailComposer.swift */; };
 		24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C6991E10E3F00048EB9D /* Constants.swift */; };
 		24C8C69C1E10EBA70048EB9D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69B1E10EBA70048EB9D /* Parser.swift */; };
 		24C8C69E1E10F4810048EB9D /* ParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C8C69D1E10F4810048EB9D /* ParserSpec.swift */; };
@@ -376,6 +377,7 @@
 		24BEC5D71E14E4AB0058F5AB /* UserServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServiceSpec.swift; sourceTree = "<group>"; };
 		24BEC5D91E14E9BB0058F5AB /* LibraryServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryServiceSpec.swift; sourceTree = "<group>"; };
 		24BEC5DB1E15DB3A0058F5AB /* LastFetched.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastFetched.swift; sourceTree = "<group>"; };
+		24BF37141E3C163A0055972C /* MailComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		24C8C6991E10E3F00048EB9D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		24C8C69B1E10EBA70048EB9D /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		24C8C69D1E10F4810048EB9D /* ParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserSpec.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				242A042A1E1F47D7000E8B06 /* Views */,
 				247BF5171E2705BC00FF643F /* ErrorAlert.swift */,
 				242A041A1E1CC33C000E8B06 /* Theme.swift */,
+				24BF37141E3C163A0055972C /* MailComposer.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1557,6 +1560,7 @@
 				24175E961E206351009FBDE6 /* EntryButtonTableViewCell.swift in Sources */,
 				242A04161E1CAAEA000E8B06 /* UserLibraryViewController.swift in Sources */,
 				2466586E1E288C8700BB15EC /* TitleTableSectionView.swift in Sources */,
+				24BF37151E3C163A0055972C /* MailComposer.swift in Sources */,
 				248FE1621E1F5A47009ACA66 /* EntryBoolTableViewCell.swift in Sources */,
 				245179161E3218AF0025F9C7 /* MediaViewControllerHelper.swift in Sources */,
 				242A042C1E1F480B000E8B06 /* NibLoadableView.swift in Sources */,

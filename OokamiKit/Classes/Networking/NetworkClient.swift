@@ -65,7 +65,7 @@ public class NetworkClient: NetworkClientProtocol {
         switch request.urlType {
         case .absolute:
             urlString = request.url
-            break
+            
         case .relative:
             urlString = "\(baseURL)\(request.url)"
         }
@@ -88,10 +88,9 @@ public class NetworkClient: NetworkClientProtocol {
                     switch result {
                     case .success(let signedRequest):
                         self.run(request: signedRequest, completion: completion)
-                        break
+                        
                     case .failure(let error):
                         completion(nil, NetworkClientError.authenticationError(error.localizedDescription))
-                        break
                     }
                 }
             } else {
@@ -114,7 +113,7 @@ public class NetworkClient: NetworkClientProtocol {
             switch response.result {
             case .success(let data):
                 completion(JSON(data), nil)
-                break
+                
             case .failure(let error):
                 
                 //Try and extract the error from the JSON
@@ -126,7 +125,6 @@ public class NetworkClient: NetworkClientProtocol {
                 
                 //If we failed then pass back the Alamofire error
                 completion(nil, error)
-                break
             }
         }
     }

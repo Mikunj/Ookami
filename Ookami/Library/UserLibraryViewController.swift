@@ -36,6 +36,12 @@ final class UserLibraryViewController: UIViewController {
     fileprivate var animeController: LibraryViewController!
     fileprivate var mangaController: LibraryViewController!
     
+    //The mail composer to use
+    //TODO: Move this out after we have a proper settings page
+    fileprivate lazy var mailComposer: MailComposer = {
+        return MailComposer(parent: self)
+    }()
+    
     /// Create a `UserLibraryViewController`
     ///
     /// - Parameters:
@@ -127,6 +133,12 @@ final class UserLibraryViewController: UIViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         if CurrentUser().isLoggedIn() {
+            
+            let feedback = UIAlertAction(title: "Send Feedback", style: .default) { _ in
+                self.mailComposer.present()
+            }
+            alert.addAction(feedback)
+            
             let logout = UIAlertAction(title: "Logout", style: .destructive) { _ in
                 CurrentUser().logout()
             }

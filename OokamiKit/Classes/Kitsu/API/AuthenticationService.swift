@@ -53,10 +53,8 @@ public class AuthenticationService: BaseService {
                     completion(error)
                 }
                 
-                break
             case .failure(_):
                 completion(BaseService.ServiceError.error(description: "Invalid Username or Password"))
-                break
             }
         }
     }

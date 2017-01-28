@@ -311,10 +311,9 @@ extension LibraryEntry {
             switch type {
             case .anime:
                 maxCount = self.anime?.episodeCount
-                break
+                
             case .manga:
                 maxCount = self.manga?.chapterCount
-                break
             }
         }
         

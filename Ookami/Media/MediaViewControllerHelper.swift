@@ -101,7 +101,6 @@ class MediaViewControllerHelper {
             if let entry = getEntry(id: mediaID, type: mediaType) {
                 AppCoordinator.showLibraryEntryVC(in: parent.navigationController, entry: entry, shouldShowMediaButton: false)
             }
-            break
             
         case .add:
             
@@ -117,7 +116,6 @@ class MediaViewControllerHelper {
             sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             parent.present(sheet, animated: true)
             
-            break
         }
     }
     

@@ -99,10 +99,10 @@ public class Parser {
                     if let parsed = self.parseDictionary(json: field) {
                         results.append(parsed)
                     }
-                    break
+                    
                 case .array:
                     results.append(contentsOf: self.parseArray(json: field))
-                    break
+                    
                 default:
                     break
                 }

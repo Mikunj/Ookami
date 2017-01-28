@@ -34,11 +34,9 @@ extension ItemData {
                     details.append("Airing")
                 }
                 
-                break
             case .manga:
                 data.name = entry.manga?.canonicalTitle ?? ""
                 data.posterImage = entry.manga?.posterImage
-                break
             }
         }
         

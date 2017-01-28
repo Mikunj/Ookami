@@ -156,11 +156,10 @@ class MediaTableHeaderView: NibLoadableView {
         case .add:
             entryButton.setTitle("Add to library", for: .normal)
             entryButton.setImage(nil, for: .normal)
-            break
+            
         case .edit:
             entryButton.setTitle("Entry", for: .normal)
             entryButton.setIconImage(withIcon: FontAwesomeIcon.pencilIcon, size: CGSize(width: 14, height: 14), color: UIColor.white, forState: .normal)
-            break
         }
     }
     
