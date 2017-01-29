@@ -42,6 +42,11 @@ final class UserLibraryViewController: UIViewController {
         return MailComposer(parent: self)
     }()
     
+    //The settings button to use
+    fileprivate lazy var settingsButton: UIBarButtonItem = {
+        return UIBarButtonItem(withIcon: .cogIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(settingsTapped))
+    }()
+    
     /// Create a `UserLibraryViewController`
     ///
     /// - Parameters:
@@ -108,9 +113,7 @@ final class UserLibraryViewController: UIViewController {
         
         let search = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
         self.navigationItem.setRightBarButton(search, animated: false)
-        
-        let settings = UIBarButtonItem(withIcon: .cogIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(settingsTapped))
-        self.navigationItem.setLeftBarButton(settings, animated: false)
+        self.navigationItem.setLeftBarButton(settingsButton, animated: false)
         
         show(.anime)
     }
@@ -132,6 +135,8 @@ final class UserLibraryViewController: UIViewController {
         //TODO: Move this out of here after main pages (discovery, user, library) have been implemented
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
+        alert.popoverPresentationController?.barButtonItem = settingsButton
+        
         if CurrentUser().isLoggedIn() {
             
             let feedback = UIAlertAction(title: "Send Feedback", style: .default) { _ in
@@ -147,7 +152,9 @@ final class UserLibraryViewController: UIViewController {
             let cancel = UIAlertAction(title: "Cancel", style: .cancel)
             alert.addAction(cancel)
             
-            self.present(alert, animated: true)
+            if self.presentedViewController == nil {
+                self.present(alert, animated: true)
+            }
         }
         
         

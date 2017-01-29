@@ -160,8 +160,8 @@ extension AnimeViewController {
 //MARK:- User Gestures
 extension AnimeViewController: MediaTableHeaderViewDelegate {
     
-    func didTapEntryButton(state: MediaTableHeaderView.EntryButtonState) {
-        MediaViewControllerHelper.tappedEntryButton(state: state, mediaID: anime.id, mediaType: .anime, parent: self) { error in
+    func didTapEntryButton(_ button: UIButton, state: MediaTableHeaderView.EntryButtonState) {
+        MediaViewControllerHelper.tappedEntryButton(button, state: state, mediaID: anime.id, mediaType: .anime, parent: self) { error in
             
             //User added anime
             guard error == nil else {

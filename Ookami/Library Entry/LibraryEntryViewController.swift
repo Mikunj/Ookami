@@ -302,6 +302,9 @@ extension LibraryEntryViewController: UITableViewDelegate {
         case .delete:
             let sheet = UIAlertController(title: nil, message: "Are you sure?", preferredStyle: .actionSheet)
             
+            sheet.popoverPresentationController?.sourceView = cell
+            sheet.popoverPresentationController?.sourceRect = cell.bounds
+            
             
             sheet.addAction(UIAlertAction(title: "Yes, Delete it!", style: .destructive) { action in
                 

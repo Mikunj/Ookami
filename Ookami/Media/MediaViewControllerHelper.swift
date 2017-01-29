@@ -95,7 +95,7 @@ class MediaViewControllerHelper {
     }
     
     //Either edit or add the entry
-    static func tappedEntryButton(state: MediaTableHeaderView.EntryButtonState, mediaID: Int, mediaType: Media.MediaType, parent: MediaViewController, completion: @escaping (Error?) -> Void) {
+    static func tappedEntryButton(_ button: UIButton, state: MediaTableHeaderView.EntryButtonState, mediaID: Int, mediaType: Media.MediaType, parent: MediaViewController, completion: @escaping (Error?) -> Void) {
         switch state {
         case .edit:
             if let entry = getEntry(id: mediaID, type: mediaType) {
@@ -105,6 +105,9 @@ class MediaViewControllerHelper {
         case .add:
             
             let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            sheet.popoverPresentationController?.sourceView = button
+            sheet.popoverPresentationController?.sourceRect = button.bounds
             
             for status in LibraryEntry.Status.all {
                 let action = UIAlertAction(title: status.toString(forMedia: mediaType), style: .default) { _ in

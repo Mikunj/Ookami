@@ -160,8 +160,8 @@ extension MangaViewController {
 //MARK:- User Gestures
 extension MangaViewController: MediaTableHeaderViewDelegate {
     
-    func didTapEntryButton(state: MediaTableHeaderView.EntryButtonState) {
-        MediaViewControllerHelper.tappedEntryButton(state: state, mediaID: manga.id, mediaType: .manga, parent: self) { error in
+    func didTapEntryButton(_ button: UIButton, state: MediaTableHeaderView.EntryButtonState) {
+        MediaViewControllerHelper.tappedEntryButton(button, state: state, mediaID: manga.id, mediaType: .manga, parent: self) { error in
             
             //User added manga
             guard error == nil else {

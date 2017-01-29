@@ -13,7 +13,7 @@ import DynamicColor
 //TODO: Improve this view ... it just looks ugly
 
 protocol MediaTableHeaderViewDelegate: class {
-    func didTapEntryButton(state: MediaTableHeaderView.EntryButtonState)
+    func didTapEntryButton(_ button: UIButton, state: MediaTableHeaderView.EntryButtonState)
     func didTapTrailerButton()
     func didTapCoverImage(_ imageView: UIImageView)
 }
@@ -165,7 +165,7 @@ class MediaTableHeaderView: NibLoadableView {
     
     @IBAction func didTapEntryButton(_ sender: Any) {
         let state = data?.entryState ?? .add
-        delegate?.didTapEntryButton(state: state)
+        delegate?.didTapEntryButton(entryButton, state: state)
     }
     
     @IBAction func didTapCoverImage(_ sender: Any) {
