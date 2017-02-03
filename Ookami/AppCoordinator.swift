@@ -65,8 +65,8 @@ class AppCoordinator {
     }
     
     //Show the starting view controller
-    static func showStartingVC(in window: UIWindow) {
-        guard let user = CurrentUser().userID else {
+    static func showStartingVC(in window: UIWindow, isUITest: Bool = false) {
+        guard let user = isUITest ? 2875 : CurrentUser().userID else {
             return
         }
         

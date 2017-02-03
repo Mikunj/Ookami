@@ -1,1 +1,1 @@
-Ookami is a show tracking app that helps you manage what you are watching or reading very easily.
+Ookami is a show tracking app, made for Kitsu.io, that helps you manage what you are watching or reading very easily.

@@ -18,6 +18,7 @@ import DZNEmptyDataSet
 //The datasource which is used by the controller
 protocol ItemViewControllerDataSource: class {
     weak var delegate: ItemViewControllerDelegate? { get set }
+    var count: Int { get }
     
     func items() -> [ItemData]
     func didSelectItem(at indexPath: IndexPath)

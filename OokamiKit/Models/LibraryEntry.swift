@@ -60,15 +60,19 @@ public class LibraryEntry: Object, Cacheable {
                     return "Current"
                 }
                 return type == .anime ? "Currently Watching": "Currently Reading"
+                
             case .planned:
                 if type == nil {
                     return "Planning"
                 }
                 return type == .anime ? "Plan to Watch": "Plan to Read"
+                
             case .completed:
                 return "Completed"
+                
             case .onHold:
                 return "On Hold"
+                
             case .dropped:
                 return "Dropped"
             }

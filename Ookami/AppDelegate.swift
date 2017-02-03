@@ -32,6 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds);
         
+        //Check for UITest
+        if ProcessInfo.processInfo.arguments.contains("UITest") {
+            AppCoordinator.showStartingVC(in: window!, isUITest: true)
+            return true
+        }
+        
+        //Main
         if CurrentUser().isLoggedIn() {
             AppCoordinator.showStartingVC(in: window!)
             

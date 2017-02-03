@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -25,34 +25,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qVJ-oZ-xo6">
                     <rect key="frame" x="16" y="243" width="382" height="250"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BUN-bc-zH3">
-                            <rect key="frame" x="8" y="16.666666666666686" width="366" height="217"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BUN-bc-zH3">
+                            <rect key="frame" x="8" y="-7.3333333333333428" width="366" height="264.66666666666663"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ECR-kw-CFc" userLabel="Label stack">
-                                    <rect key="frame" x="0.0" y="0.0" width="366" height="53"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ookami" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoI-J8-TeQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="366" height="36"/>
-                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=regular">
-                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="37"/>
-                                            </variation>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please login to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqF-j6-Jzt">
-                                            <rect key="frame" x="0.0" y="36" width="366" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=regular">
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                            </variation>
-                                        </label>
-                                    </subviews>
-                                </stackView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kitsu.png" translatesAutoresizingMaskIntoConstraints="NO" id="May-PR-GQV">
+                                    <rect key="frame" x="0.0" y="0.0" width="366" height="130.00000000000003"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="130" id="Quf-Li-GAm"/>
+                                    </constraints>
+                                </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zHl-GG-eaS" userLabel="Input stack">
-                                    <rect key="frame" x="0.0" y="73" width="366" height="144"/>
+                                    <rect key="frame" x="0.0" y="120.66666666666666" width="366" height="143.99999999999997"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username or Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9NG-Il-vnu">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="30"/>
@@ -92,15 +75,16 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPG-VH-dBT">
                                             <rect key="frame" x="0.0" y="114" width="366" height="30"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <state key="normal" title="Don't have an account? Sign up">
+                                            <state key="normal" title="Don't have a Kitsu account? Sign up">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             </variation>
                                             <connections>
-                                                <action selector="didTapSignup:" destination="-1" eventType="touchUpInside" id="smT-1v-fYw"/>
+                                                <action selector="didTapSignup:" destination="-1" eventType="touchUpInside" id="jFx-pG-uwS"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -121,9 +105,6 @@
                                     </variation>
                                 </stackView>
                             </subviews>
-                            <constraints>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="Ikx-XF-qKm"/>
-                            </constraints>
                         </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -146,4 +127,7 @@
             <point key="canvasLocation" x="46.5" y="123.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="kitsu.png" width="824" height="288"/>
+    </resources>
 </document>
