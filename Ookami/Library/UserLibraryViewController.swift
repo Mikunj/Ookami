@@ -33,8 +33,8 @@ final class UserLibraryViewController: UIViewController {
     fileprivate var dropDownMenu: BTNavigationDropdownMenu!
     
     //The library view controllers
-    fileprivate var animeController: LibraryViewController!
-    fileprivate var mangaController: LibraryViewController!
+    fileprivate var animeController: LibraryViewController?
+    fileprivate var mangaController: LibraryViewController?
     
     //The mail composer to use
     //TODO: Move this out after we have a proper settings page
@@ -79,7 +79,7 @@ final class UserLibraryViewController: UIViewController {
         animeController = LibraryViewController(dataSource: source.anime, type: .anime)
         mangaController = LibraryViewController(dataSource: source.manga, type: .manga)
         
-        for controller in [animeController, mangaController] as [LibraryViewController] {
+        for controller in [animeController!, mangaController!] as [LibraryViewController] {
             self.addChildViewController(controller)
             self.view.addSubview(controller.view)
             
@@ -122,8 +122,8 @@ final class UserLibraryViewController: UIViewController {
     ///
     /// - Parameter type: The media type
     func show(_ type: Media.MediaType) {
-        animeController.view.isHidden = type != .anime
-        mangaController.view.isHidden = type != .manga
+        animeController?.view.isHidden = type != .anime
+        mangaController?.view.isHidden = type != .manga
         searchScope = type == .anime ? .anime : .manga
     }
     
@@ -157,7 +157,6 @@ final class UserLibraryViewController: UIViewController {
             }
         }
         
-        
     }
     
 }
@@ -165,5 +164,10 @@ final class UserLibraryViewController: UIViewController {
 extension UserLibraryViewController: LibraryDataSourceParent {
     func didTapEntry(entry: LibraryEntry) {
         AppCoordinator.showLibraryEntryVC(in: self.navigationController, entry: entry)
+    }
+    
+    func didUpdateEntries() {
+        animeController?.reload()
+        mangaController?.reload()
     }
 }

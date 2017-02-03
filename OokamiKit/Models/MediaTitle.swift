@@ -22,6 +22,9 @@ public class MediaTitle: Object {
         case japanese = "ja_jp"
         case romanized = "en_jp"
         
+        /// Get the string representation of the language key
+        ///
+        /// - Returns: The string value
         public func toString() -> String {
             switch self {
             case .english:

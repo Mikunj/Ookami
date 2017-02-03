@@ -138,6 +138,10 @@ final class FullLibraryDataSource: LibraryDataSource {
 //MARK: - LibraryEntryDataSource
 extension FullLibraryDataSource {
     
+    var count: Int {
+        return results?.count ?? 0
+    }
+    
     func items() -> [ItemData] {
         guard let results = results else {
             return []
@@ -175,6 +179,9 @@ extension FullLibraryDataSource {
         token?.stop()
         token = results?.addNotificationBlock { [unowned self] changes in
             self.delegate?.didReloadItems(dataSource: self)
+            
+            //Reload the library view to update the counts
+            self.parent?.didUpdateEntries()
             
             //Hide the indicator if results were updated
             let count = self.results?.count ?? 0

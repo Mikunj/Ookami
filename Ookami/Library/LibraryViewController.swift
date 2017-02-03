@@ -13,6 +13,7 @@ import BTNavigationDropdownMenu
 
 protocol LibraryDataSourceParent: class {
     func didTapEntry(entry: LibraryEntry)
+    func didUpdateEntries()
 }
 
 protocol LibraryDataSource: ItemViewControllerDataSource {
@@ -84,14 +85,33 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         super.viewDidLoad()
     }
     
-    func updateItemViewControllers() {
+    func reload() {
+        self.updateItemControllerTitles()
+    }
+    
+    private func updateItemControllerTitles() {
+        //Update the sources
+        for status in LibraryEntry.Status.all {
+            let controller = itemControllers[status]
+            let dataSource = source[status]
+            
+            //Add the title with entry count
+            let count = dataSource?.count ?? 0
+            let title = status.toString(forMedia: type) + " (\(count))"
+            controller?.title = title
+        }
+        
+        self.buttonBarView.reloadData()
+    }
+    
+    private func updateItemViewControllers() {
         //Update the sources
         for status in LibraryEntry.Status.all {
             source[status]?.didSet(sort: sort)
             itemControllers[status]?.dataSource = source[status]
         }
         
-        self.buttonBarView.reloadData()
+        updateItemControllerTitles()
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
