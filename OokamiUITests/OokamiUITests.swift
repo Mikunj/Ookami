@@ -39,10 +39,6 @@ class OokamiUITests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        //Force a fake login
-        Ookami.shared.heimdallr = StubHeimdallr()
-        CurrentUser().userID = 2875
-        
         //Populate the data
         //We need to make sure we have the data there so that the screenshots remain consistent
         let anime = expectation(description: "Anime Current")
@@ -63,6 +59,7 @@ class OokamiUITests: XCTestCase {
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         
         let app = XCUIApplication()
+        app.launchArguments = ["UITest"]
         setupSnapshot(app)
         app.launch()
     }
