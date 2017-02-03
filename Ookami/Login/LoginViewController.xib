@@ -25,22 +25,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qVJ-oZ-xo6">
                     <rect key="frame" x="16" y="243" width="382" height="250"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BUN-bc-zH3">
-                            <rect key="frame" x="8" y="17" width="366" height="294"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BUN-bc-zH3">
+                            <rect key="frame" x="8" y="-7.3333333333333428" width="366" height="264.66666666666663"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ECR-kw-CFc" userLabel="Label stack">
-                                    <rect key="frame" x="0.0" y="0.0" width="366" height="130"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kitsu.png" translatesAutoresizingMaskIntoConstraints="NO" id="May-PR-GQV">
-                                            <rect key="frame" x="0.0" y="0.0" width="366" height="130"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="130" id="Quf-Li-GAm"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                </stackView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kitsu.png" translatesAutoresizingMaskIntoConstraints="NO" id="May-PR-GQV">
+                                    <rect key="frame" x="0.0" y="0.0" width="366" height="130.00000000000003"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="130" id="Quf-Li-GAm"/>
+                                    </constraints>
+                                </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zHl-GG-eaS" userLabel="Input stack">
-                                    <rect key="frame" x="0.0" y="150" width="366" height="144"/>
+                                    <rect key="frame" x="0.0" y="120.66666666666666" width="366" height="143.99999999999997"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username or Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9NG-Il-vnu">
                                             <rect key="frame" x="0.0" y="0.0" width="366" height="30"/>
@@ -80,6 +75,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPG-VH-dBT">
                                             <rect key="frame" x="0.0" y="114" width="366" height="30"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <state key="normal" title="Don't have a Kitsu account? Sign up">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -88,7 +84,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             </variation>
                                             <connections>
-                                                <action selector="didTapSignup:" destination="-1" eventType="touchUpInside" id="smT-1v-fYw"/>
+                                                <action selector="didTapSignup:" destination="-1" eventType="touchUpInside" id="jFx-pG-uwS"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -109,9 +105,6 @@
                                     </variation>
                                 </stackView>
                             </subviews>
-                            <constraints>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="Ikx-XF-qKm"/>
-                            </constraints>
                         </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
