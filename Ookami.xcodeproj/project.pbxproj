@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21B767855510585E29148F3C /* Pods_OokamiKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052A0D309C0A381911682308 /* Pods_OokamiKitTests.framework */; };
+		2405D4611E44448E0043BE10 /* kitsu.png in Resources */ = {isa = PBXBuildFile; fileRef = 2405D4601E44448E0043BE10 /* kitsu.png */; };
 		2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241418991DCDD81100AF1AEA /* LibraryEntry.swift */; };
 		2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */; };
 		2414189E1DCDE00400AF1AEA /* LibraryEntrySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */; };
@@ -235,6 +236,7 @@
 		052A0D309C0A381911682308 /* Pods_OokamiKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OokamiKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		06A3998A92091D3C7CC01CB7 /* Pods-OokamiKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OokamiKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OokamiKit/Pods-OokamiKit.debug.xcconfig"; sourceTree = "<group>"; };
 		18EC37E7569603AFBC8D3B99 /* Pods-Ookami.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ookami.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ookami/Pods-Ookami.debug.xcconfig"; sourceTree = "<group>"; };
+		2405D4601E44448E0043BE10 /* kitsu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitsu.png; sourceTree = "<group>"; };
 		241418991DCDD81100AF1AEA /* LibraryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntry.swift; sourceTree = "<group>"; };
 		2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsable.swift; sourceTree = "<group>"; };
 		2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntrySpec.swift; sourceTree = "<group>"; };
@@ -966,6 +968,7 @@
 		24DC7DF61E2766DB007D14FB /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2405D4601E44448E0043BE10 /* kitsu.png */,
 				2451793E1E3439810025F9C7 /* ookami-icon.png */,
 				24DC7DF71E2766F4007D14FB /* default-cover.png */,
 				245761371E2CBD6000BEB18C /* default-poster.jpg */,
@@ -1243,6 +1246,7 @@
 				2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */,
 				247BF51E1E27080F00FF643F /* SignupViewController.xib in Resources */,
 				242A03F01E190730000E8B06 /* ItemDetailGridCell.xib in Resources */,
+				2405D4611E44448E0043BE10 /* kitsu.png in Resources */,
 				242A03DD1E1646F9000E8B06 /* manga-one-punch-man.json in Resources */,
 				245761621E31F95100BEB18C /* MediaInfoTableViewCell.xib in Resources */,
 				24175E8E1E1FA88A009FBDE6 /* FontAwesome.otf in Resources */,
