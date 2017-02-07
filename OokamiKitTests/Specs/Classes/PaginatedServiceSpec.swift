@@ -1,5 +1,5 @@
 //
-//  PaginatedLibrarySepc.swift
+//  PaginatedServiceSpec.swift
 //  Ookami
 //
 //  Created by Maka on 14/11/16.
@@ -22,7 +22,7 @@ private class StubParser: Parser {
     }
 }
 
-private class StubPaginatedLibrary: PaginatedLibrary {
+private class StubPaginatedService: PaginatedService {
     
     var startCalledCount = 0
     var nextCalledCount = 0
@@ -57,13 +57,13 @@ private class StubPaginatedLibrary: PaginatedLibrary {
     
 }
 
-class PaginatedLibrarySpec: QuickSpec {
+class PaginatedServiceSpec: QuickSpec {
     override func spec() {
         
         var client: NetworkClient!
         var request: KitsuLibraryRequest!
         
-        describe("Paginated Library") {
+        describe("Paginated Base") {
             
             beforeEach {
                 
@@ -83,7 +83,7 @@ class PaginatedLibrarySpec: QuickSpec {
             context("Requests") {
                 context("Calling original request") {
                     it("should call original request if there are no links") {
-                        let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
+                        let p = StubPaginatedService(request: request, client: client) { _, _ in }
                         
                         p.next()
                         p.prev()
@@ -93,7 +93,7 @@ class PaginatedLibrarySpec: QuickSpec {
                     }
                     
                     it("should not call original request if it has already been called") {
-                        let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
+                        let p = StubPaginatedService(request: request, client: client) { _, _ in }
                         p.calledOriginalRequest = true
                         
                         p.next()
@@ -107,7 +107,7 @@ class PaginatedLibrarySpec: QuickSpec {
                 
                 it("should correctly build requests for links") {
                     let linkString = "http://abc.io/anime"
-                    let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
+                    let p = StubPaginatedService(request: request, client: client) { _, _ in }
                     let request = p.request(for: linkString)
                     expect(request.url).to(equal(linkString))
                 }
@@ -115,13 +115,13 @@ class PaginatedLibrarySpec: QuickSpec {
                 it("should return error if link is nil") {
                     var error: Error?
                     
-                    let p = StubPaginatedLibrary(request: request, client: client) { _, e in
+                    let p = StubPaginatedService(request: request, client: client) { _, e in
                         error = e
                     }
                     p.calledOriginalRequest = true
                     p.links.first = "hello"
                     p.performRequest(for: nil, nilError: .noNextPage)
-                    expect(error).toEventually(matchError(PaginatedLibraryError.noNextPage))
+                    expect(error).toEventually(matchError(PaginationError.noNextPage))
                 }
             }
             
@@ -130,7 +130,7 @@ class PaginatedLibrarySpec: QuickSpec {
                     it("should correctly set links from json") {
                         let data = ["links": ["first": "abc", "last": "def"]]
                         let json = JSON(data)
-                        let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
+                        let p = StubPaginatedService(request: request, client: client) { _, _ in }
                         p.updateLinks(fromJSON: json)
                         
                         expect(p.links.hasAnyLinks()).to(beTrue())
@@ -142,7 +142,7 @@ class PaginatedLibrarySpec: QuickSpec {
                     
                     it("should set all links to nil if no links exist in json") {
                         let json = TestHelper.json(data: "abc")
-                        let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
+                        let p = StubPaginatedService(request: request, client: client) { _, _ in }
                         p.links.first = "abc"
                         p.links.next = "def"
                         p.links.previous = "ghi"
@@ -158,7 +158,7 @@ class PaginatedLibrarySpec: QuickSpec {
                     
                     it("should set all links to nil if links is not a dictionary in json") {
                         let json = JSON(["links": "abc"])
-                        let p = StubPaginatedLibrary(request: request, client: client) { _, _ in }
+                        let p = StubPaginatedService(request: request, client: client) { _, _ in }
                         p.links.first = "abc"
                         p.links.next = "def"
                         p.links.previous = "ghi"
@@ -183,7 +183,7 @@ class PaginatedLibrarySpec: QuickSpec {
                             return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
                         
-                        let p = StubPaginatedLibrary(request: request, client: client) { fetched, _ in
+                        let p = StubPaginatedService(request: request, client: client) { fetched, _ in
                             objects = fetched
                         }
                         p.parser = StubParser()
@@ -202,7 +202,7 @@ class PaginatedLibrarySpec: QuickSpec {
                             return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
                         
-                        let p = StubPaginatedLibrary(request: request, client: client) { fetched, e in
+                        let p = StubPaginatedService(request: request, client: client) { fetched, e in
                             objects = fetched
                             error = e
                         }

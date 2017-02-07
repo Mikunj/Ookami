@@ -14,47 +14,32 @@ public class MangaService: BaseService {
     ///
     /// - Parameters:
     ///   - title: The title to search for
-    ///   - limit: The amount of manga to return
+    ///   - filters: The filters to apply
+    ///   - page: The paging to apply
     ///   - completion: The completion block which passes an array of manga ids that were found or an error if it occured
     /// - Returns: The search operation which can be cancelled.
-    public func find(title: String, limit: Int = 20, completion: @escaping ([Int]?, Error?) -> Void) -> Operation {
+    public func find(title: String, filters: MangaFilter = MangaFilter(), completion: @escaping ([Int]?, Error?) -> Void) -> PaginatedService {
         let url = Constants.Endpoints.manga
-        let request = KitsuPagedRequest(relativeURL: url)
-        request.filter(key: "text", value: title)
-        request.page(limit: limit)
-        
-        let operation = NetworkOperation(request: request.build(), client: client) { json, error in
+        return MediaServiceHelper().find(type: Manga.self, url: url, client: client, database: database, title: title, filters: filters) { objects, error in
+            
             guard error == nil else {
                 completion(nil, error)
                 return
             }
             
-            guard let json = json else {
-                completion(nil, NetworkClientError.error("Failed to parse json - Manga Service FIND"))
+            guard let objects = objects else {
+                completion(nil, NetworkClientError.error("Failed to get objects - Manga Service FIND"))
                 return
             }
             
-            //Parse the objects and return the ids of the manga back
-            Parser().parse(json: json, callback: { objects in
-                
-                //Add the objects to the database
-                self.database.addOrUpdate(objects)
-                
-                //Return the results to the user
-                let filtered = objects.flatMap { $0 is Manga ? $0 : nil }
-                if let filteredManga = filtered as? [Manga] {
-                    let ids = filteredManga.map { $0.id }
-                    
-                    completion(ids, nil)
-                    return
-                }
-                
-            })
+            //Return the ids of the objects
+            if let manga = objects as? [Manga] {
+                let ids = manga.map { $0.id }
+                completion(ids, nil)
+                return
+            }
+            
         }
-        
-        queue.addOperation(operation)
-        
-        return operation
     }
     
     /// Get a manga with the given id.

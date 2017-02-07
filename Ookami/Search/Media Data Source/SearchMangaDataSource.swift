@@ -14,12 +14,15 @@ class SearchMangaDataSource: SearchMediaDataSource {
     //The manga we are showing
     var manga: [Manga] = []
     
+    //The manga filters
+    var filters: MangaFilter = MangaFilter()
+    
     override func willClearData() {
         manga = []
     }
     
-    override func operation(for searchText: String, completion: @escaping () -> Void) -> Operation {
-        return MangaService().find(title: searchText) { [weak self] ids, error in
+    override func paginatedService(for searchText: String, completion: @escaping () -> Void) -> PaginatedService {
+        return MangaService().find(title: searchText, filters: filters) { [weak self] ids, error in
             guard let strong = self else {
                 return
             }

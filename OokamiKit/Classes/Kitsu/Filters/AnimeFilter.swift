@@ -14,7 +14,7 @@ public class AnimeFilter: MediaFilter {
     //The episode range to filter
     public var episodes: RangeFilter<Int> {
         didSet {
-            episodes.capValues(min: 0, max: 99999)
+            episodes.capValues(min: 1, max: 99999)
             episodes.applyCorrection()
         }
     }
@@ -29,7 +29,7 @@ public class AnimeFilter: MediaFilter {
     public var seasons: [Season] = []
     
     public override init() {
-        episodes = RangeFilter(start: 0, end: nil)
+        episodes = RangeFilter(start: 1, end: nil)
         super.init()
     }
     
@@ -37,7 +37,12 @@ public class AnimeFilter: MediaFilter {
         var dict = super.construct()
         
         //Episode count
-        dict["episodeCount"] = episodes.description
+        //If ep count is 1 then don't include the request else kitsu won't return anime with no episodes
+        if episodes.start != 1 || episodes.end != nil {
+            let start = episodes.start == 1 ? "" : episodes.start.description
+            let end = episodes.end?.description ?? ""
+            dict["episodeCount"] = "\(start)..\(end)"
+        }
         
         //Age rating
         if ageRatings.count > 0 {

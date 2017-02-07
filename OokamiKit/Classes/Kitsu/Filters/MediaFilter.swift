@@ -49,9 +49,20 @@ public class MediaFilter {
     ///
     /// - Returns: The dictionary representation of the filters
     public func construct() -> [String: Any] {
-        return ["year": year.description,
-                "averageRating": rating.description,
-                "genres": genres]
+        var dict: [String: Any] = ["year": year.description]
+        
+        //Only include rating if it's not the default
+        //This is because kitsu doesn't return media which has no rating ...
+        if rating.start != 0.5 || rating.end != 5.0 {
+            dict["averageRating"] = rating.description
+        }
+        
+        //Filter genres only if we added them
+        if genres.count > 0 {
+            dict["genres"] = genres
+        }
+        
+        return dict
     }
     
 }

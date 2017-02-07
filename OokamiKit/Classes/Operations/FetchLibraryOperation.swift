@@ -65,7 +65,7 @@ public class FetchLibraryOperation: AsynchronousOperation {
                 guard error == nil else {
                     
                     //Check if we have reached the max page
-                    if error! == PaginatedLibraryError.noNextPage {
+                    if error! == PaginationError.noNextPage {
                         self.fetchComplete(nil)
                     } else {
                         self.fetchComplete(error)

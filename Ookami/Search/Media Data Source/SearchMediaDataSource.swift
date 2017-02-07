@@ -19,8 +19,8 @@ class SearchMediaDataSource: SearchViewControllerDataSource {
     //The data used for animation
     var data: [SearchMediaTableCellData] = []
     
-    //The network operation
-    var operation: Operation? = nil
+    //The paginated class
+    var service: PaginatedService? = nil
     
     init(parent: UITableView) {
         parent.register(cellType: SearchMediaTableViewCell.self)
@@ -68,21 +68,21 @@ class SearchMediaDataSource: SearchViewControllerDataSource {
         if text.isEmpty {
             willClearData()
             updateData(newData: [])
-            operation?.cancel()
+            service?.cancel()
             delegate?.hideIndicator()
             return
         }
         
         //Check if we have a operation in progress, if so then cancel it
-        if operation != nil {
-            operation?.cancel()
+        if service != nil {
+            service?.cancel()
         }
         
         delegate?.showIndicator()
         
         //Set the operation and its delegate
-        operation = operation(for: text) {
-            self.operation = nil
+        service = paginatedService(for: text) {
+            self.service = nil
             self.delegate?.hideIndicator()
         }
     }
@@ -90,7 +90,7 @@ class SearchMediaDataSource: SearchViewControllerDataSource {
     func willClearData() {
     }
     
-    func operation(for searchText: String, completion: @escaping () -> Void) -> Operation {
+    func paginatedService(for searchText: String, completion: @escaping () -> Void) -> PaginatedService {
         fatalError("operation(for:) needs to be implemented in a subclass")
     }
     

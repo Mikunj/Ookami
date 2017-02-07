@@ -1,61 +1,30 @@
 //
-//  PaginatedLibrary.swift
+//  PaginatedService.swift
 //  Ookami
 //
-//  Created by Maka on 13/11/16.
-//  Copyright © 2016 Mikunj Varsani. All rights reserved.
+//  Created by Maka on 7/2/17.
+//  Copyright © 2017 Mikunj Varsani. All rights reserved.
 //
 
 import Foundation
 import SwiftyJSON
 import RealmSwift
 
-/*
- The reason we have a paginated library class is because users won't look at ALL of another users library if you think about it.
- 
- Say a user `A` looks at user `B`'s completed library which has 1000 entries. `A` won't bother looking through all 1000 entries of `B`, thus we can save time and data usage by adding in pagination, which is already supported by the api. This makes it so user `A` can still look at user `B`'s completed library, but if they wish to view more we just fetch the next page from the server for them.
- 
- However we still need to be able to fetch a full users library regardless of pagination, thus the FetchLibraryOperation still exists. This is needed for the current user using the app. We need to reliably be able to sync between the website and the app (e.g if user deletes entry on website, then it should be deleted in app) and the only way to do that is to fetch the users whole library.
-*/
-
-/// Struct for holding the pagination link state
-public struct PaginatedLibraryLinks {
-    public var first: String?
-    public var next: String?
-    public var previous: String?
-    public var last: String?
-    
-    /// Check whether there is any link that is not nil
-    ///
-    /// - Returns: Whether there is a link that is not nil
-    public func hasAnyLinks() -> Bool {
-        return first != nil || next != nil || previous != nil || last != nil
-    }
-}
-
-public enum PaginatedLibraryError : Error {
-    case invalidJSONRecieved
-    case noNextPage
-    case noPreviousPage
-    case noFirstPage
-    case noLastPage
-}
-
-/// Class for fetching a user's library paginated from the server.
+///A class which handles pagination and the requests
 ///
-/// How this works is that it will first fetch entries through the request passed in.
+/// How this works is that it will first fetch objects through the request passed in.
 /// There after it will use the links provided from the response to preform the rest of the fetches.
 /// If at any point a request fails, then the current link state will not be overriden.
 ///
-/// E.g nextLink = 5, library.next() -> fails, nextLink will still be 5, thus calling next again will try perform the request again
-public class PaginatedLibrary {
+/// E.g nextLink = 5, base.next() -> fails, nextLink will still be 5, thus calling next again will try perform the request again
+public class PaginatedService {
     
     ///A bool to track whether we called the original request, using `start()`
     ///This is specifically used as to not cause an infinite loop when calling the functions such as `next()` and `prev()` etc
     var calledOriginalRequest: Bool = false
     
     /// The completion block type, return the the fetched objects on the current page, or an Error if something went wrong
-    public typealias PaginatedLibraryCompletion = ([Object]?, Error?) -> Void
+    public typealias PaginatedBaseCompletion = ([Object]?, Error?) -> Void
     
     /// The JSON Parser
     public var parser: Parser = Parser()
@@ -68,36 +37,39 @@ public class PaginatedLibrary {
         return q
     }()
     
-    /// The library get requests passed in
-    let originalRequest: KitsuLibraryRequest
-    public var request: KitsuLibraryRequest {
-        return originalRequest.copy() as! KitsuLibraryRequest
+    /// The get request that gets passed in
+    let originalRequest: KitsuPagedRequest
+    public var request: KitsuPagedRequest {
+        return originalRequest.copy() as! KitsuPagedRequest
     }
+    
+    /// The current operation that is on going
+    var currentOperation: Operation? = nil
     
     /// The client to execute request on
     let client: NetworkClientProtocol
     
     /// The completion block which gets called everytime a request was successful
-    let completion: PaginatedLibraryCompletion
+    let completion: PaginatedBaseCompletion
     
     /// The links for pagination
-    public internal(set) var links: PaginatedLibraryLinks = PaginatedLibraryLinks()
+    public internal(set) var links: Links = Links()
     
-    /// Create a paginated library.
+    /// Create a paginated class.
     /// call `start()` to begin the fetch
     ///
     /// - Parameters:
-    ///   - request: The paged kitsu request for the library
+    ///   - request: The paged kitsu request
     ///   - client: The client to execute request on
     ///   - completion: The completion block, returns the fetched entries and related objects on the current page, or an Error if something went wrong.
     ///                 This gets called everytime a page of entries is recieved.
     ///                 This can be through calls such as `next()`, `prev()` etc ...
-    public init(request: KitsuLibraryRequest, client: NetworkClientProtocol, completion: @escaping PaginatedLibraryCompletion) {
-        self.originalRequest = request.copy() as! KitsuLibraryRequest 
+    public init(request: KitsuPagedRequest, client: NetworkClientProtocol, completion: @escaping PaginatedBaseCompletion) {
+        self.originalRequest = request.copy() as! KitsuPagedRequest
         self.client = client
         self.completion = completion
     }
-
+    
     //MARK: - Requesting
     
     /// Perform a request on the client
@@ -105,8 +77,14 @@ public class PaginatedLibrary {
     /// - Parameter request: The network request
     /// - Parameter isOriginal: Whether the request is the original request
     func perform(request: NetworkRequest, isOriginal: Bool = false) {
-        let operation = NetworkOperation(request: request, client: client) { json, error in
-
+        
+        //Check if we have an operation on going
+        if currentOperation != nil {
+            return
+        }
+        
+        currentOperation = NetworkOperation(request: request, client: client) { json, error in
+            
             //Check for errors
             guard error == nil else {
                 self.completion(nil, error)
@@ -115,7 +93,7 @@ public class PaginatedLibrary {
             
             //Check we have the JSON
             guard json != nil else {
-                self.completion(nil, PaginatedLibraryError.invalidJSONRecieved)
+                self.completion(nil, PaginationError.invalidJSONRecieved)
                 return
             }
             
@@ -129,11 +107,12 @@ public class PaginatedLibrary {
             
             //Parse the response
             self.parser.parse(json: json!) { parsed in
+                self.currentOperation = nil
                 self.completion(parsed, nil)
             }
             
         }
-        queue.addOperation(operation)
+        queue.addOperation(currentOperation!)
     }
     
     /// Update the link state from the recieved json.
@@ -154,7 +133,7 @@ public class PaginatedLibrary {
             self.links.last = nil
         }
     }
-
+    
     //MARK: - Methods
     
     /// Get the network request for an absolute link
@@ -172,7 +151,7 @@ public class PaginatedLibrary {
     /// - Parameters:
     ///   - link: The link
     ///   - nilError: The error to pass if link was nil
-    func performRequest(for link: String?, nilError: PaginatedLibraryError) {
+    func performRequest(for link: String?, nilError: PaginationError) {
         //If we haven't called the original request then call it.
         //This is to stop an infinite recursion from occurring which can happen if a client keeps calling functions such as `next()` and `prev()`
         guard calledOriginalRequest else {
@@ -180,7 +159,7 @@ public class PaginatedLibrary {
             return
         }
         
-        //At this point we know that `start()` has been called. 
+        //At this point we know that `start()` has been called.
         //However if we still don't have any links then that must mean the links were not in the response.
         //We also check that if it does have links, that the current passed in link is valid.
         guard links.hasAnyLinks(), link != nil else {
@@ -190,7 +169,13 @@ public class PaginatedLibrary {
         
         perform(request: request(for: link!))
     }
-
+    
+    /// Cancel the current operation
+    public func cancel() {
+        currentOperation?.cancel()
+        currentOperation = nil
+    }
+    
     /// Send out the original request
     public func start() {
         let nRequest = request.build()
@@ -218,3 +203,32 @@ public class PaginatedLibrary {
     }
     
 }
+
+//MARK:- Structs
+extension PaginatedService {
+    
+    /// Struct for holding the pagination link state
+    public struct Links {
+        public var first: String?
+        public var next: String?
+        public var previous: String?
+        public var last: String?
+        
+        /// Check whether there is any link that is not nil
+        ///
+        /// - Returns: Whether there is a link that is not nil
+        public func hasAnyLinks() -> Bool {
+            return first != nil || next != nil || previous != nil || last != nil
+        }
+    }
+}
+
+//MARK:- Error
+public enum PaginationError : Error {
+    case invalidJSONRecieved
+    case noNextPage
+    case noPreviousPage
+    case noFirstPage
+    case noLastPage
+}
+

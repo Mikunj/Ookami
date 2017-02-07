@@ -10,51 +10,35 @@ import Foundation
 
 public class AnimeService: BaseService {
     
-    /// Find an anime with a given title
+    /// Find an anime with a given title and filters
     ///
     /// - Parameters:
     ///   - title: The title to search for
-    ///   - limit: The amount of anime to return
+    ///   - filters: The filters to apply
     ///   - completion: The completion block which passes an array of anime ids that were found or an error if it occured
-    /// - Returns: The search operation which can be cancelled.
-    public func find(title: String, limit: Int = 20, completion: @escaping ([Int]?, Error?) -> Void) -> Operation {
+    /// - Returns: The paginated discover class which can be used to get further entries
+    public func find(title: String, filters: AnimeFilter = AnimeFilter(), completion: @escaping ([Int]?, Error?) -> Void) -> PaginatedService {
         let url = Constants.Endpoints.anime
-        let request = KitsuPagedRequest(relativeURL: url)
-        request.filter(key: "text", value: title)
-        request.page(limit: limit)
-        
-        let operation = NetworkOperation(request: request.build(), client: client) { json, error in
+        return MediaServiceHelper().find(type: Anime.self, url: url, client: client, database: database, title: title, filters: filters) { objects, error in
+            
             guard error == nil else {
                 completion(nil, error)
                 return
             }
             
-            guard let json = json else {
-                completion(nil, NetworkClientError.error("Failed to parse json - Anime Service FIND"))
+            guard let objects = objects else {
+                completion(nil, NetworkClientError.error("Failed to get objects - Anime Service FIND"))
                 return
             }
             
-            //Parse the objects and return the ids of the anime back
-            Parser().parse(json: json, callback: { objects in
-                
-                //Add the objects to the database
-                self.database.addOrUpdate(objects)
-                
-                //Return the results to the user
-                let filtered = objects.flatMap { $0 is Anime ? $0 : nil }
-                if let filteredAnime = filtered as? [Anime] {
-                    let ids = filteredAnime.map { $0.id }
-
-                    completion(ids, nil)
-                    return
-                }
-                
-            })
+            //Return the ids of the objects
+            if let anime = objects as? [Anime] {
+                let ids = anime.map { $0.id }
+                completion(ids, nil)
+                return
+            }
+            
         }
-        
-        queue.addOperation(operation)
-        
-        return operation
     }
     
     /// Get an anime with the given id.
