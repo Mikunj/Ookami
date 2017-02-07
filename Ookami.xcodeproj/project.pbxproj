@@ -161,6 +161,13 @@
 		24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED01DD015FC00773BED /* NetworkOperation.swift */; };
 		24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */; };
 		24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */; };
+		24D6E9891E49A6D700751034 /* MediaFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9881E49A6D700751034 /* MediaFilter.swift */; };
+		24D6E98C1E49AE8F00751034 /* AnimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E98B1E49AE8F00751034 /* AnimeFilter.swift */; };
+		24D6E98E1E49C18200751034 /* MangaFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E98D1E49C18200751034 /* MangaFilter.swift */; };
+		24D6E9901E49C1DD00751034 /* MediaFilterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E98F1E49C1DD00751034 /* MediaFilterSpec.swift */; };
+		24D6E9921E49C26300751034 /* RangeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9911E49C26300751034 /* RangeFilter.swift */; };
+		24D6E9941E49C7DC00751034 /* RangeFilterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9931E49C7DC00751034 /* RangeFilterSpec.swift */; };
+		24D6E9961E49CAFE00751034 /* AnimeFilterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9951E49CAFE00751034 /* AnimeFilterSpec.swift */; };
 		24DAC2621DE59E8600279EE6 /* OokamiTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DAC2611DE59E8600279EE6 /* OokamiTokenStore.swift */; };
 		24DAC2641DE69A9200279EE6 /* LibraryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DAC2631DE69A9200279EE6 /* LibraryService.swift */; };
 		24DAC2661DE69AF300279EE6 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DAC2651DE69AF300279EE6 /* BaseService.swift */; };
@@ -387,6 +394,13 @@
 		24D28ED01DD015FC00773BED /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationSpec.swift; sourceTree = "<group>"; };
 		24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubAuthHeimdallr.swift; sourceTree = "<group>"; };
+		24D6E9881E49A6D700751034 /* MediaFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaFilter.swift; sourceTree = "<group>"; };
+		24D6E98B1E49AE8F00751034 /* AnimeFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeFilter.swift; sourceTree = "<group>"; };
+		24D6E98D1E49C18200751034 /* MangaFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaFilter.swift; sourceTree = "<group>"; };
+		24D6E98F1E49C1DD00751034 /* MediaFilterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaFilterSpec.swift; sourceTree = "<group>"; };
+		24D6E9911E49C26300751034 /* RangeFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeFilter.swift; sourceTree = "<group>"; };
+		24D6E9931E49C7DC00751034 /* RangeFilterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeFilterSpec.swift; sourceTree = "<group>"; };
+		24D6E9951E49CAFE00751034 /* AnimeFilterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeFilterSpec.swift; sourceTree = "<group>"; };
 		24DAC2611DE59E8600279EE6 /* OokamiTokenStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OokamiTokenStore.swift; sourceTree = "<group>"; };
 		24DAC2631DE69A9200279EE6 /* LibraryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryService.swift; sourceTree = "<group>"; };
 		24DAC2651DE69AF300279EE6 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
@@ -521,8 +535,8 @@
 				242A03F31E190D2E000E8B06 /* Item View */,
 				242A042A1E1F47D7000E8B06 /* Views */,
 				247BF5171E2705BC00FF643F /* ErrorAlert.swift */,
-				242A041A1E1CC33C000E8B06 /* Theme.swift */,
 				24BF37141E3C163A0055972C /* MailComposer.swift */,
+				242A041A1E1CC33C000E8B06 /* Theme.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -585,6 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				242B2B4B1DE575BC0002903B /* API */,
+				24D6E98A1E49A78900751034 /* Filters */,
 				24BEC5CA1E13997F0058F5AB /* Requests */,
 				242A03E11E189510000E8B06 /* CurrentUser.swift */,
 				24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */,
@@ -608,6 +623,9 @@
 				24C8C69D1E10F4810048EB9D /* ParserSpec.swift */,
 				24BEC5C81E138E7F0058F5AB /* UserHelperSpec.swift */,
 				24BEC5D71E14E4AB0058F5AB /* UserServiceSpec.swift */,
+				24D6E98F1E49C1DD00751034 /* MediaFilterSpec.swift */,
+				24D6E9931E49C7DC00751034 /* RangeFilterSpec.swift */,
+				24D6E9951E49CAFE00751034 /* AnimeFilterSpec.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -628,9 +646,9 @@
 		245179451E345CD20025F9C7 /* OokamiUITests */ = {
 			isa = PBXGroup;
 			children = (
+				245179481E345CD20025F9C7 /* Info.plist */,
 				245179461E345CD20025F9C7 /* OokamiUITests.swift */,
 				2451794E1E345D330025F9C7 /* SnapshotHelper.swift */,
-				245179481E345CD20025F9C7 /* Info.plist */,
 			);
 			path = OokamiUITests;
 			sourceTree = "<group>";
@@ -965,13 +983,24 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		24D6E98A1E49A78900751034 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				24D6E98B1E49AE8F00751034 /* AnimeFilter.swift */,
+				24D6E9881E49A6D700751034 /* MediaFilter.swift */,
+				24D6E98D1E49C18200751034 /* MangaFilter.swift */,
+				24D6E9911E49C26300751034 /* RangeFilter.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
 		24DC7DF61E2766DB007D14FB /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				2405D4601E44448E0043BE10 /* kitsu.png */,
-				2451793E1E3439810025F9C7 /* ookami-icon.png */,
 				24DC7DF71E2766F4007D14FB /* default-cover.png */,
 				245761371E2CBD6000BEB18C /* default-poster.jpg */,
+				2405D4601E44448E0043BE10 /* kitsu.png */,
+				2451793E1E3439810025F9C7 /* ookami-icon.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1593,6 +1622,7 @@
 				242B2B451DE51B8C0002903B /* AuthenticationService.swift in Sources */,
 				24BEC5CC1E1399AB0058F5AB /* KitsuRequest.swift in Sources */,
 				24DD486E1DD6B405009378AC /* RealmStorable.swift in Sources */,
+				24D6E9921E49C26300751034 /* RangeFilter.swift in Sources */,
 				24DAC2621DE59E8600279EE6 /* OokamiTokenStore.swift in Sources */,
 				247BF50F1E2617AE00FF643F /* LibraryEntryUpdater.swift in Sources */,
 				24D28ECF1DD0157B00773BED /* AsynchronousOperation.swift in Sources */,
@@ -1612,6 +1642,8 @@
 				243C08911E11FBF500C44888 /* Cacheable.swift in Sources */,
 				242A03D71E163EAB000E8B06 /* Manga.swift in Sources */,
 				24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */,
+				24D6E98E1E49C18200751034 /* MangaFilter.swift in Sources */,
+				24D6E98C1E49AE8F00751034 /* AnimeFilter.swift in Sources */,
 				242B2B4A1DE566E90002903B /* Ookami.swift in Sources */,
 				2457615B1E30ACF900BEB18C /* MigrationManager.swift in Sources */,
 				2457615E1E31DEEE00BEB18C /* Media+Genre.swift in Sources */,
@@ -1622,6 +1654,7 @@
 				2470044C1DCD73D9000D987C /* Genre.swift in Sources */,
 				24DAC2641DE69A9200279EE6 /* LibraryService.swift in Sources */,
 				242B2B4D1DE575CC0002903B /* UserService.swift in Sources */,
+				24D6E9891E49A6D700751034 /* MediaFilter.swift in Sources */,
 				2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */,
 				24DAC2661DE69AF300279EE6 /* BaseService.swift in Sources */,
 				247362901DCF0321004B4AC5 /* NetworkRequest.swift in Sources */,
@@ -1641,10 +1674,12 @@
 				24BEC5C51E1381460058F5AB /* DatabaseSpec.swift in Sources */,
 				2487343C1DCCC183002E7366 /* AnimeSpec.swift in Sources */,
 				24A258AE1DD9455100CC7561 /* PaginatedLibrarySpec.swift in Sources */,
+				24D6E9941E49C7DC00751034 /* RangeFilterSpec.swift in Sources */,
 				24DD48761DD6D874009378AC /* FetchAllLibraryOperationSpec.swift in Sources */,
 				24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */,
 				24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */,
 				24DBE6F01DD42212003B7676 /* FetchLibraryOperationSpec.swift in Sources */,
+				24D6E9961E49CAFE00751034 /* AnimeFilterSpec.swift in Sources */,
 				24BEC5BF1E1215DE0058F5AB /* CacheManagerSpec.swift in Sources */,
 				24C8C69E1E10F4810048EB9D /* ParserSpec.swift in Sources */,
 				24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */,
@@ -1654,6 +1689,7 @@
 				247BF5111E26197A00FF643F /* LibraryEntryUpdaterSpec.swift in Sources */,
 				24BEC5D21E139FCF0058F5AB /* KitsuPagedRequestSpec.swift in Sources */,
 				242A03DB1E1643D9000E8B06 /* MangaSpec.swift in Sources */,
+				24D6E9901E49C1DD00751034 /* MediaFilterSpec.swift in Sources */,
 				24DBE6EE1DD2E295003B7676 /* RealmGettableObjectSpec.swift in Sources */,
 				24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */,
 				2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */,
