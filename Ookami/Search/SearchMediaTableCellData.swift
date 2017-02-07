@@ -15,7 +15,6 @@ struct SearchMediaTableCellData {
     var moreDetails: String = "-"
     var synopsis: String
     var posterImage: String? = nil
-    var indicatorColor: UIColor = UIColor.clear
     
     //Create with an anime
     init(anime: Anime) {
@@ -26,11 +25,6 @@ struct SearchMediaTableCellData {
         let seperator = " ᛫ "
         self.details = details(for: anime).joined(separator: seperator)
         self.moreDetails = moreDetails(for: anime).joined(separator: seperator)
-        
-        //Indicator color
-        if let entry = UserHelper.entry(forMedia: .anime, id: anime.id) {
-            self.indicatorColor = entry.status?.color() ?? UIColor.clear
-        }
     }
     
     private func details(for anime: Anime) -> [String] {
@@ -75,11 +69,6 @@ struct SearchMediaTableCellData {
         let seperator = " ᛫ "
         self.details = details(for: manga).joined(separator: seperator)
         self.moreDetails = moreDetails(for: manga).joined(separator: seperator)
-        
-        //Indicator color
-        if let entry = UserHelper.entry(forMedia: .manga, id: manga.id) {
-            self.indicatorColor = entry.status?.color() ?? UIColor.clear
-        }
     }
     
     private func details(for manga: Manga) -> [String] {
@@ -122,7 +111,6 @@ extension SearchMediaTableCellData: Equatable {
         return lhs.name == rhs.name &&
             lhs.details == rhs.details &&
             lhs.synopsis == rhs.synopsis &&
-            lhs.posterImage == rhs.posterImage &&
-            lhs.indicatorColor == rhs.indicatorColor
+            lhs.posterImage == rhs.posterImage
     }
 }

@@ -10,8 +10,6 @@ import UIKit
 import Reusable
 
 class SearchMediaTableViewCell: UITableViewCell, NibReusable {
-
-    @IBOutlet weak var indicatorView: UIView!
     
     @IBOutlet weak var posterImage: UIImageView!
 
@@ -42,9 +40,6 @@ class SearchMediaTableViewCell: UITableViewCell, NibReusable {
         }else {
             posterImage.image = nil
         }
-
-        indicatorView.isHidden = data.indicatorColor == UIColor.clear
-        indicatorView.backgroundColor = data.indicatorColor
     }
     
 }
