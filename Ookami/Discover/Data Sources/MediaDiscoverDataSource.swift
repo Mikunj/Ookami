@@ -48,8 +48,7 @@ class MediaDiscoverDataSource: DiscoverDataSource {
         }
         
         //Check if we have the results and if we don't then show the indicator
-        if count == 0,
-            fetched == false {
+        if count == 0 && !fetched {
             delegate?.showActivityIndicator()
         }
     }
@@ -84,7 +83,13 @@ class MediaDiscoverDataSource: DiscoverDataSource {
     }
     
     func didSearch(text: String) {
-        update(search: text)
+        if currentSearch != text {
+            update(search: text)
+        }
+    }
+    
+    func loadMore() {
+        service?.next()
     }
     
     //MARK:- ItemDataSource
@@ -121,5 +126,5 @@ class MediaDiscoverDataSource: DiscoverDataSource {
     func dataSetDescription() -> NSAttributedString? {
         return nil
     }
-
+    
 }

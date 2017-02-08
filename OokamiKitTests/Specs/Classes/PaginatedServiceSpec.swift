@@ -83,7 +83,7 @@ class PaginatedServiceSpec: QuickSpec {
             context("Requests") {
                 context("Calling original request") {
                     it("should call original request if there are no links") {
-                        let p = StubPaginatedService(request: request, client: client) { _, _ in }
+                        let p = StubPaginatedService(request: request, client: client) { _, _, _ in }
                         
                         p.next()
                         p.prev()
@@ -93,7 +93,7 @@ class PaginatedServiceSpec: QuickSpec {
                     }
                     
                     it("should not call original request if it has already been called") {
-                        let p = StubPaginatedService(request: request, client: client) { _, _ in }
+                        let p = StubPaginatedService(request: request, client: client) { _, _, _ in }
                         p.calledOriginalRequest = true
                         
                         p.next()
@@ -107,7 +107,7 @@ class PaginatedServiceSpec: QuickSpec {
                 
                 it("should correctly build requests for links") {
                     let linkString = "http://abc.io/anime"
-                    let p = StubPaginatedService(request: request, client: client) { _, _ in }
+                    let p = StubPaginatedService(request: request, client: client) { _, _, _ in }
                     let request = p.request(for: linkString)
                     expect(request.url).to(equal(linkString))
                 }
@@ -115,7 +115,7 @@ class PaginatedServiceSpec: QuickSpec {
                 it("should return error if link is nil") {
                     var error: Error?
                     
-                    let p = StubPaginatedService(request: request, client: client) { _, e in
+                    let p = StubPaginatedService(request: request, client: client) { _, e, _ in
                         error = e
                     }
                     p.calledOriginalRequest = true
@@ -130,7 +130,7 @@ class PaginatedServiceSpec: QuickSpec {
                     it("should correctly set links from json") {
                         let data = ["links": ["first": "abc", "last": "def"]]
                         let json = JSON(data)
-                        let p = StubPaginatedService(request: request, client: client) { _, _ in }
+                        let p = StubPaginatedService(request: request, client: client) { _, _, _ in }
                         p.updateLinks(fromJSON: json)
                         
                         expect(p.links.hasAnyLinks()).to(beTrue())
@@ -142,7 +142,7 @@ class PaginatedServiceSpec: QuickSpec {
                     
                     it("should set all links to nil if no links exist in json") {
                         let json = TestHelper.json(data: "abc")
-                        let p = StubPaginatedService(request: request, client: client) { _, _ in }
+                        let p = StubPaginatedService(request: request, client: client) { _, _, _ in }
                         p.links.first = "abc"
                         p.links.next = "def"
                         p.links.previous = "ghi"
@@ -158,7 +158,7 @@ class PaginatedServiceSpec: QuickSpec {
                     
                     it("should set all links to nil if links is not a dictionary in json") {
                         let json = JSON(["links": "abc"])
-                        let p = StubPaginatedService(request: request, client: client) { _, _ in }
+                        let p = StubPaginatedService(request: request, client: client) { _, _, _ in }
                         p.links.first = "abc"
                         p.links.next = "def"
                         p.links.previous = "ghi"
@@ -183,7 +183,7 @@ class PaginatedServiceSpec: QuickSpec {
                             return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
                         
-                        let p = StubPaginatedService(request: request, client: client) { fetched, _ in
+                        let p = StubPaginatedService(request: request, client: client) { fetched, _, _ in
                             objects = fetched
                         }
                         p.parser = StubParser()
@@ -202,7 +202,7 @@ class PaginatedServiceSpec: QuickSpec {
                             return OHHTTPStubsResponse(jsonObject: data, statusCode: 200, headers: ["Content-Type": "application/vnd.api+json"])
                         }
                         
-                        let p = StubPaginatedService(request: request, client: client) { fetched, e in
+                        let p = StubPaginatedService(request: request, client: client) { fetched, e, _ in
                             objects = fetched
                             error = e
                         }

@@ -57,7 +57,7 @@ class LibraryServiceSpec: QuickSpec {
                     }
                     
                     waitUntil { done in
-                        let _ = LibraryService(client: client).getPaginated(userID: 1, type: .anime, status: .current) { _, error in
+                        let _ = LibraryService(client: client).getPaginated(userID: 1, type: .anime, status: .current) { _, error, _ in
                             expect(error).to(beNil())
                             expect(LibraryEntry.get(withId: entryID)).to(beNil())
                             expect(Anime.all()).to(haveCount(1))
@@ -72,7 +72,7 @@ class LibraryServiceSpec: QuickSpec {
                             return OHHTTPStubsResponse(error: NetworkClientError.error("failed to get page - Paginated test"))
                         }
                         
-                        let _ = LibraryService(client: client).getPaginated(userID: 1, type: .anime, status: .current) { _, error in
+                        let _ = LibraryService(client: client).getPaginated(userID: 1, type: .anime, status: .current) { _, error, _ in
                             expect(error).toNot(beNil())
                             done()
                         }

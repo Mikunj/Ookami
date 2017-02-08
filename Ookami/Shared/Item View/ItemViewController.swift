@@ -40,7 +40,7 @@ protocol ItemViewControllerDelegate: class {
 class ItemViewController: UIViewController {
     
     //Callback block which gets called whenever scrolling occurs
-    var onScroll: (() -> Void)? = nil
+    var onScroll: ((UIScrollView) -> Void)? = nil
     
     //Different cells that we can set
     enum CellType {
@@ -92,17 +92,18 @@ class ItemViewController: UIViewController {
     }
     
     //The current array of data
+    private var viewVisible: Bool = false
     fileprivate var data: [ItemData] {
         didSet {
-            
-            //Hack to avoid inconsistency issues :/
-            if oldValue.count == 0,
-                data.count > oldValue.count {
-                self.collectionView.reloadData()
-                return
+            //Only animate if the view is visible
+            //This is to avoid dumb inconsitency issues :(
+            //And to also make the initial loading seem instantaneous, instead of just 'popping' in
+            if viewVisible {
+                collectionView.animateItemChanges(oldData: oldValue, newData: data)
+            } else {
+                collectionView.reloadData()
             }
             
-            collectionView.animateItemChanges(oldData: oldValue, newData: data)
         }
     }
     
@@ -147,6 +148,16 @@ class ItemViewController: UIViewController {
     /// It will throw a fatal error if you do.
     required init?(coder aDecoder: NSCoder) {
         fatalError("Use ItemViewController.init(dataSource:)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewVisible = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewVisible = false
     }
     
     override func viewDidLoad() {
@@ -274,7 +285,7 @@ extension ItemViewController: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        onScroll?()
+        onScroll?(scrollView)
     }
 }
 

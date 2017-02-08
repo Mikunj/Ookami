@@ -23,9 +23,9 @@ class MediaServiceHelper {
     ///   - database: The database
     ///   - title: The title of the media to search, if empty then all results will be returned
     ///   - filters: The filters to apply
-    ///   - completion: The completion block which passes back an array of T objects that were recieved or an error if it occured
+    ///   - completion: The completion block which passes back an array of T objects that were recieved or an error if it occured and a bool to indicate if it was the original request
     /// - Returns: A Paginated Discover class which can be used to fetch other pages
-    func find<T: Object>(type: T.Type, url: String, client: NetworkClient, database: Database, title: String, filters: MediaFilter, completion: @escaping ([Object]?, Error?) -> Void) -> PaginatedService {
+    func find<T: Object>(type: T.Type, url: String, client: NetworkClient, database: Database, title: String, filters: MediaFilter, completion: @escaping ([Object]?, Error?, Bool) -> Void) -> PaginatedService {
         let request = KitsuPagedRequest(relativeURL: url)
         
         //Apply title filter
@@ -43,14 +43,14 @@ class MediaServiceHelper {
         //Set the paging
         request.page = KitsuPagedRequest.Page(offset: 0, limit: 20)
         
-        let paginated = PaginatedService(request: request, client: client) { parsed, error in
+        let paginated = PaginatedService(request: request, client: client) { parsed, error, original in
             guard error == nil else {
-                completion(nil, error)
+                completion(nil, error, original)
                 return
             }
             
             guard let parsed = parsed else {
-                completion(nil, NetworkClientError.error("Failed to get parsed objects - Media Service Helper"))
+                completion(nil, NetworkClientError.error("Failed to get parsed objects - Media Service Helper"), original)
                 return
             }
             
@@ -58,7 +58,7 @@ class MediaServiceHelper {
             database.addOrUpdate(parsed)
             
             //Filter the type T out of the parsed objects and return it
-            completion(parsed.filter { $0 is T }, nil)
+            completion(parsed.filter { $0 is T }, nil, original)
         }
         
         paginated.start()

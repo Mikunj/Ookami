@@ -23,8 +23,8 @@ public class PaginatedService {
     ///This is specifically used as to not cause an infinite loop when calling the functions such as `next()` and `prev()` etc
     var calledOriginalRequest: Bool = false
     
-    /// The completion block type, return the the fetched objects on the current page, or an Error if something went wrong
-    public typealias PaginatedBaseCompletion = ([Object]?, Error?) -> Void
+    /// The completion block type, return the the fetched objects on the current page, or an Error if something went wrong, and a bool to indicate if it's the original request
+    public typealias PaginatedBaseCompletion = ([Object]?, Error?, Bool) -> Void
     
     /// The JSON Parser
     public var parser: Parser = Parser()
@@ -87,13 +87,13 @@ public class PaginatedService {
             
             //Check for errors
             guard error == nil else {
-                self.completion(nil, error)
+                self.completion(nil, error, isOriginal)
                 return
             }
             
             //Check we have the JSON
             guard json != nil else {
-                self.completion(nil, PaginationError.invalidJSONRecieved)
+                self.completion(nil, PaginationError.invalidJSONRecieved, isOriginal)
                 return
             }
             
@@ -108,7 +108,7 @@ public class PaginatedService {
             //Parse the response
             self.parser.parse(json: json!) { parsed in
                 self.currentOperation = nil
-                self.completion(parsed, nil)
+                self.completion(parsed, nil, isOriginal)
             }
             
         }
@@ -163,7 +163,7 @@ public class PaginatedService {
         //However if we still don't have any links then that must mean the links were not in the response.
         //We also check that if it does have links, that the current passed in link is valid.
         guard links.hasAnyLinks(), link != nil else {
-            self.completion(nil, nilError)
+            self.completion(nil, nilError, false)
             return
         }
         

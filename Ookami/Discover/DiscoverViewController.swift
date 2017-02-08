@@ -13,6 +13,7 @@ import Cartography
 protocol DiscoverDataSource: ItemViewControllerDataSource {
     weak var parent: UIViewController? { get set }
     func didSearch(text: String)
+    func loadMore()
 }
 
 final class DiscoverViewController: UIViewController {
@@ -85,8 +86,15 @@ final class DiscoverViewController: UIViewController {
         }
         
         itemController.didMove(toParentViewController: self)
-        itemController.onScroll = {
+        itemController.onScroll = { [unowned self] scrollView in
             self.searchBar.resignFirstResponder()
+            
+            //If we reached bottom load more
+            let offsetY = scrollView.contentOffset.y
+            let contentHeight = scrollView.contentSize.height
+            if offsetY > contentHeight - scrollView.frame.size.height {
+                self.dataSource.loadMore()
+            }
         }
     }
     
@@ -98,6 +106,7 @@ extension DiscoverViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         dataSource.didSearch(text: searchText)
+        itemController.collectionView.setContentOffset(CGPoint(x: 0, y:0), animated: true)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
