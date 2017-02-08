@@ -19,7 +19,7 @@ final class ItemDetailGridCell: UICollectionViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     
-    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var moreDetailLabel: UILabel!
     
     @IBOutlet weak var contentDetailView: GradientView!
     
@@ -29,11 +29,11 @@ final class ItemDetailGridCell: UICollectionViewCell {
         super.awakeFromNib()
         
         let labelTheme = Theme.TextTheme()
-        countLabel.textColor = labelTheme.textColor
+        moreDetailLabel.textColor = labelTheme.textColor
         
         let viewTheme = Theme.ViewTheme()
         let color = viewTheme.backgroundColor
-        countLabel.backgroundColor = color
+        moreDetailLabel.backgroundColor = color
         posterImage.backgroundColor = color.isLight() ? color.darkened(amount: 0.1) : color.lighter(amount: 0.1)
     }
 }
@@ -49,7 +49,7 @@ extension ItemDetailGridCell: ItemUpdatable {
     /// - Parameter data: The item data to update with
     func update(data: ItemData, loadImages: Bool) {
         nameLabel.text = data.name ?? "-"
-        countLabel.text = data.countString ?? "-"
+        moreDetailLabel.text = data.moreDetails ?? "-"
         
         //Check if we have details, else just hide the view
         let isEmpty = data.details?.isEmpty ?? true

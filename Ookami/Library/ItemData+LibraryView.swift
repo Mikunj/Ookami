@@ -49,7 +49,7 @@ extension ItemData {
         if let maxCount = entry.maxProgress() {
             progressString.append(" / \(maxCount)")
         }
-        data.countString = progressString
+        data.moreDetails = progressString
         
         return data
     }

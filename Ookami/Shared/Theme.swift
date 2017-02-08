@@ -23,7 +23,7 @@ extension Theme {
     }
     
     struct EntryView {
-        var headingColor = Colors().primary.lighter(amount: 0.2)
+        var headingColor = UIColor.black.lighter(amount: 0.2)
         var valueColor = UIColor.black
         var tintColor = Colors().secondary
     }
