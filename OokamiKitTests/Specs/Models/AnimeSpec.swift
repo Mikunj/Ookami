@@ -32,11 +32,17 @@ class AnimeSpec: QuickSpec {
             }
             
             context("Airing") {
-                it("should return false if it's a movie") {
+                it("should return false if it's not a TV show") {
                     let a = Anime()
-                    a.subtypeRaw = Anime.SubType.movie.rawValue
+                    a.startDate = Date(timeIntervalSince1970: 1)
+                    a.endDate = Date().addingTimeInterval(999999)
                     
-                    expect(a.isAiring()).to(beFalse())
+                    let types: [Anime.SubType] = Anime.SubType.all.filter { $0 != .tv }
+                    for type in types {
+                        a.subtypeRaw = type.rawValue
+                        expect(a.isAiring()).to(beFalse())
+                    }
+                    
                 }
                 
                 it("should return false if start date is nil") {

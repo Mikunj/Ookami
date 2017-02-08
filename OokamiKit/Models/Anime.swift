@@ -83,9 +83,10 @@ extension Anime {
     /// - Returns: True if anime is airing, false if not
     public func isAiring() -> Bool {
         
-        //If it's a movie then sometimes they don't have endDates which causes it to pass true for airing. To avoid that we just simply pass false if this is a movie
+        //Only check airing if it's a TV show, else pass false
+        //This is because most OVAs, Specials, etc .. don't have an end date specified on kitsu. They may be filled later in the future but for now it's easier to disable it for everything except TV
         guard let subtype = self.subtype,
-            subtype != .movie else {
+            subtype == .tv else {
                 return false
         }
 
