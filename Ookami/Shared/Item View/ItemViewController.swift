@@ -298,7 +298,7 @@ extension ItemViewController: DZNEmptyDataSetSource {
     }
     
     func spaceHeight(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        return 4
+        return 8
     }
 }
 

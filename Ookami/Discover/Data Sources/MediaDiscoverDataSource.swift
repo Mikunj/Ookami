@@ -119,10 +119,7 @@ class MediaDiscoverDataSource: DiscoverDataSource {
     }
     
     func dataSetDescription() -> NSAttributedString? {
-        let description = "Type in a keyword to search."
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),
-                          NSForegroundColorAttributeName: UIColor.lightGray.lighter(amount: 0.1)]
-        return NSAttributedString(string: description, attributes: attributes)
+        return nil
     }
 
 }

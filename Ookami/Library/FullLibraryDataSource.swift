@@ -201,20 +201,20 @@ extension FullLibraryDataSource {
     }
     
     func dataSetImage() -> UIImage? {
-        return FontAwesomeIcon.bookIcon.image(ofSize: CGSize(width: 44, height: 44), color: UIColor.lightGray)
+        return FontAwesomeIcon.bookIcon.image(ofSize: CGSize(width: 44, height: 44), color: UIColor.lightGray.lighter(amount: 0.1))
     }
     
     func dataSetTitle() -> NSAttributedString? {
         let title = "Could not find any \(type.rawValue.capitalized)."
         let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16),
-                          NSForegroundColorAttributeName: UIColor.lightGray]
+                          NSForegroundColorAttributeName: UIColor.lightGray.lighter(amount: 0.1)]
         return NSAttributedString(string: title, attributes: attributes)
     }
     
     func dataSetDescription() -> NSAttributedString? {
         let description = "Pull down to refresh."
         let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 14),
-                          NSForegroundColorAttributeName: UIColor.lightGray]
+                          NSForegroundColorAttributeName: UIColor.lightGray.lighter(amount: 0.1)]
         return NSAttributedString(string: description, attributes: attributes)
     }
 }
