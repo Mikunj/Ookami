@@ -39,6 +39,9 @@ protocol ItemViewControllerDelegate: class {
 //Controller for displaying a grid of items
 class ItemViewController: UIViewController {
     
+    //Callback block which gets called whenever scrolling occurs
+    var onScroll: (() -> Void)? = nil
+    
     //Different cells that we can set
     enum CellType {
         case DetailGrid
@@ -91,6 +94,16 @@ class ItemViewController: UIViewController {
     //The current array of data
     fileprivate var data: [ItemData] {
         didSet {
+            
+            //Hack to avoid inconsistency issues :/
+            if oldValue.count == 0,
+                data.count > oldValue.count {
+                collectionView.performBatchUpdates({
+                    self.collectionView.reloadData()
+                }, completion: nil)
+                return
+            }
+            
             collectionView.animateItemChanges(oldData: oldValue, newData: data)
         }
     }
@@ -260,6 +273,10 @@ extension ItemViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         (cell as? ItemUpdatable)?.stopUpdating()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        onScroll?()
     }
 }
 

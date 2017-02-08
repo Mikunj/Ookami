@@ -14,7 +14,7 @@ import OokamiKit
 class MediaDiscoverDataSource: DiscoverDataSource {
     
     //The parent to report to
-    weak var parent: DiscoverViewController?
+    weak var parent: UIViewController?
     
     //The delegate
     weak var delegate: ItemViewControllerDelegate? {
@@ -23,6 +23,9 @@ class MediaDiscoverDataSource: DiscoverDataSource {
             showIndicator()
         }
     }
+    
+    //The items to show
+    var itemData: [ItemData] = []
     
     //The current search text
     var currentSearch: String = ""
@@ -80,13 +83,17 @@ class MediaDiscoverDataSource: DiscoverDataSource {
         fatalError("paginatedService(for:completion:) needs to be implemented in a subclass")
     }
     
+    func didSearch(text: String) {
+        update(search: text)
+    }
+    
     //MARK:- ItemDataSource
     var count: Int {
-        return 0
+        return itemData.count
     }
     
     func items() -> [ItemData] {
-        return []
+        return itemData
     }
     
     func didSelectItem(at indexPath: IndexPath) {

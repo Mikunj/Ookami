@@ -28,8 +28,6 @@ final class AnimeDiscoverDataSource: MediaDiscoverDataSource {
     init(filter: AnimeFilter = AnimeFilter()) {
         self.filter = filter
         super.init()
-        
-        update()
     }
     
     override func paginatedService(for searchText: String, completion: @escaping () -> Void) -> PaginatedService {
@@ -53,19 +51,13 @@ final class AnimeDiscoverDataSource: MediaDiscoverDataSource {
             
             //We should return the results in order they were recieved so that users can get the best results
             strong.anime = ids.flatMap { Anime.get(withId: $0) }
+            strong.itemData = strong.anime.map { ItemData.from(anime: $0) }
             strong.delegate?.didReloadItems(dataSource: strong)
+            
         }
     }
     
     //MARK:- ItemDataSource
-    override var count: Int {
-        return anime.count
-    }
-    
-    override func items() -> [ItemData] {
-        return anime.map { ItemData.from(anime: $0) }
-    }
-    
     override func didSelectItem(at indexPath: IndexPath) {
         if let parent = parent {
             let anime = self.anime[indexPath.row]

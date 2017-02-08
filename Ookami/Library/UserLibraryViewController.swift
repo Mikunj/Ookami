@@ -26,9 +26,6 @@ final class UserLibraryViewController: UIViewController {
     //The list of items which can be selected in the dropdown menu
     fileprivate var dropDownMenuItems = ["Anime", "Manga"]
     
-    //The current scope to search in
-    fileprivate var searchScope: SearchViewController.Scope = .anime
-    
     //The dropdown menu
     fileprivate var dropDownMenu: BTNavigationDropdownMenu!
     
@@ -111,9 +108,7 @@ final class UserLibraryViewController: UIViewController {
             }
         }
         
-        let search = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
-        self.navigationItem.setRightBarButton(search, animated: false)
-        self.navigationItem.setLeftBarButton(settingsButton, animated: false)
+        self.navigationItem.setRightBarButton(settingsButton, animated: false)
         
         show(.anime)
     }
@@ -124,11 +119,6 @@ final class UserLibraryViewController: UIViewController {
     func show(_ type: Media.MediaType) {
         animeController?.view.isHidden = type != .anime
         mangaController?.view.isHidden = type != .manga
-        searchScope = type == .anime ? .anime : .manga
-    }
-    
-    func searchTapped() {
-        AppCoordinator.showSearch(with: searchScope, in: self)
     }
     
     func settingsTapped() {

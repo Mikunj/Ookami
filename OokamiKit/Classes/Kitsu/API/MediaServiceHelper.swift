@@ -27,11 +27,12 @@ class MediaServiceHelper {
     /// - Returns: A Paginated Discover class which can be used to fetch other pages
     func find<T: Object>(type: T.Type, url: String, client: NetworkClient, database: Database, title: String, filters: MediaFilter, completion: @escaping ([Object]?, Error?) -> Void) -> PaginatedService {
         let request = KitsuPagedRequest(relativeURL: url)
-        request.sort(by: "user_count", ascending: false)
         
         //Apply title filter
         if !title.isEmpty {
             request.filter(key: "text", value: title)
+        } else {
+            request.sort(by: "user_count", ascending: false)
         }
         
         //Apply the other filters

@@ -70,10 +70,25 @@ class AppCoordinator {
             return
         }
         
-        let libraryView = userLibraryVC(for: user) //42603 - Wopians id to test large libraries
+        let size = CGSize(width: 22, height: 22)
         
-        let nav = UINavigationController(rootViewController: libraryView)
-        window.setRootViewController(nav)
+        //Discover
+        let discoverView = mediaDiscoverVC()
+        discoverView.tabBarItem = UITabBarItem(withIcon: .searchIcon, size: size , title: "Discover")
+        let discoverNav = UINavigationController(rootViewController: discoverView)
+        
+        //Library
+        let libraryView = userLibraryVC(for: user) //42603 - Wopians id to test large libraries
+        libraryView.tabBarItem = UITabBarItem(withIcon: .bookIcon, size: size, title: "Library")
+        let libraryNav = UINavigationController(rootViewController: libraryView)
+        
+        //Default to the library tab
+        let tab = initialTabBarController()
+        tab.viewControllers = [discoverNav, libraryNav]
+        tab.selectedIndex = 1
+        
+        
+        window.setRootViewController(tab)
     }
     
     static func showAnimeVC(in parent: UIViewController, anime: Anime) {
@@ -86,6 +101,18 @@ class AppCoordinator {
         let mangaVC = MangaViewController(manga: manga)
         let nav = UINavigationController(rootViewController: mangaVC)
         parent.present(nav, animated: true)
+    }
+    
+    private static func initialTabBarController() -> UITabBarController {
+        let tab = UITabBarController()
+        tab.view.backgroundColor = Theme.ControllerTheme().backgroundColor
+        tab.tabBar.isTranslucent = false
+        tab.tabBar.tintColor = Theme.Colors().secondary
+        return tab
+    }
+    
+    private static func mediaDiscoverVC() -> MediaDiscoverViewController {
+        return MediaDiscoverViewController()
     }
     
     //Get the library view controller for the given user id
@@ -114,11 +141,5 @@ class AppCoordinator {
         let player = XCDYouTubeVideoPlayerViewController(videoIdentifier: videoID)
         controller.present(player, animated: true)
         
-    }
-    
-    static func showSearch(with scope: SearchViewController.Scope, in controller: UIViewController) {
-        let search = SearchViewController(scope: scope)
-        let nav = UINavigationController(rootViewController: search)
-        controller.present(nav, animated: true)
     }
 }
