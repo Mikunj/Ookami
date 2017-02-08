@@ -98,9 +98,7 @@ class ItemViewController: UIViewController {
             //Hack to avoid inconsistency issues :/
             if oldValue.count == 0,
                 data.count > oldValue.count {
-                collectionView.performBatchUpdates({
-                    self.collectionView.reloadData()
-                }, completion: nil)
+                self.collectionView.reloadData()
                 return
             }
             
