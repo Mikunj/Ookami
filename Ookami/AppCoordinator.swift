@@ -70,7 +70,7 @@ class AppCoordinator {
             return
         }
         
-        let size = CGSize(width: 22, height: 22)
+        let size = CGSize(width: 26, height: 26)
         
         //Discover
         let discoverView = mediaDiscoverVC()
