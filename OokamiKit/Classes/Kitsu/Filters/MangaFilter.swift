@@ -10,4 +10,18 @@ import Foundation
 
 //A class for representing Manga filters
 public class MangaFilter: MediaFilter {
+    
+    //The subtypes to filter
+    public var subtypes: [Manga.SubType] = []
+    
+    public override func construct() -> [String : Any] {
+        var dict = super.construct()
+        
+        //Subtype
+        if subtypes.count > 0 {
+            dict["subtype"] = subtypes.map { $0.rawValue }
+        }
+        
+        return dict
+    }
 }

@@ -30,6 +30,10 @@ final class MediaDiscoverViewController: UIViewController {
     //The dropdown menu
     fileprivate var dropDownMenu: BTNavigationDropdownMenu!
     
+    fileprivate lazy var filterBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(withIcon: .filterIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(filterTapped))
+    }()
+    
     init() {
         animeSource = AnimeDiscoverDataSource()
         mangaSource = MangaDiscoverDataSource()
@@ -81,6 +85,9 @@ final class MediaDiscoverViewController: UIViewController {
             }
         }
         
+        
+        self.navigationItem.rightBarButtonItem = filterBarButton
+        
         show(.anime)
     }
     
@@ -92,6 +99,16 @@ final class MediaDiscoverViewController: UIViewController {
             discoverController.dataSource = type == .anime ? animeSource : mangaSource
             currentMedia = type
         }
+    }
+    
+    
+    func filterTapped() {
+        let a = AnimeFilter()
+        a.subtypes = [.tv, .movie]
+        let filter = AnimeFilterViewController(filter: a)
+        let nav = UINavigationController(rootViewController: filter)
+        filter.title = "Filter"
+        self.present(nav, animated: true)
     }
     
 }

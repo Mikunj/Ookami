@@ -33,18 +33,20 @@ class AnimeFilterSpec: QuickSpec {
                     f.episodes = RangeFilter(start: 1, end: nil)
                     
                     let defaultDict = f.construct()
-                    expect(defaultDict.keys).toNot(contain("episodeCount", "ageRating", "streamers", "season"))
+                    expect(defaultDict.keys).toNot(contain("episodeCount", "ageRating", "streamers", "season", "subtype"))
                     
                     f.ageRatings = [.g, .r18]
                     f.streamers = [.netflix, .hulu]
                     f.seasons = [.spring, .summer]
                     f.episodes = RangeFilter(start: 1, end: 10)
+                    f.subtypes = [.tv, .movie]
                     
                     let dict = f.construct()
                     expect(dict["episodeCount"] as? String).to(equal("..10"))
                     expect(dict["ageRating"] as? [String]).to(contain("G", "R18"))
                     expect(dict["streamers"] as? [String]).to(contain("Netflix", "Hulu"))
                     expect(dict["season"] as? [String]).to(contain("spring", "summer"))
+                    expect(dict["subtype"] as? [String]).to(contain("TV", "movie"))
                     
                     f.episodes = RangeFilter(start: 2, end: 10)
                     expect(f.construct()["episodeCount"] as? String).to(equal("2..10"))

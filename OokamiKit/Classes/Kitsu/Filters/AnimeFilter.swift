@@ -28,6 +28,9 @@ public class AnimeFilter: MediaFilter {
     //The seasons to filter
     public var seasons: [Season] = []
     
+    //The subtypes to filter
+    public var subtypes: [Anime.SubType] = []
+    
     public override init() {
         episodes = RangeFilter(start: 1, end: nil)
         super.init()
@@ -57,6 +60,11 @@ public class AnimeFilter: MediaFilter {
         //Streamers
         if streamers.count > 0 {
             dict["streamers"] = streamers.map { $0.rawValue.capitalized }
+        }
+        
+        //Subtype
+        if subtypes.count > 0 {
+            dict["subtype"] = subtypes.map { $0.rawValue }
         }
         
         return dict

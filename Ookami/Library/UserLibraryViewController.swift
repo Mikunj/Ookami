@@ -108,7 +108,7 @@ final class UserLibraryViewController: UIViewController {
             }
         }
         
-        self.navigationItem.setRightBarButton(settingsButton, animated: false)
+        self.navigationItem.rightBarButtonItem = settingsButton
         
         show(.anime)
     }
