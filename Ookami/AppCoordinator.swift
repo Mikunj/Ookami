@@ -70,16 +70,16 @@ class AppCoordinator {
             return
         }
         
-        let size = CGSize(width: 26, height: 26)
-        
         //Discover
         let discoverView = mediaDiscoverVC()
-        discoverView.tabBarItem = UITabBarItem(withIcon: .searchIcon, size: size , title: "Discover")
+        let discoverImage = UIImage(named: "Search-TabBar")
+        discoverView.tabBarItem = UITabBarItem(title: "Discover", image: discoverImage, tag: 0)
         let discoverNav = UINavigationController(rootViewController: discoverView)
         
         //Library
         let libraryView = userLibraryVC(for: user) //42603 - Wopians id to test large libraries
-        libraryView.tabBarItem = UITabBarItem(withIcon: .bookIcon, size: size, title: "Library")
+        let libraryImage = UIImage(named: "Book-TabBar")
+        libraryView.tabBarItem = UITabBarItem(title: "Library", image: libraryImage, tag: 1)
         let libraryNav = UINavigationController(rootViewController: libraryView)
         
         //Default to the library tab

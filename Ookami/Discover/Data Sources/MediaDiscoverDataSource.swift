@@ -89,6 +89,7 @@ class MediaDiscoverDataSource: DiscoverDataSource {
     }
     
     func loadMore() {
+        self.delegate?.showActivityIndicator()
         service?.next()
     }
     
@@ -113,7 +114,11 @@ class MediaDiscoverDataSource: DiscoverDataSource {
     }
     
     func dataSetImage() -> UIImage? {
-        return FontAwesomeIcon.searchIcon.image(ofSize: CGSize(width: 35, height: 35), color: UIColor.lightGray.lighter(amount: 0.1))
+        let size = CGSize(width: 44, height: 44)
+        let color = UIColor.lightGray.lighter(amount: 0.1)
+        return UIImage(named: "search")?
+            .resize(size)
+            .color(color)
     }
     
     func dataSetTitle() -> NSAttributedString? {

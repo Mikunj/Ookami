@@ -201,7 +201,11 @@ extension FullLibraryDataSource {
     }
     
     func dataSetImage() -> UIImage? {
-        return FontAwesomeIcon.bookIcon.image(ofSize: CGSize(width: 44, height: 44), color: UIColor.lightGray.lighter(amount: 0.1))
+        let size = CGSize(width: 44, height: 44)
+        let color = UIColor.lightGray.lighter(amount: 0.1)
+        return UIImage(named: "book")?
+            .resize(size)
+            .color(color)
     }
     
     func dataSetTitle() -> NSAttributedString? {
