@@ -14,7 +14,9 @@ class FilterViewController: UIViewController {
     
     //The table view
     lazy var tableView: UITableView  = {
-        let t = UITableView()
+        let t = UITableView(frame: .zero, style: .grouped)
+        
+        t.cellLayoutMarginsFollowReadableWidth = false
         
         t.delegate = self
         t.dataSource = self
@@ -26,12 +28,16 @@ class FilterViewController: UIViewController {
     }()
     
     //The filters we want to show
-    var filters: [Filter]
+    var filters: [FilterGroup] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     /// Create a filter view controller.
     ///
-    /// - Parameter filters: The filters that can be set
-    init(filters: [Filter] = []) {
+    /// - Parameter filters: An array of filter groups to display
+    init(filters: [FilterGroup] = []) {
         self.filters = filters
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,23 +60,27 @@ class FilterViewController: UIViewController {
 //MARK:- Data source
 extension FilterViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return filters.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filters.count
+        return filters[section].filters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "FilterValueCell")
         cell.tintColor = Theme.Colors().secondary
         
-        let filter = filters[indexPath.row]
+        let filter = filters[indexPath.section].filters[indexPath.row]
         cell.textLabel?.text = filter.name.capitalized
         cell.detailTextLabel?.text = filter.secondaryText
         cell.accessoryType = filter.accessory
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return filters[section].name
     }
 }
 
@@ -79,7 +89,7 @@ extension FilterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let filter = filters[indexPath.row]
+        let filter = filters[indexPath.section].filters[indexPath.row]
         filter.onTap(self, tableView, tableView.cellForRow(at: indexPath))
     }
 }

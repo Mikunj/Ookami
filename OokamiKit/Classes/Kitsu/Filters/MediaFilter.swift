@@ -14,13 +14,13 @@ public class MediaFilter {
     /// The year range to filter
     public var year: RangeFilter<Int> {
         didSet {
-            year.capValues(min: 1800, max: 99999)
+            year.capValues(min: 1907, max: 99999)
             year.applyCorrection()
         }
     }
     
     //The rating range between 0.5 and 5.0 inclusive
-    public var rating: RangeFilter<Float> {
+    public var rating: RangeFilter<Double> {
         didSet {
             //Set the end to 5.0 if it's not set
             rating.end = rating.end ?? 5.0

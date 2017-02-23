@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		21B767855510585E29148F3C /* Pods_OokamiKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052A0D309C0A381911682308 /* Pods_OokamiKitTests.framework */; };
+		24032FC11E5EBA5A003DA60C /* Preloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24032FC01E5EBA5A003DA60C /* Preloader.swift */; };
+		24032FC31E5EC6C7003DA60C /* DiscoverFilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24032FC21E5EC6C7003DA60C /* DiscoverFilterHelper.swift */; };
 		2405D4611E44448E0043BE10 /* kitsu.png in Resources */ = {isa = PBXBuildFile; fileRef = 2405D4601E44448E0043BE10 /* kitsu.png */; };
 		2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241418991DCDD81100AF1AEA /* LibraryEntry.swift */; };
 		2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */; };
@@ -252,6 +254,8 @@
 		052A0D309C0A381911682308 /* Pods_OokamiKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OokamiKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		06A3998A92091D3C7CC01CB7 /* Pods-OokamiKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OokamiKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OokamiKit/Pods-OokamiKit.debug.xcconfig"; sourceTree = "<group>"; };
 		18EC37E7569603AFBC8D3B99 /* Pods-Ookami.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ookami.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ookami/Pods-Ookami.debug.xcconfig"; sourceTree = "<group>"; };
+		24032FC01E5EBA5A003DA60C /* Preloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preloader.swift; sourceTree = "<group>"; };
+		24032FC21E5EC6C7003DA60C /* DiscoverFilterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverFilterHelper.swift; sourceTree = "<group>"; };
 		2405D4601E44448E0043BE10 /* kitsu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitsu.png; sourceTree = "<group>"; };
 		241418991DCDD81100AF1AEA /* LibraryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntry.swift; sourceTree = "<group>"; };
 		2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsable.swift; sourceTree = "<group>"; };
@@ -427,7 +431,7 @@
 		24DD486D1DD6B405009378AC /* RealmStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmStorable.swift; sourceTree = "<group>"; };
 		24DD48731DD6CDED009378AC /* FetchAllLibraryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAllLibraryOperation.swift; sourceTree = "<group>"; };
 		24DD48751DD6D874009378AC /* FetchAllLibraryOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAllLibraryOperationSpec.swift; sourceTree = "<group>"; };
-		24EEE5E21E5D31A300ECA152 /* UIImage+Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Ookami.swift"; path = "UIImage+Ookami.swift"; sourceTree = "<group>"; };
+		24EEE5E21E5D31A300ECA152 /* UIImage+Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Ookami.swift"; sourceTree = "<group>"; };
 		24EEE5E41E5D394300ECA152 /* book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = book.png; sourceTree = "<group>"; };
 		24EEE5E61E5D394800ECA152 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		24EEEF5C1DCCA53100869696 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -622,6 +626,7 @@
 				24D6E9971E49FBD600751034 /* Pagination */,
 				24BEC5CA1E13997F0058F5AB /* Requests */,
 				242A03E11E189510000E8B06 /* CurrentUser.swift */,
+				24032FC01E5EBA5A003DA60C /* Preloader.swift */,
 			);
 			path = Kitsu;
 			sourceTree = "<group>";
@@ -913,7 +918,6 @@
 				2499C99F1E5D9EAE005D246C /* FilterValueViewController.swift */,
 				2499C9961E5D91D9005D246C /* FilterViewController.swift */,
 			);
-			name = Filtering;
 			path = Filtering;
 			sourceTree = "<group>";
 		};
@@ -921,8 +925,8 @@
 			isa = PBXGroup;
 			children = (
 				2499C99D1E5D9E95005D246C /* AnimeFilterViewController.swift */,
+				24032FC21E5EC6C7003DA60C /* DiscoverFilterHelper.swift */,
 			);
-			name = Filters;
 			path = Filters;
 			sourceTree = "<group>";
 		};
@@ -1055,7 +1059,6 @@
 			children = (
 				24EEE5E21E5D31A300ECA152 /* UIImage+Ookami.swift */,
 			);
-			name = Extenstions;
 			path = Extenstions;
 			sourceTree = "<group>";
 		};
@@ -1653,6 +1656,7 @@
 				2466586E1E288C8700BB15EC /* TitleTableSectionView.swift in Sources */,
 				24BF37151E3C163A0055972C /* MailComposer.swift in Sources */,
 				24D6E9AF1E4AC01A00751034 /* MangaDiscoverDataSource.swift in Sources */,
+				24032FC31E5EC6C7003DA60C /* DiscoverFilterHelper.swift in Sources */,
 				248FE1621E1F5A47009ACA66 /* EntryBoolTableViewCell.swift in Sources */,
 				245179161E3218AF0025F9C7 /* MediaViewControllerHelper.swift in Sources */,
 				242A042C1E1F480B000E8B06 /* NibLoadableView.swift in Sources */,
@@ -1701,6 +1705,7 @@
 				24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */,
 				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
 				243C08911E11FBF500C44888 /* Cacheable.swift in Sources */,
+				24032FC11E5EBA5A003DA60C /* Preloader.swift in Sources */,
 				242A03D71E163EAB000E8B06 /* Manga.swift in Sources */,
 				24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */,
 				24D6E98E1E49C18200751034 /* MangaFilter.swift in Sources */,

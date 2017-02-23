@@ -29,7 +29,18 @@ public class Genre: Object, Cacheable {
     public dynamic var localLastUpdate: Date?
 }
 
-extension Genre: GettableObject { public typealias T = Genre }
+extension Genre: GettableObject {
+    
+    public typealias T = Genre
+
+    /// Get a genre with the given name.
+    ///
+    /// - Parameter name: The name of the genre.
+    /// - Returns: The genre that has the given name.
+    public static func get(withName name: String) -> Genre? {
+        return Genre.all().filter("name ==[c] %@", name).first
+    }
+}
 extension Genre: JSONParsable {
     
     public static var typeString: String { return "genres" }

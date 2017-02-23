@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Theme.NavigationTheme().apply()
         IQKeyboardManager.shared().isEnabled = true
         
+        //Preload data
+        Preloader().preloadData()
+        
         //Start the fetching timer
         fetcher = LibraryFetcher()
         fetcher?.startFetching()

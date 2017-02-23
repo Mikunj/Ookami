@@ -14,6 +14,9 @@ class FilterValueViewController: UIViewController {
     //The table view
     lazy var tableView: UITableView  = {
         let t = UITableView()
+        
+        t.cellLayoutMarginsFollowReadableWidth = false
+        
         t.delegate = self
         t.dataSource = self
         
@@ -49,12 +52,6 @@ class FilterValueViewController: UIViewController {
         fatalError("use init(values:selectedValues:onSelectionChange:) instead")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(withIcon: .trashIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(didClear))
-    }
-    
     func didClear() {
         selectedValues = []
         onChange(selectedValues)
@@ -69,6 +66,9 @@ class FilterValueViewController: UIViewController {
         constrain(tableView) { view in
             view.edges == view.superview!.edges
         }
+        
+        //Add the clear button
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(withIcon: .trashIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(didClear))
     }
     
 }

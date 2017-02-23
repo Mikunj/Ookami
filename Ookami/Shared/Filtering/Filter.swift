@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct FilterGroup {
+    var name: String
+    var filters: [Filter]
+}
+
 //A class to represent a Filter for the View Controller
 class Filter {
     //The name of the filter
@@ -37,9 +42,13 @@ class MultiValueFilter: Filter {
     //The selected values
     var selectedValues: [String]
     
-    init(name: String, values: [String], selectedValues: [String] = []) {
+    //Block which gets called everytime the selected values change
+    var onChange: ([String]) -> Void
+    
+    init(name: String, values: [String], selectedValues: [String] = [], onChange: @escaping ([String]) -> Void) {
         self.values = values
         self.selectedValues = selectedValues
+        self.onChange = onChange
         super.init(name: name) { _ in }
         updateSecondaryText()
         
@@ -47,6 +56,8 @@ class MultiValueFilter: Filter {
         self.onTap = { vc, tableView, cell in
             let v = FilterValueViewController(values: self.values, selectedValues: self.selectedValues, onSelectionChange: { selected in
                 self.selectedValues = selected
+                onChange(self.selectedValues)
+                
                 self.updateSecondaryText()
                 tableView.reloadData()
             })

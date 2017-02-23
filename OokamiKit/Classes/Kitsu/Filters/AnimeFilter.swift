@@ -69,6 +69,23 @@ public class AnimeFilter: MediaFilter {
         
         return dict
     }
+    
+    
+    /// Create a copy of the filter
+    ///
+    /// - Returns: The filter copy
+    public func copy() -> AnimeFilter {
+        let f = AnimeFilter()
+        f.year = self.year
+        f.rating = self.rating
+        f.genres = self.genres
+        f.ageRatings = self.ageRatings
+        f.episodes = self.episodes
+        f.seasons = self.seasons
+        f.streamers = self.streamers
+        f.subtypes = self.subtypes
+        return f
+    }
 }
 
 extension AnimeFilter {

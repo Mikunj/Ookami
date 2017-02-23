@@ -26,6 +26,7 @@ extension Constants {
         static let libraryEntries = "/library-entries"
         static let anime = "/anime"
         static let manga = "/manga"
+        static let genres = "/genres"
     }
     
 }

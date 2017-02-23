@@ -19,7 +19,7 @@ class MediaFilterSpec: QuickSpec {
                 it("should cap the values properley") {
                     let filter = MediaFilter()
                     filter.year = RangeFilter(start: 0, end: 999999)
-                    expect(filter.year.start).to(equal(1800))
+                    expect(filter.year.start).to(equal(1907))
                     expect(filter.year.end).to(equal(99999))
                     
                     filter.year = RangeFilter(start: 2000, end: 2010)
