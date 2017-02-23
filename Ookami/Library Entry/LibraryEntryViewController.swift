@@ -376,7 +376,9 @@ extension LibraryEntryViewController: UITableViewDelegate {
             let editingVC = TextEditingViewController(title: "Notes", text: entry.notes, placeholder: "Type your notes here!")
             editingVC.modalPresentationStyle = .overCurrentContext
             editingVC.delegate = self
-            present(editingVC, animated: false)
+            
+            let vc = tabBarController ?? self
+            vc.present(editingVC, animated: false)
             
         case .reconsumeCount:
             let rows = Array(0...999)

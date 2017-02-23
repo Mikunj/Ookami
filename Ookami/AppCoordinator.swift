@@ -72,13 +72,13 @@ class AppCoordinator {
         
         //Discover
         let discoverView = mediaDiscoverVC()
-        let discoverImage = UIImage(named: "Search-TabBar")
+        let discoverImage = UIImage(named: "Search_tab_bar")
         discoverView.tabBarItem = UITabBarItem(title: "Discover", image: discoverImage, tag: 0)
         let discoverNav = UINavigationController(rootViewController: discoverView)
         
         //Library
         let libraryView = userLibraryVC(for: user) //42603 - Wopians id to test large libraries
-        let libraryImage = UIImage(named: "Book-TabBar")
+        let libraryImage = UIImage(named: "Book_tab_bar")
         libraryView.tabBarItem = UITabBarItem(title: "Library", image: libraryImage, tag: 1)
         let libraryNav = UINavigationController(rootViewController: libraryView)
         
