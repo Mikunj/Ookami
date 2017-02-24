@@ -7,13 +7,12 @@
 //
 
 import UIKit
+import ActionSheetPicker_3_0
 
 struct FilterGroup {
     var name: String
     var filters: [Filter]
 }
-
-//TODO: Make a SingleValueFilter which uses ActionSheetPicker_3.0 for values
 
 //A class to represent a Filter for the View Controller
 class Filter {
@@ -32,6 +31,61 @@ class Filter {
     init(name: String, onTap: @escaping (UIViewController, UITableView, UITableViewCell?) -> Void) {
         self.name = name
         self.onTap = onTap
+    }
+}
+
+//A filter that enables selecting 1 single value
+class SingleValueFilter: Filter {
+
+    //The values we can select
+    var values: [String]
+    
+    //The current selected value
+    var selectedValue: String
+    
+    //The block which gets called when selected value changes. It passes back the index and the selected value.
+    var onChange: (Int, String) -> Void
+    
+    /// Create a single value filter
+    ///
+    /// - Parameters:
+    ///   - name: The name which is shown on the filter cell
+    ///   - title: The title that is shown on the picker control
+    ///   - values: The values that can be selected
+    ///   - selectedValue: The current selected value
+    ///   - onChange: The block which gets called upon selection change
+    init(name: String, title: String, values: [String], selectedValue: String, onChange: @escaping (Int, String) -> Void) {
+        self.values = values
+        self.selectedValue = selectedValue
+        self.onChange = onChange
+        super.init(name: name) { _ in }
+        
+        //Set the secondary text
+        secondaryText = selectedValue
+        accessory = .none
+        
+        //Hack so that we can use self after init
+        self.onTap = { vc, tableView, cell in
+            
+            guard let cell = cell else {
+                return
+            }
+            
+            let initial = values.index(of: selectedValue) ?? 0
+            ActionSheetStringPicker.show(withTitle: title,
+                                         rows: values,
+                                         initialSelection: initial,
+                                         doneBlock: { picker, index, value in
+                                            self.selectedValue = values[index]
+                                            self.secondaryText = self.selectedValue
+                                            tableView.reloadData()
+                                            
+                                            self.onChange(index, self.selectedValue)
+                                            
+            }, cancel: { _ in },
+               origin: cell)
+            
+        }
     }
 }
 
@@ -58,10 +112,10 @@ class MultiValueFilter: Filter {
         self.onTap = { vc, tableView, cell in
             let v = FilterValueViewController(values: self.values, selectedValues: self.selectedValues, onSelectionChange: { selected in
                 self.selectedValues = selected
-                onChange(self.selectedValues)
-                
                 self.updateSecondaryText()
                 tableView.reloadData()
+                
+                onChange(self.selectedValues)
             })
             vc.navigationController?.pushViewController(v, animated: true)
         }

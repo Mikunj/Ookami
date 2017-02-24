@@ -21,69 +21,53 @@ class DiscoverFilterHelper {
     }
     
     private func minYearFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> Filter {
-        let filter = Filter(name: "Min") { vc, tableView, cell in
-            guard let cell = cell else {
-                return
-            }
-            
-            let maxYear = Calendar.current.component(.year, from: Date())
-            let rows = Array(1907...maxYear)
-            let initial = rows.index(of: mediaFilter.year.start) ?? 0
-            ActionSheetStringPicker.show(withTitle: "Min Year", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
-                
-                let year = rows[index]
-                
-                //We need to make sure that the end year is not less than the year the user selected
-                if let end = mediaFilter.year.end,
-                    end < year {
-                    mediaFilter.year.end = year
-                }
-                
-                mediaFilter.year.start = year
-                onComplete()
-            }, cancel: { _ in
-            }, origin: cell)
-        }
         
-        filter.secondaryText = String(mediaFilter.year.start)
-        filter.accessory = .none
+        let maxYear = Calendar.current.component(.year, from: Date())
+        let values = Array(1907...maxYear).map { String($0) }
+        
+        let filter = SingleValueFilter(name: "Min", title: "Min Year", values: values,
+                                       selectedValue: String(mediaFilter.year.start),
+                                       onChange: {index, value in
+                                        
+                                        guard let year = Int(value) else {
+                                            return
+                                        }
+                                        
+                                        //We need to make sure that the end year is not less than the year the user selected
+                                        if let end = mediaFilter.year.end,
+                                            end < year {
+                                            mediaFilter.year.end = year
+                                        }
+                                        
+                                        mediaFilter.year.start = year
+                                        onComplete()
+        })
         
         return filter
     }
     
     private func maxYearFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> Filter {
-        let text = mediaFilter.year.end?.description ?? "∞"
         
-        let filter = Filter(name: "Max") { vc, tableView, cell in
-            guard let cell = cell else {
-                return
-            }
-            
-            let maxYear = Calendar.current.component(.year, from: Date())
-            let minYear = mediaFilter.year.start
-            
-            //We add "∞" because that means to the end of time
-            var rows = ["∞"]
-            let years = Array(minYear...maxYear).reversed()
-            rows.append(contentsOf: years.map { String($0) })
-            
-            //Get the initial, if we don't have the end that the initial value is inifinty
-            let initial = rows.index(of: text) ?? 0
-            
-            ActionSheetStringPicker.show(withTitle: "Max Year", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
-                
-                //We don't need to check if start is greater than end because we already put that restrictions on the values
-                
-                let year = rows[index]
-                mediaFilter.year.end = index == 0 ? nil : Int(year)
-                
-                onComplete()
-            }, cancel: { _ in
-            }, origin: cell)
-        }
+        //Get the upper and lower limits
+        let maxYear = Calendar.current.component(.year, from: Date())
+        let minYear = mediaFilter.year.start
         
-        filter.secondaryText = text
-        filter.accessory = .none
+        //We add "∞" because that means to the end of time
+        var values = ["∞"]
+        let initial = mediaFilter.year.end?.description ?? "∞"
+        
+        //Add the other years
+        let years = Array(minYear...maxYear).reversed()
+        values.append(contentsOf: years.map { String($0) })
+        
+        let filter = SingleValueFilter(name: "Max",
+                                       title: "Max Year",
+                                       values: values,
+                                       selectedValue: initial,
+                                       onChange: { index, value in
+                                        mediaFilter.year.end = index == 0 ? nil : Int(value)
+                                        onComplete()
+        })
         
         return filter
     }
@@ -98,69 +82,68 @@ class DiscoverFilterHelper {
     }
     
     private func minScoreFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> Filter {
-        let filter = Filter(name: "Min") { vc, tableView, cell in
-            guard let cell = cell else {
-                return
-            }
-            
-            //Add 0.5 so it displays that rating
-            let ratings = Array(stride(from: 0.5, to: 5.5, by: 0.5))
-            let initial = ratings.index(of: mediaFilter.rating.start) ?? 0
-            
-            //Format it to 1 decimal place display so it's consitent
-            let rows = ratings.map { String(format: "%.1f", $0) }
-            
-            ActionSheetStringPicker.show(withTitle: "Min Score", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
-                
-                let rating = ratings[index]
-                
-                //We need to make sure that the max score is not less than the score the user selected
-                if let max = mediaFilter.rating.end,
-                    max < rating {
-                    mediaFilter.rating.end = rating
-                }
-                
-                mediaFilter.rating.start = rating
-                onComplete()
-            }, cancel: { _ in
-            }, origin: cell)
-        }
         
-        filter.secondaryText = "\(mediaFilter.rating.start) ★"
-        filter.accessory = .none
+        //Add 0.5 so it displays that rating
+        let ratings = Array(stride(from: 0.5, to: 5.5, by: 0.5))
+        let index = ratings.index(of: mediaFilter.rating.start) ?? 0
+        
+        
+        //Format it to 1 decimal place display so it's consitent
+        let values = ratings.map { String(format: "%.1f ★", $0) }
+        let initial = values[index]
+        
+        
+        let filter = SingleValueFilter(name: "Min",
+                                       title: "Min Score",
+                                       values: values,
+                                       selectedValue: initial,
+                                       onChange: { index, value in
+                                        
+                                        let rating = ratings[index]
+                                        
+                                        //We need to make sure that the max score is not less than the score the user selected
+                                        if let max = mediaFilter.rating.end,
+                                            max < rating {
+                                            mediaFilter.rating.end = rating
+                                        }
+                                        
+                                        mediaFilter.rating.start = rating
+                                        onComplete()
+                                        
+        })
         
         return filter
-
+        
     }
     
     private func maxScoreFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> Filter {
-        let filter = Filter(name: "Max") { vc, tableView, cell in
-            guard let cell = cell else {
-                return
-            }
-            
-            //With this filter we know 100% that the end rating will never be nil
-            let minRating = mediaFilter.rating.start
-            
-            let ratings = Array(stride(from: minRating, to: 5.5, by: 0.5))
-            let initial = ratings.index(of: mediaFilter.rating.end!) ?? 0
-            
-            //Format it to 1 decimal place display so it's consitent
-            let rows = ratings.map { String(format: "%.1f", $0) }
-            
-            ActionSheetStringPicker.show(withTitle: "Max Score", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
-                
-                //We don't need to check if start is greater than end because we already put that restrictions on the values
-                let rating = ratings[index]
-                mediaFilter.rating.end = rating
-                
-                onComplete()
-            }, cancel: { _ in
-            }, origin: cell)
-        }
         
-        filter.secondaryText = "\(mediaFilter.rating.end!) ★"
-        filter.accessory = .none
+        //With this filter we know 100% that the end rating will never be nil
+        let minRating = mediaFilter.rating.start
+        
+        //Add 0.5 so it displays that rating
+        let ratings = Array(stride(from: minRating, to: 5.5, by: 0.5))
+        let index = ratings.index(of: mediaFilter.rating.end!) ?? 0
+        
+        
+        //Format it to 1 decimal place display so it's consitent
+        let values = ratings.map { String(format: "%.1f ★", $0) }
+        let initial = values[index]
+        
+        
+        let filter = SingleValueFilter(name: "Max",
+                                       title: "Max Score",
+                                       values: values,
+                                       selectedValue: initial,
+                                       onChange: { index, value in
+                                        
+                                        //We don't need to check if start is greater than end because we already put that restrictions on the values
+                                        let rating = ratings[index]
+                                        mediaFilter.rating.end = rating
+                                        
+                                        onComplete()
+                                        
+        })
         
         return filter
     }

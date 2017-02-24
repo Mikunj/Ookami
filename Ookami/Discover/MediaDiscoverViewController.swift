@@ -103,12 +103,17 @@ final class MediaDiscoverViewController: UIViewController {
     
     
     func filterTapped() {
-        let a = AnimeFilter()
-        a.subtypes = [.tv, .movie]
-        let filter = AnimeFilterViewController(filter: a) { _ in }
-        let nav = UINavigationController(rootViewController: filter)
-        filter.title = "Filter"
-        self.present(nav, animated: true)
+        switch currentMedia {
+        case .anime:
+            let filter = AnimeFilterViewController(filter: animeSource.filter) { newFilter in
+                self.animeSource.filter = newFilter
+            }
+            let nav = UINavigationController(rootViewController: filter)
+            filter.title = "Filter"
+            self.present(nav, animated: true)
+        case .manga:
+            return
+        }
     }
     
 }

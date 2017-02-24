@@ -99,71 +99,58 @@ extension AnimeFilterViewController {
     }
     
     private func minEpisodeFilter() -> Filter {
-        let epFilter = Filter(name: "Min") { vc, tableView, cell in
-            guard let cell = cell else {
-                return
-            }
-            
-            let rows = [1, 13, 25, 50, 100]
-            let initial = rows.index(of: self.filter.episodes.start) ?? 0
-            ActionSheetStringPicker.show(withTitle: "Min Episode", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
-                
-                let episode = rows[index]
-                
-                //We need to make sure that the start episode is less than the end episode
-                if let end = self.filter.episodes.end,
-                    end < episode {
-                    self.filter.episodes.end = episode
-                }
-                
-                self.filter.episodes.start = episode
-                self.reload()
-            }, cancel: { _ in
-            }, origin: cell)
-        }
         
-        epFilter.secondaryText = String(self.filter.episodes.start)
-        epFilter.accessory = .none
+        let values = [1, 13, 25, 50, 100].map { String($0) }
+        let initial = String(filter.episodes.start)
+        
+        let epFilter = SingleValueFilter(name: "Min",
+                                         title:"Min Episodes",
+                                         values: values,
+                                         selectedValue: initial,
+                                         onChange: { index, value in
+                                            
+                                            guard let episode = Int(value) else {
+                                                return
+                                            }
+                                            
+                                            //We need to make sure that the start episode is less than the end episode
+                                            if let end = self.filter.episodes.end,
+                                                end < episode {
+                                                self.filter.episodes.end = episode
+                                            }
+                                            
+                                            self.filter.episodes.start = episode
+                                            self.reload()
+        })
         
         return epFilter
     }
     
     private func maxEpisodeFilter() -> Filter {
-        let text = self.filter.episodes.end?.description ?? "∞"
         
-        let epFilter = Filter(name: "Max") { vc, tableView, cell in
-            guard let cell = cell else {
-                return
-            }
-            
-            //We add "∞" because that means to the end of time
-            var rows = ["∞"]
-            
-            let minEpisodes = self.filter.episodes.start
-            let episodes = [1, 13, 25, 50, 100]
-            let minIndex = episodes.index(of: minEpisodes) ?? 0
-            
-            //Only add the episodes after the min episode
-            for i in minIndex..<episodes.count {
-                rows.append(String(episodes[i]))
-            }
-            
-            //Get the initial, if we don't have the end that the initial value is inifinty
-            let initial = rows.index(of: text) ?? 0
-            
-            ActionSheetStringPicker.show(withTitle: "Max Episodes", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
-                
-                //We don't need to check if start is greater than end because we already put that restrictions on the values
-                
-                let episode = rows[index]
-                self.filter.episodes.end = index == 0 ? nil : Int(episode)
-                self.reload()
-            }, cancel: { _ in
-            }, origin: cell)
+        
+        //We add "∞" because that means to the end of time
+        var values = ["∞"]
+        
+        let minEpisodes = self.filter.episodes.start
+        let episodes = [1, 13, 25, 50, 100]
+        let minIndex = episodes.index(of: minEpisodes) ?? 0
+        
+        //Only add the episodes after the min episode
+        for i in minIndex..<episodes.count {
+            values.append(String(episodes[i]))
         }
         
-        epFilter.secondaryText = text
-        epFilter.accessory = .none
+        let initial = self.filter.episodes.end?.description ?? "∞"
+        
+        let epFilter = SingleValueFilter(name: "Max",
+                                         title: "Max Episodes",
+                                         values: values,
+                                         selectedValue: initial,
+                                         onChange: { index, value in
+                                            self.filter.episodes.end = index == 0 ? nil : Int(value)
+                                            self.reload()
+        })
         
         return epFilter
     }
