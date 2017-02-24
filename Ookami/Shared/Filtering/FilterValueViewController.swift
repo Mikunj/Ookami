@@ -9,6 +9,7 @@
 import UIKit
 import Cartography
 
+//View controller which displays the filter values and enabled selecting them
 class FilterValueViewController: UIViewController {
     
     //The table view
@@ -52,6 +53,7 @@ class FilterValueViewController: UIViewController {
         fatalError("use init(values:selectedValues:onSelectionChange:) instead")
     }
     
+    //Clicked the clear button
     func didClear() {
         selectedValues = []
         onChange(selectedValues)

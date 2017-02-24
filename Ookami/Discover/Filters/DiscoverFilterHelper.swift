@@ -45,14 +45,14 @@ class DiscoverFilterHelper {
             }, origin: cell)
         }
         
-        filter.secondaryText = "\(mediaFilter.year.start)"
+        filter.secondaryText = String(mediaFilter.year.start)
         filter.accessory = .none
         
         return filter
     }
     
     private func maxYearFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> Filter {
-        let text = mediaFilter.year.end != nil ? "\(mediaFilter.year.end!)" : "∞"
+        let text = mediaFilter.year.end?.description ?? "∞"
         
         let filter = Filter(name: "Max") { vc, tableView, cell in
             guard let cell = cell else {

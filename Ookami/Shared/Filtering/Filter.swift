@@ -13,6 +13,8 @@ struct FilterGroup {
     var filters: [Filter]
 }
 
+//TODO: Make a SingleValueFilter which uses ActionSheetPicker_3.0 for values
+
 //A class to represent a Filter for the View Controller
 class Filter {
     //The name of the filter

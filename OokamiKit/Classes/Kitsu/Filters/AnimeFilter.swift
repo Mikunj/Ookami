@@ -42,7 +42,7 @@ public class AnimeFilter: MediaFilter {
         //Episode count
         //If ep count is 1 then don't include the request else kitsu won't return anime with no episodes
         if episodes.start != 1 || episodes.end != nil {
-            let start = episodes.start == 1 ? "" : episodes.start.description
+            let start = episodes.start == 1 ? "" : String(episodes.start)
             let end = episodes.end?.description ?? ""
             dict["episodeCount"] = "\(start)..\(end)"
         }
@@ -97,10 +97,11 @@ extension AnimeFilter {
         case fall
         case winter
         
-        static let all: [Season] = [.spring, .summer, .fall, .winter]
+        public static let all: [Season] = [.spring, .summer, .fall, .winter]
     }
     
     //The list of streamers which offer the anime
+    //TODO: Might be better later to preload these from /streamers endpoint instead
     public enum Streamer: String {
         case hulu
         case funimation

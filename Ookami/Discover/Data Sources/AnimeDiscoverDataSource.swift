@@ -30,6 +30,12 @@ final class AnimeDiscoverDataSource: MediaDiscoverDataSource {
         super.init()
     }
     
+    /// Get the paginated service for a given search string
+    ///
+    /// - Parameters:
+    ///   - searchText: The search string
+    ///   - completion: The completion block
+    /// - Returns: The paginated service
     override func paginatedService(for searchText: String, completion: @escaping () -> Void) -> PaginatedService {
         return AnimeService().find(title: searchText, filters: filter) { [weak self] ids, error, original in
             
