@@ -10,6 +10,8 @@
 		21B767855510585E29148F3C /* Pods_OokamiKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052A0D309C0A381911682308 /* Pods_OokamiKitTests.framework */; };
 		24032FC11E5EBA5A003DA60C /* Preloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24032FC01E5EBA5A003DA60C /* Preloader.swift */; };
 		24032FC31E5EC6C7003DA60C /* DiscoverFilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24032FC21E5EC6C7003DA60C /* DiscoverFilterHelper.swift */; };
+		24032FC51E5FD6B4003DA60C /* BaseMediaFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24032FC41E5FD6B4003DA60C /* BaseMediaFilterViewController.swift */; };
+		24032FC71E5FD76B003DA60C /* MangaFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24032FC61E5FD76B003DA60C /* MangaFilterViewController.swift */; };
 		2405D4611E44448E0043BE10 /* kitsu.png in Resources */ = {isa = PBXBuildFile; fileRef = 2405D4601E44448E0043BE10 /* kitsu.png */; };
 		2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241418991DCDD81100AF1AEA /* LibraryEntry.swift */; };
 		2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */; };
@@ -256,6 +258,8 @@
 		18EC37E7569603AFBC8D3B99 /* Pods-Ookami.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ookami.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ookami/Pods-Ookami.debug.xcconfig"; sourceTree = "<group>"; };
 		24032FC01E5EBA5A003DA60C /* Preloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preloader.swift; sourceTree = "<group>"; };
 		24032FC21E5EC6C7003DA60C /* DiscoverFilterHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverFilterHelper.swift; sourceTree = "<group>"; };
+		24032FC41E5FD6B4003DA60C /* BaseMediaFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMediaFilterViewController.swift; sourceTree = "<group>"; };
+		24032FC61E5FD76B003DA60C /* MangaFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaFilterViewController.swift; sourceTree = "<group>"; };
 		2405D4601E44448E0043BE10 /* kitsu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitsu.png; sourceTree = "<group>"; };
 		241418991DCDD81100AF1AEA /* LibraryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntry.swift; sourceTree = "<group>"; };
 		2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsable.swift; sourceTree = "<group>"; };
@@ -925,7 +929,9 @@
 			isa = PBXGroup;
 			children = (
 				2499C99D1E5D9E95005D246C /* AnimeFilterViewController.swift */,
+				24032FC41E5FD6B4003DA60C /* BaseMediaFilterViewController.swift */,
 				24032FC21E5EC6C7003DA60C /* DiscoverFilterHelper.swift */,
+				24032FC61E5FD76B003DA60C /* MangaFilterViewController.swift */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -1626,6 +1632,7 @@
 				24175EA01E209266009FBDE6 /* TextEditingViewController.swift in Sources */,
 				242A04031E1A64C2000E8B06 /* LibraryViewController.swift in Sources */,
 				242A03F61E19C949000E8B06 /* ItemUpdatable.swift in Sources */,
+				24032FC71E5FD76B003DA60C /* MangaFilterViewController.swift in Sources */,
 				242A03EC1E18FC3C000E8B06 /* ItemViewController.swift in Sources */,
 				24EEE5E31E5D31A300ECA152 /* UIImage+Ookami.swift in Sources */,
 				242A03FC1E1A15B8000E8B06 /* CollectionCellSpacer.swift in Sources */,
@@ -1657,6 +1664,7 @@
 				24BF37151E3C163A0055972C /* MailComposer.swift in Sources */,
 				24D6E9AF1E4AC01A00751034 /* MangaDiscoverDataSource.swift in Sources */,
 				24032FC31E5EC6C7003DA60C /* DiscoverFilterHelper.swift in Sources */,
+				24032FC51E5FD6B4003DA60C /* BaseMediaFilterViewController.swift in Sources */,
 				248FE1621E1F5A47009ACA66 /* EntryBoolTableViewCell.swift in Sources */,
 				245179161E3218AF0025F9C7 /* MediaViewControllerHelper.swift in Sources */,
 				242A042C1E1F480B000E8B06 /* NibLoadableView.swift in Sources */,

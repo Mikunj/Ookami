@@ -24,4 +24,16 @@ public class MangaFilter: MediaFilter {
         
         return dict
     }
+    
+    /// Create a copy of the manga filter.
+    ///
+    /// - Returns: The copied manga filter
+    public func copy() -> MangaFilter {
+        let m = MangaFilter()
+        m.year = self.year
+        m.rating = self.rating
+        m.genres = self.genres
+        m.subtypes = self.subtypes
+        return m
+    }
 }

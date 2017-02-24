@@ -8,13 +8,10 @@
 
 import UIKit
 import OokamiKit
-import Cartography
-import ActionSheetPicker_3_0
 
-class AnimeFilterViewController: UIViewController {
-    
-    //The filter view
-    var filterView: FilterViewController!
+//TODO: Maybe add a clear button which sets the filter to default?
+
+class AnimeFilterViewController: BaseMediaFilterViewController {
     
     //The block that gets called upon saving
     fileprivate var onSave: (AnimeFilter) -> Void
@@ -22,55 +19,32 @@ class AnimeFilterViewController: UIViewController {
     //The current filter we are editing
     fileprivate var filter: AnimeFilter
     
+    /// Create an anime filter view controller.
+    ///
+    /// - Parameters:
+    ///   - filter: The anime filter.
+    ///   - onSave: The block which gets called upon save. It passes back the new anime filter.
     init(filter: AnimeFilter, onSave: @escaping (AnimeFilter) -> Void) {
         self.onSave = onSave
         self.filter = filter.copy()
-        super.init(nibName: nil, bundle: nil)
-        filterView = FilterViewController(filters: filters())
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("use init(filter:) instead.")
+        fatalError("use init(filter:onSave:) instead.")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.view.backgroundColor = Theme.ControllerTheme().backgroundColor
-        
-        //Add the filter view
-        self.addChildViewController(filterView)
-        self.view.addSubview(filterView.view)
-        
-        constrain(filterView.view) { view in
-            view.edges == view.superview!.edges
-        }
-        
-        filterView.didMove(toParentViewController: self)
-        
-        //Add the save and cancel buttons
-        let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didCancel))
-        let save = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(didSave))
-        
-        self.navigationItem.leftBarButtonItem = cancel
-        self.navigationItem.rightBarButtonItem = save
-    }
-    
-    func didCancel() {
-        dismiss(animated: true)
-    }
-    
-    func didSave() {
+    override func didSave() {
         onSave(filter)
-        dismiss(animated: true)
+        super.didSave()
+    }
+    
+    override func reload() {
+        filterView.filters = filters()
     }
 }
 
 extension AnimeFilterViewController {
-    
-    func reload() {
-        filterView.filters = filters()
-    }
     
     func filters() -> [FilterGroup] {
         let helper = DiscoverFilterHelper()
