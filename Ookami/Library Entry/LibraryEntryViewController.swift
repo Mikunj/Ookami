@@ -82,10 +82,10 @@ class LibraryEntryViewController: UIViewController {
         return view
     }()
     
-    //The dark overlay for displaying
-    var darkOverlay: UIView = {
+    //The indicator overlay for displaying
+    var indicatorOverlay: UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        v.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         return v
     }()
     
@@ -144,14 +144,14 @@ class LibraryEntryViewController: UIViewController {
             view.edges == view.superview!.edges
         }
         
-        //Add the dark overlay
-        self.view.addSubview(darkOverlay)
-        constrain(darkOverlay) { view in
+        //Add the indicator overlay
+        self.view.addSubview(indicatorOverlay)
+        constrain(indicatorOverlay) { view in
             view.edges == view.superview!.edges
         }
         
         //Add the indicator ontop of the overlay
-        darkOverlay.addSubview(activityIndicator)
+        indicatorOverlay.addSubview(activityIndicator)
         let size = Theme.ActivityIndicatorTheme().size
         constrain(activityIndicator) { view in
             view.center == view.superview!.center
@@ -454,7 +454,7 @@ extension LibraryEntryViewController {
     func showIndicator() {
         UIView.animate(withDuration: 0.25) {
             self.activityIndicator.startAnimating()
-            self.darkOverlay.isHidden = false
+            self.indicatorOverlay.isHidden = false
             self.navigationController?.navigationBar.isUserInteractionEnabled = false
             self.saveBarButton?.isEnabled = false
             self.clearBarButton?.isEnabled = false
@@ -464,7 +464,7 @@ extension LibraryEntryViewController {
     func hideIndicator() {
         UIView.animate(withDuration: 0.25) {
             self.activityIndicator.stopAnimating()
-            self.darkOverlay.isHidden = true
+            self.indicatorOverlay.isHidden = true
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
             self.saveBarButton?.isEnabled = true
             self.clearBarButton?.isEnabled = true

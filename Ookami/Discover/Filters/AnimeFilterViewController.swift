@@ -74,7 +74,7 @@ extension AnimeFilterViewController {
     
     private func minEpisodeFilter() -> Filter {
         
-        let values = [1, 13, 25, 50, 100].map { String($0) }
+        let values = [1, 13, 26, 50, 100].map { String($0) }
         let initial = String(filter.episodes.start)
         
         let epFilter = SingleValueFilter(name: "Min",
@@ -107,7 +107,7 @@ extension AnimeFilterViewController {
         var values = ["∞"]
         
         let minEpisodes = self.filter.episodes.start
-        let episodes = [1, 13, 25, 50, 100]
+        let episodes = [1, 13, 26, 50, 100]
         let minIndex = episodes.index(of: minEpisodes) ?? 0
         
         //Only add the episodes after the min episode

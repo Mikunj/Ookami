@@ -24,6 +24,9 @@ protocol LibraryDataSource: ItemViewControllerDataSource {
 //Class used for displaying library entries of a specific type (e.g anime, manga)
 final class LibraryViewController: ButtonBarPagerTabStripViewController {
     
+    //Bool to keep track of whether the view finished loading
+    fileprivate var didFinishLoading = false
+    
     //The current library we are displaying
     fileprivate var type: Media.MediaType
     
@@ -72,10 +75,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     }
     
     override func viewDidLoad() {
-        buttonBarView.collectionViewLayout = flowLayout
-        
         let theme = Theme.PagerButtonBarTheme()
-        self.settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         self.settings.style.buttonBarItemLeftRightMargin = 12
         self.settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 14)
         self.settings.style.buttonBarItemTitleColor = theme.buttonTextColor
@@ -83,6 +83,10 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         self.settings.style.buttonBarItemBackgroundColor = theme.buttonColor
         
         super.viewDidLoad()
+        
+        //Read above for explanation on setting the layout
+        buttonBarView.collectionViewLayout = flowLayout
+        didFinishLoading = true
     }
     
     func reload() {
@@ -101,7 +105,9 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
             controller?.title = title
         }
         
-        self.buttonBarView.reloadData()
+        if didFinishLoading {
+            buttonBarView.reloadData()
+        }
     }
     
     private func updateItemViewControllers() {
