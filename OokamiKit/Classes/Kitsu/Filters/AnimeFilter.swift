@@ -48,23 +48,25 @@ public class AnimeFilter: MediaFilter {
         }
         
         //Age rating
+        //E.g: R, R18
         if ageRatings.count > 0 {
-            dict["ageRating"] = ageRatings.map { $0.rawValue.uppercased() }
+            dict["ageRating"] = ageRatings.map { $0.rawValue.uppercased() }.joined(separator: ",")
         }
         
         //Season
         if seasons.count > 0 {
-            dict["season"] = seasons.map { $0.rawValue }
+            dict["season"] = seasons.map { $0.rawValue }.joined(separator: ",")
         }
         
         //Streamers
+        //E.g: Hulu, Crunchyroll
         if streamers.count > 0 {
-            dict["streamers"] = streamers.map { $0.rawValue.capitalized }
+            dict["streamers"] = streamers.map { $0.rawValue.capitalized }.joined(separator: ",")
         }
         
         //Subtype
         if subtypes.count > 0 {
-            dict["subtype"] = subtypes.map { $0.rawValue }
+            dict["subtype"] = subtypes.map { $0.rawValue }.joined(separator: ",")
         }
         
         return dict
@@ -106,11 +108,11 @@ extension AnimeFilter {
         case hulu
         case funimation
         case crunchyroll
-        case viewstar
+        case viewster
         case daisuki
         case netflix
         
-        public static let all: [Streamer] = [.hulu, .funimation, .crunchyroll, .viewstar, .daisuki, .netflix]
+        public static let all: [Streamer] = [.hulu, .funimation, .crunchyroll, .viewster, .daisuki, .netflix]
     }
     
     /// The age ratings

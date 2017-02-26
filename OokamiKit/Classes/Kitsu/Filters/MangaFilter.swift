@@ -19,7 +19,7 @@ public class MangaFilter: MediaFilter {
         
         //Subtype
         if subtypes.count > 0 {
-            dict["subtype"] = subtypes.map { $0.rawValue }
+            dict["subtype"] = subtypes.map { $0.rawValue }.joined(separator: ",")
         }
         
         return dict
