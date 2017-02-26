@@ -25,7 +25,7 @@ class MangaFilterSpec: QuickSpec {
                     f.subtypes = [.manga, .manhua]
                     
                     let dict = f.construct()
-                    expect(dict["subtype"] as? [String]).to(contain("manga,manhua"))
+                    expect(dict["subtype"] as? String).to(contain("manga,manhua"))
                 }
             }
         }
