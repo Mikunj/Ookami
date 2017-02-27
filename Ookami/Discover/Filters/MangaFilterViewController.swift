@@ -33,8 +33,9 @@ class MangaFilterViewController: BaseMediaFilterViewController {
     }
     
     override func didSave() {
-        onSave(filter)
-        super.didSave()
+        dismiss(animated: true) {
+            self.onSave(self.filter)
+        }
     }
     
     override func reload() {
