@@ -54,7 +54,7 @@
                                                 <point key="value" x="0.5" y="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
-                                                <point key="value" x="0.5" y="0.69999999999999996"/>
+                                                <point key="value" x="0.5" y="0.59999999999999998"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="topColor">
                                                 <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

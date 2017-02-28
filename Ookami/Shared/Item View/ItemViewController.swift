@@ -44,11 +44,12 @@ class ItemViewController: UIViewController {
     
     //Different cells that we can set
     enum CellType {
-        case DetailGrid
+        case detailGrid
+        case simpleGrid
     }
     
     //Types of cell to use
-    var type: CellType = .DetailGrid {
+    var type: CellType = .detailGrid {
         didSet {
             applySpacer()
             collectionView.collectionViewLayout.invalidateLayout()
@@ -121,7 +122,9 @@ class ItemViewController: UIViewController {
         c.emptyDataSetSource = self
         c.emptyDataSetDelegate = self
         
+        //Cells
         c.register(cellType: ItemDetailGridCell.self)
+        c.register(cellType: ItemSimpleGridCell.self)
         
         return c
     }()
@@ -210,8 +213,10 @@ class ItemViewController: UIViewController {
     /// An array of item sizes to use
     func itemSize() -> [CGSize] {
         switch type {
-        case .DetailGrid:
+        case .detailGrid:
             return [CGSize(width: 100, height: 175), CGSize(width: 120, height: 210)]
+        case .simpleGrid:
+            return [CGSize(width: 100, height: 150), CGSize(width: 120, height: 180)]
         }
     }
     
@@ -258,9 +263,17 @@ extension ItemViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: ItemDetailGridCell = collectionView.dequeueReusableCell(for: indexPath)
         
-        return cell
+        var cell: UICollectionViewCell?
+        
+        switch type {
+        case .detailGrid:
+            cell = collectionView.dequeueReusableCell(for: indexPath) as ItemDetailGridCell
+        case .simpleGrid:
+            cell = collectionView.dequeueReusableCell(for: indexPath) as ItemSimpleGridCell
+        }
+
+        return cell ?? UICollectionViewCell()
     }
     
 }

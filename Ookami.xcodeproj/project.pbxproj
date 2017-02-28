@@ -80,6 +80,8 @@
 		245E59A61DD1C3C4002375A4 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A51DD1C3C4002375A4 /* Default.swift */; };
 		245E59A81DD1D5A1002375A4 /* StubRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */; };
 		2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246023391DCCA11700B3C99B /* UserSpec.swift */; };
+		246318321E652FEE00892CDA /* ItemSimpleGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246318301E652FEE00892CDA /* ItemSimpleGridCell.swift */; };
+		246318331E652FEE00892CDA /* ItemSimpleGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 246318311E652FEE00892CDA /* ItemSimpleGridCell.xib */; };
 		2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2464F1D11DCC58800028F7B0 /* AppDelegate.swift */; };
 		2464F1D91DCC58800028F7B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2464F1D81DCC58800028F7B0 /* Assets.xcassets */; };
 		2464F1DC1DCC58800028F7B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2464F1DA1DCC58800028F7B0 /* LaunchScreen.storyboard */; };
@@ -330,6 +332,8 @@
 		245E59A51DD1C3C4002375A4 /* Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubRealmObject.swift; sourceTree = "<group>"; };
 		246023391DCCA11700B3C99B /* UserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpec.swift; sourceTree = "<group>"; };
+		246318301E652FEE00892CDA /* ItemSimpleGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSimpleGridCell.swift; sourceTree = "<group>"; };
+		246318311E652FEE00892CDA /* ItemSimpleGridCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemSimpleGridCell.xib; sourceTree = "<group>"; };
 		2464F1CE1DCC58800028F7B0 /* Ookami.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ookami.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2464F1D11DCC58800028F7B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2464F1D81DCC58800028F7B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -584,6 +588,8 @@
 			children = (
 				242A03ED1E190730000E8B06 /* ItemDetailGridCell.swift */,
 				242A03EE1E190730000E8B06 /* ItemDetailGridCell.xib */,
+				246318301E652FEE00892CDA /* ItemSimpleGridCell.swift */,
+				246318311E652FEE00892CDA /* ItemSimpleGridCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1323,6 +1329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2451793F1E3439810025F9C7 /* ookami-icon.png in Resources */,
+				246318331E652FEE00892CDA /* ItemSimpleGridCell.xib in Resources */,
 				247BF5161E26FEF200FF643F /* LoginViewController.xib in Resources */,
 				24175EA11E209266009FBDE6 /* TextEditingViewController.xib in Resources */,
 				248FE15F1E1F58AC009ACA66 /* EntryStringTableViewCell.xib in Resources */,
@@ -1649,6 +1656,7 @@
 				247BF5151E26FEF200FF643F /* LoginViewController.swift in Sources */,
 				247BF51A1E2706FD00FF643F /* AppCoordinator.swift in Sources */,
 				24D6E9B11E4ACADA00751034 /* MediaDiscoverViewController.swift in Sources */,
+				246318321E652FEE00892CDA /* ItemSimpleGridCell.swift in Sources */,
 				24DC7DFA1E2776AF007D14FB /* LibraryFetcher.swift in Sources */,
 				24D6E9AD1E4ABD3700751034 /* MediaDiscoverDataSource.swift in Sources */,
 				242A04011E1A183D000E8B06 /* CollectionCellSpacerOption.swift in Sources */,

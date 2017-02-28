@@ -49,6 +49,7 @@ final class DiscoverViewController: UIViewController {
     init(dataSource: DiscoverDataSource) {
         self.dataSource = dataSource
         itemController = ItemViewController(dataSource: dataSource)
+        itemController.type = .simpleGrid
         itemController.shouldLoadImages = true
         super.init(nibName: nil, bundle: nil)
         
