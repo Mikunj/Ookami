@@ -38,6 +38,11 @@ class MangaFilterViewController: BaseMediaFilterViewController {
         }
     }
     
+    override func didClear() {
+        self.filter = MangaFilter()
+        reload()
+    }
+
     override func reload() {
         filterView.filters = filters()
     }

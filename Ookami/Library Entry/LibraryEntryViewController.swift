@@ -118,7 +118,9 @@ class LibraryEntryViewController: UIViewController {
         // Show the save icon if we can edit the entries
         if editable {
             let size = CGSize(width: 22, height: 22)
-            saveBarButton = UIBarButtonItem(withIcon: .okIcon, size: size, target: self, action: #selector(didSave))
+            
+            let saveImage = UIImage(named: "Check")
+            saveBarButton = UIBarButtonItem(image: saveImage, style: .done, target: self, action: #selector(didSave))
             clearBarButton = UIBarButtonItem(withIcon: .trashIcon, size: size, target: self, action: #selector(didClear))
             
             self.navigationItem.rightBarButtonItems = [saveBarButton!, clearBarButton!]

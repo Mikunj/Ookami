@@ -9,8 +9,6 @@
 import UIKit
 import OokamiKit
 
-//TODO: Maybe add a clear button which sets the filter to default?
-
 class AnimeFilterViewController: BaseMediaFilterViewController {
     
     //The block that gets called upon saving
@@ -38,6 +36,11 @@ class AnimeFilterViewController: BaseMediaFilterViewController {
         dismiss(animated: true) { 
             self.onSave(self.filter)
         }
+    }
+    
+    override func didClear() {
+        self.filter = AnimeFilter()
+        reload()
     }
     
     override func reload() {

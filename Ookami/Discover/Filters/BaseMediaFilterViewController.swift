@@ -41,11 +41,16 @@ class BaseMediaFilterViewController: UIViewController {
         filterView.didMove(toParentViewController: self)
         
         //Add the save and cancel buttons
-        let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didCancel))
-        let save = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(didSave))
+        let cancelImage = UIImage(named: "Close")
+        let cancel = UIBarButtonItem(image: cancelImage, style: .done, target: self, action: #selector(didCancel))
+        
+        let clear = UIBarButtonItem(withIcon: .trashIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(didClear))
+        
+        let saveImage = UIImage(named: "Check")
+        let save = UIBarButtonItem(image: saveImage, style: .done, target: self, action: #selector(didSave))
         
         self.navigationItem.leftBarButtonItem = cancel
-        self.navigationItem.rightBarButtonItem = save
+        self.navigationItem.rightBarButtonItems = [save, clear]
     }
     
     func didCancel() {
@@ -54,6 +59,10 @@ class BaseMediaFilterViewController: UIViewController {
     
     func didSave() {
         dismiss(animated: true)
+    }
+    
+    func didClear() {
+        
     }
     
     func reload() {
