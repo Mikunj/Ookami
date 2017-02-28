@@ -30,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="100" width="100" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hai Sou Tensou No Grimgar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUX-Lm-yan">
-                                                <rect key="frame" x="0.0" y="15" width="100" height="35"/>
+                                                <rect key="frame" x="1" y="14" width="98" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="Wql-vW-fsN"/>
                                                 </constraints>
@@ -41,10 +41,10 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="YUX-Lm-yan" firstAttribute="leading" secondItem="yD0-ew-IHl" secondAttribute="leading" id="19C-PT-TfR"/>
-                                            <constraint firstAttribute="bottom" secondItem="YUX-Lm-yan" secondAttribute="bottom" id="D7R-aT-oPb"/>
+                                            <constraint firstItem="YUX-Lm-yan" firstAttribute="leading" secondItem="yD0-ew-IHl" secondAttribute="leading" constant="1" id="19C-PT-TfR"/>
+                                            <constraint firstAttribute="bottom" secondItem="YUX-Lm-yan" secondAttribute="bottom" constant="1" id="D7R-aT-oPb"/>
                                             <constraint firstAttribute="height" constant="50" id="HJY-yH-S5H"/>
-                                            <constraint firstAttribute="trailing" secondItem="YUX-Lm-yan" secondAttribute="trailing" id="hbI-Ca-WnZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="YUX-Lm-yan" secondAttribute="trailing" constant="1" id="hbI-Ca-WnZ"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
@@ -88,6 +88,9 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
                                                 <point key="value" x="0.5" y="0.40000000000000002"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                                <point key="value" x="0.5" y="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>

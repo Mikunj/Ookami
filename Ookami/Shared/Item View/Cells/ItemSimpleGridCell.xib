@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="100" width="100" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Tatamy Galaxy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvp-9U-727">
-                                        <rect key="frame" x="0.0" y="15" width="100" height="35"/>
+                                        <rect key="frame" x="1" y="14" width="98" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="b9W-lr-KSL"/>
                                         </constraints>
@@ -38,10 +38,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="mvp-9U-727" secondAttribute="bottom" id="2EI-8P-uTD"/>
-                                    <constraint firstItem="mvp-9U-727" firstAttribute="leading" secondItem="TOP-sC-Rzf" secondAttribute="leading" id="QJb-kT-hSL"/>
+                                    <constraint firstAttribute="bottom" secondItem="mvp-9U-727" secondAttribute="bottom" constant="1" id="2EI-8P-uTD"/>
+                                    <constraint firstItem="mvp-9U-727" firstAttribute="leading" secondItem="TOP-sC-Rzf" secondAttribute="leading" constant="1" id="QJb-kT-hSL"/>
                                     <constraint firstAttribute="height" constant="50" id="XIL-Ce-fX1"/>
-                                    <constraint firstAttribute="trailing" secondItem="mvp-9U-727" secondAttribute="trailing" id="dcF-t0-s60"/>
+                                    <constraint firstAttribute="trailing" secondItem="mvp-9U-727" secondAttribute="trailing" constant="1" id="dcF-t0-s60"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
