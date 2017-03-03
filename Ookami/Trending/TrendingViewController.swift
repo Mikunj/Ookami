@@ -10,16 +10,6 @@ import UIKit
 import Cartography
 
 /*
- 
- Plan: This will accept an array of [TrendingDataSource] which confroms to the protocol <UICollectionViewDataSource, UICollectionViewDelegate>
- We can make a base data source which handles all the displaying of the collection cells (and accepts a mediafilter) and then subclass them into AnimeTrendingDataSource and MangaTrendingDataSource.
- From there they can both handle the on-tap events and the see all events.
- 
- TODO: Maybe in the data source we have a layout property which gets automatically set to the collection view in the table cell?
- From there we can use `collectionViewContentSize` property to work out the height of the cell. Look below.
- 
- - Also need a way for the DataSource to pass back the collection cell sizes so that we can correctly compute the CollectionViewTableViewCell sizes. (25 + top&bottom padding + cell height)
- 
  We need to set the tags on the tableview cells so that we know what row was tapped when see all button was tapped. This way we can pass the call to the correct data source.
  
  https://ashfurrow.com/blog/putting-a-uicollectionview-in-a-uitableviewcell-in-swift/
@@ -32,6 +22,9 @@ class TrendingViewController: UIViewController {
         let t = UITableView()
         
         t.cellLayoutMarginsFollowReadableWidth = false
+        
+        //Disable selection because that will all be in the collection view
+        t.allowsSelection = false
         
         t.delegate = self
         t.dataSource = self
@@ -76,12 +69,9 @@ extension TrendingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(for: indexPath) as CollectionViewTableViewCell
         
-        let source = data[indexPath.row]
         cell.delegate = self
         
-        cell.collectionView.reloadData()
-        cell.collectionView.collectionViewLayout = source.collectionViewLayout
-        
+        let source = data[indexPath.row]
         source.setup(collectionView: cell.collectionView)
         
         return cell
@@ -92,7 +82,7 @@ extension TrendingViewController: UITableViewDataSource {
 extension TrendingViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //Height = 30 (title & button) + Collection view height
+        //Height = 40 (title & button) + Collection view height
         let source = data[indexPath.row]
         
         //If we have a flow layout then calculate the height
@@ -102,7 +92,7 @@ extension TrendingViewController: UITableViewDelegate {
         let padding = layout.sectionInset.top + layout.sectionInset.bottom
         let height = itemHeight + padding + 1
         
-        return 30.0 + height
+        return 40.0 + height
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -112,6 +102,7 @@ extension TrendingViewController: UITableViewDelegate {
         
         tableCell.setTitle(title: source.title)
         tableCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: source, forRow: indexPath.row)
+        tableCell.collectionView.collectionViewLayout = source.collectionViewLayout
         tableCell.collectionViewOffset = offsets[indexPath.row] ?? 0
     }
     

@@ -28,7 +28,7 @@ class AnimeTrendingDataSource: TrendingDataSource {
         let padding: CGFloat = 4
         layout.minimumLineSpacing = padding
         layout.minimumInteritemSpacing = padding
-        layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding * 2, right: padding)
+        layout.sectionInset = UIEdgeInsets(top: padding / 2, left: padding, bottom: padding * 2, right: padding)
         
         let phoneSize = CGSize(width: 110, height: 165)
         let padSize = CGSize(width: 150, height: 225)
