@@ -15,6 +15,17 @@ class MediaFilterSpec: QuickSpec {
     override func spec() {
         describe("Media Filter") {
             
+            context("Additional filters") {
+                it("Should correctly add them to the final dictionary") {
+                    let filter = MediaFilter()
+                    filter.filter(key: "test", value: 1)
+                    
+                    let dict = filter.construct()
+                    expect(dict.keys).to(contain("test"))
+                    expect(dict["test"] as? Int).to(equal(1))
+                }
+            }
+            
             context("Year filter") {
                 it("should cap the values properley") {
                     let filter = MediaFilter()

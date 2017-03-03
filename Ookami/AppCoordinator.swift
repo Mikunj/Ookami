@@ -76,6 +76,12 @@ class AppCoordinator {
         discoverView.tabBarItem = UITabBarItem(title: "Discover", image: discoverImage, tag: 0)
         let discoverNav = UINavigationController(rootViewController: discoverView)
         
+        //Trending
+        //TODO: Get a nice pdf image icon for trending
+        let trendingView = AnimeTrendingViewController()
+        trendingView.tabBarItem = UITabBarItem(withIcon: .barChartIcon, size: CGSize(width: 25, height: 25), title: "Trending")
+        let trendingNav = UINavigationController(rootViewController: trendingView)
+        
         //Library
         let libraryView = userLibraryVC(for: user) //42603 - Wopians id to test large libraries
         let libraryImage = UIImage(named: "Book_tab_bar")
@@ -84,8 +90,8 @@ class AppCoordinator {
         
         //Default to the library tab
         let tab = initialTabBarController()
-        tab.viewControllers = [discoverNav, libraryNav]
-        tab.selectedIndex = 1
+        tab.viewControllers = [discoverNav, trendingNav, libraryNav]
+        tab.selectedIndex = 2
         
         
         window.setRootViewController(tab)

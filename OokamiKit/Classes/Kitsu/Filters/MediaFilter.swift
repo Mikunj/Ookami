@@ -8,6 +8,9 @@
 
 import Foundation
 
+
+//TODO: Add sorting
+
 //A class for representing the media filters
 public class MediaFilter {
     
@@ -32,6 +35,9 @@ public class MediaFilter {
     //The genres
     public internal(set) var genres: [String] = []
     
+    //Additional filters
+    public internal(set) var additionalFilters: [String: Any] = [:]
+    
     /// Create a media filter
     public init() {
         year = RangeFilter(start: 1907, end: nil)
@@ -43,6 +49,15 @@ public class MediaFilter {
     /// - Parameter genres: An array of genres to filter. If empty then it shows All genres.
     public func filter(genres: [Genre]) {
         self.genres = genres.map { $0.name }
+    }
+    
+    /// Filter the media by a specific key
+    ///
+    /// - Parameters:
+    ///   - key: The key
+    ///   - value: The value to filter key by.
+    public func filter(key: String, value: Any) {
+        additionalFilters[key] = value
     }
     
     /// Convert the filters to a dictionary.
@@ -60,6 +75,11 @@ public class MediaFilter {
         //Filter genres only if we added them
         if genres.count > 0 {
             dict["genres"] = genres
+        }
+        
+        //Add the additional filters
+        for (key, value) in additionalFilters {
+            dict[key] = value
         }
         
         return dict
