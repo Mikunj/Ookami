@@ -116,10 +116,24 @@ class MediaTableHeaderView: NibLoadableView {
     
     func getAttributedDetailText() -> NSAttributedString {
         
-        let userRatingText = data == nil ? "-" : String(format: "%.2f", data!.userRating)
-        let popularityRankText = data == nil ? "-" : String(data!.popularityRank)
-        let ratingRankText = data == nil ? "-" : String(data!.ratingRank)
+        var userRatingText = "?"
+        var popularityRankText = "?"
+        var ratingRankText = "?"
         
+        //Since the values can all be less than or equal to 0, we only set them if they are above 0
+        if let data = data {
+            if data.userRating > 0 {
+                userRatingText = String(format: "%.2f", data.userRating)
+            }
+            
+            if data.popularityRank > 0 {
+                popularityRankText = String(data.popularityRank)
+            }
+            
+            if data.ratingRank > 0 {
+                ratingRankText = String(data.ratingRank)
+            }
+        }
         
         let userRatingIcon = iconAttributedString(icon: FontAwesomeIcon.starIcon, color: UIColor(hexString: "#FFB33B"))
         let popularityRankIcon = iconAttributedString(icon: FontAwesomeIcon.heartIcon, color: UIColor(hexString: "#E74C3C"))

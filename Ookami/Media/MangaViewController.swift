@@ -99,10 +99,10 @@ extension MangaViewController {
         let publishedText = MediaViewControllerHelper.dateRangeText(start: manga.startDate, end: manga.endDate)
         info.append(("Published", publishedText))
         
-        let chapters = manga.chapterCount > 0 ? "\(manga.chapterCount)" : "?"
+        let chapters = manga.chapterCount > 0 ? manga.chapterCount.description : "?"
         info.append(("Chapters", chapters))
         
-        let volumes = manga.volumeCount > 0 ? "\(manga.volumeCount)" : "?"
+        let volumes = manga.volumeCount > 0 ? manga.volumeCount.description : "?"
         info.append(("Volumes", "\(volumes)"))
         
         info.append(("Serialization", manga.serialization))
@@ -122,8 +122,11 @@ extension MangaViewController {
         let rating = manga.averageRating > 0 ? String(format: "%.2f", manga.averageRating) : "?"
         info.append(("Rating", rating))
         
-        info.append(("Popularity", "#\(manga.popularityRank)"))
-        info.append(("Ranked", "#\(manga.ratingRank)"))
+        let popularity = manga.popularityRank > 0 ? manga.popularityRank.description : "?"
+        info.append(("Popularity", "#\(popularity)"))
+        
+        let ratingRank = manga.ratingRank > 0 ? manga.ratingRank.description : "?"
+        info.append(("Ranked", "#\(ratingRank)"))
         
         return info
     }

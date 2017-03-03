@@ -101,10 +101,10 @@ extension AnimeViewController {
         let airingText = MediaViewControllerHelper.dateRangeText(start: anime.startDate, end: anime.endDate)
         info.append((airingTitle, airingText))
         
-        let episodes = anime.episodeCount > 0 ? "\(anime.episodeCount)" : "?"
+        let episodes = anime.episodeCount > 0 ? anime.episodeCount.description : "?"
         info.append(("Episodes", episodes))
         
-        let duration = anime.episodeLength > 0 ? "\(anime.episodeLength)" : "?"
+        let duration = anime.episodeLength > 0 ? anime.episodeLength.description : "?"
         info.append(("Duration", "\(duration) minutes each"))
         
         if !anime.ageRating.isEmpty {
@@ -122,8 +122,11 @@ extension AnimeViewController {
         let rating = anime.averageRating > 0 ? String(format: "%.2f", anime.averageRating) : "?"
         info.append(("Rating", rating))
         
-        info.append(("Popularity", "#\(anime.popularityRank)"))
-        info.append(("Ranked", "#\(anime.ratingRank)"))
+        let popularity = anime.popularityRank > 0 ? anime.popularityRank.description : "?"
+        info.append(("Popularity", "#\(popularity)"))
+        
+        let ratingRank = anime.ratingRank > 0 ? anime.ratingRank.description : "?"
+        info.append(("Ranked", "#\(ratingRank)"))
         
         return info
     }

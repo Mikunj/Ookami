@@ -78,7 +78,10 @@ extension TrendingViewController: UITableViewDataSource {
         
         let source = data[indexPath.row]
         cell.delegate = self
+        
+        cell.collectionView.reloadData()
         cell.collectionView.collectionViewLayout = source.collectionViewLayout
+        
         source.setup(collectionView: cell.collectionView)
         
         return cell
