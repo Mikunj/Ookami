@@ -25,14 +25,14 @@ class MediaServiceHelper {
     ///   - filters: The filters to apply
     ///   - completion: The completion block which passes back an array of T objects that were recieved or an error if it occured and a bool to indicate if it was the original request
     /// - Returns: A Paginated Discover class which can be used to fetch other pages
-    func find<T: Object>(type: T.Type, url: String, client: NetworkClient, database: Database, title: String, filters: MediaFilter, completion: @escaping ([Object]?, Error?, Bool) -> Void) -> PaginatedService {
+    func find<T: Object>(type: T.Type, url: String, client: NetworkClient, database: Database, title: String, filters: MediaFilter, limit: Int, completion: @escaping ([Object]?, Error?, Bool) -> Void) -> PaginatedService {
         let request = KitsuPagedRequest(relativeURL: url)
         
         //Apply title filter
         if !title.isEmpty {
             request.filter(key: "text", value: title)
         } else {
-            request.sort(by: "user_count", ascending: false)
+            request.sort(by: filters.sort.key, ascending: filters.sort.direction == .ascending)
         }
         
         //Apply the other filters
@@ -41,7 +41,7 @@ class MediaServiceHelper {
         }
         
         //Set the paging
-        request.page = KitsuPagedRequest.Page(offset: 0, limit: 20)
+        request.page = KitsuPagedRequest.Page(offset: 0, limit: limit)
         
         let paginated = PaginatedService(request: request, client: client) { parsed, error, original in
             guard error == nil else {

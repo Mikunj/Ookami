@@ -41,12 +41,13 @@ class AnimeTrendingDataSource: TrendingDataSource {
     ///
     /// - Parameters:
     ///   - title: The title
+    ///   - detail: The detail
     ///   - filter: The filter to use for displaying anime
     ///   - parent: The parent of the data source
     ///   - delegate: The delegate
-    init(title: String, filter: AnimeFilter, parent: UIViewController, delegate: TrendingDelegate) {
+    init(title: String, detail: String = "", filter: AnimeFilter, parent: UIViewController, delegate: TrendingDelegate) {
         self.filter = filter
-        super.init(title: title, parent: parent, delegate: delegate)
+        super.init(title: title, detail: detail, parent: parent, delegate: delegate)
         fetchAnime()
     }
     
@@ -56,7 +57,7 @@ class AnimeTrendingDataSource: TrendingDataSource {
         
         fetching = true
         
-        let service = AnimeService().find(title: "", filters: filter) { [weak self] ids, error, _ in
+        let service = AnimeService().find(title: "", filters: filter, limit: 10) { [weak self] ids, error, _ in
             self?.fetching = false
             
             guard error == nil,

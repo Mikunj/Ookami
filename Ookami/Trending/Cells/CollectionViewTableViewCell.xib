@@ -18,19 +18,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oR5-J3-m7V" userLabel="Upper view">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqQ-b8-hMH">
-                                <rect key="frame" x="8" y="5" width="70" height="35"/>
+                                <rect key="frame" x="8" y="3" width="70" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="MTd-fp-DEo"/>
+                                    <constraint firstAttribute="height" constant="21" id="fdu-qU-GVx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTm-3F-MoP">
-                                <rect key="frame" x="86" y="5" width="226" height="35"/>
+                                <rect key="frame" x="86" y="0.0" width="226" height="45"/>
                                 <state key="normal" title="See All">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -38,21 +39,29 @@
                                     <action selector="didTapSeeAll:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OeK-Id-lZb"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oe-mG-M3w" userLabel="Detail Label">
+                                <rect key="frame" x="8" y="25" width="70" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="uqQ-b8-hMH" firstAttribute="leading" secondItem="oR5-J3-m7V" secondAttribute="leading" constant="8" id="EwU-w8-6nu"/>
-                            <constraint firstItem="uqQ-b8-hMH" firstAttribute="top" secondItem="oR5-J3-m7V" secondAttribute="top" constant="5" id="Jcx-Bl-8a7"/>
-                            <constraint firstAttribute="height" constant="40" id="UVe-2C-HJD"/>
-                            <constraint firstItem="UTm-3F-MoP" firstAttribute="leading" secondItem="uqQ-b8-hMH" secondAttribute="trailing" constant="8" id="X7l-fV-eBE"/>
-                            <constraint firstAttribute="bottom" secondItem="uqQ-b8-hMH" secondAttribute="bottom" id="jEz-SG-TMl"/>
+                            <constraint firstItem="8oe-mG-M3w" firstAttribute="leading" secondItem="uqQ-b8-hMH" secondAttribute="leading" id="J1t-Jq-EIM"/>
+                            <constraint firstItem="uqQ-b8-hMH" firstAttribute="top" secondItem="oR5-J3-m7V" secondAttribute="top" constant="3" id="Jcx-Bl-8a7"/>
+                            <constraint firstItem="8oe-mG-M3w" firstAttribute="trailing" secondItem="uqQ-b8-hMH" secondAttribute="trailing" id="Pvy-Mr-nlD"/>
+                            <constraint firstAttribute="height" constant="45" id="UVe-2C-HJD"/>
+                            <constraint firstItem="UTm-3F-MoP" firstAttribute="leading" secondItem="uqQ-b8-hMH" secondAttribute="trailing" constant="8" id="ewE-A5-tGS"/>
+                            <constraint firstItem="8oe-mG-M3w" firstAttribute="top" secondItem="uqQ-b8-hMH" secondAttribute="bottom" constant="1" id="gBu-Hj-m1M"/>
                             <constraint firstAttribute="bottom" secondItem="UTm-3F-MoP" secondAttribute="bottom" id="kVW-Gv-4bN"/>
                             <constraint firstAttribute="trailing" secondItem="UTm-3F-MoP" secondAttribute="trailing" constant="8" id="muA-ZK-0Wa"/>
-                            <constraint firstItem="UTm-3F-MoP" firstAttribute="top" secondItem="oR5-J3-m7V" secondAttribute="top" constant="5" id="rot-mi-RTw"/>
+                            <constraint firstItem="UTm-3F-MoP" firstAttribute="top" secondItem="oR5-J3-m7V" secondAttribute="top" id="rot-mi-RTw"/>
                         </constraints>
                     </view>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="AQo-Jo-Rsf">
-                        <rect key="frame" x="0.0" y="40" width="320" height="117"/>
+                        <rect key="frame" x="0.0" y="45" width="320" height="112"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AGq-ji-woU">
                             <size key="itemSize" width="100" height="150"/>
@@ -74,6 +83,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="AQo-Jo-Rsf" id="oiG-0K-QhE"/>
+                <outlet property="detailLabel" destination="8oe-mG-M3w" id="WFB-qy-5QO"/>
                 <outlet property="seeAllButton" destination="UTm-3F-MoP" id="Ib2-qY-lNf"/>
                 <outlet property="titleLabel" destination="uqQ-b8-hMH" id="Vjw-1S-3Gh"/>
             </connections>

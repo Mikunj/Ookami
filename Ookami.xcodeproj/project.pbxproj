@@ -1105,7 +1105,6 @@
 				24E67FFD1E6915690001BAFB /* AnimeTrendingDataSource.swift */,
 				24E67FFF1E691A8E0001BAFB /* AnimeTrendingViewController.swift */,
 			);
-			name = Anime;
 			path = Anime;
 			sourceTree = "<group>";
 		};

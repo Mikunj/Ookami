@@ -82,7 +82,7 @@ extension TrendingViewController: UITableViewDataSource {
 extension TrendingViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //Height = 40 (title & button) + Collection view height
+        //Height = 45 (title & button) + Collection view height
         let source = data[indexPath.row]
         
         //If we have a flow layout then calculate the height
@@ -92,7 +92,7 @@ extension TrendingViewController: UITableViewDelegate {
         let padding = layout.sectionInset.top + layout.sectionInset.bottom
         let height = itemHeight + padding + 1
         
-        return 40.0 + height
+        return 45.0 + height
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -100,7 +100,8 @@ extension TrendingViewController: UITableViewDelegate {
         
         let source = data[indexPath.row]
         
-        tableCell.setTitle(title: source.title)
+        tableCell.set(title: source.title)
+        tableCell.set(detail: source.detail)
         tableCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: source, forRow: indexPath.row)
         tableCell.collectionView.collectionViewLayout = source.collectionViewLayout
         tableCell.collectionViewOffset = offsets[indexPath.row] ?? 0

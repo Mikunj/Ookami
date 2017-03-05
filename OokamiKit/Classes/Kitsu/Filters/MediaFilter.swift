@@ -11,8 +11,28 @@ import Foundation
 
 //TODO: Add sorting
 
+//A struct for representing sorting by a given key
+public struct Sort {
+    
+    public enum Direction {
+        case ascending
+        case descending
+    }
+    
+    public var key: String
+    public var direction: Direction
+    
+    public init(by key: String, direction: Direction = .descending) {
+        self.key = key
+        self.direction = direction
+    }
+}
+
 //A class for representing the media filters
 public class MediaFilter {
+    
+    /// The sorting to apply to the filter
+    public var sort: Sort
     
     /// The year range to filter
     public var year: RangeFilter<Int> {
@@ -42,6 +62,7 @@ public class MediaFilter {
     public init() {
         year = RangeFilter(start: 1907, end: nil)
         rating = RangeFilter(start: 0.5, end: 5.0)
+        sort = Sort(by: "user_count")
     }
     
     /// Filter the media by genres.

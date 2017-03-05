@@ -18,9 +18,9 @@ public class MangaService: BaseService {
     ///   - page: The paging to apply
     ///   - completion: The completion block which passes an array of manga ids that were found or an error if it occured and a bool to indicate whether it was the original request
     /// - Returns: The search operation which can be cancelled.
-    public func find(title: String, filters: MangaFilter = MangaFilter(), completion: @escaping ([Int]?, Error?, Bool) -> Void) -> PaginatedService {
+    public func find(title: String, filters: MangaFilter = MangaFilter(), limit: Int = 20, completion: @escaping ([Int]?, Error?, Bool) -> Void) -> PaginatedService {
         let url = Constants.Endpoints.manga
-        return MediaServiceHelper().find(type: Manga.self, url: url, client: client, database: database, title: title, filters: filters) { objects, error, original in
+        return MediaServiceHelper().find(type: Manga.self, url: url, client: client, database: database, title: title, filters: filters, limit: limit) { objects, error, original in
             
             guard error == nil else {
                 completion(nil, error, original)

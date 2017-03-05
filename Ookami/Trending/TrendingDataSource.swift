@@ -17,6 +17,9 @@ class TrendingDataSource: NSObject {
     //The title of the cell
     var title: String
     
+    //The detail string
+    var detail: String = ""
+    
     //The parent of the data source
     weak var parent: UIViewController?
     
@@ -30,8 +33,9 @@ class TrendingDataSource: NSObject {
         return layout
     }
     
-    init(title: String, parent: UIViewController, delegate: TrendingDelegate) {
+    init(title: String, detail: String = "", parent: UIViewController, delegate: TrendingDelegate) {
         self.title = title
+        self.detail = detail
         self.parent = parent
         self.delegate = delegate
     }

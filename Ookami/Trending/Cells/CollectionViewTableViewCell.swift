@@ -29,6 +29,8 @@ class CollectionViewTableViewCell: UITableViewCell, NibReusable {
     
     @IBOutlet weak var titleLabel: UILabel!
 
+    @IBOutlet weak var detailLabel: UILabel!
+    
     @IBOutlet weak var seeAllButton: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -37,8 +39,12 @@ class CollectionViewTableViewCell: UITableViewCell, NibReusable {
         super.awakeFromNib()
     }
     
-    func setTitle(title: String) {
+    func set(title: String) {
         titleLabel.text = title
+    }
+    
+    func set(detail: String) {
+        detailLabel.text = detail
     }
     
     func setCollectionViewDataSourceDelegate<T>(dataSourceDelegate: T, forRow row: Int) where
