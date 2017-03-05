@@ -79,13 +79,14 @@ class AppCoordinator {
         //Trending
         //TODO: Get a nice pdf image icon for trending
         let trendingView = mediaTrendingVC()
-        trendingView.tabBarItem = UITabBarItem(withIcon: .barChartIcon, size: CGSize(width: 25, height: 25), title: "Trending")
+        let trendingImage = UIImage(named: "Trending_tab_bar")
+        trendingView.tabBarItem = UITabBarItem(title: "Trending", image: trendingImage, tag: 1)
         let trendingNav = UINavigationController(rootViewController: trendingView)
         
         //Library
         let libraryView = userLibraryVC(for: user) //42603 - Wopians id to test large libraries
         let libraryImage = UIImage(named: "Book_tab_bar")
-        libraryView.tabBarItem = UITabBarItem(title: "Library", image: libraryImage, tag: 1)
+        libraryView.tabBarItem = UITabBarItem(title: "Library", image: libraryImage, tag: 2)
         let libraryNav = UINavigationController(rootViewController: libraryView)
         
         //Default to the library tab
