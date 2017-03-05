@@ -66,6 +66,7 @@
 		2442210F1E6CC3EF0068EE8D /* MangaTrendingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2442210E1E6CC3EF0068EE8D /* MangaTrendingDataSource.swift */; };
 		244221121E6CC4ED0068EE8D /* MediaTrendingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221111E6CC4ED0068EE8D /* MediaTrendingDataSource.swift */; };
 		244221141E6CC6760068EE8D /* MangaTrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221131E6CC6760068EE8D /* MangaTrendingViewController.swift */; };
+		244221161E6CC8CF0068EE8D /* MediaTrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221151E6CC8CF0068EE8D /* MediaTrendingViewController.swift */; };
 		245179141E3216D30025F9C7 /* MangaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245179131E3216D30025F9C7 /* MangaViewController.swift */; };
 		245179161E3218AF0025F9C7 /* MediaViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245179151E3218AF0025F9C7 /* MediaViewControllerHelper.swift */; };
 		2451793F1E3439810025F9C7 /* ookami-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2451793E1E3439810025F9C7 /* ookami-icon.png */; };
@@ -325,6 +326,7 @@
 		2442210E1E6CC3EF0068EE8D /* MangaTrendingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaTrendingDataSource.swift; sourceTree = "<group>"; };
 		244221111E6CC4ED0068EE8D /* MediaTrendingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTrendingDataSource.swift; sourceTree = "<group>"; };
 		244221131E6CC6760068EE8D /* MangaTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaTrendingViewController.swift; sourceTree = "<group>"; };
+		244221151E6CC8CF0068EE8D /* MediaTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTrendingViewController.swift; sourceTree = "<group>"; };
 		245179131E3216D30025F9C7 /* MangaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaViewController.swift; sourceTree = "<group>"; };
 		245179151E3218AF0025F9C7 /* MediaViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewControllerHelper.swift; sourceTree = "<group>"; };
 		2451793E1E3439810025F9C7 /* ookami-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ookami-icon.png"; sourceTree = "<group>"; };
@@ -710,6 +712,7 @@
 			isa = PBXGroup;
 			children = (
 				244221111E6CC4ED0068EE8D /* MediaTrendingDataSource.swift */,
+				244221151E6CC8CF0068EE8D /* MediaTrendingViewController.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -1734,6 +1737,7 @@
 				246318321E652FEE00892CDA /* ItemSimpleGridCell.swift in Sources */,
 				24DC7DFA1E2776AF007D14FB /* LibraryFetcher.swift in Sources */,
 				24D6E9AD1E4ABD3700751034 /* MediaDiscoverDataSource.swift in Sources */,
+				244221161E6CC8CF0068EE8D /* MediaTrendingViewController.swift in Sources */,
 				242A04011E1A183D000E8B06 /* CollectionCellSpacerOption.swift in Sources */,
 				2464F1D21DCC58800028F7B0 /* AppDelegate.swift in Sources */,
 				242A040C1E1C858D000E8B06 /* UserLibraryViewDataSource.swift in Sources */,

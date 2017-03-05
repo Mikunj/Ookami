@@ -14,7 +14,7 @@ import Cartography
 //Class used for displaying the discover page for all media (anime, manga, etc...)
 final class MediaDiscoverViewController: UIViewController {
     
-    //The disover view controller
+    //The discover view controller
     fileprivate var discoverController: DiscoverViewController
     
     //The current media that is being shown

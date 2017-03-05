@@ -78,7 +78,7 @@ class AppCoordinator {
         
         //Trending
         //TODO: Get a nice pdf image icon for trending
-        let trendingView = MangaTrendingViewController()
+        let trendingView = mediaTrendingVC()
         trendingView.tabBarItem = UITabBarItem(withIcon: .barChartIcon, size: CGSize(width: 25, height: 25), title: "Trending")
         let trendingNav = UINavigationController(rootViewController: trendingView)
         
@@ -115,6 +115,10 @@ class AppCoordinator {
         tab.tabBar.isTranslucent = false
         tab.tabBar.tintColor = Theme.Colors().secondary
         return tab
+    }
+    
+    private static func mediaTrendingVC() -> MediaTrendingViewController {
+        return MediaTrendingViewController()
     }
     
     private static func mediaDiscoverVC() -> MediaDiscoverViewController {
