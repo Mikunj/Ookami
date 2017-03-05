@@ -78,7 +78,7 @@ class AppCoordinator {
         
         //Trending
         //TODO: Get a nice pdf image icon for trending
-        let trendingView = AnimeTrendingViewController()
+        let trendingView = MangaTrendingViewController()
         trendingView.tabBarItem = UITabBarItem(withIcon: .barChartIcon, size: CGSize(width: 25, height: 25), title: "Trending")
         let trendingNav = UINavigationController(rootViewController: trendingView)
         

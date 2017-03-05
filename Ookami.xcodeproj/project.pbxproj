@@ -63,6 +63,9 @@
 		242B2B4D1DE575CC0002903B /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B2B4C1DE575CC0002903B /* UserService.swift */; };
 		243C088F1E11FBD800C44888 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243C088E1E11FBD800C44888 /* CacheManager.swift */; };
 		243C08911E11FBF500C44888 /* Cacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243C08901E11FBF500C44888 /* Cacheable.swift */; };
+		2442210F1E6CC3EF0068EE8D /* MangaTrendingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2442210E1E6CC3EF0068EE8D /* MangaTrendingDataSource.swift */; };
+		244221121E6CC4ED0068EE8D /* MediaTrendingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221111E6CC4ED0068EE8D /* MediaTrendingDataSource.swift */; };
+		244221141E6CC6760068EE8D /* MangaTrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221131E6CC6760068EE8D /* MangaTrendingViewController.swift */; };
 		245179141E3216D30025F9C7 /* MangaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245179131E3216D30025F9C7 /* MangaViewController.swift */; };
 		245179161E3218AF0025F9C7 /* MediaViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245179151E3218AF0025F9C7 /* MediaViewControllerHelper.swift */; };
 		2451793F1E3439810025F9C7 /* ookami-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2451793E1E3439810025F9C7 /* ookami-icon.png */; };
@@ -319,6 +322,9 @@
 		242B2B4C1DE575CC0002903B /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		243C088E1E11FBD800C44888 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		243C08901E11FBF500C44888 /* Cacheable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cacheable.swift; sourceTree = "<group>"; };
+		2442210E1E6CC3EF0068EE8D /* MangaTrendingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaTrendingDataSource.swift; sourceTree = "<group>"; };
+		244221111E6CC4ED0068EE8D /* MediaTrendingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTrendingDataSource.swift; sourceTree = "<group>"; };
+		244221131E6CC6760068EE8D /* MangaTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaTrendingViewController.swift; sourceTree = "<group>"; };
 		245179131E3216D30025F9C7 /* MangaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaViewController.swift; sourceTree = "<group>"; };
 		245179151E3218AF0025F9C7 /* MediaViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewControllerHelper.swift; sourceTree = "<group>"; };
 		2451793E1E3439810025F9C7 /* ookami-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ookami-icon.png"; sourceTree = "<group>"; };
@@ -689,6 +695,23 @@
 				242B2B4C1DE575CC0002903B /* UserService.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		2442210D1E6CC3E20068EE8D /* Manga */ = {
+			isa = PBXGroup;
+			children = (
+				2442210E1E6CC3EF0068EE8D /* MangaTrendingDataSource.swift */,
+				244221131E6CC6760068EE8D /* MangaTrendingViewController.swift */,
+			);
+			path = Manga;
+			sourceTree = "<group>";
+		};
+		244221101E6CC4DE0068EE8D /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				244221111E6CC4ED0068EE8D /* MediaTrendingDataSource.swift */,
+			);
+			name = Shared;
 			sourceTree = "<group>";
 		};
 		245179451E345CD20025F9C7 /* OokamiUITests */ = {
@@ -1082,8 +1105,10 @@
 		24E67FF21E68EC050001BAFB /* Trending */ = {
 			isa = PBXGroup;
 			children = (
+				244221101E6CC4DE0068EE8D /* Shared */,
 				24E67FFC1E6915590001BAFB /* Anime */,
 				24E67FF31E68EC140001BAFB /* Cells */,
+				2442210D1E6CC3E20068EE8D /* Manga */,
 				24E67FFA1E68F3CB0001BAFB /* TrendingDataSource.swift */,
 				24E67FF81E68EFE70001BAFB /* TrendingViewController.swift */,
 			);
@@ -1669,8 +1694,10 @@
 			files = (
 				242A040A1E1C7CA5000E8B06 /* LibraryEntry+LibraryView.swift in Sources */,
 				245761531E30607900BEB18C /* ItemData+LibraryView.swift in Sources */,
+				2442210F1E6CC3EF0068EE8D /* MangaTrendingDataSource.swift in Sources */,
 				24D6E9A91E4AADF900751034 /* AnimeDiscoverDataSource.swift in Sources */,
 				2499C9971E5D91D9005D246C /* FilterViewController.swift in Sources */,
+				244221121E6CC4ED0068EE8D /* MediaTrendingDataSource.swift in Sources */,
 				24E67FFB1E68F3CB0001BAFB /* TrendingDataSource.swift in Sources */,
 				24E67FF61E68EC360001BAFB /* CollectionViewTableViewCell.swift in Sources */,
 				2466586B1E28876800BB15EC /* MediaViewController.swift in Sources */,
@@ -1681,6 +1708,7 @@
 				246658731E28999E00BB15EC /* MediaTextTableViewCell.swift in Sources */,
 				242A042E1E1F487B000E8B06 /* EntryMediaHeaderView.swift in Sources */,
 				245761611E31F95100BEB18C /* MediaInfoTableViewCell.swift in Sources */,
+				244221141E6CC6760068EE8D /* MangaTrendingViewController.swift in Sources */,
 				24175EA01E209266009FBDE6 /* TextEditingViewController.swift in Sources */,
 				242A04031E1A64C2000E8B06 /* LibraryViewController.swift in Sources */,
 				242A03F61E19C949000E8B06 /* ItemUpdatable.swift in Sources */,
