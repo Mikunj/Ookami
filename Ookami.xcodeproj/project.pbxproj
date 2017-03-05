@@ -67,6 +67,7 @@
 		244221121E6CC4ED0068EE8D /* MediaTrendingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221111E6CC4ED0068EE8D /* MediaTrendingDataSource.swift */; };
 		244221141E6CC6760068EE8D /* MangaTrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221131E6CC6760068EE8D /* MangaTrendingViewController.swift */; };
 		244221161E6CC8CF0068EE8D /* MediaTrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221151E6CC8CF0068EE8D /* MediaTrendingViewController.swift */; };
+		244221181E6CD5B60068EE8D /* YearTrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221171E6CD5B60068EE8D /* YearTrendingViewController.swift */; };
 		245179141E3216D30025F9C7 /* MangaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245179131E3216D30025F9C7 /* MangaViewController.swift */; };
 		245179161E3218AF0025F9C7 /* MediaViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245179151E3218AF0025F9C7 /* MediaViewControllerHelper.swift */; };
 		2451793F1E3439810025F9C7 /* ookami-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2451793E1E3439810025F9C7 /* ookami-icon.png */; };
@@ -327,6 +328,7 @@
 		244221111E6CC4ED0068EE8D /* MediaTrendingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTrendingDataSource.swift; sourceTree = "<group>"; };
 		244221131E6CC6760068EE8D /* MangaTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaTrendingViewController.swift; sourceTree = "<group>"; };
 		244221151E6CC8CF0068EE8D /* MediaTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTrendingViewController.swift; sourceTree = "<group>"; };
+		244221171E6CD5B60068EE8D /* YearTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearTrendingViewController.swift; sourceTree = "<group>"; };
 		245179131E3216D30025F9C7 /* MangaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaViewController.swift; sourceTree = "<group>"; };
 		245179151E3218AF0025F9C7 /* MediaViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewControllerHelper.swift; sourceTree = "<group>"; };
 		2451793E1E3439810025F9C7 /* ookami-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ookami-icon.png"; sourceTree = "<group>"; };
@@ -713,8 +715,10 @@
 			children = (
 				244221111E6CC4ED0068EE8D /* MediaTrendingDataSource.swift */,
 				244221151E6CC8CF0068EE8D /* MediaTrendingViewController.swift */,
+				244221171E6CD5B60068EE8D /* YearTrendingViewController.swift */,
 			);
 			name = Shared;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		245179451E345CD20025F9C7 /* OokamiUITests */ = {
@@ -1108,10 +1112,10 @@
 		24E67FF21E68EC050001BAFB /* Trending */ = {
 			isa = PBXGroup;
 			children = (
-				244221101E6CC4DE0068EE8D /* Shared */,
 				24E67FFC1E6915590001BAFB /* Anime */,
 				24E67FF31E68EC140001BAFB /* Cells */,
 				2442210D1E6CC3E20068EE8D /* Manga */,
+				244221101E6CC4DE0068EE8D /* Shared */,
 				24E67FFA1E68F3CB0001BAFB /* TrendingDataSource.swift */,
 				24E67FF81E68EFE70001BAFB /* TrendingViewController.swift */,
 			);
@@ -1719,6 +1723,7 @@
 				24E67FF91E68EFE70001BAFB /* TrendingViewController.swift in Sources */,
 				24E680001E691A8E0001BAFB /* AnimeTrendingViewController.swift in Sources */,
 				242A03EC1E18FC3C000E8B06 /* ItemViewController.swift in Sources */,
+				244221181E6CD5B60068EE8D /* YearTrendingViewController.swift in Sources */,
 				24EEE5E31E5D31A300ECA152 /* UIImage+Ookami.swift in Sources */,
 				242A03FC1E1A15B8000E8B06 /* CollectionCellSpacer.swift in Sources */,
 				24175E991E207CB1009FBDE6 /* LibraryEntryViewData.swift in Sources */,
