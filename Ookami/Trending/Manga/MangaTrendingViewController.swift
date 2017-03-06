@@ -30,7 +30,12 @@ class MangaTrendingViewController: TrendingViewController {
         filter.year.end = year
         filter.sort = Sort(by: "average_rating")
         
-        return MangaTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self)
+        return MangaTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
+            let source = MangaYearTrendingDataSource(filter: filter)
+            let yearController = YearTrendingViewController(title: "Highest Rated", currentYear: year, dataSource: source)
+            self?.navigationController?.pushViewController(yearController, animated: true)
+        }
+
     }
     
     //MARK:- Popularity
@@ -44,7 +49,12 @@ class MangaTrendingViewController: TrendingViewController {
         filter.year.start = year
         filter.year.end = year
         
-        return MangaTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self)
+        return MangaTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
+            let source = MangaYearTrendingDataSource(filter: filter.copy())
+            let yearController = YearTrendingViewController(title: "Most Popular", currentYear: year, dataSource: source)
+            self?.navigationController?.pushViewController(yearController, animated: true)
+        }
+
     }
 
 }

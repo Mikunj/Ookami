@@ -30,7 +30,11 @@ class AnimeTrendingViewController: TrendingViewController {
         filter.year.end = year
         filter.sort = Sort(by: "average_rating")
         
-        return AnimeTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self)
+        return AnimeTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
+            let source = AnimeYearTrendingDataSource(filter: filter)
+            let yearController = YearTrendingViewController(title: "Highest Rated", currentYear: year, dataSource: source)
+            self?.navigationController?.pushViewController(yearController, animated: true)
+        }
     }
     
     //MARK:- Popularity
@@ -45,7 +49,12 @@ class AnimeTrendingViewController: TrendingViewController {
         filter.year.end = year
         
         
-        return AnimeTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self)
+        return AnimeTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
+            let source = AnimeYearTrendingDataSource(filter: filter)
+            let yearController = YearTrendingViewController(title: "Most Popular", currentYear: year, dataSource: source)
+            self?.navigationController?.pushViewController(yearController, animated: true)
+        }
+
     }
     
     //MARK:- Season
@@ -60,7 +69,7 @@ class AnimeTrendingViewController: TrendingViewController {
         filter.filter(key: "season_year", value: year)
         filter.seasons = [season]
         
-        return AnimeTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self)
+        return AnimeTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) {}
     }
     
     private func currentSeason() -> AnimeFilter.Season {

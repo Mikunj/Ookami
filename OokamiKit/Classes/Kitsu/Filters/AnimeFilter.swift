@@ -86,6 +86,8 @@ public class AnimeFilter: MediaFilter {
         f.seasons = self.seasons
         f.streamers = self.streamers
         f.subtypes = self.subtypes
+        f.sort = self.sort
+        f.additionalFilters = self.additionalFilters
         return f
     }
 }

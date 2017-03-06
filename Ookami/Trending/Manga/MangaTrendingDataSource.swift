@@ -22,9 +22,10 @@ class MangaTrendingDataSource: MediaTrendingDataSource {
     ///   - filter: The filter to use for displaying manga
     ///   - parent: The parent of the data source
     ///   - delegate: The delegate
-    init(title: String, detail: String = "", filter: MangaFilter, parent: UIViewController, delegate: TrendingDelegate) {
+    ///   - onTap: The block which gets called when the see all button is tapped.
+    init(title: String, detail: String = "", filter: MangaFilter, parent: UIViewController, delegate: TrendingDelegate, onTap: @escaping () -> Void) {
         self.filter = filter
-        super.init(title: title, detail: detail, parent: parent, delegate: delegate)
+        super.init(title: title, detail: detail, parent: parent, delegate: delegate, onTap: onTap)
     }
     
     //Fetch the manga

@@ -13,6 +13,11 @@ public struct RangeFilter<T: Comparable>: CustomStringConvertible where T: Custo
     public var start: T
     public var end: T?
     
+    public init(start: T, end: T?) {
+        self.start = start
+        self.end = end
+    }
+    
     //Apply correction to the values so that start < end
     mutating func applyCorrection() {
         //Check that start < end

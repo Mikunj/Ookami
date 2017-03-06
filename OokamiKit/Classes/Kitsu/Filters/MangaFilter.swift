@@ -34,6 +34,8 @@ public class MangaFilter: MediaFilter {
         m.rating = self.rating
         m.genres = self.genres
         m.subtypes = self.subtypes
+        m.sort = self.sort
+        m.additionalFilters = self.additionalFilters
         return m
     }
 }

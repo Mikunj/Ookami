@@ -10,6 +10,9 @@ import UIKit
 
 class MediaTrendingDataSource: TrendingDataSource {
     
+    //Block which gets called when see all button was tapped
+    var onSeeAllTap: () -> Void
+    
     //The current media ids that we have
     var mediaIds: [Int] = []
     
@@ -40,9 +43,15 @@ class MediaTrendingDataSource: TrendingDataSource {
     ///   - detail: The detail
     ///   - parent: The parent of the data source
     ///   - delegate: The delegate
-    override init(title: String, detail: String = "", parent: UIViewController, delegate: TrendingDelegate) {
+    ///   - onTap: The block which gets called when the see all button is tapped.
+    init(title: String, detail: String = "", parent: UIViewController, delegate: TrendingDelegate, onTap: @escaping () -> Void) {
+        self.onSeeAllTap = onTap
         super.init(title: title, detail: detail, parent: parent, delegate: delegate)
         fetch()
+    }
+    
+    override func didTapSeeAllButton() {
+        onSeeAllTap()
     }
     
     //Fetch the media
