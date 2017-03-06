@@ -331,8 +331,8 @@
 		244221111E6CC4ED0068EE8D /* MediaTrendingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTrendingDataSource.swift; sourceTree = "<group>"; };
 		244221131E6CC6760068EE8D /* MangaTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaTrendingViewController.swift; sourceTree = "<group>"; };
 		244221151E6CC8CF0068EE8D /* MediaTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTrendingViewController.swift; sourceTree = "<group>"; };
-		244221171E6CD5B60068EE8D /* YearTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearTrendingViewController.swift; sourceTree = "<group>"; };
-		2442211B1E6CD6850068EE8D /* MediaYearTrendingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaYearTrendingDataSource.swift; sourceTree = "<group>"; };
+		244221171E6CD5B60068EE8D /* YearTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YearTrendingViewController.swift; path = YearTrendingViewController.swift; sourceTree = "<group>"; };
+		2442211B1E6CD6850068EE8D /* MediaYearTrendingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaYearTrendingDataSource.swift; path = MediaYearTrendingDataSource.swift; sourceTree = "<group>"; };
 		2442211E1E6CDBA80068EE8D /* AnimeYearTrendingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeYearTrendingDataSource.swift; sourceTree = "<group>"; };
 		244221201E6CEBDE0068EE8D /* MangaYearTrendingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaYearTrendingDataSource.swift; sourceTree = "<group>"; };
 		245179131E3216D30025F9C7 /* MangaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaViewController.swift; sourceTree = "<group>"; };
@@ -723,8 +723,6 @@
 				2442211D1E6CD6AA0068EE8D /* Year trending */,
 				244221111E6CC4ED0068EE8D /* MediaTrendingDataSource.swift */,
 				244221151E6CC8CF0068EE8D /* MediaTrendingViewController.swift */,
-				2442211B1E6CD6850068EE8D /* MediaYearTrendingDataSource.swift */,
-				244221171E6CD5B60068EE8D /* YearTrendingViewController.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -732,8 +730,9 @@
 		2442211D1E6CD6AA0068EE8D /* Year trending */ = {
 			isa = PBXGroup;
 			children = (
+				2442211B1E6CD6850068EE8D /* MediaYearTrendingDataSource.swift */,
+				244221171E6CD5B60068EE8D /* YearTrendingViewController.swift */,
 			);
-			name = "Year trending";
 			path = "Year trending";
 			sourceTree = "<group>";
 		};
