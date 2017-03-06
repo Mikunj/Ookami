@@ -14,7 +14,6 @@ import ActionSheetPicker_3_0
 protocol YearTrendingDataSource: ItemViewControllerDataSource {
     weak var parent: UIViewController? { get set }
     func didSet(year: Int)
-    func loadMore()
 }
 
 //A view controller which displays yearly trending media
@@ -109,16 +108,6 @@ class YearTrendingViewController: UIViewController {
         }
         
         itemController.didMove(toParentViewController: self)
-        itemController.onScroll = { [unowned self] scrollView in
-            
-            //If we reached bottom load more
-            //TODO: Move this behaviour as default into ItemViewController
-            let offsetY = scrollView.contentOffset.y
-            let contentHeight = scrollView.contentSize.height
-            if offsetY > contentHeight - scrollView.frame.size.height {
-                self.dataSource.loadMore()
-            }
-        }
         
         self.navigationItem.rightBarButtonItem = yearBarButton
     }

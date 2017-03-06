@@ -23,6 +23,7 @@ protocol ItemViewControllerDataSource: class {
     func items() -> [ItemData]
     func didSelectItem(at indexPath: IndexPath)
     func refresh()
+    func loadMore()
     func shouldShowEmptyDataSet() -> Bool
     func dataSetImage() -> UIImage?
     func dataSetTitle() -> NSAttributedString?
@@ -315,6 +316,11 @@ extension ItemViewController: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.frame.size.height {
+            self.dataSource?.loadMore()
+        }
         onScroll?(scrollView)
     }
 }

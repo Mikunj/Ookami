@@ -70,6 +70,8 @@ final class FullLibraryDataSource: LibraryDataSource {
         fetchLibrary(forced: true)
     }
     
+    func loadMore() {}
+    
     func showIndicator(forced: Bool = false) {
         if forced {
             delegate?.showActivityIndicator()
