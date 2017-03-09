@@ -75,10 +75,36 @@ class PaginatedItemViewDataSourceBase: ItemViewControllerDataSource {
         if original {
             self.data = data
         } else {
-            self.data.append(contentsOf: data)
+            let filtered = filterDuplicates(from: data)
+            self.data.append(contentsOf: filtered)
         }
         
         self.itemData = self.data.map { $0.toItemData() }
+        
+        //If we fetch new data then scroll to the top
+        if original { self.delegate?.scrollToTop(animated: true) }
+    }
+    
+    //Filter any duplicates
+    private func filterDuplicates(from data: [ItemDataTransformable]) -> [ItemDataTransformable] {
+        
+        //Since ItemDataTransformable is a protocol, we can't use `Array.contains()` to check if our data has any of the values listed
+        //To overcome this we convert the data to `ItemData` and use that for checking against our current itemData. This works because `ItemData` is `Equatable`.
+        let itemData = data.map { $0.toItemData() }
+        var filtered: [ItemDataTransformable] = []
+        
+        //Loop through the array using index
+        for i in 0..<itemData.count {
+            //Check if we have the item data in our current itemData
+            if self.itemData.contains(itemData[i]) {
+                continue
+            }
+            
+            //Since we don't then we can append it to the filtered array
+            filtered.append(data[i])
+        }
+        
+        return filtered
     }
     
     //The paginated service

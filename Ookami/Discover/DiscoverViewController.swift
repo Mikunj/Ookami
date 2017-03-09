@@ -87,6 +87,14 @@ final class DiscoverViewController: UIViewController {
         
         itemController.didMove(toParentViewController: self)
         itemController.onScroll = { [unowned self] scrollView in
+            
+            //Scrolling presents a problem where if you type something, the collection view will scroll to the top and the keyboard will be dismissed immediately, leaving you with only 1 character typed.
+            //This means to actually type out a word you would have to always be at the very top of the collection view
+            //To combat this we only dismiss the keyboard if we are scrolling down
+            //This ensures we can still keep typing when the collection view automatically scrolls to the top
+            let yVelocity = scrollView.panGestureRecognizer.velocity(in: scrollView).y
+            guard yVelocity < 0 else { return }
+            
             self.searchBar.resignFirstResponder()
         }
     }
@@ -99,7 +107,7 @@ extension DiscoverViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         dataSource.didSearch(text: searchText)
-        itemController.collectionView.setContentOffset(CGPoint(x: 0, y:0), animated: true)
+        itemController.scrollToTop(animated: true)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
