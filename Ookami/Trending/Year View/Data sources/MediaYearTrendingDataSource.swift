@@ -1,49 +1,47 @@
 //
-//  MediaDiscoverDataSource.swift
+//  MediaYearTrendingDataSource.swift
 //  Ookami
 //
-//  Created by Maka on 8/2/17.
+//  Created by Maka on 6/3/17.
 //  Copyright © 2017 Mikunj Varsani. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import OokamiKit
 
-/// A data source for media discovery
+/// A data source for media year trends
 /// Must be subclassed
-class MediaDiscoverDataSource: PaginatedItemViewDataSourceBase, DiscoverDataSource {
+class MediaYearTrendingDataSource: PaginatedItemViewDataSourceBase, YearTrendingDataSource {
     
-    //The parent to report to
+    //The parent
     weak var parent: UIViewController?
     
-    //The current search text
-    var currentSearch: String = ""
-
-    /// Update the discovery results.
+    //The current year text
+    var currentYear: Int = -1
+    
+    /// Update the trending results.
     /// This will discard the previous service and fetch a whole new one.
     ///
-    /// - Parameter search: The text to search for, or blank if you want everything
-    func update(search: String = "") {
+    /// - Parameter year: The year
+    func update(year: Int) {
+        guard year > 0 else { return }
         
-        //Set the current search
-        currentSearch = search
+        //Set the current year
+        currentYear = year
         
-        //Update the service
         updateService()
     }
     
-    func didSearch(text: String) {
-        if currentSearch != text {
-            update(search: text)
+    func didSet(year: Int) {
+        if currentYear != year {
+            update(year: year)
         }
     }
-    
-    //MARK:- ItemDataSource
     
     override func dataSetImage() -> UIImage? {
         let size = CGSize(width: 44, height: 44)
         let color = UIColor.lightGray.lighter(amount: 0.1)
-        return UIImage(named: "search")?
+        return UIImage(named: "book")?
             .resize(size)
             .color(color)
     }
@@ -54,6 +52,7 @@ class MediaDiscoverDataSource: PaginatedItemViewDataSourceBase, DiscoverDataSour
                           NSForegroundColorAttributeName: UIColor.lightGray.lighter(amount: 0.1)]
         return NSAttributedString(string: title, attributes: attributes)
     }
-
+    
     
 }
+

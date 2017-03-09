@@ -1,5 +1,5 @@
 //
-//  TrendingListDataSource.swift
+//  TrendingTableDataSource.swift
 //  Ookami
 //
 //  Created by Maka on 3/3/17.

@@ -78,7 +78,7 @@ class AppCoordinator {
         
         //Trending
         //TODO: Get a nice pdf image icon for trending
-        let trendingView = mediaTrendingVC()
+        let trendingView = mediaTrendingTableVC()
         let trendingImage = UIImage(named: "Trending_tab_bar")
         trendingView.tabBarItem = UITabBarItem(title: "Trending", image: trendingImage, tag: 1)
         let trendingNav = UINavigationController(rootViewController: trendingView)
@@ -118,8 +118,8 @@ class AppCoordinator {
         return tab
     }
     
-    private static func mediaTrendingVC() -> MediaTrendingViewController {
-        return MediaTrendingViewController()
+    private static func mediaTrendingTableVC() -> MediaTrendingTableViewController {
+        return MediaTrendingTableViewController()
     }
     
     private static func mediaDiscoverVC() -> MediaDiscoverViewController {

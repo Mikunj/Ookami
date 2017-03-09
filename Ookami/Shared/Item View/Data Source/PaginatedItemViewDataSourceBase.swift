@@ -1,5 +1,5 @@
 //
-//  PaginatedItemViewDataSource.swift
+//  PaginatedItemViewDataSourceBase.swift
 //  Ookami
 //
 //  Created by Maka on 9/3/17.
@@ -9,7 +9,9 @@
 import Foundation
 import OokamiKit
 
-class PaginatedItemViewDataSource: ItemViewControllerDataSource {
+//A class which provides general functionality for paginated data sources
+class PaginatedItemViewDataSourceBase: ItemViewControllerDataSource {
+    
     //The delegate
     weak var delegate: ItemViewControllerDelegate? {
         didSet {
@@ -80,7 +82,7 @@ class PaginatedItemViewDataSource: ItemViewControllerDataSource {
     }
     
     //The paginated service
-    func paginatedService(_ completion: @escaping () -> Void) -> PaginatedService {
+    func paginatedService(_ completion: @escaping () -> Void) -> PaginatedService? {
         fatalError("paginatedService(completion:) needs to be implemented in a subclass")
     }
     

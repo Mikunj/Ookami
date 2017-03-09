@@ -64,7 +64,6 @@
 		243C088F1E11FBD800C44888 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243C088E1E11FBD800C44888 /* CacheManager.swift */; };
 		243C08911E11FBF500C44888 /* Cacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243C08901E11FBF500C44888 /* Cacheable.swift */; };
 		2442210F1E6CC3EF0068EE8D /* MangaTrendingTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2442210E1E6CC3EF0068EE8D /* MangaTrendingTableDataSource.swift */; };
-		244221121E6CC4ED0068EE8D /* MediaBaseTrendingTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221111E6CC4ED0068EE8D /* MediaBaseTrendingTableDataSource.swift */; };
 		244221141E6CC6760068EE8D /* MangaTrendingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221131E6CC6760068EE8D /* MangaTrendingTableViewController.swift */; };
 		244221161E6CC8CF0068EE8D /* MediaTrendingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221151E6CC8CF0068EE8D /* MediaTrendingTableViewController.swift */; };
 		244221181E6CD5B60068EE8D /* YearTrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244221171E6CD5B60068EE8D /* YearTrendingViewController.swift */; };
@@ -133,8 +132,11 @@
 		248FE15F1E1F58AC009ACA66 /* EntryStringTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248FE15D1E1F58AC009ACA66 /* EntryStringTableViewCell.xib */; };
 		248FE1621E1F5A47009ACA66 /* EntryBoolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248FE1601E1F5A47009ACA66 /* EntryBoolTableViewCell.swift */; };
 		248FE1631E1F5A47009ACA66 /* EntryBoolTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 248FE1611E1F5A47009ACA66 /* EntryBoolTableViewCell.xib */; };
-		249126661E71085900EE81B1 /* PaginatedItemViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249126651E71085900EE81B1 /* PaginatedItemViewDataSource.swift */; };
+		249126661E71085900EE81B1 /* PaginatedItemViewDataSourceBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249126651E71085900EE81B1 /* PaginatedItemViewDataSourceBase.swift */; };
 		2491266A1E711FBA00EE81B1 /* ItemData+OokamiKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249126691E711FBA00EE81B1 /* ItemData+OokamiKit.swift */; };
+		2491266E1E712A1C00EE81B1 /* PaginatedTrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2491266D1E712A1C00EE81B1 /* PaginatedTrendingViewController.swift */; };
+		249126721E71381E00EE81B1 /* TrendingTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249126711E71381E00EE81B1 /* TrendingTableDataSource.swift */; };
+		249126741E71392900EE81B1 /* MediaTrendingTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249126731E71392900EE81B1 /* MediaTrendingTableDataSource.swift */; };
 		2494D9A81DCC631E0032AC8E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9A71DCC631E0032AC8E /* User.swift */; };
 		2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */; };
 		2499C9971E5D91D9005D246C /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2499C9961E5D91D9005D246C /* FilterViewController.swift */; };
@@ -202,7 +204,6 @@
 		24E67FF61E68EC360001BAFB /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E67FF41E68EC360001BAFB /* CollectionViewTableViewCell.swift */; };
 		24E67FF71E68EC360001BAFB /* CollectionViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24E67FF51E68EC360001BAFB /* CollectionViewTableViewCell.xib */; };
 		24E67FF91E68EFE70001BAFB /* TrendingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E67FF81E68EFE70001BAFB /* TrendingTableViewController.swift */; };
-		24E67FFB1E68F3CB0001BAFB /* TrendingTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E67FFA1E68F3CB0001BAFB /* TrendingTableDataSource.swift */; };
 		24E67FFE1E6915690001BAFB /* AnimeTrendingTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E67FFD1E6915690001BAFB /* AnimeTrendingTableDataSource.swift */; };
 		24E680001E691A8E0001BAFB /* AnimeTrendingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E67FFF1E691A8E0001BAFB /* AnimeTrendingTableViewController.swift */; };
 		24EEE5E31E5D31A300ECA152 /* UIImage+Ookami.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEE5E21E5D31A300ECA152 /* UIImage+Ookami.swift */; };
@@ -328,7 +329,6 @@
 		243C088E1E11FBD800C44888 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		243C08901E11FBF500C44888 /* Cacheable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cacheable.swift; sourceTree = "<group>"; };
 		2442210E1E6CC3EF0068EE8D /* MangaTrendingTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaTrendingTableDataSource.swift; sourceTree = "<group>"; };
-		244221111E6CC4ED0068EE8D /* MediaBaseTrendingTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaBaseTrendingTableDataSource.swift; sourceTree = "<group>"; };
 		244221131E6CC6760068EE8D /* MangaTrendingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaTrendingTableViewController.swift; sourceTree = "<group>"; };
 		244221151E6CC8CF0068EE8D /* MediaTrendingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTrendingTableViewController.swift; sourceTree = "<group>"; };
 		244221171E6CD5B60068EE8D /* YearTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YearTrendingViewController.swift; sourceTree = "<group>"; };
@@ -398,8 +398,11 @@
 		248FE15D1E1F58AC009ACA66 /* EntryStringTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryStringTableViewCell.xib; sourceTree = "<group>"; };
 		248FE1601E1F5A47009ACA66 /* EntryBoolTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryBoolTableViewCell.swift; sourceTree = "<group>"; };
 		248FE1611E1F5A47009ACA66 /* EntryBoolTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryBoolTableViewCell.xib; sourceTree = "<group>"; };
-		249126651E71085900EE81B1 /* PaginatedItemViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedItemViewDataSource.swift; sourceTree = "<group>"; };
+		249126651E71085900EE81B1 /* PaginatedItemViewDataSourceBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedItemViewDataSourceBase.swift; sourceTree = "<group>"; };
 		249126691E711FBA00EE81B1 /* ItemData+OokamiKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ItemData+OokamiKit.swift"; sourceTree = "<group>"; };
+		2491266D1E712A1C00EE81B1 /* PaginatedTrendingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedTrendingViewController.swift; sourceTree = "<group>"; };
+		249126711E71381E00EE81B1 /* TrendingTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingTableDataSource.swift; sourceTree = "<group>"; };
+		249126731E71392900EE81B1 /* MediaTrendingTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTrendingTableDataSource.swift; sourceTree = "<group>"; };
 		2494D9A71DCC631E0032AC8E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2494D9AC1DCC740D0032AC8E /* Date+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Utils.swift"; sourceTree = "<group>"; };
 		2499C9961E5D91D9005D246C /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -464,7 +467,6 @@
 		24E67FF41E68EC360001BAFB /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
 		24E67FF51E68EC360001BAFB /* CollectionViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewTableViewCell.xib; sourceTree = "<group>"; };
 		24E67FF81E68EFE70001BAFB /* TrendingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingTableViewController.swift; sourceTree = "<group>"; };
-		24E67FFA1E68F3CB0001BAFB /* TrendingTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingTableDataSource.swift; sourceTree = "<group>"; };
 		24E67FFD1E6915690001BAFB /* AnimeTrendingTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeTrendingTableDataSource.swift; sourceTree = "<group>"; };
 		24E67FFF1E691A8E0001BAFB /* AnimeTrendingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeTrendingTableViewController.swift; sourceTree = "<group>"; };
 		24EEE5E21E5D31A300ECA152 /* UIImage+Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Ookami.swift"; sourceTree = "<group>"; };
@@ -708,30 +710,12 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		2442210D1E6CC3E20068EE8D /* Manga */ = {
-			isa = PBXGroup;
-			children = (
-				244221201E6CEBDE0068EE8D /* MangaYearTrendingDataSource.swift */,
-			);
-			path = Manga;
-			sourceTree = "<group>";
-		};
 		244221101E6CC4DE0068EE8D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				2442211D1E6CD6AA0068EE8D /* Year trending */,
-				244221111E6CC4ED0068EE8D /* MediaBaseTrendingTableDataSource.swift */,
+				2491266D1E712A1C00EE81B1 /* PaginatedTrendingViewController.swift */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		2442211D1E6CD6AA0068EE8D /* Year trending */ = {
-			isa = PBXGroup;
-			children = (
-				2442211B1E6CD6850068EE8D /* MediaYearTrendingDataSource.swift */,
-				244221171E6CD5B60068EE8D /* YearTrendingViewController.swift */,
-			);
-			path = "Year trending";
 			sourceTree = "<group>";
 		};
 		245179451E345CD20025F9C7 /* OokamiUITests */ = {
@@ -972,20 +956,21 @@
 		249126641E71083300EE81B1 /* Data Source */ = {
 			isa = PBXGroup;
 			children = (
-				249126651E71085900EE81B1 /* PaginatedItemViewDataSource.swift */,
+				249126651E71085900EE81B1 /* PaginatedItemViewDataSourceBase.swift */,
 			);
 			path = "Data Source";
 			sourceTree = "<group>";
 		};
-		2491266B1E71282500EE81B1 /* Table */ = {
+		2491266B1E71282500EE81B1 /* Table View */ = {
 			isa = PBXGroup;
 			children = (
+				24E67FF31E68EC140001BAFB /* Cells */,
 				2491266C1E71283200EE81B1 /* Data sources */,
 				24E67FFF1E691A8E0001BAFB /* AnimeTrendingTableViewController.swift */,
 				244221131E6CC6760068EE8D /* MangaTrendingTableViewController.swift */,
 				24E67FF81E68EFE70001BAFB /* TrendingTableViewController.swift */,
 			);
-			path = Table;
+			path = "Table View";
 			sourceTree = "<group>";
 		};
 		2491266C1E71283200EE81B1 /* Data sources */ = {
@@ -993,7 +978,27 @@
 			children = (
 				24E67FFD1E6915690001BAFB /* AnimeTrendingTableDataSource.swift */,
 				2442210E1E6CC3EF0068EE8D /* MangaTrendingTableDataSource.swift */,
-				24E67FFA1E68F3CB0001BAFB /* TrendingTableDataSource.swift */,
+				249126731E71392900EE81B1 /* MediaTrendingTableDataSource.swift */,
+				249126711E71381E00EE81B1 /* TrendingTableDataSource.swift */,
+			);
+			path = "Data sources";
+			sourceTree = "<group>";
+		};
+		2491266F1E712DE000EE81B1 /* Year View */ = {
+			isa = PBXGroup;
+			children = (
+				249126701E712DFB00EE81B1 /* Data sources */,
+				244221171E6CD5B60068EE8D /* YearTrendingViewController.swift */,
+			);
+			path = "Year View";
+			sourceTree = "<group>";
+		};
+		249126701E712DFB00EE81B1 /* Data sources */ = {
+			isa = PBXGroup;
+			children = (
+				2442211E1E6CDBA80068EE8D /* AnimeYearTrendingDataSource.swift */,
+				244221201E6CEBDE0068EE8D /* MangaYearTrendingDataSource.swift */,
+				2442211B1E6CD6850068EE8D /* MediaYearTrendingDataSource.swift */,
 			);
 			path = "Data sources";
 			sourceTree = "<group>";
@@ -1153,11 +1158,9 @@
 		24E67FF21E68EC050001BAFB /* Trending */ = {
 			isa = PBXGroup;
 			children = (
-				24E67FFC1E6915590001BAFB /* Anime */,
-				24E67FF31E68EC140001BAFB /* Cells */,
-				2442210D1E6CC3E20068EE8D /* Manga */,
 				244221101E6CC4DE0068EE8D /* Shared */,
-				2491266B1E71282500EE81B1 /* Table */,
+				2491266B1E71282500EE81B1 /* Table View */,
+				2491266F1E712DE000EE81B1 /* Year View */,
 				244221151E6CC8CF0068EE8D /* MediaTrendingTableViewController.swift */,
 			);
 			path = Trending;
@@ -1170,14 +1173,6 @@
 				24E67FF51E68EC360001BAFB /* CollectionViewTableViewCell.xib */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		24E67FFC1E6915590001BAFB /* Anime */ = {
-			isa = PBXGroup;
-			children = (
-				2442211E1E6CDBA80068EE8D /* AnimeYearTrendingDataSource.swift */,
-			);
-			path = Anime;
 			sourceTree = "<group>";
 		};
 		24EEE5E11E5D316700ECA152 /* Extenstions */ = {
@@ -1743,12 +1738,10 @@
 				2442210F1E6CC3EF0068EE8D /* MangaTrendingTableDataSource.swift in Sources */,
 				24D6E9A91E4AADF900751034 /* AnimeDiscoverDataSource.swift in Sources */,
 				2499C9971E5D91D9005D246C /* FilterViewController.swift in Sources */,
-				244221121E6CC4ED0068EE8D /* MediaBaseTrendingTableDataSource.swift in Sources */,
-				24E67FFB1E68F3CB0001BAFB /* TrendingTableDataSource.swift in Sources */,
 				24E67FF61E68EC360001BAFB /* CollectionViewTableViewCell.swift in Sources */,
 				2466586B1E28876800BB15EC /* MediaViewController.swift in Sources */,
 				246658691E2886BA00BB15EC /* AnimeViewController.swift in Sources */,
-				249126661E71085900EE81B1 /* PaginatedItemViewDataSource.swift in Sources */,
+				249126661E71085900EE81B1 /* PaginatedItemViewDataSourceBase.swift in Sources */,
 				248FE15E1E1F58AC009ACA66 /* EntryStringTableViewCell.swift in Sources */,
 				242A04071E1B904D000E8B06 /* main.swift in Sources */,
 				24175E921E1FA88A009FBDE6 /* FontAwesomeIcon.swift in Sources */,
@@ -1756,6 +1749,7 @@
 				242A042E1E1F487B000E8B06 /* EntryMediaHeaderView.swift in Sources */,
 				2442211F1E6CDBA80068EE8D /* AnimeYearTrendingDataSource.swift in Sources */,
 				245761611E31F95100BEB18C /* MediaInfoTableViewCell.swift in Sources */,
+				249126741E71392900EE81B1 /* MediaTrendingTableDataSource.swift in Sources */,
 				244221141E6CC6760068EE8D /* MangaTrendingTableViewController.swift in Sources */,
 				24175EA01E209266009FBDE6 /* TextEditingViewController.swift in Sources */,
 				242A04031E1A64C2000E8B06 /* LibraryViewController.swift in Sources */,
@@ -1794,6 +1788,7 @@
 				24175E961E206351009FBDE6 /* EntryButtonTableViewCell.swift in Sources */,
 				242A04161E1CAAEA000E8B06 /* UserLibraryViewController.swift in Sources */,
 				2466586E1E288C8700BB15EC /* TitleTableSectionView.swift in Sources */,
+				2491266E1E712A1C00EE81B1 /* PaginatedTrendingViewController.swift in Sources */,
 				24E67FFE1E6915690001BAFB /* AnimeTrendingTableDataSource.swift in Sources */,
 				24BF37151E3C163A0055972C /* MailComposer.swift in Sources */,
 				24D6E9AF1E4AC01A00751034 /* MangaDiscoverDataSource.swift in Sources */,
@@ -1801,6 +1796,7 @@
 				24032FC31E5EC6C7003DA60C /* DiscoverFilterHelper.swift in Sources */,
 				24032FC51E5FD6B4003DA60C /* BaseMediaFilterViewController.swift in Sources */,
 				248FE1621E1F5A47009ACA66 /* EntryBoolTableViewCell.swift in Sources */,
+				249126721E71381E00EE81B1 /* TrendingTableDataSource.swift in Sources */,
 				245179161E3218AF0025F9C7 /* MediaViewControllerHelper.swift in Sources */,
 				242A042C1E1F480B000E8B06 /* NibLoadableView.swift in Sources */,
 				242A03F21E1909AC000E8B06 /* ItemData.swift in Sources */,

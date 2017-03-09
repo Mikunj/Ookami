@@ -10,6 +10,8 @@ import Foundation
 
 public class MangaService: BaseService {
     
+    //TODO: Need to refactor the find function here .. so ugly
+    
     /// Find a manga with a given title
     ///
     /// - Parameters:

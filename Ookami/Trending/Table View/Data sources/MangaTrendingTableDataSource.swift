@@ -9,7 +9,7 @@
 import UIKit
 import OokamiKit
 
-class MangaTrendingTableDataSource: MediaBaseTrendingTableDataSource {
+class MangaTrendingTableDataSource: MediaTrendingTableDataSource {
     
     //The filter to apply
     var filter: MangaFilter

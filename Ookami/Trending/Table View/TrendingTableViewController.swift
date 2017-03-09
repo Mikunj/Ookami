@@ -40,7 +40,7 @@ class TrendingTableViewController: UIViewController {
     var offsets: [Int: CGFloat] = [:]
     
     //The data to show
-    var data: [TrendingDataSource] = []
+    var data: [TrendingTableDataSource] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,8 +127,8 @@ extension TrendingTableViewController: CollectionViewTableViewCellDelegate {
 }
 
 //MARK:- Trending Delegate
-extension TrendingTableViewController: TrendingDelegate {
-    func reload(dataSource: TrendingDataSource) {
+extension TrendingTableViewController: TrendingTableDelegate {
+    func reload(dataSource: TrendingTableDataSource) {
         guard let index = data.index(of: dataSource) else { return }
         let indexPath = IndexPath(row: index, section: 0)
         tableView.reloadRows(at: [indexPath], with: .automatic)

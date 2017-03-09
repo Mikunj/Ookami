@@ -11,20 +11,24 @@ import OokamiKit
 import Cartography
 import ActionSheetPicker_3_0
 
-protocol YearTrendingDataSource: ItemViewControllerDataSource {
-    weak var parent: UIViewController? { get set }
+protocol YearTrendingDataSource: PaginatedTrendingDataSource {
     func didSet(year: Int)
 }
 
 //A view controller which displays yearly trending media
 //The user can then pick a year and the results will change
 //Basically an ItemViewController with a year picker
-class YearTrendingViewController: UIViewController {
+class YearTrendingViewController: PaginatedTrendingViewController {
+    
     /// The current year
     var currentYear: Int {
         didSet {
-            dataSource.didSet(year: currentYear)
+            yearDataSource?.didSet(year: currentYear)
         }
+    }
+    
+    var yearDataSource: YearTrendingDataSource? {
+        return dataSource as? YearTrendingDataSource
     }
     
     //The base title to use E.g "Highest Rated Anime" and the year will be filled in
@@ -36,19 +40,8 @@ class YearTrendingViewController: UIViewController {
     /// The max year that the user can pick
     var maxYear: Int
     
-    /// The data source to use
-    var dataSource: YearTrendingDataSource {
-        didSet {
-            itemController.dataSource = dataSource
-            dataSource.parent = self
-        }
-    }
-    
     //The years array that will be displayed in the drop down
     fileprivate var years: [String]
-    
-    //The item controller to show the results
-    fileprivate var itemController: ItemViewController
     
     //Year bar button item to choose the year
     fileprivate lazy var yearBarButton: UIBarButtonItem = {
@@ -74,42 +67,22 @@ class YearTrendingViewController: UIViewController {
         self.maxYear = currentMax
         self.years = Array(minYear...currentMax).reversed().map { String($0) }
         
-        self.dataSource = dataSource
-        
-        itemController = ItemViewController(dataSource: dataSource)
-        itemController.type = .simpleGrid
-        itemController.shouldLoadImages = true
-        super.init(nibName: nil, bundle: nil)
-        
-        self.dataSource.parent = self
+        super.init(dataSource: dataSource)
         set(year: currentYear)
     }
     
-    func set(year: Int) {
-        dataSource.didSet(year: year)
-        self.title = baseTitle + " " + year.description
-        self.currentYear = year
-    }
-    
     required init?(coder aDecoder: NSCoder) {
-        fatalError("Use init(minYear:maxYear:dataSource:) instead")
+        fatalError("Use init(title:currentYear:minYear:maxYear:dataSource:) instead")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Add the item view controller and the search bar
-        self.addChildViewController(itemController)
-        
-        self.view.addSubview(itemController.view)
-        
-        constrain(itemController.view) { view in
-            view.edges == view.superview!.edges
-        }
-        
-        itemController.didMove(toParentViewController: self)
-        
         self.navigationItem.rightBarButtonItem = yearBarButton
+    }
+    
+    func set(year: Int) {
+        self.title = baseTitle + " " + year.description
+        self.currentYear = year
     }
     
     func yearTapped() {

@@ -28,7 +28,7 @@ class CollectionViewTableViewCell: UITableViewCell, NibReusable {
     weak var delegate: CollectionViewTableViewCellDelegate?
     
     @IBOutlet weak var titleLabel: UILabel!
-
+    
     @IBOutlet weak var detailLabel: UILabel!
     
     @IBOutlet weak var seeAllButton: UIButton!
@@ -50,12 +50,12 @@ class CollectionViewTableViewCell: UITableViewCell, NibReusable {
     func setCollectionViewDataSourceDelegate<T>(dataSourceDelegate: T, forRow row: Int) where
         T: UICollectionViewDelegate,
         T: UICollectionViewDataSource {
-        
-        self.tag = row
-        collectionView.delegate = dataSourceDelegate
-        collectionView.dataSource = dataSourceDelegate
-        collectionView.tag = row
-        collectionView.reloadData()
+            
+            self.tag = row
+            collectionView.delegate = dataSourceDelegate
+            collectionView.dataSource = dataSourceDelegate
+            collectionView.tag = row
+            collectionView.reloadData()
     }
     
     @IBAction func didTapSeeAll(_ sender: Any) {
