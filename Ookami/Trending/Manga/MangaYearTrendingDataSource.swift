@@ -67,7 +67,7 @@ class MangaYearTrendingDataSource: MediaYearTrendingDataSource {
                 strong.manga.append(contentsOf: manga)
             }
             
-            strong.itemData = strong.manga.map { ItemData.from(manga: $0) }
+            strong.itemData = strong.manga.map { $0.toItemData() }
             strong.delegate?.didReloadItems(dataSource: strong)
             
             //If the device is an ipad and it's the original then we fetch the next page so that content is filled up on the screen

@@ -9,6 +9,8 @@
 import UIKit
 import OokamiKit
 
+//TODO: Convert these over
+
 class AnimeYearTrendingDataSource: MediaYearTrendingDataSource {
     
     //The filter we are going to use
@@ -67,7 +69,7 @@ class AnimeYearTrendingDataSource: MediaYearTrendingDataSource {
                 strong.anime.append(contentsOf: anime)
             }
             
-            strong.itemData = strong.anime.map { ItemData.from(anime: $0) }
+            strong.itemData = strong.anime.map { $0.toItemData() }
             strong.delegate?.didReloadItems(dataSource: strong)
             
             //If the device is an ipad and it's the original then we fetch the next page so that content is filled up on the screen

@@ -1,24 +1,15 @@
 //
-//  MediaYearTrendingDataSource.swift
+//  PaginatedItemViewDataSource.swift
 //  Ookami
 //
-//  Created by Maka on 6/3/17.
+//  Created by Maka on 9/3/17.
 //  Copyright © 2017 Mikunj Varsani. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import OokamiKit
 
-//TODO: Refactor this because the MediaDiscoverDataSource is basically the same
-//It will also be the same for SeasonalTrendingDataSource
-
-/// A data source for media year trends
-/// Must be subclassed
-class MediaYearTrendingDataSource: YearTrendingDataSource {
-    
-    //The parent to report to
-    weak var parent: UIViewController?
-    
+class PaginatedItemViewDataSource: ItemViewControllerDataSource {
     //The delegate
     weak var delegate: ItemViewControllerDelegate? {
         didSet {
@@ -28,16 +19,24 @@ class MediaYearTrendingDataSource: YearTrendingDataSource {
     }
     
     //The items to show
-    var itemData: [ItemData] = []
+    var itemData: [ItemData] = [] {
+        didSet {
+            self.delegate?.didReloadItems(dataSource: self)
+        }
+    }
     
-    //The current year text
-    var currentYear: Int = -1
+    //The backing data
+    var data: [ItemDataTransformable] = []
     
     //The paginated service that we use
     var service: PaginatedService? = nil
     
     //Bool to check whether we have fetched the media
     var fetched: Bool = false
+    
+    init() {
+        updateService()
+    }
     
     //Show the activity indicator
     func showIndicator(forced: Bool = false) {
@@ -52,17 +51,9 @@ class MediaYearTrendingDataSource: YearTrendingDataSource {
         }
     }
     
-    /// Update the trending results.
-    /// This will discard the previous service and fetch a whole new one.
-    ///
-    /// - Parameter year: The year
-    func update(year: Int) {
-        guard year > 0 else { return }
-        
+    //Update the service
+    func updateService() {
         fetched = false
-        
-        //Set the current year
-        currentYear = year
         
         //Check if we have a operation in progress, if so then cancel it
         if service != nil {
@@ -71,21 +62,26 @@ class MediaYearTrendingDataSource: YearTrendingDataSource {
         
         showIndicator(forced: true)
         
-        service = paginatedService(for: year, completion: {
+        service = paginatedService() {
             self.delegate?.hideActivityIndicator()
             self.fetched = true
-        })
-    }
-    
-    //The service for the given year
-    func paginatedService(for year: Int, completion: @escaping () -> Void) -> PaginatedService {
-        fatalError("paginatedService(for:completion:) needs to be implemented in a subclass")
-    }
-    
-    func didSet(year: Int) {
-        if currentYear != year {
-            update(year: year)
         }
+    }
+    
+    //Update the item data from an array of data transformables
+    func updateItemData(from data: [ItemDataTransformable], original: Bool) {
+        if original {
+            self.data = data
+        } else {
+            self.data.append(contentsOf: data)
+        }
+        
+        self.itemData = self.data.map { $0.toItemData() }
+    }
+    
+    //The paginated service
+    func paginatedService(_ completion: @escaping () -> Void) -> PaginatedService {
+        fatalError("paginatedService(completion:) needs to be implemented in a subclass")
     }
     
     func loadMore() {
@@ -106,7 +102,7 @@ class MediaYearTrendingDataSource: YearTrendingDataSource {
     }
     
     func refresh() {
-        update(year: currentYear)
+        updateService()
     }
     
     func shouldShowEmptyDataSet() -> Bool {
@@ -114,18 +110,11 @@ class MediaYearTrendingDataSource: YearTrendingDataSource {
     }
     
     func dataSetImage() -> UIImage? {
-        let size = CGSize(width: 44, height: 44)
-        let color = UIColor.lightGray.lighter(amount: 0.1)
-        return UIImage(named: "book")?
-            .resize(size)
-            .color(color)
+        return nil
     }
     
     func dataSetTitle() -> NSAttributedString? {
-        let title = "Could not find any results."
-        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16),
-                          NSForegroundColorAttributeName: UIColor.lightGray.lighter(amount: 0.1)]
-        return NSAttributedString(string: title, attributes: attributes)
+        return nil
     }
     
     func dataSetDescription() -> NSAttributedString? {
@@ -133,4 +122,3 @@ class MediaYearTrendingDataSource: YearTrendingDataSource {
     }
     
 }
-

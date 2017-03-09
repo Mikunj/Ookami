@@ -1,5 +1,5 @@
 //
-//  MangaTrendingDataSource.swift
+//  MangaTrendingTableDataSource.swift
 //  Ookami
 //
 //  Created by Maka on 6/3/17.
@@ -9,7 +9,7 @@
 import UIKit
 import OokamiKit
 
-class MangaTrendingDataSource: MediaTrendingDataSource {
+class MangaTrendingTableDataSource: MediaBaseTrendingTableDataSource {
     
     //The filter to apply
     var filter: MangaFilter
@@ -23,35 +23,20 @@ class MangaTrendingDataSource: MediaTrendingDataSource {
     ///   - parent: The parent of the data source
     ///   - delegate: The delegate
     ///   - onTap: The block which gets called when the see all button is tapped.
-    init(title: String, detail: String = "", filter: MangaFilter, parent: UIViewController, delegate: TrendingDelegate, onTap: @escaping () -> Void) {
+    init(title: String, detail: String = "", filter: MangaFilter, parent: UIViewController, delegate: TrendingTableDelegate, onTap: @escaping () -> Void) {
         self.filter = filter
         super.init(title: title, detail: detail, parent: parent, delegate: delegate, onTap: onTap)
     }
     
-    //Fetch the manga
-    override func fetch() {
-        guard !fetching else { return }
-        
-        fetching = true
-        
-        let service = MangaService().find(title: "", filters: filter, limit: 10) { [weak self] ids, error, _ in
-            self?.fetching = false
-            
-            guard error == nil,
-                let ids = ids else {
-                    return
-            }
-            
-            self?.mediaIds = ids
-            self?.reload()
+    override func paginatedService(_ completion: @escaping ([Int]?, Error?) -> Void) -> PaginatedService {
+        return MangaService().find(title: "", filters: filter, limit: 10) { ids, error, _ in
+            completion(ids, error)
         }
-        
-        service.start()
     }
     
     override func itemData(for indexPath: IndexPath) -> ItemData? {
         if let manga = Manga.get(withId: mediaIds[indexPath.row]) {
-            var data = ItemData.from(manga: manga)
+            var data = manga.toItemData()
             data.details = ""
             return data
         }

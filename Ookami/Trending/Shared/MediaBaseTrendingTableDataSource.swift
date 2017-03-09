@@ -1,5 +1,5 @@
 //
-//  MediaTrendingDataSource.swift
+//  MediaBaseTrendingTableDataSource.swift
 //  Ookami
 //
 //  Created by Maka on 6/3/17.
@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import OokamiKit
 
-class MediaTrendingDataSource: TrendingDataSource {
+//Class for all media to subclass from
+class MediaBaseTrendingTableDataSource: TrendingTableDataSource {
     
     //Block which gets called when see all button was tapped
     var onSeeAllTap: () -> Void
@@ -44,7 +46,7 @@ class MediaTrendingDataSource: TrendingDataSource {
     ///   - parent: The parent of the data source
     ///   - delegate: The delegate
     ///   - onTap: The block which gets called when the see all button is tapped.
-    init(title: String, detail: String = "", parent: UIViewController, delegate: TrendingDelegate, onTap: @escaping () -> Void) {
+    init(title: String, detail: String = "", parent: UIViewController, delegate: TrendingTableDelegate, onTap: @escaping () -> Void) {
         self.onSeeAllTap = onTap
         super.init(title: title, detail: detail, parent: parent, delegate: delegate)
         fetch()
@@ -56,7 +58,27 @@ class MediaTrendingDataSource: TrendingDataSource {
     
     //Fetch the media
     func fetch() {
+        guard !fetching else { return }
+        
+        fetching = true
+        
+        paginatedService({ ids, error in
+            self.fetching = false
+            
+            guard error == nil,
+                let ids = ids else {
+                    return
+            }
+            
+            self.mediaIds = ids
+            self.reload()
+        }).start()
     }
+    
+    func paginatedService(_ completion: @escaping ([Int]?, Error?) -> Void) -> PaginatedService {
+        fatalError("paginatedService(completion:) must be implemented in a subclass")
+    }
+    
     
     //The item data for item at index path
     func itemData(for indexPath: IndexPath) -> ItemData? {
@@ -89,5 +111,5 @@ class MediaTrendingDataSource: TrendingDataSource {
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     
-
+    
 }

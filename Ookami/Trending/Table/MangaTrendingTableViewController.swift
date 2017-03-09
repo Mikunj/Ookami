@@ -1,5 +1,5 @@
 //
-//  MangaTrendingViewController.swift
+//  MangaTrendingTableViewController.swift
 //  Ookami
 //
 //  Created by Maka on 6/3/17.
@@ -9,7 +9,7 @@
 import UIKit
 import OokamiKit
 
-class MangaTrendingViewController: TrendingViewController {
+class MangaTrendingTableViewController: TrendingTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class MangaTrendingViewController: TrendingViewController {
     }
     
     //MARK:- Highest Rated
-    private func highestRatedFilter() -> MangaTrendingDataSource {
+    private func highestRatedFilter() -> MangaTrendingTableDataSource {
         //We need to get current year - 1
         let year = Calendar.current.component(.year, from: Date()) - 1
         let title = "Highest Rated Manga"
@@ -30,7 +30,7 @@ class MangaTrendingViewController: TrendingViewController {
         filter.year.end = year
         filter.sort = Sort(by: "average_rating")
         
-        return MangaTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
+        return MangaTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = MangaYearTrendingDataSource(filter: filter)
             let yearController = YearTrendingViewController(title: "Highest Rated", currentYear: year, dataSource: source)
             self?.navigationController?.pushViewController(yearController, animated: true)
@@ -39,7 +39,7 @@ class MangaTrendingViewController: TrendingViewController {
     }
     
     //MARK:- Popularity
-    private func popularityFilter() -> MangaTrendingDataSource {
+    private func popularityFilter() -> MangaTrendingTableDataSource {
         //We need to get current year - 1
         let year = Calendar.current.component(.year, from: Date()) - 1
         let title = "Most Popular Manga"
@@ -49,7 +49,7 @@ class MangaTrendingViewController: TrendingViewController {
         filter.year.start = year
         filter.year.end = year
         
-        return MangaTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
+        return MangaTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = MangaYearTrendingDataSource(filter: filter.copy())
             let yearController = YearTrendingViewController(title: "Most Popular", currentYear: year, dataSource: source)
             self?.navigationController?.pushViewController(yearController, animated: true)

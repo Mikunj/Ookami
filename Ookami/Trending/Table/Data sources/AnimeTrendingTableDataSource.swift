@@ -1,5 +1,5 @@
 //
-//  AnimeTrendingDataSource.swift
+//  AnimeTrendingTableDataSource.swift
 //  Ookami
 //
 //  Created by Maka on 3/3/17.
@@ -9,7 +9,7 @@
 import UIKit
 import OokamiKit
 
-class AnimeTrendingDataSource: MediaTrendingDataSource {
+class AnimeTrendingTableDataSource: MediaBaseTrendingTableDataSource {
     
     //The filter to apply
     var filter: AnimeFilter
@@ -23,35 +23,20 @@ class AnimeTrendingDataSource: MediaTrendingDataSource {
     ///   - parent: The parent of the data source
     ///   - delegate: The delegate
     ///   - onTap: The block which gets called when the see all button is tapped.
-    init(title: String, detail: String = "", filter: AnimeFilter, parent: UIViewController, delegate: TrendingDelegate, onTap: @escaping () -> Void) {
+    init(title: String, detail: String = "", filter: AnimeFilter, parent: UIViewController, delegate: TrendingTableDelegate, onTap: @escaping () -> Void) {
         self.filter = filter
         super.init(title: title, detail: detail, parent: parent, delegate: delegate, onTap: onTap)
     }
     
-    //Fetch the anime
-    override func fetch() {
-        guard !fetching else { return }
-        
-        fetching = true
-        
-        let service = AnimeService().find(title: "", filters: filter, limit: 10) { [weak self] ids, error, _ in
-            self?.fetching = false
-            
-            guard error == nil,
-                let ids = ids else {
-                    return
-            }
-            
-            self?.mediaIds = ids
-            self?.reload()
+    override func paginatedService(_ completion: @escaping ([Int]?, Error?) -> Void) -> PaginatedService {
+        return AnimeService().find(title: "", filters: filter, limit: 10) { ids, error, _ in
+            completion(ids, error)
         }
-        
-        service.start()
     }
     
     override func itemData(for indexPath: IndexPath) -> ItemData? {
         if let anime = Anime.get(withId: mediaIds[indexPath.row]) {
-            var data = ItemData.from(anime: anime)
+            var data = anime.toItemData()
             data.details = ""
             return data
         }
@@ -64,7 +49,7 @@ class AnimeTrendingDataSource: MediaTrendingDataSource {
         
         if let parent = parent,
             let anime = Anime.get(withId: mediaIds[indexPath.row]) {
-                AppCoordinator.showAnimeVC(in: parent, anime: anime)
+            AppCoordinator.showAnimeVC(in: parent, anime: anime)
         }
     }
     

@@ -19,9 +19,6 @@ final class AnimeDiscoverDataSource: MediaDiscoverDataSource {
         }
     }
     
-    //An array of anime in order that they need to be shown in
-    var anime: [Anime] = []
-    
     /// Create an Anime Discover Data Source
     ///
     /// - Parameter filter: The initial filter to use
@@ -30,58 +27,38 @@ final class AnimeDiscoverDataSource: MediaDiscoverDataSource {
         super.init()
     }
     
-    /// Get the paginated service for a given search string
-    ///
-    /// - Parameters:
-    ///   - searchText: The search string
-    ///   - completion: The completion block
-    /// - Returns: The paginated service
-    override func paginatedService(for searchText: String, completion: @escaping () -> Void) -> PaginatedService {
-        return AnimeService().find(title: searchText, filters: filter) { [weak self] ids, error, original in
+    /// Get the paginated service for the current search string
+    override func paginatedService(_ completion: @escaping () -> Void) -> PaginatedService {
+        return AnimeService().find(title: currentSearch, filters: filter) { [weak self] ids, error, original in
             
             completion()
             
-            guard let strong = self else {
-                return
-            }
-            
-            guard error == nil else {
-                if error as? PaginationError != nil {
-                    //Don't print anything if it's pagination related
+            guard error == nil,
+                let ids = ids else {
+                    if error as? PaginationError != nil {
+                        //Don't print anything if it's pagination related
+                        return
+                    }
+                    
+                    print(error!.localizedDescription)
                     return
-                }
-                
-                print(error!.localizedDescription)
-                return
-            }
-            
-            guard let ids = ids else {
-                print("Didn't get any ids - Discover Anime")
-                return
             }
             
             //We should return the results in order they were recieved so that users can get the best results
             let anime = ids.flatMap { Anime.get(withId: $0) }
-            if original {
-                strong.anime = anime
-            } else {
-                strong.anime.append(contentsOf: anime)
-            }
-            
-            strong.itemData = strong.anime.map { ItemData.from(anime: $0) }
-            strong.delegate?.didReloadItems(dataSource: strong)
+            self?.updateItemData(from: anime, original: original)
             
             //If the device is an ipad and it's the original then we fetch the next page so that content is filled up on the screen
             if UIDevice.current.userInterfaceIdiom == .pad && original {
-                strong.loadMore()
+                self?.loadMore()
             }
         }
     }
     
     //MARK:- ItemDataSource
     override func didSelectItem(at indexPath: IndexPath) {
-        if let parent = parent {
-            let anime = self.anime[indexPath.row]
+        if let parent = parent,
+            let anime = self.data[indexPath.row] as? Anime {
             AppCoordinator.showAnimeVC(in: parent, anime: anime)
         }
     }

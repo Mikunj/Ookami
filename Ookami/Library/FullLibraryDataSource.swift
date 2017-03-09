@@ -149,7 +149,7 @@ extension FullLibraryDataSource {
             return []
         }
         
-        return Array(results).map { ItemData.from(entry: $0) }
+        return Array(results).map { $0.toItemData() }
     }
     
     func didSelectItem(at indexpath: IndexPath) {

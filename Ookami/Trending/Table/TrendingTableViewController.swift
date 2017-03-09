@@ -1,5 +1,5 @@
 //
-//  TrendingViewController.swift
+//  TrendingTableViewController.swift
 //  Ookami
 //
 //  Created by Maka on 3/3/17.
@@ -10,12 +10,11 @@ import UIKit
 import Cartography
 
 /*
- We need to set the tags on the tableview cells so that we know what row was tapped when see all button was tapped. This way we can pass the call to the correct data source.
- 
  https://ashfurrow.com/blog/putting-a-uicollectionview-in-a-uitableviewcell-in-swift/
  */
 
-class TrendingViewController: UIViewController {
+//A View controller for showing trending items in a table view
+class TrendingTableViewController: UIViewController {
     
     //The table view
     lazy var tableView: UITableView  = {
@@ -56,7 +55,7 @@ class TrendingViewController: UIViewController {
 }
 
 //MARK:- Tableview Data Source
-extension TrendingViewController: UITableViewDataSource {
+extension TrendingTableViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -79,7 +78,7 @@ extension TrendingViewController: UITableViewDataSource {
 }
 
 //MARK:- Tableview Delegate
-extension TrendingViewController: UITableViewDelegate {
+extension TrendingTableViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //Height = 45 (title & button) + Collection view height
@@ -119,7 +118,7 @@ extension TrendingViewController: UITableViewDelegate {
 }
 
 //MARK:- CollectionViewTableViewCellDelegate
-extension TrendingViewController: CollectionViewTableViewCellDelegate {
+extension TrendingTableViewController: CollectionViewTableViewCellDelegate {
     func didTapSeeAll(sender: CollectionViewTableViewCell) {
         let index = sender.tag
         let source = data[index]
@@ -128,7 +127,7 @@ extension TrendingViewController: CollectionViewTableViewCellDelegate {
 }
 
 //MARK:- Trending Delegate
-extension TrendingViewController: TrendingDelegate {
+extension TrendingTableViewController: TrendingDelegate {
     func reload(dataSource: TrendingDataSource) {
         guard let index = data.index(of: dataSource) else { return }
         let indexPath = IndexPath(row: index, section: 0)

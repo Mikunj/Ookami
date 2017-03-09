@@ -1,5 +1,5 @@
 //
-//  TrendingDataSource.swift
+//  TrendingListDataSource.swift
 //  Ookami
 //
 //  Created by Maka on 3/3/17.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol TrendingDelegate: class {
-    func reload(dataSource: TrendingDataSource)
+protocol TrendingTableDelegate: class {
+    func reload(dataSource: TrendingTableDataSource)
 }
 
-class TrendingDataSource: NSObject {
+class TrendingTableDataSource: NSObject {
     
     //The title of the cell
     var title: String
@@ -24,7 +24,7 @@ class TrendingDataSource: NSObject {
     weak var parent: UIViewController?
     
     //The delegate for the data source
-    weak var delegate: TrendingDelegate?
+    weak var delegate: TrendingTableDelegate?
     
     //The layout that will be applied to the collection view
     var collectionViewLayout: UICollectionViewFlowLayout {
@@ -33,7 +33,7 @@ class TrendingDataSource: NSObject {
         return layout
     }
     
-    init(title: String, detail: String = "", parent: UIViewController, delegate: TrendingDelegate) {
+    init(title: String, detail: String = "", parent: UIViewController, delegate: TrendingTableDelegate) {
         self.title = title
         self.detail = detail
         self.parent = parent
@@ -56,7 +56,7 @@ class TrendingDataSource: NSObject {
 }
 
 //MARK:- UICollectionViewDataSource
-extension TrendingDataSource: UICollectionViewDataSource {
+extension TrendingTableDataSource: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -71,4 +71,4 @@ extension TrendingDataSource: UICollectionViewDataSource {
 }
 
 //MARK:- UICollectionViewDelegate
-extension TrendingDataSource: UICollectionViewDelegate {}
+extension TrendingTableDataSource: UICollectionViewDelegate {}

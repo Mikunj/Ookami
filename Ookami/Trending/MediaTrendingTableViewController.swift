@@ -1,5 +1,5 @@
 //
-//  MediaTrendingViewController.swift
+//  MediaTrendingTableViewController.swift
 //  Ookami
 //
 //  Created by Maka on 6/3/17.
@@ -11,11 +11,12 @@ import OokamiKit
 import Cartography
 import BTNavigationDropdownMenu
 
-class MediaTrendingViewController: UIViewController {
+//View controller for showing Trends of Anime and Manga combined
+class MediaTrendingTableViewController: UIViewController {
     
     //The trending view controller
-    fileprivate var animeController: AnimeTrendingViewController
-    fileprivate var mangaController: MangaTrendingViewController
+    fileprivate var animeController: AnimeTrendingTableViewController
+    fileprivate var mangaController: MangaTrendingTableViewController
     
     //The list of items which can be selected in the dropdown menu
     fileprivate var dropDownMenuItems = ["Anime", "Manga"]
@@ -24,8 +25,8 @@ class MediaTrendingViewController: UIViewController {
     fileprivate var dropDownMenu: BTNavigationDropdownMenu!
     
     init() {
-        animeController = AnimeTrendingViewController()
-        mangaController = MangaTrendingViewController()
+        animeController = AnimeTrendingTableViewController()
+        mangaController = MangaTrendingTableViewController()
         super.init(nibName: nil, bundle: nil)
     }
     

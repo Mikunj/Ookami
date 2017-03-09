@@ -1,5 +1,5 @@
 //
-//  AnimeTrendingViewController.swift
+//  AnimeTrendingTableViewController.swift
 //  Ookami
 //
 //  Created by Maka on 3/3/17.
@@ -9,7 +9,7 @@
 import UIKit
 import OokamiKit
 
-class AnimeTrendingViewController: TrendingViewController {
+class AnimeTrendingTableViewController: TrendingTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class AnimeTrendingViewController: TrendingViewController {
     }
     
     //MARK:- Highest Rated
-    private func highestRatedFilter() -> AnimeTrendingDataSource {
+    private func highestRatedFilter() -> AnimeTrendingTableDataSource {
         //We need to get current year - 1
         let year = Calendar.current.component(.year, from: Date()) - 1
         let title = "Highest Rated Anime"
@@ -30,7 +30,7 @@ class AnimeTrendingViewController: TrendingViewController {
         filter.year.end = year
         filter.sort = Sort(by: "average_rating")
         
-        return AnimeTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
+        return AnimeTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = AnimeYearTrendingDataSource(filter: filter)
             let yearController = YearTrendingViewController(title: "Highest Rated", currentYear: year, dataSource: source)
             self?.navigationController?.pushViewController(yearController, animated: true)
@@ -38,7 +38,7 @@ class AnimeTrendingViewController: TrendingViewController {
     }
     
     //MARK:- Popularity
-    private func popularityFilter() -> AnimeTrendingDataSource {
+    private func popularityFilter() -> AnimeTrendingTableDataSource {
         //We need to get current year - 1
         let year = Calendar.current.component(.year, from: Date()) - 1
         let title = "Most Popular Anime"
@@ -49,7 +49,7 @@ class AnimeTrendingViewController: TrendingViewController {
         filter.year.end = year
         
         
-        return AnimeTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
+        return AnimeTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = AnimeYearTrendingDataSource(filter: filter)
             let yearController = YearTrendingViewController(title: "Most Popular", currentYear: year, dataSource: source)
             self?.navigationController?.pushViewController(yearController, animated: true)
@@ -58,7 +58,7 @@ class AnimeTrendingViewController: TrendingViewController {
     }
     
     //MARK:- Season
-    private func seasonFilter() -> AnimeTrendingDataSource {
+    private func seasonFilter() -> AnimeTrendingTableDataSource {
         let year = Calendar.current.component(.year, from: Date())
         let season = currentSeason()
         
@@ -69,7 +69,7 @@ class AnimeTrendingViewController: TrendingViewController {
         filter.filter(key: "season_year", value: year)
         filter.seasons = [season]
         
-        return AnimeTrendingDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) {}
+        return AnimeTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) {}
     }
     
     private func currentSeason() -> AnimeFilter.Season {

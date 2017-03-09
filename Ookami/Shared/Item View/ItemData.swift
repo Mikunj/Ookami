@@ -8,6 +8,12 @@
 
 import Foundation
 
+//Protocol to adhere to for transforming to ItemData
+protocol ItemDataTransformable {
+    func toItemData() -> ItemData
+}
+
+//An item data struct
 struct ItemData: Equatable {
     var name: String?
     var details: String?
