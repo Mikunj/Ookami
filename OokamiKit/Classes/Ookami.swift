@@ -10,8 +10,6 @@ import Foundation
 import Heimdallr
 import Keys
 
-//TODO: Need to add migrations manager or something
-
 /// The main class which holds the top level objects
 public class Ookami {
     

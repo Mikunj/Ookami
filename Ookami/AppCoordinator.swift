@@ -77,7 +77,6 @@ class AppCoordinator {
         let discoverNav = UINavigationController(rootViewController: discoverView)
         
         //Trending
-        //TODO: Get a nice pdf image icon for trending
         let trendingView = mediaTrendingTableVC()
         let trendingImage = UIImage(named: "Trending_tab_bar")
         trendingView.tabBarItem = UITabBarItem(title: "Trending", image: trendingImage, tag: 1)

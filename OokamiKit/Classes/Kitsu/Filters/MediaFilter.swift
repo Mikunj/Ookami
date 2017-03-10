@@ -8,9 +8,6 @@
 
 import Foundation
 
-
-//TODO: Add sorting
-
 //A struct for representing sorting by a given key
 public struct Sort {
     

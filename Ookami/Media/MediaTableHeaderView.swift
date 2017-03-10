@@ -10,8 +10,6 @@ import UIKit
 import Kingfisher
 import DynamicColor
 
-//TODO: Improve this view ... it just looks ugly
-
 protocol MediaTableHeaderViewDelegate: class {
     func didTapEntryButton(_ button: UIButton, state: MediaTableHeaderView.EntryButtonState)
     func didTapTrailerButton()

@@ -1085,7 +1085,6 @@
 				24C8CDB61E725FE9003596DD /* Data sources */,
 				24C8CDB41E7257BC003596DD /* SeasonalTrendingViewController.swift */,
 			);
-			name = "Seasonal View";
 			path = "Seasonal View";
 			sourceTree = "<group>";
 		};
@@ -1094,7 +1093,6 @@
 			children = (
 				24C8CDB71E726001003596DD /* AnimeSeasonalDataSource.swift */,
 			);
-			name = "Data sources";
 			path = "Data sources";
 			sourceTree = "<group>";
 		};
