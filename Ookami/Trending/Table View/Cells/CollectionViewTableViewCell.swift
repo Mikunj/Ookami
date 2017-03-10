@@ -47,6 +47,10 @@ class CollectionViewTableViewCell: UITableViewCell, NibReusable {
         detailLabel.text = detail
     }
     
+    func set(showSeeAll visible: Bool) {
+        seeAllButton.isHidden = !visible
+    }
+    
     func setCollectionViewDataSourceDelegate<T>(dataSourceDelegate: T, forRow row: Int) where
         T: UICollectionViewDelegate,
         T: UICollectionViewDataSource {

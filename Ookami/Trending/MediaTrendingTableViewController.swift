@@ -11,6 +11,8 @@ import OokamiKit
 import Cartography
 import BTNavigationDropdownMenu
 
+//Might be better to combine Both Anime and Manga into 1?
+
 //View controller for showing Trends of Anime and Manga combined
 class MediaTrendingTableViewController: UIViewController {
     

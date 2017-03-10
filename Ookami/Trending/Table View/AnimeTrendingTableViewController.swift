@@ -14,8 +14,13 @@ class AnimeTrendingTableViewController: TrendingTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.data = [seasonFilter(), highestRatedFilter(), popularityFilter()]
+        self.data = [weeklyTrending(), seasonFilter(), highestRatedFilter(), popularityFilter()]
         self.tableView.reloadData()
+    }
+    
+    //MARK:- Weekly Trending
+    private func weeklyTrending() -> AnimeWeeklyTrendingTableDataSource {
+        return AnimeWeeklyTrendingTableDataSource(title: "Trending", detail: "This Week", parent: self, delegate: self)
     }
     
     //MARK:- Highest Rated

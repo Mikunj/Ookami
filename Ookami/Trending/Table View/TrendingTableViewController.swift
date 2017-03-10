@@ -101,6 +101,7 @@ extension TrendingTableViewController: UITableViewDelegate {
         
         tableCell.set(title: source.title)
         tableCell.set(detail: source.detail)
+        tableCell.set(showSeeAll: source.showSeeAllButton)
         tableCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: source, forRow: indexPath.row)
         tableCell.collectionView.collectionViewLayout = source.collectionViewLayout
         tableCell.collectionViewOffset = offsets[indexPath.row] ?? 0

@@ -61,23 +61,24 @@ class MediaTrendingTableDataSource: TrendingTableDataSource {
         
         fetching = true
         
-        paginatedService({ ids, error in
+        fetchMediaIds(){ ids, error in
             self.fetching = false
             
             guard error == nil,
                 let ids = ids else {
+                    print(error!.localizedDescription + " - Media Trending Table Data Source")
                     return
             }
             
             self.mediaIds = ids
             self.reload()
-        }).start()
+        }
     }
     
-    func paginatedService(_ completion: @escaping ([Int]?, Error?) -> Void) -> PaginatedService {
-        fatalError("paginatedService(completion:) must be implemented in a subclass")
+    //Override this in subclasses and fetch the ids here
+    func fetchMediaIds(_ completion: @escaping ([Int]?, Error?) -> Void) {
+        fatalError("fetchMediaIds(completion:) must be implemented in a subclass")
     }
-    
     
     //The item data for item at index path
     func itemData(for indexPath: IndexPath) -> ItemData? {

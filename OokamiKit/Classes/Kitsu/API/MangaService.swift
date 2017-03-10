@@ -24,14 +24,10 @@ public class MangaService: BaseService {
         let url = Constants.Endpoints.manga
         return MediaServiceHelper().find(type: Manga.self, url: url, client: client, database: database, title: title, filters: filters, limit: limit) { objects, error, original in
             
-            guard error == nil else {
-                completion(nil, error, original)
-                return
-            }
-            
-            guard let objects = objects else {
-                completion(nil, NetworkClientError.error("Failed to get objects - Manga Service FIND"), original)
-                return
+            guard error == nil,
+                let objects = objects else {
+                    completion(nil, error, original)
+                    return
             }
             
             //Return the ids of the objects
@@ -44,6 +40,35 @@ public class MangaService: BaseService {
         }
     }
     
+    /// Get the weekly trending manga.
+    ///
+    /// - Parameter completion: The completion block which passes back an array of trending manga ids or an error if something went wrong.
+    public func trending(completion: @escaping ([Int]?, Error?) -> Void) {
+        let endpoint = Constants.Endpoints.trending
+        let request = KitsuRequest(relativeURL: endpoint + "/manga")
+        
+        let operation = NetworkOperation(request: request.build(), client: client) { json, error in
+            guard error == nil,
+                let json = json else {
+                    completion(nil, error)
+                    return
+            }
+            
+            Parser().parse(json: json) { parsed in
+                self.database.addOrUpdate(parsed)
+                
+                //Get the anime
+                let manga = parsed.filter { $0 is Manga } as? [Manga] ?? []
+                let ids = manga.map { $0.id }
+                completion(ids, nil)
+            }
+            
+        }
+        
+        queue.addOperation(operation)
+    }
+    
+    
     /// Get a manga with the given id.
     ///
     /// - Parameters:
@@ -55,13 +80,9 @@ public class MangaService: BaseService {
         request.include("genres")
         
         let operation = NetworkOperation(request: request.build(), client: client) { json, error in
-            guard error == nil else {
+            guard error == nil,
+                let json = json else {
                 completion(nil, error)
-                return
-            }
-            
-            guard let json = json else {
-                completion(nil, ServiceError.error(description: "Invalid JSON recieved - Manga Service GET"))
                 return
             }
             

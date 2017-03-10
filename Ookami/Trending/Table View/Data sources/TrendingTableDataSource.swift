@@ -20,6 +20,9 @@ class TrendingTableDataSource: NSObject {
     //The detail string
     var detail: String = ""
     
+    //Whether we want the see all button to be visible
+    var showSeeAllButton = true
+    
     //The parent of the data source
     weak var parent: UIViewController?
     
