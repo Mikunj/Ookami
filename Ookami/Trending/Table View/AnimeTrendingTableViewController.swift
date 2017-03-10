@@ -32,7 +32,7 @@ class AnimeTrendingTableViewController: TrendingTableViewController {
         
         return AnimeTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = AnimeYearTrendingDataSource(filter: filter)
-            let yearController = YearTrendingViewController(title: "Highest Rated", currentYear: year, dataSource: source)
+            let yearController = YearTrendingViewController(title: "Highest Rated", initialYear: year, dataSource: source)
             self?.navigationController?.pushViewController(yearController, animated: true)
         }
     }
@@ -51,7 +51,7 @@ class AnimeTrendingTableViewController: TrendingTableViewController {
         
         return AnimeTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = AnimeYearTrendingDataSource(filter: filter)
-            let yearController = YearTrendingViewController(title: "Most Popular", currentYear: year, dataSource: source)
+            let yearController = YearTrendingViewController(title: "Most Popular", initialYear: year, dataSource: source)
             self?.navigationController?.pushViewController(yearController, animated: true)
         }
 
@@ -69,7 +69,11 @@ class AnimeTrendingTableViewController: TrendingTableViewController {
         filter.filter(key: "season_year", value: year)
         filter.seasons = [season]
         
-        return AnimeTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) {}
+        return AnimeTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
+            let source = AnimeSeasonalDataSource(filter: filter)
+            let seasonController = SeasonalTrendingViewController(initialSeason: season, initialYear: year, dataSource: source)
+            self?.navigationController?.pushViewController(seasonController, animated: true)
+        }
     }
     
     private func currentSeason() -> AnimeFilter.Season {

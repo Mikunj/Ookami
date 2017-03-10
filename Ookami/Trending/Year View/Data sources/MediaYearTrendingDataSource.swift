@@ -39,9 +39,9 @@ class MediaYearTrendingDataSource: PaginatedItemViewDataSourceBase, YearTrending
     }
     
     override func dataSetImage() -> UIImage? {
-        let size = CGSize(width: 44, height: 44)
+        let size = CGSize(width: 46, height: 44)
         let color = UIColor.lightGray.lighter(amount: 0.1)
-        return UIImage(named: "book")?
+        return UIImage(named: "Trending_tab_bar")?
             .resize(size)
             .color(color)
     }

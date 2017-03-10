@@ -9,29 +9,34 @@
 import UIKit
 import OokamiKit
 
-//TODO: Convert these over
-
 class AnimeYearTrendingDataSource: MediaYearTrendingDataSource {
     
     //The filter we are going to use
-    var filter: AnimeFilter
+    var initialFilter: AnimeFilter
     
     /// Create an Anime Year Trending Data Source
     ///
     /// - Parameter filter: The initial filter to use.
     init(filter: AnimeFilter = AnimeFilter()) {
-        self.filter = filter.copy()
+        self.initialFilter = filter.copy()
     }
     
     override func paginatedService(_ completion: @escaping () -> Void) -> PaginatedService? {
         
         guard currentYear > 0 else { return nil }
         
-        //Use a copied version of the filter so we don't get any unintended value changes
-        let copiedFilter = filter.copy()
-        copiedFilter.year = RangeFilter<Int>(start: currentYear, end: currentYear)
-        
-        return AnimeService().find(title: "", filters: copiedFilter) { [weak self] ids, error, original in
+        return service(for: filter(), completion: completion)
+    }
+    
+    //Get the filter with the current year applied
+    func filter() -> AnimeFilter {
+        let filter = initialFilter.copy()
+        filter.year = RangeFilter<Int>(start: currentYear, end: currentYear)
+        return filter
+    }
+    
+    func service(for filter: AnimeFilter, completion: @escaping () -> Void) -> PaginatedService {
+        return AnimeService().find(title: "", filters: filter) { [weak self] ids, error, original in
             
             completion()
             

@@ -21,13 +21,13 @@ protocol YearTrendingDataSource: PaginatedTrendingDataSource {
 class YearTrendingViewController: PaginatedTrendingViewController {
     
     /// The current year
-    var currentYear: Int {
+    var selectedYear: Int {
         didSet {
-            yearDataSource?.didSet(year: currentYear)
+            yearDataSource?.didSet(year: selectedYear)
         }
     }
     
-    var yearDataSource: YearTrendingDataSource? {
+    fileprivate var yearDataSource: YearTrendingDataSource? {
         return dataSource as? YearTrendingDataSource
     }
     
@@ -35,16 +35,20 @@ class YearTrendingViewController: PaginatedTrendingViewController {
     var baseTitle: String
     
     /// The min year that user can select from
-    var minYear: Int
+    var minYear: Int = 1907
     
     /// The max year that the user can pick
-    var maxYear: Int
+    var maxYear: Int = {
+        Calendar.current.component(.year, from: Date())
+    }()
     
     //The years array that will be displayed in the drop down
-    fileprivate var years: [String]
+    var years: [String] {
+        return Array(minYear...maxYear).reversed().map { String($0) }
+    }
     
     //Year bar button item to choose the year
-    fileprivate lazy var yearBarButton: UIBarButtonItem = {
+    lazy var yearBarButton: UIBarButtonItem = {
         return UIBarButtonItem(withIcon: .calendarIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(yearTapped))
     }()
     
@@ -52,27 +56,18 @@ class YearTrendingViewController: PaginatedTrendingViewController {
     ///
     /// - Parameters:
     ///   - title: The title of the controller.
-    ///   - minYear: The mininum year the user can pick.
-    ///   - maxYear: The maximum year the user can pick. If set to -1, then the maximum will be the current year.
+    ///   - initialYear: The current selected year. Limitation: 1907 < selectedYear < [Current Year]
     ///   - dataSource: The data source to use
-    init(title: String, currentYear: Int, minYear: Int = 1907, maxYear: Int = -1, dataSource: YearTrendingDataSource) {
+    init(title: String, initialYear: Int, dataSource: YearTrendingDataSource) {
         self.baseTitle = title
-        self.currentYear = currentYear
-        
-        let currentMax = maxYear >= 0 ? maxYear : Calendar.current.component(.year, from: Date())
-        
-        //Make sure we have the right values
-        assert(minYear <= currentMax, "Min year should be less than or equal to Max year")
-        self.minYear = minYear
-        self.maxYear = currentMax
-        self.years = Array(minYear...currentMax).reversed().map { String($0) }
+        self.selectedYear = initialYear
         
         super.init(dataSource: dataSource)
-        set(year: currentYear)
+        set(year: initialYear)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("Use init(title:currentYear:minYear:maxYear:dataSource:) instead")
+        fatalError("Use init(title:selectedYear:dataSource:) instead")
     }
     
     override func viewDidLoad() {
@@ -81,12 +76,16 @@ class YearTrendingViewController: PaginatedTrendingViewController {
     }
     
     func set(year: Int) {
-        self.title = baseTitle + " " + year.description
-        self.currentYear = year
+        self.selectedYear = year
+        updateTitle()
+    }
+    
+    func updateTitle() {
+        self.title = baseTitle + " " + selectedYear.description
     }
     
     func yearTapped() {
-        let currentIndex = years.index(of: currentYear.description) ?? 0
+        let currentIndex = years.index(of: selectedYear.description) ?? 0
         ActionSheetStringPicker.show(withTitle: "Year", rows: years, initialSelection: currentIndex, doneBlock: { picker, index, value in
             if let year = Int(self.years[index]) {
                 self.set(year: year)

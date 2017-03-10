@@ -43,10 +43,13 @@ extension UIImage {
     /// - Returns: The resized image
     func resize(_ size: CGSize) -> UIImage {
         
-        UIGraphicsBeginImageContextWithOptions(size, false, self.scale)
+        guard self.size != size else { return self }
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         self.draw(in: CGRect(origin: CGPoint.zero, size: size))
         
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
         return scaledImage!
     }
 }

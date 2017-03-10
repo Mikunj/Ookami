@@ -95,13 +95,15 @@ public class AnimeFilter: MediaFilter {
 extension AnimeFilter {
     
     //The seasons to filter by
+    //This probably needs to be moved once more show types are added
     public enum Season: String {
         case spring
         case summer
         case fall
         case winter
         
-        public static let all: [Season] = [.spring, .summer, .fall, .winter]
+        //This is in the order of showing, so winter comes first
+        public static let all: [Season] = [.winter, .spring, .summer, .fall]
     }
     
     //The list of streamers which offer the anime

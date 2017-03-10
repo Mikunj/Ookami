@@ -32,7 +32,7 @@ class MangaTrendingTableViewController: TrendingTableViewController {
         
         return MangaTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = MangaYearTrendingDataSource(filter: filter)
-            let yearController = YearTrendingViewController(title: "Highest Rated", currentYear: year, dataSource: source)
+            let yearController = YearTrendingViewController(title: "Highest Rated", initialYear: year, dataSource: source)
             self?.navigationController?.pushViewController(yearController, animated: true)
         }
 
@@ -51,7 +51,7 @@ class MangaTrendingTableViewController: TrendingTableViewController {
         
         return MangaTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = MangaYearTrendingDataSource(filter: filter.copy())
-            let yearController = YearTrendingViewController(title: "Most Popular", currentYear: year, dataSource: source)
+            let yearController = YearTrendingViewController(title: "Most Popular", initialYear: year, dataSource: source)
             self?.navigationController?.pushViewController(yearController, animated: true)
         }
 
