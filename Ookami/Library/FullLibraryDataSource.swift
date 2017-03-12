@@ -165,7 +165,6 @@ extension FullLibraryDataSource {
         
         //Get the initial results aswell as the sorted
         results = LibraryEntry.belongsTo(user: userID, type: type, status: status)
-        sortedResults = getSortedResults(with: sort)
         
         //Tell the delegate that we have some results
         //This is there to ensure data gets loaded properley before token is set
@@ -189,11 +188,12 @@ extension FullLibraryDataSource {
     }
     
     func didReloadItems(with sort: LibraryViewController.Sort?) {
-        //Update the sorted results
-        sortedResults = getSortedResults(with: sort)
-        
-        //Reload the data
-        delegate?.didReloadItems(dataSource: self)
+        getBackgroundSortedResults(with: sort) { sorted in
+            self.sortedResults = sorted
+            
+            //Reload the data
+            self.delegate?.didReloadItems(dataSource: self)
+        }
     }
     
     func didSet(sort: LibraryViewController.Sort) {
@@ -230,14 +230,44 @@ extension FullLibraryDataSource {
 //MARK:- Sorting
 extension FullLibraryDataSource {
     
-    func getSortedResults(with sort: LibraryViewController.Sort?) -> [LibraryEntry] {
+    //Sort the results in the background
+    func getBackgroundSortedResults(with sort: LibraryViewController.Sort?, completion: @escaping ([LibraryEntry]) -> Void) {
+        
+        //Make sure we have results or exit early
+        guard let results = results else {
+            completion([])
+            return
+        }
+        
+        let ids: [Int] = results.map { $0.id }
+        
+        //Start the background work
+        DispatchQueue.global(qos: .background).async {
+            
+            let entries = LibraryEntry.get(withIds: ids)
+            let results = self.getSorted(results: entries, with: sort)
+            let sortedIds: [Int] = results.map { $0.id }
+            
+            DispatchQueue.main.async {
+                
+                //We flatMap it here instead of using `get(withIds:)` because we care about the order.
+                //Using `get(withIds:)` doesn't always guarantee they'll be in the order we sent the ids in.
+                let sortedEntries = sortedIds.flatMap { LibraryEntry.get(withId: $0) }
+                completion(sortedEntries)
+            }
+            
+        }
+        
+    }
+    
+    func getSorted(results: Results<LibraryEntry>?, with sort: LibraryViewController.Sort?) -> [LibraryEntry] {
         
         //Check if we need to sort
         guard let results = results else { return [] }
         guard let sort = sort else { return Array(results) }
         
         let ascending = sort.direction == .ascending
-
+        
         //Apply the sort
         switch sort.type {
         case .updatedAt:

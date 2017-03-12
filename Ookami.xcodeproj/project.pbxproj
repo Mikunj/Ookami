@@ -587,9 +587,9 @@
 		242A03E51E18FB39000E8B06 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				240C55621E7548C900BA8E50 /* LibraryFilterViewController.swift */,
 				242A04041E1A7220000E8B06 /* FullLibraryDataSource.swift */,
 				242A04091E1C7CA5000E8B06 /* LibraryEntry+LibraryView.swift */,
+				240C55621E7548C900BA8E50 /* LibraryFilterViewController.swift */,
 				242A04021E1A64C2000E8B06 /* LibraryViewController.swift */,
 				242A04151E1CAAEA000E8B06 /* UserLibraryViewController.swift */,
 				242A040B1E1C858D000E8B06 /* UserLibraryViewDataSource.swift */,

@@ -15,9 +15,6 @@ class LibraryFilterViewController: UIViewController {
     //The filter view
     var filterView: FilterViewController
     
-    //The original sort
-    var originalSort: LibraryViewController.Sort
-    
     //The modified sort
     var sort: LibraryViewController.Sort
     
@@ -31,7 +28,6 @@ class LibraryFilterViewController: UIViewController {
     ///   - onSave: The closure which gets called when save was tapped. A new sort object is passed back.
     init(sort: LibraryViewController.Sort, onSave: @escaping (LibraryViewController.Sort) -> Void) {
         filterView = FilterViewController(filters: [])
-        self.originalSort = sort
         self.sort = sort
         self.onSave = onSave
         super.init(nibName: nil, bundle: nil)
@@ -61,13 +57,11 @@ class LibraryFilterViewController: UIViewController {
         let cancelImage = UIImage(named: "Close")
         let cancel = UIBarButtonItem(image: cancelImage, style: .done, target: self, action: #selector(didCancel))
         
-        let clear = UIBarButtonItem(withIcon: .trashIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(didClear))
-        
         let saveImage = UIImage(named: "Check")
         let save = UIBarButtonItem(image: saveImage, style: .done, target: self, action: #selector(didSave))
         
         self.navigationItem.leftBarButtonItem = cancel
-        self.navigationItem.rightBarButtonItems = [save, clear]
+        self.navigationItem.rightBarButtonItem = save
     }
     
     func didCancel() {
@@ -75,13 +69,9 @@ class LibraryFilterViewController: UIViewController {
     }
     
     func didSave() {
-        self.onSave(self.sort)
-        dismiss(animated: true)
-    }
-    
-    func didClear() {
-        self.sort = originalSort
-        reload()
+        dismiss(animated: true) {
+            self.onSave(self.sort)
+        }
     }
     
     func reload() {
