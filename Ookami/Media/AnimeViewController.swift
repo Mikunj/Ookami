@@ -94,7 +94,7 @@ extension AnimeViewController {
         
         info.append(("Type", anime.subtypeRaw.uppercased()))
         
-        let status = anime.isAiring() ? "Airing" : "Finished Airing"
+        let status = anime.airingText()
         info.append(("Status", status))
         
         let airingTitle = anime.isAiring() ? "Airing": "Aired"

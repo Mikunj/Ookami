@@ -97,6 +97,18 @@ extension Anime {
         //Anime is airing if it started before the current date and it doesn't have an end date or the end date is sometime in the future
         return (startDate < current) && (endDate == nil || endDate! > current)
     }
+    
+    /// Returns the airing text for the given anime.
+    ///
+    /// - Returns: "Airing", "Finished Airing", "Not Yet Aired" or "?".
+    public func airingText() -> String {
+        if isAiring() { return "Airing" }
+        
+        guard let date = startDate else { return "?" }
+        if date > Date() { return "Not Yet Aired" }
+        
+        return "Finished Airing"
+    }
 }
 
 //MARK:- Cache
