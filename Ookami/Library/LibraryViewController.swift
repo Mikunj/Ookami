@@ -38,7 +38,10 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     
     //Filter the results
     var sort: Sort {
-        didSet { source.values.forEach { $0.didSet(sort: sort) } }
+        didSet {
+            Sort.save(sort: sort)
+            source.values.forEach { $0.didSet(sort: sort) }
+        }
     }
     
     ///A clean flow layout for the buttonBarView.
@@ -65,8 +68,11 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     init(dataSource: [LibraryEntry.Status: LibraryDataSource], type: Media.MediaType) {
         self.source = dataSource
         self.type = type
-        sort = Sort(type: .updatedAt, direction: .descending)
+        sort = Sort.load() ?? Sort(type: .updatedAt, direction: .descending)
         super.init(nibName: nil, bundle: nil)
+        
+        //Save the sort incase it was never saved before
+        Sort.save(sort: sort)
     }
     
     /// Do not use this to initialize `LibraryViewController`
@@ -173,7 +179,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     
 }
 
-//Mark:- Filter
+//Mark:- Sorting
 extension LibraryViewController {
     
     //A Sort struct just for Library
@@ -197,6 +203,26 @@ extension LibraryViewController {
         init(type: SortType, direction: Direction = .descending) {
             self.type = type
             self.direction = direction
+        }
+        
+        //Save the sort
+        static func save(sort: Sort) {
+            let defaults = UserDefaults.standard
+            defaults.set(sort.type.rawValue, forKey: "Library-Sort-Type")
+            defaults.set(sort.direction.rawValue, forKey: "Library-Sort-Direction")
+        }
+        
+        //Load a saved sort
+        static func load() -> Sort? {
+            let defaults = UserDefaults.standard
+            guard let typeString = defaults.string(forKey: "Library-Sort-Type"),
+                let directionString = defaults.string(forKey: "Library-Sort-Direction"),
+                let type = SortType(rawValue: typeString),
+                let direction = Direction(rawValue: directionString) else {
+                    return nil
+            }
+            
+            return Sort(type: type, direction: direction)
         }
         
         static func ==(lhs: Sort, rhs: Sort) -> Bool {

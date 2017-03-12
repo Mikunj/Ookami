@@ -62,7 +62,7 @@ final class FullLibraryDataSource: LibraryDataSource {
         self.type = type
         self.status = status
         
-        updateResults(with: nil)
+        updateResults(with: LibraryViewController.Sort.load())
         fetchLibrary()
     }
     
