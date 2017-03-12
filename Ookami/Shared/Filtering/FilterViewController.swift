@@ -9,7 +9,7 @@
 import UIKit
 import Cartography
 
-//A Class for representing a filterable view
+//A View controller for displaying a list of filters
 class FilterViewController: UIViewController {
     
     //The table view

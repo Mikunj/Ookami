@@ -323,9 +323,12 @@ extension ItemViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-        if offsetY > contentHeight - scrollView.frame.size.height {
+        
+        //We need to make sure we don't trigger a load more if the offset is < 50
+        if offsetY > 50 && offsetY > contentHeight - scrollView.frame.size.height {
             self.dataSource?.loadMore()
         }
+        
         onScroll?(scrollView)
     }
 }

@@ -148,6 +148,7 @@ class DiscoverFilterHelper {
         return filter
     }
     
+    //MARK:- Genre
     func genreFilter(from mediaFilter: MediaFilter) -> Filter {
         let genres = Array(Genre.all().sorted(byKeyPath: "name").map { $0.name })
         return MultiValueFilter(name: "Genres",

@@ -64,6 +64,22 @@ class KitsuRequestSpec: QuickSpec {
                     expect(newParams.keys).toNot(contain("sort"))
                 }
                 
+                it("should not return filters in the parameters if it was not set") {
+                    let request = KitsuRequest(relativeURL: "/test")
+                    request.include("a")
+                    
+                    let params = request.parameters()
+                    expect(params.keys).toNot(contain("filter"))
+                }
+                
+                it("should not return includes in the parameters if it was not set") {
+                    let request = KitsuRequest(relativeURL: "/test")
+                    request.filter(key: "name", value: "a")
+                    
+                    let params = request.parameters()
+                    expect(params.keys).toNot(contain("include"))
+                }
+                
                 
                 it("should build the request correctly") {
                     let url = "/test"

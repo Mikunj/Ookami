@@ -26,6 +26,7 @@ public struct Sort {
 }
 
 //A class for representing the media filters
+//This isn't a struct because we can't subclass it if it was.
 public class MediaFilter {
     
     /// The sorting to apply to the filter

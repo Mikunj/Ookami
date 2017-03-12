@@ -79,11 +79,12 @@ public class PaginatedService {
     func perform(request: NetworkRequest, isOriginal: Bool = false) {
         
         //Check if we have an operation on going
-        if currentOperation != nil {
-            return
-        }
+        guard currentOperation == nil else { return }
         
         currentOperation = NetworkOperation(request: request, client: client) { json, error in
+            
+            //Set the operation to nil
+            self.currentOperation = nil
             
             //Check for errors
             guard error == nil else {
@@ -107,7 +108,6 @@ public class PaginatedService {
             
             //Parse the response
             self.parser.parse(json: json!) { parsed in
-                self.currentOperation = nil
                 self.completion(parsed, nil, isOriginal)
             }
             

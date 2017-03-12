@@ -37,7 +37,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     fileprivate var itemControllers: [LibraryEntry.Status: ItemViewController] = [:]
     
     //Filter the results
-    fileprivate var sort: Sort = .updatedAt(ascending: false) {
+    fileprivate var sort: Sort {
         didSet { source.values.forEach { $0.didSet(sort: sort) } }
     }
     
@@ -65,6 +65,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     init(dataSource: [LibraryEntry.Status: LibraryDataSource], type: Media.MediaType) {
         self.source = dataSource
         self.type = type
+        sort = Sort(type: .updatedAt, direction: .descending)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -174,7 +175,28 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
 
 //Mark:- Filter
 extension LibraryViewController {
-    enum Sort {
-        case updatedAt(ascending: Bool)
+    
+    //A Sort struct just for Library
+    struct Sort {
+        
+        enum `Type` {
+            case updatedAt
+            case title
+            case progress
+            case rating
+        }
+        
+        enum Direction {
+            case ascending
+            case descending
+        }
+        
+        var type: Type
+        var direction: Direction
+        
+        init(type: Type, direction: Direction = .descending) {
+            self.type = type
+            self.direction = direction
+        }
     }
 }
