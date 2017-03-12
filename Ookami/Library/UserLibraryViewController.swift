@@ -44,6 +44,11 @@ final class UserLibraryViewController: UIViewController {
         return UIBarButtonItem(withIcon: .cogIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(settingsTapped))
     }()
     
+    //The filter button
+    fileprivate lazy var filterBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(withIcon: .filterIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(filterTapped))
+    }()
+    
     /// Create a `UserLibraryViewController`
     ///
     /// - Parameters:
@@ -75,6 +80,9 @@ final class UserLibraryViewController: UIViewController {
         //Add the library views
         animeController = LibraryViewController(dataSource: source.anime, type: .anime)
         mangaController = LibraryViewController(dataSource: source.manga, type: .manga)
+        
+        //Make sure both the anime and manga controller sorts are the same
+        set(sort: animeController!.sort)
         
         for controller in [animeController!, mangaController!] as [LibraryViewController] {
             self.addChildViewController(controller)
@@ -108,7 +116,8 @@ final class UserLibraryViewController: UIViewController {
             }
         }
         
-        self.navigationItem.rightBarButtonItem = settingsButton
+        self.navigationItem.leftBarButtonItem = settingsButton
+        self.navigationItem.rightBarButtonItem = filterBarButton
         
         show(.anime)
     }
@@ -147,6 +156,25 @@ final class UserLibraryViewController: UIViewController {
             }
         }
         
+    }
+    
+    func filterTapped() {
+        if let sort = animeController?.sort {
+            let vc: LibraryFilterViewController = LibraryFilterViewController(sort: sort) { sort in
+                self.set(sort: sort)
+            }
+            
+            let nav = UINavigationController(rootViewController: vc)
+            vc.title = "Filter"
+            self.present(nav, animated: true)
+        }
+    }
+    
+    func set(sort: LibraryViewController.Sort) {
+        if animeController?.sort != sort || mangaController?.sort != sort {
+            animeController?.sort = sort
+            mangaController?.sort = sort
+        }
     }
     
 }

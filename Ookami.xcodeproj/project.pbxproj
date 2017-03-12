@@ -13,6 +13,7 @@
 		24032FC51E5FD6B4003DA60C /* BaseMediaFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24032FC41E5FD6B4003DA60C /* BaseMediaFilterViewController.swift */; };
 		24032FC71E5FD76B003DA60C /* MangaFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24032FC61E5FD76B003DA60C /* MangaFilterViewController.swift */; };
 		2405D4611E44448E0043BE10 /* kitsu.png in Resources */ = {isa = PBXBuildFile; fileRef = 2405D4601E44448E0043BE10 /* kitsu.png */; };
+		240C55631E7548C900BA8E50 /* LibraryFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240C55621E7548C900BA8E50 /* LibraryFilterViewController.swift */; };
 		2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241418991DCDD81100AF1AEA /* LibraryEntry.swift */; };
 		2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */; };
 		2414189E1DCDE00400AF1AEA /* LibraryEntrySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */; };
@@ -282,6 +283,7 @@
 		24032FC41E5FD6B4003DA60C /* BaseMediaFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMediaFilterViewController.swift; sourceTree = "<group>"; };
 		24032FC61E5FD76B003DA60C /* MangaFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaFilterViewController.swift; sourceTree = "<group>"; };
 		2405D4601E44448E0043BE10 /* kitsu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitsu.png; sourceTree = "<group>"; };
+		240C55621E7548C900BA8E50 /* LibraryFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryFilterViewController.swift; sourceTree = "<group>"; };
 		241418991DCDD81100AF1AEA /* LibraryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntry.swift; sourceTree = "<group>"; };
 		2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsable.swift; sourceTree = "<group>"; };
 		2414189D1DCDE00300AF1AEA /* LibraryEntrySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntrySpec.swift; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 		242A03E51E18FB39000E8B06 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				240C55621E7548C900BA8E50 /* LibraryFilterViewController.swift */,
 				242A04041E1A7220000E8B06 /* FullLibraryDataSource.swift */,
 				242A04091E1C7CA5000E8B06 /* LibraryEntry+LibraryView.swift */,
 				242A04021E1A64C2000E8B06 /* LibraryViewController.swift */,
@@ -1819,6 +1822,7 @@
 				247BF51D1E27080F00FF643F /* SignupViewController.swift in Sources */,
 				24175E961E206351009FBDE6 /* EntryButtonTableViewCell.swift in Sources */,
 				242A04161E1CAAEA000E8B06 /* UserLibraryViewController.swift in Sources */,
+				240C55631E7548C900BA8E50 /* LibraryFilterViewController.swift in Sources */,
 				2466586E1E288C8700BB15EC /* TitleTableSectionView.swift in Sources */,
 				2491266E1E712A1C00EE81B1 /* PaginatedTrendingViewController.swift in Sources */,
 				24E67FFE1E6915690001BAFB /* AnimeTrendingTableDataSource.swift in Sources */,

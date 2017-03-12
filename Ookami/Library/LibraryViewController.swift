@@ -37,12 +37,12 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     fileprivate var itemControllers: [LibraryEntry.Status: ItemViewController] = [:]
     
     //Filter the results
-    fileprivate var sort: Sort {
+    var sort: Sort {
         didSet { source.values.forEach { $0.didSet(sort: sort) } }
     }
     
     ///A clean flow layout for the buttonBarView.
-    ///This is there because there is a bug in XLPagerTabStrip where if you set the buttonBarItemFont, 
+    ///This is there because there is a bug in XLPagerTabStrip where if you set the buttonBarItemFont,
     ///the bar buttons don't size properley when setting buttonBarItemsShouldFillAvailiableWidth = true.
     //By setting a layout with all zero values, it seems to fix the issue
     fileprivate var flowLayout: UICollectionViewFlowLayout = {
@@ -154,10 +154,10 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         
         //Just double check bounds incase of index errors
         guard fromIndex >= 0,
-                fromIndex < self.viewControllers.count,
-                toIndex >= 0,
-                toIndex < self.viewControllers.count else {
-            return
+            fromIndex < self.viewControllers.count,
+            toIndex >= 0,
+            toIndex < self.viewControllers.count else {
+                return
         }
         
         //Set the image should load on the view controller
@@ -170,33 +170,38 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
             from?.shouldLoadImages = false
         }
     }
-
+    
 }
 
 //Mark:- Filter
 extension LibraryViewController {
     
     //A Sort struct just for Library
-    struct Sort {
+    struct Sort: Equatable {
         
-        enum `Type` {
-            case updatedAt
+        enum SortType: String {
+            case updatedAt = "Last Updated"
             case title
             case progress
             case rating
         }
         
-        enum Direction {
+        enum Direction: String {
             case ascending
             case descending
         }
         
-        var type: Type
+        var type: SortType
         var direction: Direction
         
-        init(type: Type, direction: Direction = .descending) {
+        init(type: SortType, direction: Direction = .descending) {
             self.type = type
             self.direction = direction
+        }
+        
+        static func ==(lhs: Sort, rhs: Sort) -> Bool {
+            return lhs.type == rhs.type &&
+                lhs.direction == rhs.direction
         }
     }
 }

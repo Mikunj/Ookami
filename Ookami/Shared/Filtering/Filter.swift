@@ -47,6 +47,7 @@ class SingleValueFilter: Filter {
     var onChange: (Int, String) -> Void
     
     /// Create a single value filter
+    /// TODO: Maybe replace selectedValue with an Int index?
     ///
     /// - Parameters:
     ///   - name: The name which is shown on the filter cell
