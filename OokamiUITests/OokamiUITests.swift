@@ -72,31 +72,67 @@ class OokamiUITests: XCTestCase {
     func testSnapshot() {
         
         let app = XCUIApplication()
+        let tabBarsQuery = app.tabBars
+        let trendingButton = tabBarsQuery.buttons["Trending"]
+        trendingButton.tap()
         
-        let ookamiUserlibraryviewNavigationBar = app.navigationBars["Ookami.UserLibraryView"]
-        ookamiUserlibraryviewNavigationBar.buttons["Search"].tap()
-        app.searchFields["Enter your search"].typeText("One punch man")
+        let discoverButton = tabBarsQuery.buttons["Discover"]
+        discoverButton.tap()
+        discoverButton.tap()
+        tabBarsQuery.buttons["Library"].tap()
         
-        let tablesQuery = app.tables
-        tablesQuery.staticTexts["12 episodes ᛫ 24 minutes"].tap()
+        snapshot("01 - Anime Library")
         
-        snapshot("03 - Anime page")
+        app.navigationBars["Ookami.UserLibraryView"].otherElements.children(matching: .button).element.tap()
+        app.tables.staticTexts["Manga"].tap()
+        
+        snapshot("02 - Manga Library")
+        
+        trendingButton.tap()
+        
+        snapshot("05 - Trending")
+        
+        discoverButton.tap()
+        
+        snapshot("04 - Discover")
+        
+        app.collectionViews.children(matching: .cell).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .image).element.tap()
+        
+        snapshot("03 - Media")
         
         app.navigationBars.buttons["Stop"].tap()
         
-        snapshot("04 - Search")
-        
-        let cancelButton = app.buttons["Cancel"]
-        cancelButton.tap()
-        cancelButton.tap()
-        
-        snapshot("01 - Anime library")
-        
-        ookamiUserlibraryviewNavigationBar.otherElements.children(matching: .button).element.tap()
-        tablesQuery.staticTexts["Manga"].tap()
-        
-        snapshot("02 - Manga library")
         
     }
+    
+//    func testSnapshot() {
+//        
+//        let app = XCUIApplication()
+//        
+//        let ookamiUserlibraryviewNavigationBar = app.navigationBars["Ookami.UserLibraryView"]
+//        ookamiUserlibraryviewNavigationBar.buttons["Search"].tap()
+//        app.searchFields["Enter your search"].typeText("One punch man")
+//        
+//        let tablesQuery = app.tables
+//        tablesQuery.staticTexts["12 episodes ᛫ 24 minutes"].tap()
+//        
+//        snapshot("03 - Anime page")
+//        
+//        app.navigationBars.buttons["Stop"].tap()
+//        
+//        snapshot("04 - Search")
+//        
+//        let cancelButton = app.buttons["Cancel"]
+//        cancelButton.tap()
+//        cancelButton.tap()
+//        
+//        snapshot("01 - Anime library")
+//        
+//        ookamiUserlibraryviewNavigationBar.otherElements.children(matching: .button).element.tap()
+//        tablesQuery.staticTexts["Manga"].tap()
+//        
+//        snapshot("02 - Manga library")
+//        
+//    }
     
 }
