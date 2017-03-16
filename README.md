@@ -2,14 +2,14 @@ Ookami
 ===================
 An iOS show tracking app which uses Kitsu.io as a backend
 
-##Requirements
+## Requirements
 
  - Xcode 8
  - iOS 9
 
-##Setup
+## Setup
 
-####Requirements
+#### Requirements
 
  - [Cocoapods](https://guides.cocoapods.org/using/getting-started.html)
  - [Cocoapod-Keys](https://github.com/orta/cocoapods-keys)
@@ -20,7 +20,7 @@ To setup either clone or download the repo. After `cd` to the repo folder and ty
     pod install
 While installing the Cocoapod-Keys plugin will ask you to enter `KitsuClientKey` and `KitsuClientSecret`. Enter the client key and secret respectively.
 
-##Deploying
+## Deploying
 
 **Note:** This section is useful only if you are going to submit the app to the Appstore. Please follow the MIT License guidelines if you do decide to publish the app.
 
@@ -29,7 +29,7 @@ While installing the Cocoapod-Keys plugin will ask you to enter `KitsuClientKey`
 This project uses [fastlane](https://fastlane.tools/) for deploying to App store or TestFlight.
 However a few things will need to be changed if you decide to build your own version.
 
-####Requirements
+#### Requirements
  - [fastlane](https://fastlane.tools/)
  - Apple developer account
 
@@ -45,8 +45,8 @@ To deploy the app simply run `fastlane release`.
 
 To deploy it for testing, simply run `fastlane beta` instead.
 
-##Author
+## Author
 Mikunj Varsani
 
-##License
+## License
 Ookami is available under the MIT license. See the LICENSE file for more info.
