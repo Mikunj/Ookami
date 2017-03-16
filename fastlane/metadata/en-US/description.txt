@@ -1,1 +1,7 @@
 Ookami is a show tracking app, made for Kitsu.io, that helps you manage what you are watching or reading very easily.
+
+Features:
+- Seamlessly syncs with Kitsu.io
+- Track both your Anime and Manga easily!
+- Advanced filters for discovering new shows and manga
+- See Highest Rated, Most Popular, Seasonal and Trending shows/manga

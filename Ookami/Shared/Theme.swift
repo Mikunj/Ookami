@@ -23,14 +23,14 @@ extension Theme {
     }
     
     struct EntryView {
-        var headingColor = Colors().primary.lighter(amount: 0.2)
-        var valueColor = Colors().primary
+        var headingColor = UIColor.black.lighter(amount: 0.2)
+        var valueColor = UIColor.black
         var tintColor = Colors().secondary
     }
     
     struct Colors {
-        var primary = UIColor(hexString: "#283038")
-        var secondary = UIColor(hexString: "#22b4e5")
+        var primary = UIColor(hexString: "#402F3F").lighter(amount: 0.05)
+        var secondary = UIColor(hexString: "#E75E45").lighter(amount: 0.02)
         var red = UIColor(hexString: "#F84D1A")
         var green = UIColor(hexString: "#5BDE32")
     }
@@ -62,13 +62,13 @@ extension Theme {
     struct DropDownTheme {
         var backgroundColor = Colors().primary.darkened(amount: 0.04)
         var selectionBackgroundColor = Colors().primary.darkened(amount: 0.1)
-        var seperatorColor = UIColor.black
+        var seperatorColor = Colors().primary.darkened(amount: 0.1)
         var textColor = UIColor.white
     }
     
     struct PagerButtonBarTheme {
-        var backgroundColor = Colors().primary.darkened(amount: 0.02)
-        var buttonColor = Colors().primary.darkened(amount: 0.02)
+        var backgroundColor = Colors().primary.darkened(amount: 0.04)
+        var buttonColor = Colors().primary.darkened(amount: 0.04)
         var buttonTextColor = UIColor.white
     }
     

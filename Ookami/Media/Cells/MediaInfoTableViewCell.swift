@@ -19,6 +19,6 @@ class MediaInfoTableViewCell: UITableViewCell, NibReusable {
         
         self.contentView.layoutMargins = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
         infoTitleLabel.textColor = Theme.Colors().secondary
-        infoLabel.textColor = Theme.Colors().primary
+        infoLabel.textColor = UIColor.black
     }
 }

@@ -24,6 +24,9 @@ protocol LibraryDataSource: ItemViewControllerDataSource {
 //Class used for displaying library entries of a specific type (e.g anime, manga)
 final class LibraryViewController: ButtonBarPagerTabStripViewController {
     
+    //Bool to keep track of whether the view finished loading
+    fileprivate var didFinishLoading = false
+    
     //The current library we are displaying
     fileprivate var type: Media.MediaType
     
@@ -34,12 +37,15 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     fileprivate var itemControllers: [LibraryEntry.Status: ItemViewController] = [:]
     
     //Filter the results
-    fileprivate var sort: Sort = .updatedAt(ascending: false) {
-        didSet { source.values.forEach { $0.didSet(sort: sort) } }
+    var sort: Sort {
+        didSet {
+            Sort.save(sort: sort)
+            source.values.forEach { $0.didSet(sort: sort) }
+        }
     }
     
     ///A clean flow layout for the buttonBarView.
-    ///This is there because there is a bug in XLPagerTabStrip where if you set the buttonBarItemFont, 
+    ///This is there because there is a bug in XLPagerTabStrip where if you set the buttonBarItemFont,
     ///the bar buttons don't size properley when setting buttonBarItemsShouldFillAvailiableWidth = true.
     //By setting a layout with all zero values, it seems to fix the issue
     fileprivate var flowLayout: UICollectionViewFlowLayout = {
@@ -62,7 +68,11 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     init(dataSource: [LibraryEntry.Status: LibraryDataSource], type: Media.MediaType) {
         self.source = dataSource
         self.type = type
+        sort = Sort.load() ?? Sort(type: .updatedAt, direction: .descending)
         super.init(nibName: nil, bundle: nil)
+        
+        //Save the sort incase it was never saved before
+        Sort.save(sort: sort)
     }
     
     /// Do not use this to initialize `LibraryViewController`
@@ -72,10 +82,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     }
     
     override func viewDidLoad() {
-        buttonBarView.collectionViewLayout = flowLayout
-        
         let theme = Theme.PagerButtonBarTheme()
-        self.settings.style.buttonBarItemsShouldFillAvailiableWidth = true
         self.settings.style.buttonBarItemLeftRightMargin = 12
         self.settings.style.buttonBarItemFont = UIFont.systemFont(ofSize: 14)
         self.settings.style.buttonBarItemTitleColor = theme.buttonTextColor
@@ -83,6 +90,10 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         self.settings.style.buttonBarItemBackgroundColor = theme.buttonColor
         
         super.viewDidLoad()
+        
+        //Read above for explanation on setting the layout
+        buttonBarView.collectionViewLayout = flowLayout
+        didFinishLoading = true
     }
     
     func reload() {
@@ -101,7 +112,9 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
             controller?.title = title
         }
         
-        self.buttonBarView.reloadData()
+        if didFinishLoading {
+            buttonBarView.reloadData()
+        }
     }
     
     private func updateItemViewControllers() {
@@ -147,10 +160,10 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         
         //Just double check bounds incase of index errors
         guard fromIndex >= 0,
-                fromIndex < self.viewControllers.count,
-                toIndex >= 0,
-                toIndex < self.viewControllers.count else {
-            return
+            fromIndex < self.viewControllers.count,
+            toIndex >= 0,
+            toIndex < self.viewControllers.count else {
+                return
         }
         
         //Set the image should load on the view controller
@@ -163,12 +176,58 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
             from?.shouldLoadImages = false
         }
     }
-
+    
 }
 
-//Mark:- Filter
+//Mark:- Sorting
 extension LibraryViewController {
-    enum Sort {
-        case updatedAt(ascending: Bool)
+    
+    //A Sort struct just for Library
+    struct Sort: Equatable {
+        
+        enum SortType: String {
+            case updatedAt = "Last Updated"
+            case title
+            case progress
+            case rating
+        }
+        
+        enum Direction: String {
+            case ascending
+            case descending
+        }
+        
+        var type: SortType
+        var direction: Direction
+        
+        init(type: SortType, direction: Direction = .descending) {
+            self.type = type
+            self.direction = direction
+        }
+        
+        //Save the sort
+        static func save(sort: Sort) {
+            let defaults = UserDefaults.standard
+            defaults.set(sort.type.rawValue, forKey: "Library-Sort-Type")
+            defaults.set(sort.direction.rawValue, forKey: "Library-Sort-Direction")
+        }
+        
+        //Load a saved sort
+        static func load() -> Sort? {
+            let defaults = UserDefaults.standard
+            guard let typeString = defaults.string(forKey: "Library-Sort-Type"),
+                let directionString = defaults.string(forKey: "Library-Sort-Direction"),
+                let type = SortType(rawValue: typeString),
+                let direction = Direction(rawValue: directionString) else {
+                    return nil
+            }
+            
+            return Sort(type: type, direction: direction)
+        }
+        
+        static func ==(lhs: Sort, rhs: Sort) -> Bool {
+            return lhs.type == rhs.type &&
+                lhs.direction == rhs.direction
+        }
     }
 }

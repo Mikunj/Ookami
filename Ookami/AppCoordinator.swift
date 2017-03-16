@@ -70,10 +70,31 @@ class AppCoordinator {
             return
         }
         
-        let libraryView = userLibraryVC(for: user) //42603 - Wopians id to test large libraries
+        //Discover
+        let discoverView = mediaDiscoverVC()
+        let discoverImage = UIImage(named: "Search_tab_bar")
+        discoverView.tabBarItem = UITabBarItem(title: "Discover", image: discoverImage, tag: 0)
+        let discoverNav = UINavigationController(rootViewController: discoverView)
         
-        let nav = UINavigationController(rootViewController: libraryView)
-        window.setRootViewController(nav)
+        //Trending
+        let trendingView = mediaTrendingTableVC()
+        let trendingImage = UIImage(named: "Trending_tab_bar")
+        trendingView.tabBarItem = UITabBarItem(title: "Trending", image: trendingImage, tag: 1)
+        let trendingNav = UINavigationController(rootViewController: trendingView)
+        
+        //Library
+        let libraryView = userLibraryVC(for: user) //42603 - Wopians id to test large libraries
+        let libraryImage = UIImage(named: "Book_tab_bar")
+        libraryView.tabBarItem = UITabBarItem(title: "Library", image: libraryImage, tag: 2)
+        let libraryNav = UINavigationController(rootViewController: libraryView)
+        
+        //Default to the library tab
+        let tab = initialTabBarController()
+        tab.viewControllers = [discoverNav, trendingNav, libraryNav]
+        tab.selectedIndex = 2
+        
+        
+        window.setRootViewController(tab)
     }
     
     static func showAnimeVC(in parent: UIViewController, anime: Anime) {
@@ -86,6 +107,22 @@ class AppCoordinator {
         let mangaVC = MangaViewController(manga: manga)
         let nav = UINavigationController(rootViewController: mangaVC)
         parent.present(nav, animated: true)
+    }
+    
+    private static func initialTabBarController() -> UITabBarController {
+        let tab = UITabBarController()
+        tab.view.backgroundColor = Theme.ControllerTheme().backgroundColor
+        tab.tabBar.isTranslucent = false
+        tab.tabBar.tintColor = Theme.Colors().secondary
+        return tab
+    }
+    
+    private static func mediaTrendingTableVC() -> MediaTrendingTableViewController {
+        return MediaTrendingTableViewController()
+    }
+    
+    private static func mediaDiscoverVC() -> MediaDiscoverViewController {
+        return MediaDiscoverViewController()
     }
     
     //Get the library view controller for the given user id
@@ -114,11 +151,5 @@ class AppCoordinator {
         let player = XCDYouTubeVideoPlayerViewController(videoIdentifier: videoID)
         controller.present(player, animated: true)
         
-    }
-    
-    static func showSearch(with scope: SearchViewController.Scope, in controller: UIViewController) {
-        let search = SearchViewController(scope: scope)
-        let nav = UINavigationController(rootViewController: search)
-        controller.present(nav, animated: true)
     }
 }

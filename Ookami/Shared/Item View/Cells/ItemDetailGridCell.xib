@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -30,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="100" width="100" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hai Sou Tensou No Grimgar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUX-Lm-yan">
-                                                <rect key="frame" x="0.0" y="15" width="100" height="35"/>
+                                                <rect key="frame" x="1" y="14" width="98" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="Wql-vW-fsN"/>
                                                 </constraints>
@@ -41,10 +41,10 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="YUX-Lm-yan" firstAttribute="leading" secondItem="yD0-ew-IHl" secondAttribute="leading" id="19C-PT-TfR"/>
-                                            <constraint firstAttribute="bottom" secondItem="YUX-Lm-yan" secondAttribute="bottom" id="D7R-aT-oPb"/>
+                                            <constraint firstItem="YUX-Lm-yan" firstAttribute="leading" secondItem="yD0-ew-IHl" secondAttribute="leading" constant="1" id="19C-PT-TfR"/>
+                                            <constraint firstAttribute="bottom" secondItem="YUX-Lm-yan" secondAttribute="bottom" constant="1" id="D7R-aT-oPb"/>
                                             <constraint firstAttribute="height" constant="50" id="HJY-yH-S5H"/>
-                                            <constraint firstAttribute="trailing" secondItem="YUX-Lm-yan" secondAttribute="trailing" id="hbI-Ca-WnZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="YUX-Lm-yan" secondAttribute="trailing" constant="1" id="hbI-Ca-WnZ"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
@@ -54,7 +54,7 @@
                                                 <point key="value" x="0.5" y="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
-                                                <point key="value" x="0.5" y="0.69999999999999996"/>
+                                                <point key="value" x="0.5" y="0.59999999999999998"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="topColor">
                                                 <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -89,6 +89,9 @@
                                             <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
                                                 <point key="value" x="0.5" y="0.40000000000000002"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                                <point key="value" x="0.5" y="1"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
@@ -106,10 +109,10 @@
                                     <constraint firstItem="yD0-ew-IHl" firstAttribute="leading" secondItem="k0m-z6-kWl" secondAttribute="leading" id="m3k-Bf-k8a"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1b-qr-a9V" userLabel="Count View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1b-qr-a9V" userLabel="More Detail View">
                                 <rect key="frame" x="0.0" y="150" width="100" height="25"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuW-Wy-Bnp" userLabel="Count Label">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuW-Wy-Bnp" userLabel="More Detail Label">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
@@ -148,7 +151,7 @@
             <connections>
                 <outlet property="contentDetailLabel" destination="HDW-GD-tnJ" id="fKA-HP-1WZ"/>
                 <outlet property="contentDetailView" destination="OGY-iI-VCo" id="7vs-rH-REE"/>
-                <outlet property="countLabel" destination="KuW-Wy-Bnp" id="gpT-vG-z9s"/>
+                <outlet property="moreDetailLabel" destination="KuW-Wy-Bnp" id="c1V-7c-cUF"/>
                 <outlet property="nameLabel" destination="YUX-Lm-yan" id="yJX-AZ-Y4A"/>
                 <outlet property="nameView" destination="yD0-ew-IHl" id="HS2-EV-56S"/>
                 <outlet property="posterImage" destination="qUl-4l-ClB" id="c5n-P3-O2c"/>

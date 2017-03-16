@@ -50,14 +50,21 @@ public class KitsuRequest {
     /// - Returns: The parameters dictionary for this request
     func parameters() -> Parameters {
         var params: Parameters = [:]
-        params["include"] = includes.joined(separator: ",")
-        params["filter"] = filters
+        
+        //Only add includes if we have them
+        if includes.count > 0 {
+            params["include"] = includes.joined(separator: ",")
+        }
+        
+        //Only add filters if we have them
+        if filters.count > 0 {
+            params["filter"] = filters
+        }
         
         if let sort = sort {
             params["sort"] = sort
         }
         
-        //params["page"] = ["offset": page.offset, "limit": page.limit]
         return params
     }
     

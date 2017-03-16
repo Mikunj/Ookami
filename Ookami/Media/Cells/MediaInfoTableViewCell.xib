@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,21 +15,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="29.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="29"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCF-RZ-Enf">
-                        <rect key="frame" x="16" y="8" width="75" height="13"/>
+                        <rect key="frame" x="16" y="8" width="78" height="13"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="75" id="zuC-mx-aUN"/>
+                            <constraint firstAttribute="width" constant="78" id="zuC-mx-aUN"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                         <color key="textColor" red="0.0078431372550000003" green="0.70588235290000001" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ull-L4-aAE">
-                        <rect key="frame" x="99" y="8" width="213" height="13"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <rect key="frame" x="106" y="8" width="206" height="13"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -37,11 +37,11 @@
                 <constraints>
                     <constraint firstItem="ull-L4-aAE" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="8V6-v2-XTZ"/>
                     <constraint firstItem="lCF-RZ-Enf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="9QZ-Vt-YaV"/>
-                    <constraint firstItem="ull-L4-aAE" firstAttribute="leading" secondItem="lCF-RZ-Enf" secondAttribute="trailing" constant="8" id="LGk-6e-XHc"/>
+                    <constraint firstItem="ull-L4-aAE" firstAttribute="leading" secondItem="lCF-RZ-Enf" secondAttribute="trailing" constant="12" id="LGk-6e-XHc"/>
                     <constraint firstItem="ull-L4-aAE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Qc9-lJ-Hxc"/>
                     <constraint firstItem="ull-L4-aAE" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="SFu-mD-mLl"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="lCF-RZ-Enf" secondAttribute="bottom" id="dUQ-xt-Uru"/>
-                    <constraint firstAttribute="topMargin" secondItem="lCF-RZ-Enf" secondAttribute="top" id="v9m-7Z-fgZ"/>
+                    <constraint firstItem="lCF-RZ-Enf" firstAttribute="top" secondItem="ull-L4-aAE" secondAttribute="top" id="wyZ-rl-bNB"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

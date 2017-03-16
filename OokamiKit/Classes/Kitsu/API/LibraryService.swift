@@ -187,21 +187,21 @@ public class LibraryService: BaseService {
     ///   - since: A date, only entries whos lastUpdate time is more recent than this date will be recieved.
     ///   - onFetch: The callback block which gets called anytime entries are fetched. This can be through calls such as `next()` on the returned `PaginatedLibrary` instance.
     /// - Returns: A Paginated Library instance which can be used to make further calls.
-    public func getPaginated(userID: Int, type: Media.MediaType, status: LibraryEntry.Status, since: Date = Date(timeIntervalSince1970: 0), onFetch: @escaping ([LibraryEntry]?, Error?) -> Void) -> PaginatedLibrary {
+    public func getPaginated(userID: Int, type: Media.MediaType, status: LibraryEntry.Status, since: Date = Date(timeIntervalSince1970: 0), onFetch: @escaping ([LibraryEntry]?, Error?, Bool) -> Void) -> PaginatedLibrary {
         
         //Make the request
         let request = KitsuLibraryRequest(userID: userID, type: type, status: status, since: since)
         request.include("user")
         request.sort(by: "updated_at", ascending: false)
         
-        let library = PaginatedLibrary(request: request, client: client, completion: { objects, error in
+        let library = PaginatedLibrary(request: request, client: client, completion: { objects, error, original in
             guard error == nil else {
-                onFetch(nil, error)
+                onFetch(nil, error, original)
                 return
             }
             
             guard let objects = objects else {
-                onFetch(nil, ServiceError.error(description: "Failed to get paginated objects"))
+                onFetch(nil, ServiceError.error(description: "Failed to get paginated objects"), original)
                 return
             }
             
@@ -210,7 +210,7 @@ public class LibraryService: BaseService {
             let filtered = objects.filter { !($0 is LibraryEntry) }
             self.database.addOrUpdate(filtered)
             
-            onFetch(entries, nil)
+            onFetch(entries, nil, original)
         })
         
         library.start()

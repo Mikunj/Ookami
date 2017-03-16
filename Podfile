@@ -11,12 +11,14 @@ plugin 'cocoapods-keys', {
  ]}
 
 def project_pods
-    pod 'RealmSwift', '~> 2.3.0'
+    pod 'RealmSwift', '~> 2.4.0'
     pod 'SwiftyJSON', '~> 3.1'
     pod 'Alamofire', '~> 4.3'
 
-    #https://github.com/trivago/Heimdallr.swift/pull/94#issuecomment-253346803
-    pod 'Heimdallr', git: 'https://github.com/marcelofabri/Heimdallr.swift.git', branch: 'swift-3.0'
+    #Heimdallr has updated it version to 3.6, but the cocoapods specs don't have it yet
+    #So for the time being just get the files directly from their git, but when the specs have updated uncomment the line below
+    #pod 'Heimdallr', '~> 3.6'
+    pod 'Heimdallr', :git => 'https://github.com/trivago/Heimdallr.swift.git', :tag => '3.6.0'
 end
 
 def testing_pods
@@ -29,10 +31,10 @@ end
 def ui_pods
     #Maybe remove this dependency and use pure autolayout code instead
     pod 'Cartography', '~> 1.0'
-    pod 'Kingfisher', '~> 3.0'
-    pod 'Reusable', '~> 3.0'
-    pod 'XLPagerTabStrip', '~> 6.0'
-    pod 'NVActivityIndicatorView', '~> 3.0'
+    pod 'Kingfisher', '~> 3.5'
+    pod 'Reusable', '~> 4.0'
+    pod 'XLPagerTabStrip', '~> 7.0'
+    pod 'NVActivityIndicatorView', '~> 3.5'
     pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
     pod 'DynamicColor', '~> 3.2.1'
     pod 'ActionSheetPicker-3.0', '~> 2.2.0'

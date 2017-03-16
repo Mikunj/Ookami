@@ -59,13 +59,13 @@ public class FetchLibraryOperation: AsynchronousOperation {
         
         //Setup the library
         if library == nil {
-            library = PaginatedLibrary(request: request, client: client) { objects, error in
+            library = PaginatedLibrary(request: request, client: client) { objects, error, _ in
      
                 //Check for completion
                 guard error == nil else {
                     
                     //Check if we have reached the max page
-                    if error! == PaginatedLibraryError.noNextPage {
+                    if error! == PaginationError.noNextPage {
                         self.fetchComplete(nil)
                     } else {
                         self.fetchComplete(error)

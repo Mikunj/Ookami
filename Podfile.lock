@@ -6,15 +6,15 @@ PODS:
   - Diff (0.5.0)
   - DynamicColor (3.2.1)
   - DZNEmptyDataSet (1.8.1)
-  - Heimdallr (3.5.0):
-    - Heimdallr/Core (= 3.5.0)
-  - Heimdallr/Core (3.5.0):
+  - Heimdallr (3.6.0):
+    - Heimdallr/Core (= 3.6.0)
+  - Heimdallr/Core (3.6.0):
     - Result (~> 3.0)
   - IQKeyboardManager (4.0.8)
   - Keys (1.0.0)
-  - Kingfisher (3.2.4)
+  - Kingfisher (3.5.0)
   - Nimble (5.1.1)
-  - NVActivityIndicatorView (3.2)
+  - NVActivityIndicatorView (3.5)
   - OHHTTPStubs (5.2.2):
     - OHHTTPStubs/Default (= 5.2.2)
   - OHHTTPStubs/Core (5.2.2)
@@ -31,21 +31,21 @@ PODS:
   - OHHTTPStubs/Swift (5.2.2):
     - OHHTTPStubs/Core
   - Quick (1.0.0)
-  - Realm (2.3.0):
-    - Realm/Headers (= 2.3.0)
-  - Realm/Headers (2.3.0)
-  - RealmSwift (2.3.0):
-    - Realm (= 2.3.0)
-  - Result (3.0.0)
-  - Reusable (3.0.1):
-    - Reusable/Storyboard (= 3.0.1)
-    - Reusable/View (= 3.0.1)
-  - Reusable/Storyboard (3.0.1)
-  - Reusable/View (3.0.1)
+  - Realm (2.4.3):
+    - Realm/Headers (= 2.4.3)
+  - Realm/Headers (2.4.3)
+  - RealmSwift (2.4.3):
+    - Realm (= 2.4.3)
+  - Result (3.1.0)
+  - Reusable (4.0.0):
+    - Reusable/Storyboard (= 4.0.0)
+    - Reusable/View (= 4.0.0)
+  - Reusable/Storyboard (4.0.0)
+  - Reusable/View (4.0.0)
   - SKPhotoBrowser (4.0.0)
   - SwiftyJSON (3.1.4)
   - XCDYouTubeKit (2.5.3)
-  - XLPagerTabStrip (6.0.0)
+  - XLPagerTabStrip (7.0.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0 (~> 2.2.0)
@@ -55,29 +55,29 @@ DEPENDENCIES:
   - Diff (~> 0.5)
   - DynamicColor (~> 3.2.1)
   - DZNEmptyDataSet (~> 1.8)
-  - Heimdallr (from `https://github.com/marcelofabri/Heimdallr.swift.git`, branch `swift-3.0`)
+  - Heimdallr (from `https://github.com/trivago/Heimdallr.swift.git`, tag `3.6.0`)
   - IQKeyboardManager (~> 4.0.8)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Kingfisher (~> 3.0)
+  - Kingfisher (~> 3.5)
   - Nimble (~> 5.1)
-  - NVActivityIndicatorView (~> 3.0)
+  - NVActivityIndicatorView (~> 3.5)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
   - Quick (~> 1.0)
-  - RealmSwift (~> 2.3.0)
-  - Reusable (~> 3.0)
+  - RealmSwift (~> 2.4.0)
+  - Reusable (~> 4.0)
   - SKPhotoBrowser (~> 4.0.0)
   - SwiftyJSON (~> 3.1)
   - XCDYouTubeKit (~> 2.5.0)
-  - XLPagerTabStrip (~> 6.0)
+  - XLPagerTabStrip (~> 7.0)
 
 EXTERNAL SOURCES:
   BTNavigationDropdownMenu:
     :branch: swift-3.0
     :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
   Heimdallr:
-    :branch: swift-3.0
-    :git: https://github.com/marcelofabri/Heimdallr.swift.git
+    :git: https://github.com/trivago/Heimdallr.swift.git
+    :tag: 3.6.0
   Keys:
     :path: Pods/CocoaPodsKeys
 
@@ -86,8 +86,8 @@ CHECKOUT OPTIONS:
     :commit: 2c08c8579cf7a53ecb3dbf578e6e1034080a9859
     :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
   Heimdallr:
-    :commit: af40d89fef3300b780c8a1675db70bf3147dfd0f
-    :git: https://github.com/marcelofabri/Heimdallr.swift.git
+    :git: https://github.com/trivago/Heimdallr.swift.git
+    :tag: 3.6.0
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
@@ -97,23 +97,23 @@ SPEC CHECKSUMS:
   Diff: eceb93a3adf508574ba9b8560da185ace83de055
   DynamicColor: 4786d650c69da6c3f2cbfe068348288ec4e5521f
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  Heimdallr: 6d371eb270d6d06d8c9ef5dc9fe7f7bda1331154
+  Heimdallr: 511a82ccb4eb4949b7080c5391ce28efe1ec73d5
   IQKeyboardManager: 1a8189fa153bf09044355ee0ad36826f6767e7f7
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
+  Kingfisher: 7c62087039d93d26c54c8dd9b0b588d2ce55cef6
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
-  NVActivityIndicatorView: 28942c18ced111a6a3ce5e6f5b27d9d40116d639
+  NVActivityIndicatorView: e5252b082f93885f0bfc24c318719b4eaabcd37b
   OHHTTPStubs: 34d9d0994e64fcf8552dbfade5ce82ada913ee31
   Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
-  Realm: 69d7de9aa569a11eed490aaabc8f2109e3985ecf
-  RealmSwift: dc6f99ea55e59490cec69c860f91932b6bf7efb6
-  Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
-  Reusable: 5362d10271ca8316b104698a21e90498f47e8339
+  Realm: e08d60b0048ccccd3949c8c28a92c4db5712d7e9
+  RealmSwift: 30d49739ccb3385d201242736ca4dda56aec9dfc
+  Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
+  Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
   SKPhotoBrowser: bc33eca22f4abd6b99d8d260509ca30c01752a87
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   XCDYouTubeKit: 90690f9e3523735dc93b8024269d991b0cfffe78
-  XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
+  XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: db52e8a9308f5ac0293de9ee0cd65e5124544ca5
+PODFILE CHECKSUM: 1f0d45aac819a49a3d4d1cd06ccc96aa9b891a1b
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

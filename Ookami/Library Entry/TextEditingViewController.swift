@@ -29,6 +29,11 @@ class TextEditingViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     
+    //The blur effect
+    var blurEffectView: UIVisualEffectView = {
+        return UIVisualEffectView()
+    }()
+    
     /// Create a TextEditingViewController
     ///
     /// - Parameters:
@@ -53,6 +58,7 @@ class TextEditingViewController: UIViewController, UITextViewDelegate {
         
         UIView.animate(withDuration: 0.25) {
             self.view.alpha = 1
+            self.blurEffectView.effect = UIBlurEffect(style: .dark)
         }
     }
     
@@ -61,12 +67,14 @@ class TextEditingViewController: UIViewController, UITextViewDelegate {
         
         UIView.animate(withDuration: 0.5) {
             self.view.alpha = 0
+            self.blurEffectView.effect = nil
         }
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         UIView.animate(withDuration: 0.5, animations: {
             self.view.alpha = 0
+            self.blurEffectView.effect = nil
         }, completion: { _ in
             super.dismiss(animated: false, completion: completion)
         })
@@ -78,9 +86,6 @@ class TextEditingViewController: UIViewController, UITextViewDelegate {
         view.alpha = 0
         
         //Add blur effect
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        
         self.view.insertSubview(blurEffectView, at: 0)
         constrain(blurEffectView) { view in
             view.edges == view.superview!.edges
@@ -95,17 +100,11 @@ class TextEditingViewController: UIViewController, UITextViewDelegate {
         textView.textColor = initialText.isEmpty ? UIColor.lightGray : UIColor.black
         textView.delegate = self
         
-        //Set the icons on the buttons
-        let size = CGSize(width: 22, height: 22)
-        cancelButton.setIconImage(withIcon: .removeIcon, size: size, color: nil, forState: .normal)
-        doneButton.setIconImage(withIcon: .okIcon, size: size, color: nil, forState: .normal)
-        
-        cancelButton.setTitle(nil, for: .normal)
-        doneButton.setTitle(nil, for: .normal)
-        
         let theme = Theme.Colors()
-        cancelButton.setTitleColor(theme.red, for: .normal)
-        doneButton.setTitleColor(theme.green, for: .normal)
+        cancelButton.tintColor = theme.red
+        doneButton.tintColor = theme.green
+        //cancelButton.setTitleColor(theme.red, for: .normal)
+        //doneButton.setTitleColor(theme.green, for: .normal)
         
     }
     

@@ -23,6 +23,7 @@ protocol ItemViewControllerDataSource: class {
     func items() -> [ItemData]
     func didSelectItem(at indexPath: IndexPath)
     func refresh()
+    func loadMore()
     func shouldShowEmptyDataSet() -> Bool
     func dataSetImage() -> UIImage?
     func dataSetTitle() -> NSAttributedString?
@@ -31,6 +32,7 @@ protocol ItemViewControllerDataSource: class {
 
 //The delegate which is implemented by the controller
 protocol ItemViewControllerDelegate: class {
+    func scrollToTop(animated: Bool)
     func didReloadItems(dataSource: ItemViewControllerDataSource)
     func showActivityIndicator()
     func hideActivityIndicator()
@@ -39,13 +41,17 @@ protocol ItemViewControllerDelegate: class {
 //Controller for displaying a grid of items
 class ItemViewController: UIViewController {
     
+    //Callback block which gets called whenever scrolling occurs
+    var onScroll: ((UIScrollView) -> Void)? = nil
+    
     //Different cells that we can set
     enum CellType {
-        case DetailGrid
+        case detailGrid
+        case simpleGrid
     }
     
     //Types of cell to use
-    var type: CellType = .DetailGrid {
+    var type: CellType = .detailGrid {
         didSet {
             applySpacer()
             collectionView.collectionViewLayout.invalidateLayout()
@@ -89,9 +95,18 @@ class ItemViewController: UIViewController {
     }
     
     //The current array of data
+    private var viewVisible: Bool = false
     fileprivate var data: [ItemData] {
         didSet {
-            collectionView.animateItemChanges(oldData: oldValue, newData: data)
+            //Only animate if the view is visible
+            //This is to avoid dumb inconsitency issues :(
+            //And to also make the initial loading seem instantaneous, instead of just 'popping' in
+            if viewVisible {
+                collectionView.animateItemChanges(oldData: oldValue, newData: data)
+            } else {
+                collectionView.reloadData()
+            }
+            
         }
     }
     
@@ -109,7 +124,9 @@ class ItemViewController: UIViewController {
         c.emptyDataSetSource = self
         c.emptyDataSetDelegate = self
         
+        //Cells
         c.register(cellType: ItemDetailGridCell.self)
+        c.register(cellType: ItemSimpleGridCell.self)
         
         return c
     }()
@@ -136,6 +153,16 @@ class ItemViewController: UIViewController {
     /// It will throw a fatal error if you do.
     required init?(coder aDecoder: NSCoder) {
         fatalError("Use ItemViewController.init(dataSource:)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewVisible = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewVisible = false
     }
     
     override func viewDidLoad() {
@@ -187,9 +214,28 @@ class ItemViewController: UIViewController {
     
     /// An array of item sizes to use
     func itemSize() -> [CGSize] {
+        
+        //The ratio of the poster (width / height)
+        let posterRatio: Double = 100 / 150
+        
+        //We need to work out heights from the given widths
+        let widths = stride(from: 100, to: 140, by: 5)
+        let sizes = widths.map { width -> CGSize in
+            let dWidth = Double(width)
+            let height = floor((1 / posterRatio) * dWidth)
+            return CGSize(width: dWidth, height: height)
+        }
+        
         switch type {
-        case .DetailGrid:
-            return [CGSize(width: 100, height: 175), CGSize(width: 120, height: 210)]
+        case .detailGrid:
+            
+            //We need to add 25 to accomodate for the detail label at the bottom
+            return sizes.map { size -> CGSize in
+                return CGSize(width: size.width, height: size.height + 25)
+            }
+        case .simpleGrid:
+            //Since the poster fills the whole view, we just pass in the computed sizes
+            return sizes
         }
     }
     
@@ -208,6 +254,10 @@ extension ItemViewController: IndicatorInfoProvider {
 
 //MARK:- Item Delegate
 extension ItemViewController: ItemViewControllerDelegate {
+    func scrollToTop(animated: Bool) {
+        collectionView.setContentOffset(.zero, animated: animated)
+    }
+    
     func didReloadItems(dataSource: ItemViewControllerDataSource) {
         data = dataSource.items()
         collectionView.reloadEmptyDataSet()
@@ -236,9 +286,17 @@ extension ItemViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: ItemDetailGridCell = collectionView.dequeueReusableCell(for: indexPath)
         
-        return cell
+        var cell: UICollectionViewCell?
+        
+        switch type {
+        case .detailGrid:
+            cell = collectionView.dequeueReusableCell(for: indexPath) as ItemDetailGridCell
+        case .simpleGrid:
+            cell = collectionView.dequeueReusableCell(for: indexPath) as ItemSimpleGridCell
+        }
+
+        return cell ?? UICollectionViewCell()
     }
     
 }
@@ -260,6 +318,18 @@ extension ItemViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         (cell as? ItemUpdatable)?.stopUpdating()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        //We need to make sure we don't trigger a load more if the offset is < 50
+        if offsetY > 50 && offsetY > contentHeight - scrollView.frame.size.height {
+            self.dataSource?.loadMore()
+        }
+        
+        onScroll?(scrollView)
     }
 }
 
@@ -283,7 +353,7 @@ extension ItemViewController: DZNEmptyDataSetSource {
     }
     
     func spaceHeight(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        return 4
+        return 8
     }
 }
 

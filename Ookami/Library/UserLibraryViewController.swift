@@ -26,9 +26,6 @@ final class UserLibraryViewController: UIViewController {
     //The list of items which can be selected in the dropdown menu
     fileprivate var dropDownMenuItems = ["Anime", "Manga"]
     
-    //The current scope to search in
-    fileprivate var searchScope: SearchViewController.Scope = .anime
-    
     //The dropdown menu
     fileprivate var dropDownMenu: BTNavigationDropdownMenu!
     
@@ -45,6 +42,11 @@ final class UserLibraryViewController: UIViewController {
     //The settings button to use
     fileprivate lazy var settingsButton: UIBarButtonItem = {
         return UIBarButtonItem(withIcon: .cogIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(settingsTapped))
+    }()
+    
+    //The filter button
+    fileprivate lazy var filterBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(withIcon: .filterIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(filterTapped))
     }()
     
     /// Create a `UserLibraryViewController`
@@ -79,6 +81,9 @@ final class UserLibraryViewController: UIViewController {
         animeController = LibraryViewController(dataSource: source.anime, type: .anime)
         mangaController = LibraryViewController(dataSource: source.manga, type: .manga)
         
+        //Make sure both the anime and manga controller sorts are the same
+        set(sort: animeController!.sort)
+        
         for controller in [animeController!, mangaController!] as [LibraryViewController] {
             self.addChildViewController(controller)
             self.view.addSubview(controller.view)
@@ -111,9 +116,8 @@ final class UserLibraryViewController: UIViewController {
             }
         }
         
-        let search = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
-        self.navigationItem.setRightBarButton(search, animated: false)
-        self.navigationItem.setLeftBarButton(settingsButton, animated: false)
+        self.navigationItem.leftBarButtonItem = settingsButton
+        self.navigationItem.rightBarButtonItem = filterBarButton
         
         show(.anime)
     }
@@ -124,11 +128,6 @@ final class UserLibraryViewController: UIViewController {
     func show(_ type: Media.MediaType) {
         animeController?.view.isHidden = type != .anime
         mangaController?.view.isHidden = type != .manga
-        searchScope = type == .anime ? .anime : .manga
-    }
-    
-    func searchTapped() {
-        AppCoordinator.showSearch(with: searchScope, in: self)
     }
     
     func settingsTapped() {
@@ -157,6 +156,25 @@ final class UserLibraryViewController: UIViewController {
             }
         }
         
+    }
+    
+    func filterTapped() {
+        if let sort = animeController?.sort {
+            let vc: LibraryFilterViewController = LibraryFilterViewController(sort: sort) { sort in
+                self.set(sort: sort)
+            }
+            
+            let nav = UINavigationController(rootViewController: vc)
+            vc.title = "Filter"
+            self.present(nav, animated: true)
+        }
+    }
+    
+    func set(sort: LibraryViewController.Sort) {
+        if animeController?.sort != sort || mangaController?.sort != sort {
+            animeController?.sort = sort
+            mangaController?.sort = sort
+        }
     }
     
 }

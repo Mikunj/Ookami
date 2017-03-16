@@ -10,52 +10,64 @@ import Foundation
 
 public class MangaService: BaseService {
     
+    //TODO: Need to refactor the find function here .. so ugly
+    
     /// Find a manga with a given title
     ///
     /// - Parameters:
     ///   - title: The title to search for
-    ///   - limit: The amount of manga to return
-    ///   - completion: The completion block which passes an array of manga ids that were found or an error if it occured
+    ///   - filters: The filters to apply
+    ///   - page: The paging to apply
+    ///   - completion: The completion block which passes an array of manga ids that were found or an error if it occured and a bool to indicate whether it was the original request
     /// - Returns: The search operation which can be cancelled.
-    public func find(title: String, limit: Int = 20, completion: @escaping ([Int]?, Error?) -> Void) -> Operation {
+    public func find(title: String, filters: MangaFilter = MangaFilter(), limit: Int = 20, completion: @escaping ([Int]?, Error?, Bool) -> Void) -> PaginatedService {
         let url = Constants.Endpoints.manga
-        let request = KitsuPagedRequest(relativeURL: url)
-        request.filter(key: "text", value: title)
-        request.page(limit: limit)
+        return MediaServiceHelper().find(type: Manga.self, url: url, client: client, database: database, title: title, filters: filters, limit: limit) { objects, error, original in
+            
+            guard error == nil,
+                let objects = objects else {
+                    completion(nil, error, original)
+                    return
+            }
+            
+            //Return the ids of the objects
+            if let manga = objects as? [Manga] {
+                let ids = manga.map { $0.id }
+                completion(ids, nil, original)
+                return
+            }
+            
+        }
+    }
+    
+    /// Get the weekly trending manga.
+    ///
+    /// - Parameter completion: The completion block which passes back an array of trending manga ids or an error if something went wrong.
+    public func trending(completion: @escaping ([Int]?, Error?) -> Void) {
+        let endpoint = Constants.Endpoints.trending
+        let request = KitsuRequest(relativeURL: endpoint + "/manga")
         
         let operation = NetworkOperation(request: request.build(), client: client) { json, error in
-            guard error == nil else {
-                completion(nil, error)
-                return
-            }
-            
-            guard let json = json else {
-                completion(nil, NetworkClientError.error("Failed to parse json - Manga Service FIND"))
-                return
-            }
-            
-            //Parse the objects and return the ids of the manga back
-            Parser().parse(json: json, callback: { objects in
-                
-                //Add the objects to the database
-                self.database.addOrUpdate(objects)
-                
-                //Return the results to the user
-                let filtered = objects.flatMap { $0 is Manga ? $0 : nil }
-                if let filteredManga = filtered as? [Manga] {
-                    let ids = filteredManga.map { $0.id }
-                    
-                    completion(ids, nil)
+            guard error == nil,
+                let json = json else {
+                    completion(nil, error)
                     return
-                }
+            }
+            
+            Parser().parse(json: json) { parsed in
+                self.database.addOrUpdate(parsed)
                 
-            })
+                //Get the anime
+                let manga = parsed.filter { $0 is Manga } as? [Manga] ?? []
+                let ids = manga.map { $0.id }
+                completion(ids, nil)
+            }
+            
         }
         
         queue.addOperation(operation)
-        
-        return operation
     }
+    
     
     /// Get a manga with the given id.
     ///
@@ -68,13 +80,9 @@ public class MangaService: BaseService {
         request.include("genres")
         
         let operation = NetworkOperation(request: request.build(), client: client) { json, error in
-            guard error == nil else {
+            guard error == nil,
+                let json = json else {
                 completion(nil, error)
-                return
-            }
-            
-            guard let json = json else {
-                completion(nil, ServiceError.error(description: "Invalid JSON recieved - Manga Service GET"))
                 return
             }
             

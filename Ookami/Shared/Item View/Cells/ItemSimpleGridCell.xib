@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ItemSimpleGridCell" customModule="Ookami" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oag-BY-GDt" userLabel="Base View">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V3H-gA-wSl">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                            </imageView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOP-sC-Rzf" userLabel="Name View" customClass="GradientView" customModule="Ookami" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="100" width="100" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Tatamy Galaxy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvp-9U-727">
+                                        <rect key="frame" x="1" y="14" width="98" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="b9W-lr-KSL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="mvp-9U-727" secondAttribute="bottom" constant="1" id="2EI-8P-uTD"/>
+                                    <constraint firstItem="mvp-9U-727" firstAttribute="leading" secondItem="TOP-sC-Rzf" secondAttribute="leading" constant="1" id="QJb-kT-hSL"/>
+                                    <constraint firstAttribute="height" constant="50" id="XIL-Ce-fX1"/>
+                                    <constraint firstAttribute="trailing" secondItem="mvp-9U-727" secondAttribute="trailing" constant="1" id="dcF-t0-s60"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                        <point key="value" x="0.5" y="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                        <point key="value" x="0.5" y="0.59999999999999998"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ioP-6W-wVz" userLabel="Content Detail" customClass="GradientView" customModule="Ookami" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5★ ᛫ Airing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="bJb-Zq-JJP">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Gyl-sh-50F"/>
+                                    <constraint firstItem="bJb-Zq-JJP" firstAttribute="leading" secondItem="ioP-6W-wVz" secondAttribute="leading" id="QZt-OS-uqd"/>
+                                    <constraint firstItem="bJb-Zq-JJP" firstAttribute="top" secondItem="ioP-6W-wVz" secondAttribute="top" id="XLh-BK-601"/>
+                                    <constraint firstAttribute="bottom" secondItem="bJb-Zq-JJP" secondAttribute="bottom" id="rOW-JO-JC0"/>
+                                    <constraint firstAttribute="trailing" secondItem="bJb-Zq-JJP" secondAttribute="trailing" id="vUj-eK-AT7"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="topColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bottomColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                        <point key="value" x="0.5" y="0.40000000000000002"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="V3H-gA-wSl" firstAttribute="top" secondItem="oag-BY-GDt" secondAttribute="top" id="1yB-6p-f7R"/>
+                            <constraint firstAttribute="bottom" secondItem="TOP-sC-Rzf" secondAttribute="bottom" id="FwA-zX-OrH"/>
+                            <constraint firstAttribute="trailing" secondItem="V3H-gA-wSl" secondAttribute="trailing" id="KUh-h3-s0F"/>
+                            <constraint firstItem="ioP-6W-wVz" firstAttribute="top" secondItem="oag-BY-GDt" secondAttribute="top" id="KfY-vK-rRn"/>
+                            <constraint firstAttribute="bottom" secondItem="V3H-gA-wSl" secondAttribute="bottom" id="M4b-ap-3QQ"/>
+                            <constraint firstAttribute="trailing" secondItem="TOP-sC-Rzf" secondAttribute="trailing" id="daY-gP-RSQ"/>
+                            <constraint firstItem="V3H-gA-wSl" firstAttribute="leading" secondItem="oag-BY-GDt" secondAttribute="leading" id="fZe-ne-2fI"/>
+                            <constraint firstItem="ioP-6W-wVz" firstAttribute="leading" secondItem="oag-BY-GDt" secondAttribute="leading" id="glP-KW-oR6"/>
+                            <constraint firstItem="TOP-sC-Rzf" firstAttribute="leading" secondItem="oag-BY-GDt" secondAttribute="leading" id="qHv-R7-365"/>
+                            <constraint firstAttribute="trailing" secondItem="ioP-6W-wVz" secondAttribute="trailing" id="uc7-BB-5hX"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="oag-BY-GDt" secondAttribute="trailing" id="1yT-DP-e8f"/>
+                <constraint firstItem="oag-BY-GDt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="33N-mG-f53"/>
+                <constraint firstAttribute="bottom" secondItem="oag-BY-GDt" secondAttribute="bottom" id="MCK-hG-pga"/>
+                <constraint firstItem="oag-BY-GDt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="aXD-1m-rip"/>
+            </constraints>
+            <connections>
+                <outlet property="contentDetailLabel" destination="bJb-Zq-JJP" id="9Cs-G3-SjE"/>
+                <outlet property="contentDetailView" destination="ioP-6W-wVz" id="Kmi-ds-5jb"/>
+                <outlet property="nameLabel" destination="mvp-9U-727" id="aFv-WH-VVo"/>
+                <outlet property="nameView" destination="TOP-sC-Rzf" id="Gff-c0-15i"/>
+                <outlet property="posterImage" destination="V3H-gA-wSl" id="9St-wF-ooh"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>
