@@ -12,15 +12,15 @@ import Cartography
 //A controller which has a custom navigation bar which is transparent but after a certain offset it becomes visible
 class NavigationHidingViewController: UIViewController {
     
-    //The top view to emulate a navigation bar set by the system
-    lazy var barView: UIView = {
+    //The navigation bar container view to emulate a navigation bar set by the system
+    lazy var barContainer: UIView = {
         let v = UIView()
         v.backgroundColor = Theme.NavigationTheme().barColor
         return v
     }()
     
-    //The height constraint of the top view
-    var barViewHeight: NSLayoutConstraint?
+    //The height constraint of the bar container
+    var barContainerHeight: NSLayoutConstraint?
     
     //The navigation bar we use so we can get transparancy
     lazy var navigationBar: UINavigationBar = {
@@ -53,7 +53,7 @@ class NavigationHidingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.automaticallyAdjustsScrollViewInsets = false
-        barView.isHidden = false
+        barContainer.isHidden = false
         navigationController?.setNavigationBarHidden(true, animated: animated)
         updateNavigationBar()
     }
@@ -67,7 +67,7 @@ class NavigationHidingViewController: UIViewController {
         super.viewDidLoad()
 
         //Add the bar
-        barView.addSubview(navigationBar)
+        barContainer.addSubview(navigationBar)
         constrain(navigationBar) { bar in
             bar.bottom == bar.superview!.bottom
             bar.left == bar.superview!.left
@@ -76,30 +76,30 @@ class NavigationHidingViewController: UIViewController {
         }
         
         //The top view
-        self.view.addSubview(barView)
-        constrain(barView) { view in
+        self.view.addSubview(barContainer)
+        constrain(barContainer) { view in
             view.top == view.superview!.top
             view.left == view.superview!.left
             view.right == view.superview!.right
-            barViewHeight = (view.height == 44)
+            barContainerHeight = (view.height == 44)
         }
-        updateTopViewHeight()
+        updateBarContainerHeight()
         
         //May need to call this again in subclass
-        self.view.bringSubview(toFront: barView)
+        self.view.bringSubview(toFront: barContainer)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        updateTopViewHeight()
+        updateBarContainerHeight()
     }
     
-    //Update the height of the top view incase of orientation changes
-    func updateTopViewHeight() {
+    //Update the height of the bar container incase of orientation changes
+    func updateBarContainerHeight() {
         let statusHeight = UIApplication.shared.statusBarFrame.height
         let barHeight = self.navigationController?.navigationBar.frame.size.height ?? 44
-        barViewHeight?.constant = barHeight + statusHeight
-        barView.layoutIfNeeded()
+        barContainerHeight?.constant = barHeight + statusHeight
+        barContainer.layoutIfNeeded()
     }
     
     //The offset that makes the bar visible
@@ -121,7 +121,7 @@ class NavigationHidingViewController: UIViewController {
             let shouldShow = offset > minOffset
             let color = shouldShow ? Theme.NavigationTheme().barColor : UIColor.clear
             self.navigationBar.topItem?.title = shouldShow ? self.barTitle() : ""
-            self.barView.backgroundColor = color
+            self.barContainer.backgroundColor = color
         }
     }
     

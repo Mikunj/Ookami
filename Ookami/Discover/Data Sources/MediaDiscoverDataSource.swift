@@ -18,6 +18,12 @@ class MediaDiscoverDataSource: PaginatedItemViewDataSourceBase, DiscoverDataSour
     
     //The current search text
     var currentSearch: String = ""
+    
+    //The paginated service
+    //Also expose the method here so we know what needs to be overriden without going to the other classes.
+    override func paginatedService(_ completion: @escaping () -> Void) -> PaginatedService? {
+        fatalError("paginatedService(completion:) needs to be implemented in a subclass")
+    }
 
     /// Update the discovery results.
     /// This will discard the previous service and fetch a whole new one.

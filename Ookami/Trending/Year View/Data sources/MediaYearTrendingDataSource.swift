@@ -19,6 +19,12 @@ class MediaYearTrendingDataSource: PaginatedItemViewDataSourceBase, YearTrending
     //The current year text
     var currentYear: Int = -1
     
+    //The paginated service
+    //Also expose the method here so we know what needs to be overriden without going to the other classes.
+    override func paginatedService(_ completion: @escaping () -> Void) -> PaginatedService? {
+        fatalError("paginatedService(completion:) needs to be implemented in a subclass")
+    }
+    
     /// Update the trending results.
     /// This will discard the previous service and fetch a whole new one.
     ///
