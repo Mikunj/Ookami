@@ -85,7 +85,7 @@ public class LibraryEntry: Object, Cacheable {
     public dynamic var reconsumeCount = 0
     public dynamic var notes = ""
     public dynamic var isPrivate = false
-    public dynamic var rating = 0.0
+    public dynamic var rating = 0
     public dynamic var updatedAt: Date = Date()
     public dynamic var media: Media? = nil
     
@@ -208,7 +208,12 @@ extension LibraryEntry: JSONParsable {
         entry.reconsumeCount = attributes["reconsumeCount"].intValue
         entry.notes = attributes["notes"].stringValue
         entry.isPrivate = attributes["private"].bool ?? false
-        entry.rating = attributes["rating"].doubleValue
+        
+        //TODO: Revert this back to
+        //entry.rating = attributes["rating"].intValue
+        //After new rating is out
+        entry.rating = Int(attributes["rating"].doubleValue * 4)
+        
         entry.updatedAt = Date.from(string: attributes["updatedAt"].stringValue) ?? Date()
         
         let relationships = json["relationships"]

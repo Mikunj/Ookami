@@ -149,24 +149,24 @@ class LibraryEntryUpdaterSpec: QuickSpec {
                 context("Rating") {
                     it("should not update ratings if not valid") {
                         let e = LibraryEntry()
-                        e.rating = 0.0
+                        e.rating = 3
                         
                         let updater = LibraryEntryUpdater(entry: e)
                         
-                        let invalid = [-0.1, 3.2, 5.1]
+                        let invalid = [1, 21]
                         for value in invalid {
                             updater.update(rating: value)
-                            expect(updater.entry.rating).to(equal(0))
+                            expect(updater.entry.rating).to(equal(3))
                         }
                     }
                     
                     it("should update rating if it's valid") {
                         let e = LibraryEntry()
-                        e.rating = 0.0
+                        e.rating = 1
                         
                         let updater = LibraryEntryUpdater(entry: e)
                         
-                        let valid = [0.0, 3.5, 5.0]
+                        let valid = [0, 2, 10, 20]
                         for value in valid {
                             updater.update(rating: value)
                             expect(updater.entry.rating).to(equal(value))

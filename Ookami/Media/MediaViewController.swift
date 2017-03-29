@@ -112,7 +112,7 @@ class MediaViewController: NavigationHidingViewController, NVActivityIndicatorVi
         tableView.layoutIfNeeded()
         
         //Bring the bar at the front
-        self.view.bringSubview(toFront: barView)
+        self.view.bringSubview(toFront: barContainer)
         
         //Add notifications
         NotificationCenter.default.addObserver(self, selector: #selector(entryDidChange(notification:)), name: LibraryService.Notifications.addedEntry.name, object: nil)
@@ -226,7 +226,7 @@ extension MediaViewController {
         //We set the insets so that it looks like mediaHeader is actually the tableHeaderView.
         //Without setting them the section headers will float when scrolling.
         //If in the future, section headers are removed then this should also be removed.
-        let barViewHeight = barView.frame.height
+        let barViewHeight = barContainer.frame.height
         let topInset = min(headerHeight, max(barViewHeight, -offset))
         tableView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
     }

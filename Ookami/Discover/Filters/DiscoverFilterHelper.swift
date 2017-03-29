@@ -83,8 +83,7 @@ class DiscoverFilterHelper {
     
     private func minScoreFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> Filter {
         
-        //Add 0.5 so it displays that rating
-        let ratings = Array(stride(from: 0.5, to: 5.5, by: 0.5))
+        let ratings = Array(stride(from: 1.0, to: 10.5, by: 0.5))
         let index = ratings.index(of: mediaFilter.rating.start) ?? 0
         
         
@@ -121,8 +120,7 @@ class DiscoverFilterHelper {
         //With this filter we know 100% that the end rating will never be nil
         let minRating = mediaFilter.rating.start
         
-        //Add 0.5 so it displays that rating
-        let ratings = Array(stride(from: minRating, to: 5.5, by: 0.5))
+        let ratings = Array(stride(from: minRating, to: 10.5, by: 0.5))
         let index = ratings.index(of: mediaFilter.rating.end!) ?? 0
         
         

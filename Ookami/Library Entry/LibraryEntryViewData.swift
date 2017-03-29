@@ -14,7 +14,7 @@ import ActionSheetPicker_3_0
 class LibraryEntryViewData {
     
     //The updater
-    var updater: LibraryEntryUpdater?
+    private(set) var updater: LibraryEntryUpdater?
     
     /// Create a data source for LibraryEntryViewController
     ///
@@ -67,7 +67,7 @@ class LibraryEntryViewData {
         let status = TableData(type: .string, value: statusValue, heading: .status)
         
         //Rating
-        let ratingString = entry.rating > 0 ? String(entry.rating) : "-"
+        let ratingString = entry.rating > 0 ? String(Double(entry.rating) / 2) : "-"
         let rating = TableData(type: .string, value: ratingString, heading: .rating)
         
         //Notes

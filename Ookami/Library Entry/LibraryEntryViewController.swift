@@ -360,16 +360,20 @@ extension LibraryEntryViewController: UITableViewDelegate {
             
         case .rating:
             
-            let ratings = Array(stride(from: 0, to: 5.5, by: 0.5))
-            let initial = ratings.index(of: entry.rating) ?? 0
+            var ratings = Array(stride(from: 1.0, to: 10.5, by: 0.5))
+            ratings.insert(0, at: 0)
+            
+            let halvedRating = Double(entry.rating) / 2
+            let initial = ratings.index(of: halvedRating) ?? 0
             
             //Format it to 1 decimal place display so it's consitent
             let rows = ratings.map { String(format: "%.1f", $0) }
             
             ActionSheetStringPicker.show(withTitle: "Rating", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
                 
-                //We know that we will have 10 values, so to get the rating just divide by 2
-                self.data.updater?.update(rating: Double(index) / 2)
+                //We need to convert 1 - 10 to 2 - 20
+                let newRating = Int(ratings[index] * 2)
+                self.data.updater?.update(rating: newRating)
                 self.reloadData()
             }, cancel: { _ in }, origin: cell)
             

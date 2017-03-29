@@ -16,9 +16,10 @@ public class MigrationManager {
     
     /// Apply migrations to the Realm
     public func applyMigrations() {
-        let schemaVersion: UInt64 = 1
+        let schemaVersion: UInt64 = 2
         let migrationBlock: MigrationBlock =  { migration, oldSchemaVersion in
             self.migrateTo_1(from: oldSchemaVersion, migration: migration)
+            self.migrateTo_2(from: oldSchemaVersion, migration: migration)
         }
         Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: schemaVersion, migrationBlock: migrationBlock)
     }
@@ -57,5 +58,19 @@ public class MigrationManager {
             new?["serialization"] = ""
         }
     }
+    
+    private func migrateTo_2(from schema: UInt64, migration: Migration) {
+        guard schema < 2 else {
+            return
+        }
+        
+        //LibraryEntry
+        // => [Modified] rating from Double to Int (0.5 - 5.0 => 2 - 20)
+        migration.enumerateObjects(ofType: LibraryEntry.className()) { old, new in
+            let rating = old?["rating"] as? Double ?? 0
+            new?["rating"] = Int(rating * 4)
+        }
+    }
+
     
 }

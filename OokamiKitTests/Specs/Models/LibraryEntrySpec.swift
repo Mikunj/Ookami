@@ -84,7 +84,7 @@ class LibraryEntrySpec: QuickSpec {
                     e.progress = 0
                     e.reconsuming = true
                     e.reconsumeCount = 1
-                    e.rating = 0.0
+                    e.rating = 0
                     e.status = .current
                     e.notes = "hi"
                     
@@ -99,7 +99,7 @@ class LibraryEntrySpec: QuickSpec {
                     e.progress = 0
                     e.reconsuming = true
                     e.reconsumeCount = 1
-                    e.rating = 0.0
+                    e.rating = 0
                     e.status = .current
                     e.notes = "hi"
                     
@@ -108,7 +108,7 @@ class LibraryEntrySpec: QuickSpec {
                     o.progress = 0
                     o.reconsuming = false
                     o.reconsumeCount = 10
-                    o.rating = 5.0
+                    o.rating = 5
                     o.status = .completed
                     o.notes = "hi"
                     
@@ -292,7 +292,9 @@ class LibraryEntrySpec: QuickSpec {
                     expect(entry.reconsumeCount).to(equal(0))
                     expect(entry.notes).to(equal(""))
                     expect(entry.isPrivate).to(beTrue())
-                    expect(entry.rating).to(equal(5.0))
+                    
+                    //TODO: When new rating comes out, need to update this to reflect
+                    expect(entry.rating).to(equal(20))
                     
                     let d = DateFormatter()
                     d.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"

@@ -102,16 +102,15 @@ extension LibraryEntryUpdater {
     
     /// Update the rating on an entry.
     ///
-    /// The rating will only be updated if it is between 0.0 - 5.0 in increments of 0.5.
-    /// E.g 5.5, 4.3, -1.0 will not be accepted. 0, 0.5, 1.0, 5.0 will however be accepted
+    /// The rating will only be updated if it is between 2 and 20 or 0.
     ///
-    /// - Parameter rating: The new rating between 0 and 5
-    public func update(rating: Double) {
-        //Only allow ratings from 0 - 5.0 and in 0.5 increments
-        let ratings = Array(stride(from: 0, to: 5.5, by: 0.5))
-        if ratings.contains(rating) {
-            unmanaged.rating = rating
+    /// - Parameter rating: The new rating between 2 and 20 or 0.
+    public func update(rating: Int) {
+        guard rating == 0 || (rating >= 2 && rating <= 20) else {
+            return
         }
+
+        unmanaged.rating = rating
     }
     
     /// Update the notes on the entry.
