@@ -16,6 +16,18 @@ class LibraryEntryViewData {
     //The updater
     private(set) var updater: LibraryEntryUpdater?
     
+    //The handlers
+    var dataHandlers: [LibraryEntryDataHandler] = {
+        return [LibraryEntryProgressHandler(),
+                LibraryEntryStatusHandler(),
+                LibraryEntryRatingHandler(),
+                LibraryEntryNotesHandler(),
+                LibraryEntryReconsumeCountHandler(),
+                LibraryEntryReconsumingHandler(),
+                LibraryEntryPrivateHandler(),
+                LibraryEntryDeleteHandler()]
+    }()
+    
     /// Create a data source for LibraryEntryViewController
     ///
     /// - Parameter entry: The entry to use as the data source
@@ -54,50 +66,29 @@ class LibraryEntryViewData {
             return []
         }
         
-        let max = entry.maxProgress()
-        let progressValue = max != nil ? "\(entry.progress) of \(max!)" : "\(entry.progress)"
-        let progress = TableData(type: .button, value: progressValue, heading: .progress)
-        
-        //Status
-        var statusValue = "-"
-        if let mediaStatus = entry.status, let type = entry.media?.type {
-            statusValue = mediaStatus.toString(forMedia: type)
+        //Filter out the private handler if we are not the current user
+        let handlers = dataHandlers.filter { handler in
+            if entry.userID == CurrentUser().userID {
+                return true
+            }
+            
+            return handler.heading != .isPrivate
         }
         
-        let status = TableData(type: .string, value: statusValue, heading: .status)
-        
-        //Rating
-        let ratingString = entry.rating > 0 ? String(Double(entry.rating) / 2) : "-"
-        let rating = TableData(type: .string, value: ratingString, heading: .rating)
-        
-        //Notes
-        let notes = TableData(type: .string, value: entry.notes, heading: .notes)
-        
-        //Reconsuming
-        let reconsumedString = "\(entry.reconsumeCount) times"
-        let reconsumeCount = TableData(type: .button, value: reconsumedString, heading: .reconsumeCount)
-        
-        
-        let reconsuming = TableData(type: .bool, value: entry.reconsuming, heading: .reconsuming)
-        
-        //Private
-        let isPrivate = TableData(type: .bool, value: entry.isPrivate, heading: .isPrivate)
-        
-        let delete = TableData(type: .delete, value: "Delete library entry", heading: .delete)
-        
-        var tableData = [progress, status, rating, notes, reconsumeCount, reconsuming]
-        
-        //Only add private if entry belongs to current user
-        if entry.userID == CurrentUser().userID {
-            tableData.append(isPrivate)
-        }
-        
-        //Add the delete at the very end
-        tableData.append(delete)
-        
-        return tableData
+        return handlers.map { $0.tableData(for: entry) }
     }
     
+    //MARK:- On Select
+    func didSelect(heading: Heading, cell: UITableViewCell, controller: LibraryEntryViewController) {
+        guard let updater = updater else { return }
+        
+        for handler in dataHandlers {
+            if handler.heading == heading {
+                handler.didSelect(updater: updater, cell: cell, controller: controller)
+                return
+            }
+        }
+    }
 }
 
 //Mark:- TableData

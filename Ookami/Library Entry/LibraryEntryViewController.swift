@@ -290,9 +290,6 @@ extension LibraryEntryViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if !editable { return }
-        guard let entry = data.updater?.entry else {
-            return
-        }
         
         let tableData = data.tableData()
         let heading = tableData[indexPath.row].heading
@@ -300,111 +297,7 @@ extension LibraryEntryViewController: UITableViewDelegate {
             return
         }
         
-        switch heading {
-        case .delete:
-            let sheet = UIAlertController(title: nil, message: "Are you sure?", preferredStyle: .actionSheet)
-            
-            sheet.popoverPresentationController?.sourceView = cell
-            sheet.popoverPresentationController?.sourceRect = cell.bounds
-            
-            
-            sheet.addAction(UIAlertAction(title: "Yes, Delete it!", style: .destructive) { action in
-                
-                //Send the delete action and show error if it occurred
-                self.showIndicator()
-                LibraryService().delete(entry: entry) { error in
-                    self.hideIndicator()
-                    guard error == nil else {
-                        ErrorAlert.showAlert(in: self, title: "Failed to delete entry", message: error!.localizedDescription)
-                        return
-                    }
-                    
-                    let _ = self.navigationController?.popViewController(animated: true)
-                }
-            })
-            
-            sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            
-            //Present the sheet if we haven't
-            if self.presentedViewController == nil {
-                self.present(sheet, animated: true)
-            }
-            
-        case .progress:
-            
-            let max = entry.maxProgress() ?? 999
-            let rows = Array(0...max)
-            ActionSheetStringPicker.show(withTitle: "Progress", rows: rows, initialSelection: entry.progress, doneBlock: { picker, index, value in
-                if let newValue = value as? Int {
-                    self.data.updater?.update(progress: newValue)
-                    self.reloadData()
-                }
-            }, cancel: { _ in }, origin: cell)
-            
-        case .status:
-            
-            let statuses = LibraryEntry.Status.all
-            let rows: [String] = statuses.map {
-                if let media = entry.media {
-                    return $0.toString(forMedia: media.type)
-                }
-                
-                return "-"
-            }
-            
-            let initial = statuses.index(of: entry.status ?? .current) ?? 0
-            ActionSheetStringPicker.show(withTitle: "Status", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
-                self.data.updater?.update(status: statuses[index])
-                self.reloadData()
-            }, cancel: { _ in }, origin: cell)
-            
-        case .rating:
-            
-            var ratings = Array(stride(from: 1.0, to: 10.5, by: 0.5))
-            ratings.insert(0, at: 0)
-            
-            let halvedRating = Double(entry.rating) / 2
-            let initial = ratings.index(of: halvedRating) ?? 0
-            
-            //Format it to 1 decimal place display so it's consitent
-            let rows = ratings.map { String(format: "%.1f", $0) }
-            
-            ActionSheetStringPicker.show(withTitle: "Rating", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
-                
-                //We need to convert 1 - 10 to 2 - 20
-                let newRating = Int(ratings[index] * 2)
-                self.data.updater?.update(rating: newRating)
-                self.reloadData()
-            }, cancel: { _ in }, origin: cell)
-            
-        case .notes:
-            
-            let editingVC = TextEditingViewController(title: "Notes", text: entry.notes, placeholder: "Type your notes here!")
-            editingVC.modalPresentationStyle = .overCurrentContext
-            editingVC.delegate = self
-            
-            let vc = tabBarController ?? self
-            vc.present(editingVC, animated: false)
-            
-        case .reconsumeCount:
-            let rows = Array(0...999)
-            ActionSheetStringPicker.show(withTitle: "Reconsume Count", rows: rows, initialSelection: entry.reconsumeCount, doneBlock: { picker, index, value in
-                if let newValue = value as? Int {
-                    self.data.updater?.update(reconsumeCount: newValue)
-                    self.reloadData()
-                }
-            }, cancel: { _ in }, origin: cell)
-            
-        case .reconsuming:
-            //Just invert the value
-            self.data.updater?.update(reconsuming: !entry.reconsuming)
-            self.reloadData()
-            
-        case .isPrivate:
-            self.data.updater?.update(isPrivate: !entry.isPrivate)
-            self.reloadData()
-        }
-        
+        data.didSelect(heading: heading, cell: cell, controller: self)
     }
 }
 

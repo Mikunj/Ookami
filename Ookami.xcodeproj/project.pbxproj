@@ -181,6 +181,15 @@
 		24D28ED11DD015FC00773BED /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED01DD015FC00773BED /* NetworkOperation.swift */; };
 		24D28ED41DD017E500773BED /* NetworkOperationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */; };
 		24D28ED71DD01ABA00773BED /* StubAuthHeimdallr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */; };
+		24D401451E8B90F600C7825D /* LibraryEntryDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D401441E8B90F600C7825D /* LibraryEntryDataHandler.swift */; };
+		24D401471E8B931B00C7825D /* LibraryEntryProgressHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D401461E8B931B00C7825D /* LibraryEntryProgressHandler.swift */; };
+		24D401491E8B947100C7825D /* LibraryEntryStatusHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D401481E8B947100C7825D /* LibraryEntryStatusHandler.swift */; };
+		24D4014B1E8B952D00C7825D /* LibraryEntryRatingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D4014A1E8B952D00C7825D /* LibraryEntryRatingHandler.swift */; };
+		24D4014D1E8B95C000C7825D /* LibraryEntryNotesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D4014C1E8B95C000C7825D /* LibraryEntryNotesHandler.swift */; };
+		24D4014F1E8B968900C7825D /* LibraryEntryReconsumeCountHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D4014E1E8B968900C7825D /* LibraryEntryReconsumeCountHandler.swift */; };
+		24D401511E8B96BB00C7825D /* LibraryEntryReconsumingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D401501E8B96BB00C7825D /* LibraryEntryReconsumingHandler.swift */; };
+		24D401531E8B96E900C7825D /* LibraryEntryPrivateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D401521E8B96E900C7825D /* LibraryEntryPrivateHandler.swift */; };
+		24D401551E8B97A200C7825D /* LibraryEntryDeleteHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D401541E8B97A200C7825D /* LibraryEntryDeleteHandler.swift */; };
 		24D6E9891E49A6D700751034 /* MediaFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9881E49A6D700751034 /* MediaFilter.swift */; };
 		24D6E98C1E49AE8F00751034 /* AnimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E98B1E49AE8F00751034 /* AnimeFilter.swift */; };
 		24D6E98E1E49C18200751034 /* MangaFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E98D1E49C18200751034 /* MangaFilter.swift */; };
@@ -449,6 +458,15 @@
 		24D28ED01DD015FC00773BED /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		24D28ED31DD017E500773BED /* NetworkOperationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperationSpec.swift; sourceTree = "<group>"; };
 		24D28ED61DD01ABA00773BED /* StubAuthHeimdallr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubAuthHeimdallr.swift; sourceTree = "<group>"; };
+		24D401441E8B90F600C7825D /* LibraryEntryDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryDataHandler.swift; sourceTree = "<group>"; };
+		24D401461E8B931B00C7825D /* LibraryEntryProgressHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryProgressHandler.swift; sourceTree = "<group>"; };
+		24D401481E8B947100C7825D /* LibraryEntryStatusHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryStatusHandler.swift; sourceTree = "<group>"; };
+		24D4014A1E8B952D00C7825D /* LibraryEntryRatingHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryRatingHandler.swift; sourceTree = "<group>"; };
+		24D4014C1E8B95C000C7825D /* LibraryEntryNotesHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryNotesHandler.swift; sourceTree = "<group>"; };
+		24D4014E1E8B968900C7825D /* LibraryEntryReconsumeCountHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryReconsumeCountHandler.swift; sourceTree = "<group>"; };
+		24D401501E8B96BB00C7825D /* LibraryEntryReconsumingHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryReconsumingHandler.swift; sourceTree = "<group>"; };
+		24D401521E8B96E900C7825D /* LibraryEntryPrivateHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryPrivateHandler.swift; sourceTree = "<group>"; };
+		24D401541E8B97A200C7825D /* LibraryEntryDeleteHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryDeleteHandler.swift; sourceTree = "<group>"; };
 		24D6E9881E49A6D700751034 /* MediaFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaFilter.swift; sourceTree = "<group>"; };
 		24D6E98B1E49AE8F00751034 /* AnimeFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeFilter.swift; sourceTree = "<group>"; };
 		24D6E98D1E49C18200751034 /* MangaFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaFilter.swift; sourceTree = "<group>"; };
@@ -650,6 +668,7 @@
 			isa = PBXGroup;
 			children = (
 				248FE15B1E1F586E009ACA66 /* Cells */,
+				24D401431E8B90CF00C7825D /* Data Handlers */,
 				245761561E30624100BEB18C /* Header */,
 				242A04201E1F11E0000E8B06 /* LibraryEntryViewController.swift */,
 				24175E981E207CB1009FBDE6 /* LibraryEntryViewData.swift */,
@@ -1129,6 +1148,23 @@
 				245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		24D401431E8B90CF00C7825D /* Data Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				24D401441E8B90F600C7825D /* LibraryEntryDataHandler.swift */,
+				24D401541E8B97A200C7825D /* LibraryEntryDeleteHandler.swift */,
+				24D4014C1E8B95C000C7825D /* LibraryEntryNotesHandler.swift */,
+				24D401521E8B96E900C7825D /* LibraryEntryPrivateHandler.swift */,
+				24D401461E8B931B00C7825D /* LibraryEntryProgressHandler.swift */,
+				24D4014A1E8B952D00C7825D /* LibraryEntryRatingHandler.swift */,
+				24D4014E1E8B968900C7825D /* LibraryEntryReconsumeCountHandler.swift */,
+				24D401501E8B96BB00C7825D /* LibraryEntryReconsumingHandler.swift */,
+				24D401481E8B947100C7825D /* LibraryEntryStatusHandler.swift */,
+			);
+			name = "Data Handlers";
+			path = "Data Handlers";
 			sourceTree = "<group>";
 		};
 		24D6E98A1E49A78900751034 /* Filters */ = {
@@ -1768,9 +1804,13 @@
 				242A040A1E1C7CA5000E8B06 /* LibraryEntry+LibraryView.swift in Sources */,
 				2442210F1E6CC3EF0068EE8D /* MangaTrendingTableDataSource.swift in Sources */,
 				24D6E9A91E4AADF900751034 /* AnimeDiscoverDataSource.swift in Sources */,
+				24D401491E8B947100C7825D /* LibraryEntryStatusHandler.swift in Sources */,
 				2499C9971E5D91D9005D246C /* FilterViewController.swift in Sources */,
 				24E67FF61E68EC360001BAFB /* CollectionViewTableViewCell.swift in Sources */,
+				24D4014B1E8B952D00C7825D /* LibraryEntryRatingHandler.swift in Sources */,
+				24D401531E8B96E900C7825D /* LibraryEntryPrivateHandler.swift in Sources */,
 				2466586B1E28876800BB15EC /* MediaViewController.swift in Sources */,
+				24D4014F1E8B968900C7825D /* LibraryEntryReconsumeCountHandler.swift in Sources */,
 				246658691E2886BA00BB15EC /* AnimeViewController.swift in Sources */,
 				249126661E71085900EE81B1 /* PaginatedItemViewDataSourceBase.swift in Sources */,
 				248FE15E1E1F58AC009ACA66 /* EntryStringTableViewCell.swift in Sources */,
@@ -1794,7 +1834,9 @@
 				24EEE5E31E5D31A300ECA152 /* UIImage+Ookami.swift in Sources */,
 				242A03FC1E1A15B8000E8B06 /* CollectionCellSpacer.swift in Sources */,
 				24175E991E207CB1009FBDE6 /* LibraryEntryViewData.swift in Sources */,
+				24D401451E8B90F600C7825D /* LibraryEntryDataHandler.swift in Sources */,
 				242A03EF1E190730000E8B06 /* ItemDetailGridCell.swift in Sources */,
+				24D401471E8B931B00C7825D /* LibraryEntryProgressHandler.swift in Sources */,
 				24C8CDBC1E727DA8003596DD /* MangaWeeklyTrendingTableDataSource.swift in Sources */,
 				24175E931E1FA88A009FBDE6 /* IconDrawable.swift in Sources */,
 				24AF0E3A1E24BAC100F11809 /* MediaTableHeaderView.swift in Sources */,
@@ -1806,8 +1848,10 @@
 				247BF5181E2705BC00FF643F /* ErrorAlert.swift in Sources */,
 				24C8CDB51E7257BC003596DD /* SeasonalTrendingViewController.swift in Sources */,
 				247BF5151E26FEF200FF643F /* LoginViewController.swift in Sources */,
+				24D401511E8B96BB00C7825D /* LibraryEntryReconsumingHandler.swift in Sources */,
 				247BF51A1E2706FD00FF643F /* AppCoordinator.swift in Sources */,
 				24D6E9B11E4ACADA00751034 /* MediaDiscoverViewController.swift in Sources */,
+				24D4014D1E8B95C000C7825D /* LibraryEntryNotesHandler.swift in Sources */,
 				246318321E652FEE00892CDA /* ItemSimpleGridCell.swift in Sources */,
 				24DC7DFA1E2776AF007D14FB /* LibraryFetcher.swift in Sources */,
 				24C8CDB81E726001003596DD /* AnimeSeasonalDataSource.swift in Sources */,
@@ -1825,6 +1869,7 @@
 				240C55631E7548C900BA8E50 /* LibraryFilterViewController.swift in Sources */,
 				2466586E1E288C8700BB15EC /* TitleTableSectionView.swift in Sources */,
 				2491266E1E712A1C00EE81B1 /* PaginatedTrendingViewController.swift in Sources */,
+				24D401551E8B97A200C7825D /* LibraryEntryDeleteHandler.swift in Sources */,
 				24E67FFE1E6915690001BAFB /* AnimeTrendingTableDataSource.swift in Sources */,
 				24BF37151E3C163A0055972C /* MailComposer.swift in Sources */,
 				24D6E9AF1E4AC01A00751034 /* MangaDiscoverDataSource.swift in Sources */,
