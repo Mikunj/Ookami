@@ -40,21 +40,21 @@ class MediaFilterSpec: QuickSpec {
             }
             
             context("Rating filter") {
-                it("should set the end value to 5.0 if nothing was provided") {
+                it("should set the end value to 20 if nothing was provided") {
                     let filter = MediaFilter()
-                    filter.rating = RangeFilter(start: 0.5, end: nil)
-                    expect(filter.rating.end).to(equal(5.0))
+                    filter.rating = RangeFilter(start: 2, end: nil)
+                    expect(filter.rating.end).to(equal(20))
                 }
                 
                 it("should cap the values properley") {
                     let filter = MediaFilter()
-                    filter.rating = RangeFilter(start: 0, end: 9.5)
-                    expect(filter.rating.start).to(equal(0.5))
-                    expect(filter.rating.end).to(equal(5.0))
+                    filter.rating = RangeFilter(start: 1, end: 29)
+                    expect(filter.rating.start).to(equal(2))
+                    expect(filter.rating.end).to(equal(20))
                     
-                    filter.rating = RangeFilter(start: 0.6, end: 0.7)
-                    expect(filter.rating.start).to(equal(0.6))
-                    expect(filter.rating.end).to(equal(0.7))
+                    filter.rating = RangeFilter(start: 3, end: 19)
+                    expect(filter.rating.start).to(equal(3))
+                    expect(filter.rating.end).to(equal(19))
                 }
             }
             
@@ -75,14 +75,14 @@ class MediaFilterSpec: QuickSpec {
                 it("should correctly output a dictionary") {
                     let filter = MediaFilter()
                     filter.year = RangeFilter(start: 2000, end: nil)
-                    filter.rating = RangeFilter(start: 0.5, end: 5.0)
+                    filter.rating = RangeFilter(start: 2, end: 20)
                     
                     let defaultDict = filter.construct()
                     
                     expect(defaultDict.keys).to(contain("year"))
                     expect(defaultDict.keys).toNot(contain("averageRating", "genres"))
                     
-                    filter.rating = RangeFilter(start: 0.5, end: 4.5)
+                    filter.rating = RangeFilter(start: 2, end: 19)
                     let genres: [Genre] = ["Name 1", "Name 2"].map {
                         let g = Genre()
                         g.name = $0
@@ -91,13 +91,11 @@ class MediaFilterSpec: QuickSpec {
                     
                     filter.filter(genres: genres)
                     
-                    
-                    
                     let dict = filter.construct()
                     
                     expect(dict.keys).to(contain(["genres", "year", "averageRating"]))
                     expect(dict["year"] as? String).to(equal("2000.."))
-                    expect(dict["averageRating"] as? String).to(equal("0.5..4.5"))
+                    expect(dict["averageRating"] as? String).to(equal("2..19"))
                     expect(dict["genres"] as? [String]).to(contain("Name 1","Name 2"))
                     
                 }

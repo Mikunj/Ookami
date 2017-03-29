@@ -40,12 +40,15 @@ public class MediaFilter {
         }
     }
     
-    //The rating range between 0.5 and 5.0 inclusive
-    public var rating: RangeFilter<Double> {
+    //The rating range between 2 and 20 inclusive
+    //We use this instead of 1 - 10.0 with increments of 0.5 because it's just easier to work with.
+    //We can manually convert to the 1 - 10.0 display by dividing by 2.
+    //Also this is the range that kitsu uses.
+    public var rating: RangeFilter<Int> {
         didSet {
-            //Set the end to 5.0 if it's not set
-            rating.end = rating.end ?? 5.0
-            rating.capValues(min: 0.5, max: 5.0)
+            //Set the end to 20.0 if it's not set
+            rating.end = rating.end ?? 20
+            rating.capValues(min: 2, max: 20)
             rating.applyCorrection()
         }
     }
@@ -59,7 +62,7 @@ public class MediaFilter {
     /// Create a media filter
     public init() {
         year = RangeFilter(start: 1907, end: nil)
-        rating = RangeFilter(start: 0.5, end: 5.0)
+        rating = RangeFilter(start: 2, end: 20)
         sort = Sort(by: "user_count")
     }
     
@@ -87,7 +90,7 @@ public class MediaFilter {
         
         //Only include rating if it's not the default
         //This is because kitsu doesn't return media which has no rating ...
-        if rating.start != 0.5 || rating.end != 5.0 {
+        if rating.start != 2 || rating.end != 20 {
             dict["averageRating"] = rating.description
         }
         

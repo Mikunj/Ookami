@@ -1163,7 +1163,6 @@
 				24D401501E8B96BB00C7825D /* LibraryEntryReconsumingHandler.swift */,
 				24D401481E8B947100C7825D /* LibraryEntryStatusHandler.swift */,
 			);
-			name = "Data Handlers";
 			path = "Data Handlers";
 			sourceTree = "<group>";
 		};
