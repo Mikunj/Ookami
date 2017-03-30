@@ -9,14 +9,20 @@
 import UIKit
 import OokamiKit
 import NVActivityIndicatorView
+import FBSDKLoginKit
+
+//TODO: If we recieve a 403 from the grant then move user to the signup page and pre-populate the email field
+//https://stackoverflow.com/questions/29323244/facebook-ios-sdk-4-0how-to-get-user-email-address-from-fbsdkprofile
 
 class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     
     @IBOutlet weak var usernameField: UITextField!
     
     @IBOutlet weak var passwordField: UITextField!
-
+    
     @IBOutlet weak var loginButton: UIButton!
+    
+    @IBOutlet weak var facebookButton: FBSDKLoginButton!
     
     @IBOutlet weak var signupButton: UIButton!
     
@@ -41,8 +47,11 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         usernameField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
         passwordField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
         updateLoginButton()
+        
+        facebookButton.readPermissions = ["public_profile", "email", "user_friends"]
+        facebookButton.delegate = self
     }
-
+    
     @IBAction func didTapLogin(_ sender: UIButton) {
         self.view.endEditing(true)
         
@@ -50,12 +59,11 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         let password = passwordField.text ?? ""
         loginButton.isEnabled = false
         
-        let theme = Theme.ActivityIndicatorTheme()
-        startAnimating(theme.size, type: theme.type, color: theme.color)
+        showIndicator()
         
         AuthenticationService().authenticate(usernameOrEmail: username, password: password) { error in
             self.loginButton.isEnabled = true
-            self.stopAnimating()
+            self.hideIndicator()
             
             guard error == nil else {
                 ErrorAlert.showAlert(in: self, title: "Login Error", message: "\(error!.localizedDescription). Please try again.")
@@ -67,7 +75,14 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     @IBAction func didTapSignup(_ sender: UIButton) {
+        showSignUp()
+    }
+    
+    //Show the signup view
+    func showSignUp(facebookID: String? = nil, email: String? = nil) {
         let signup = SignupViewController()
+        signup.facebookID = facebookID
+        signup.initialEmail = email
         signup.onSignupSuccess = onLoginSuccess
         self.navigationController?.pushViewController(signup, animated: true)
     }
@@ -83,4 +98,103 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     func textFieldDidChange(textField: UITextField) {
         updateLoginButton()
     }
+    
+    func showIndicator() {
+        let theme = Theme.ActivityIndicatorTheme()
+        startAnimating(theme.size, type: theme.type, color: theme.color)
+    }
+    
+    //This function is here so that it can be used in blocks but still calls stopAnimating in the main thread
+    func hideIndicator() {
+        DispatchQueue.main.async {
+            self.stopAnimating()
+        }
+    }
+    
 }
+
+
+//MARK:- Facebook
+extension LoginViewController: FBSDKLoginButtonDelegate {
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {}
+    
+    func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
+        return true
+    }
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        
+        //Check for errors
+        if error != nil {
+            ErrorAlert.showAlert(in: self, title: "Facebook Login Error", message: "\(error.localizedDescription). Please try again.")
+            return
+        }
+        
+        //Check for cancelation
+        guard !result.isCancelled,
+            let token = result.token else {
+                return
+        }
+        
+        //Check that we have the email permission grant atlease
+        guard let grantedPermissions = result.grantedPermissions,
+            grantedPermissions.contains("email") else {
+                ErrorAlert.showAlert(in: self, title: "Facebook Login Error", message: "Email permission must be granted to login to Kitsu!")
+                
+                FBSDKLoginManager().logOut()
+                
+                return
+        }
+        
+        //Start auth
+        showIndicator()
+        
+        //Get the token and login
+        AuthenticationService().authenticate(facebookToken: token.tokenString, register: registerFacebookUser, completion: onFacebookCompletion)
+    }
+    
+    //Register the facebook user to kitsu
+    func registerFacebookUser() {
+        
+        //User needs to be registered. Fetch their email and show them the signup page
+        let params = ["fields": "email"]
+        FBSDKGraphRequest(graphPath: "me", parameters: params).start { connection, result, error in
+            
+            self.hideIndicator()
+            
+            let id = FBSDKAccessToken.current().userID
+            
+            guard error == nil,
+                let data = result as? [String: Any],
+                let email = data["email"] as? String else {
+                    ErrorAlert.showAlert(in: self, title: "Facebook Login Error", message: "Something went wrong when fetching email :(")
+                    
+                    FBSDKLoginManager().logOut()
+                    return
+            }
+            
+            FBSDKLoginManager().logOut()
+            
+            self.showSignUp(facebookID: id, email: email)
+        }
+        
+    }
+    
+    //Facebook login completed
+    func onFacebookCompletion(error: Error?) {
+        self.hideIndicator()
+        
+        //Logout of facebook
+        FBSDKLoginManager().logOut()
+        
+        guard error == nil else {
+            ErrorAlert.showAlert(in: self, title: "Login Error", message: "\(error!.localizedDescription). Please try again.")
+            return
+        }
+        
+        self.onLoginSuccess?()
+        
+    }
+}
+

@@ -27,6 +27,10 @@ class SignupViewController: UIViewController, NVActivityIndicatorViewable {
     
     var onSignupSuccess: (() -> Void)?
     
+    //Facebook related stuff
+    var facebookID: String?
+    var initialEmail: String?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
@@ -39,13 +43,16 @@ class SignupViewController: UIViewController, NVActivityIndicatorViewable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = Theme.Colors().primary
         signupButton.backgroundColor = Theme.Colors().secondary
         
         nameField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
         emailField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
         passwordField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
+        
+        emailField.text = initialEmail
+        
         updateUI()
     }
     
@@ -64,7 +71,7 @@ class SignupViewController: UIViewController, NVActivityIndicatorViewable {
         let theme = Theme.ActivityIndicatorTheme()
         startAnimating(theme.size, type: theme.type, color: theme.color)
         
-        AuthenticationService().signup(name: name, email: email, password: pass) { error in
+        AuthenticationService().signup(name: name, email: email, password: pass, facebookID: facebookID) { error in
             self.signupButton.isEnabled = true
             self.stopAnimating()
             

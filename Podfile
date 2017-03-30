@@ -29,7 +29,6 @@ def testing_pods
 end
 
 def ui_pods
-    #Maybe remove this dependency and use pure autolayout code instead
     pod 'Cartography', '~> 1.0'
     pod 'Kingfisher', '~> 3.5'
     pod 'Reusable', '~> 4.0'
@@ -43,6 +42,7 @@ def ui_pods
     pod 'SKPhotoBrowser', '~> 4.0.0'
     pod 'XCDYouTubeKit', '~> 2.5.0'
     pod 'DZNEmptyDataSet', '~> 1.8'
+    pod 'FBSDKLoginKit', '~> 4.20'
 end
 
 target 'Ookami' do

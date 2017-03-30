@@ -40,6 +40,16 @@ private class StubRequestHeimdallr: Heimdallr {
             completion(.failure(stubError!))
         }
     }
+    
+    
+    override func requestAccessToken(grantType: String, parameters: [String : String], completion: @escaping (Result<Void, NSError>) -> ()) {
+        if stubError == nil {
+            token = true
+            completion(.success())
+        } else {
+            completion(.failure(stubError!))
+        }
+    }
 }
 
 private class StubAuthenticationService: AuthenticationService {
@@ -122,7 +132,7 @@ class AuthenticationServiceSpec: QuickSpec {
                 }
             }
             
-            context("Authentication") {
+            context("Authentication Username/Pass") {
                 it("should return no error if successful") {
                     let a = StubAuthenticationService(currentUser: currentUser)
                     waitUntil { done in
@@ -150,6 +160,38 @@ class AuthenticationServiceSpec: QuickSpec {
                             expect(error).toNot(beNil())
                             done()
                         }
+                    }
+                }
+            }
+            
+            context("Authentication facebook") {
+                it("should return no error if successful") {
+                    let a = StubAuthenticationService(currentUser: currentUser)
+                    waitUntil { done in
+                        a.authenticate(facebookToken: "test", register: {}, completion: { error in
+                            expect(error).to(beNil())
+                            done()
+                        })
+                    }
+                }
+                
+                it("should store the user id if successful") {
+                    let a = StubAuthenticationService(currentUser: currentUser)
+                    a.authenticate(facebookToken: "test", register: {}, completion: { _ in
+                    })
+                    expect(currentUser.userID).toEventually(equal(1))
+                    expect(currentUser.isLoggedIn()).toEventually(beTrue())
+                }
+                
+                it("should return error if something went wrong") {
+                    let nsError: NSError = NSError(domain: "hi", code: 1, userInfo: nil)
+                    let cUser = CurrentUser(heimdallr: StubRequestHeimdallr(stubError: nsError), userIDKey: "auth-spec-key")
+                    let a = StubAuthenticationService(currentUser: cUser)
+                    waitUntil { done in
+                        a.authenticate(facebookToken: "test", register: {}, completion: { error in
+                            expect(error).toNot(beNil())
+                            done()
+                        })
                     }
                 }
             }

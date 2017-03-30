@@ -18,15 +18,18 @@ public class Ookami {
         return Ookami()
     }()
     
+    //The client credentials
+    public var credentials: OAuthClientCredentials = {
+        let keys = OokamiKeys()
+        return OAuthClientCredentials(id: keys.kitsuClientKey, secret: keys.kitsuClientSecret)
+    }()
+    
     //Heimdallr client
     public lazy var heimdallr: Heimdallr = {
-        let keys = OokamiKeys()
-        let credentials = OAuthClientCredentials(id: keys.kitsuClientKey, secret: keys.kitsuClientSecret)
-        
         let store = OokamiTokenStore()
         
         let tokenURL = URL(string: Constants.URL.authToken)! 
-        let heim = Heimdallr(tokenURL: tokenURL, credentials: credentials, accessTokenStore: store)
+        let heim = Heimdallr(tokenURL: tokenURL, credentials: self.credentials, accessTokenStore: store)
         return heim
     }()
     

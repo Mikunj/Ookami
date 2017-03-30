@@ -8,6 +8,7 @@
 
 import Foundation
 import Heimdallr
+import Result
 
 /// Class for handling authentication to the kitsu servers
 /// We use this instead of directly calling authenticate on a `Heimdallr` instance because we still have to do extra stuff after we authenticate the user.
@@ -44,20 +45,52 @@ public class AuthenticationService: BaseService {
     ///   - completion: Completion block which passes an error if it occured
     public func authenticate(usernameOrEmail: String, password: String, completion: @escaping (Error?) -> Void) {
         currentUser.heimdallr.requestAccessToken(username: usernameOrEmail, password: password) { result in
-            switch result {
-            case .success:
-                
-                // We only want to call the completion block after we are certain we have the correct user info
-                // updateInfo will pass back an error if it failed so we can directly pass it onto the completion block
-                self.updateInfo() { error in
-                    completion(error)
-                }
-                
-            case .failure(_):
-                completion(BaseService.ServiceError.error(description: "Invalid Username or Password"))
-            }
+            self.onAuth(result: result, completion: completion)
         }
     }
+    
+    /// Authenticate a user with the given facebook token.
+    ///
+    /// - Parameters:
+    ///   - token: The facebook token of the user.
+    ///   - register: Block which gets called when a user needs to be registered.
+    ///   - completion: The completion block which passes an error if it occured.
+    public func authenticate(facebookToken token: String, register: @escaping () -> Void, completion: @escaping (Error?) -> Void) {
+        let params = ["provider": "facebook",
+                      "assertion": token]
+        
+        currentUser.heimdallr.requestAccessToken(grantType: "assertion", parameters: params) { result in
+            
+            //Check if we got an invalid grant, if so then it means user hasn't setup a kitsu account yet
+            if result.error?.code == OAuthErrorCode.InvalidGrant.intValue {
+                register()
+                return
+            }
+            
+            self.onAuth(result: result, completion: completion)
+        }
+    }
+    
+    /// Processing function on authentication success
+    ///
+    /// - Parameters:
+    ///   - result: The result of the authentication
+    ///   - completion: The completion block
+    private func onAuth(result: Result<Void, NSError>, completion: @escaping (Error?) -> Void) {
+        switch result {
+        case .success:
+            
+            // We only want to call the completion block after we are certain we have the correct user info
+            // updateInfo will pass back an error if it failed so we can directly pass it onto the completion block
+            self.updateInfo() { error in
+                completion(error)
+            }
+            
+        case .failure(let e):
+            completion(BaseService.ServiceError.error(description: e.localizedDescription))
+        }
+    }
+
     
     /// Sign up a user
     ///
@@ -65,11 +98,18 @@ public class AuthenticationService: BaseService {
     ///   - name: The name of the user
     ///   - email: The email of the user
     ///   - password: The password of the user
+    ///   - facebookID: The facebook id associated with the account
     ///   - completion: The completion block which passes back an error if it occurred
-    public func signup(name: String, email: String, password: String, completion: @escaping (Error?) -> Void) {
+    public func signup(name: String, email: String, password: String, facebookID: String? = nil, completion: @escaping (Error?) -> Void) {
         
         //Construct the params
-        let attributes: [String: Any] = ["name": name, "email": email, "password": password]
+        var attributes: [String: Any] = ["name": name, "email": email, "password": password]
+        
+        //Add the facebook id if we have it
+        if let id = facebookID {
+            attributes["facebookId"] = id
+        }
+        
         let data: [String: Any] = ["attributes": attributes, "type": User.typeString]
         let payload: [String: Any] = ["data": data]
         

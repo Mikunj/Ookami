@@ -8,8 +8,8 @@
 import UIKit
 import IQKeyboardManager
 import OokamiKit
+import FBSDKLoginKit
 
-//TODO: Handle the case where user changes password but doesn't logout in the app. (maybe during launch, check auth and if valid then show main vc else show the login?)
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        //Initialise libraries
         MigrationManager().applyMigrations()
         FontAwesomeIcon.register()
         Theme.NavigationTheme().apply()
@@ -55,9 +58,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showLogin() {
+        
+        //If we're not logged in then clear facebook login
+        if !CurrentUser().isLoggedIn() {
+            FBSDKLoginManager().logOut()
+        }
+    
         if let window = window {
             AppCoordinator.showLoginVC(in: window)
         }
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

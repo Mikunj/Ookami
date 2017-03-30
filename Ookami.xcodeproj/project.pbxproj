@@ -467,6 +467,7 @@
 		24D401501E8B96BB00C7825D /* LibraryEntryReconsumingHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryReconsumingHandler.swift; sourceTree = "<group>"; };
 		24D401521E8B96E900C7825D /* LibraryEntryPrivateHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryPrivateHandler.swift; sourceTree = "<group>"; };
 		24D401541E8B97A200C7825D /* LibraryEntryDeleteHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryDeleteHandler.swift; sourceTree = "<group>"; };
+		24D401561E8C636700C7825D /* Ookami.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ookami.entitlements; sourceTree = "<group>"; };
 		24D6E9881E49A6D700751034 /* MediaFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaFilter.swift; sourceTree = "<group>"; };
 		24D6E98B1E49AE8F00751034 /* AnimeFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeFilter.swift; sourceTree = "<group>"; };
 		24D6E98D1E49C18200751034 /* MangaFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaFilter.swift; sourceTree = "<group>"; };
@@ -797,6 +798,7 @@
 		2464F1D01DCC58800028F7B0 /* Ookami */ = {
 			isa = PBXGroup;
 			children = (
+				24D401561E8C636700C7825D /* Ookami.entitlements */,
 				24D6E9A41E4AA9E900751034 /* Discover */,
 				24EEE5E11E5D316700ECA152 /* Extenstions */,
 				242A03E51E18FB39000E8B06 /* Library */,
@@ -1445,6 +1447,9 @@
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
 							};
 						};
 					};
@@ -2172,6 +2177,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Ookami/Ookami.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
@@ -2192,6 +2198,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Ookami/Ookami.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5V7RKV36V8;
