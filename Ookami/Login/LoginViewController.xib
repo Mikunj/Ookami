@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Ookami" customModuleProvider="target">
             <connections>
-                <outlet property="facebookButton" destination="Vud-eJ-XDA" id="d2v-l9-7QV"/>
+                <outlet property="facebookButton" destination="gBq-wr-fgG" id="WUE-xL-L8t"/>
                 <outlet property="loginButton" destination="bku-fb-HNV" id="joe-XM-dxC"/>
                 <outlet property="onePasswordButton" destination="tg7-oT-Vfn" id="RBJ-FV-Bqf"/>
                 <outlet property="passwordField" destination="bxC-Zm-BMH" id="6VN-1a-9Pd"/>
@@ -143,13 +143,17 @@
                                                 <action selector="didTapLogin:" destination="-1" eventType="touchUpInside" id="7NV-2q-wni"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vud-eJ-XDA" customClass="FBSDKLoginButton">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBq-wr-fgG">
                                             <rect key="frame" x="0.0" y="114" width="288" height="30"/>
-                                            <color key="backgroundColor" red="0.0078431372550000003" green="0.70588235290000001" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.25926578044891357" green="0.40468230843544006" blue="0.69936054944992065" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" priority="999" constant="30" id="CIY-39-sm0"/>
+                                                <constraint firstAttribute="height" constant="30" id="bK3-bX-bO1"/>
+                                                <constraint firstAttribute="height" constant="40" id="pMx-GB-Kn9"/>
                                             </constraints>
-                                            <state key="normal" title="FB Login">
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                            <state key="normal" title="Login with Facebook">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <userDefinedRuntimeAttributes>
@@ -157,9 +161,21 @@
                                                     <integer key="value" value="4"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="pMx-GB-Kn9"/>
+                                                </mask>
+                                            </variation>
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <mask key="constraints">
+                                                    <exclude reference="bK3-bX-bO1"/>
+                                                    <include reference="pMx-GB-Kn9"/>
+                                                </mask>
                                             </variation>
+                                            <connections>
+                                                <action selector="didTapFacebook:" destination="-1" eventType="touchUpInside" id="imF-aZ-VNh"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPG-VH-dBT">
                                             <rect key="frame" x="0.0" y="152" width="288" height="30"/>

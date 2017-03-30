@@ -25,6 +25,10 @@ class SignupViewController: UIViewController, NVActivityIndicatorViewable {
     
     @IBOutlet weak var signupButton: UIButton!
     
+    var activityIndicator: FullScreenActivityIndicator = {
+        return FullScreenActivityIndicator()
+    }()
+    
     var onSignupSuccess: (() -> Void)?
     
     //Facebook related stuff
@@ -43,6 +47,8 @@ class SignupViewController: UIViewController, NVActivityIndicatorViewable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.add(to: view)
         
         self.view.backgroundColor = Theme.Colors().primary
         signupButton.backgroundColor = Theme.Colors().secondary
@@ -68,12 +74,12 @@ class SignupViewController: UIViewController, NVActivityIndicatorViewable {
         let pass = passwordField.text ?? ""
         signupButton.isEnabled = false
         
-        let theme = Theme.ActivityIndicatorTheme()
-        startAnimating(theme.size, type: theme.type, color: theme.color)
+        activityIndicator.showIndicator()
         
         AuthenticationService().signup(name: name, email: email, password: pass, facebookID: facebookID) { error in
+            
             self.signupButton.isEnabled = true
-            self.stopAnimating()
+            self.activityIndicator.hideIndicator()
             
             guard error == nil else {
                 ErrorAlert.showAlert(in: self, title: "Sign up Error", message: "\(error!.localizedDescription). Please try again.")

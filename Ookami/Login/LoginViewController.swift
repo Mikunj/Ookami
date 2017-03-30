@@ -20,11 +20,15 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     
     @IBOutlet weak var loginButton: UIButton!
     
-    @IBOutlet weak var facebookButton: FBSDKLoginButton!
+    @IBOutlet weak var facebookButton: UIButton!
     
     @IBOutlet weak var signupButton: UIButton!
     
     @IBOutlet weak var onePasswordButton: UIButton!
+    
+    var activityIndicator: FullScreenActivityIndicator = {
+        return FullScreenActivityIndicator()
+    }()
     
     var onLoginSuccess: (() -> Void)?
     
@@ -41,6 +45,8 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.add(to: view)
+        
         self.view.backgroundColor = Theme.Colors().primary
         loginButton.backgroundColor = Theme.Colors().secondary
         onePasswordButton.tintColor = Theme.Colors().secondary
@@ -52,8 +58,9 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         passwordField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
         updateLoginButton()
         
-        facebookButton.readPermissions = ["public_profile", "email", "user_friends"]
-        facebookButton.delegate = self
+        //Set the icon on the facebook button
+        let fb = FontAwesomeIcon.facebookSignIcon.image(ofSize: CGSize(width: 22, height: 22), color: UIColor.white)
+        facebookButton.setImage(fb, for: .normal)
     }
     
     @IBAction func didTapLogin(_ sender: UIButton) {
@@ -63,18 +70,21 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         let password = passwordField.text ?? ""
         loginButton.isEnabled = false
         
-        showIndicator()
+        activityIndicator.showIndicator()
         
         AuthenticationService().authenticate(usernameOrEmail: username, password: password) { error in
-            self.loginButton.isEnabled = true
-            self.stopAnimating()
-            
-            guard error == nil else {
-                ErrorAlert.showAlert(in: self, title: "Login Error", message: "\(error!.localizedDescription). Please try again.")
-                return
+            DispatchQueue.main.async {
+                self.loginButton.isEnabled = true
+                self.activityIndicator.hideIndicator()
+                
+                guard error == nil else {
+                    ErrorAlert.showAlert(in: self, title: "Login Error", message: "\(error!.localizedDescription). Please try again.")
+                    return
+                }
+                
+                self.onLoginSuccess?()
             }
             
-            self.onLoginSuccess?()
         }
     }
     
@@ -101,7 +111,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     func updateText(username: String?, password: String?) {
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.3) {
             self.usernameField.text = username
             self.passwordField.text = password
             self.updateLoginButton()
@@ -129,52 +139,47 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         updateLoginButton()
     }
     
-    func showIndicator() {
-        let theme = Theme.ActivityIndicatorTheme()
-        self.startAnimating(theme.size, type: theme.type, color: theme.color)
-    }
+    //MARK:- Facebook
     
-}
-
-
-//MARK:- Facebook
-extension LoginViewController: FBSDKLoginButtonDelegate {
-    
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {}
-    
-    func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
-        return true
-    }
-    
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+    //Facebook button tap
+    @IBAction func didTapFacebook(_ sender: Any) {
         
-        //Check for errors
-        if error != nil {
-            ErrorAlert.showAlert(in: self, title: "Facebook Login Error", message: "\(error.localizedDescription). Please try again.")
-            return
-        }
+        //Force a logout
+        FBSDKLoginManager().logOut()
         
-        //Check for cancelation
-        guard !result.isCancelled,
-            let token = result.token else {
+        //Login
+        FBSDKLoginManager().logIn(withReadPermissions: ["public_profile", "email"], from: self) { result, error in
+            //Check for errors
+            guard error == nil else {
+                ErrorAlert.showAlert(in: self, title: "Facebook Login Error", message: "\(error!.localizedDescription). Please try again.")
                 return
+            }
+            
+            //Check for cancelation
+            guard let result = result,
+                !result.isCancelled,
+                let token = result.token else {
+                    return
+            }
+            
+            //Check that we have the email permission grant atlease
+            guard let grantedPermissions = result.grantedPermissions,
+                grantedPermissions.contains("email") else {
+                    ErrorAlert.showAlert(in: self, title: "Facebook Login Error", message: "Email permission must be granted to login to Kitsu!")
+                    
+                    FBSDKLoginManager().logOut()
+                    
+                    return
+            }
+            
+            //Start auth
+            DispatchQueue.main.async {
+                self.activityIndicator.showIndicator()
+            }
+            
+            //Get the token and login
+            AuthenticationService().authenticate(facebookToken: token.tokenString, register: self.registerFacebookUser, completion: self.onFacebookCompletion)
         }
-        
-        //Check that we have the email permission grant atlease
-        guard let grantedPermissions = result.grantedPermissions,
-            grantedPermissions.contains("email") else {
-                ErrorAlert.showAlert(in: self, title: "Facebook Login Error", message: "Email permission must be granted to login to Kitsu!")
-                
-                FBSDKLoginManager().logOut()
-                
-                return
-        }
-        
-        //Start auth
-        showIndicator()
-        
-        //Get the token and login
-        AuthenticationService().authenticate(facebookToken: token.tokenString, register: registerFacebookUser, completion: onFacebookCompletion)
     }
     
     //Register the facebook user to kitsu
@@ -184,25 +189,26 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
         let params = ["fields": "email"]
         FBSDKGraphRequest(graphPath: "me", parameters: params).start { connection, result, error in
             
-            //Stop the loading indicator
             DispatchQueue.main.async {
-                self.stopAnimating()
+                //Stop the loading indicator
+                self.activityIndicator.hideIndicator()
+                
+                let id = FBSDKAccessToken.current().userID
+                
+                guard error == nil,
+                    let data = result as? [String: Any],
+                    let email = data["email"] as? String else {
+                        ErrorAlert.showAlert(in: self, title: "Facebook Login Error", message: "Something went wrong when fetching email :(")
+                        
+                        FBSDKLoginManager().logOut()
+                        return
+                }
+                
+                FBSDKLoginManager().logOut()
+                
+                
+                self.showSignUp(facebookID: id, email: email)
             }
-            
-            let id = FBSDKAccessToken.current().userID
-            
-            guard error == nil,
-                let data = result as? [String: Any],
-                let email = data["email"] as? String else {
-                    ErrorAlert.showAlert(in: self, title: "Facebook Login Error", message: "Something went wrong when fetching email :(")
-                    
-                    FBSDKLoginManager().logOut()
-                    return
-            }
-            
-            FBSDKLoginManager().logOut()
-            
-            self.showSignUp(facebookID: id, email: email)
         }
         
     }
@@ -210,22 +216,22 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
     //Facebook login completed
     func onFacebookCompletion(error: Error?) {
         
-        //Stop the loading indicator
         DispatchQueue.main.async {
-            self.stopAnimating()
+            
+            //Stop the loading indicator
+            self.activityIndicator.hideIndicator()
+            
+            //Logout of facebook
+            FBSDKLoginManager().logOut()
+            
+            guard error == nil else {
+                ErrorAlert.showAlert(in: self, title: "Login Error", message: "\(error!.localizedDescription). Please try again.")
+                return
+            }
+            
+            self.onLoginSuccess?()
         }
-        
-        
-        //Logout of facebook
-        FBSDKLoginManager().logOut()
-        
-        guard error == nil else {
-            ErrorAlert.showAlert(in: self, title: "Login Error", message: "\(error!.localizedDescription). Please try again.")
-            return
-        }
-        
-        self.onLoginSuccess?()
-        
     }
+    
 }
 

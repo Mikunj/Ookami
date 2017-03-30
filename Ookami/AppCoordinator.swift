@@ -93,7 +93,6 @@ class AppCoordinator {
         tab.viewControllers = [discoverNav, trendingNav, libraryNav]
         tab.selectedIndex = 2
         
-        
         window.setRootViewController(tab)
     }
     
