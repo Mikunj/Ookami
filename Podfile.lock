@@ -1,4 +1,5 @@
 PODS:
+  - 1PasswordExtension (1.8.4)
   - ActionSheetPicker-3.0 (2.2.0)
   - Alamofire (4.3.0)
   - Bolts (1.8.4):
@@ -12,14 +13,6 @@ PODS:
   - Diff (0.5.0)
   - DynamicColor (3.2.1)
   - DZNEmptyDataSet (1.8.1)
-  - FacebookCore (0.2.0):
-    - Bolts (~> 1.8)
-    - FBSDKCoreKit (~> 4.15)
-  - FacebookLogin (0.2.0):
-    - Bolts (~> 1.8)
-    - FacebookCore (~> 0.2)
-    - FBSDKCoreKit (~> 4.15)
-    - FBSDKLoginKit (~> 4.15)
   - FBSDKCoreKit (4.20.1):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.20.1):
@@ -66,6 +59,7 @@ PODS:
   - XLPagerTabStrip (7.0.0)
 
 DEPENDENCIES:
+  - 1PasswordExtension (~> 1.8.4)
   - ActionSheetPicker-3.0 (~> 2.2.0)
   - Alamofire (~> 4.3)
   - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`, branch `swift-3.0`)
@@ -73,7 +67,7 @@ DEPENDENCIES:
   - Diff (~> 0.5)
   - DynamicColor (~> 3.2.1)
   - DZNEmptyDataSet (~> 1.8)
-  - FacebookLogin (~> 0.2)
+  - FBSDKLoginKit (~> 4.20)
   - Heimdallr (from `https://github.com/trivago/Heimdallr.swift.git`, tag `3.6.0`)
   - IQKeyboardManager (~> 4.0.8)
   - Keys (from `Pods/CocoaPodsKeys`)
@@ -109,6 +103,7 @@ CHECKOUT OPTIONS:
     :tag: 3.6.0
 
 SPEC CHECKSUMS:
+  1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -117,8 +112,6 @@ SPEC CHECKSUMS:
   Diff: eceb93a3adf508574ba9b8560da185ace83de055
   DynamicColor: 4786d650c69da6c3f2cbfe068348288ec4e5521f
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
-  FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FBSDKCoreKit: 39a3569652983bf8666620dd334804c9057ae9b2
   FBSDKLoginKit: 17092ff61a18c54ca423aebc18c5acc2e5a4a728
   Heimdallr: 511a82ccb4eb4949b7080c5391ce28efe1ec73d5
@@ -138,6 +131,6 @@ SPEC CHECKSUMS:
   XCDYouTubeKit: 90690f9e3523735dc93b8024269d991b0cfffe78
   XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: 9e6a7aae8c5b569c94c33b142cb4d1d34d2a7286
+PODFILE CHECKSUM: aded8d87d29e47a25c11676f9283d34c14fa15ed
 
 COCOAPODS: 1.2.0

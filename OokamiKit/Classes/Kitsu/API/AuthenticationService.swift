@@ -44,8 +44,12 @@ public class AuthenticationService: BaseService {
     ///   - password: The password
     ///   - completion: Completion block which passes an error if it occured
     public func authenticate(usernameOrEmail: String, password: String, completion: @escaping (Error?) -> Void) {
-        currentUser.heimdallr.requestAccessToken(username: usernameOrEmail, password: password) { result in
-            self.onAuth(result: result, completion: completion)
+        
+        let trimmedUser = usernameOrEmail.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedPass = password.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        currentUser.heimdallr.requestAccessToken(username: trimmedUser, password: trimmedPass) { result in
+            self.onAuth(result: result, errorString: "Invalid username or password", completion: completion)
         }
     }
     
@@ -56,8 +60,10 @@ public class AuthenticationService: BaseService {
     ///   - register: Block which gets called when a user needs to be registered.
     ///   - completion: The completion block which passes an error if it occured.
     public func authenticate(facebookToken token: String, register: @escaping () -> Void, completion: @escaping (Error?) -> Void) {
+        
+        let trimmed = token.trimmingCharacters(in: .whitespacesAndNewlines)
         let params = ["provider": "facebook",
-                      "assertion": token]
+                      "assertion": trimmed]
         
         currentUser.heimdallr.requestAccessToken(grantType: "assertion", parameters: params) { result in
             
@@ -67,7 +73,7 @@ public class AuthenticationService: BaseService {
                 return
             }
             
-            self.onAuth(result: result, completion: completion)
+            self.onAuth(result: result, errorString: "Failed to authenticate with Facebook", completion: completion)
         }
     }
     
@@ -75,8 +81,9 @@ public class AuthenticationService: BaseService {
     ///
     /// - Parameters:
     ///   - result: The result of the authentication
+    ///   - errorString: The error string to show when an error occurs.
     ///   - completion: The completion block
-    private func onAuth(result: Result<Void, NSError>, completion: @escaping (Error?) -> Void) {
+    private func onAuth(result: Result<Void, NSError>, errorString: String, completion: @escaping (Error?) -> Void) {
         switch result {
         case .success:
             
@@ -86,8 +93,8 @@ public class AuthenticationService: BaseService {
                 completion(error)
             }
             
-        case .failure(let e):
-            completion(BaseService.ServiceError.error(description: e.localizedDescription))
+        case .failure(_):
+            completion(BaseService.ServiceError.error(description: errorString))
         }
     }
 

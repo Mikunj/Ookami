@@ -14,11 +14,7 @@ def project_pods
     pod 'RealmSwift', '~> 2.4.0'
     pod 'SwiftyJSON', '~> 3.1'
     pod 'Alamofire', '~> 4.3'
-
-    #Heimdallr has updated it version to 3.6, but the cocoapods specs don't have it yet
-    #So for the time being just get the files directly from their git, but when the specs have updated uncomment the line below
-    #pod 'Heimdallr', '~> 3.6'
-    pod 'Heimdallr', :git => 'https://github.com/trivago/Heimdallr.swift.git', :tag => '3.6.0'
+    pod 'Heimdallr', '~> 3.6'
 end
 
 def testing_pods
@@ -43,6 +39,7 @@ def ui_pods
     pod 'XCDYouTubeKit', '~> 2.5.0'
     pod 'DZNEmptyDataSet', '~> 1.8'
     pod 'FBSDKLoginKit', '~> 4.20'
+    pod '1PasswordExtension', '~> 1.8.4'
 end
 
 target 'Ookami' do

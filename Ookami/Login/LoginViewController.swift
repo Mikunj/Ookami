@@ -10,9 +10,7 @@ import UIKit
 import OokamiKit
 import NVActivityIndicatorView
 import FBSDKLoginKit
-
-//TODO: If we recieve a 403 from the grant then move user to the signup page and pre-populate the email field
-//https://stackoverflow.com/questions/29323244/facebook-ios-sdk-4-0how-to-get-user-email-address-from-fbsdkprofile
+import OnePasswordExtension
 
 class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     
@@ -25,6 +23,8 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     @IBOutlet weak var facebookButton: FBSDKLoginButton!
     
     @IBOutlet weak var signupButton: UIButton!
+    
+    @IBOutlet weak var onePasswordButton: UIButton!
     
     var onLoginSuccess: (() -> Void)?
     
@@ -43,6 +43,10 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         
         self.view.backgroundColor = Theme.Colors().primary
         loginButton.backgroundColor = Theme.Colors().secondary
+        onePasswordButton.tintColor = Theme.Colors().secondary
+        
+        //Check if we have 1 pass installed, if not hide the button
+        onePasswordButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
         
         usernameField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
         passwordField.addTarget(self, action: #selector(textFieldDidChange(textField:)), for: .editingChanged)
@@ -63,7 +67,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         
         AuthenticationService().authenticate(usernameOrEmail: username, password: password) { error in
             self.loginButton.isEnabled = true
-            self.hideIndicator()
+            self.stopAnimating()
             
             guard error == nil else {
                 ErrorAlert.showAlert(in: self, title: "Login Error", message: "\(error!.localizedDescription). Please try again.")
@@ -74,8 +78,34 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
         }
     }
     
+    @IBAction func didTapOnePassword(_ sender: Any) {
+        OnePasswordExtension.shared().findLogin(forURLString: "https://kitsu.io", for: self, sender: sender) { dict, error in
+            guard let dict = dict else {
+                if (error as! NSError).code != Int(AppExtensionErrorCodeCancelledByUser) {
+                    ErrorAlert.showAlert(in: self, title: "1 Password Error", message: "An error occured! \(error?.localizedDescription)")
+                }
+                return
+            }
+            
+            //Change in the main queue
+            DispatchQueue.main.async {
+                let username = dict[AppExtensionUsernameKey] as? String
+                let password = dict[AppExtensionPasswordKey] as? String
+                self.updateText(username: username, password: password)
+            }
+        }
+    }
+    
     @IBAction func didTapSignup(_ sender: UIButton) {
         showSignUp()
+    }
+    
+    func updateText(username: String?, password: String?) {
+        UIView.animate(withDuration: 0.2) {
+            self.usernameField.text = username
+            self.passwordField.text = password
+            self.updateLoginButton()
+        }
     }
     
     //Show the signup view
@@ -101,14 +131,7 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     
     func showIndicator() {
         let theme = Theme.ActivityIndicatorTheme()
-        startAnimating(theme.size, type: theme.type, color: theme.color)
-    }
-    
-    //This function is here so that it can be used in blocks but still calls stopAnimating in the main thread
-    func hideIndicator() {
-        DispatchQueue.main.async {
-            self.stopAnimating()
-        }
+        self.startAnimating(theme.size, type: theme.type, color: theme.color)
     }
     
 }
@@ -161,7 +184,10 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
         let params = ["fields": "email"]
         FBSDKGraphRequest(graphPath: "me", parameters: params).start { connection, result, error in
             
-            self.hideIndicator()
+            //Stop the loading indicator
+            DispatchQueue.main.async {
+                self.stopAnimating()
+            }
             
             let id = FBSDKAccessToken.current().userID
             
@@ -183,7 +209,12 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
     
     //Facebook login completed
     func onFacebookCompletion(error: Error?) {
-        self.hideIndicator()
+        
+        //Stop the loading indicator
+        DispatchQueue.main.async {
+            self.stopAnimating()
+        }
+        
         
         //Logout of facebook
         FBSDKLoginManager().logOut()
