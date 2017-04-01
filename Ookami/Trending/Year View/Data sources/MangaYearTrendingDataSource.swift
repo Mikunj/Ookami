@@ -12,24 +12,29 @@ import OokamiKit
 class MangaYearTrendingDataSource: MediaYearTrendingDataSource {
     
     //The filter we are going to use
-    var filter: MangaFilter
+    var initialFilter: MangaFilter
     
     /// Create an Manga Year Trending Data Source
     ///
     /// - Parameter filter: The initial filter to use.
     init(filter: MangaFilter = MangaFilter()) {
-        self.filter = filter.copy()
+        self.initialFilter = filter.copy()
     }
     
     override func paginatedService(_ completion: @escaping () -> Void) -> PaginatedService? {
-        
         guard currentYear > 0 else { return nil }
-        
-        //Use a copied version of the filter so we don't get any unintended value changes
-        let copiedFilter = filter.copy()
-        copiedFilter.year = RangeFilter<Int>(start: currentYear, end: currentYear)
-        
-        return MangaService().find(title: "", filters: copiedFilter) { [weak self] ids, error, original in
+        return service(for: filter(), completion: completion)
+    }
+    
+    //Get the filter with the current year applied
+    func filter() -> MangaFilter {
+        let filter = initialFilter.copy()
+        filter.year = RangeFilter<Int>(start: currentYear, end: currentYear)
+        return filter
+    }
+    
+    func service(for filter: MangaFilter, completion: @escaping () -> Void) -> PaginatedService {
+        return DiscoverService().find(type: .manga, title: "", filters: filter) { [weak self] ids, error, original in
             
             completion()
             

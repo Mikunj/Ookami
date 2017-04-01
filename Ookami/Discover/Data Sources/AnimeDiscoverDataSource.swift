@@ -29,7 +29,7 @@ final class AnimeDiscoverDataSource: MediaDiscoverDataSource {
     
     /// Get the paginated service for the current search string
     override func paginatedService(_ completion: @escaping () -> Void) -> PaginatedService {
-        return AnimeService().find(title: currentSearch, filters: filter) { [weak self] ids, error, original in
+        return DiscoverService().find(type: .anime, title: currentSearch, filters: filter) { [weak self] ids, error, original in
             
             completion()
             

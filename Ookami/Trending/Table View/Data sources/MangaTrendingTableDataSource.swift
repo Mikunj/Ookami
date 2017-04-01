@@ -29,7 +29,7 @@ class MangaTrendingTableDataSource: MediaTrendingTableDataSource {
     }
     
     override func fetchMediaIds(_ completion: @escaping ([Int]?, Error?) -> Void) {
-        MangaService().find(title: "", filters: filter, limit: 10) { ids, error, _ in
+        DiscoverService().find(type: .manga, title: "", filters: filter, limit: 10) { ids, error, _ in
             completion(ids, error)
         }.start()
     }

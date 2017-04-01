@@ -36,7 +36,7 @@ class AnimeYearTrendingDataSource: MediaYearTrendingDataSource {
     }
     
     func service(for filter: AnimeFilter, completion: @escaping () -> Void) -> PaginatedService {
-        return AnimeService().find(title: "", filters: filter) { [weak self] ids, error, original in
+        return DiscoverService().find(type: .anime, title: "", filters: filter) { [weak self] ids, error, original in
             
             completion()
             
