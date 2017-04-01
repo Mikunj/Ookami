@@ -214,29 +214,7 @@ class ItemViewController: UIViewController {
     
     /// An array of item sizes to use
     func itemSize() -> [CGSize] {
-        
-        //The ratio of the poster (width / height)
-        let posterRatio: Double = 100 / 150
-        
-        //We need to work out heights from the given widths
-        let widths = stride(from: 100, to: 140, by: 5)
-        let sizes = widths.map { width -> CGSize in
-            let dWidth = Double(width)
-            let height = floor((1 / posterRatio) * dWidth)
-            return CGSize(width: dWidth, height: height)
-        }
-        
-        switch type {
-        case .detailGrid:
-            
-            //We need to add 25 to accomodate for the detail label at the bottom
-            return sizes.map { size -> CGSize in
-                return CGSize(width: size.width, height: size.height + 25)
-            }
-        case .simpleGrid:
-            //Since the poster fills the whole view, we just pass in the computed sizes
-            return sizes
-        }
+        return ItemViewSizeHandler.itemSizes(for: type)
     }
     
     func handleRefresh(_ refreshControl: UIRefreshControl) {

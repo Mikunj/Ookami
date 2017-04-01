@@ -156,7 +156,10 @@ class AnimeSpec: QuickSpec {
                     expect(anime.canonicalTitle).to(equal("Hunter x Hunter (2011)"))
                     expect(anime.titles).to(haveCount(3))
                     expect(anime.averageRating).to(equal(4.4999011528989))
-                    expect(anime.posterImage).to(equal("https://media.kitsu.io/anime/poster_images/6448/small.jpg?1431828590"))
+                    
+                    let posterLink = UIDevice.current.userInterfaceIdiom == .pad ? "https://media.kitsu.io/anime/poster_images/6448/medium.jpg?1431828590" : "https://media.kitsu.io/anime/poster_images/6448/small.jpg?1431828590"
+                    expect(anime.posterImage).to(equal(posterLink))
+                    
                     expect(anime.coverImage).to(equal("https://media.kitsu.io/anime/cover_images/6448/original.jpg?1435367957"))
                     expect(anime.episodeCount).to(equal(148))
                     expect(anime.episodeLength).to(equal(-1))

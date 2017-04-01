@@ -163,7 +163,10 @@ extension Anime: JSONParsable {
         anime.nsfw = attributes["nsfw"].boolValue
         anime.popularityRank = attributes["popularityRank"].int ?? -1
         anime.ratingRank = attributes["ratingRank"].int ?? -1
-        anime.posterImage = attributes["posterImage"]["small"].stringValue
+        
+        //Poster & Covers
+        let posterSize = UIDevice.current.userInterfaceIdiom == .pad ? "medium" : "small"
+        anime.posterImage = attributes["posterImage"][posterSize].stringValue
         anime.coverImage = attributes["coverImage"]["original"].stringValue
         
         //Add titles

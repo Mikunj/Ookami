@@ -127,7 +127,10 @@ extension Manga: JSONParsable {
         manga.popularityRank = attributes["popularityRank"].int ?? -1
         manga.ratingRank = attributes["ratingRank"].int ?? -1
         manga.nsfw = attributes["nsfw"].boolValue
-        manga.posterImage = attributes["posterImage"]["small"].stringValue
+        
+        //Poster & Cover
+        let posterSize = UIDevice.current.userInterfaceIdiom == .pad ? "medium" : "small"
+        manga.posterImage = attributes["posterImage"][posterSize].stringValue
         manga.coverImage = attributes["coverImage"]["original"].stringValue
         
         
