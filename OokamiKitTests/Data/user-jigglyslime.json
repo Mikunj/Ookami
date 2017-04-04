@@ -30,7 +30,8 @@
             "original": "https://static.hummingbird.me/users/cover_images/000/002/875/original/2875-rainbowish_fb_cover_by_n3x0n-d5fqohg.png?1389986097"
         },
         "email": "jigglyslime@kitsu.io",
-        "password": null
+        "password": null,
+        "ratingSystem": "simple"
     },
     "relationships": {
         "waifu": {

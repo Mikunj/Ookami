@@ -91,8 +91,8 @@ class LoginViewController: UIViewController, NVActivityIndicatorViewable {
     @IBAction func didTapOnePassword(_ sender: Any) {
         OnePasswordExtension.shared().findLogin(forURLString: "https://kitsu.io", for: self, sender: sender) { dict, error in
             guard let dict = dict else {
-                if (error as! NSError).code != Int(AppExtensionErrorCodeCancelledByUser) {
-                    ErrorAlert.showAlert(in: self, title: "1 Password Error", message: "An error occured! \(error?.localizedDescription)")
+                if (error! as NSError).code != Int(AppExtensionErrorCodeCancelledByUser) {
+                    ErrorAlert.showAlert(in: self, title: "1 Password Error", message: "An error occured! \(error!.localizedDescription)")
                 }
                 return
             }

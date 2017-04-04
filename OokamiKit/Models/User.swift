@@ -48,6 +48,12 @@ public class User: Object, Cacheable {
     public dynamic var avatarImage = ""
     public dynamic var coverImage = ""
     
+    //Rating
+    public dynamic var ratingSystemRaw = ""
+    public var ratingSystem: RatingSystem? {
+        return RatingSystem(rawValue: ratingSystemRaw)
+    }
+    
     public dynamic var name = ""
     public let pastNames = List<UserPastName>()
     
@@ -56,7 +62,7 @@ public class User: Object, Cacheable {
     }
     
     override public static func ignoredProperties() -> [String] {
-        return ["currentUser"]
+        return []
     }
     
     /// MARK:- Cacheable
@@ -116,6 +122,7 @@ extension User: JSONParsable {
         user.gender = attributes["gender"].stringValue
         user.avatarImage = attributes["avatar"]["original"].stringValue
         user.coverImage = attributes["coverImage"]["original"].stringValue
+        user.ratingSystemRaw = attributes["ratingSystem"].stringValue
         
         //Parse past names
         let pastNamesJSON = attributes["pastNames"]        
@@ -129,5 +136,13 @@ extension User: JSONParsable {
         return user
     }
     
+}
+
+//MARK:- Enums
+extension User {
+    public enum RatingSystem: String {
+        case advanced
+        case simple
+    }
 }
 

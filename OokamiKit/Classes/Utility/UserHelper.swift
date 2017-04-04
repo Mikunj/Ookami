@@ -22,7 +22,7 @@ public class UserHelper {
     ///   - array: The array of entry ids that should not be deleted.
     ///   - type: The type of entries to check.
     ///   - id: The user id to check library of.
-    @discardableResult static func deleteEntries(notIn array: [Int], type: Media.MediaType, forUser id: Int) {
+    static func deleteEntries(notIn array: [Int], type: Media.MediaType, forUser id: Int) {
         let entries = LibraryEntry.belongsTo(user: id, type: type).filter("NOT id in %@", array)
         
         database.delete(entries)

@@ -182,7 +182,7 @@ extension IconDrawable {
         
         // Registers font dynamically
         if CTFontManagerRegisterFontsForURL(url, .none, &error) == false || error != nil {
-            assertionFailure("Failed registering font with the postscript name '\(fontName)' at path '\(url)' with error: \(error).")
+            assertionFailure("Failed registering font with the postscript name '\(fontName)' at path '\(url)' with error: \(String(describing: error)).")
         }
         
         print("Font '\(familyName)' registered successfully!")
@@ -199,7 +199,7 @@ extension IconDrawable {
         var error: Unmanaged<CFError>? = nil
         
         if CTFontManagerUnregisterFontsForURL(url, .none, &error) == false || error != nil {
-            assertionFailure("Failed unregistering font with name '\(familyName)' at path '\(url)' with error: \(error).")
+            assertionFailure("Failed unregistering font with name '\(familyName)' at path '\(url)' with error: \(String(describing: error)).")
         }
         
         print("Font '\(familyName)' unregistered successfully!")

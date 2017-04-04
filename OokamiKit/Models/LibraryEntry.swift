@@ -43,51 +43,21 @@ public class Media: Object, GettableObject {
 
 public class LibraryEntry: Object, Cacheable {
     
-    public enum Status: String {
-        case current
-        case planned
-        case completed
-        case onHold = "on_hold"
-        case dropped
-        
-        public static let all: [Status] = [.current, .planned, .completed, .onHold, .dropped]
-        
-        ///Get the string representation of the status for a given media
-        public func toString(forMedia type: Media.MediaType?) -> String {
-            switch self {
-            case .current:
-                if type == nil {
-                    return "Current"
-                }
-                return type == .anime ? "Currently Watching": "Currently Reading"
-                
-            case .planned:
-                if type == nil {
-                    return "Planning"
-                }
-                return type == .anime ? "Plan to Watch": "Plan to Read"
-                
-            case .completed:
-                return "Completed"
-                
-            case .onHold:
-                return "On Hold"
-                
-            case .dropped:
-                return "Dropped"
-            }
-        }
-    }
-    
+    //MARK:- Properties
     public dynamic var id = -1
     public dynamic var progress = 0
     public dynamic var reconsuming = false
     public dynamic var reconsumeCount = 0
     public dynamic var notes = ""
     public dynamic var isPrivate = false
-    public dynamic var rating = 0
     public dynamic var updatedAt: Date = Date()
     public dynamic var media: Media? = nil
+    
+    //Ratings
+    public dynamic var rating = 0
+    public var simpleRating: SimpleRating? {
+        return SimpleRating.from(rating: rating)
+    }
     
     /**
      For `LibraryEntry` it is more convinient to add a getter and setter to the 'status' property so that we can modify it easily that way due to enums
@@ -130,6 +100,22 @@ public class LibraryEntry: Object, Cacheable {
         }
         
         return self.updatedAt >= dbEntry.updatedAt
+    }
+    
+    //MARK:- Equatable
+    public override func isEqual(_ object: Any?) -> Bool {
+        guard let other = object as? LibraryEntry else {
+            return false
+        }
+        
+        return self.id == other.id &&
+            self.progress == other.progress &&
+            self.rawStatus == other.rawStatus &&
+            self.reconsuming == other.reconsuming &&
+            self.reconsumeCount == other.reconsumeCount &&
+            self.notes == other.notes &&
+            self.isPrivate == other.isPrivate &&
+            self.rating == other.rating
     }
     
     //MARK:- Cacheable
@@ -211,8 +197,12 @@ extension LibraryEntry: JSONParsable {
         
         //TODO: Revert this back to
         //entry.rating = attributes["rating"].intValue
-        //After new rating is out
-        entry.rating = Int(attributes["rating"].doubleValue * 4)
+        //After nuck switches back
+        if attributes["ratingTwenty"].exists() {
+            entry.rating = attributes["ratingTwenty"].intValue
+        } else {
+            entry.rating = Int(attributes["rating"].doubleValue * 4)
+        }
         
         entry.updatedAt = Date.from(string: attributes["updatedAt"].stringValue) ?? Date()
         
@@ -258,7 +248,7 @@ extension LibraryEntry {
         attributes["status"] = rawStatus
         
         let rating: Any = self.rating > 0 ? self.rating : NSNull()
-        attributes["rating"] = rating
+        attributes["ratingTwenty"] = rating
         
         var params: [String: Any] = [:]
         params["id"] = id
@@ -288,24 +278,6 @@ extension LibraryEntry {
     }
 }
 
-//MARK:- Equatable
-extension LibraryEntry {
-    public override func isEqual(_ object: Any?) -> Bool {
-        guard let other = object as? LibraryEntry else {
-            return false
-        }
-        
-        return self.id == other.id &&
-            self.progress == other.progress &&
-            self.rawStatus == other.rawStatus &&
-            self.reconsuming == other.reconsuming &&
-            self.reconsumeCount == other.reconsumeCount &&
-            self.notes == other.notes &&
-            self.isPrivate == other.isPrivate &&
-            self.rating == other.rating
-    }
-}
-
 //MARK:- Updating
 extension LibraryEntry {
     
@@ -328,6 +300,89 @@ extension LibraryEntry {
         
         //If we get -1 then we don't have a max count for the media
         return maxCount == nil || maxCount! < 0 ? nil : maxCount
+    }
+}
+
+//MARK:- Enums
+extension LibraryEntry {
+    
+    public enum Status: String {
+        case current
+        case planned
+        case completed
+        case onHold = "on_hold"
+        case dropped
+        
+        public static let all: [Status] = [.current, .planned, .completed, .onHold, .dropped]
+        
+        ///Get the string representation of the status for a given media
+        public func toString(forMedia type: Media.MediaType?) -> String {
+            switch self {
+            case .current:
+                if type == nil {
+                    return "Current"
+                }
+                return type == .anime ? "Currently Watching": "Currently Reading"
+                
+            case .planned:
+                if type == nil {
+                    return "Planning"
+                }
+                return type == .anime ? "Plan to Watch": "Plan to Read"
+                
+            case .completed:
+                return "Completed"
+                
+            case .onHold:
+                return "On Hold"
+                
+            case .dropped:
+                return "Dropped"
+            }
+        }
+    }
+    
+    public enum SimpleRating: String {
+        case awful
+        case meh
+        case good
+        case great
+        
+        public static let all: [SimpleRating] = [.awful, .meh, .good, .great]
+        
+        /// Get the SimpleRating from the given `rating`.
+        ///
+        /// - Parameter rating: A rating between 2 and 20
+        /// - Returns: The SimpleRating of the `rating` or nil if not within valid bounds.
+        public static func from(rating: Int) -> SimpleRating? {
+            guard rating >= 2 && rating <= 20 else { return nil }
+            
+            //The ratings are mapped to a static value of 2/8/14/20
+            switch rating {
+            case let x where x < 8:
+                return .awful
+                
+            case let x where x < 14:
+                return .meh
+                
+            case let x where x < 20:
+                return .good
+                
+            default:
+                return .great
+            }
+        }
+        
+        /// Convert the SimpleRating to an int value
+        ///
+        /// - Returns: The int value of the SimpleRating
+        public func toRating() -> Int {
+            let all = SimpleRating.all
+            let values = [2, 8, 14, 20]
+            
+            //We can force unwrap the value because we are 100% certain the SimpleRating will be in the all array.
+            return values[all.index(of: self)!]
+        }
     }
 }
 

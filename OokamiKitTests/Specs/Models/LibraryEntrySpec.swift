@@ -29,6 +29,33 @@ class LibraryEntrySpec: QuickSpec {
                 }
             }
             
+            context("Simple Rating") {
+                it("should correctly convert ratings to simple ratings") {
+                    let ratings = [2, 7, 8, 13, 14, 19, 20]
+                    let simpleRatings: [LibraryEntry.SimpleRating] = [.awful, .awful, .meh, .meh, .good, .good, .great]
+                    for i in 0..<ratings.count {
+                        let simple = LibraryEntry.SimpleRating.from(rating: ratings[i])
+                        expect(simple).to(equal(simpleRatings[i]))
+                    }
+                    
+                    let invalidRatings = [0, 1, 21, 22]
+                    for i in 0..<invalidRatings.count {
+                        let simple = LibraryEntry.SimpleRating.from(rating: invalidRatings[i])
+                        expect(simple).to(beNil())
+                    }
+                }
+                
+                it("should correctly convert simple ratings to integer rating") {
+                    let simpleRatings: [LibraryEntry.SimpleRating] = [.awful, .meh, .good, .great]
+                    let ratings = [2, 8, 14, 20]
+                    
+                    for i in 0..<simpleRatings.count {
+                        let r = simpleRatings[i].toRating()
+                        expect(r).to(equal(ratings[i]))
+                    }
+                }
+            }
+            
             context("Max Progress") {
                 it("should return nil if media is not set") {
                     let e = LibraryEntry()
@@ -293,7 +320,6 @@ class LibraryEntrySpec: QuickSpec {
                     expect(entry.notes).to(equal(""))
                     expect(entry.isPrivate).to(beTrue())
                     
-                    //TODO: When new rating comes out, need to update this to reflect
                     expect(entry.rating).to(equal(20))
                     
                     let d = DateFormatter()

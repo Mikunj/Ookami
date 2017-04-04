@@ -30,8 +30,18 @@ extension LibraryEntry: ItemDataTransformable {
         //An array of the details to include
         var details: [String] = []
         if self.rating > 0 {
-            let rating = Double(self.rating) / 2
-            details.append("\(rating) ★")
+            
+            let system = self.user?.ratingSystem ?? .advanced
+            
+            switch system {
+            case .advanced:
+                let rating = Double(self.rating) / 2
+                details.append("\(rating) ★")
+            case .simple:
+                if let simple = self.simpleRating {
+                    details.append(simple.rawValue.capitalized)
+                }
+            }
         }
         
         

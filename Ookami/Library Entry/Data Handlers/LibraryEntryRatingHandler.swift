@@ -17,13 +17,40 @@ class LibraryEntryRatingHandler: LibraryEntryDataHandler {
     }
     
     func tableData(for entry: LibraryEntry) -> LibraryEntryViewData.TableData {
-        let ratingString = entry.rating > 0 ? String(Double(entry.rating) / 2) : "-"
+        
+        let system = entry.user?.ratingSystem ?? .advanced
+        var ratingString = "-"
+        
+        switch system {
+        case .advanced:
+            if entry.rating > 0 {
+                ratingString = String(Double(entry.rating) / 2)
+            }
+        case .simple:
+            if let simple = entry.simpleRating {
+                ratingString = simple.rawValue.capitalized
+            }
+        }
+        
+        
         return LibraryEntryViewData.TableData(type: .string, value: ratingString, heading: heading)
     }
     
     //The handling of tap
     func didSelect(updater: LibraryEntryUpdater, cell: UITableViewCell, controller: LibraryEntryViewController) {
         
+        let system = updater.entry.user?.ratingSystem ?? .advanced
+        
+        switch system {
+        case .advanced:
+            showAdvancedRating(updater: updater, cell: cell, controller: controller)
+        case .simple:
+            showSimpleRating(updater: updater, cell: cell, controller: controller)
+        }
+        
+    }
+    
+    private func showAdvancedRating(updater: LibraryEntryUpdater, cell: UITableViewCell, controller: LibraryEntryViewController) {
         var ratings = Array(stride(from: 1.0, to: 10.5, by: 0.5))
         ratings.insert(0, at: 0)
         
@@ -37,6 +64,33 @@ class LibraryEntryRatingHandler: LibraryEntryDataHandler {
             
             //We need to convert 1 - 10 to 2 - 20
             let newRating = Int(ratings[index] * 2)
+            updater.update(rating: newRating)
+            controller.reloadData()
+        }, cancel: { _ in }, origin: cell)
+        
+    }
+    
+    private func showSimpleRating(updater: LibraryEntryUpdater, cell: UITableViewCell, controller: LibraryEntryViewController) {
+        
+        let ratings = LibraryEntry.SimpleRating.all
+        
+        //The string representation of the ratings
+        var stringRatings = ratings.map { $0.rawValue.capitalized }
+        stringRatings.insert("-", at: 0)
+        
+        //The int representation of the ratings
+        var intRatings = ratings.map { $0.toRating() }
+        intRatings.insert(0, at: 0)
+        
+        //Initial rating
+        var initial = 0
+        if let simple = updater.entry.simpleRating,
+            let index = ratings.index(of: simple) {
+            initial = index + 1
+        }
+        
+        ActionSheetStringPicker.show(withTitle: "Rating", rows: stringRatings, initialSelection: initial, doneBlock: { picker, index, value in
+            let newRating = intRatings[index]
             updater.update(rating: newRating)
             controller.reloadData()
         }, cancel: { _ in }, origin: cell)

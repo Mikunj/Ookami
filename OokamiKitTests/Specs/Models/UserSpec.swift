@@ -92,6 +92,7 @@ class UserSpec: QuickSpec {
                     expect(user.gender).to(equal(""))
                     expect(user.avatarImage).to(equal("https://static.hummingbird.me/users/avatars/000/002/875/original/114367.jpg?1392948358"))
                     expect(user.coverImage).to(equal("https://static.hummingbird.me/users/cover_images/000/002/875/original/2875-rainbowish_fb_cover_by_n3x0n-d5fqohg.png?1389986097"))
+                    expect(user.ratingSystemRaw).to(equal("simple"))
                     
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"
