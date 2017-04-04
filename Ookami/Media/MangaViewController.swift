@@ -119,8 +119,8 @@ extension MangaViewController {
             info.append(("Genres", genres.joined(separator: ", ")))
         }
         
-        let rating = manga.averageRating > 0 ? String(format: "%.2f", manga.averageRating) : "?"
-        info.append(("Rating", rating))
+        let rating = manga.averageRating > 0 ? String(format: "%.2f%%", manga.averageRating) : "?"
+        info.append(("Average Rating", rating))
         
         let popularity = manga.popularityRank > 0 ? manga.popularityRank.description : "?"
         info.append(("Popularity", "#\(popularity)"))

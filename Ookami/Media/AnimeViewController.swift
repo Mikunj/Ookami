@@ -119,8 +119,8 @@ extension AnimeViewController {
             info.append(("Genres", genres.joined(separator: ", ")))
         }
         
-        let rating = anime.averageRating > 0 ? String(format: "%.2f", anime.averageRating) : "?"
-        info.append(("Rating", rating))
+        let rating = anime.averageRating > 0 ? String(format: "%.2f%%", anime.averageRating) : "?"
+        info.append(("Average Rating", rating))
         
         let popularity = anime.popularityRank > 0 ? anime.popularityRank.description : "?"
         info.append(("Popularity", "#\(popularity)"))
