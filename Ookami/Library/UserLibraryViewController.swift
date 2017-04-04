@@ -10,6 +10,7 @@ import UIKit
 import BTNavigationDropdownMenu
 import OokamiKit
 import Cartography
+import NVActivityIndicatorView
 
 //TODO: Need to add PagedLibraryDataSource
 //TODO: Move settings to a page later
@@ -32,6 +33,11 @@ final class UserLibraryViewController: UIViewController {
     //The library view controllers
     fileprivate var animeController: LibraryViewController?
     fileprivate var mangaController: LibraryViewController?
+    
+    //The activity indicator for this view
+    var activityIndicator: FullScreenActivityIndicator = {
+        return FullScreenActivityIndicator()
+    }()
     
     //The mail composer to use
     //TODO: Move this out after we have a proper settings page
@@ -119,6 +125,8 @@ final class UserLibraryViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = settingsButton
         self.navigationItem.rightBarButtonItem = filterBarButton
         
+        activityIndicator.add(to: self.view)
+        
         show(.anime)
     }
     
@@ -130,6 +138,12 @@ final class UserLibraryViewController: UIViewController {
         mangaController?.view.isHidden = type != .manga
     }
     
+    //Reload the entries
+    func reload() {
+        animeController?.reloadData()
+        mangaController?.reloadData()
+    }
+    
     func settingsTapped() {
         //TODO: Move this out of here after main pages (discovery, user, library) have been implemented
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -137,6 +151,26 @@ final class UserLibraryViewController: UIViewController {
         alert.popoverPresentationController?.barButtonItem = settingsButton
         
         if CurrentUser().isLoggedIn() {
+            
+            let other: User.RatingSystem = CurrentUser().user?.ratingSystem == .advanced ? .simple : .advanced
+            let otherString = other.rawValue.capitalized
+            let changeRating = UIAlertAction(title: "Change to \(otherString) Rating", style: .default) { _ in
+                
+                self.activityIndicator.showIndicator()
+                
+                UserService().update(ratingSystem: other) { error in
+                    DispatchQueue.main.async {
+                        self.activityIndicator.hideIndicator()
+                        self.reload()
+                        
+                        if let error = error {
+                            ErrorAlert.showAlert(in: self, title: "Error Occurred", message: error.localizedDescription)
+                        }
+                    }
+                    
+                }
+            }
+            alert.addAction(changeRating)
             
             let feedback = UIAlertAction(title: "Send Feedback", style: .default) { _ in
                 self.mailComposer.present()
@@ -185,7 +219,7 @@ extension UserLibraryViewController: LibraryDataSourceParent {
     }
     
     func didUpdateEntries() {
-        animeController?.reload()
-        mangaController?.reload()
+        animeController?.reloadTitles()
+        mangaController?.reloadTitles()
     }
 }

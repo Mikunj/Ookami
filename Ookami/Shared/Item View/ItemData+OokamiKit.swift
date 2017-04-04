@@ -36,7 +36,13 @@ extension LibraryEntry: ItemDataTransformable {
             switch system {
             case .advanced:
                 let rating = Double(self.rating) / 2
-                details.append("\(rating) ★")
+                
+                //Display rating as full value or half value
+                //This avoids ugly displays like 10.0
+                let format = rating.truncatingRemainder(dividingBy: 1.0) == 0.0 ? "%.0f" : "%.1f"
+                let ratingString = String(format: format, rating)
+                
+                details.append("\(ratingString) ★")
             case .simple:
                 if let simple = self.simpleRating {
                     details.append(simple.rawValue.capitalized)

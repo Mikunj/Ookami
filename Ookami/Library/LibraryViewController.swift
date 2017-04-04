@@ -96,8 +96,14 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         didFinishLoading = true
     }
     
-    func reload() {
+    func reloadTitles() {
         self.updateItemControllerTitles()
+    }
+    
+    func reloadData() {
+        for controller in itemControllers.values {
+            controller.reloadData()
+        }
     }
     
     private func updateItemControllerTitles() {

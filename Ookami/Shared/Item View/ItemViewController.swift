@@ -33,7 +33,7 @@ protocol ItemViewControllerDataSource: class {
 //The delegate which is implemented by the controller
 protocol ItemViewControllerDelegate: class {
     func scrollToTop(animated: Bool)
-    func didReloadItems(dataSource: ItemViewControllerDataSource)
+    func didReloadItems()
     func showActivityIndicator()
     func hideActivityIndicator()
 }
@@ -81,7 +81,7 @@ class ItemViewController: UIViewController {
             
             //Reload the data in the view
             collectionView.setContentOffset(CGPoint.zero, animated: true)
-            data = _source == nil ? [] : _source!.items()
+            data = _source?.items() ?? []
         }
     }
     
@@ -221,6 +221,11 @@ class ItemViewController: UIViewController {
         refreshControl.endRefreshing()
         dataSource?.refresh()
     }
+    
+    func reloadData() {
+        data = dataSource?.items() ?? []
+        collectionView.reloadEmptyDataSet()
+    }
 }
 
 //MARK:- Indicator Info Provider
@@ -236,9 +241,8 @@ extension ItemViewController: ItemViewControllerDelegate {
         collectionView.setContentOffset(.zero, animated: animated)
     }
     
-    func didReloadItems(dataSource: ItemViewControllerDataSource) {
-        data = dataSource.items()
-        collectionView.reloadEmptyDataSet()
+    func didReloadItems() {
+        reloadData()
     }
     
     func showActivityIndicator() {

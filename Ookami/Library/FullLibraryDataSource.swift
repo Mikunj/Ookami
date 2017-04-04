@@ -14,7 +14,7 @@ import RealmSwift
 final class FullLibraryDataSource: LibraryDataSource {
     weak var delegate: ItemViewControllerDelegate? {
         didSet {
-            delegate?.didReloadItems(dataSource: self)
+            delegate?.didReloadItems()
             showIndicator()
         }
     }
@@ -128,7 +128,7 @@ final class FullLibraryDataSource: LibraryDataSource {
                 self.fetchedEntries = true
                 
                 //Tell delegate to reload the items
-                self.delegate?.didReloadItems(dataSource: self)
+                self.delegate?.didReloadItems()
                 
                 //Hide the indicator if we have recieved all the results
                 self.delegate?.hideActivityIndicator()
@@ -192,7 +192,7 @@ extension FullLibraryDataSource {
             self.sortedResults = sorted
             
             //Reload the data
-            self.delegate?.didReloadItems(dataSource: self)
+            self.delegate?.didReloadItems()
         }
     }
     

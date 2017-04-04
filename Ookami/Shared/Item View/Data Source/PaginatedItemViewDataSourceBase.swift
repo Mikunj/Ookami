@@ -15,7 +15,7 @@ class PaginatedItemViewDataSourceBase: ItemViewControllerDataSource {
     //The delegate
     weak var delegate: ItemViewControllerDelegate? {
         didSet {
-            delegate?.didReloadItems(dataSource: self)
+            delegate?.didReloadItems()
             showIndicator()
         }
     }
@@ -23,7 +23,7 @@ class PaginatedItemViewDataSourceBase: ItemViewControllerDataSource {
     //The items to show
     var itemData: [ItemData] = [] {
         didSet {
-            self.delegate?.didReloadItems(dataSource: self)
+            self.delegate?.didReloadItems()
         }
     }
     
