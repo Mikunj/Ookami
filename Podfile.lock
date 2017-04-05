@@ -1,7 +1,7 @@
 PODS:
   - 1PasswordExtension (1.8.4)
   - ActionSheetPicker-3.0 (2.2.0)
-  - Alamofire (4.3.0)
+  - Alamofire (4.4.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -9,7 +9,7 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
   - BTNavigationDropdownMenu (0.4.1)
-  - Cartography (1.0.1)
+  - Cartography (1.1.0)
   - Diff (0.5.0)
   - DynamicColor (3.2.1)
   - DZNEmptyDataSet (1.8.1)
@@ -23,9 +23,9 @@ PODS:
     - Result (~> 3.0)
   - IQKeyboardManager (4.0.8)
   - Keys (1.0.0)
-  - Kingfisher (3.5.0)
-  - Nimble (5.1.1)
-  - NVActivityIndicatorView (3.5)
+  - Kingfisher (3.6.1)
+  - Nimble (6.1.0)
+  - NVActivityIndicatorView (3.6.0)
   - OHHTTPStubs (5.2.2):
     - OHHTTPStubs/Default (= 5.2.2)
   - OHHTTPStubs/Core (5.2.2)
@@ -41,12 +41,12 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (5.2.2)
   - OHHTTPStubs/Swift (5.2.2):
     - OHHTTPStubs/Core
-  - Quick (1.0.0)
-  - Realm (2.4.3):
-    - Realm/Headers (= 2.4.3)
-  - Realm/Headers (2.4.3)
-  - RealmSwift (2.4.3):
-    - Realm (= 2.4.3)
+  - Quick (1.1.0)
+  - Realm (2.5.0):
+    - Realm/Headers (= 2.5.0)
+  - Realm/Headers (2.5.0)
+  - RealmSwift (2.5.0):
+    - Realm (= 2.5.0)
   - Result (3.2.1)
   - Reusable (4.0.0):
     - Reusable/Storyboard (= 4.0.0)
@@ -61,9 +61,9 @@ PODS:
 DEPENDENCIES:
   - 1PasswordExtension (~> 1.8.4)
   - ActionSheetPicker-3.0 (~> 2.2.0)
-  - Alamofire (~> 4.3)
+  - Alamofire (~> 4.4)
   - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`, branch `swift-3.0`)
-  - Cartography (~> 1.0)
+  - Cartography (~> 1.1)
   - Diff (~> 0.5)
   - DynamicColor (~> 3.2.1)
   - DZNEmptyDataSet (~> 1.8)
@@ -71,13 +71,13 @@ DEPENDENCIES:
   - Heimdallr (~> 3.6)
   - IQKeyboardManager (~> 4.0.8)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Kingfisher (~> 3.5)
-  - Nimble (~> 5.1)
-  - NVActivityIndicatorView (~> 3.5)
+  - Kingfisher (~> 3.6)
+  - Nimble (~> 6.1)
+  - NVActivityIndicatorView (~> 3.6)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
-  - Quick (~> 1.0)
-  - RealmSwift (~> 2.4.0)
+  - Quick (~> 1.1)
+  - RealmSwift (~> 2.5.0)
   - Reusable (~> 4.0)
   - SKPhotoBrowser (~> 4.0.0)
   - SwiftyJSON (~> 3.1)
@@ -99,10 +99,10 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
-  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
-  Cartography: c1460e99395b824d9d75360b0382faeb0b33dcd7
+  Cartography: 0538ccb4044acbbda2266335fc58cb4228794d90
   Diff: eceb93a3adf508574ba9b8560da185ace83de055
   DynamicColor: 4786d650c69da6c3f2cbfe068348288ec4e5521f
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -111,13 +111,13 @@ SPEC CHECKSUMS:
   Heimdallr: 7b17b8fffd77ea82fe331418408af7b7a5a5d7a4
   IQKeyboardManager: 1a8189fa153bf09044355ee0ad36826f6767e7f7
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Kingfisher: 7c62087039d93d26c54c8dd9b0b588d2ce55cef6
-  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
-  NVActivityIndicatorView: e5252b082f93885f0bfc24c318719b4eaabcd37b
+  Kingfisher: 2f31cb75f3e98d3d4c406cbdcd9b263e956cfa67
+  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
+  NVActivityIndicatorView: c7c1c4300b418bd9ed06459e78d4df859ddbe31f
   OHHTTPStubs: 34d9d0994e64fcf8552dbfade5ce82ada913ee31
-  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
-  Realm: e08d60b0048ccccd3949c8c28a92c4db5712d7e9
-  RealmSwift: 30d49739ccb3385d201242736ca4dda56aec9dfc
+  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
+  Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
+  RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
   Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
   SKPhotoBrowser: bc33eca22f4abd6b99d8d260509ca30c01752a87
@@ -125,6 +125,6 @@ SPEC CHECKSUMS:
   XCDYouTubeKit: 90690f9e3523735dc93b8024269d991b0cfffe78
   XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: 6478a744c4030ee07e1b11177773b1b5099fdfba
+PODFILE CHECKSUM: 167f5c9f1c9f6eb3cc4d28bdf4bd946728db47c8
 
 COCOAPODS: 1.2.0

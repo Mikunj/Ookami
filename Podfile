@@ -11,25 +11,25 @@ plugin 'cocoapods-keys', {
  ]}
 
 def project_pods
-    pod 'RealmSwift', '~> 2.4.0'
+    pod 'RealmSwift', '~> 2.5.0'
     pod 'SwiftyJSON', '~> 3.1'
-    pod 'Alamofire', '~> 4.3'
+    pod 'Alamofire', '~> 4.4'
     pod 'Heimdallr', '~> 3.6'
 end
 
 def testing_pods
-    pod 'Quick', '~> 1.0'
-    pod 'Nimble', '~> 5.1'
+    pod 'Quick', '~> 1.1'
+    pod 'Nimble', '~> 6.1'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
 end
 
 def ui_pods
-    pod 'Cartography', '~> 1.0'
-    pod 'Kingfisher', '~> 3.5'
+    pod 'Cartography', '~> 1.1'
+    pod 'Kingfisher', '~> 3.6'
     pod 'Reusable', '~> 4.0'
     pod 'XLPagerTabStrip', '~> 7.0'
-    pod 'NVActivityIndicatorView', '~> 3.5'
+    pod 'NVActivityIndicatorView', '~> 3.6'
     pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
     pod 'DynamicColor', '~> 3.2.1'
     pod 'ActionSheetPicker-3.0', '~> 2.2.0'

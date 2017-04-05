@@ -95,7 +95,7 @@ class MediaFilterSpec: QuickSpec {
                     
                     expect(dict.keys).to(contain(["genres", "year", "averageRating"]))
                     expect(dict["year"] as? String).to(equal("2000.."))
-                    expect(dict["averageRating"] as? String).to(equal("2..19"))
+                    expect(dict["averageRating"] as? String).to(equal("5..99"))
                     expect(dict["genres"] as? [String]).to(contain("Name 1","Name 2"))
                     
                 }
