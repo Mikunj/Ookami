@@ -345,7 +345,7 @@
 		242B2B4C1DE575CC0002903B /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		243C088E1E11FBD800C44888 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		243C08901E11FBF500C44888 /* Cacheable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cacheable.swift; sourceTree = "<group>"; };
-		2440C43F1E8D137200F128E7 /* FullScreenActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FullScreenActivityIndicator.swift; path = FullScreenActivityIndicator.swift; sourceTree = "<group>"; };
+		2440C43F1E8D137200F128E7 /* FullScreenActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenActivityIndicator.swift; sourceTree = "<group>"; };
 		2442210E1E6CC3EF0068EE8D /* MangaTrendingTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaTrendingTableDataSource.swift; sourceTree = "<group>"; };
 		244221131E6CC6760068EE8D /* MangaTrendingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaTrendingTableViewController.swift; sourceTree = "<group>"; };
 		244221151E6CC8CF0068EE8D /* MediaTrendingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTrendingTableViewController.swift; sourceTree = "<group>"; };

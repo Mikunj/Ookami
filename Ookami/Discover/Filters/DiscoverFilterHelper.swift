@@ -83,15 +83,14 @@ class DiscoverFilterHelper {
     
     private func minScoreFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> Filter {
         
-        let ratings = Array(stride(from: 1.0, to: 10.5, by: 0.5))
+        let ratings = Array(stride(from: 5, to: 105, by: 5))
         
-        let current = Double(mediaFilter.rating.start) / 2
+        let current = mediaFilter.rating.start
         let index = ratings.index(of: current) ?? 0
         
         //Format it to 1 decimal place display so it's consitent
-        let values = ratings.map { String(format: "%.1f ★", $0) }
+        let values = ratings.map { String(format: "%d%%", $0) }
         let initial = values[index]
-        
         
         let filter = SingleValueFilter(name: "Min",
                                        title: "Min Score",
@@ -99,7 +98,7 @@ class DiscoverFilterHelper {
                                        selectedValue: initial,
                                        onChange: { index, value in
                                         
-                                        let rating = Int(ratings[index] * 2)
+                                        let rating = ratings[index]
                                         
                                         //We need to make sure that the max score is not less than the score the user selected
                                         if let max = mediaFilter.rating.end,
@@ -119,15 +118,15 @@ class DiscoverFilterHelper {
     private func maxScoreFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> Filter {
         
         //With this filter we know 100% that the end rating will never be nil
-        let minRating = Double(mediaFilter.rating.start) / 2
+        let minRating = mediaFilter.rating.start
         
-        let ratings = Array(stride(from: minRating, to: 10.5, by: 0.5))
+        let ratings = Array(stride(from: minRating, to: 105, by: 5))
         
-        let current = Double(mediaFilter.rating.end!) / 2
+        let current = mediaFilter.rating.end!
         let index = ratings.index(of: current) ?? 0
         
         //Format it to 1 decimal place display so it's consitent
-        let values = ratings.map { String(format: "%.1f ★", $0) }
+        let values = ratings.map { String(format: "%d%%", $0) }
         let initial = values[index]
         
         let filter = SingleValueFilter(name: "Max",
@@ -137,7 +136,7 @@ class DiscoverFilterHelper {
                                        onChange: { index, value in
                                         
                                         //We don't need to check if start is greater than end because we already put that restrictions on the values
-                                        let rating = Int(ratings[index] * 2)
+                                        let rating = ratings[index]
                                         mediaFilter.rating.end = rating
                                         
                                         onComplete()

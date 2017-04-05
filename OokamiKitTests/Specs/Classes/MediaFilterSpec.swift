@@ -42,19 +42,19 @@ class MediaFilterSpec: QuickSpec {
             context("Rating filter") {
                 it("should set the end value to 20 if nothing was provided") {
                     let filter = MediaFilter()
-                    filter.rating = RangeFilter(start: 2, end: nil)
-                    expect(filter.rating.end).to(equal(20))
+                    filter.rating = RangeFilter(start: 5, end: nil)
+                    expect(filter.rating.end).to(equal(100))
                 }
                 
                 it("should cap the values properley") {
                     let filter = MediaFilter()
-                    filter.rating = RangeFilter(start: 1, end: 29)
-                    expect(filter.rating.start).to(equal(2))
-                    expect(filter.rating.end).to(equal(20))
+                    filter.rating = RangeFilter(start: 1, end: 101)
+                    expect(filter.rating.start).to(equal(5))
+                    expect(filter.rating.end).to(equal(100))
                     
-                    filter.rating = RangeFilter(start: 3, end: 19)
-                    expect(filter.rating.start).to(equal(3))
-                    expect(filter.rating.end).to(equal(19))
+                    filter.rating = RangeFilter(start: 6, end: 99)
+                    expect(filter.rating.start).to(equal(6))
+                    expect(filter.rating.end).to(equal(99))
                 }
             }
             
@@ -75,14 +75,14 @@ class MediaFilterSpec: QuickSpec {
                 it("should correctly output a dictionary") {
                     let filter = MediaFilter()
                     filter.year = RangeFilter(start: 2000, end: nil)
-                    filter.rating = RangeFilter(start: 2, end: 20)
+                    filter.rating = RangeFilter(start: 5, end: 100)
                     
                     let defaultDict = filter.construct()
                     
                     expect(defaultDict.keys).to(contain("year"))
                     expect(defaultDict.keys).toNot(contain("averageRating", "genres"))
                     
-                    filter.rating = RangeFilter(start: 2, end: 19)
+                    filter.rating = RangeFilter(start: 5, end: 99)
                     let genres: [Genre] = ["Name 1", "Name 2"].map {
                         let g = Genre()
                         g.name = $0

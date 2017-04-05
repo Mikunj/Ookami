@@ -46,9 +46,9 @@ public class MediaFilter {
     //Also this is the range that kitsu uses.
     public var rating: RangeFilter<Int> {
         didSet {
-            //Set the end to 20.0 if it's not set
-            rating.end = rating.end ?? 20
-            rating.capValues(min: 2, max: 20)
+            //Set the end to 100 if it's not set
+            rating.end = rating.end ?? 100
+            rating.capValues(min: 5, max: 100)
             rating.applyCorrection()
         }
     }
@@ -62,7 +62,7 @@ public class MediaFilter {
     /// Create a media filter
     public init() {
         year = RangeFilter(start: 1907, end: nil)
-        rating = RangeFilter(start: 2, end: 20)
+        rating = RangeFilter(start: 5, end: 100)
         sort = Sort(by: "user_count")
     }
     
@@ -90,7 +90,7 @@ public class MediaFilter {
         
         //Only include rating if it's not the default
         //This is because kitsu doesn't return media which has no rating ...
-        if rating.start != 2 || rating.end != 20 {
+        if rating.start != 5 || rating.end != 100 {
             dict["averageRating"] = rating.description
         }
         
