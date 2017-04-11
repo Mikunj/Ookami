@@ -30,6 +30,12 @@ class LibraryEntryRatingHandler: LibraryEntryDataHandler {
             if let simple = entry.simpleRating {
                 ratingString = simple.rawValue.capitalized
             }
+        case .regular:
+            if entry.rating > 0 {
+                let rating = Double(entry.rating) / 4
+                let rounded = rating.round(nearest: 0.5)
+                ratingString = String(rounded)
+            }
         }
         
         
@@ -46,8 +52,33 @@ class LibraryEntryRatingHandler: LibraryEntryDataHandler {
             showAdvancedRating(updater: updater, cell: cell, controller: controller)
         case .simple:
             showSimpleRating(updater: updater, cell: cell, controller: controller)
+        case .regular:
+            showRegularRating(updater: updater, cell: cell, controller: controller)
         }
         
+    }
+    
+    private func showRegularRating(updater: LibraryEntryUpdater, cell: UITableViewCell, controller: LibraryEntryViewController) {
+        var ratings = Array(stride(from: 0.5, to: 5.5, by: 0.5))
+        ratings.insert(0, at: 0)
+        
+        //We need to take this and round to the nearest 0.5
+        //This is because if you do 19 / 4, you get 4.75 which is not present in the system
+        //It needs to be rounded down to 4.5
+        let quateredRating = Double(updater.entry.rating) / 4
+        let rounded = quateredRating.round(nearest: 0.5)
+        let initial = ratings.index(of: rounded) ?? 0
+        
+        //Format it to 2 decimal place display so it's consitent
+        let rows = ratings.map { String(format: "%.1f", $0) }
+        
+        ActionSheetStringPicker.show(withTitle: "Rating", rows: rows, initialSelection: initial, doneBlock: { picker, index, value in
+            
+            //We need to convert 0.5 - 5 to 2 - 20
+            let newRating = Int(ratings[index] * 4)
+            updater.update(rating: newRating)
+            controller.reloadData()
+        }, cancel: { _ in }, origin: cell)
     }
     
     private func showAdvancedRating(updater: LibraryEntryUpdater, cell: UITableViewCell, controller: LibraryEntryViewController) {

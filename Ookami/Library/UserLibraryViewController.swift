@@ -144,22 +144,29 @@ final class UserLibraryViewController: UIViewController {
         mangaController?.reloadData()
     }
     
-    func settingsTapped() {
-        //TODO: Move this out of here after main pages (discovery, user, library) have been implemented
+    func showRatingSystemAlert() {
+        
+        guard CurrentUser().isLoggedIn(),
+            let currentSystem = CurrentUser().user?.ratingSystem else {
+                return
+        }
+        
+        
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         alert.popoverPresentationController?.barButtonItem = settingsButton
         
-        if CurrentUser().isLoggedIn() {
+        let ratingSystems = User.RatingSystem.all.filter { $0 != currentSystem }
+        
+        for system in ratingSystems {
             
-            let other: User.RatingSystem = CurrentUser().user?.ratingSystem == .advanced ? .simple : .advanced
-            let otherString = other.rawValue.capitalized
-            let changeRating = UIAlertAction(title: "Change to \(otherString) Rating", style: .default) { _ in
+            let changeRating = UIAlertAction(title: system.rawValue.capitalized, style: .default) { _ in
                 
-                self.activityIndicator.showIndicator()
-                
-                UserService().update(ratingSystem: other) { error in
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    self.activityIndicator.showIndicator()
+                    
+                    UserService().update(ratingSystem: system) { error in
+                        
                         self.activityIndicator.hideIndicator()
                         self.reload()
                         
@@ -171,27 +178,55 @@ final class UserLibraryViewController: UIViewController {
                 }
             }
             alert.addAction(changeRating)
-            
-            let feedback = UIAlertAction(title: "Send Feedback", style: .default) { _ in
-                self.mailComposer.present()
-            }
-            alert.addAction(feedback)
-            
-            let logout = UIAlertAction(title: "Logout", style: .destructive) { _ in
-                CurrentUser().logout()
-            }
-            alert.addAction(logout)
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-            alert.addAction(cancel)
-            
-            if self.presentedViewController == nil {
-                self.present(alert, animated: true)
-            }
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancel)
+        
+        if self.presentedViewController == nil {
+            self.present(alert, animated: true)
         }
         
     }
     
+    func settingsTapped() {
+        //TODO: Move this out of here after main pages (discovery, user, library) have been implemented
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alert.popoverPresentationController?.barButtonItem = settingsButton
+        
+        if CurrentUser().isLoggedIn() {
+            
+            let changeRating = UIAlertAction(title: "Change Rating System", style: .default) { _ in
+                
+                
+                DispatchQueue.main.async {
+                    self.showRatingSystemAlert()
+                }
+            }
+            
+            alert.addAction(changeRating)
+        }
+        
+        let feedback = UIAlertAction(title: "Send Feedback", style: .default) { _ in
+            self.mailComposer.present()
+        }
+        alert.addAction(feedback)
+        
+        let logout = UIAlertAction(title: "Logout", style: .destructive) { _ in
+            CurrentUser().logout()
+        }
+        alert.addAction(logout)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancel)
+        
+        if self.presentedViewController == nil {
+            self.present(alert, animated: true)
+        }
+    }
+
+
     func filterTapped() {
         if let sort = animeController?.sort {
             let vc: LibraryFilterViewController = LibraryFilterViewController(sort: sort) { sort in

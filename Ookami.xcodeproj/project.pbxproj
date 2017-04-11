@@ -13,6 +13,7 @@
 		24032FC51E5FD6B4003DA60C /* BaseMediaFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24032FC41E5FD6B4003DA60C /* BaseMediaFilterViewController.swift */; };
 		24032FC71E5FD76B003DA60C /* MangaFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24032FC61E5FD76B003DA60C /* MangaFilterViewController.swift */; };
 		2405D4611E44448E0043BE10 /* kitsu.png in Resources */ = {isa = PBXBuildFile; fileRef = 2405D4601E44448E0043BE10 /* kitsu.png */; };
+		240B59B51E9CC7F4002140C3 /* Double+Ookami.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240B59B41E9CC7F4002140C3 /* Double+Ookami.swift */; };
 		240C55631E7548C900BA8E50 /* LibraryFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240C55621E7548C900BA8E50 /* LibraryFilterViewController.swift */; };
 		2414189A1DCDD81100AF1AEA /* LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241418991DCDD81100AF1AEA /* LibraryEntry.swift */; };
 		2414189C1DCDDBB500AF1AEA /* JSONParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */; };
@@ -294,6 +295,7 @@
 		24032FC41E5FD6B4003DA60C /* BaseMediaFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMediaFilterViewController.swift; sourceTree = "<group>"; };
 		24032FC61E5FD76B003DA60C /* MangaFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaFilterViewController.swift; sourceTree = "<group>"; };
 		2405D4601E44448E0043BE10 /* kitsu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitsu.png; sourceTree = "<group>"; };
+		240B59B41E9CC7F4002140C3 /* Double+Ookami.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Ookami.swift"; sourceTree = "<group>"; };
 		240C55621E7548C900BA8E50 /* LibraryFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryFilterViewController.swift; sourceTree = "<group>"; };
 		241418991DCDD81100AF1AEA /* LibraryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntry.swift; sourceTree = "<group>"; };
 		2414189B1DCDDBB500AF1AEA /* JSONParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParsable.swift; sourceTree = "<group>"; };
@@ -1253,6 +1255,7 @@
 			isa = PBXGroup;
 			children = (
 				24EEE5E21E5D31A300ECA152 /* UIImage+Ookami.swift */,
+				240B59B41E9CC7F4002140C3 /* Double+Ookami.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";
@@ -1848,6 +1851,7 @@
 				242A03EF1E190730000E8B06 /* ItemDetailGridCell.swift in Sources */,
 				24D401471E8B931B00C7825D /* LibraryEntryProgressHandler.swift in Sources */,
 				24C8CDBC1E727DA8003596DD /* MangaWeeklyTrendingTableDataSource.swift in Sources */,
+				240B59B51E9CC7F4002140C3 /* Double+Ookami.swift in Sources */,
 				24175E931E1FA88A009FBDE6 /* IconDrawable.swift in Sources */,
 				24AF0E3A1E24BAC100F11809 /* MediaTableHeaderView.swift in Sources */,
 				242A041B1E1CC33C000E8B06 /* Theme.swift in Sources */,

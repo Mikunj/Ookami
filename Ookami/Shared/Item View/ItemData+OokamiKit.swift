@@ -47,6 +47,18 @@ extension LibraryEntry: ItemDataTransformable {
                 if let simple = self.simpleRating {
                     details.append(simple.rawValue.capitalized)
                 }
+                
+            case .regular:
+                let rating = Double(self.rating) / 4
+                let rounded = rating.round(nearest: 0.5)
+                
+                //Display rating as full value or half value
+                //This avoids ugly displays like 5.0
+                let format = rounded.truncatingRemainder(dividingBy: 1.0) == 0.0 ? "%.0f" : "%.1f"
+                let ratingString = String(format: format, rounded)
+                
+                details.append("\(ratingString) ★")
+
             }
         }
         

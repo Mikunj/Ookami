@@ -141,8 +141,11 @@ extension User: JSONParsable {
 //MARK:- Enums
 extension User {
     public enum RatingSystem: String {
-        case advanced
+        case advanced //1 - 10
         case simple
+        case regular //0.5 - 5
+        
+        public static let all: [RatingSystem] = [.simple, .regular, .advanced]
     }
 }
 
