@@ -9,6 +9,7 @@ import UIKit
 import IQKeyboardManager
 import OokamiKit
 import FBSDKLoginKit
+import Siren
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -24,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FontAwesomeIcon.register()
         Theme.NavigationTheme().apply()
         IQKeyboardManager.shared().isEnabled = true
+        
+        //Alert user of any updates
+        Siren.shared.checkVersion(checkType: .immediately)
         
         //Preload data
         Preloader().preloadData()
@@ -85,6 +89,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.removeObserver(self)
         CacheManager.shared.clearCache()
         fetcher?.stopFetching()
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        Siren.shared.checkVersion(checkType: .daily)
     }
     
 }

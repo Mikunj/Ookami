@@ -1254,8 +1254,8 @@
 		24EEE5E11E5D316700ECA152 /* Extenstions */ = {
 			isa = PBXGroup;
 			children = (
-				24EEE5E21E5D31A300ECA152 /* UIImage+Ookami.swift */,
 				240B59B41E9CC7F4002140C3 /* Double+Ookami.swift */,
+				24EEE5E21E5D31A300ECA152 /* UIImage+Ookami.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";

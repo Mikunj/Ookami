@@ -40,6 +40,7 @@ def ui_pods
     pod 'DZNEmptyDataSet', '~> 1.8'
     pod 'FBSDKLoginKit', '~> 4.20'
     pod '1PasswordExtension', '~> 1.8.4'
+    pod 'Siren', '~> 2.0'
 end
 
 target 'Ookami' do

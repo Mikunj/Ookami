@@ -53,6 +53,7 @@ PODS:
     - Reusable/View (= 4.0.0)
   - Reusable/Storyboard (4.0.0)
   - Reusable/View (4.0.0)
+  - Siren (2.0.1)
   - SKPhotoBrowser (4.0.0)
   - SwiftyJSON (3.1.4)
   - XCDYouTubeKit (2.5.3)
@@ -79,6 +80,7 @@ DEPENDENCIES:
   - Quick (~> 1.1)
   - RealmSwift (~> 2.5.0)
   - Reusable (~> 4.0)
+  - Siren (~> 2.0)
   - SKPhotoBrowser (~> 4.0.0)
   - SwiftyJSON (~> 3.1)
   - XCDYouTubeKit (~> 2.5.0)
@@ -120,11 +122,12 @@ SPEC CHECKSUMS:
   RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
   Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
+  Siren: 1ecf01040a56b6b417e7b754cf3fecea7c159c1c
   SKPhotoBrowser: bc33eca22f4abd6b99d8d260509ca30c01752a87
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   XCDYouTubeKit: 90690f9e3523735dc93b8024269d991b0cfffe78
   XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: 167f5c9f1c9f6eb3cc4d28bdf4bd946728db47c8
+PODFILE CHECKSUM: 358b87e6494c51ea46c24d0150ae470e561cb575
 
 COCOAPODS: 1.2.0
