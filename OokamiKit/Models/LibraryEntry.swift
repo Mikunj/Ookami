@@ -210,7 +210,9 @@ extension LibraryEntry: JSONParsable {
         }
         
         entry.updatedAt = Date.from(string: attributes["updatedAt"].stringValue) ?? Date()
-        entry.progressedAt = Date.from(string: attributes["progressedAt"].stringValue) ?? Date()
+        
+        //In the event that we don't have a progressedAt value, we just use the updatedAt time
+        entry.progressedAt = Date.from(string: attributes["progressedAt"].stringValue) ?? entry.updatedAt
         
         //Start and end dates
         entry.startedAt = Date.from(string: attributes["startedAt"].stringValue)
