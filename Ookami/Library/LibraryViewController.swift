@@ -68,7 +68,7 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
     init(dataSource: [LibraryEntry.Status: LibraryDataSource], type: Media.MediaType) {
         self.source = dataSource
         self.type = type
-        sort = Sort.load() ?? Sort(type: .updatedAt, direction: .descending)
+        sort = Sort.load() ?? Sort(type: .progressedAt, direction: .descending)
         super.init(nibName: nil, bundle: nil)
         
         //Save the sort incase it was never saved before
@@ -192,7 +192,7 @@ extension LibraryViewController {
     struct Sort: Equatable {
         
         enum SortType: String {
-            case updatedAt = "Last Updated"
+            case progressedAt = "Last Updated"
             case title
             case progress
             case rating

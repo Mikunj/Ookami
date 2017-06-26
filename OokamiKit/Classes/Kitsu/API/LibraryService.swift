@@ -192,7 +192,7 @@ public class LibraryService: BaseService {
         //Make the request
         let request = KitsuLibraryRequest(userID: userID, type: type, status: status, since: since)
         request.include("user")
-        request.sort(by: "updated_at", ascending: false)
+        request.sort(by: "progressedAt", ascending: false)
         
         let library = PaginatedLibrary(request: request, client: client, completion: { objects, error, original in
             guard error == nil else {
@@ -236,7 +236,7 @@ public class LibraryService: BaseService {
         //Make the request
         let request = KitsuLibraryRequest(userID: userID, type: type, status: status, since: since)
         request.include("user")
-        request.sort(by: "updated_at", ascending: false)
+        request.sort(by: "progressedAt", ascending: false)
         
         let operation = FetchLibraryOperation(request: request, client: client, onFetch: { objects in
             
@@ -272,7 +272,7 @@ public class LibraryService: BaseService {
         let operation = FetchAllLibraryOperation(client: client, request: { status in
             let request = KitsuLibraryRequest(userID: userID, type: type, status: status, since: since, needsAuth: true)
             request.include("user")
-            request.sort(by: "updated_at", ascending: false)
+            request.sort(by: "progressedAt", ascending: false)
             return request
         }, onFetch: { objects in
             

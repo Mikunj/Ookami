@@ -115,6 +115,42 @@ class LibraryEntryUpdaterSpec: QuickSpec {
                         expect(updater.entry.progress).to(equal(10))
                     }
                     
+                    it("should set the started at time if not set when moving to current") {
+                        let e = LibraryEntry()
+                        e.id = 1
+                        e.startedAt = nil
+                        e.status = .planned
+                        
+                        let updater = LibraryEntryUpdater(entry: e)
+                        updater.update(status: .current)
+                        expect(updater.entry.startedAt).toNot(beNil())
+                    }
+                    
+                    it("should not set start time if it has been set when moving to current") {
+                        let date = Date()
+                        let e = LibraryEntry()
+                        e.id = 1
+                        e.startedAt = date
+                        e.status = .planned
+                        
+                        let updater = LibraryEntryUpdater(entry: e)
+                        updater.update(status: .current)
+                        expect(updater.entry.startedAt).to(equal(date))
+                    }
+                    
+                    it("should set the started at and finished at time if moving to completed") {
+                        let e = LibraryEntry()
+                        e.id = 1
+                        e.startedAt = nil
+                        e.finishedAt = nil
+                        e.status = .planned
+                        
+                        let updater = LibraryEntryUpdater(entry: e)
+                        updater.update(status: .completed)
+                        expect(updater.entry.startedAt).toNot(beNil())
+                        expect(updater.entry.finishedAt).toNot(beNil())
+                    }
+                    
                     it("should update reconsume count if set to completed and entry was being reconsumed") {
                         let e = LibraryEntry()
                         e.id = 1

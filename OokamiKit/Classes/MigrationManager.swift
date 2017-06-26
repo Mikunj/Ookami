@@ -16,11 +16,12 @@ public class MigrationManager {
     
     /// Apply migrations to the Realm
     public func applyMigrations() {
-        let schemaVersion: UInt64 = 3
+        let schemaVersion: UInt64 = 4
         let migrationBlock: MigrationBlock =  { migration, oldSchemaVersion in
             self.migrateTo_1(from: oldSchemaVersion, migration: migration)
             self.migrateTo_2(from: oldSchemaVersion, migration: migration)
             self.migrateTo_3(from: oldSchemaVersion, migration: migration)
+            self.migrateTo_4(from: oldSchemaVersion, migration: migration)
         }
         Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: schemaVersion, migrationBlock: migrationBlock)
     }
@@ -83,6 +84,22 @@ public class MigrationManager {
         // => [Added] ratingSystemRaw
         migration.enumerateObjects(ofType: User.className()) { _, new in
             new?["ratingSystemRaw"] = ""
+        }
+    }
+    
+    private func migrateTo_4(from schema: UInt64, migration: Migration) {
+        guard schema < 4 else {
+            return
+        }
+        
+        //Library Entry
+        // => [Added] progressedAt
+        // => [Added] startedAt
+        // => [Added] finishedAt
+        migration.enumerateObjects(ofType: LibraryEntry.className()) { _, new in
+            new?["progressedAt"] = Date()
+            new?["startedAt"] = nil
+            new?["finishedAt"] = nil
         }
     }
 

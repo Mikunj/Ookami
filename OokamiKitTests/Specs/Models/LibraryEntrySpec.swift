@@ -114,6 +114,9 @@ class LibraryEntrySpec: QuickSpec {
                     e.rating = 0
                     e.status = .current
                     e.notes = "hi"
+                    e.startedAt = Date(timeIntervalSince1970: 0)
+                    e.finishedAt = Date(timeIntervalSince1970: 1)
+                    
                     
                     let other = LibraryEntry(value: e)
                     
@@ -129,6 +132,8 @@ class LibraryEntrySpec: QuickSpec {
                     e.rating = 0
                     e.status = .current
                     e.notes = "hi"
+                    e.startedAt = Date(timeIntervalSince1970: 0)
+                    e.finishedAt = Date(timeIntervalSince1970: 1)
                     
                     let o = LibraryEntry()
                     o.id = 2
@@ -138,6 +143,7 @@ class LibraryEntrySpec: QuickSpec {
                     o.rating = 5
                     o.status = .completed
                     o.notes = "hi"
+                    e.finishedAt = Date(timeIntervalSince1970: 2)
                     
                     expect(e).toNot(equal(o))
                 }
@@ -326,6 +332,15 @@ class LibraryEntrySpec: QuickSpec {
                     d.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"
                     let updatedAt = d.date(from: "2016-08-15T11:01:29.181Z")
                     expect(entry.updatedAt).to(equal(updatedAt))
+                    
+                    let progressedAt = d.date(from: "2017-06-24T14:59:22.951Z")
+                    expect(entry.progressedAt).to(equal(progressedAt))
+                    
+                    let startedAt = d.date(from: "2017-06-23T07:22:43.932Z")
+                    expect(entry.startedAt).to(equal(startedAt))
+                    
+                    let finishedAt = d.date(from: "2017-06-24T14:59:22.951Z")
+                    expect(entry.finishedAt).to(equal(finishedAt))
                     
                     expect(entry.userID).to(equal(2875))
                     expect(entry.media).toNot(beNil())
