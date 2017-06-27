@@ -11,7 +11,7 @@ import OokamiKit
 
 /// A data source for media discovery
 /// Must be subclassed
-class MediaDiscoverDataSource: PaginatedItemViewDataSourceBase, DiscoverDataSource {
+class MediaDiscoverDataSource: PaginatedItemViewDataSourceBase, SearchDataSource {
     
     //The parent to report to
     weak var parent: UIViewController?

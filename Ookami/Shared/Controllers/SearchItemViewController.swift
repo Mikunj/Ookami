@@ -1,8 +1,8 @@
 //
-//  DiscoverViewController.swift
+//  SearchItemViewController.swift
 //  Ookami
 //
-//  Created by Maka on 8/2/17.
+//  Created by Maka on 27/6/17.
 //  Copyright © 2017 Mikunj Varsani. All rights reserved.
 //
 
@@ -10,15 +10,15 @@ import UIKit
 import OokamiKit
 import Cartography
 
-protocol DiscoverDataSource: ItemViewControllerDataSource {
+protocol SearchDataSource: ItemViewControllerDataSource {
     weak var parent: UIViewController? { get set }
     func didSearch(text: String)
 }
 
-final class DiscoverViewController: UIViewController {
+final class SearchItemViewController: UIViewController {
     
     //The data source to use
-    var dataSource: DiscoverDataSource {
+    var dataSource: SearchDataSource {
         didSet {
             itemController.dataSource = dataSource
             dataSource.parent = self
@@ -45,7 +45,7 @@ final class DiscoverViewController: UIViewController {
         return bar
     }()
     
-    init(dataSource: DiscoverDataSource) {
+    init(dataSource: SearchDataSource) {
         self.dataSource = dataSource
         itemController = ItemViewController(dataSource: dataSource)
         itemController.type = .simpleGrid
@@ -79,7 +79,7 @@ final class DiscoverViewController: UIViewController {
             bar.right == bar.superview!.right
             bar.height == 44
             bar.bottom == view.top
-        
+            
             view.left == view.superview!.left
             view.right == view.superview!.right
             view.bottom == view.superview!.bottom
@@ -103,7 +103,7 @@ final class DiscoverViewController: UIViewController {
 }
 
 //MARK:- Search bar delegate
-extension DiscoverViewController: UISearchBarDelegate {
+extension SearchItemViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         dataSource.didSearch(text: searchText)
