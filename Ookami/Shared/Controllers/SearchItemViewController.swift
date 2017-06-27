@@ -12,7 +12,11 @@ import Cartography
 
 protocol SearchDataSource: ItemViewControllerDataSource {
     weak var parent: UIViewController? { get set }
+    var searchBarPlaceHolder: String { get }
+    var searchDisplayType: ItemViewController.CellType { get }
+    
     func didSearch(text: String)
+    
 }
 
 final class SearchItemViewController: UIViewController {
@@ -52,6 +56,8 @@ final class SearchItemViewController: UIViewController {
         itemController.shouldLoadImages = true
         super.init(nibName: nil, bundle: nil)
         
+        searchBar.placeholder = dataSource.searchBarPlaceHolder
+        itemController.type = dataSource.searchDisplayType
         self.dataSource.parent = self
     }
     

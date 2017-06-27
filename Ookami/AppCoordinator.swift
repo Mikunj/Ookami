@@ -50,6 +50,7 @@ class AppCoordinator {
     static func showLibraryEntryVC(in nav: UINavigationController?, entry: LibraryEntry, shouldShowMediaButton: Bool = true) {
         let e = LibraryEntryViewController(entry: entry)
         e.shouldShowMediaButton = shouldShowMediaButton
+        e.hidesBottomBarWhenPushed = true
         nav?.pushViewController(e, animated: true)
     }
     

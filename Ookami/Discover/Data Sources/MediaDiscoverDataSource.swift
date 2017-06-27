@@ -19,6 +19,15 @@ class MediaDiscoverDataSource: PaginatedItemViewDataSourceBase, SearchDataSource
     //The current search text
     var currentSearch: String = ""
     
+    var searchDisplayType: ItemViewController.CellType {
+        return .simpleGrid
+    }
+    
+    //The place holder text
+    var searchBarPlaceHolder: String {
+        return "Search by title, character or staff..."
+    }
+    
     //The paginated service
     //Also expose the method here so we know what needs to be overriden without going to the other classes.
     override func paginatedService(_ completion: @escaping () -> Void) -> PaginatedService? {
