@@ -333,4 +333,45 @@ public class LibraryService: BaseService {
         database.addOrUpdate(fetched!)
     }
     
+    /// Get the library entry of a given user that belongs to a given media.
+    ///
+    /// - Parameters:
+    ///   - userID: The user id
+    ///   - mediaId: The id of the media that you want to get the entry for.
+    ///   - type: The type of the media.
+    ///   - completion: The completion block which passes the library entry or an error if it occurred.
+    public func getLibraryEntry(forUser userID: Int, mediaId: Int, type: Media.MediaType, completion: @escaping (LibraryEntry?, Error?) -> Void) {
+        
+        //Create the request
+        let request = KitsuLibraryRequest(userID: userID, type: type)
+        request.include("user")
+        
+        //Filter on the media key
+        let mediaKey = type == .anime ? "animeId" : "mangaId"
+        request.filter(key: mediaKey, value: mediaId)
+        
+        //Send it off!
+        let operation = NetworkOperation(request: request.build(), client: client) { json, error in
+            guard error == nil else {
+                completion(nil, error)
+                return
+            }
+            
+            guard let json = json else {
+                completion(nil, ServiceError.error(description: "Failed to get json - LibraryService Get Entry"))
+                return
+            }
+            
+            //Add the new entry to the library
+            Parser().parse(json: json) { parsed in
+                self.database.addOrUpdate(parsed)
+                
+                let parsedEntry = parsed.first { $0 is LibraryEntry } as? LibraryEntry
+                completion(parsedEntry, nil)
+            }
+        }
+        
+        queue.addOperation(operation)
+    }
+    
 }

@@ -47,6 +47,18 @@ class MangaViewController: MediaViewController {
         //Update the manga
         MangaService().get(id: manga.id) { _, _ in self.reloadData() }
         
+        //Get the user library entry
+        if let current = CurrentUser().userID {
+            LibraryService().getLibraryEntry(forUser: current, mediaId: manga.id, type: .manga) { _, error in
+                if let error = error {
+                    print(error)
+                }
+                
+                //Reload the header
+                self.mediaHeader.data = self.headerData()
+            }
+        }
+        
         //Reload the data
         reloadData()
     }

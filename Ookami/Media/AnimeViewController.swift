@@ -47,6 +47,18 @@ class AnimeViewController: MediaViewController {
         //Update the anime
         AnimeService().get(id: anime.id) { _, _ in self.reloadData() }
         
+        //Get the user library entry
+        if let current = CurrentUser().userID {
+            LibraryService().getLibraryEntry(forUser: current, mediaId: anime.id, type: .anime) { _, error in
+                if let error = error {
+                    print(error)
+                }
+                
+                //Reload the header
+                self.mediaHeader.data = self.headerData()
+            }
+        }
+        
         //Reload the data
         reloadData()
     }
