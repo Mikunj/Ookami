@@ -41,6 +41,9 @@ final class LocalSearchDataSource: SearchDataSource {
     weak var delegate: ItemViewControllerDelegate? {
         didSet {
             delegate?.didReloadItems()
+            if isLoading {
+                delegate?.showActivityIndicator()
+            }
         }
     }
     
@@ -60,6 +63,9 @@ final class LocalSearchDataSource: SearchDataSource {
     //The filtered entries
     private var filteredEntries: [LibraryEntry] = []
     
+    //Bool used to determine whether we need to show the indicator or not
+    private var isLoading = false
+    
     /// Create a LocalSearchDataSource which uses the realm data to search for entries of a given user and of a given type.
     ///
     /// - Parameters:
@@ -68,6 +74,7 @@ final class LocalSearchDataSource: SearchDataSource {
     init(userID: Int, type: Media.MediaType) {
         self.userID = userID
         self.type = type
+        self.isLoading = true
         
         //Get all the entries and add a notification block to them
         token = LibraryEntry.belongsTo(user: userID, type: type).addNotificationBlock { [weak self] changes in
@@ -98,8 +105,9 @@ final class LocalSearchDataSource: SearchDataSource {
         backgroundFilter(title: currentSearch) { entries in
             self.filteredEntries = entries
             self.itemData = self.filteredEntries.map { $0.toItemData() }
+            self.isLoading = false
+            self.delegate?.hideActivityIndicator()
         }
-        //filteredEntries = filter(entries: sortedEntries, title: currentSearch)
         
     }
     

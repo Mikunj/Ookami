@@ -786,8 +786,8 @@
 			isa = PBXGroup;
 			children = (
 				242A04041E1A7220000E8B06 /* FullLibraryDataSource.swift */,
-				242A040B1E1C858D000E8B06 /* UserLibraryViewDataSource.swift */,
 				24589C721F02091A00EF712A /* LocalSearchDataSource.swift */,
+				242A040B1E1C858D000E8B06 /* UserLibraryViewDataSource.swift */,
 			);
 			path = "Data Sources";
 			sourceTree = "<group>";
