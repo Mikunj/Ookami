@@ -35,7 +35,7 @@ class AnimeTrendingTableViewController: TrendingTableViewController {
         let filter = AnimeFilter()
         filter.year.start = filterYear
         filter.year.end = filterYear
-        filter.sort = Sort(by: "average_rating")
+        filter.sort = Sort(by: .averageRating)
         
         return AnimeTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = AnimeYearTrendingDataSource(filter: filter)
@@ -56,6 +56,7 @@ class AnimeTrendingTableViewController: TrendingTableViewController {
         let filter = AnimeFilter()
         filter.year.start = filterYear
         filter.year.end = filterYear
+        filter.sort = Sort(by: .popularity)
         
         
         return AnimeTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in

@@ -53,6 +53,7 @@ extension MangaFilterViewController {
     func filters() -> [FilterGroup] {
         let helper = DiscoverFilterHelper()
         
+        let sort = helper.sortFilter(from: filter) { self.reload() }
         let year = helper.yearFilter(from: filter) { self.reload() }
         let score = helper.scoreFilter(from: filter) { self.reload() }
         
@@ -63,7 +64,7 @@ extension MangaFilterViewController {
         let other = FilterGroup(name: "", filters: [type, genre])
         
         
-        return [year, score, other]
+        return [sort, year, score, other]
     }
     
     //The type filter

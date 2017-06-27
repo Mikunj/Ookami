@@ -13,6 +13,23 @@ import ActionSheetPicker_3_0
 //A Helper class that provides basic filters for MediaFilter
 class DiscoverFilterHelper {
     
+    //MARK:- Sort
+    func sortFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> FilterGroup {
+        let keys = Sort.Keys.all
+        let values = ["Popularity", "Average Rating", "Date", "Recently Added"]
+        
+        let selectedIndex = keys.map { $0.rawValue}
+            .index(of: mediaFilter.sort.key) ?? 0
+        let selected = values[selectedIndex]
+        
+        let filter = SingleValueFilter(name: "Sort By", title: "Sort By", values: values, selectedValue: selected) { index, value in
+            mediaFilter.sort = Sort(by: keys[index])
+            onComplete()
+        }
+        
+        return FilterGroup(name: "", filters: [filter])
+    }
+    
     //MARK:- Year
     func yearFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> FilterGroup {
         let min = minYearFilter(from: mediaFilter, onComplete: onComplete)

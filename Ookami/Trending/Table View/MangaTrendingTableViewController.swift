@@ -33,7 +33,7 @@ class MangaTrendingTableViewController: TrendingTableViewController {
         let filter = MangaFilter()
         filter.year.start = year
         filter.year.end = year
-        filter.sort = Sort(by: "average_rating")
+        filter.sort = Sort(by: .averageRating)
         
         return MangaTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = MangaYearTrendingDataSource(filter: filter)
@@ -53,6 +53,7 @@ class MangaTrendingTableViewController: TrendingTableViewController {
         let filter = MangaFilter()
         filter.year.start = year
         filter.year.end = year
+        filter.sort = Sort(by: .popularity)
         
         return MangaTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = MangaYearTrendingDataSource(filter: filter.copy())
