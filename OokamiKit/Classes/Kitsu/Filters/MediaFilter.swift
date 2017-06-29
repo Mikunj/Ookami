@@ -24,6 +24,19 @@ public struct Sort {
         case createdAt = "created_at"
         
         public static let all: [Keys] = [.popularity, .averageRating, .startDate, .createdAt]
+        
+        public func toString() -> String {
+            switch self {
+            case .popularity:
+                return "Popularity"
+            case .averageRating:
+                return "Average Rating"
+            case .startDate:
+                return "Start Date"
+            case .createdAt:
+                return "Recently Added"
+            }
+        }
     }
     
     public var key: String

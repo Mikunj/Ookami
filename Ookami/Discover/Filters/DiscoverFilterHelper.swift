@@ -15,8 +15,10 @@ class DiscoverFilterHelper {
     
     //MARK:- Sort
     func sortFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> FilterGroup {
-        let keys = Sort.Keys.all
-        let values = ["Popularity", "Average Rating", "Date", "Recently Added"]
+        
+        //Since there's an issue with the recently added filter, we temporarily disabled it
+        let keys: [Sort.Keys] = [.popularity, .averageRating, .startDate]
+        let values = keys.map { $0.toString() }
         
         let selectedIndex = keys.map { $0.rawValue}
             .index(of: mediaFilter.sort.key) ?? 0
@@ -27,7 +29,7 @@ class DiscoverFilterHelper {
             onComplete()
         }
         
-        return FilterGroup(name: "", filters: [filter])
+        return FilterGroup(name: "Sort (Only applies to default display)", filters: [filter])
     }
     
     //MARK:- Year
