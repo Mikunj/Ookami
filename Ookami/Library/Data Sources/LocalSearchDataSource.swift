@@ -212,16 +212,9 @@ final class LocalSearchDataSource: SearchDataSource {
     }
     
     func didSelectItem(at indexPath: IndexPath) {
-        if let parent = parent {
+        if let nav = parent?.navigationController {
             let entry = filteredEntries[indexPath.row]
-            
-            if let anime = entry.anime  {
-                AppCoordinator.showAnimeVC(in: parent, anime: anime)
-            }
-            
-            if let manga = entry.manga {
-                AppCoordinator.showMangaVC(in: parent, manga: manga)
-            }
+            AppCoordinator.showLibraryEntryVC(in: nav, entry: entry)
         }
     }
     
