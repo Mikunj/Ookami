@@ -51,6 +51,9 @@ public class LibraryEntry: Object, Cacheable {
     public dynamic var notes = ""
     public dynamic var isPrivate = false
     public dynamic var updatedAt: Date = Date()
+    public dynamic var progressedAt: Date = Date()
+    public dynamic var startedAt: Date? = nil
+    public dynamic var finishedAt: Date? = nil
     public dynamic var media: Media? = nil
     
     //Ratings
@@ -115,7 +118,9 @@ public class LibraryEntry: Object, Cacheable {
             self.reconsumeCount == other.reconsumeCount &&
             self.notes == other.notes &&
             self.isPrivate == other.isPrivate &&
-            self.rating == other.rating
+            self.rating == other.rating &&
+            self.startedAt == other.startedAt &&
+            self.finishedAt == other.finishedAt
     }
     
     //MARK:- Cacheable
@@ -206,6 +211,13 @@ extension LibraryEntry: JSONParsable {
         
         entry.updatedAt = Date.from(string: attributes["updatedAt"].stringValue) ?? Date()
         
+        //In the event that we don't have a progressedAt value, we just use the updatedAt time
+        entry.progressedAt = Date.from(string: attributes["progressedAt"].stringValue) ?? entry.updatedAt
+        
+        //Start and end dates
+        entry.startedAt = Date.from(string: attributes["startedAt"].stringValue)
+        entry.finishedAt = Date.from(string: attributes["finishedAt"].stringValue)
+        
         let relationships = json["relationships"]
         
         //Check if we already have a media, if not then make a new one
@@ -249,6 +261,14 @@ extension LibraryEntry {
         
         let rating: Any = self.rating > 0 ? self.rating : NSNull()
         attributes["ratingTwenty"] = rating
+        
+        if let start = self.startedAt {
+            attributes["startedAt"] = start.iso8601
+        }
+        
+        if let finish = self.finishedAt {
+            attributes["finishedAt"] = finish.iso8601
+        }
         
         var params: [String: Any] = [:]
         params["id"] = id

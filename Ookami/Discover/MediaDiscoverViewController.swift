@@ -15,7 +15,7 @@ import Cartography
 final class MediaDiscoverViewController: UIViewController {
     
     //The discover view controller
-    fileprivate var discoverController: DiscoverViewController
+    fileprivate var searchController: SearchItemViewController
     
     //The current media that is being shown
     fileprivate var currentMedia: Media.MediaType = .anime
@@ -37,7 +37,7 @@ final class MediaDiscoverViewController: UIViewController {
     init() {
         animeSource = AnimeDiscoverDataSource()
         mangaSource = MangaDiscoverDataSource()
-        discoverController = DiscoverViewController(dataSource: animeSource)
+        searchController = SearchItemViewController(dataSource: animeSource)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,14 +55,14 @@ final class MediaDiscoverViewController: UIViewController {
         
         self.view.backgroundColor = Theme.ControllerTheme().backgroundColor
         
-        self.addChildViewController(discoverController)
-        self.view.addSubview(discoverController.view)
+        self.addChildViewController(searchController)
+        self.view.addSubview(searchController.view)
         
-        constrain(discoverController.view) { view in
+        constrain(searchController.view) { view in
             view.edges == view.superview!.edges
         }
         
-        discoverController.didMove(toParentViewController: self)
+        searchController.didMove(toParentViewController: self)
         
         //Setup dropdown menu
         dropDownMenu = BTNavigationDropdownMenu(title: dropDownMenuItems[0], items: dropDownMenuItems as [AnyObject])
@@ -96,7 +96,7 @@ final class MediaDiscoverViewController: UIViewController {
     /// - Parameter type: The media type
     func show(_ type: Media.MediaType) {
         if type != currentMedia {
-            discoverController.dataSource = type == .anime ? animeSource : mangaSource
+            searchController.dataSource = type == .anime ? animeSource : mangaSource
             currentMedia = type
         }
     }

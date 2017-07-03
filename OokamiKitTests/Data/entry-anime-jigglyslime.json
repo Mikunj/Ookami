@@ -13,7 +13,10 @@
         "private": true,
         "rating": "5.0",
         "ratingTwenty": "20",
-        "updatedAt": "2016-08-15T11:01:29.181Z"
+        "updatedAt": "2016-08-15T11:01:29.181Z",
+        "progressedAt": "2017-06-24T14:59:22.951Z",
+        "startedAt": "2017-06-23T07:22:43.932Z",
+        "finishedAt": "2017-06-24T14:59:22.951Z",
     },
     "relationships": {
         "user": {

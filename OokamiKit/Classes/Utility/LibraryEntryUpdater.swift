@@ -91,14 +91,29 @@ extension LibraryEntryUpdater {
                 unmanaged.progress = max
             }
             
+            //Set the finished date
+            update(finishedAt: Date())
+            
+            //Set the start date if it hasn't been set
+            if unmanaged.startedAt == nil {
+                update(startedAt: Date())
+            }
+            
             //We need to update the reconsume count aswell if we were reconsuming
             if unmanaged.reconsuming {
                 update(reconsumeCount: unmanaged.reconsumeCount + 1)
                 update(reconsuming: false)
             }
             
+        } else if status == .current {
+            //Set the start date if it hasn't been set when we move the entry to current
+            if unmanaged.startedAt == nil {
+                update(startedAt: Date())
+            }
         }
     }
+    
+
     
     /// Update the rating on an entry.
     ///
@@ -135,6 +150,20 @@ extension LibraryEntryUpdater {
             update(progress: 0)
             update(status: .current)
         }
+    }
+    
+    /// Update the started at date on the entry.
+    ///
+    /// - Parameter startedAt: The date.
+    public func update(startedAt: Date?) {
+        unmanaged.startedAt = startedAt
+    }
+    
+    /// Update the finished at date on the entry.
+    ///
+    /// - Parameter startedAt: The date.
+    public func update(finishedAt: Date?) {
+        unmanaged.finishedAt = finishedAt
     }
     
     /// Update the reconsume count on the entry.

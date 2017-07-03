@@ -84,7 +84,7 @@ class LibraryFilterViewController: UIViewController {
     
     private func typeFilter() -> Filter {
         
-        let sorts: [LibraryViewController.Sort.SortType] = [.updatedAt, .title, .progress, .rating]
+        let sorts: [LibraryViewController.Sort.SortType] = [.progressedAt, .title, .progress, .rating]
         let values = sorts.map { $0.rawValue.capitalized }
         let selected = values[sorts.index(of: sort.type) ?? 0]
         

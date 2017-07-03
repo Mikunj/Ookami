@@ -25,15 +25,15 @@ class MangaTrendingTableViewController: TrendingTableViewController {
     
     //MARK:- Highest Rated
     private func highestRatedFilter() -> MangaTrendingTableDataSource {
-        //We need to get current year - 1
-        let year = Calendar.current.component(.year, from: Date()) - 1
+        //For Manga since there is no such thing as seasons, we just directly choose the current year
+        let year = Calendar.current.component(.year, from: Date())
         let title = "Highest Rated Manga"
         let detail = year.description
         
         let filter = MangaFilter()
         filter.year.start = year
         filter.year.end = year
-        filter.sort = Sort(by: "average_rating")
+        filter.sort = Sort(by: .averageRating)
         
         return MangaTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = MangaYearTrendingDataSource(filter: filter)
@@ -45,14 +45,15 @@ class MangaTrendingTableViewController: TrendingTableViewController {
     
     //MARK:- Popularity
     private func popularityFilter() -> MangaTrendingTableDataSource {
-        //We need to get current year - 1
-        let year = Calendar.current.component(.year, from: Date()) - 1
+        //For Manga since there is no such thing as seasons, we just directly choose the current year
+        let year = Calendar.current.component(.year, from: Date())
         let title = "Most Popular Manga"
         let detail = year.description
         
         let filter = MangaFilter()
         filter.year.start = year
         filter.year.end = year
+        filter.sort = Sort(by: .popularity)
         
         return MangaTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = MangaYearTrendingDataSource(filter: filter.copy())

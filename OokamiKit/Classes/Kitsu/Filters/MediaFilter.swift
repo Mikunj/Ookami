@@ -16,6 +16,29 @@ public struct Sort {
         case descending
     }
     
+    //Defaults keys we can use
+    public enum Keys: String {
+        case popularity = "user_count"
+        case averageRating = "average_rating"
+        case startDate = "start_date"
+        case createdAt = "created_at"
+        
+        public static let all: [Keys] = [.popularity, .averageRating, .startDate, .createdAt]
+        
+        public func toString() -> String {
+            switch self {
+            case .popularity:
+                return "Popularity"
+            case .averageRating:
+                return "Average Rating"
+            case .startDate:
+                return "Start Date"
+            case .createdAt:
+                return "Recently Added"
+            }
+        }
+    }
+    
     public var key: String
     public var direction: Direction
     
@@ -23,6 +46,11 @@ public struct Sort {
         self.key = key
         self.direction = direction
     }
+    
+    public init(by key: Keys, direction: Direction = .descending) {
+        self.init(by: key.rawValue, direction: direction)
+    }
+    
 }
 
 //A class for representing the media filters
@@ -63,7 +91,7 @@ public class MediaFilter {
     public init() {
         year = RangeFilter(start: 1907, end: nil)
         rating = RangeFilter(start: 5, end: 100)
-        sort = Sort(by: "user_count")
+        sort = Sort(by: .averageRating)
     }
     
     /// Filter the media by genres.

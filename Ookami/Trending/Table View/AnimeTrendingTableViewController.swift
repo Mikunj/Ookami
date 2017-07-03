@@ -25,15 +25,17 @@ class AnimeTrendingTableViewController: TrendingTableViewController {
     
     //MARK:- Highest Rated
     private func highestRatedFilter() -> AnimeTrendingTableDataSource {
-        //We need to get current year - 1
-        let year = Calendar.current.component(.year, from: Date()) - 1
+        //For trending, we don't want users always to be viewing the previous years media, for that purpose we only show the previous years results during the first season and then revert to current year for the rest of the seasons.
+        let year = Calendar.current.component(.year, from: Date())
+        let filterYear = currentSeason() == .winter ? year - 1 : year
+        
         let title = "Highest Rated Anime"
-        let detail = year.description
+        let detail = filterYear.description
         
         let filter = AnimeFilter()
-        filter.year.start = year
-        filter.year.end = year
-        filter.sort = Sort(by: "average_rating")
+        filter.year.start = filterYear
+        filter.year.end = filterYear
+        filter.sort = Sort(by: .averageRating)
         
         return AnimeTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in
             let source = AnimeYearTrendingDataSource(filter: filter)
@@ -44,14 +46,17 @@ class AnimeTrendingTableViewController: TrendingTableViewController {
     
     //MARK:- Popularity
     private func popularityFilter() -> AnimeTrendingTableDataSource {
-        //We need to get current year - 1
-        let year = Calendar.current.component(.year, from: Date()) - 1
+        //For trending, we don't want users always to be viewing the previous years media, for that purpose we only show the previous years results during the first season and then revert to current year for the rest of the seasons.
+        let year = Calendar.current.component(.year, from: Date())
+        let filterYear = currentSeason() == .winter ? year - 1 : year
+        
         let title = "Most Popular Anime"
-        let detail = year.description
+        let detail = filterYear.description
         
         let filter = AnimeFilter()
-        filter.year.start = year
-        filter.year.end = year
+        filter.year.start = filterYear
+        filter.year.end = filterYear
+        filter.sort = Sort(by: .popularity)
         
         
         return AnimeTrendingTableDataSource(title: title, detail: detail, filter: filter, parent: self, delegate: self) { [weak self] in

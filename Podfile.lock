@@ -1,7 +1,7 @@
 PODS:
   - 1PasswordExtension (1.8.4)
   - ActionSheetPicker-3.0 (2.2.0)
-  - Alamofire (4.4.0)
+  - Alamofire (4.5.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -10,80 +10,80 @@ PODS:
   - Bolts/Tasks (1.8.4)
   - BTNavigationDropdownMenu (0.4.1)
   - Cartography (1.1.0)
-  - Diff (0.5.0)
-  - DynamicColor (3.2.1)
+  - Diff (0.5.3)
+  - DynamicColor (3.3)
   - DZNEmptyDataSet (1.8.1)
-  - FBSDKCoreKit (4.20.1):
+  - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.20.1):
+  - FBSDKLoginKit (4.24.0):
     - FBSDKCoreKit
   - Heimdallr (3.6.0):
     - Heimdallr/Core (= 3.6.0)
   - Heimdallr/Core (3.6.0):
     - Result (~> 3.0)
-  - IQKeyboardManager (4.0.8)
+  - IQKeyboardManager (4.0.10)
   - Keys (1.0.0)
-  - Kingfisher (3.6.1)
-  - Nimble (6.1.0)
+  - Kingfisher (3.10.2)
+  - Nimble (7.0.1)
   - NVActivityIndicatorView (3.6.0)
-  - OHHTTPStubs (5.2.2):
-    - OHHTTPStubs/Default (= 5.2.2)
-  - OHHTTPStubs/Core (5.2.2)
-  - OHHTTPStubs/Default (5.2.2):
+  - OHHTTPStubs (6.0.0):
+    - OHHTTPStubs/Default (= 6.0.0)
+  - OHHTTPStubs/Core (6.0.0)
+  - OHHTTPStubs/Default (6.0.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.2.2):
+  - OHHTTPStubs/JSON (6.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.2.2):
+  - OHHTTPStubs/NSURLSession (6.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.2.2)
-  - OHHTTPStubs/Swift (5.2.2):
-    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (6.0.0)
+  - OHHTTPStubs/Swift (6.0.0):
+    - OHHTTPStubs/Default
   - Quick (1.1.0)
-  - Realm (2.5.0):
-    - Realm/Headers (= 2.5.0)
-  - Realm/Headers (2.5.0)
-  - RealmSwift (2.5.0):
-    - Realm (= 2.5.0)
+  - Realm (2.8.3):
+    - Realm/Headers (= 2.8.3)
+  - Realm/Headers (2.8.3)
+  - RealmSwift (2.8.3):
+    - Realm (= 2.8.3)
   - Result (3.2.1)
   - Reusable (4.0.0):
     - Reusable/Storyboard (= 4.0.0)
     - Reusable/View (= 4.0.0)
   - Reusable/Storyboard (4.0.0)
   - Reusable/View (4.0.0)
-  - Siren (2.0.1)
-  - SKPhotoBrowser (4.0.0)
+  - Siren (2.0.6)
+  - SKPhotoBrowser (4.0.1)
   - SwiftyJSON (3.1.4)
-  - XCDYouTubeKit (2.5.3)
+  - XCDYouTubeKit (2.5.5)
   - XLPagerTabStrip (7.0.0)
 
 DEPENDENCIES:
   - 1PasswordExtension (~> 1.8.4)
   - ActionSheetPicker-3.0 (~> 2.2.0)
-  - Alamofire (~> 4.4)
+  - Alamofire (~> 4.5)
   - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`, branch `swift-3.0`)
   - Cartography (~> 1.1)
-  - Diff (~> 0.5)
-  - DynamicColor (~> 3.2.1)
+  - Diff (~> 0.5.3)
+  - DynamicColor (~> 3.3)
   - DZNEmptyDataSet (~> 1.8)
-  - FBSDKLoginKit (~> 4.20)
+  - FBSDKLoginKit (~> 4.24)
   - Heimdallr (~> 3.6)
-  - IQKeyboardManager (~> 4.0.8)
+  - IQKeyboardManager (~> 4.0.10)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Kingfisher (~> 3.6)
-  - Nimble (~> 6.1)
+  - Kingfisher (~> 3.10)
+  - Nimble (~> 7.0)
   - NVActivityIndicatorView (~> 3.6)
-  - OHHTTPStubs
+  - OHHTTPStubs (~> 6.0)
   - OHHTTPStubs/Swift
   - Quick (~> 1.1)
-  - RealmSwift (~> 2.5.0)
+  - RealmSwift (~> 2.8)
   - Reusable (~> 4.0)
-  - Siren (~> 2.0)
-  - SKPhotoBrowser (~> 4.0.0)
+  - Siren (~> 2.0.6)
+  - SKPhotoBrowser (~> 4.0.1)
   - SwiftyJSON (~> 3.1)
-  - XCDYouTubeKit (~> 2.5.0)
+  - XCDYouTubeKit (~> 2.5.5)
   - XLPagerTabStrip (~> 7.0)
 
 EXTERNAL SOURCES:
@@ -101,33 +101,33 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
   Cartography: 0538ccb4044acbbda2266335fc58cb4228794d90
-  Diff: eceb93a3adf508574ba9b8560da185ace83de055
-  DynamicColor: 4786d650c69da6c3f2cbfe068348288ec4e5521f
+  Diff: befa1d19c32726b2b36ce915d98793e2fbde8dcc
+  DynamicColor: 3cdaa1e01c16e93ba744e0630f768373e0fc7a7d
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  FBSDKCoreKit: 39a3569652983bf8666620dd334804c9057ae9b2
-  FBSDKLoginKit: 17092ff61a18c54ca423aebc18c5acc2e5a4a728
+  FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
+  FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
   Heimdallr: 7b17b8fffd77ea82fe331418408af7b7a5a5d7a4
-  IQKeyboardManager: 1a8189fa153bf09044355ee0ad36826f6767e7f7
+  IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Kingfisher: 2f31cb75f3e98d3d4c406cbdcd9b263e956cfa67
-  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
+  Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
+  Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
   NVActivityIndicatorView: c7c1c4300b418bd9ed06459e78d4df859ddbe31f
-  OHHTTPStubs: 34d9d0994e64fcf8552dbfade5ce82ada913ee31
+  OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
-  RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
+  Realm: 3601ef091c8c499a31101d8563b991e75546cdce
+  RealmSwift: 8183818515471b01a99abdd2970f8e4fd52b6f4a
   Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
-  Siren: 1ecf01040a56b6b417e7b754cf3fecea7c159c1c
-  SKPhotoBrowser: bc33eca22f4abd6b99d8d260509ca30c01752a87
+  Siren: fae83cda4d08373982313ba64873035e7c1bab40
+  SKPhotoBrowser: 3a7c6fc02aa1620ab17253a47a49fafda46536e8
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
-  XCDYouTubeKit: 90690f9e3523735dc93b8024269d991b0cfffe78
+  XCDYouTubeKit: 86f4e7a9c2baa7b7adf6abfc28ac3ab34927be2d
   XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: 358b87e6494c51ea46c24d0150ae470e561cb575
+PODFILE CHECKSUM: 6f530d0118139e7c7e6d10ed42792bd4471678b6
 
 COCOAPODS: 1.2.0

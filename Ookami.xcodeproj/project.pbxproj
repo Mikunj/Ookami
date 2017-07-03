@@ -78,6 +78,8 @@
 		2451793F1E3439810025F9C7 /* ookami-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2451793E1E3439810025F9C7 /* ookami-icon.png */; };
 		245179471E345CD20025F9C7 /* OokamiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245179461E345CD20025F9C7 /* OokamiUITests.swift */; };
 		2451794F1E345D330025F9C7 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2451794E1E345D330025F9C7 /* SnapshotHelper.swift */; };
+		2453D0CB1F00B7A3003DB262 /* LibraryEntryStartedAtHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2453D0CA1F00B7A3003DB262 /* LibraryEntryStartedAtHandler.swift */; };
+		2453D0CD1F00BF85003DB262 /* LibraryEntryFinishedAtHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2453D0CC1F00BF85003DB262 /* LibraryEntryFinishedAtHandler.swift */; };
 		245761381E2CBD6000BEB18C /* default-poster.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 245761371E2CBD6000BEB18C /* default-poster.jpg */; };
 		245761411E2DF71900BEB18C /* AnimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245761401E2DF71900BEB18C /* AnimeService.swift */; };
 		2457614F1E2E3F3F00BEB18C /* MangaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2457614E1E2E3F3F00BEB18C /* MangaService.swift */; };
@@ -86,6 +88,8 @@
 		2457615E1E31DEEE00BEB18C /* Media+Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2457615D1E31DEEE00BEB18C /* Media+Genre.swift */; };
 		245761611E31F95100BEB18C /* MediaInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2457615F1E31F95100BEB18C /* MediaInfoTableViewCell.swift */; };
 		245761621E31F95100BEB18C /* MediaInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 245761601E31F95100BEB18C /* MediaInfoTableViewCell.xib */; };
+		24589C711F02056700EF712A /* SearchItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24589C701F02056700EF712A /* SearchItemViewController.swift */; };
+		24589C731F02091A00EF712A /* LocalSearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24589C721F02091A00EF712A /* LocalSearchDataSource.swift */; };
 		245E59A61DD1C3C4002375A4 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A51DD1C3C4002375A4 /* Default.swift */; };
 		245E59A81DD1D5A1002375A4 /* StubRealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */; };
 		2460233A1DCCA11700B3C99B /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246023391DCCA11700B3C99B /* UserSpec.swift */; };
@@ -202,7 +206,6 @@
 		24D6E9941E49C7DC00751034 /* RangeFilterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9931E49C7DC00751034 /* RangeFilterSpec.swift */; };
 		24D6E9961E49CAFE00751034 /* AnimeFilterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9951E49CAFE00751034 /* AnimeFilterSpec.swift */; };
 		24D6E9991E49FBE900751034 /* PaginatedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9981E49FBE900751034 /* PaginatedService.swift */; };
-		24D6E9A61E4AAA1000751034 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9A51E4AAA1000751034 /* DiscoverViewController.swift */; };
 		24D6E9A91E4AADF900751034 /* AnimeDiscoverDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9A81E4AADF900751034 /* AnimeDiscoverDataSource.swift */; };
 		24D6E9AD1E4ABD3700751034 /* MediaDiscoverDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9AC1E4ABD3700751034 /* MediaDiscoverDataSource.swift */; };
 		24D6E9AF1E4AC01A00751034 /* MangaDiscoverDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6E9AE1E4AC01A00751034 /* MangaDiscoverDataSource.swift */; };
@@ -362,6 +365,8 @@
 		245179461E345CD20025F9C7 /* OokamiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OokamiUITests.swift; sourceTree = "<group>"; };
 		245179481E345CD20025F9C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2451794E1E345D330025F9C7 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		2453D0CA1F00B7A3003DB262 /* LibraryEntryStartedAtHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryStartedAtHandler.swift; sourceTree = "<group>"; };
+		2453D0CC1F00BF85003DB262 /* LibraryEntryFinishedAtHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryEntryFinishedAtHandler.swift; sourceTree = "<group>"; };
 		245761371E2CBD6000BEB18C /* default-poster.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default-poster.jpg"; sourceTree = "<group>"; };
 		245761401E2DF71900BEB18C /* AnimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeService.swift; sourceTree = "<group>"; };
 		2457614E1E2E3F3F00BEB18C /* MangaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaService.swift; sourceTree = "<group>"; };
@@ -370,6 +375,8 @@
 		2457615D1E31DEEE00BEB18C /* Media+Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Media+Genre.swift"; sourceTree = "<group>"; };
 		2457615F1E31F95100BEB18C /* MediaInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaInfoTableViewCell.swift; sourceTree = "<group>"; };
 		245761601E31F95100BEB18C /* MediaInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediaInfoTableViewCell.xib; sourceTree = "<group>"; };
+		24589C701F02056700EF712A /* SearchItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchItemViewController.swift; sourceTree = "<group>"; };
+		24589C721F02091A00EF712A /* LocalSearchDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalSearchDataSource.swift; sourceTree = "<group>"; };
 		245E59A51DD1C3C4002375A4 /* Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		245E59A71DD1D5A1002375A4 /* StubRealmObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubRealmObject.swift; sourceTree = "<group>"; };
 		246023391DCCA11700B3C99B /* UserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpec.swift; sourceTree = "<group>"; };
@@ -483,7 +490,6 @@
 		24D6E9931E49C7DC00751034 /* RangeFilterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeFilterSpec.swift; sourceTree = "<group>"; };
 		24D6E9951E49CAFE00751034 /* AnimeFilterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeFilterSpec.swift; sourceTree = "<group>"; };
 		24D6E9981E49FBE900751034 /* PaginatedService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedService.swift; sourceTree = "<group>"; };
-		24D6E9A51E4AAA1000751034 /* DiscoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
 		24D6E9A81E4AADF900751034 /* AnimeDiscoverDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeDiscoverDataSource.swift; sourceTree = "<group>"; };
 		24D6E9AC1E4ABD3700751034 /* MediaDiscoverDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDiscoverDataSource.swift; sourceTree = "<group>"; };
 		24D6E9AE1E4AC01A00751034 /* MangaDiscoverDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaDiscoverDataSource.swift; sourceTree = "<group>"; };
@@ -612,12 +618,11 @@
 		242A03E51E18FB39000E8B06 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				242A04041E1A7220000E8B06 /* FullLibraryDataSource.swift */,
+				24589C6F1F02051F00EF712A /* Data Sources */,
 				242A04091E1C7CA5000E8B06 /* LibraryEntry+LibraryView.swift */,
 				240C55621E7548C900BA8E50 /* LibraryFilterViewController.swift */,
 				242A04021E1A64C2000E8B06 /* LibraryViewController.swift */,
 				242A04151E1CAAEA000E8B06 /* UserLibraryViewController.swift */,
-				242A040B1E1C858D000E8B06 /* UserLibraryViewDataSource.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -777,6 +782,16 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		24589C6F1F02051F00EF712A /* Data Sources */ = {
+			isa = PBXGroup;
+			children = (
+				242A04041E1A7220000E8B06 /* FullLibraryDataSource.swift */,
+				24589C721F02091A00EF712A /* LocalSearchDataSource.swift */,
+				242A040B1E1C858D000E8B06 /* UserLibraryViewDataSource.swift */,
+			);
+			path = "Data Sources";
+			sourceTree = "<group>";
+		};
 		2464F1C51DCC58800028F7B0 = {
 			isa = PBXGroup;
 			children = (
@@ -906,6 +921,7 @@
 			isa = PBXGroup;
 			children = (
 				246658761E29BCE000BB15EC /* NavigationHidingViewController.swift */,
+				24589C701F02056700EF712A /* SearchItemViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1005,7 +1021,7 @@
 			isa = PBXGroup;
 			children = (
 				24E67FF31E68EC140001BAFB /* Cells */,
-				2491266C1E71283200EE81B1 /* Data sources */,
+				2491266C1E71283200EE81B1 /* Data Sources */,
 				24E67FFF1E691A8E0001BAFB /* AnimeTrendingTableViewController.swift */,
 				244221131E6CC6760068EE8D /* MangaTrendingTableViewController.swift */,
 				24E67FF81E68EFE70001BAFB /* TrendingTableViewController.swift */,
@@ -1013,7 +1029,7 @@
 			path = "Table View";
 			sourceTree = "<group>";
 		};
-		2491266C1E71283200EE81B1 /* Data sources */ = {
+		2491266C1E71283200EE81B1 /* Data Sources */ = {
 			isa = PBXGroup;
 			children = (
 				24E67FFD1E6915690001BAFB /* AnimeTrendingTableDataSource.swift */,
@@ -1023,7 +1039,7 @@
 				249126731E71392900EE81B1 /* MediaTrendingTableDataSource.swift */,
 				249126711E71381E00EE81B1 /* TrendingTableDataSource.swift */,
 			);
-			path = "Data sources";
+			path = "Data Sources";
 			sourceTree = "<group>";
 		};
 		2491266F1E712DE000EE81B1 /* Year View */ = {
@@ -1165,12 +1181,14 @@
 			children = (
 				24D401441E8B90F600C7825D /* LibraryEntryDataHandler.swift */,
 				24D401541E8B97A200C7825D /* LibraryEntryDeleteHandler.swift */,
+				2453D0CC1F00BF85003DB262 /* LibraryEntryFinishedAtHandler.swift */,
 				24D4014C1E8B95C000C7825D /* LibraryEntryNotesHandler.swift */,
 				24D401521E8B96E900C7825D /* LibraryEntryPrivateHandler.swift */,
 				24D401461E8B931B00C7825D /* LibraryEntryProgressHandler.swift */,
 				24D4014A1E8B952D00C7825D /* LibraryEntryRatingHandler.swift */,
 				24D4014E1E8B968900C7825D /* LibraryEntryReconsumeCountHandler.swift */,
 				24D401501E8B96BB00C7825D /* LibraryEntryReconsumingHandler.swift */,
+				2453D0CA1F00B7A3003DB262 /* LibraryEntryStartedAtHandler.swift */,
 				24D401481E8B947100C7825D /* LibraryEntryStatusHandler.swift */,
 			);
 			path = "Data Handlers";
@@ -1201,7 +1219,6 @@
 			children = (
 				24D6E9A71E4AADDF00751034 /* Data Sources */,
 				2499C99C1E5D9E87005D246C /* Filters */,
-				24D6E9A51E4AAA1000751034 /* DiscoverViewController.swift */,
 				24D6E9B01E4ACADA00751034 /* MediaDiscoverViewController.swift */,
 			);
 			path = Discover;
@@ -1848,6 +1865,7 @@
 				242A03FC1E1A15B8000E8B06 /* CollectionCellSpacer.swift in Sources */,
 				24175E991E207CB1009FBDE6 /* LibraryEntryViewData.swift in Sources */,
 				24D401451E8B90F600C7825D /* LibraryEntryDataHandler.swift in Sources */,
+				2453D0CB1F00B7A3003DB262 /* LibraryEntryStartedAtHandler.swift in Sources */,
 				242A03EF1E190730000E8B06 /* ItemDetailGridCell.swift in Sources */,
 				24D401471E8B931B00C7825D /* LibraryEntryProgressHandler.swift in Sources */,
 				24C8CDBC1E727DA8003596DD /* MangaWeeklyTrendingTableDataSource.swift in Sources */,
@@ -1868,6 +1886,7 @@
 				24D4014D1E8B95C000C7825D /* LibraryEntryNotesHandler.swift in Sources */,
 				246318321E652FEE00892CDA /* ItemSimpleGridCell.swift in Sources */,
 				24DC7DFA1E2776AF007D14FB /* LibraryFetcher.swift in Sources */,
+				2453D0CD1F00BF85003DB262 /* LibraryEntryFinishedAtHandler.swift in Sources */,
 				24C8CDB81E726001003596DD /* AnimeSeasonalDataSource.swift in Sources */,
 				24D6E9AD1E4ABD3700751034 /* MediaDiscoverDataSource.swift in Sources */,
 				244221161E6CC8CF0068EE8D /* MediaTrendingTableViewController.swift in Sources */,
@@ -1886,6 +1905,7 @@
 				2491266E1E712A1C00EE81B1 /* PaginatedTrendingViewController.swift in Sources */,
 				24D401551E8B97A200C7825D /* LibraryEntryDeleteHandler.swift in Sources */,
 				24E67FFE1E6915690001BAFB /* AnimeTrendingTableDataSource.swift in Sources */,
+				24589C731F02091A00EF712A /* LocalSearchDataSource.swift in Sources */,
 				24BF37151E3C163A0055972C /* MailComposer.swift in Sources */,
 				24D6E9AF1E4AC01A00751034 /* MangaDiscoverDataSource.swift in Sources */,
 				2491266A1E711FBA00EE81B1 /* ItemData+OokamiKit.swift in Sources */,
@@ -1897,10 +1917,10 @@
 				242A042C1E1F480B000E8B06 /* NibLoadableView.swift in Sources */,
 				242A03F21E1909AC000E8B06 /* ItemData.swift in Sources */,
 				242A04221E1F11E1000E8B06 /* LibraryEntryViewController.swift in Sources */,
+				24589C711F02056700EF712A /* SearchItemViewController.swift in Sources */,
 				2499C9A01E5D9EAE005D246C /* FilterValueViewController.swift in Sources */,
 				2499C99B1E5D96FC005D246C /* Filter.swift in Sources */,
 				242A03FF1E1A180C000E8B06 /* CollectionCellSpacing.swift in Sources */,
-				24D6E9A61E4AAA1000751034 /* DiscoverViewController.swift in Sources */,
 				244221211E6CEBDE0068EE8D /* MangaYearTrendingDataSource.swift in Sources */,
 				24C1C4C81E8F50B500137702 /* ItemViewSizeHandler.swift in Sources */,
 			);

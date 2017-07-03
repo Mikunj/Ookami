@@ -53,6 +53,7 @@ extension AnimeFilterViewController {
     func filters() -> [FilterGroup] {
         let helper = DiscoverFilterHelper()
         
+        let sort = helper.sortFilter(from: filter) { self.reload() }
         let year = helper.yearFilter(from: filter) { self.reload() }
         let score = helper.scoreFilter(from: filter) { self.reload() }
         let episodes = episodeFilter()
@@ -67,7 +68,7 @@ extension AnimeFilterViewController {
         let other = FilterGroup(name: "", filters: [type, rating, streamers, season, genre])
         
         
-        return [year, score, episodes, other]
+        return [sort, year, score, episodes, other]
     }
     
     //MARK:- Episode

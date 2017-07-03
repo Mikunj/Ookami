@@ -270,9 +270,9 @@ extension FullLibraryDataSource {
         
         //Apply the sort
         switch sort.type {
-        case .updatedAt:
+        case .progressedAt:
             //We don't need to add a secondary sort for title as it's going to be very unlikely that we'll get 2 same values
-            return Array(results.sorted(byKeyPath: "updatedAt", ascending: ascending))
+            return Array(results.sorted(byKeyPath: "progressedAt", ascending: ascending))
             
         case .title:
             return titleSort(results: results, ascending: ascending)

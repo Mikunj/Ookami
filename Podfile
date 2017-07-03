@@ -11,36 +11,36 @@ plugin 'cocoapods-keys', {
  ]}
 
 def project_pods
-    pod 'RealmSwift', '~> 2.5.0'
+    pod 'RealmSwift', '~> 2.8'
     pod 'SwiftyJSON', '~> 3.1'
-    pod 'Alamofire', '~> 4.4'
+    pod 'Alamofire', '~> 4.5'
     pod 'Heimdallr', '~> 3.6'
 end
 
 def testing_pods
     pod 'Quick', '~> 1.1'
-    pod 'Nimble', '~> 6.1'
-    pod 'OHHTTPStubs'
+    pod 'Nimble', '~> 7.0'
+    pod 'OHHTTPStubs', '~> 6.0'
     pod 'OHHTTPStubs/Swift'
 end
 
 def ui_pods
     pod 'Cartography', '~> 1.1'
-    pod 'Kingfisher', '~> 3.6'
+    pod 'Kingfisher', '~> 3.10'
     pod 'Reusable', '~> 4.0'
     pod 'XLPagerTabStrip', '~> 7.0'
     pod 'NVActivityIndicatorView', '~> 3.6'
     pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
-    pod 'DynamicColor', '~> 3.2.1'
+    pod 'DynamicColor', '~> 3.3'
     pod 'ActionSheetPicker-3.0', '~> 2.2.0'
-    pod 'IQKeyboardManager', '~> 4.0.8'
-    pod 'Diff', '~> 0.5'
-    pod 'SKPhotoBrowser', '~> 4.0.0'
-    pod 'XCDYouTubeKit', '~> 2.5.0'
+    pod 'IQKeyboardManager', '~> 4.0.10'
+    pod 'Diff', '~> 0.5.3'
+    pod 'SKPhotoBrowser', '~> 4.0.1'
+    pod 'XCDYouTubeKit', '~> 2.5.5'
     pod 'DZNEmptyDataSet', '~> 1.8'
-    pod 'FBSDKLoginKit', '~> 4.20'
+    pod 'FBSDKLoginKit', '~> 4.24'
     pod '1PasswordExtension', '~> 1.8.4'
-    pod 'Siren', '~> 2.0'
+    pod 'Siren', '~> 2.0.6'
 end
 
 target 'Ookami' do

@@ -21,6 +21,8 @@ class LibraryEntryViewData {
         return [LibraryEntryProgressHandler(),
                 LibraryEntryStatusHandler(),
                 LibraryEntryRatingHandler(),
+                LibraryEntryStartedAtHandler(),
+                LibraryEntryFinishedAtHandler(),
                 LibraryEntryNotesHandler(),
                 LibraryEntryReconsumeCountHandler(),
                 LibraryEntryReconsumingHandler(),
@@ -115,5 +117,7 @@ extension LibraryEntryViewData {
         case reconsumeCount = "Reconsumed"
         case reconsuming = "Reconsuming"
         case isPrivate = "Private"
+        case startedAt = "Started At"
+        case finishedAt = "Finished At"
     }
 }

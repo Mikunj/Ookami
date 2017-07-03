@@ -55,6 +55,11 @@ final class UserLibraryViewController: UIViewController {
         return UIBarButtonItem(withIcon: .filterIcon, size: CGSize(width: 22, height: 22), target: self, action: #selector(filterTapped))
     }()
     
+    //The search button
+    fileprivate lazy var searchBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchTapped))
+    }()
+    
     /// Create a `UserLibraryViewController`
     ///
     /// - Parameters:
@@ -123,7 +128,7 @@ final class UserLibraryViewController: UIViewController {
         }
         
         self.navigationItem.leftBarButtonItem = settingsButton
-        self.navigationItem.rightBarButtonItem = filterBarButton
+        self.navigationItem.rightBarButtonItems = [searchBarButton, filterBarButton]
         
         activityIndicator.add(to: self.view)
         
@@ -237,6 +242,15 @@ final class UserLibraryViewController: UIViewController {
             vc.title = "Filter"
             self.present(nav, animated: true)
         }
+    }
+    
+    func searchTapped() {
+        let type: Media.MediaType = (animeController?.view.isHidden ?? false) ? .manga : .anime
+        let source = LocalSearchDataSource(userID: userID, type: type)
+        let vc = SearchItemViewController(dataSource: source)
+        vc.title = "Search Library"
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func set(sort: LibraryViewController.Sort) {
