@@ -13,19 +13,21 @@ PODS:
   - Diff (0.5.3)
   - DynamicColor (3.3)
   - DZNEmptyDataSet (1.8.1)
-  - FBSDKCoreKit (4.24.0):
+  - FBSDKCoreKit (4.25.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.24.0):
+  - FBSDKLoginKit (4.25.0):
     - FBSDKCoreKit
-  - Heimdallr (3.6.0):
-    - Heimdallr/Core (= 3.6.0)
-  - Heimdallr/Core (3.6.0):
+  - Heimdallr (3.6.1):
+    - Heimdallr/Core (= 3.6.1)
+  - Heimdallr/Core (3.6.1):
     - Result (~> 3.0)
-  - IQKeyboardManager (4.0.10)
+  - IQKeyboardManager (4.0.13)
   - Keys (1.0.0)
-  - Kingfisher (3.10.2)
+  - Kingfisher (3.11.0)
   - Nimble (7.0.1)
-  - NVActivityIndicatorView (3.6.0)
+  - NVActivityIndicatorView (3.7.0):
+    - NVActivityIndicatorView/Presenter (= 3.7.0)
+  - NVActivityIndicatorView/Presenter (3.7.0)
   - OHHTTPStubs (6.0.0):
     - OHHTTPStubs/Default (= 6.0.0)
   - OHHTTPStubs/Core (6.0.0)
@@ -42,18 +44,18 @@ PODS:
   - OHHTTPStubs/Swift (6.0.0):
     - OHHTTPStubs/Default
   - Quick (1.1.0)
-  - Realm (2.8.3):
-    - Realm/Headers (= 2.8.3)
-  - Realm/Headers (2.8.3)
-  - RealmSwift (2.8.3):
-    - Realm (= 2.8.3)
-  - Result (3.2.1)
+  - Realm (2.10.0):
+    - Realm/Headers (= 2.10.0)
+  - Realm/Headers (2.10.0)
+  - RealmSwift (2.10.0):
+    - Realm (= 2.10.0)
+  - Result (3.2.3)
   - Reusable (4.0.0):
     - Reusable/Storyboard (= 4.0.0)
     - Reusable/View (= 4.0.0)
   - Reusable/Storyboard (4.0.0)
   - Reusable/View (4.0.0)
-  - Siren (2.0.6)
+  - Siren (2.0.7)
   - SKPhotoBrowser (4.0.1)
   - SwiftyJSON (3.1.4)
   - XCDYouTubeKit (2.5.5)
@@ -68,19 +70,19 @@ DEPENDENCIES:
   - Diff (~> 0.5.3)
   - DynamicColor (~> 3.3)
   - DZNEmptyDataSet (~> 1.8)
-  - FBSDKLoginKit (~> 4.24)
-  - Heimdallr (~> 3.6)
-  - IQKeyboardManager (~> 4.0.10)
+  - FBSDKLoginKit (~> 4.25)
+  - Heimdallr (~> 3.6.1)
+  - IQKeyboardManager (~> 4.0.13)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Kingfisher (~> 3.10)
+  - Kingfisher (~> 3.11)
   - Nimble (~> 7.0)
-  - NVActivityIndicatorView (~> 3.6)
+  - NVActivityIndicatorView (~> 3.7)
   - OHHTTPStubs (~> 6.0)
   - OHHTTPStubs/Swift
   - Quick (~> 1.1)
-  - RealmSwift (~> 2.8)
+  - RealmSwift (~> 2.10)
   - Reusable (~> 4.0)
-  - Siren (~> 2.0.6)
+  - Siren (~> 2.0.7)
   - SKPhotoBrowser (~> 4.0.1)
   - SwiftyJSON (~> 3.1)
   - XCDYouTubeKit (~> 2.5.5)
@@ -108,26 +110,26 @@ SPEC CHECKSUMS:
   Diff: befa1d19c32726b2b36ce915d98793e2fbde8dcc
   DynamicColor: 3cdaa1e01c16e93ba744e0630f768373e0fc7a7d
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
-  FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
-  Heimdallr: 7b17b8fffd77ea82fe331418408af7b7a5a5d7a4
-  IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
+  FBSDKCoreKit: 53e3f4bfb64e80c5f229dd30ae33ff57fbbbd2d1
+  FBSDKLoginKit: f628c09684dae9c17f071cf90b014e886f5093ea
+  Heimdallr: d2a8b1dc3ecc7ad249c9ffd20c990e2248fcd599
+  IQKeyboardManager: 8eab4d8111418414619d1df8e4779ce5d0f8d7e2
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
+  Kingfisher: c8911a7672c6217dec8c0520fb6e76ec4b7e0780
   Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
-  NVActivityIndicatorView: c7c1c4300b418bd9ed06459e78d4df859ddbe31f
+  NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Realm: 3601ef091c8c499a31101d8563b991e75546cdce
-  RealmSwift: 8183818515471b01a99abdd2970f8e4fd52b6f4a
-  Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
+  Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
+  RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
+  Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
-  Siren: fae83cda4d08373982313ba64873035e7c1bab40
+  Siren: e51ff27a8e83c3b7508fc7e41becbfa16523b26c
   SKPhotoBrowser: 3a7c6fc02aa1620ab17253a47a49fafda46536e8
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   XCDYouTubeKit: 86f4e7a9c2baa7b7adf6abfc28ac3ab34927be2d
   XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: 6f530d0118139e7c7e6d10ed42792bd4471678b6
+PODFILE CHECKSUM: f413119d33771bff05e6b6b37ee6d735a7ff0c74
 
 COCOAPODS: 1.2.0
