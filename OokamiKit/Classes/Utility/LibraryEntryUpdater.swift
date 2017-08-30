@@ -91,18 +91,23 @@ extension LibraryEntryUpdater {
                 unmanaged.progress = max
             }
             
-            //Set the finished date
-            update(finishedAt: Date())
-            
-            //Set the start date if it hasn't been set
-            if unmanaged.startedAt == nil {
-                update(startedAt: Date())
-            }
             
             //We need to update the reconsume count aswell if we were reconsuming
             if unmanaged.reconsuming {
                 update(reconsumeCount: unmanaged.reconsumeCount + 1)
                 update(reconsuming: false)
+            } else {
+                //We only want to set the dates if we weren't reconsuming.
+                
+                //Set the finished date
+                if unmanaged.finishedAt == nil {
+                    update(finishedAt: Date())
+                }
+                
+                //Set the start date if it hasn't been set
+                if unmanaged.startedAt == nil {
+                    update(startedAt: Date())
+                }
             }
             
         } else if status == .current {

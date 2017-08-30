@@ -16,8 +16,7 @@ class DiscoverFilterHelper {
     //MARK:- Sort
     func sortFilter(from mediaFilter: MediaFilter, onComplete: @escaping () -> Void) -> FilterGroup {
         
-        //Since there's an issue with the recently added filter, we temporarily disabled it
-        let keys: [Sort.Keys] = [.popularity, .averageRating, .startDate]
+        let keys = Sort.Keys.all
         let values = keys.map { $0.toString() }
         
         let selectedIndex = keys.map { $0.rawValue}
