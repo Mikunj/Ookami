@@ -78,7 +78,7 @@ public class DiscoverService: BaseService {
             }
             
             guard let parsed = parsed else {
-                completion(nil, NetworkClientError.error("Failed to get parsed objects - Media Service Helper"), original)
+                completion(nil, NetworkClientError.error("Failed to get parsed objects - Discover Service"), original)
                 return
             }
             

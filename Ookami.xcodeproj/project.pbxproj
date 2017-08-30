@@ -232,6 +232,7 @@
 		24EEE5E71E5D394800ECA152 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 24EEE5E61E5D394800ECA152 /* search.png */; };
 		24EEEF5D1DCCA53100869696 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EEEF5C1DCCA53100869696 /* Helper.swift */; };
 		24EEEF601DCCA56700869696 /* user-jigglyslime.json in Resources */ = {isa = PBXBuildFile; fileRef = 24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */; };
+		24EFB81A1F56462500D4B3AE /* MediaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EFB8191F56462500D4B3AE /* MediaService.swift */; };
 		4B0602544AED16E809D1EEAF /* Pods_OokamiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 434E929751010464220AF315 /* Pods_OokamiTests.framework */; };
 		520B0B1726DD6CC2FF27B00D /* Pods_OokamiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596FBEE6BEFC12185B9DF4D8 /* Pods_OokamiUITests.framework */; };
 		BFF7EBB80861000783563FA2 /* Pods_Ookami.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AF10F67E8E4875D581D508 /* Pods_Ookami.framework */; };
@@ -517,6 +518,7 @@
 		24EEE5E61E5D394800ECA152 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		24EEEF5C1DCCA53100869696 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		24EEEF5F1DCCA56700869696 /* user-jigglyslime.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "user-jigglyslime.json"; sourceTree = "<group>"; };
+		24EFB8191F56462500D4B3AE /* MediaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaService.swift; sourceTree = "<group>"; };
 		42AF10F67E8E4875D581D508 /* Pods_Ookami.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ookami.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		434E929751010464220AF315 /* Pods_OokamiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OokamiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		596FBEE6BEFC12185B9DF4D8 /* Pods_OokamiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OokamiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -752,6 +754,7 @@
 				24DAC2631DE69A9200279EE6 /* LibraryService.swift */,
 				2457614E1E2E3F3F00BEB18C /* MangaService.swift */,
 				242B2B4C1DE575CC0002903B /* UserService.swift */,
+				24EFB8191F56462500D4B3AE /* MediaService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1986,6 +1989,7 @@
 				2494D9AD1DCC740D0032AC8E /* Date+Utils.swift in Sources */,
 				24DAC2661DE69AF300279EE6 /* BaseService.swift in Sources */,
 				247362901DCF0321004B4AC5 /* NetworkRequest.swift in Sources */,
+				24EFB81A1F56462500D4B3AE /* MediaService.swift in Sources */,
 				24BEC5C31E1341F40058F5AB /* Database.swift in Sources */,
 				24DBE6EC1DD2DFD5003B7676 /* FetchLibraryOperation.swift in Sources */,
 				2494D9A81DCC631E0032AC8E /* User.swift in Sources */,
