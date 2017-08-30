@@ -29,8 +29,8 @@ public class Parser {
         register(object: User.self)
         register(object: Genre.self)
         register(object: LibraryEntry.self)
+        register(object: MediaRelationship.self)
     }
-    
     
     /// Register a parser. This parser's type will be used to determine which objects get passed to it.
     /// If an object's type matches the parser type then that object will be passed to the `parser` block.

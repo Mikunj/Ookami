@@ -153,6 +153,7 @@
 		2499C9A01E5D9EAE005D246C /* FilterValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2499C99F1E5D9EAE005D246C /* FilterValueViewController.swift */; };
 		24A1B57C1DD8718F00F7E4E4 /* PaginatedLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */; };
 		24A258AE1DD9455100CC7561 /* PaginatedServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A258AD1DD9455100CC7561 /* PaginatedServiceSpec.swift */; };
+		24A54A561F563BB3001411B5 /* MediaRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A54A551F563BB3001411B5 /* MediaRelationship.swift */; };
 		24A7EAB91DCDCB8A000935E6 /* GenreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */; };
 		24A7EABB1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
 		24A7EABC1DCDCBFA000935E6 /* genre-adventure.json in Resources */ = {isa = PBXBuildFile; fileRef = 24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */; };
@@ -439,6 +440,7 @@
 		2499C99F1E5D9EAE005D246C /* FilterValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterValueViewController.swift; sourceTree = "<group>"; };
 		24A1B57B1DD8718F00F7E4E4 /* PaginatedLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedLibrary.swift; sourceTree = "<group>"; };
 		24A258AD1DD9455100CC7561 /* PaginatedServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginatedServiceSpec.swift; sourceTree = "<group>"; };
+		24A54A551F563BB3001411B5 /* MediaRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaRelationship.swift; sourceTree = "<group>"; };
 		24A7EAB81DCDCB8A000935E6 /* GenreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreSpec.swift; sourceTree = "<group>"; };
 		24A7EABA1DCDCBFA000935E6 /* genre-adventure.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "genre-adventure.json"; sourceTree = "<group>"; };
 		24AF0E391E24BAC100F11809 /* MediaTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTableHeaderView.swift; sourceTree = "<group>"; };
@@ -881,6 +883,7 @@
 				241418991DCDD81100AF1AEA /* LibraryEntry.swift */,
 				242A03D61E163EAB000E8B06 /* Manga.swift */,
 				2457615D1E31DEEE00BEB18C /* Media+Genre.swift */,
+				24A54A551F563BB3001411B5 /* MediaRelationship.swift */,
 				242A03D41E163D0C000E8B06 /* MediaTitle.swift */,
 				2473627F1DCDFF3B004B4AC5 /* README */,
 				2494D9A71DCC631E0032AC8E /* User.swift */,
@@ -1960,6 +1963,7 @@
 				243C088F1E11FBD800C44888 /* CacheManager.swift in Sources */,
 				245761411E2DF71900BEB18C /* AnimeService.swift in Sources */,
 				24BEC5DC1E15DB3A0058F5AB /* LastFetched.swift in Sources */,
+				24A54A561F563BB3001411B5 /* MediaRelationship.swift in Sources */,
 				24C8C69A1E10E3F00048EB9D /* Constants.swift in Sources */,
 				248734481DCD491E002E7366 /* RealmProvider.swift in Sources */,
 				243C08911E11FBF500C44888 /* Cacheable.swift in Sources */,

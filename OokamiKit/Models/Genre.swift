@@ -41,6 +41,7 @@ extension Genre: GettableObject {
         return Genre.all().filter("name ==[c] %@", name).first
     }
 }
+
 extension Genre: JSONParsable {
     
     public static var typeString: String { return "genres" }
