@@ -224,11 +224,26 @@ extension PaginatedService {
 }
 
 //MARK:- Error
-public enum PaginationError : Error {
+public enum PaginationError : LocalizedError {
     case invalidJSONRecieved
     case noNextPage
     case noPreviousPage
     case noFirstPage
     case noLastPage
+    
+    public var errorDescription: String? {
+        switch self {
+        case .invalidJSONRecieved:
+            return "Invalid JSON received"
+        case .noNextPage:
+            return "No next page"
+        case .noPreviousPage:
+            return "No previoud page"
+        case .noFirstPage:
+            return "No first page"
+        case .noLastPage:
+            return "No last page"
+        }
+    }
 }
 

@@ -18,6 +18,7 @@ struct MediaViewControllerSection {
     var cellForIndexPath: (IndexPath, UITableView) -> UITableViewCell = { _,_ in return UITableViewCell() }
     var willDisplayCell: ((IndexPath, UITableViewCell) -> Void)? = nil
     var didSelectRow: ((IndexPath, UITableView) -> Void)? = nil
+    var didEndDisplayingCell: ((IndexPath, UITableViewCell) -> Void)? = nil
     var heightForRow: (IndexPath) -> CGFloat = { _ in
         return UITableViewAutomaticDimension
     }
@@ -47,6 +48,7 @@ class MediaViewController: NavigationHidingViewController, NVActivityIndicatorVi
         
         t.register(cellType: MediaTextTableViewCell.self)
         t.register(cellType: MediaInfoTableViewCell.self)
+        t.register(cellType: CollectionViewTableViewCell.self)
         
         //Auto table height
         t.estimatedRowHeight = 15
@@ -200,6 +202,11 @@ extension MediaViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let section = data[indexPath.section]
         section.willDisplayCell?(indexPath, cell)
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let section = data[indexPath.section]
+        section.didEndDisplayingCell?(indexPath, cell)
     }
 }
 

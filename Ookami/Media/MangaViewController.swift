@@ -19,6 +19,8 @@ class MangaViewController: MediaViewController {
     
     fileprivate var manga: Manga
     
+    fileprivate var franchiseController: MediaFranchiseController?
+    
     /// Create an `MangaViewController`
     ///
     /// - Parameter manga: The manga to display
@@ -39,6 +41,11 @@ class MangaViewController: MediaViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setup the franchise controller
+        franchiseController = MediaFranchiseController(mediaId: manga.id, mediaType: .manga, parent: self) {
+            self.reloadData()
+        }
         
         //Set the header data
         mediaHeader.data = headerData()
@@ -64,7 +71,7 @@ class MangaViewController: MediaViewController {
     }
     
     override func sectionData() -> [MediaViewControllerSection] {
-        let sections: [MediaViewControllerSection?] = [titleSection(), infoSection(), synopsisSection()]
+        let sections: [MediaViewControllerSection?] = [titleSection(), infoSection(), synopsisSection(), franchiseController?.section()]
         return sections.flatMap { $0 }
     }
     

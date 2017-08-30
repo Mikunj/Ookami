@@ -22,7 +22,7 @@ public class MediaService: BaseService {
         let endpoint = Constants.Endpoints.mediaRelationships
         let request = KitsuPagedRequest(relativeURL: endpoint)
         request.filter(key: "source_id", value: id)
-        request.filter(key: "source_type", value: type.rawValue)
+        request.filter(key: "source_type", value: type.rawValue.capitalized)
         request.include("destination", "source")
         request.page = KitsuPagedRequest.Page(offset: 0, limit: 20)
         
