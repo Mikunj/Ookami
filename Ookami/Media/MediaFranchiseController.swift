@@ -35,7 +35,7 @@ class MediaFranchiseController: NSObject {
         let padding: CGFloat = 4
         layout.minimumLineSpacing = padding
         layout.minimumInteritemSpacing = padding
-        layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
+        layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding * 2, right: padding)
         
         let phoneSize = CGSize(width: 110, height: 190)
         let padSize = CGSize(width: 150, height: 250)
@@ -113,7 +113,7 @@ class MediaFranchiseController: NSObject {
             tableCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
             tableCell.collectionView.collectionViewLayout = self.collectionViewLayout
             tableCell.collectionViewOffset = self.offset
-            tableCell.collectionView.backgroundColor = UIColor.white.darkened(amount: 0.03)
+            tableCell.collectionView.backgroundColor = UIColor.groupTableViewBackground.lighter(amount: 0.018)
         }
         
         controllerSection?.didEndDisplayingCell = { indexPath, cell in
