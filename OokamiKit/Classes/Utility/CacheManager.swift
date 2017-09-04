@@ -21,6 +21,7 @@ public class CacheManager {
         manager.register(Genre.self)
         manager.register(LibraryEntry.self)
         manager.register(User.self)
+        manager.register(MediaRelationship.self)
         
         return manager
     }()

@@ -28,6 +28,7 @@ extension Constants {
         static let manga = "/manga"
         static let genres = "/genres"
         static let trending = "/trending"
+        static let mediaRelationships = "/media-relationships"
     }
     
 }

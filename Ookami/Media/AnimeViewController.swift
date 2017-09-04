@@ -12,11 +12,14 @@ import RealmSwift
 import SKPhotoBrowser
 
 //TODO: Add more sections (characters, franchise)
+//TODO: For franchise create MediaFranchiseController(parent: MediaViewController) which has a section MediaViewControllerSection. And the fetching of the franchise is done within it
 
 //A view controller to display anime
 class AnimeViewController: MediaViewController {
     
     fileprivate var anime: Anime
+    
+    fileprivate var franchiseController: MediaFranchiseController?
     
     /// Create an `AnimeViewController`
     ///
@@ -39,6 +42,11 @@ class AnimeViewController: MediaViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setup the franchise controller
+        franchiseController = MediaFranchiseController(mediaId: anime.id, mediaType: .anime, parent: self) {
+            self.reloadData()
+        }
         
         //Set the header data
         mediaHeader.data = headerData()
@@ -64,7 +72,7 @@ class AnimeViewController: MediaViewController {
     }
     
     override func sectionData() -> [MediaViewControllerSection] {
-        let sections: [MediaViewControllerSection?] = [titleSection(), infoSection(), synopsisSection()]
+        let sections: [MediaViewControllerSection?] = [titleSection(), infoSection(), synopsisSection(), franchiseController?.section()]
         return sections.flatMap { $0 }
     }
     
