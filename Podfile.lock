@@ -21,9 +21,9 @@ PODS:
     - Heimdallr/Core (= 3.6.1)
   - Heimdallr/Core (3.6.1):
     - Result (~> 3.0)
-  - IQKeyboardManager (4.0.13)
+  - IQKeyboardManager (5.0.0)
   - Keys (1.0.0)
-  - Kingfisher (3.11.0)
+  - Kingfisher (3.13.1)
   - Nimble (7.0.1)
   - NVActivityIndicatorView (3.7.0):
     - NVActivityIndicatorView/Presenter (= 3.7.0)
@@ -44,11 +44,11 @@ PODS:
   - OHHTTPStubs/Swift (6.0.0):
     - OHHTTPStubs/Default
   - Quick (1.1.0)
-  - Realm (2.10.0):
-    - Realm/Headers (= 2.10.0)
-  - Realm/Headers (2.10.0)
-  - RealmSwift (2.10.0):
-    - Realm (= 2.10.0)
+  - Realm (3.0.2):
+    - Realm/Headers (= 3.0.2)
+  - Realm/Headers (3.0.2)
+  - RealmSwift (3.0.2):
+    - Realm (= 3.0.2)
   - Result (3.2.3)
   - Reusable (4.0.0):
     - Reusable/Storyboard (= 4.0.0)
@@ -72,19 +72,19 @@ DEPENDENCIES:
   - DZNEmptyDataSet (~> 1.8)
   - FBSDKLoginKit (~> 4.25)
   - Heimdallr (~> 3.6.1)
-  - IQKeyboardManager (~> 4.0.13)
+  - IQKeyboardManager (= 5.0.0)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Kingfisher (~> 3.11)
+  - Kingfisher (~> 3.13)
   - Nimble (~> 7.0)
   - NVActivityIndicatorView (~> 3.7)
   - OHHTTPStubs (~> 6.0)
   - OHHTTPStubs/Swift
   - Quick (~> 1.1)
-  - RealmSwift (~> 2.10)
+  - RealmSwift (~> 3.0.2)
   - Reusable (~> 4.0)
   - Siren (~> 2.0.7)
   - SKPhotoBrowser (~> 4.0.1)
-  - SwiftyJSON (~> 3.1)
+  - SwiftyJSON (~> 3.1.4)
   - XCDYouTubeKit (~> 2.5.5)
   - XLPagerTabStrip (~> 7.0)
 
@@ -113,15 +113,15 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 53e3f4bfb64e80c5f229dd30ae33ff57fbbbd2d1
   FBSDKLoginKit: f628c09684dae9c17f071cf90b014e886f5093ea
   Heimdallr: d2a8b1dc3ecc7ad249c9ffd20c990e2248fcd599
-  IQKeyboardManager: 8eab4d8111418414619d1df8e4779ce5d0f8d7e2
+  IQKeyboardManager: 5edc5bcd5cd3e6982924e6318b82c57099eb0a6c
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Kingfisher: c8911a7672c6217dec8c0520fb6e76ec4b7e0780
+  Kingfisher: ed9707a409cc47fddafbcd12a43a9757e3600af5
   Nimble: 657d000e11df8aebe27cdaf9d244de7f30ed87f7
   NVActivityIndicatorView: d3738df7e2e476aca0ba6bf32a8c9fbcfc33d64b
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
-  RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
+  Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
+  RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
   Result: 128640a6347e8d2ae48b142556739a2d13f90ce6
   Reusable: 98e5fff1e0e2e00872199699b276dde08ee56c07
   Siren: e51ff27a8e83c3b7508fc7e41becbfa16523b26c
@@ -130,6 +130,6 @@ SPEC CHECKSUMS:
   XCDYouTubeKit: 86f4e7a9c2baa7b7adf6abfc28ac3ab34927be2d
   XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: f413119d33771bff05e6b6b37ee6d735a7ff0c74
+PODFILE CHECKSUM: fdd45a97fc0fe5aa9146f93b08b94fa973c8574a
 
 COCOAPODS: 1.2.0

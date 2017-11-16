@@ -77,7 +77,7 @@ final class LocalSearchDataSource: SearchDataSource {
         self.isLoading = true
         
         //Get all the entries and add a notification block to them
-        token = LibraryEntry.belongsTo(user: userID, type: type).addNotificationBlock { [weak self] changes in
+        token = LibraryEntry.belongsTo(user: userID, type: type).observe { [weak self] changes in
             guard let strongSelf = self else { return }
             
             //This operation takes some time depending on the amount of entries the user has
@@ -90,7 +90,7 @@ final class LocalSearchDataSource: SearchDataSource {
     }
     
     deinit {
-        token?.stop()
+        token?.invalidate()
     }
     
     /// Update the search results.

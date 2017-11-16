@@ -67,7 +67,7 @@ final class FullLibraryDataSource: LibraryDataSource {
     }
     
     deinit {
-        token?.stop()
+        token?.invalidate()
     }
     
     func refresh() {
@@ -170,8 +170,8 @@ extension FullLibraryDataSource {
         //This is there to ensure data gets loaded properley before token is set
         didReloadItems(with: sort)
         
-        token?.stop()
-        token = results?.addNotificationBlock { [unowned self] changes in
+        token?.invalidate()
+        token = results?.observe { [unowned self] changes in
             
             self.didReloadItems(with: sort)
             

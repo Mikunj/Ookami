@@ -11,8 +11,8 @@ plugin 'cocoapods-keys', {
  ]}
 
 def project_pods
-    pod 'RealmSwift', '~> 2.10'
-    pod 'SwiftyJSON', '~> 3.1'
+    pod 'RealmSwift', '~> 3.0.2'
+    pod 'SwiftyJSON', '~> 3.1.4'
     pod 'Alamofire', '~> 4.5'
     pod 'Heimdallr', '~> 3.6.1'
 end
@@ -26,14 +26,14 @@ end
 
 def ui_pods
     pod 'Cartography', '~> 1.1'
-    pod 'Kingfisher', '~> 3.11'
+    pod 'Kingfisher', '~> 3.13'
     pod 'Reusable', '~> 4.0'
     pod 'XLPagerTabStrip', '~> 7.0'
     pod 'NVActivityIndicatorView', '~> 3.7'
     pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
     pod 'DynamicColor', '~> 3.3'
     pod 'ActionSheetPicker-3.0', '~> 2.2.0'
-    pod 'IQKeyboardManager', '~> 4.0.13'
+    pod 'IQKeyboardManager', '5.0.0'
     pod 'Diff', '~> 0.5.3'
     pod 'SKPhotoBrowser', '~> 4.0.1'
     pod 'XCDYouTubeKit', '~> 2.5.5'

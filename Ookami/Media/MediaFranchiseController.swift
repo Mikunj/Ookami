@@ -75,7 +75,7 @@ class MediaFranchiseController: NSObject {
     }
     
     deinit {
-        token?.stop()
+        token?.invalidate()
         service?.cancel()
     }
     
@@ -136,8 +136,8 @@ class MediaFranchiseController: NSObject {
     //Get the franchises and add a notification on them
     fileprivate func updateFranchises() {
         franchises = MediaRelationship.belongsTo(sourceId: sourceId, type: sourceType).sorted(byKeyPath: "role")
-        token?.stop()
-        token = franchises?.addNotificationBlock { [unowned self] _ in
+        token?.invalidate()
+        token = franchises?.observe { [unowned self] _ in
             self.onUpdate()
         }
     }
