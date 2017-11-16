@@ -76,7 +76,7 @@ extension NSLock {
     ///
     /// - parameter block: The closure to be performed.
     
-    func withCriticalScope<T>( block: (Void) -> T) -> T {
+    func withCriticalScope<T>( block: () -> T) -> T {
         lock()
         let value = block()
         unlock()

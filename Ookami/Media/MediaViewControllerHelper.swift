@@ -89,6 +89,7 @@ class MediaViewControllerHelper {
     static func tappedImageView(_ imageView: UIImageView, in vc: UIViewController) {
         if let image = imageView.image {
             SKPhotoBrowserOptions.displayStatusbar = false
+            
             let photo = SKPhotoBrowser(originImage: image, photos: [SKPhoto.photoWithImage(image)], animatedFromView: imageView)
             vc.present(photo, animated: true)
         }

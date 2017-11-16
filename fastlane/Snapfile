@@ -4,9 +4,9 @@
 devices([
   "iPhone 6",
   "iPhone 6 Plus",
-  "iPhone 5",
-  "iPad Pro (12.9 inch)",
-  "iPad Pro (9.7 inch)",
+  "iPhone 5s",
+  "iPad Pro (12.9-inch)",
+  "iPad Pro (9.7-inch)",
   # "Apple TV 1080p"
 ])
 
@@ -24,6 +24,8 @@ scheme "Ookami"
 output_directory "./fastlane/screenshots"
 
 clear_previous_screenshots true # remove the '#' to clear all previously generated screenshots before creating new ones
+concurrent_simulators true
+xcargs "-only-testing:OokamiUITests"
 
 # Choose which project/workspace to use
 # project "./Project.xcodeproj"

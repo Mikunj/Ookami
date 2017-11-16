@@ -121,6 +121,10 @@ class ItemViewController: UIViewController {
         c.dataSource = self
         c.delegate = self
         
+        if #available(iOS 11.0, *) {
+            c.contentInsetAdjustmentBehavior = .always
+        }
+        
         c.emptyDataSetSource = self
         c.emptyDataSetDelegate = self
         
@@ -189,6 +193,7 @@ class ItemViewController: UIViewController {
         collectionView.addSubview(refreshControl)
         collectionView.sendSubview(toBack: refreshControl)
     }
+    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()

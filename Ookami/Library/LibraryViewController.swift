@@ -91,6 +91,10 @@ final class LibraryViewController: ButtonBarPagerTabStripViewController {
         
         super.viewDidLoad()
         
+        if #available(iOS 11.0, *) {
+            self.containerView?.contentInsetAdjustmentBehavior = .always
+        }
+        
         //Read above for explanation on setting the layout
         buttonBarView.collectionViewLayout = flowLayout
         didFinishLoading = true

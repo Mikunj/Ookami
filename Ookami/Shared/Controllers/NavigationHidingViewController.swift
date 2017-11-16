@@ -21,6 +21,7 @@ class NavigationHidingViewController: UIViewController {
     
     //The height constraint of the bar container
     var barContainerHeight: NSLayoutConstraint?
+    var navBarTop: NSLayoutConstraint?
     
     //The navigation bar we use so we can get transparancy
     lazy var navigationBar: UINavigationBar = {
@@ -32,6 +33,10 @@ class NavigationHidingViewController: UIViewController {
         bar.titleTextAttributes = [NSForegroundColorAttributeName: theme.barTextColor]
         bar.setBackgroundImage(UIImage(), for: .default)
         bar.shadowImage = UIImage()
+        
+        if #available(iOS 11.0, *) {
+            bar.prefersLargeTitles = false
+        }
         
         let item = UINavigationItem(title: "")
         
@@ -69,10 +74,10 @@ class NavigationHidingViewController: UIViewController {
         //Add the bar
         barContainer.addSubview(navigationBar)
         constrain(navigationBar) { bar in
-            bar.bottom == bar.superview!.bottom
+            navBarTop = (bar.top == bar.superview!.top)
+            bar.bottom == bar.superview!.bottom 
             bar.left == bar.superview!.left
             bar.right == bar.superview!.right
-            bar.height == 44
         }
         
         //The top view
@@ -99,6 +104,7 @@ class NavigationHidingViewController: UIViewController {
         let statusHeight = UIApplication.shared.statusBarFrame.height
         let barHeight = self.navigationController?.navigationBar.frame.size.height ?? 44
         barContainerHeight?.constant = barHeight + statusHeight
+        navBarTop?.constant = barContainer.frame.origin.y + statusHeight
         barContainer.layoutIfNeeded()
     }
     

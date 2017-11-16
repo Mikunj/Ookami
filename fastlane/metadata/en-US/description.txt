@@ -5,3 +5,5 @@ Features:
 - Track both your Anime and Manga easily!
 - Advanced filters for discovering new shows and manga
 - See Highest Rated, Most Popular, Seasonal and Trending shows/manga
+
+Note: This app does not offer any streaming services.

@@ -60,13 +60,26 @@ class MediaViewController: NavigationHidingViewController, NVActivityIndicatorVi
         //Disable default reading margins
         t.cellLayoutMarginsFollowReadableWidth = false
         
+        if #available(iOS 11, *) {
+            t.contentInsetAdjustmentBehavior = .never
+        }
+        
         return t
     }()
     
     //The height of the header
     var headerHeight: CGFloat {
         let isIpad = UIDevice.current.userInterfaceIdiom == .pad
-        return isIpad ? 420 : 300
+        
+        //Change header height for iphone X devices
+        var phoneHeight = 300
+        if #available(iOS 11.0, *) {
+            if ((UIApplication.shared.keyWindow?.safeAreaInsets.top)! > CGFloat(0.0)) {
+                phoneHeight = 375
+            }
+        }
+        
+        return CGFloat(isIpad ? 420 : phoneHeight)
     }
     
     //The header view
@@ -100,7 +113,7 @@ class MediaViewController: NavigationHidingViewController, NVActivityIndicatorVi
         }
         
         //Add the header to the table view
-        tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: headerHeight - 20, left: 0, bottom: 0, right: 0)
         tableView.addSubview(mediaHeader)
         constrain(mediaHeader, self.view) { header, view in
             mediaHeaderTop = (header.top == view.top)

@@ -87,7 +87,6 @@ class MediaFranchiseController: NSObject {
     fileprivate func fetchFranchises() {
         service = MediaService().getMediaRelationships(for: self.sourceId, type: self.sourceType) { [weak self] _, error in
             guard error == nil else {
-                print("Franchise Fetch: " + error!.localizedDescription)
                 return
             }
             self?.service?.next()

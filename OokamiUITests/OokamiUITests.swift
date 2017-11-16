@@ -82,10 +82,9 @@ class OokamiUITests: XCTestCase {
         tabBarsQuery.buttons["Library"].tap()
         
         snapshot("01 - Anime Library")
-        
-        app.navigationBars["Ookami.UserLibraryView"].otherElements.children(matching: .button).element.tap()
-        app.tables.staticTexts["Manga"].tap()
-        
+    app.navigationBars["Ookami.UserLibraryView"].staticTexts.children(matching: .button).element.tap()
+        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Manga"]/*[[".cells.staticTexts[\"Manga\"]",".staticTexts[\"Manga\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+    
         snapshot("02 - Manga Library")
         
         trendingButton.tap()
@@ -96,12 +95,11 @@ class OokamiUITests: XCTestCase {
         
         snapshot("04 - Discover")
         
-        app.collectionViews.children(matching: .cell).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .image).element.tap()
-        
-        snapshot("03 - Media")
-        
-        app.navigationBars.buttons["Stop"].tap()
-        
+        let mediaElement = app.collectionViews.children(matching:.any).element(boundBy: 1)
+        if mediaElement.exists {
+            mediaElement.tap()
+            snapshot("03 - Media")
+        }
         
     }
     

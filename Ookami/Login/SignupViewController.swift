@@ -116,7 +116,7 @@ class SignupViewController: UIViewController, NVActivityIndicatorViewable {
     
     func isPasswordValid() -> Bool {
         let password = passwordField.text ?? ""
-        return password.characters.count >= 8
+        return password.count >= 8
     }
     
     func isEmailValid() -> Bool {

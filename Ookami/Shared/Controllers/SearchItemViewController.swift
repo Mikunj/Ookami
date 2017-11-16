@@ -79,16 +79,23 @@ final class SearchItemViewController: UIViewController {
         self.view.addSubview(searchBar)
         self.view.addSubview(itemController.view)
         
+        //Set the search bar heights
+        var searchHeight: NSLayoutConstraint?
+        
         constrain(searchBar, itemController.view) { bar, view in
             bar.top == bar.superview!.top
             bar.left == bar.superview!.left
             bar.right == bar.superview!.right
-            bar.height == 44
+            searchHeight = (bar.height == 44)
             bar.bottom == view.top
             
             view.left == view.superview!.left
             view.right == view.superview!.right
             view.bottom == view.superview!.bottom
+        }
+        
+        if #available(iOS 11, *) {
+            searchHeight?.constant = 56
         }
         
         itemController.didMove(toParentViewController: self)

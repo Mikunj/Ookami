@@ -57,6 +57,10 @@ class LibraryEntryViewController: UIViewController {
         //Disable default reading margins
         t.cellLayoutMarginsFollowReadableWidth = false
         
+        if #available(iOS 11, *) {
+            t.contentInsetAdjustmentBehavior = .never
+        }
+        
         return t
     }()
     
